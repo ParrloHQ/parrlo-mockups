@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Клавиатура iOS v2</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="kb.css">
+</head>
+<body>
+<div class="wrap">
+<h1>Клавиатура Parrlo · iOS · v2</h1>
+<p class="s">Задача Мурата 15.11: текущая клавиатура выглядит как заглушка. Планка качества и раскладки — лучшие системные клавиатуры, но всё своё: стиль брендбука v2.3, наши иконки и цвета. Клавиатура идёт за темой телефона (светлая и тёмная). Распознавание речи — на сервере, не на устройстве. Демо-данные.</p>
+<p class="s"><b>Что изменилось:</b> сверху панель из пяти иконок вместо текста «Открой Parrlo…» и синей ссылки; крупные заглавные клавиши и Shift; нижний ряд «123 · глобус · , · пробел с языком · . · ввод»; ввод — зелёный акцент; «нет доступа» — неактивные иконки и одна подсказка по нажатию; отдельной клавиши «EN» нет — язык на пробеле.</p>
+
+<div class="ctl" role="toolbar" aria-label="Переключатели">
+ <span class="lb">Тема</span><span class="seg" data-k="theme"><button data-v="light">Светлая</button><button data-v="dark">Тёмная</button></span>
+ <span class="lb">Язык</span><span class="seg" data-k="lang"><button data-v="ru">RU</button><button data-v="es">ES</button><button data-v="en">EN</button></span>
+ <span class="toc"><a href="#s-ready">Готово</a><a href="#s-nofull">Нет полного доступа</a><a href="#s-nokey">Нет ключа</a><a href="#s-rec">Запись</a><a href="#spec">Размеры и цвета</a><a href="#texts">Тексты</a></span>
+</div>
+
+<div id="frames"></div>
+
+<h2 id="spec">Размеры, цвета, правила</h2>
+<div class="tw"><table class="tx">
+<tr><th>Элемент</th><th>375×667</th><th>440×956</th><th>Примечание</th></tr>
+<tr><td>Панель иконок</td><td>высота 46 pt</td><td>50 pt</td><td>иконки 26 pt, зона нажатия 52×44 / 60×44; «Настройки» прижата вправо</td></tr>
+<tr><td>Клавиша</td><td>высота 42 pt, промежуток 6 pt (ru 5)</td><td>46 pt, 6 pt</td><td>между рядами 11 / 12 pt; радиус 6 / 8 pt; буквы Inter 22 / 25 pt, заглавные</td></tr>
+<tr><td>Нижний ряд</td><td>123 · 🌐 · , · пробел · . · ввод</td><td>123 · , · пробел · . · ввод</td><td>на iPhone с Face ID глобус рисует сама iOS под клавиатурой — свой не дублируем (<code>needsInputModeSwitchKey</code>)</td></tr>
+<tr><td>Пробел</td><td colspan="2">«‹ Русский ›»</td><td>смахивание по пробелу — следующий язык Parrlo (ru → es → en); долгое нажатие — курсор</td></tr>
+</table></div>
+<div class="tw"><table class="tx">
+<tr><th>Токен</th><th>Светлая</th><th>Тёмная</th><th>Контраст</th></tr>
+<tr><td>Фон клавиатуры / клавиша / служебная</td><td>#D3D7DC / #FFFFFF / #ABB2BB</td><td>#1B1F25 / #3A414B / #2A3038</td><td></td></tr>
+<tr><td>Текст клавиш, иконки</td><td>#0E1116</td><td>#F2F5F7</td><td>на клавише 18,9:1 / 9,4:1; на служебной 8,8:1 / 12,2:1</td></tr>
+<tr><td>Ввод (акцент) / знак</td><td>#00875C / #FFFFFF</td><td>#2BC48A / #0E1116</td><td>4,55:1 / 8,4:1</td></tr>
+<tr><td>Неактивная иконка</td><td>#8A939F</td><td>#5D6672</td><td>неактивные элементы WCAG не нормирует</td></tr>
+<tr><td>Подсказка / ссылка «Открыть»</td><td>#0E1116, текст #FFFFFF, ссылка #2BC48A</td><td>#F2F5F7, текст #0E1116, ссылка #006B48</td><td>≥ 4,5:1</td></tr>
+<tr><td>Точка записи</td><td>#C42B1F</td><td>#FF6B5E</td><td>не единственный признак: есть текст «Идёт запись»</td></tr>
+</table></div>
+<ul class="s">
+<li>Подсказка рисуется внутри окна клавиатуры: расширение iOS не может рисовать над приложением.</li>
+<li>Без «Полного доступа» клавиатура не открывает приложение и не ходит в сеть, поэтому в подсказке только путь в Настройках, без кнопки.</li>
+<li>«Нет ключа» — нет сессии в общем хранилище (не входили или сессия истекла). «Открыть» ведёт на вход в Parrlo; после входа иконки включаются сами.</li>
+<li>Запись на iOS идёт в приложении Parrlo, клавиатура показывает её статус. Как клавиатура получает статус — уточнить у менеджера клавиатуры.</li>
+<li>VoiceOver: у каждой иконки метка (таблица ниже), неактивные — «недоступно» (<code>accessibilityTraits .notEnabled</code>), но в фокусе остаются, по двойному касанию — та же подсказка.</li>
+</ul>
+
+<h2 id="texts">Тексты ru / es / en</h2>
+<div class="tw"><table class="tx" id="ttab"></table></div>
+</div>
+<script src="kb.js"></script>
+<script>
+(function(){
+  const q=new URLSearchParams(location.search);
+  const st=window.KB_ST={theme:q.get('theme')||'dark',lang:q.get('lang')||'ru'};
+  function sync(){document.querySelectorAll('.seg').forEach(s=>s.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(st[s.dataset.k]===b.dataset.v))));
+    const u=new URL(location);u.searchParams.set('theme',st.theme);u.searchParams.set('lang',st.lang);history.replaceState(null,'',u);window.KB_RENDER();}
+  document.querySelectorAll('.seg').forEach(s=>s.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[s.dataset.k]=b.dataset.v;sync();}));
+  const T=window.KB_T,keys=[['improve','Иконка'],['translate','Иконка'],['dict','Иконка'],['voice','Иконка'],['settings','Иконка'],['shift','VoiceOver'],['del','VoiceOver'],['num','VoiceOver'],['next','VoiceOver'],['space','VoiceOver'],['ret','VoiceOver'],['tipFull','Подсказка'],['tipKey','Подсказка'],['open','Кнопка'],['rec','Запись'],['done','Запись'],['cancelRec','VoiceOver']];
+  document.getElementById('ttab').innerHTML='<tr><th>Ключ</th><th>Где</th><th>ru</th><th>es</th><th>en</th></tr>'+keys.map(([k,w])=>`<tr><td><code>${k}</code></td><td>${w}</td><td>${T.ru[k]}</td><td>${T.es[k]}</td><td>${T.en[k]}</td></tr>`).join('');
+  sync();
+})();
+</script>
+</body>
+</html>

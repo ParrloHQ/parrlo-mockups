@@ -1,0 +1,108 @@
+@font-face{font-family:Inter;src:url(../brandbook/fonts/inter.ttf) format("truetype");font-weight:100 900}
+/* страница */
+:root{--p-bg:#F4F6F8;--p-card:#FFFFFF;--p-tx:#0E1116;--p-sec:#5B6472;--p-line:#D5DBE1;--p-acc:#00875C;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--p-bg:#0B0E12;--p-card:#171C23;--p-tx:#E8ECF1;--p-sec:#9AA4B2;--p-line:#2F3742;--p-acc:#2BC48A;color-scheme:dark}}
+:root[data-theme="dark"]{--p-bg:#0B0E12;--p-card:#171C23;--p-tx:#E8ECF1;--p-sec:#9AA4B2;--p-line:#2F3742;--p-acc:#2BC48A;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--p-bg);color:var(--p-tx);font:400 15px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 64px}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font:700 26px/1.2 Inter,sans-serif;margin-bottom:8px}
+h2{font:700 20px/1.25 Inter,sans-serif;margin:40px 0 12px}
+h3{font:700 17px/1.3 Inter,sans-serif;margin-bottom:4px}
+p.s{color:var(--p-sec);max-width:860px;margin-bottom:8px}
+.ctl{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;background:var(--p-bg);padding:12px 0;border-bottom:1px solid var(--p-line);margin:16px 0 8px}
+.seg{display:inline-flex;border:1px solid var(--p-line);border-radius:10px;overflow:hidden}
+.seg button{font:600 14px Inter,sans-serif;border:0;background:var(--p-card);color:var(--p-tx);padding:0 14px;min-height:40px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--p-acc);color:#fff}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#0E1116}
+.ctl .lb{color:var(--p-sec);font-size:13px}
+.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px}.toc a{color:var(--p-acc)}
+.st{padding:24px 0;border-bottom:1px solid var(--p-line)}
+.st .cap{color:var(--p-sec);max-width:860px;margin-bottom:14px;font-size:14px}
+.pair{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+figure{margin:0}figcaption{font-size:13px;color:var(--p-sec);margin-top:8px}
+.zoom{zoom:.62}
+@media (max-width:700px){.zoom{zoom:.5}}
+table.tx{border-collapse:collapse;width:100%;font-size:14px;margin-top:8px}
+table.tx th,table.tx td{border-bottom:1px solid var(--p-line);padding:8px 8px 8px 0;text-align:left;vertical-align:top}
+table.tx th{color:var(--p-sec);font-weight:600}
+.tw{overflow-x:auto}
+ul.s{color:var(--p-sec);max-width:860px;padding-left:20px}ul.s li{margin:4px 0}
+code{font:13px ui-monospace,Menlo,monospace}
+
+/* телефон: токены брендбука v2.3, клавиатура идёт за темой телефона */
+.ph{--kbbg:#D3D7DC;--key:#FFFFFF;--key2:#ABB2BB;--tx:#0E1116;--sec:#5B6472;--sh:0 1px 0 rgba(0,0,0,.3);--acc:#00875C;--onacc:#FFFFFF;--ico:#0E1116;--icooff:#8A939F;
+  --tipbg:#0E1116;--tiptx:#FFFFFF;--tiplink:#2BC48A;--rec:#C42B1F;--host:#EFF1F4;--nav:#F7F8F9;--bub:#FFFFFF;--fld:#FFFFFF;--line:#D5DBE1;
+  width:var(--W);height:var(--H);border-radius:44px;overflow:hidden;position:relative;display:flex;flex-direction:column;background:var(--host);color:var(--tx);
+  font:400 17px/1.3 Inter,system-ui,sans-serif;box-shadow:0 0 0 10px #0E1116,0 0 0 11px #3A414B;margin:11px}
+.ph.se{border-radius:20px}
+.ph.dark{--kbbg:#1B1F25;--key:#3A414B;--key2:#2A3038;--tx:#F2F5F7;--sec:#9AA4B2;--sh:0 1px 0 rgba(0,0,0,.6);--acc:#2BC48A;--onacc:#0E1116;--ico:#F2F5F7;--icooff:#5D6672;
+  --tipbg:#F2F5F7;--tiptx:#0E1116;--tiplink:#006B48;--rec:#FF6B5E;--host:#0E1116;--nav:#171B21;--bub:#242B34;--fld:#1C2026;--line:#2F3742}
+.ph svg{display:block}
+.sb{flex:none;height:20px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font:600 13px Inter,sans-serif;background:var(--nav)}
+.sb.big{height:54px;padding:0 34px;font-size:17px}
+.sb .di{width:124px;height:36px;border-radius:20px;background:#000}
+.sb .bt{width:26px;height:12px;border-radius:4px;border:1.5px solid currentColor;opacity:.8}
+.host{flex:1;min-height:0;display:flex;flex-direction:column}
+.nav{flex:none;height:48px;display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--nav);border-bottom:1px solid var(--line)}
+.nav .bk{display:flex;align-items:center;color:var(--acc);font-size:17px;flex:1}.nav .bk svg{width:24px;height:24px}
+.nav b{font-weight:600}.nav .avw{flex:1;display:flex;justify-content:flex-end}
+.nav .av{width:32px;height:32px;border-radius:50%;background:#6AA6F5;color:#0E1116;font:600 14px/32px Inter,sans-serif;text-align:center}
+.msgs{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;padding:12px}
+.bub{align-self:flex-start;max-width:78%;background:var(--bub);border-radius:18px 18px 18px 6px;padding:8px 12px;font-size:16px}
+.inp{flex:none;display:flex;gap:8px;align-items:center;padding:6px 10px 8px;background:var(--nav);border-top:1px solid var(--line)}
+.fld{flex:1;min-height:36px;border-radius:18px;background:var(--fld);border:1px solid var(--line);display:flex;align-items:center;padding:0 12px;color:var(--sec);font-size:16px}
+.caret{width:2px;height:20px;background:var(--acc);margin-right:2px;flex:none}
+.snd{width:32px;height:32px;border-radius:50%;background:var(--key2);color:var(--sec);display:flex;align-items:center;justify-content:center}.snd svg{width:18px;height:18px}
+
+/* клавиатура */
+.kb{flex:none;background:var(--kbbg);position:relative;padding:0 3px 4px;--kh:42px;--kg:6px;--rg:11px;--kf:22px}
+.max .kb{--kh:46px;--rg:12px;--kf:25px}
+.kb .keys.ru{--kg:5px}
+.tb{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 4px}
+.max .tb{height:50px}
+.tb .fill{display:none}
+.ib{width:52px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--ico)}
+.max .ib{width:60px}
+.ib svg{width:26px;height:26px}
+.ib.off{color:var(--icooff)}
+.ib.tap{background:var(--key2)}
+.ph.dark .ib.tap{background:var(--key)}
+.ib.set{width:44px}
+.keys{display:flex;flex-direction:column;gap:var(--rg);padding-top:6px}
+.keys .r{display:flex;gap:var(--kg)}
+.k{flex:1 1 0;min-width:0;height:var(--kh);border-radius:6px;background:var(--key);box-shadow:var(--sh);display:flex;align-items:center;justify-content:center;font:400 var(--kf)/1 Inter,system-ui,sans-serif;color:var(--tx)}
+.max .k{border-radius:8px}
+.k.f{background:var(--key2)}
+.k.f svg{width:24px;height:24px}
+.k.w{flex:1.38 1 0}
+.k.sh.on{background:var(--key);color:var(--tx)}
+.hp{flex:.5 1 0}
+.g3{flex:.18 1 0}
+.k.n{flex:1.25 1 0;font-size:17px;font-weight:500}
+.k.gl{flex:1 1 0}
+.k.p{flex:.85 1 0}
+.k.sp{flex:4.4 1 0;font-size:16px;color:var(--tx);gap:10px}
+.k.sp .ch{font-style:normal;color:var(--sec);font-size:18px}
+.k.rt{flex:1.55 1 0;background:var(--acc);color:var(--onacc);box-shadow:none}
+.k.rt svg{width:26px;height:26px}
+/* подсказка: внутри границ клавиатуры (расширение iOS не рисует вне своего окна) */
+.tip{position:absolute;top:48px;left:8px;z-index:3;max-width:calc(100% - 16px);background:var(--tipbg);color:var(--tiptx);border-radius:12px;padding:10px 14px;font:500 15px/1.35 Inter,sans-serif;display:flex;align-items:center;gap:12px;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+.max .tip{top:52px}
+.tip .ar{position:absolute;top:-6px;width:14px;height:14px;background:var(--tipbg);transform:rotate(45deg);border-radius:2px}
+.tip .tt{flex:1;min-width:0}
+.tip .tl{flex:none;color:var(--tiplink);font-weight:700;min-height:44px;display:flex;align-items:center;padding:0 2px}
+/* запись */
+.tb.rec{gap:8px;padding:0 6px}
+.rx{flex:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--tx)}.rx svg{width:22px;height:22px;padding:7px;box-sizing:content-box;border-radius:50%;background:var(--key2)}
+.ph.dark .rx svg{background:var(--key)}
+.rdot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--rec)}
+.rl{flex:none;font:600 15px Inter,sans-serif}
+.rt2{flex:none;font:500 15px Inter,sans-serif;color:var(--sec);font-variant-numeric:tabular-nums}
+.wv{flex:1;min-width:0;display:flex;align-items:center;gap:2px;height:28px;overflow:hidden}
+.wv i{flex:none;width:3px;border-radius:2px;background:var(--acc);opacity:.85}
+.dn{flex:none;min-height:36px;padding:0 16px;border-radius:18px;background:var(--acc);color:var(--onacc);font:600 15px Inter,sans-serif;display:flex;align-items:center}
+/* системная полоса под клавиатурой (Face ID): глобус рисует iOS */
+.sys{flex:none;height:44px;background:var(--kbbg);position:relative}
+.sys .sg{position:absolute;left:26px;top:4px;color:var(--sec)}.sys .sg svg{width:26px;height:26px}
+.sys .hm{position:absolute;left:50%;bottom:8px;width:140px;height:5px;margin-left:-70px;border-radius:3px;background:var(--tx)}
