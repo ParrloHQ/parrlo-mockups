@@ -16,7 +16,7 @@
 <div class="ctl" role="toolbar" aria-label="Переключатели">
  <span class="lb">Тема</span><span class="seg" data-k="theme"><button data-v="light">Светлая</button><button data-v="dark">Тёмная</button></span>
  <span class="lb">Язык</span><span class="seg" data-k="lang"><button data-v="ru">RU</button><button data-v="es">ES</button><button data-v="en">EN</button></span>
- <span class="toc"><a href="#s-ready">Готово</a><a href="#s-nofull">Нет полного доступа</a><a href="#s-nokey">Нет ключа</a><a href="#s-rec">Запись (после выпуска)</a><a href="#spec">Размеры и цвета</a><a href="#texts">Тексты</a></span>
+ <span class="toc"><a href="#s-ready">Готово</a><a href="#s-nofull">Нет полного доступа</a><a href="#s-nokey">Нет ключа</a><a href="#reasons">Причины</a><a href="#s-rec">Запись (после выпуска)</a><a href="#spec">Размеры и цвета</a><a href="#texts">Тексты</a></span>
 </div>
 
 <div id="frames"></div>
@@ -41,12 +41,15 @@
 <ul class="s">
 <li>Подсказка рисуется внутри окна клавиатуры: расширение iOS не может рисовать над приложением.</li>
 <li>Без «Полного доступа» клавиатура не открывает приложение и не ходит в сеть, поэтому в подсказке только путь в Настройках, без кнопки.</li>
-<li>«Нет ключа» — у клавиатуры нет ключа в общем хранилище: Parrlo Translate не открывали или клавиатура не включена в его настройках. Входа в Parrlo нет. «Открыть» ведёт в Parrlo Translate на настройки клавиатуры; когда ключ появится, иконки включаются сами.</li>
+<li>«Нет ключа» — клавиатура не может работать с облаком: шесть причин, у каждой своя подсказка (таблица ниже). Входа в Parrlo нет. Когда ключ появится, иконки включаются сами.</li>
 <li>Запись на iOS идёт в приложении Parrlo Translate, клавиатура показывает её статус: Translate 4 раза в секунду пишет статус в App Group и шлёт Darwin-уведомление; полоса видна, пока такт не старше 2 с; ✕ и «Готово» уходят командой обратно, команда старше 5 с не выполняется. Полоса в чате возможна только в варианте Б (сессия микрофона) — это после выпуска (решение Мурата 15.11). В выпуске вариант А: «Диктовка» открывает Translate, при уходе из него запись прерывается.</li>
 <li>Тексты на «ты» (es — «tú»).</li>
 <li>VoiceOver: у каждой иконки метка (таблица ниже), неактивные — «недоступно» (<code>accessibilityTraits .notEnabled</code>), но в фокусе остаются, по двойному касанию — та же подсказка.</li>
 </ul>
 
+<h2 id="reasons">Подсказки «нет ключа» по причинам</h2>
+<p class="s">Строки — из кода клавиатуры (KeyboardCopy). Кнопка «Открыть / Abrir / Open» показывается только вне Translate; внутри Translate её нет.</p>
+<div class="tw"><table class="tx" id="rtab"></table></div>
 <h2 id="texts">Тексты ru / es / en</h2>
 <div class="tw"><table class="tx" id="ttab"></table></div>
 </div>
@@ -60,6 +63,8 @@
   document.querySelectorAll('.seg').forEach(s=>s.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[s.dataset.k]=b.dataset.v;sync();}));
   const T=window.KB_T,keys=[['improve','Иконка'],['translate','Иконка'],['dict','Иконка'],['voice','Иконка'],['settings','Иконка'],['shift','VoiceOver'],['del','VoiceOver'],['num','VoiceOver'],['next','VoiceOver'],['space','VoiceOver'],['ret','VoiceOver'],['tipFull','Подсказка'],['tipKey','Подсказка'],['open','Кнопка'],['rec','Запись'],['done','Запись'],['cancelRec','VoiceOver']];
   document.getElementById('ttab').innerHTML='<tr><th>Ключ</th><th>Где</th><th>ru</th><th>es</th><th>en</th></tr>'+keys.map(([k,w])=>`<tr><td><code>${k}</code></td><td>${w}</td><td>${T.ru[k]}</td><td>${T.es[k]}</td><td>${T.en[k]}</td></tr>`).join('');
+  const R=[['key1','Нет согласия на облако','да'],['key2','Нет токена, первое подключение','да'],['key3','Нет токена, переподключение','да'],['key4','Внутри Translate, токен выдаётся','нет'],['key5','Внутри Translate, выдача не удалась','нет'],['key6','Нет подтверждения 16+','да'],['openFail','Переход в Parrlo не открылся','—']];
+  document.getElementById('rtab').innerHTML='<tr><th>Причина</th><th>«Открыть»</th><th>ru</th><th>es</th><th>en</th></tr>'+R.map(([k,w,o])=>`<tr><td>${w}</td><td>${o}</td><td>${T.ru[k]}</td><td>${T.es[k]}</td><td>${T.en[k]}</td></tr>`).join('');
   sync();
 })();
 </script>

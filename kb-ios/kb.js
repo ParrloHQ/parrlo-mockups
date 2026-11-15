@@ -21,17 +21,17 @@ const T={
  ru:{lang:'Русский', chat:'Лусия', back:'Чаты', msg:'¿Nos vemos mañana a las 10 en la oficina?', ph:'Сообщение',
    improve:'Улучшить', translate:'Перевести', dict:'Диктовка', voice:'Голосовое', settings:'Настройки',
    shift:'Заглавные', del:'Удалить', num:'Цифры', next:'Следующая клавиатура', ret:'Ввод', space:'Пробел',
-   tipFull:'Включи «Полный доступ»: Настройки'+NB+'→ Parrlo Translate'+NB+'→ Клавиатуры', tipKey:'Открой Parrlo Translate и'+NB+'включи клавиатуру в'+NB+'настройках', open:'Открыть',
+   tipFull:'Включи «Полный доступ»: Настройки'+NB+'→ Parrlo Translate'+NB+'→ Клавиатуры', tipKey:'Открой Parrlo один раз', key1:'Включи клавиатуру в настройках Parrlo', key2:'Открой Parrlo один раз', key3:'Открой приложение Parrlo', key4:'Подключаем клавиатуру…', key5:'Перевод временно недоступен. Попробуй позже — печатать можно.', key6:'Открой Parrlo, чтобы включить', openFail:'Не открылось. Открой Parrlo с экрана «Домой».', open:'Открыть',
    rec:'Идёт запись', done:'Готово', cancelRec:'Отменить запись'},
  es:{lang:'Español', chat:'Olga', back:'Chats', msg:'Увидимся завтра в 10 в офисе?', ph:'Mensaje',
    improve:'Mejorar', translate:'Traducir', dict:'Dictado', voice:'Nota de voz', settings:'Ajustes',
    shift:'Mayúsculas', del:'Borrar', num:'Números', next:'Siguiente teclado', ret:'Intro', space:'Espacio',
-   tipFull:'Activa «Acceso completo»: Ajustes'+NB+'→ Parrlo Translate'+NB+'→ Teclados', tipKey:'Abre Parrlo Translate y'+NB+'activa el teclado en los'+NB+'ajustes', open:'Abrir',
+   tipFull:'Activa «Acceso completo»: Ajustes'+NB+'→ Parrlo Translate'+NB+'→ Teclados', tipKey:'Abre Parrlo una vez', key1:'Activa el teclado en los ajustes de Parrlo', key2:'Abre Parrlo una vez', key3:'Abre la app Parrlo', key4:'Conectando el teclado…', key5:'La traducción no está disponible ahora mismo. Inténtalo más tarde; puedes seguir escribiendo.', key6:'Abre Parrlo para activarlo', openFail:'No se ha abierto. Abre Parrlo desde la pantalla de inicio.', open:'Abrir',
    rec:'Grabando', done:'Listo', cancelRec:'Cancelar grabación'},
  en:{lang:'English', chat:'Lucía', back:'Chats', msg:'¿Nos vemos mañana a las 10 en la oficina?', ph:'Message',
    improve:'Improve', translate:'Translate', dict:'Dictate', voice:'Voice note', settings:'Settings',
    shift:'Shift', del:'Delete', num:'Numbers', next:'Next keyboard', ret:'Return', space:'Space',
-   tipFull:'Turn on “Full Access”: Settings'+NB+'→ Parrlo Translate'+NB+'→ Keyboards', tipKey:'Open Parrlo Translate and turn on the keyboard in'+NB+'Settings', open:'Open',
+   tipFull:'Turn on “Full Access”: Settings'+NB+'→ Parrlo Translate'+NB+'→ Keyboards', tipKey:'Open Parrlo once', key1:'Turn on the keyboard in Parrlo settings', key2:'Open Parrlo once', key3:'Open the Parrlo app', key4:'Connecting the keyboard…', key5:'Translation is temporarily unavailable. Try again later — you can still type.', key6:'Open Parrlo to turn this on', openFail:'Couldn’t open it. Open Parrlo from the Home Screen.', open:'Open',
    rec:'Recording', done:'Done', cancelRec:'Cancel recording'},
 };
 window.KB_T=T;
@@ -44,8 +44,8 @@ const STATES=[
   {id:'ready', t:'Готово', cap:'Всё включено. Панель: Улучшить, Перевести, Диктовка, Голосовое и справа Настройки — иконки без подписей, у каждой зона нажатия 44×44 и VoiceOver-метка. Начало предложения: Shift включён, клавиши заглавные.'},
   {id:'nofull', t:'Нет полного доступа', cap:'Печатать можно. Иконки панели неактивны (приглушены), текста поверх клавиатуры нет. Без «Полного доступа» клавиатура не может открыть приложение, поэтому кнопки «Открыть» нет.', off:true},
   {id:'nofull-tip', t:'Нет полного доступа · нажатие', cap:'Нажатие на любую неактивную иконку — одна короткая подсказка под ней. Скрывается через 4 с или по нажатию в любом месте.', off:true, tip:'full', at:1},
-  {id:'nokey', t:'Нет ключа', cap:'Полный доступ есть, но у клавиатуры нет ключа: Parrlo Translate ещё не открывали или клавиатура не включена в его настройках. Входа в Parrlo нет — подсказка называет эту причину. Иконки неактивны, печатать можно.', off:true},
-  {id:'nokey-tip', t:'Нет ключа · нажатие', cap:'Подсказка и «Открыть» — открывает Parrlo Translate на настройках клавиатуры. Как только ключ появится, иконки станут активными без перезапуска клавиатуры.', off:true, tip:'key', at:2},
+  {id:'nokey', t:'Нет ключа', cap:'Полный доступ есть, но клавиатура ещё не может работать с облаком. Причин шесть — у каждой своя подсказка (таблица «Подсказки „нет ключа“» ниже). Входа в Parrlo нет. Иконки неактивны, печатать можно.', off:true},
+  {id:'nokey-tip', t:'Нет ключа · нажатие', cap:'Пример — первое подключение: «Открой Parrlo один раз» и «Открыть». Кнопка есть только вне Translate. Если переход не открылся — «Не открылось. Открой Parrlo с экрана „Домой“». Как только ключ появится, иконки станут активными без перезапуска клавиатуры.', off:true, tip:'key', at:2},
   {id:'rec', t:'Идёт запись · после выпуска (вариант Б)', cap:'Решение Мурата 15.11: выпуск — на варианте А, вариант Б — после выпуска. В выпуске «Диктовка» открывает Parrlo Translate, запись идёт там; при уходе из Translate запись прерывается, этой полосы в чате нет. Кадр — для варианта Б (сессия микрофона у Translate). Как работает полоса: Translate 4 раза в секунду пишет статус в App Group (начало, громкость, такт) и шлёт Darwin-уведомление; полоса видна, пока такт не старше 2 с. ✕ и «Готово» отправляют команду обратно тем же путём; команда старше 5 с не выполняется.', rec:true},
 ];
 window.KB_STATES=STATES;
