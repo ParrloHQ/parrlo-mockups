@@ -21,17 +21,17 @@ const T={
  ru:{lang:'Русский', chat:'Лусия', back:'Чаты', msg:'¿Nos vemos mañana a las 10 en la oficina?', ph:'Сообщение',
    improve:'Улучшить', translate:'Перевести', dict:'Диктовка', voice:'Голосовое', settings:'Настройки',
    shift:'Заглавные', del:'Удалить', num:'Цифры', next:'Следующая клавиатура', ret:'Ввод', space:'Пробел',
-   tipFull:'Включите «Полный доступ»: Настройки'+NB+'→ Parrlo Translate'+NB+'→ Клавиатуры', tipKey:'Войдите в'+NB+'Parrlo, чтобы включить', open:'Открыть',
+   tipFull:'Включи «Полный доступ»: Настройки'+NB+'→ Parrlo Translate'+NB+'→ Клавиатуры', tipKey:'Открой Parrlo Translate и'+NB+'включи клавиатуру в'+NB+'настройках', open:'Открыть',
    rec:'Идёт запись', done:'Готово', cancelRec:'Отменить запись'},
  es:{lang:'Español', chat:'Olga', back:'Chats', msg:'Увидимся завтра в 10 в офисе?', ph:'Mensaje',
    improve:'Mejorar', translate:'Traducir', dict:'Dictado', voice:'Nota de voz', settings:'Ajustes',
    shift:'Mayúsculas', del:'Borrar', num:'Números', next:'Siguiente teclado', ret:'Intro', space:'Espacio',
-   tipFull:'Activa «Acceso completo»: Ajustes'+NB+'→ Parrlo Translate'+NB+'→ Teclados', tipKey:'Inicia sesión en'+NB+'Parrlo para activarlo', open:'Abrir',
+   tipFull:'Activa «Acceso completo»: Ajustes'+NB+'→ Parrlo Translate'+NB+'→ Teclados', tipKey:'Abre Parrlo Translate y'+NB+'activa el teclado en los'+NB+'ajustes', open:'Abrir',
    rec:'Grabando', done:'Listo', cancelRec:'Cancelar grabación'},
  en:{lang:'English', chat:'Lucía', back:'Chats', msg:'¿Nos vemos mañana a las 10 en la oficina?', ph:'Message',
    improve:'Improve', translate:'Translate', dict:'Dictate', voice:'Voice note', settings:'Settings',
    shift:'Shift', del:'Delete', num:'Numbers', next:'Next keyboard', ret:'Return', space:'Space',
-   tipFull:'Turn on “Full Access”: Settings'+NB+'→ Parrlo Translate'+NB+'→ Keyboards', tipKey:'Sign in to'+NB+'Parrlo to turn this on', open:'Open',
+   tipFull:'Turn on “Full Access”: Settings'+NB+'→ Parrlo Translate'+NB+'→ Keyboards', tipKey:'Open Parrlo Translate and turn on the keyboard in'+NB+'Settings', open:'Open',
    rec:'Recording', done:'Done', cancelRec:'Cancel recording'},
 };
 window.KB_T=T;
@@ -44,9 +44,9 @@ const STATES=[
   {id:'ready', t:'Готово', cap:'Всё включено. Панель: Улучшить, Перевести, Диктовка, Голосовое и справа Настройки — иконки без подписей, у каждой зона нажатия 44×44 и VoiceOver-метка. Начало предложения: Shift включён, клавиши заглавные.'},
   {id:'nofull', t:'Нет полного доступа', cap:'Печатать можно. Иконки панели неактивны (приглушены), текста поверх клавиатуры нет. Без «Полного доступа» клавиатура не может открыть приложение, поэтому кнопки «Открыть» нет.', off:true},
   {id:'nofull-tip', t:'Нет полного доступа · нажатие', cap:'Нажатие на любую неактивную иконку — одна короткая подсказка под ней. Скрывается через 4 с или по нажатию в любом месте.', off:true, tip:'full', at:1},
-  {id:'nokey', t:'Нет ключа (нет входа)', cap:'Полный доступ есть, но нет ключа сессии: не входили в Parrlo или сессия истекла. Иконки неактивны, печатать можно.', off:true},
-  {id:'nokey-tip', t:'Нет ключа · нажатие', cap:'Подсказка и «Открыть» — открывает Parrlo на экране входа. После входа иконки становятся активными без перезапуска клавиатуры.', off:true, tip:'key', at:2},
-  {id:'rec', t:'Идёт запись', cap:'Нажали «Диктовка». На iOS микрофон пишет приложение Parrlo (клавиатурам iOS микрофон недоступен), клавиатура показывает статус: ✕ отмена, таймер, волна, «Готово». Панель возвращается после «Готово».', rec:true},
+  {id:'nokey', t:'Нет ключа', cap:'Полный доступ есть, но у клавиатуры нет ключа: Parrlo Translate ещё не открывали или клавиатура не включена в его настройках. Входа в Parrlo нет — подсказка называет эту причину. Иконки неактивны, печатать можно.', off:true},
+  {id:'nokey-tip', t:'Нет ключа · нажатие', cap:'Подсказка и «Открыть» — открывает Parrlo Translate на настройках клавиатуры. Как только ключ появится, иконки станут активными без перезапуска клавиатуры.', off:true, tip:'key', at:2},
+  {id:'rec', t:'Идёт запись · только вариант Б (решает Мурат)', cap:'Запись, пока человек остаётся в чате, возможна только в варианте Б (сессия микрофона у Translate). В варианте А фоновой записи нет: при уходе из Translate запись прерывается, и этой полосы в чате нет. Как работает полоса: Translate 4 раза в секунду пишет статус в App Group (начало, громкость, такт) и шлёт Darwin-уведомление; полоса видна, пока такт не старше 2 с. ✕ и «Готово» отправляют команду обратно тем же путём; команда старше 5 с не выполняется.', rec:true},
 ];
 window.KB_STATES=STATES;
 const up=(s,l)=>s.toLocaleUpperCase(l);
