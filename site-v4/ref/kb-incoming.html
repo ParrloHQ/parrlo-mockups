@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo · клавиатура, перевод входящего</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.kb-incoming-w{max-width:1200px;margin:0 auto}
+.kb-incoming-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.kb-incoming-tags{display:flex;gap:8px;flex-wrap:wrap}
+.kb-incoming-tag{display:inline-block;font:600 13px/20px Inter,sans-serif;color:#0E1116;background:#FFC247;border-radius:8px;padding:2px 10px}
+.kb-incoming-tag.m{background:#2F3742;color:#F2F5F7}
+.kb-incoming-lng{display:flex;gap:4px;background:#171C23;border-radius:14px;padding:4px}
+.kb-incoming-lng a{min-width:56px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font:700 15px Inter,sans-serif;color:#C5CCD5;text-decoration:none}
+.kb-incoming-lng a[aria-current="true"]{background:#2BC48A;color:#0E1116}
+.kb-incoming-w h1{font:900 36px/1.15 Nunito,sans-serif;margin:0 0 8px}
+.kb-incoming-w h2{font:900 24px/1.2 Nunito,sans-serif;margin:0 0 8px}
+.kb-incoming-lead{color:#9AA4B2;max-width:760px;margin:0 0 32px}
+.kb-incoming-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;padding:48px 24px 40px;border-radius:32px;background:#171C23}
+.kb-incoming-hero figure,.kb-incoming-st figure{margin:0}
+.kb-incoming-sec{margin-top:64px}
+.kb-incoming-sec>p{color:#9AA4B2;margin:0 0 24px;max-width:760px}
+.kb-incoming-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(600px,1fr));gap:24px}
+.kb-incoming-st{background:#171C23;border-radius:24px;padding:24px}
+.kb-incoming-st h3{font:900 20px/1.25 Nunito,sans-serif;margin:0 0 4px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.kb-incoming-st h3 code{font:500 13px ui-monospace,Menlo,monospace;color:#9AA4B2;background:#0E1116;border-radius:6px;padding:1px 6px}
+.kb-incoming-st>p{margin:0 0 20px;color:#9AA4B2;font-size:15px}
+.kb-incoming-pair{display:flex;gap:20px;justify-content:center}
+.kb-incoming-pair .pcap{margin-top:10px;font-size:13px}
+.kb-incoming-pair .pcap b{font-size:14px}
+.kb-incoming-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px}
+.kb-incoming-notes h2{font-size:20px;margin:0 0 10px}
+.kb-incoming-notes ul{margin:0;padding-left:20px;color:#9AA4B2}
+.kb-incoming-notes li{margin:6px 0}
+.kb-incoming-notes b{color:#F2F5F7;font-weight:600}
+.kb-incoming-st .pf{--s:.6!important}
+@media (max-width:660px){
+ .kb-incoming-grid{grid-template-columns:1fr}
+ .kb-incoming-st{padding:16px}
+ .kb-incoming-pair{gap:12px}
+ .kb-incoming-st .pf{--s:.345!important}
+ .kb-incoming-hero{padding:24px 8px;gap:24px}
+ .kb-incoming-hero .pf{--s:.76!important}
+ .kb-incoming-w h1{font-size:28px}
+}
+
+/* ===== экран 430×932: нейтральный мессенджер + клавиатура Parrlo ===== */
+.scr.light{--kb-bg:#D3D7DC;--kb-key:#FFFFFF;--kb-key2:#ABB2BB;--kb-tx:#0E1116;--kb-sec:#5B6472;--kb-sh:0 1px 0 rgba(0,0,0,.3);--kb-acc:#00875C;--kb-onacc:#FFFFFF;--kb-line:#D5DBE1}
+.scr:not(.light){--kb-bg:#1B1F25;--kb-key:#3A414B;--kb-key2:#2A3038;--kb-tx:#F2F5F7;--kb-sec:#C5CCD5;--kb-sh:0 1px 0 rgba(0,0,0,.6);--kb-acc:#2BC48A;--kb-onacc:#0E1116;--kb-line:#4A525D}
+.kb-incoming-scr .nav{padding:6px 16px 10px}
+.kb-incoming-scr .nav .av{color:#0E1116}
+.kb-incoming-scr .msgs{padding:12px 16px}
+.kb-incoming-scr .m{max-width:78%}
+.kb-incoming-scr .m .tm{opacity:1;color:var(--sec)}
+.kb-incoming-scr .m.out .tm{color:inherit;opacity:.85}
+.kb-incoming-scr.light .m.out .tm{color:#3E5A4D;opacity:1}
+.kb-incoming-scr .inp{padding:8px 12px 10px;align-items:flex-end}
+.kb-incoming-scr .inp .f{color:var(--tx);flex:1;min-width:0;padding:8px 14px;line-height:24px;font-size:17px;border-radius:20px;min-height:42px}
+.kb-incoming-scr .inp .f .pl{color:var(--sec)}
+.kb-incoming-scr .inp .sd{flex:none;width:38px;height:38px;margin-bottom:2px}
+.kb-incoming-scr .inp .sd.off{background:var(--sf2);color:var(--sec)}
+.kb-incoming-car{display:inline-block;width:2px;height:22px;background:var(--acc);vertical-align:-5px;margin-left:1px}
+.kb-incoming-kb{flex:none;background:var(--kb-bg);padding:0 3px;color:var(--kb-tx)}
+/* полоса над панелью — 60 pt, как в kb-incoming */
+.kb-incoming-strip{position:relative;margin:8px 5px 0;height:60px;border-radius:14px;background:var(--kb-key);box-shadow:var(--kb-sh);padding:0 4px 0 12px;display:flex;align-items:center;gap:10px;font-size:14px;line-height:19px;overflow:hidden}
+.kb-incoming-strip>svg{flex:none;width:22px;height:22px;color:var(--kb-acc)}
+.kb-incoming-strip .tx{flex:1;min-width:0}
+.kb-incoming-strip .tx b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-incoming-strip .tx span{display:block;color:var(--kb-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-incoming-pill{flex:none;height:44px;display:flex;align-items:center;padding:0 4px}
+.kb-incoming-pill span{height:32px;border-radius:16px;background:var(--kb-key2);display:flex;align-items:center;gap:5px;padding:0 8px 0 12px;font:700 13px Inter,sans-serif;letter-spacing:.02em}
+.kb-incoming-pill svg{width:16px;height:16px}
+/* подсказки слов при наборе */
+.kb-incoming-strip.sg{padding:0 4px;gap:0}
+.kb-incoming-sg{flex:1 1 0;min-width:0;height:52px;display:flex;align-items:center;justify-content:center;font:500 16px Inter,sans-serif;border-radius:10px;white-space:nowrap}
+.kb-incoming-sg.on{background:var(--kb-bg)}
+.kb-incoming-sgd{flex:none;width:1px;height:28px;background:var(--kb-line)}
+/* черновик готов: два действия */
+.kb-incoming-strip.go{padding:0 8px;gap:8px}
+.kb-incoming-a{height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 16px;font:700 15px Inter,sans-serif;white-space:nowrap}
+.kb-incoming-a svg{flex:none;width:22px;height:22px}
+.kb-incoming-a .pm{width:21px;height:21px}
+.kb-incoming-a.p{flex:1 1 auto;min-width:0;background:var(--kb-acc);color:var(--kb-onacc)}
+.kb-incoming-a.s{flex:none;background:var(--kb-key2);color:var(--kb-tx)}
+.kb-incoming-a.p small{font:700 12px Inter,sans-serif;letter-spacing:.03em;border-radius:6px;padding:0 4px;box-shadow:inset 0 0 0 1.5px currentColor}
+.scr:not(.light) .kb-incoming-pop{background:#4A525D}
+/* панель иконок */
+.kb-incoming-bar{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;margin-top:4px}
+.kb-incoming-ib{width:64px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--kb-tx)}
+.kb-incoming-ib svg{width:26px;height:26px}
+.kb-incoming-ib .pm{width:25px;height:25px}
+/* клавиши */
+.kb-incoming-rows{position:relative;display:flex;flex-direction:column;gap:11px;padding-top:6px}
+.kb-incoming-r{display:flex;gap:5px}
+.kb-incoming-k{position:relative;flex:1 1 0;min-width:0;height:45px;border-radius:8px;background:var(--kb-key);box-shadow:var(--kb-sh);color:var(--kb-tx);display:flex;align-items:center;justify-content:center;font:400 24px/1 Inter,sans-serif}
+.kb-incoming-k.f{background:var(--kb-key2)}
+.kb-incoming-k.f svg{width:23px;height:23px}
+.kb-incoming-k.w{flex:1.38 1 0}
+.kb-incoming-g{flex:.18 1 0}
+.kb-incoming-hp{flex:.5 1 0}
+.kb-incoming-k.n{flex:1.25 1 0;font-size:17px;font-weight:500}
+.kb-incoming-k.p{flex:.85 1 0}
+.kb-incoming-k.sp{flex:4.4 1 0;font-size:16px;gap:10px}
+.kb-incoming-k.sp i{font-style:normal;color:var(--kb-sec);font-size:18px}
+.kb-incoming-k.rt{flex:1.55 1 0;background:var(--kb-acc);color:var(--kb-onacc);box-shadow:none}
+.kb-incoming-k.rt svg{width:25px;height:25px}
+/* нажатая клавиша: увеличенная буква над ней */
+.kb-incoming-k.pr{background:transparent;box-shadow:none;color:transparent}
+.kb-incoming-pop{position:absolute;left:-7px;right:-7px;bottom:0;height:108px;border-radius:12px 12px 9px 9px;background:var(--kb-key);box-shadow:0 1px 0 rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.22);color:var(--kb-tx);display:flex;justify-content:center;padding-top:10px;font:400 36px/1 Inter,sans-serif;z-index:2;clip-path:polygon(0 0,100% 0,100% 52%,calc(100% - 7px) 60%,calc(100% - 7px) 100%,7px 100%,7px 60%,0 52%)}
+.kb-incoming-home{height:34px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.kb-incoming-home i{width:140px;height:5px;border-radius:3px;background:var(--kb-tx)}
+/* ===== добавлено для kb-incoming: состояния полосы ===== */
+.scr.light{--kb-err:#C42B1F;--kb-rec:#C42B1F;--kb-track:#E3E7EB}
+.scr:not(.light){--kb-err:#FF8A80;--kb-rec:#FF6B5E;--kb-track:#4A525D}
+.kb-incoming-strip>svg.ok{color:var(--kb-acc)}
+.kb-incoming-strip>svg.er{color:var(--kb-err)}
+.kb-incoming-strip>svg.nt{color:var(--kb-tx)}
+.kb-incoming-strip.st{padding-right:8px}
+.kb-incoming-strip.pg{padding-bottom:8px}
+.kb-incoming-strip.pg .tx{padding-left:4px}
+.kb-incoming-a.s .un{width:20px;height:20px}
+.kb-incoming-a.q{flex:none;background:transparent;color:var(--kb-tx);padding:0 12px}
+.kb-incoming-a.p.n{flex:none}
+.kb-incoming-a.p.n svg{width:20px;height:20px}
+.kb-incoming-prog{position:absolute;left:12px;right:12px;bottom:6px;height:3px;border-radius:2px;background:var(--kb-track);overflow:hidden}
+.kb-incoming-prog i{position:absolute;top:0;bottom:0;left:22%;width:38%;border-radius:2px;background:var(--kb-acc);animation:kb-incoming-run 1.4s ease-in-out infinite}
+@keyframes kb-incoming-run{0%{left:22%}45%{left:100%}45.01%{left:-40%}100%{left:22%}}
+/* иконка панели: активна / занята / недоступна */
+.kb-incoming-ib.on{background:var(--kb-acc);color:var(--kb-onacc)}
+.kb-incoming-ib.off{opacity:.36}
+.kb-incoming-spin{animation:kb-incoming-rot 1s linear infinite;transform-origin:12px 12px}
+@keyframes kb-incoming-rot{to{transform:rotate(360deg)}}
+/* диктовка: полоса «Идёт запись» */
+.kb-incoming-strip.rec{padding:0 8px 0 4px;gap:8px}
+.kb-incoming-rx{flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--kb-tx)}
+.kb-incoming-rx span{width:34px;height:34px;border-radius:50%;background:var(--kb-key2);display:flex;align-items:center;justify-content:center}
+.kb-incoming-rx svg{width:18px;height:18px}
+.kb-incoming-rdot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--kb-rec)}
+.kb-incoming-rl{flex:none;font:600 15px/20px Inter,sans-serif;white-space:nowrap}
+.kb-incoming-rt{flex:none;font:500 15px/20px Inter,sans-serif;color:var(--kb-sec);font-variant-numeric:tabular-nums}
+.kb-incoming-wv{flex:1;min-width:0;height:30px;display:flex;align-items:center;justify-content:center;gap:2px;overflow:hidden}
+.kb-incoming-wv i{flex:none;width:3px;border-radius:2px;background:var(--kb-acc)}
+/* диктовка: чип «Вставить» вместо панели иконок */
+.kb-incoming-insr{height:48px;display:flex;align-items:center;padding:0 5px;margin-top:4px}
+.kb-incoming-ins{flex:1;min-width:0;height:44px;border-radius:14px;background:var(--kb-key);box-shadow:var(--kb-sh);display:flex;align-items:center;gap:8px;padding:0 8px 0 12px;font:400 14px/18px Inter,sans-serif;color:var(--kb-tx)}
+.kb-incoming-ins>svg{flex:none;width:22px;height:22px;color:var(--kb-acc)}
+.kb-incoming-ins .t{flex:1;min-width:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.kb-incoming-ins .t b{font-weight:700}
+.kb-incoming-ins small{flex:none;font:700 12px/18px Inter,sans-serif;letter-spacing:.03em;border-radius:6px;padding:0 4px;box-shadow:inset 0 0 0 1.5px currentColor;color:var(--kb-sec)}
+@media (prefers-reduced-motion:reduce){.kb-incoming-spin,.kb-incoming-prog i{animation:none}}
+/* ===== добавлено для kb-incoming ===== */
+.scr.light{--kb-sel:#C2E6D6;--kb-selh:#00875C;--kb-mk:#C8EBDB}
+.scr:not(.light){--kb-sel:#265C50;--kb-selh:#2BC48A;--kb-mk:#24604A}
+/* пересланное сообщение и выделение текста в нём */
+.kb-incoming-fw{display:flex;align-items:center;gap:4px;font:500 13px/18px Inter,sans-serif;color:var(--sec);margin-bottom:10px}
+.kb-incoming-fw svg{width:15px;height:15px;flex:none}
+.kb-incoming-hl{background:var(--kb-sel);border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:1px 0}
+.kb-incoming-h{display:inline-block;position:relative;width:2px;height:22px;vertical-align:-5px;background:var(--kb-selh);margin:0 1px 0 -1px}
+.kb-incoming-h.e{margin:0 -1px 0 1px}
+.kb-incoming-h::after{content:'';position:absolute;left:-4px;width:10px;height:10px;border-radius:50%;background:var(--kb-selh)}
+.kb-incoming-h.s::after{top:-9px}
+.kb-incoming-h.e::after{bottom:-9px}
+.kb-incoming-scr .m .kb-incoming-hl~.tm{margin-top:10px}
+/* голосовое в переписке */
+.kb-incoming-scr .m.kb-incoming-vb{display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;width:262px}
+.kb-incoming-vb .pl{flex:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#FFFFFF;color:#00875C}
+.scr.light .kb-incoming-vb .pl{background:#00875C;color:#FFFFFF}
+.kb-incoming-vb .pl svg{width:18px;height:18px}
+.kb-incoming-vb .w{flex:1;min-width:0;display:flex;align-items:center;gap:2px;height:28px;overflow:hidden}
+.kb-incoming-vb .w i{flex:none;width:3px;border-radius:2px;background:currentColor;opacity:.85}
+.kb-incoming-vb .r{flex:none;display:flex;flex-direction:column;align-items:flex-end}
+.kb-incoming-vb .d{font:600 14px/18px Inter,sans-serif;font-variant-numeric:tabular-nums}
+.kb-incoming-vb .tm{margin-top:0}
+/* полоса «Скопирован текст» */
+.kb-incoming-strip.st .kb-incoming-a.p.n{padding:0 14px}
+.kb-incoming-a.p small{color:inherit}
+/* карточка на месте полосы и панели: 112 + 8 = 120, раскладка не двигается */
+.kb-incoming-card{margin:8px 5px 0;height:112px;border-radius:14px;background:var(--kb-key);box-shadow:var(--kb-sh);padding:0 6px 4px 14px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.kb-incoming-ch{flex:none;height:48px;display:flex;align-items:center;gap:8px}
+.kb-incoming-ch>svg{flex:none;width:22px;height:22px;color:var(--kb-acc)}
+.kb-incoming-ch .lb{flex:1;min-width:0;font:600 14px/19px Inter,sans-serif;color:var(--kb-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-incoming-ch .kb-incoming-a.q{padding:0 12px}
+.kb-incoming-ch .kb-incoming-a svg{width:20px;height:20px}
+.kb-incoming-cb{flex:none;padding-right:10px;font:500 16px/22px Inter,sans-serif;color:var(--kb-tx);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-height:44px}
+.kb-incoming-cb .k{color:var(--kb-sec);font-weight:600}
+.kb-incoming-mk{color:inherit;background:var(--kb-mk);border-radius:5px;padding:0 3px;font-weight:700;white-space:nowrap;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* ===== экран Parrlo Translate (только тёмный): голосовое на языке собеседника ===== */
+.kb-incoming-tv{--me:#2BC48A;--es:#BFF2DC}
+.kb-incoming-ttop{flex:none;height:64px;display:flex;align-items:center;gap:8px;padding:0 16px}
+.kb-incoming-tb{flex:none;width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.kb-incoming-tb svg{width:24px;height:24px}
+.kb-incoming-tt{flex:1;min-width:0;text-align:center;font:900 20px/24px Nunito,sans-serif}
+.kb-incoming-tsp{flex:none;width:48px}
+.kb-incoming-tm{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:0 16px 8px}
+.kb-incoming-vc{background:var(--deep);color:#FFFFFF;border-radius:28px 28px 8px 28px;padding:20px 20px 20px}
+.kb-incoming-vl{display:flex;align-items:center;gap:8px;font:600 13px/16px Inter,sans-serif;letter-spacing:.02em;margin-bottom:14px}
+.kb-incoming-vl svg{width:18px;height:18px;flex:none}
+.kb-incoming-vo{display:block;font:400 15px/21px Inter,sans-serif;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,.28)}
+.kb-incoming-vo small{display:block;font:600 12px/16px Inter,sans-serif;letter-spacing:.03em;margin-bottom:4px}
+.kb-incoming-vt{display:block;font:900 26px/32px Nunito,sans-serif}
+.kb-incoming-vp{display:flex;align-items:center;gap:12px;margin-top:20px;height:36px}
+.kb-incoming-vp .w{flex:1;min-width:0;display:flex;align-items:center;gap:3px;height:36px;overflow:hidden}
+.kb-incoming-vp .w i{flex:none;width:3px;border-radius:2px;background:#FFFFFF}
+.kb-incoming-vp .d{flex:none;font:600 15px/20px Inter,sans-serif;font-variant-numeric:tabular-nums}
+.kb-incoming-vr{display:flex;align-items:center;gap:12px;min-height:72px;background:var(--sf);border-radius:24px;padding:4px 8px 4px 20px;box-shadow:inset 0 0 0 1px var(--line)}
+.kb-incoming-vr>div{flex:1;min-width:0}
+.kb-incoming-vr b{display:block;font:600 16px/22px Inter,sans-serif}
+.kb-incoming-vr small{display:block;font:400 14px/19px Inter,sans-serif;color:var(--sec)}
+.kb-incoming-val{flex:none;display:flex;align-items:center;gap:6px;height:44px;padding:0 8px 0 12px;font:600 15px Inter,sans-serif;color:var(--tx)}
+.kb-incoming-val svg{width:18px;height:18px;color:var(--sec)}
+.kb-incoming-tbot{flex:none;display:flex;flex-direction:column;gap:12px;padding:12px 16px 4px}
+.kb-incoming-hint{height:20px;display:flex;align-items:center;justify-content:center;font:500 14px/20px Inter,sans-serif;color:var(--sec);white-space:nowrap}
+.kb-incoming-btns{display:flex;gap:12px}
+.kb-incoming-pb{flex:1 1 0;min-width:0;height:80px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 21px/24px Nunito,sans-serif;white-space:nowrap}
+.kb-incoming-pb svg{flex:none;width:24px;height:24px}
+.kb-incoming-pb.s{background:var(--sf2);color:var(--tx)}
+.kb-incoming-pb.p{background:var(--me);color:#0E1116}
+.kb-incoming-ch .ok{flex:none;display:flex;color:var(--kb-acc)}
+.kb-incoming-ch .ok svg{width:22px;height:22px}
+.kb-incoming-ch .lb.t{color:var(--kb-tx)}
+</style>
+</head>
+<body>
+<div class="kb-incoming-w">
+<div class="kb-incoming-top"><div class="kb-incoming-tags"><span class="kb-incoming-tag" id="kb-incoming-t-draft"></span><span class="kb-incoming-tag m" id="kb-incoming-t-mock"></span></div>
+<nav class="kb-incoming-lng" id="kb-incoming-lng" aria-label="Language"></nav></div>
+<h1 id="kb-incoming-h1"></h1>
+<p class="kb-incoming-lead" id="kb-incoming-lead"></p>
+<div class="kb-incoming-hero" id="kb-incoming-hero"></div>
+<section class="kb-incoming-sec">
+<h2 id="kb-incoming-h-st"></h2>
+<p id="kb-incoming-p-st"></p>
+<div class="kb-incoming-grid" id="kb-incoming-grid"></div>
+</section>
+<section class="kb-incoming-sec kb-incoming-notes" id="kb-incoming-notes"></section>
+</div>
+<script>
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+let pmN=0;
+/* «Улучшить» — монохромный попугай Parrlo (ключ spark из screens.js), маска с уникальным id */
+const parrot=()=>{const id='kb-incoming-pm'+(++pmN);return `<svg class="pm" viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#${id})"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>`;};
+const I={
+tr:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg>`,
+mic:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/></svg>`,
+voice:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+gear:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>`,
+chev:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>`,
+shift:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l8 8.5h-4.5v7.5h-7V12H4z"/></svg>`,
+shiftOn:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l8 8.5h-4.5v7.5h-7V12H4z"/></svg>`,
+del:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 5H20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H8.5L3 12z"/><path d="M11.5 9.5l5 5M16.5 9.5l-5 5" stroke-linecap="round"/></svg>`,
+ret:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5v6a3 3 0 0 1-3 3H5"/><path d="M9 10l-4 4 4 4"/></svg>`,
+back:`<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>`,
+send:`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>`,
+/* добавлено для состояний перевода */
+spin:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5" opacity=".3"/><path class="kb-incoming-spin" d="M12 3.5a8.5 8.5 0 0 1 8.5 8.5"/></svg>`,
+check:`<svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+checkW:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+undo:`<svg class="un" viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>`,
+retry:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v5h-5"/></svg>`,
+alert:`<svg class="er" viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5h.01"/></svg>`,
+cloudOff:`<svg class="nt" viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M8 7.2A5.5 5.5 0 0 1 17 9.5h.5a4 4 0 0 1 2.6 7"/><path d="M17 19H7a4.5 4.5 0 0 1-1.3-8.8"/><path d="M3 3l18 18"/></svg>`,
+x:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>`,
+ins:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4.5 19.5h15"/></svg>`};
+const NB=' ';
+
+Object.assign(I,{
+clip:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><rect x="5.5" y="4.5" width="13" height="16.5" rx="2.5"/><path d="M9 4.5V3.8A1.3 1.3 0 0 1 10.3 2.5h3.4A1.3 1.3 0 0 1 15 3.8v.7"/><path d="M9 10.5h6M9 14.5h4"/></svg>`,
+fwd:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2" aria-hidden="true"><path d="M14 5l6 6-6 6"/><path d="M20 11H10a6 6 0 0 0-6 6v2"/></svg>`,
+reply:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M10 5L4 11l6 6"/><path d="M4 11h10a6 6 0 0 1 6 6v2"/></svg>`,
+play:`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.5.86l11-6.8a1 1 0 0 0 0-1.72l-11-6.8A1 1 0 0 0 8 5.2z"/></svg>`,
+share:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M12 3v12M7.5 7.5L12 3l4.5 4.5"/><path d="M8 10.5H6.5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-6.5a2 2 0 0 0-2-2H16"/></svg>`,
+chevD:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>`,
+backT:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>`,
+checkA:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`});
+const NN='‑';/* U+2011 */
+
+/* ===== один словарь: экран и страница =====
+   Каркас, переписка, собеседник и раскладка — как в kb-before / kb-translate (словарь D там). */
+const D={
+ru:{html:'ru',
+ kb:'ru',space:'Русский',ph:'Сообщение',online:'в сети',today:'Сегодня',who:'Pedro',av:'P',them:'es',
+ pair:'RU → ES',pairA:'Языки: с русского на испанский',hintB:'Пиши по‑русски',hintS:'Переведём на испанский',
+ imp:'Улучшить',tr:'Перевести',dict:'Диктовка',voice:'Голосовое',set:'Настройки',shift:'Заглавные',del:'Удалить',num:'Цифры',ret:'Ввод',
+ base:[['in','¡Hola! ¿Qué tal el piso? ¿Va bien la calefacción?','9:52'],['out','¡Hola, Pedro! Sí, todo bien, gracias.','9:55'],['in','Genial. Mañana viene el técnico a revisar la caldera. ¿A qué hora te viene bien?','10:01']],
+ fwdL:'Переслано',fwdT:'Le recordamos que el recibo de la comunidad vence el día 5.',
+ vbA:'Голосовое, 0:04',
+ cpB:'Скопирован текст',cpS:'Перевести на русский?',cpA:'Перевести',cpAria:'Перевести скопированный текст на русский',
+ inL:'С испанского',inT:'Напоминаем: взнос за дом нужно оплатить <mark class="kb-incoming-mk">до 5‑го числа</mark>.',hide:'Скрыть',reply:'Ответить',
+ chField:'¡Hola! El grifo de la cocina vuelve a gotear. ¿Podría venir un técnico el sábado?',
+ chL:'Перевели на испанский',mean:'Смысл:',meanT:'Кран на кухне снова течёт. Может ли мастер прийти <mark class="kb-incoming-mk">в субботу</mark>?',
+ undo:'Отменить',undoA:'Отменить перевод, вернуть русский текст',
+ vTitle:'Голосовое',vBack:'Назад в чат',vLabel:'Голосовое по‑испански',vYou:'Твой текст',
+ vSrc:'Завтра после 10 удобно. Я буду дома.',vOut:'Mañana después de las 10 me va bien. Estaré en casa.',vDur:'0:04',
+ vVoice:'Голос',vVoiceS:'Стандартный голос Parrlo',vVal:'Женский',vValA:'Голос: женский. Изменить',
+ vHint:'Прослушай и отправь через «Поделиться»',listen:'Прослушать',share:'Поделиться',
+ /* страница */
+ title:'Parrlo · клавиатура, перевод входящего',t_draft:'Черновик текста',t_mock:'Макет · скоро',
+ h1:'Клавиатура Parrlo · перевод входящего, проверка и голосовое',
+ lead:'Вторая половина разговора. Pedro пересылает напоминание по‑испански; ты выделяешь его и копируешь, а над раскладкой появляется смысл по‑русски, дата подсвечена. Поле ввода не тронуто. Клавиатура не читает переписку: она видит только то, что ты сам скопировал, и переводит по нажатию. Ниже — проверка перед отправкой (строка «Смысл») и голосовое по‑испански, которое озвучивает Parrlo Translate. Каркас, переписка и раскладка — как в kb-before и kb-translate. Клавиатура идёт за темой телефона.',
+ capL:['Перевод входящего · светлая тема','Над раскладкой — смысл сообщения по‑русски, дата подсвечена. Поле не тронуто.'],
+ capD:['Перевод входящего · тёмная тема','Те же размеры, токены тёмной клавиатуры.'],
+ hSt:'Состояния',pSt:'Слева светлая тема, справа тёмная. Полоса и карточка занимают над раскладкой одну и ту же высоту, 120 pt, поэтому поле и раскладка не прыгают. Экран озвучки — это Parrlo Translate, он только тёмный.',
+ light:'Светлая',dark:'Тёмная',tvOnly:'Parrlo Translate · тёмная тема',
+ st:{select:['Выделено и скопировано','Ты выделяешь пересланное сообщение Pedro и нажимаешь «Скопировать». Клавиатура замечает, что в буфере новый текст, и предлагает «Перевести». Сам текст она прочитает только по нажатию.'],
+  incoming:['Перевод входящего','После «Перевести» на месте полосы и панели — смысл сообщения по‑русски, дата подсвечена: её стоит проверить глазами. «Ответить» — к полю, писать по‑русски; «Скрыть» — вернуть панель.'],
+  check:['Проверь, что уходит','После «Перевести» в поле испанский текст, а в карточке — «Смысл» по‑русски, суббота подсвечена. Если смысл уехал, это видно до отправки; «Отменить» вернёт русский черновик.'],
+  voice:['Голосовое по‑испански','«Голосовое» в панели открывает Parrlo Translate: твой текст, он же по‑испански и запись стандартным голосом Parrlo. «Прослушать» — проверить на слух, «Поделиться» — отправить в чат.'],
+  shared:['Голосовое в чате','После «Поделиться» голосовое ушло в переписку с Pedro обычным аудиосообщением мессенджера. Клавиатура снова ждёт текст по‑русски.']},
+ hDec:'Решения',dec:[
+  '<b>Клавиатура видит только скопированное.</b> Переписку и выделение в чужом приложении клавиатура прочитать не может и не делает вид, что может. Путь честный: выделить → «Скопировать» → «Перевести» в полосе. Текст из буфера читается только по этому нажатию.',
+  '<b>Поле ввода не трогаем.</b> Перевод входящего — чтобы прочитать, в поле он не вставляется. Черновик, если он был, остаётся на месте.',
+  '<b>Карточка на месте полосы и панели, 112 + 8 pt.</b> Двум строкам смысла нужно место: карточка занимает полосу и ряд иконок, а раскладка и поле не сдвигаются. Панель возвращают «Скрыть» и любое нажатие клавиши.',
+  '<b>Числа и даты подсвечены</b> фоном и жирным, не только цветом: «Числа и даты Parrlo подсвечивает — их стоит проверить глазами» (copy‑ru §7).',
+  '<b>«Ответить»</b> закрывает карточку и ставит курсор в поле: дальше пишешь по‑русски, «Перевести» сделает испанский.',
+  '<b>«Смысл» — в той же карточке</b>: обратный перевод того, что лежит в поле, с подсвеченной датой. Это продолжение состояния «Перевели» из kb-translate: вместо «Было: …» — «Смысл: …», «Отменить» на том же месте.',
+  '<b>Голосовое — через Parrlo Translate</b>, как в сборке: «Голосовое» в панели открывает экран озвучки. Цвет = сторона: карточка твоя, тёмно‑зелёная, как твои реплики в translate-talk; сверху твой текст, ниже он же по‑испански крупно.',
+  '<b>Голос — стандартный голос Parrlo с выбором «Женский / Мужской»</b>: это не «Мой голос», и без догадок о роде.',
+  '<b>Отправка — через «Поделиться»</b>: голосовое приходит в чат обычным аудиосообщением, собеседнику ничего ставить не нужно.',
+  '<b>Пересланное сообщение.</b> Текст §7 из copy‑ru — напоминание управляющей компании; его пересылает Pedro, чтобы собеседник был тот же, что в kb-before.'],
+ hTok:'Токены и контраст',
+ hNo:'Не утверждено',no:[
+  'Все тексты — черновик; es и en не вычитаны носителем. Демо‑фразы §7, §8 и §10 взяты из copy‑ru, он сам на утверждении у Мурата.',
+  'Технически проверить путь «скопировать → „Перевести“»: клавиатура узнаёт о новом тексте в буфере, не читая его (счётчик изменений буфера), и читает только по нажатию. Не покажет ли iOS запрос «Разрешить вставку».',
+  'В задании — «Смысл» перед вставкой перевода. Здесь, как в copy‑ru §8 и в утверждённом kb-translate, перевод уже в поле, а «Смысл» виден до отправки. Предпросмотр до вставки — это другое поведение «Перевести», решить отдельно.',
+  'Пока открыта карточка, панель иконок скрыта. Альтернатива — растить клавиатуру, но тогда прыгает поле.',
+  'В copy‑ru §7 сообщение пишет управляющая компания; здесь его пересылает Pedro.',
+  'Выбор «Женский / Мужской» на экране озвучки; в архитектуре — «мужской или женский по роду». Название «Стандартный голос Parrlo» — черновик.',
+  'Экран озвучки только в тёмной теме: Parrlo Translate тёмный.',
+  'Что видно после «Ответить»: подсказка «Пиши по‑русски» в полосе или сразу подсказки слов.',
+  'Мессенджер выдуманный и нейтральный; на сайте WhatsApp — только словом, без логотипа.']},
+es:{html:'es',
+ kb:'es',space:'Español',ph:'Mensaje',online:'en línea',today:'Hoy',who:'Olga',av:'O',them:'ru',
+ pair:'ES → RU',pairA:'Idiomas: del español al ruso',hintB:'Escribe en español',hintS:'Lo traducimos al ruso',
+ imp:'Mejorar',tr:'Traducir',dict:'Dictado',voice:'Nota de voz',set:'Ajustes',shift:'Mayúsculas',del:'Borrar',num:'Números',ret:'Intro',
+ base:[['in','Добрый день! Как вам квартира? С отоплением всё в порядке?','9:52'],['out','Здравствуйте, Ольга! Да, всё хорошо, спасибо.','9:55'],['in','Отлично. Завтра придёт мастер проверить котёл. Во сколько вам удобно?','10:01']],
+ fwdL:'Reenviado',fwdT:'Напоминаем: взнос за дом нужно оплатить до 5‑го числа.',
+ vbA:'Nota de voz, 0:04',
+ cpB:'Texto copiado',cpS:'¿Lo traducimos al español?',cpA:'Traducir',cpAria:'Traducir al español el texto copiado',
+ inL:'Del ruso',inT:'Recordatorio: hay que pagar la cuota de la comunidad <mark class="kb-incoming-mk">antes del día 5</mark>.',hide:'Ocultar',reply:'Responder',
+ chField:'Здравствуйте! Кран на кухне опять течёт. Можно мастера в субботу?',
+ chL:'Traducido al ruso',mean:'Quiere decir:',meanT:'El grifo de la cocina vuelve a gotear. ¿Puede venir un técnico <mark class="kb-incoming-mk">el sábado</mark>?',
+ undo:'Deshacer',undoA:'Deshacer la traducción y recuperar el texto en español',
+ vTitle:'Nota de voz',vBack:'Volver al chat',vLabel:'Nota de voz en ruso',vYou:'Tu texto',
+ vSrc:'Mañana después de las 10 me va bien. Estaré en casa.',vOut:'Завтра после 10 мне удобно. Я буду дома.',vDur:'0:04',
+ vVoice:'Voz',vVoiceS:'Voz estándar de Parrlo',vVal:'Femenina',vValA:'Voz: femenina. Cambiar',
+ vHint:'Escúchala y envíala con «Compartir»',listen:'Escuchar',share:'Compartir',
+ title:'Parrlo · teclado, mensajes recibidos',t_draft:'Texto provisional',t_mock:'Maqueta · próximamente',
+ h1:'Teclado Parrlo · traducir lo recibido, revisar y nota de voz',
+ lead:'La otra mitad de la conversación. Olga te reenvía un aviso en ruso; lo seleccionas, lo copias y encima del teclado aparece qué quiere decir en español, con la fecha resaltada. El campo de texto no se toca. El teclado no lee la conversación: solo ve lo que tú copias y lo traduce cuando tocas el botón. Debajo, la revisión antes de enviar (la línea «Quiere decir») y una nota de voz en ruso que pone voz Parrlo Translate. La estructura, la conversación y el teclado son los de kb-before y kb-translate. El teclado sigue el tema del móvil.',
+ capL:['Mensaje recibido · tema claro','Encima del teclado, qué quiere decir el mensaje en español; la fecha, resaltada. El campo, intacto.'],
+ capD:['Mensaje recibido · tema oscuro','Mismas medidas, colores del teclado oscuro.'],
+ hSt:'Estados',pSt:'A la izquierda, el tema claro; a la derecha, el oscuro. La franja y la tarjeta ocupan sobre el teclado la misma altura, 120 pt, así que el campo y el teclado no se mueven. La pantalla de la nota de voz es Parrlo Translate y solo tiene tema oscuro.',
+ light:'Claro',dark:'Oscuro',tvOnly:'Parrlo Translate · tema oscuro',
+ st:{select:['Seleccionado y copiado','Seleccionas el mensaje que te reenvió Olga y tocas «Copiar». El teclado nota que hay texto nuevo en el portapapeles y te ofrece «Traducir». Solo lo lee cuando tocas el botón.'],
+  incoming:['Traducir lo recibido','Tras «Traducir», en lugar de la franja y el panel aparece qué quiere decir el mensaje en español, con la fecha resaltada: conviene revisarla. «Responder» te lleva al campo; «Ocultar» devuelve el panel.'],
+  check:['Revisa lo que envías','Tras «Traducir», el campo tiene el texto en ruso y la tarjeta muestra «Quiere decir» en español, con el sábado resaltado. Si el sentido cambió, lo ves antes de enviar; «Deshacer» recupera tu borrador.'],
+  voice:['Nota de voz en ruso','«Nota de voz» en el panel abre Parrlo Translate: tu texto, el mismo en ruso y la grabación con la voz estándar de Parrlo. «Escuchar» para oírla; «Compartir» para enviarla al chat.'],
+  shared:['La nota de voz, en el chat','Tras «Compartir», la nota de voz llega a la conversación con Olga como un audio normal del mensajero. El teclado vuelve a esperar tu texto en español.']},
+ hDec:'Decisiones',dec:[
+  '<b>El teclado solo ve lo que copias.</b> No puede leer la conversación ni lo que seleccionas en otra app, y no finge que puede. El camino es honesto: seleccionar → «Copiar» → «Traducir» en la franja. El portapapeles se lee solo al tocar ese botón.',
+  '<b>El campo no se toca.</b> La traducción de lo recibido es para leerla; no se inserta en el campo. Si había un borrador, sigue ahí.',
+  '<b>Tarjeta en lugar de la franja y el panel, 112 + 8 pt.</b> Dos líneas necesitan sitio: la tarjeta ocupa la franja y la fila de iconos, y el teclado y el campo no se mueven. El panel vuelve con «Ocultar» o con cualquier tecla.',
+  '<b>Números y fechas resaltados</b> con fondo y negrita, no solo con color: conviene revisarlos con tus propios ojos (copy‑ru §7).',
+  '<b>«Responder»</b> cierra la tarjeta y pone el cursor en el campo: escribes en español y «Traducir» lo pasa al ruso.',
+  '<b>«Quiere decir», en la misma tarjeta</b>: la traducción inversa de lo que hay en el campo, con la fecha resaltada. Continúa el estado «Traducido» de kb-translate: en vez de «Antes: …», «Quiere decir: …», y «Deshacer» en el mismo sitio.',
+  '<b>La nota de voz, en Parrlo Translate</b>, como en la versión actual: «Nota de voz» abre la pantalla de voz. Color = lado: la tarjeta es tuya, verde oscuro como tus frases en translate-talk; arriba tu texto y debajo, en grande, el mismo en ruso.',
+  '<b>Voz estándar de Parrlo, a elegir entre «Femenina» y «Masculina»</b>: no es «Mi voz» y no se adivina el género.',
+  '<b>Se envía con «Compartir»</b>: llega al chat como un audio normal; la otra persona no necesita instalar nada.',
+  '<b>Mensaje reenviado.</b> El texto del §7 de copy‑ru es un aviso de la comunidad; lo reenvía la casera para que la conversación sea la misma que en kb-before.'],
+ hTok:'Colores y contraste',
+ hNo:'Pendiente de aprobar',no:[
+  'Todos los textos son provisionales; el español y el inglés están sin revisar por un nativo. Las frases de los §7, §8 y §10 vienen de copy‑ru, también pendiente de aprobar.',
+  'Comprobar el camino «copiar → Traducir»: el teclado sabe que hay texto nuevo sin leerlo (contador de cambios del portapapeles) y solo lo lee al tocar. Ver si iOS pide «Permitir pegar».',
+  'El encargo pide «Quiere decir» antes de insertar la traducción. Aquí, como en copy‑ru §8 y en kb-translate, la traducción ya está en el campo y «Quiere decir» se ve antes de enviar. Una vista previa antes de insertar sería otro comportamiento de «Traducir».',
+  'Mientras la tarjeta está abierta, el panel de iconos se oculta. La alternativa es agrandar el teclado, pero el campo daría un salto.',
+  'En copy‑ru §7 escribe la administración de la comunidad; aquí lo reenvía la casera.',
+  'Elegir «Femenina / Masculina» en la pantalla de voz; la arquitectura dice «según el género». El nombre «Voz estándar de Parrlo» es provisional.',
+  'La pantalla de voz solo en tema oscuro: Parrlo Translate es oscuro.',
+  'Qué se ve tras «Responder»: la pista «Escribe en español» en la franja o directamente las sugerencias.',
+  'El mensajero es ficticio y neutro; en la web, WhatsApp solo se nombra, sin logotipo.']},
+en:{html:'en',
+ kb:'en',space:'English',ph:'Message',online:'online',today:'Today',who:'Pedro',av:'P',them:'es',
+ pair:'EN → ES',pairA:'Languages: English to Spanish',hintB:'Write in English',hintS:'We’ll translate it into Spanish',
+ imp:'Improve',tr:'Translate',dict:'Dictate',voice:'Voice note',set:'Settings',shift:'Shift',del:'Delete',num:'Numbers',ret:'Return',
+ base:[['in','¡Hola! ¿Qué tal el piso? ¿Va bien la calefacción?','9:52'],['out','¡Hola, Pedro! Sí, todo bien, gracias.','9:55'],['in','Genial. Mañana viene el técnico a revisar la caldera. ¿A qué hora te viene bien?','10:01']],
+ fwdL:'Forwarded',fwdT:'Le recordamos que el recibo de la comunidad vence el día 5.',
+ vbA:'Voice note, 0:04',
+ cpB:'Text copied',cpS:'Translate it into English?',cpA:'Translate',cpAria:'Translate the copied text into English',
+ inL:'From Spanish',inT:'Just a reminder: the community fee is due <mark class="kb-incoming-mk">by the 5th</mark>.',hide:'Hide',reply:'Reply',
+ chField:'¡Hola! El grifo de la cocina vuelve a gotear. ¿Podría venir un técnico el sábado?',
+ chL:'Translated into Spanish',mean:'Meaning:',meanT:'The kitchen tap is leaking again. Could a technician come <mark class="kb-incoming-mk">on Saturday</mark>?',
+ undo:'Undo',undoA:'Undo the translation and bring back the English text',
+ vTitle:'Voice note',vBack:'Back to chat',vLabel:'Voice note in Spanish',vYou:'Your text',
+ vSrc:'Tomorrow after 10 works for me. I’ll be home.',vOut:'Mañana después de las 10 me va bien. Estaré en casa.',vDur:'0:04',
+ vVoice:'Voice',vVoiceS:'Standard Parrlo voice',vVal:'Female',vValA:'Voice: female. Change',
+ vHint:'Listen, then send it with Share',listen:'Listen',share:'Share',
+ title:'Parrlo · keyboard, incoming messages',t_draft:'Draft copy',t_mock:'Mockup · coming soon',
+ h1:'Parrlo Keyboard · incoming translation, checking and voice notes',
+ lead:'The other half of the conversation. Pedro forwards a reminder in Spanish; you select it and copy it, and its meaning appears in English above the keys, with the date highlighted. The text field stays untouched. The keyboard doesn’t read your chat: it only sees what you copy, and translates it when you tap. Further down: the check before sending (the Meaning line) and a Spanish voice note voiced by Parrlo Translate. Skeleton, thread and layout match kb-before and kb-translate. The keyboard follows the phone’s theme.',
+ capL:['Incoming translation · light theme','Above the keys, the message’s meaning in English, date highlighted. The field is untouched.'],
+ capD:['Incoming translation · dark theme','Same sizes, dark keyboard tokens.'],
+ hSt:'States',pSt:'Light theme on the left, dark on the right. The strip and the card take up the same 120 pt above the keys, so the field and layout never jump. The voice screen is Parrlo Translate, which is dark only.',
+ light:'Light',dark:'Dark',tvOnly:'Parrlo Translate · dark theme',
+ st:{select:['Selected and copied','You select Pedro’s forwarded message and tap Copy. The keyboard notices there’s new text on the clipboard and offers Translate. It only reads the text when you tap.'],
+  incoming:['Incoming translation','After Translate, the strip and toolbar make way for the message’s meaning in English, with the date highlighted — worth a second look. Reply takes you to the field; Hide brings the toolbar back.'],
+  check:['Check what you send','After Translate, the field holds the Spanish and the card shows its Meaning in English, with Saturday highlighted. If the sense drifted, you see it before sending; Undo brings back your draft.'],
+  voice:['Voice note in Spanish','Voice note in the toolbar opens Parrlo Translate: your text, the same in Spanish and a recording in the standard Parrlo voice. Listen to check it by ear; Share to send it to the chat.'],
+  shared:['Voice note in the chat','After Share, the voice note lands in the chat with Pedro as an ordinary messenger audio message. The keyboard is ready for your English again.']},
+ hDec:'Decisions',dec:[
+  '<b>The keyboard only sees what you copy.</b> It can’t read the conversation or a selection in another app, and doesn’t pretend to. The path is honest: select → Copy → Translate in the strip. The clipboard is read only on that tap.',
+  '<b>The field is left alone.</b> An incoming translation is for reading; it isn’t inserted into the field. Any draft stays where it was.',
+  '<b>A card in place of the strip and toolbar, 112 + 8 pt.</b> Two lines need room: the card takes the strip and the icon row, while the layout and field stay put. Hide or any keystroke brings the toolbar back.',
+  '<b>Numbers and dates are highlighted</b> with a tint and bold, not colour alone: they’re worth checking with your own eyes (copy‑ru §7).',
+  '<b>Reply</b> closes the card and puts the cursor in the field: you write in English and Translate turns it into Spanish.',
+  '<b>Meaning lives in the same card</b>: a back-translation of what’s in the field, date highlighted. It extends kb-translate’s Translated state: “Meaning: …” replaces “Before: …”, with Undo in the same place.',
+  '<b>Voice notes go through Parrlo Translate</b>, as in the build: Voice note in the toolbar opens the voice screen. Colour = side: the card is yours, deep green like your lines in translate-talk; your text on top, the Spanish large below.',
+  '<b>A standard Parrlo voice, Female or Male</b>: not My Voice, and no guessing anyone’s gender.',
+  '<b>Sent with Share</b>: it arrives in the chat as a regular audio message; the other person doesn’t need to install anything.',
+  '<b>A forwarded message.</b> The §7 copy is a notice from the building’s management; Pedro forwards it so the chat partner stays the same as in kb-before.'],
+ hTok:'Tokens and contrast',
+ hNo:'Not approved',no:[
+  'All copy is draft; Spanish and English have not been proofread by native speakers. The §7, §8 and §10 demo lines come from copy‑ru, itself awaiting approval.',
+  'Verify the “copy → Translate” path: the keyboard learns there’s new clipboard text without reading it (the clipboard change counter) and reads it only on tap. Check whether iOS shows an Allow Paste prompt.',
+  'The brief asks for Meaning before the translation is inserted. Here, as in copy‑ru §8 and the approved kb-translate, the translation is already in the field and Meaning shows before sending. A preview before inserting would be different Translate behaviour; decide separately.',
+  'While the card is open, the icon toolbar is hidden. The alternative is a taller keyboard, but then the field jumps.',
+  'In copy‑ru §7 the building’s management writes the message; here Pedro forwards it.',
+  'Female / Male choice on the voice screen; the architecture says “by gender”. The name “Standard Parrlo voice” is a draft.',
+  'The voice screen is dark only: Parrlo Translate is dark.',
+  'What shows after Reply: the “Write in English” hint in the strip or word suggestions right away.',
+  'The messenger is made up and neutral; on the site WhatsApp is only named, with no logo.']}
+};
+
+/* контраст считается из цветов на лету */
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const fmt=(v,l)=>l==='en'?v.toFixed(1):v.toFixed(1).replace('.',',');
+
+/* раскладки — как в kb-before */
+const ROWS={ru:['йцукенгшщзх','фывапролджэ','ячсмитьбю'],es:['qwertyuiop','asdfghjklñ','zxcvbnm'],en:['qwertyuiop','asdfghjkl','zxcvbnm']};
+const BAR=[['imp',parrot],['tr',()=>I.tr],['dict',()=>I.mic],['voice',()=>I.voice],['set',()=>I.gear]];
+function keys(c,up,press){
+ const R=ROWS[c.kb],lg=c.kb==='ru'?'ru':c.kb;
+ const k=ch=>{const t=up?ch.toLocaleUpperCase(lg):ch;return ch===press?`<span class="kb-incoming-k pr" role="button">${t}<span class="kb-incoming-pop" aria-hidden="true">${t}</span></span>`:`<span class="kb-incoming-k" role="button">${t}</span>`;};
+ const row=s=>[...s].map(k).join('');
+ const half=R[1].length<R[0].length?'<span class="kb-incoming-hp"></span>':'';
+ return `<div class="kb-incoming-r">${row(R[0])}</div><div class="kb-incoming-r">${half}${row(R[1])}${half}</div>
+<div class="kb-incoming-r"><span class="kb-incoming-k f w" role="button" aria-label="${c.shift}"${up?' aria-pressed="true"':''}>${up?I.shiftOn:I.shift}</span><span class="kb-incoming-g"></span>${row(R[2])}<span class="kb-incoming-g"></span><span class="kb-incoming-k f w" role="button" aria-label="${c.del}">${I.del}</span></div>
+<div class="kb-incoming-r"><span class="kb-incoming-k f n" role="button" aria-label="${c.num}">123</span><span class="kb-incoming-k p" role="button">,</span><span class="kb-incoming-k sp" role="button"><i>‹</i>${c.space}<i>›</i></span><span class="kb-incoming-k p" role="button">.</span><span class="kb-incoming-k rt" role="button" aria-label="${c.ret}">${I.ret}</span></div>`;}
+
+const car='<i class="kb-incoming-car"></i>';
+
+/* токены и контраст — цифры считаются из цветов */
+const PAIRS={
+ L:[['T1','#0E1116','#FFFFFF'],['T2','#5B6472','#FFFFFF'],['T3','#FFFFFF','#00875C'],['T4','#0E1116','#ABB2BB'],['T5','#0E1116','#C8EBDB'],['T6','#0E1116','#C2E6D6'],['T7','#0E1116','#E9EDF0'],['T8','#5B6472','#E9EDF0'],['T9','#3E5A4D','#D6F5E5']],
+ D:[['T1','#F2F5F7','#3A414B'],['T2','#C5CCD5','#3A414B'],['T3','#0E1116','#2BC48A'],['T4','#F2F5F7','#2A3038'],['T5','#F2F5F7','#24604A'],['T6','#F2F5F7','#265C50'],['T7','#F2F5F7','#242B34'],['T8','#9AA4B2','#242B34'],['T9','#FFFFFF','#00875C']],
+ V:[['V1','#FFFFFF','#00875C'],['V2','#0E1116','#2BC48A'],['V3','#F2F5F7','#242B34'],['V4','#9AA4B2','#0E1116'],['V5','#9AA4B2','#1C2026']]};
+const PL={ru:{T1:'текст на полосе и карточке',T2:'подпись карточки',T3:'«Перевести», «Ответить» на акценте',T4:'«Отменить» на служебном',T5:'подсвеченная дата',T6:'выделенный текст',T7:'входящее сообщение',T8:'«Переслано» и время во входящем',T9:'время в исходящем',
+  V1:'текст на карточке голосового',V2:'«Поделиться»',V3:'«Прослушать»',V4:'подсказка над кнопками',V5:'подпись в строке «Голос»'},
+ es:{T1:'texto en franja y tarjeta',T2:'título de la tarjeta',T3:'«Traducir», «Responder» sobre acento',T4:'«Deshacer» sobre tecla de función',T5:'fecha resaltada',T6:'texto seleccionado',T7:'mensaje recibido',T8:'«Reenviado» y hora en recibido',T9:'hora en enviado',
+  V1:'texto en la tarjeta de voz',V2:'«Compartir»',V3:'«Escuchar»',V4:'pista sobre los botones',V5:'subtítulo en «Voz»'},
+ en:{T1:'text on strip and card',T2:'card label',T3:'Translate, Reply on accent',T4:'Undo on function key',T5:'highlighted date',T6:'selected text',T7:'incoming message',T8:'Forwarded and time in incoming',T9:'time in outgoing',
+  V1:'text on the voice card',V2:'Share',V3:'Listen',V4:'hint above the buttons',V5:'subtitle in the Voice row'}};
+const TOK={
+ru:['<b>Светлая клавиатура:</b> фон #D3D7DC, клавиши, полоса и карточка #FFFFFF, служебные #ABB2BB, текст #0E1116, вторичный #5B6472, акцент #00875C / #FFFFFF, подсветка даты #C8EBDB, выделение #C2E6D6 и ручки #00875C; чат — фон #FFFFFF, входящие #E9EDF0, исходящие #D6F5E5.',
+ '<b>Тёмная клавиатура:</b> фон #1B1F25, клавиши, полоса и карточка #3A414B, служебные #2A3038, текст #F2F5F7, вторичный #C5CCD5, акцент #2BC48A / #0E1116, подсветка даты #24604A, выделение #265C50 и ручки #2BC48A; чат — фон #0E1116, входящие #242B34, исходящие #00875C.',
+ '<b>Parrlo Translate:</b> фон #0E1116, поверхности #1C2026 / #242B34, твоя сторона #2BC48A и #00875C, текст #F2F5F7, вторичный #9AA4B2.',
+ '<b>Контраст, светлая:</b> CONTRAST_L.','<b>Контраст, тёмная:</b> CONTRAST_D.','<b>Контраст, Translate:</b> CONTRAST_V.',
+ '<b>Не только цветом:</b> дата — фон и жирный; выделение — фон и две ручки; «Скопирован текст» и «Перевели» — значок и слова; голосовое — кнопка ▶, волна и длительность.',
+ '<b>Зоны нажатия:</b> иконки панели 64×44; «Перевести», «Ответить», «Скрыть», «Отменить», выбор голоса — 44 pt; «Прослушать» и «Поделиться» — 80 pt; «Назад» — 48; переключатель языка страницы 56×44.'],
+es:['<b>Teclado claro:</b> fondo #D3D7DC, teclas, franja y tarjeta #FFFFFF, teclas de función #ABB2BB, texto #0E1116, secundario #5B6472, acento #00875C / #FFFFFF, fecha resaltada #C8EBDB, selección #C2E6D6 y tiradores #00875C; chat: fondo #FFFFFF, recibidos #E9EDF0, enviados #D6F5E5.',
+ '<b>Teclado oscuro:</b> fondo #1B1F25, teclas, franja y tarjeta #3A414B, teclas de función #2A3038, texto #F2F5F7, secundario #C5CCD5, acento #2BC48A / #0E1116, fecha resaltada #24604A, selección #265C50 y tiradores #2BC48A; chat: fondo #0E1116, recibidos #242B34, enviados #00875C.',
+ '<b>Parrlo Translate:</b> fondo #0E1116, superficies #1C2026 / #242B34, tu lado #2BC48A y #00875C, texto #F2F5F7, secundario #9AA4B2.',
+ '<b>Contraste, claro:</b> CONTRAST_L.','<b>Contraste, oscuro:</b> CONTRAST_D.','<b>Contraste, Translate:</b> CONTRAST_V.',
+ '<b>No solo con color:</b> la fecha lleva fondo y negrita; la selección, fondo y dos tiradores; «Texto copiado» y «Traducido», icono y palabras; la nota de voz, botón ▶, onda y duración.',
+ '<b>Zonas táctiles:</b> iconos del panel 64×44; «Traducir», «Responder», «Ocultar», «Deshacer» y el selector de voz, 44 pt; «Escuchar» y «Compartir», 80 pt; «Volver», 48; selector de idioma de la página 56×44.'],
+en:['<b>Light keyboard:</b> background #D3D7DC, keys, strip and card #FFFFFF, function keys #ABB2BB, text #0E1116, secondary #5B6472, accent #00875C / #FFFFFF, date highlight #C8EBDB, selection #C2E6D6 with #00875C handles; chat: background #FFFFFF, incoming #E9EDF0, outgoing #D6F5E5.',
+ '<b>Dark keyboard:</b> background #1B1F25, keys, strip and card #3A414B, function keys #2A3038, text #F2F5F7, secondary #C5CCD5, accent #2BC48A / #0E1116, date highlight #24604A, selection #265C50 with #2BC48A handles; chat: background #0E1116, incoming #242B34, outgoing #00875C.',
+ '<b>Parrlo Translate:</b> background #0E1116, surfaces #1C2026 / #242B34, your side #2BC48A and #00875C, text #F2F5F7, secondary #9AA4B2.',
+ '<b>Contrast, light:</b> CONTRAST_L.','<b>Contrast, dark:</b> CONTRAST_D.','<b>Contrast, Translate:</b> CONTRAST_V.',
+ '<b>Not by colour alone:</b> the date has a tint and bold; the selection a tint and two handles; Text copied and Translated an icon and words; the voice note a ▶ button, a waveform and its length.',
+ '<b>Touch targets:</b> toolbar icons 64×44; Translate, Reply, Hide, Undo and the voice picker 44 pt; Listen and Share 80 pt; Back 48; page language switch 56×44.']};
+
+const VW=[6,10,16,22,14,26,20,12,18,28,22,14,8,16,24,30,20,12,18,24,14,10,16,22,18,12,8,14,20,10,6,8,12,6];
+const BW=[6,10,16,12,20,14,24,18,10,16,22,12,8,14,20,16,10,14,18,12,8,6,10,6];
+const msg=([d,t,tm,o],c)=>{
+ const lg=d==='in'?` lang="${c.them}"`:'';
+ if(o==='voice')return `<div class="m out kb-incoming-vb" role="group" aria-label="${c.vbA}"><span class="pl" role="button" aria-label="${c.listen}">${I.play}</span><span class="w" aria-hidden="true">${BW.map(h=>`<i style="height:${h}px"></i>`).join('')}</span><span class="r"><span class="d">${c.vDur}</span><span class="tm">${tm}</span></span></div>`;
+ const fw=o&&o.includes('fwd')?`<span class="kb-incoming-fw" lang="${c.html}">${I.fwd}${c.fwdL}</span>`:'';
+ const body=o&&o.includes('sel')?`<span class="kb-incoming-hl"><i class="kb-incoming-h s" aria-hidden="true"></i>${t}<i class="kb-incoming-h e" aria-hidden="true"></i></span>`:t;
+ return `<div class="m ${d}"${lg}>${fw}${body}<span class="tm">${tm}</span></div>`;};
+const tread=c=>[c.base[2],['out','','10:03','voice'],['in',c.fwdT,'10:05','fwd sel']];
+const btn=(cls,ic,t,a)=>`<span class="kb-incoming-a ${cls}" role="button"${a?` aria-label="${a}"`:''}>${ic||''}${t}</span>`;
+/* состояния: переписка, поле, полоса или карточка */
+const S={
+ select:c=>({msgs:tread(c),field:`<span class="pl">${c.ph}</span>`,car:'pre',up:1,send:0,
+  strip:`<div class="kb-incoming-strip st" role="status">${I.clip}<span class="tx"><b>${c.cpB}</b><span>${c.cpS}</span></span>${btn('p n',I.tr,c.cpA,c.cpAria)}</div>`}),
+ incoming:c=>({msgs:tread(c),field:`<span class="pl">${c.ph}</span>`,car:'pre',up:1,send:0,
+  card:`<div class="kb-incoming-card" role="region" aria-label="${c.inL}"><div class="kb-incoming-ch">${I.tr}<span class="lb">${c.inL}</span>${btn('q','',c.hide)}${btn('p n',I.reply,c.reply)}</div><div class="kb-incoming-cb" lang="${c.html}">${c.inT}</div></div>`}),
+ check:c=>({msgs:[c.base[0]],field:c.chField,flang:c.them,car:'post',up:0,send:1,
+  card:`<div class="kb-incoming-card" role="status"><div class="kb-incoming-ch"><span class="ok">${I.checkA}</span><span class="lb t">${c.chL}</span>${btn('s',I.undo,c.undo,c.undoA)}</div><div class="kb-incoming-cb"><span class="k">${c.mean}</span> ${c.meanT}</div></div>`}),
+ voice:c=>({tv:1}),
+ shared:c=>({msgs:[c.base[1],c.base[2],['out','','10:03','voice']],field:`<span class="pl">${c.ph}</span>`,car:'pre',up:1,send:0,
+  strip:`<div class="kb-incoming-strip">${I.tr}<span class="tx"><b>${c.hintB}</b><span>${c.hintS}</span></span><span class="kb-incoming-pill" role="button" aria-label="${c.pairA}"><span>${c.pair}${I.chev}</span></span></div>`})
+};
+const ORDER=['select','incoming','check','voice','shared'];
+const HERO='incoming';
+
+/* экран Parrlo Translate: голосовое на языке собеседника */
+function tscreen(c){
+ return `<div class="scr kb-incoming-tv" lang="${c.html}">
+<div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>
+<div class="kb-incoming-ttop"><span class="kb-incoming-tb" role="button" aria-label="${c.vBack}">${I.backT}</span><span class="kb-incoming-tt">${c.vTitle}</span><span class="kb-incoming-tsp"></span></div>
+<div class="kb-incoming-tm">
+ <div class="kb-incoming-vc"><div class="kb-incoming-vl">${I.voice}${c.vLabel}</div>
+  <span class="kb-incoming-vo"><small>${c.vYou}</small>${c.vSrc}</span>
+  <span class="kb-incoming-vt" lang="${c.them}">${c.vOut}</span>
+  <div class="kb-incoming-vp" aria-hidden="true"><span class="w">${VW.map(h=>`<i style="height:${h}px"></i>`).join('')}</span><span class="d">${c.vDur}</span></div></div>
+ <div class="kb-incoming-vr"><div><b>${c.vVoice}</b><small>${c.vVoiceS}</small></div><span class="kb-incoming-val" role="button" aria-label="${c.vValA}">${c.vVal}${I.chevD}</span></div>
+</div>
+<div class="kb-incoming-tbot"><div class="kb-incoming-hint">${c.vHint}</div>
+ <div class="kb-incoming-btns"><span class="kb-incoming-pb s" role="button">${I.play}${c.listen}</span><span class="kb-incoming-pb p" role="button">${I.share}${c.share}</span></div></div>
+<div class="homebar"><i></i></div></div>`;}
+
+function screen(id,light,c){
+ const s=S[id](c);
+ if(s.tv)return tscreen(c);
+ const f=s.car==='pre'?car+s.field:s.field+car;
+ const bar=s.card?'':`<div class="kb-incoming-bar">${BAR.map(([n,ic])=>`<span class="kb-incoming-ib" role="button" aria-label="${c[n]}">${ic()}</span>`).join('')}</div>`;
+ return `<div class="scr kb-incoming-scr ${light?'light':''}" lang="${c.html}">
+<div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>
+<div class="nav"><span class="bk">${I.back}</span><span class="av">${c.av}</span><span class="nm"><b>${c.who}</b><span>${c.online}</span></span></div>
+<div class="msgs"><div class="day">${c.today}</div>${s.msgs.map(m=>msg(m,c)).join('')}</div>
+<div class="inp"><span class="f"><span${s.flang?` lang="${s.flang}"`:''}>${f}</span></span><span class="sd${s.send?'':' off'}">${I.send}</span></div>
+<div class="kb-incoming-kb">
+${s.card||s.strip}
+${bar}
+<div class="kb-incoming-rows">${keys(c,s.up)}</div>
+<div class="kb-incoming-home"><i></i></div></div></div>`;}
+const ph=(id,l,sc,c)=>`<div class="pf p67 ${l?'light':''}" style="--s:${sc}"><div class="shell"></div><div class="glass">${screen(id,l,c)}</div></div>`;
+
+function render(L){
+ const c=D[L];
+ document.documentElement.lang=c.html;document.title=c.title;
+ const $=id=>document.getElementById(id);
+ $('kb-incoming-lng').innerHTML=['ru','es','en'].map(x=>`<a href="?l=${x}" data-l="${x}" aria-current="${x===L}" lang="${x}">${x.toUpperCase()}</a>`).join('');
+ $('kb-incoming-t-draft').textContent=c.t_draft;$('kb-incoming-t-mock').textContent=c.t_mock;
+ $('kb-incoming-h1').textContent=c.h1;$('kb-incoming-lead').textContent=c.lead;
+ $('kb-incoming-h-st').textContent=c.hSt;$('kb-incoming-p-st').textContent=c.pSt;
+ $('kb-incoming-hero').innerHTML=
+ `<figure data-shot="kb-incoming--light--${L}">${ph(HERO,1,1,c)}<div class="pcap"><span class="dot"></span><div><b>${c.capL[0]}</b><span>${c.capL[1]}</span></div></div></figure>
+<figure data-shot="kb-incoming--dark--${L}">${ph(HERO,0,1,c)}<div class="pcap"><span class="dot"></span><div><b>${c.capD[0]}</b><span>${c.capD[1]}</span></div></div></figure>`;
+ $('kb-incoming-grid').innerHTML=ORDER.map(id=>
+ `<article class="kb-incoming-st"><h3>${c.st[id][0]}<code>${id}</code></h3><p>${c.st[id][1]}</p>`+(S[id](c).tv?
+ `<div class="kb-incoming-pair"><figure data-shot="kb-incoming--${id}--dark--${L}">${ph(id,0,.6,c)}<div class="pcap"><div><b>${c.tvOnly}</b></div></div></figure></div></article>`:
+ `<div class="kb-incoming-pair">
+<figure data-shot="kb-incoming--${id}--light--${L}">${ph(id,1,.6,c)}<div class="pcap"><div><b>${c.light}</b></div></div></figure>
+<figure data-shot="kb-incoming--${id}--dark--${L}">${ph(id,0,.6,c)}<div class="pcap"><div><b>${c.dark}</b></div></div></figure></div></article>`)).join('');
+ const cs=t=>PAIRS[t].map(([k,a,b])=>`${PL[L][k]} ${fmt(cr(a,b),L)}`).join('; ');
+ const tok=TOK[L].map(x=>x.replace('CONTRAST_L',cs('L')).replace('CONTRAST_D',cs('D')).replace('CONTRAST_V',cs('V')));
+ $('kb-incoming-notes').innerHTML=`<div><h2>${c.hDec}</h2><ul>${c.dec.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h2>${c.hTok}</h2><ul>${tok.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h2>${c.hNo}</h2><ul>${c.no.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+ document.body.dataset.lang=L;
+}
+let L0=new URLSearchParams(location.search).get('l');if(!D[L0])L0='ru';
+render(L0);
+document.getElementById('kb-incoming-lng').addEventListener('click',e=>{const a=e.target.closest('a[data-l]');if(!a)return;e.preventDefault();const l=a.dataset.l;try{history.replaceState(null,'','?l='+l)}catch(_){}render(l);});
+window.KB_INCOMING_RENDER=render;
+document.body.dataset.ready='1';
+</script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo · клавиатура, Android</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.kb-android-w{max-width:1200px;margin:0 auto}
+.kb-android-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.kb-android-tags{display:flex;gap:8px;flex-wrap:wrap}
+.kb-android-tag{display:inline-block;font:600 13px/20px Inter,sans-serif;color:#0E1116;background:#FFC247;border-radius:8px;padding:2px 10px}
+.kb-android-tag.m{background:#2F3742;color:#F2F5F7}
+.kb-android-lng{display:flex;gap:4px;background:#171C23;border-radius:14px;padding:4px}
+.kb-android-lng a{min-width:56px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font:700 15px Inter,sans-serif;color:#C5CCD5;text-decoration:none}
+.kb-android-lng a[aria-current="true"]{background:#2BC48A;color:#0E1116}
+.kb-android-w h1{font:900 36px/1.15 Nunito,sans-serif;margin:0 0 8px}
+.kb-android-w h2{font:900 24px/1.2 Nunito,sans-serif;margin:0 0 8px}
+.kb-android-lead{color:#9AA4B2;max-width:760px;margin:0 0 24px}
+.kb-android-copy{max-width:760px;margin:0 0 32px;border-left:3px solid #2BC48A;padding:4px 0 4px 16px;color:#9AA4B2;font-size:15px}
+.kb-android-copy small{display:block;font:700 12px/18px Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#9AA4B2}
+.kb-android-copy b{display:block;font:900 22px/1.25 Nunito,sans-serif;color:#F2F5F7;margin:2px 0 4px}
+.kb-android-copy p{margin:0 0 8px}
+.kb-android-copy span{display:inline-block;font:700 14px/20px Inter,sans-serif;color:#0E1116;background:#2BC48A;border-radius:10px;padding:4px 12px}
+.kb-android-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;padding:48px 24px 40px;border-radius:32px;background:#171C23}
+.kb-android-hero figure,.kb-android-st figure{margin:0}
+.kb-android-sec{margin-top:64px}
+.kb-android-sec>p{color:#9AA4B2;margin:0 0 24px;max-width:760px}
+.kb-android-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(580px,1fr));gap:24px}
+.kb-android-st{background:#171C23;border-radius:24px;padding:24px}
+.kb-android-st h3{font:900 20px/1.25 Nunito,sans-serif;margin:0 0 4px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.kb-android-st h3 code{font:500 13px ui-monospace,Menlo,monospace;color:#9AA4B2;background:#0E1116;border-radius:6px;padding:1px 6px}
+.kb-android-st>p{margin:0 0 20px;color:#9AA4B2;font-size:15px}
+.kb-android-pair{display:flex;gap:20px;justify-content:center}
+.kb-android-pair .pcap{margin-top:10px;font-size:13px}
+.kb-android-pair .pcap b{font-size:14px}
+.kb-android-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px}
+.kb-android-notes h2{font-size:20px;margin:0 0 10px}
+.kb-android-notes ul{margin:0;padding-left:20px;color:#9AA4B2}
+.kb-android-notes li{margin:6px 0}
+.kb-android-notes b{color:#F2F5F7;font-weight:600}
+.kb-android-st .pf{--s:.6!important}
+@media (max-width:660px){
+ .kb-android-grid{grid-template-columns:1fr}
+ .kb-android-st{padding:16px}
+ .kb-android-pair{gap:12px}
+ .kb-android-st .pf{--s:.355!important}
+ .kb-android-hero{padding:24px 8px;gap:24px}
+ .kb-android-hero .pf{--s:.78!important}
+ .kb-android-w h1{font-size:28px}
+}
+
+/* ===== рамка Android: на основе .pf, 412×915, маленький круглый вырез камеры ===== */
+.pf.kb-android-pf{--pw:412px;--ph:915px;--bz:10px;--r:46px}
+.kb-android-pf .glass::after{content:"";position:absolute;z-index:20;top:calc(14px*var(--s));left:50%;width:calc(12px*var(--s));height:calc(12px*var(--s));margin-left:calc(-6px*var(--s));border-radius:50%;background:#05070A;box-shadow:0 0 0 calc(1.5px*var(--s)) rgba(255,255,255,.06)}
+
+/* ===== экран 412×915: нейтральный мессенджер + клавиатура Parrlo ===== */
+.scr.light{--kb-bg:#D3D7DC;--kb-key:#FFFFFF;--kb-key2:#ABB2BB;--kb-tx:#0E1116;--kb-sec:#5B6472;--kb-acc:#00875C;--kb-onacc:#FFFFFF;--kb-line:#C5CCD5;--kb-rec:#C42B1F;--kb-track:#E3E7EB}
+.scr:not(.light){--kb-bg:#1B1F25;--kb-key:#3A414B;--kb-key2:#2A3038;--kb-tx:#F2F5F7;--kb-sec:#C5CCD5;--kb-acc:#2BC48A;--kb-onacc:#0E1116;--kb-line:#4A525D;--kb-rec:#FF6B5E;--kb-track:#4A525D}
+/* статус-бар Android: время слева, значки справа, камера по центру */
+.kb-android-sb{flex:none;height:40px;display:flex;align-items:center;justify-content:space-between;padding:2px 22px 0 26px;font:600 15px/1 Inter,sans-serif;font-variant-numeric:tabular-nums}
+.kb-android-sb .ic{display:flex;align-items:center;gap:6px;width:auto;height:auto}
+.kb-android-sb svg{width:17px;height:17px}
+.kb-android-sb svg.bt{width:11px;height:18px}
+/* шапка чата: стрелка «назад», аватар, имя, меню */
+.kb-android-scr .nav{padding:4px 4px 8px 4px;gap:4px}
+.kb-android-hb{flex:none;width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.kb-android-hb svg{width:24px;height:24px}
+.kb-android-scr .nav .av{color:#0E1116;margin-right:8px}
+.kb-android-scr .msgs{padding:12px 16px}
+.kb-android-scr .m{max-width:80%;border-radius:18px}
+.kb-android-scr .m.in{border-bottom-left-radius:4px}
+.kb-android-scr .m.out{border-bottom-right-radius:4px}
+.kb-android-scr .m .tm{opacity:1;color:var(--sec)}
+.kb-android-scr .m.out .tm{color:inherit;opacity:.85}
+.kb-android-scr.light .m.out .tm{color:#3E5A4D;opacity:1}
+.kb-android-scr .inp{padding:8px 8px 10px 12px;align-items:flex-end;gap:6px}
+.kb-android-scr .inp .f{color:var(--tx);flex:1;min-width:0;padding:9px 16px;line-height:24px;font-size:17px;border-radius:24px;min-height:46px}
+.kb-android-scr .inp .f .pl{color:var(--sec)}
+.kb-android-sd{flex:none;width:46px;height:46px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center}
+.kb-android-sd svg{width:22px;height:22px}
+.kb-android-sd.off{background:var(--sf2);color:var(--sec)}
+.kb-android-car{display:inline-block;width:2px;height:22px;background:var(--acc);vertical-align:-5px;margin-left:1px}
+/* клавиатура */
+.kb-android-kb{flex:none;background:var(--kb-bg);padding:0 3px;color:var(--kb-tx)}
+.kb-android-strip{position:relative;margin:8px 5px 0;height:60px;border-radius:14px;background:var(--kb-key);padding:0 4px 0 12px;display:flex;align-items:center;gap:10px;font-size:14px;line-height:19px;overflow:hidden}
+.kb-android-strip>svg{flex:none;width:22px;height:22px;color:var(--kb-acc)}
+.kb-android-strip .tx{flex:1;min-width:0}
+.kb-android-strip .tx b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-android-strip .tx span{display:block;color:var(--kb-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-android-strip.go{padding:0 8px;gap:8px}
+.kb-android-strip.st{padding-right:8px}
+.kb-android-a{height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 16px;font:700 15px Inter,sans-serif;white-space:nowrap}
+.kb-android-a svg{flex:none;width:22px;height:22px}
+.kb-android-a .pm{width:21px;height:21px}
+.kb-android-a.p{flex:1 1 auto;min-width:0;background:var(--kb-acc);color:var(--kb-onacc)}
+.kb-android-a.s{flex:none;background:var(--kb-key2);color:var(--kb-tx)}
+.kb-android-a.s .un{width:20px;height:20px}
+.kb-android-a.q{flex:none;background:transparent;color:var(--kb-tx);padding:0 12px}
+.kb-android-a small{font:700 12px Inter,sans-serif;letter-spacing:.03em;border-radius:6px;padding:0 4px;box-shadow:inset 0 0 0 1.5px currentColor}
+/* запись в полосе */
+.kb-android-strip.rec{padding:0 14px 0 14px;gap:10px}
+.kb-android-rdot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--kb-rec);box-shadow:0 0 0 4px color-mix(in srgb,var(--kb-rec) 22%,transparent)}
+.kb-android-rl{flex:none;font:600 15px/20px Inter,sans-serif;white-space:nowrap}
+.kb-android-rt{flex:none;font:500 15px/20px Inter,sans-serif;color:var(--kb-sec);font-variant-numeric:tabular-nums}
+.kb-android-wv{flex:1;min-width:0;height:32px;display:flex;align-items:center;justify-content:flex-end;gap:2px;overflow:hidden}
+.kb-android-wv i{flex:none;width:3px;border-radius:2px;background:var(--kb-acc)}
+.kb-android-wv i.q{opacity:.35}
+/* панель из пяти иконок */
+.kb-android-bar{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;margin-top:4px}
+.kb-android-ib{width:64px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--kb-tx)}
+.kb-android-ib svg{width:26px;height:26px}
+.kb-android-ib .pm{width:25px;height:25px}
+.kb-android-ib.on{background:var(--kb-acc);color:var(--kb-onacc)}
+/* клавиши: плоские, со скруглением 6, цифры-подсказки в верхнем ряду */
+.kb-android-rows{height:236px;display:flex;flex-direction:column;gap:10px;padding:6px 0 8px}
+.kb-android-r{display:flex;gap:4px}
+.kb-android-k{position:relative;flex:1 1 0;min-width:0;height:47px;border-radius:7px;background:var(--kb-key);color:var(--kb-tx);display:flex;align-items:center;justify-content:center;font:400 23px/1 Inter,sans-serif}
+.kb-android-k sup{position:absolute;top:4px;right:4px;font:500 11px/1 Inter,sans-serif;color:var(--kb-sec)}
+.kb-android-k.f{background:var(--kb-key2)}
+.kb-android-k.f svg{width:23px;height:23px}
+.kb-android-k.w{flex:1.5 1 0}
+.kb-android-hp{flex:.5 1 0}
+.kb-android-k.n{flex:1.5 1 0;font:500 15px/1 Inter,sans-serif}
+.kb-android-k.p{flex:1 1 0}
+.kb-android-k.gl svg{width:21px;height:21px}
+.kb-android-k.sp{flex:4.6 1 0;font:500 14px/1 Inter,sans-serif;color:var(--kb-sec)}
+.kb-android-k.rt{flex:1.5 1 0;background:var(--kb-acc);color:var(--kb-onacc);border-radius:24px}
+.kb-android-k.rt svg{width:24px;height:24px}
+/* панель голоса вместо букв — та же высота */
+.kb-android-vp{height:236px;display:flex;flex-direction:column;gap:10px;padding:6px 5px 8px}
+.kb-android-live{flex:1;min-height:0;border-radius:14px;background:var(--kb-key);padding:12px 16px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.kb-android-live small{font:600 13px/18px Inter,sans-serif;color:var(--kb-sec)}
+.kb-android-live p{margin:0;font:400 18px/25px Inter,sans-serif}
+.kb-android-live p i{font-style:normal;color:var(--kb-sec)}
+.kb-android-ctl{flex:none;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2px}
+.kb-android-ctl .side{flex:1 1 0;display:flex}
+.kb-android-ctl .side.r{justify-content:flex-end}
+.kb-android-stop{flex:none;width:64px;height:64px;border-radius:50%;background:var(--kb-acc);color:var(--kb-onacc);display:flex;align-items:center;justify-content:center}
+.kb-android-stop i{width:20px;height:20px;border-radius:5px;background:currentColor}
+.kb-android-lc{height:44px;border-radius:22px;background:var(--kb-key2);display:flex;align-items:center;gap:6px;padding:0 14px;font:700 14px Inter,sans-serif;color:var(--kb-tx)}
+.kb-android-lc svg{width:18px;height:18px}
+/* результат голоса: два варианта на выбор */
+.kb-android-ch{flex:none;border-radius:14px;background:var(--kb-key);padding:9px 14px 10px;box-shadow:inset 0 0 0 1.5px transparent}
+.kb-android-ch.on{box-shadow:inset 0 0 0 2px var(--kb-acc)}
+.kb-android-ch .lb{display:flex;align-items:center;gap:8px;font:600 13px/18px Inter,sans-serif;color:var(--kb-sec);margin-bottom:3px}
+.kb-android-ch .rd{flex:none;width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--kb-sec);display:flex;align-items:center;justify-content:center}
+.kb-android-ch.on .rd{background:var(--kb-acc);box-shadow:none;color:var(--kb-onacc)}
+.kb-android-ch .rd svg{width:12px;height:12px}
+.kb-android-ch.on .lb{color:var(--kb-tx)}
+.kb-android-ch p{margin:0;font:400 15px/20px Inter,sans-serif}
+.kb-android-ch.on p{font-weight:500}
+.kb-android-acts{flex:none;display:flex;gap:8px;margin-top:auto}
+/* нижняя системная полоса Android при открытой клавиатуре: скрыть, жест, сменить клавиатуру */
+.kb-android-nb{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 10px}
+.kb-android-nb .b{width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:var(--kb-tx)}
+.kb-android-nb .b svg{width:24px;height:24px}
+.kb-android-nb .g{width:108px;height:4px;border-radius:2px;background:var(--kb-tx);opacity:.9}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="kb-android-w">
+<div class="kb-android-top"><div class="kb-android-tags"><span class="kb-android-tag" id="kb-android-t-draft"></span><span class="kb-android-tag m" id="kb-android-t-mock"></span></div>
+<nav class="kb-android-lng" id="kb-android-lng" aria-label="Language"></nav></div>
+<h1 id="kb-android-h1"></h1>
+<p class="kb-android-lead" id="kb-android-lead"></p>
+<div class="kb-android-copy" id="kb-android-copy"></div>
+<div class="kb-android-hero" id="kb-android-hero"></div>
+<section class="kb-android-sec">
+<h2 id="kb-android-h-st"></h2>
+<p id="kb-android-p-st"></p>
+<div class="kb-android-grid" id="kb-android-grid"></div>
+</section>
+<section class="kb-android-sec kb-android-notes" id="kb-android-notes"></section>
+</div>
+<script>
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+let pmN=0;
+/* «Улучшить» — монохромный попугай Parrlo (ключ spark из screens.js), маска с уникальным id */
+const parrot=()=>{const id='kb-android-pm'+(++pmN);return `<svg class="pm" viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#${id})"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>`;};
+const I={
+tr:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg>`,
+mic:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/></svg>`,
+voice:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+gear:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>`,
+shift:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l7.5 8H15v7H9v-7H4.5z"/></svg>`,
+shiftOn:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l7.5 8H15v7H9v-7H4.5z"/></svg>`,
+del:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 5H20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H8.5L3 12z"/><path d="M11.5 9.5l5 5M16.5 9.5l-5 5" stroke-linecap="round"/></svg>`,
+ret:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5v6a3 3 0 0 1-3 3H5"/><path d="M9 10l-4 4 4 4"/></svg>`,
+globe:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>`,
+/* Android: стрелка «назад», меню, отправка */
+back:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4.5M11 5l-7 7 7 7"/></svg>`,
+more:`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5.5" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="12" cy="18.5" r="1.9"/></svg>`,
+send:`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.4 20.4l17.4-7.5a1 1 0 0 0 0-1.8L3.4 3.6a.7.7 0 0 0-1 .8L4.5 11l8 1-8 1-2.1 6.6a.7.7 0 0 0 1 .8z"/></svg>`,
+/* системная полоса: скрыть клавиатуру, сменить клавиатуру */
+hide:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`,
+kbd:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M6 9.5h.01M9.3 9.5h.01M12.6 9.5h.01M15.9 9.5h.01M18 9.5h.01M6 12.5h.01M9.3 12.5h.01M12.6 12.5h.01M15.9 12.5h.01M18 12.5h.01M8 15.5h8" stroke-width="2.1"/></svg>`,
+/* статус-бар */
+wifi:`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 20.5L.8 8.6a16 16 0 0 1 22.4 0z"/></svg>`,
+cell:`<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 2.5v19h-19z"/></svg>`,
+batt:`<svg class="bt" viewBox="0 0 11 18" fill="currentColor" aria-hidden="true"><rect x="3.5" y="0" width="4" height="2" rx=".6"/><rect x=".8" y="1.8" width="9.4" height="15.4" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="2.4" y="5.4" width="6.2" height="10.2" rx="1"/></svg>`,
+/* состояния */
+check:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+checkS:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+undo:`<svg class="un" viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>`,
+redo:`<svg class="un" viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 4v4.5h4.5"/></svg>`,
+ins:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M12 3.5v11M7.5 10l4.5 4.5 4.5-4.5"/><path d="M4.5 19.5h15"/></svg>`};
+const NB=' ';
+
+/* ===== один словарь: экран и страница ===== */
+const D={
+ru:{html:'ru',
+ kb:'ru',space:'Русский',ph:'Сообщение',online:'в сети',today:'Сегодня',who:'Pedro',av:'P',
+ msgs:[['in','¡Hola! ¿Qué tal todo por el piso?','9:48'],['out','¡Hola, Pedro! Todo bien, gracias.','9:50'],['in','Me alegro. Si necesitas algo, dímelo.','9:52']],
+ draft:'Здравствуйте! Кран на кухне опять течёт. Можно мастера в субботу?',
+ to:'es',toTag:'ES',toName:'Español',out:'¡Hola! El grifo de la cocina vuelve a gotear. ¿Podría venir un técnico el sábado?',
+ raw:'Здравствуйте, ну… кран на кухне опять течёт, короче, можно мастера',rawTail:' в субботу',
+ trA:'Перевести',trAria:'Перевести на испанский',imp:'Улучшить',tr:'Перевести',dict:'Диктовка',voice:'Голосовое',set:'Настройки',
+ shift:'Заглавные',del:'Удалить',num:'Цифры и символы',ret:'Ввод',lang:'Сменить язык раскладки',hideKb:'Скрыть клавиатуру',switchKb:'Сменить клавиатуру',
+ backA:'Назад',moreA:'Ещё',sendA:'Отправить',
+ doneB:'Перевели на испанский',was:'Было по‑русски',undo:'Отменить',undoA:'Отменить перевод, вернуть русский текст',
+ rec:'Идёт запись',recT:'0:07',liveL:'Текст собирается, пока говоришь',cancel:'Отмена',stopA:'Остановить запись',speak:'RU',speakA:'Язык речи: русский',
+ vdB:'Текст готов',vdS:'Выбери, что вставить',mine:'Твой текст',trL:'Перевод · Español',again:'Заново',againA:'Записать заново',insert:'Вставить',insertA:'Вставить перевод в поле',
+ /* страница */
+ title:'Parrlo · клавиатура, Android',t_draft:'Черновик текста',t_mock:'Макет · скоро · K‑14, K‑15',
+ h1:'Клавиатура Parrlo на Android · макет',
+ lead:'Раздел 16 страницы клавиатуры: честно сказать владельцам Android, что клавиатура готовится. Та же панель Parrlo — полоса 60 pt, пять иконок, родная раскладка, — но в Android-телефоне: статус-бар Android, шапка чата со стрелкой, плоские клавиши, глобус смены языка, системная полоса со «Скрыть» и «Сменить клавиатуру». Голос на Android записывается прямо в клавиатуре: панель записи встаёт на место букв, высота не меняется. Клавиатура идёт за темой телефона.',
+ copyH:'Как раздел звучит на сайте (§16, черновик)',copyO:'Android · Готовим',copyT:'На Android — тоже будет.',copyP:'Готовим ту же клавиатуру для Android: перевод, «Улучшить» и голос прямо в панели. Оставь адрес — напишем, как только она выйдет.',copyB:'Узнать о запуске',
+ capL:['Панель · светлая тема','Черновик готов: в полосе «Перевести» и «Улучшить». Подпись на сайте — «макет».'],
+ capD:['Панель · тёмная тема','Те же размеры, токены тёмной клавиатуры.'],
+ hSt:'Состояния',pSt:'Слева светлая тема, справа тёмная. K‑14 — панель «Улучшить» / «Перевести», K‑15 — голос прямо в панели (репрезентативные кадры из серии A‑V0…A‑V8: запись A‑V2 и результат A‑V5b). Раскладка везде родная — русская.',
+ light:'Светлая',dark:'Тёмная',
+ st:{panel:['Панель','K‑14 · Черновик написан: полоса предлагает «Перевести» на испанский и «Улучшить». Главный кадр раздела.'],
+  translated:['Перевели','K‑14 · Нажал «Перевести»: в поле испанский текст, в полосе — что было и «Отменить». Отправляешь кнопкой мессенджера.'],
+  voice:['Голос: запись','K‑15 · Нажал микрофон: на месте букв — панель записи, текст собирается, пока говоришь. Из чата выходить не нужно.'],
+  'voice-done':['Голос: текст готов','K‑15 · Остановил запись: свои слова собраны в ясный текст, рядом перевод. Выбираешь вариант и жмёшь «Вставить».']},
+ hDec:'Решения',dec:[
+  '<b>Своя рамка Android</b> (класс kb-android-pf на основе .pf): экран 412×915, скругление меньше, маленький круглый вырез камеры по центру статус-бара. Без логотипов и узнаваемой модели.',
+  '<b>Ничего от iPhone</b>: статус-бар Android (время слева; Wi‑Fi, сеть, батарея справа), стрелка «назад» и меню ⋮ в шапке, круглая кнопка отправки с самолётиком, жестовая полоска 108×4 вместо «домой».',
+  '<b>Та же панель Parrlo</b>: полоса 60 pt, пять иконок в том же порядке (Улучшить, Перевести, Диктовка, Голосовое, Настройки), те же токены. Пользователь, видевший iPhone-версию на этой же странице, узнаёт клавиатуру сразу.',
+  '<b>Отличия Android в клавиатуре</b>: плоские клавиши без тени, цифры-подсказки в верхнем ряду (долгое нажатие), нижний ряд ?123 · , · глобус · пробел · . · ввод-пилюля. Глобус меняет язык раскладки; «Сменить клавиатуру» и «Скрыть» живут в системной полосе Android, как у любой клавиатуры там.',
+  '<b>Голос прямо в панели</b>: на Android клавиатура пишет сама, без перехода в приложение. Панель записи встаёт на место букв той же высоты (236 pt) — переписка не прыгает. Сверху полоса «Идёт запись» с таймером и волной, внизу «Отмена», большой «Стоп» и язык речи.',
+  '<b>Текст на ходу</b>: пока говоришь, в панели видно, что Parrlo услышал, со всеми «ну» и «короче» (как в §9). После «Стоп» — собранный ясный текст.',
+  '<b>Выбор перед вставкой</b>: две карточки — «Твой текст» и «Перевод · Español», выбранная обведена и отмечена галочкой (не только цветом). По умолчанию выбран перевод: ради него и пишут арендодателю.',
+  '<b>Отправляешь ты сам</b>: у клавиатуры нет своей кнопки отправки; после перевода и вставки активна кнопка мессенджера.',
+  '<b>Без кадров probe</b>: всё нарисовано по макету, на сайте подпись «макет», на самом экране метки нет.'],
+ hTok:'Токены и контраст',
+ hNo:'Не утверждено',no:[
+  'Все тексты — черновик: подписи полосы, «Текст собирается, пока говоришь», «Выбери, что вставить». Тексты es и en не вычитаны носителем.',
+  'Android-клавиатуры как продукта ещё нет: только диагностическая сборка (GAP клавиатуры, №25–30). Дизайн A‑V0…A‑V8 существует только строками — эти кадры его первая отрисовка.',
+  'Текст на ходу требует потокового распознавания; в сборке запись сначала заканчивается, потом обрабатывается (этапы A‑V4). Если потока не будет — вместо текста в панели этапы обработки.',
+  'По умолчанию вставляется перевод или свой текст — нужно решение; в kb-voice A‑V5 по умолчанию «свой текст», перевод — по кнопке.',
+  'Таймер без предела записи: число‑лимит на экран не выносим, предупреждение об окончании (A‑V2b) — отдельным кадром, если понадобится.',
+  'Где кнопка смены клавиатуры: в системной полосе (как рисует Android) или ещё и долгим нажатием на глобус — решить вместе с разработкой.',
+  'Мессенджер выдуманный и нейтральный; на сайте сценарий подписывается словом «WhatsApp» без логотипа.']},
+es:{html:'es',
+ kb:'es',space:'Español',ph:'Mensaje',online:'en línea',today:'Hoy',who:'Olga',av:'O',
+ msgs:[['in','Добрый день! Как вам квартира?','9:48'],['out','Здравствуйте, Ольга! Всё хорошо, спасибо.','9:50'],['in','Рада слышать. Если что-то нужно — пишите.','9:52']],
+ draft:'Hola, Olga. El grifo de la cocina vuelve a gotear. ¿Puede venir un técnico el sábado?',
+ to:'ru',toTag:'RU',toName:'Русский',out:'Здравствуйте, Ольга! Кран на кухне опять течёт. Может мастер прийти в субботу?',
+ raw:'Hola, Olga, eh… el grifo de la cocina vuelve a gotear, o sea, ¿puede venir un técnico',rawTail:' el sábado?',
+ trA:'Traducir',trAria:'Traducir al ruso',imp:'Mejorar',tr:'Traducir',dict:'Dictado',voice:'Nota de voz',set:'Ajustes',
+ shift:'Mayúsculas',del:'Borrar',num:'Números y símbolos',ret:'Intro',lang:'Cambiar idioma del teclado',hideKb:'Ocultar teclado',switchKb:'Cambiar de teclado',
+ backA:'Atrás',moreA:'Más',sendA:'Enviar',
+ doneB:'Traducido al ruso',was:'Antes, en español',undo:'Deshacer',undoA:'Deshacer la traducción y recuperar el texto en español',
+ rec:'Grabando',recT:'0:07',liveL:'El texto aparece mientras hablas',cancel:'Cancelar',stopA:'Detener la grabación',speak:'ES',speakA:'Idioma de la voz: español',
+ vdB:'Texto listo',vdS:'Elige qué insertar',mine:'Tu texto',trL:'Traducción · Русский',again:'Repetir',againA:'Grabar de nuevo',insert:'Insertar',insertA:'Insertar la traducción en el campo',
+ title:'Parrlo · teclado, Android',t_draft:'Texto provisional',t_mock:'Maqueta · próximamente · K‑14, K‑15',
+ h1:'Teclado Parrlo en Android · maqueta',
+ lead:'Sección 16 de la página del teclado: decir con claridad a quien usa Android que el teclado está en camino. El mismo panel de Parrlo —franja de 60 pt, cinco iconos, tu teclado de siempre—, pero en un móvil Android: barra de estado de Android, cabecera del chat con flecha, teclas planas, globo para cambiar de idioma y la barra del sistema con «Ocultar» y «Cambiar de teclado». En Android la voz se graba dentro del propio teclado: el panel de grabación ocupa el sitio de las letras y la altura no cambia. El teclado sigue el tema del móvil.',
+ copyH:'Cómo suena la sección en la web (§16, borrador)',copyO:'Android · En camino',copyT:'En Android, también.',copyP:'Estamos preparando el mismo teclado para Android: traducir, «Mejorar» y la voz, directamente en el panel. Déjanos tu correo y te escribimos en cuanto salga.',copyB:'Avísame cuando salga',
+ capL:['Panel · tema claro','Borrador listo: la franja ofrece «Traducir» y «Mejorar». En la web lleva la etiqueta «maqueta».'],
+ capD:['Panel · tema oscuro','Mismas medidas, colores del teclado oscuro.'],
+ hSt:'Estados',pSt:'A la izquierda, el tema claro; a la derecha, el oscuro. K‑14 es el panel «Mejorar» / «Traducir»; K‑15, la voz dentro del panel (fotogramas representativos de la serie A‑V0…A‑V8: grabación A‑V2 y resultado A‑V5b). El teclado es siempre el tuyo: español.',
+ light:'Claro',dark:'Oscuro',
+ st:{panel:['Panel','K‑14 · El borrador está escrito: la franja ofrece «Traducir» al ruso y «Mejorar». Fotograma principal de la sección.'],
+  translated:['Traducido','K‑14 · Tocaste «Traducir»: en el campo, el texto en ruso; en la franja, lo que había y «Deshacer». Lo envías con el botón del mensajero.'],
+  voice:['Voz: grabando','K‑15 · Tocaste el micrófono: en lugar de las letras, el panel de grabación; el texto aparece mientras hablas. Sin salir del chat.'],
+  'voice-done':['Voz: texto listo','K‑15 · Paraste la grabación: tus palabras, ya ordenadas en un texto claro, y al lado la traducción. Eliges una y tocas «Insertar».']},
+ hDec:'Decisiones',dec:[
+  '<b>Marco Android propio</b> (clase kb-android-pf basada en .pf): pantalla de 412×915, esquinas algo menos redondeadas y un pequeño orificio de cámara centrado en la barra de estado. Sin logotipos ni modelo reconocible.',
+  '<b>Nada de iPhone</b>: barra de estado de Android (hora a la izquierda; wifi, red y batería a la derecha), flecha «atrás» y menú ⋮ en la cabecera, botón de enviar redondo con avión de papel y barra de gestos de 108×4.',
+  '<b>El mismo panel de Parrlo</b>: franja de 60 pt, cinco iconos en el mismo orden (Mejorar, Traducir, Dictado, Nota de voz, Ajustes) y los mismos colores. Quien ya vio la versión de iPhone en esta página lo reconoce al momento.',
+  '<b>Lo propio de Android en el teclado</b>: teclas planas sin sombra, números de ayuda en la fila superior (pulsación larga) y fila inferior ?123 · , · globo · espacio · . · intro en píldora. El globo cambia el idioma del teclado; «Cambiar de teclado» y «Ocultar» están en la barra del sistema, como en cualquier teclado de Android.',
+  '<b>Voz dentro del panel</b>: en Android el teclado graba por sí mismo, sin pasar a la app. El panel de grabación ocupa el sitio de las letras con la misma altura (236 pt), así que la conversación no salta. Arriba, la franja «Grabando» con tiempo y onda; abajo, «Cancelar», un «Detener» grande y el idioma de la voz.',
+  '<b>Texto sobre la marcha</b>: mientras hablas, el panel muestra lo que Parrlo ha entendido, con sus «eh» y «o sea» (como en §9). Al detener, el texto ya limpio.',
+  '<b>Elegir antes de insertar</b>: dos tarjetas, «Tu texto» y «Traducción · Русский»; la elegida lleva borde y marca de verificación (no solo color). Por defecto, la traducción: para eso se le escribe a la casera.',
+  '<b>Envías tú</b>: el teclado no tiene botón de enviar; tras traducir o insertar se activa el del mensajero.',
+  '<b>Sin capturas de la versión de prueba</b>: todo está dibujado como maqueta; en la web lleva la etiqueta «maqueta» y en la propia pantalla no hay marca.'],
+ hTok:'Colores y contraste',
+ hNo:'Pendiente de aprobar',no:[
+  'Todos los textos son provisionales; el español y el inglés están sin revisar por un nativo.',
+  'El teclado de Android aún no existe como producto: solo hay una versión de diagnóstico (GAP del teclado, n.º 25–30). El diseño A‑V0…A‑V8 solo existe como texto; estos fotogramas son su primer dibujo.',
+  'El texto sobre la marcha necesita reconocimiento en streaming; en la versión actual primero termina la grabación y después se procesa (etapas A‑V4). Si no hay streaming, en el panel se verán las etapas.',
+  'Qué se inserta por defecto, la traducción o tu texto: falta decidir; en kb-voice A‑V5 por defecto va tu texto y la traducción, con un botón.',
+  'Tiempo sin límite visible: no ponemos cifras de límite en pantalla; el aviso de final (A‑V2b) sería otro fotograma.',
+  'Dónde va «Cambiar de teclado»: en la barra del sistema (como lo dibuja Android) o también con pulsación larga en el globo; decidir con desarrollo.',
+  'El mensajero es ficticio y neutro; en la web el caso se menciona como «WhatsApp», sin logotipo.']},
+en:{html:'en',
+ kb:'en',space:'English',ph:'Message',online:'online',today:'Today',who:'Pedro',av:'P',
+ msgs:[['in','¡Hola! ¿Qué tal todo por el piso?','9:48'],['out','¡Hola, Pedro! Todo bien, gracias.','9:50'],['in','Me alegro. Si necesitas algo, dímelo.','9:52']],
+ draft:'Hi Pedro! The kitchen tap is leaking again. Could someone fix it on Saturday?',
+ to:'es',toTag:'ES',toName:'Español',out:'¡Hola, Pedro! El grifo de la cocina vuelve a gotear. ¿Podría venir alguien el sábado?',
+ raw:'Hi Pedro, um… the kitchen tap’s leaking again, like, could someone come and fix it',rawTail:' on Saturday',
+ trA:'Translate',trAria:'Translate into Spanish',imp:'Improve',tr:'Translate',dict:'Dictate',voice:'Voice note',set:'Settings',
+ shift:'Shift',del:'Delete',num:'Numbers and symbols',ret:'Return',lang:'Switch keyboard language',hideKb:'Hide keyboard',switchKb:'Switch keyboard',
+ backA:'Back',moreA:'More',sendA:'Send',
+ doneB:'Translated into Spanish',was:'Was in English',undo:'Undo',undoA:'Undo the translation and bring back the English text',
+ rec:'Recording',recT:'0:07',liveL:'Text appears as you speak',cancel:'Cancel',stopA:'Stop recording',speak:'EN',speakA:'Speech language: English',
+ vdB:'Text ready',vdS:'Choose what to insert',mine:'Your text',trL:'Translation · Español',again:'Redo',againA:'Record again',insert:'Insert',insertA:'Insert the translation into the field',
+ title:'Parrlo · keyboard, Android',t_draft:'Draft copy',t_mock:'Mockup · coming soon · K‑14, K‑15',
+ h1:'Parrlo Keyboard on Android · mockup',
+ lead:'Section 16 of the keyboard page: telling Android users plainly that the keyboard is on its way. The same Parrlo panel — the 60 pt strip, five icons, your own layout — on an Android phone: Android status bar, a chat header with a back arrow, flat keys, a globe for switching languages, and the system bar with Hide and Switch keyboard. On Android, voice is recorded right inside the keyboard: the recording panel takes the place of the letters at the same height. The keyboard follows the phone’s theme.',
+ copyH:'How the section reads on the site (§16, draft)',copyO:'Android · In the works',copyT:'Coming to Android, too.',copyP:'We’re building the same keyboard for Android: Translate, Improve and voice right in the panel. Leave your email and we’ll let you know as soon as it’s out.',copyB:'Get notified at launch',
+ capL:['Panel · light theme','Draft ready: the strip offers Translate and Improve. Labelled “mockup” on the site.'],
+ capD:['Panel · dark theme','Same sizes, dark keyboard tokens.'],
+ hSt:'States',pSt:'Light theme on the left, dark on the right. K‑14 is the Improve / Translate panel; K‑15 is voice right in the panel (representative frames from the A‑V0…A‑V8 series: recording A‑V2 and result A‑V5b). The layout stays your own: English.',
+ light:'Light',dark:'Dark',
+ st:{panel:['Panel','K‑14 · The draft is written: the strip offers Translate into Spanish and Improve. The section’s main frame.'],
+  translated:['Translated','K‑14 · You tapped Translate: Spanish text in the field, the strip shows what was there and Undo. You send it with the messenger’s button.'],
+  voice:['Voice: recording','K‑15 · You tapped the mic: the recording panel replaces the letters and the text builds up as you speak. No need to leave the chat.'],
+  'voice-done':['Voice: text ready','K‑15 · You stopped recording: your words, tidied into clear text, with the translation beside them. Pick one and tap Insert.']},
+ hDec:'Decisions',dec:[
+  '<b>Its own Android frame</b> (kb-android-pf, built on .pf): a 412×915 screen, slightly tighter corners and a small round camera hole centred in the status bar. No logos, no recognisable model.',
+  '<b>Nothing from iPhone</b>: Android status bar (time on the left; Wi‑Fi, signal, battery on the right), back arrow and ⋮ menu in the header, a round send button with a paper plane, and a 108×4 gesture bar.',
+  '<b>The same Parrlo panel</b>: 60 pt strip, five icons in the same order (Improve, Translate, Dictate, Voice note, Settings), same tokens. Anyone who saw the iPhone version on this page recognises it at once.',
+  '<b>What’s Android about the keyboard</b>: flat keys without shadows, digit hints on the top row (long press), and a bottom row of ?123 · , · globe · space · . · pill-shaped return. The globe switches layout language; Switch keyboard and Hide live in Android’s system bar, as with any keyboard there.',
+  '<b>Voice right in the panel</b>: on Android the keyboard records by itself, no jump to the app. The recording panel takes the letters’ place at the same height (236 pt), so the thread doesn’t jump. Above it, the Recording strip with a timer and waveform; below, Cancel, a big Stop and the speech language.',
+  '<b>Text as you speak</b>: while you talk, the panel shows what Parrlo heard, ums and likes included (as in §9). After Stop, the tidied text.',
+  '<b>Choose before inserting</b>: two cards, Your text and Translation · Español; the chosen one has an outline and a check mark (not colour alone). Translation is preselected — that’s why you’re writing to the landlord.',
+  '<b>You do the sending</b>: the keyboard has no send button of its own; after translating or inserting, the messenger’s button is active.',
+  '<b>No frames from the diagnostic build</b>: everything is drawn as a mockup; labelled “mockup” on the site, no label on the screen itself.'],
+ hTok:'Tokens and contrast',
+ hNo:'Not approved',no:[
+  'All copy is draft; Spanish and English have not been proofread by native speakers.',
+  'The Android keyboard doesn’t exist as a product yet — only a diagnostic build (keyboard GAP, nos. 25–30). A‑V0…A‑V8 exist only as text; these frames are their first drawing.',
+  'Text as you speak needs streaming recognition; the build finishes recording first and processes afterwards (A‑V4 stages). Without streaming, the panel shows those stages instead.',
+  'Whether the translation or your own text is preselected needs a decision; kb-voice A‑V5 defaults to your text, with translation behind a button.',
+  'Timer with no visible cap: we don’t put limit numbers on screen; an end-of-recording warning (A‑V2b) would be a separate frame.',
+  'Where Switch keyboard lives: in the system bar (as Android draws it) and/or on long-pressing the globe — decide with engineering.',
+  'The messenger is made up and neutral; on the site the scenario is named “WhatsApp” in text, without a logo.']}
+};
+const TOK={
+ru:[
+ '<b>Светлая:</b> фон клавиатуры #D3D7DC, клавиши, полоса и карточки #FFFFFF, служебные #ABB2BB, текст #0E1116, вторичный #5B6472, акцент #00875C / #FFFFFF, точка записи #C42B1F; чат — фон #FFFFFF, входящие #E9EDF0, поле #F2F4F6.',
+ '<b>Тёмная:</b> фон клавиатуры #1B1F25, клавиши, полоса и карточки #3A414B, служебные #2A3038, текст #F2F5F7, вторичный #C5CCD5, акцент #2BC48A / #0E1116, точка записи #FF6B5E; чат — фон #0E1116, входящие #242B34, поле #1C2026.',
+ '<b>Контраст, светлая:</b> CONTRAST_L.','<b>Контраст, тёмная:</b> CONTRAST_D.',
+ '<b>Не только цветом:</b> запись — точка, таймер и слова «Идёт запись»; выбранная карточка — обводка и галочка, невыбранная — пустой кружок; «Перевели» — галочка и слова; активная иконка микрофона — заливка и aria-pressed.',
+ '<b>Зоны нажатия:</b> иконки панели 64×44, «Перевести», «Улучшить», «Отменить», «Отмена», «Заново», «Вставить», язык речи — 44 pt; «Стоп» 64×64; «Назад», ⋮, «Скрыть» и «Сменить клавиатуру» — 48×48; отправка 46×46; переключатель языка страницы 56×44. Буквенные клавиши — 33×47, как у системных клавиатур.'],
+es:[
+ '<b>Claro:</b> fondo del teclado #D3D7DC, teclas, franja y tarjetas #FFFFFF, teclas de función #ABB2BB, texto #0E1116, secundario #5B6472, acento #00875C / #FFFFFF, punto de grabación #C42B1F; chat: fondo #FFFFFF, recibidos #E9EDF0, campo #F2F4F6.',
+ '<b>Oscuro:</b> fondo del teclado #1B1F25, teclas, franja y tarjetas #3A414B, teclas de función #2A3038, texto #F2F5F7, secundario #C5CCD5, acento #2BC48A / #0E1116, punto de grabación #FF6B5E; chat: fondo #0E1116, recibidos #242B34, campo #1C2026.',
+ '<b>Contraste, claro:</b> CONTRAST_L.','<b>Contraste, oscuro:</b> CONTRAST_D.',
+ '<b>No solo con color:</b> la grabación lleva punto, tiempo y la palabra «Grabando»; la tarjeta elegida, borde y marca, y la otra, un círculo vacío; «Traducido», marca y texto; el micrófono activo, relleno y aria-pressed.',
+ '<b>Zonas táctiles:</b> iconos del panel 64×44; «Traducir», «Mejorar», «Deshacer», «Cancelar», «Repetir», «Insertar» e idioma de la voz, 44 pt; «Detener» 64×64; «Atrás», ⋮, «Ocultar» y «Cambiar de teclado», 48×48; enviar 46×46; selector de idioma 56×44. Teclas de letras 33×47, como en los teclados del sistema.'],
+en:[
+ '<b>Light:</b> keyboard background #D3D7DC, keys, strip and cards #FFFFFF, function keys #ABB2BB, text #0E1116, secondary #5B6472, accent #00875C / #FFFFFF, recording dot #C42B1F; chat: background #FFFFFF, incoming #E9EDF0, field #F2F4F6.',
+ '<b>Dark:</b> keyboard background #1B1F25, keys, strip and cards #3A414B, function keys #2A3038, text #F2F5F7, secondary #C5CCD5, accent #2BC48A / #0E1116, recording dot #FF6B5E; chat: background #0E1116, incoming #242B34, field #1C2026.',
+ '<b>Contrast, light:</b> CONTRAST_L.','<b>Contrast, dark:</b> CONTRAST_D.',
+ '<b>Not by colour alone:</b> recording has a dot, a timer and the word “Recording”; the chosen card has an outline and a check, the other an empty circle; Translated has a check and words; the active mic icon is filled and aria-pressed.',
+ '<b>Touch targets:</b> toolbar icons 64×44; Translate, Improve, Undo, Cancel, Redo, Insert and the speech language 44 pt; Stop 64×64; Back, ⋮, Hide and Switch keyboard 48×48; send 46×46; page language switch 56×44. Letter keys 33×47, as on system keyboards.']};
+
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const PAIRS={
+ L:[['T1','#0E1116','#FFFFFF'],['T2','#5B6472','#FFFFFF'],['T3','#FFFFFF','#00875C'],['T4','#0E1116','#ABB2BB'],['T5','#0E1116','#D3D7DC'],['T6','#0E1116','#E9EDF0'],['T8','#5B6472','#E9EDF0'],['T9','#5B6472','#F2F4F6']],
+ D:[['T1','#F2F5F7','#3A414B'],['T2','#C5CCD5','#3A414B'],['T3','#0E1116','#2BC48A'],['T4','#F2F5F7','#2A3038'],['T5','#F2F5F7','#1B1F25'],['T6','#F2F5F7','#242B34'],['T8','#9AA4B2','#242B34'],['T9','#9AA4B2','#1C2026']]};
+const PL={ru:{T1:'текст на клавише, полосе, карточке',T2:'вторичный и цифры-подсказки',T3:'«Перевести», «Вставить» на акценте',T4:'«Улучшить», «Отменить» на служебном',T5:'значки системной полосы на фоне клавиатуры',T6:'входящее сообщение',T8:'время во входящем',T9:'плейсхолдер поля'},
+ es:{T1:'texto en tecla, franja y tarjeta',T2:'secundario y números de ayuda',T3:'«Traducir», «Insertar» sobre acento',T4:'«Mejorar», «Deshacer» sobre tecla de función',T5:'barra del sistema sobre el teclado',T6:'mensaje recibido',T8:'hora en recibido',T9:'marcador del campo'},
+ en:{T1:'text on keys, strip, cards',T2:'secondary and digit hints',T3:'Translate, Insert on accent',T4:'Improve, Undo on function key',T5:'system bar on keyboard background',T6:'incoming message',T8:'time in incoming',T9:'field placeholder'}};
+const fmt=(v,l)=>l==='en'?v.toFixed(1):v.toFixed(1).replace('.',',');
+
+/* раскладки и цифры-подсказки верхнего ряда */
+const ROWS={ru:['йцукенгшщзх','фывапролджэ','ячсмитьбю'],es:['qwertyuiop','asdfghjklñ','zxcvbnm'],en:['qwertyuiop','asdfghjkl','zxcvbnm']};
+const BAR=[['imp',parrot],['tr',()=>I.tr],['dict',()=>I.mic],['voice',()=>I.voice],['set',()=>I.gear]];
+function keys(c,up){
+ const R=ROWS[c.kb];
+ const k=(ch,i,top)=>{const t=up?ch.toLocaleUpperCase(c.kb):ch;const sup=top&&i<10?`<sup aria-hidden="true">${(i+1)%10}</sup>`:'';return `<span class="kb-android-k" role="button">${t}${sup}</span>`;};
+ const row=(s,top)=>[...s].map((ch,i)=>k(ch,i,top)).join('');
+ const half=R[1].length<R[0].length?'<span class="kb-android-hp"></span>':'';
+ return `<div class="kb-android-r">${row(R[0],1)}</div><div class="kb-android-r">${half}${row(R[1])}${half}</div>
+<div class="kb-android-r"><span class="kb-android-k f w" role="button" aria-label="${c.shift}"${up?' aria-pressed="true"':''}>${up?I.shiftOn:I.shift}</span>${row(R[2])}<span class="kb-android-k f w" role="button" aria-label="${c.del}">${I.del}</span></div>
+<div class="kb-android-r"><span class="kb-android-k f n" role="button" aria-label="${c.num}">?123</span><span class="kb-android-k p" role="button">,</span><span class="kb-android-k f gl" role="button" aria-label="${c.lang}">${I.globe}</span><span class="kb-android-k sp" role="button">${c.space}</span><span class="kb-android-k p" role="button">.</span><span class="kb-android-k rt" role="button" aria-label="${c.ret}">${I.ret}</span></div>`;}
+
+const car='<i class="kb-android-car"></i>';
+const WAVE=[6,10,16,12,22,18,26,14,10,20,24,16,8,18,26,22,12,8,14,20,10,6];
+/* состояния: поле, полоса, панель, область букв */
+const S={
+ panel:c=>({field:c.draft,send:1,
+  strip:`<div class="kb-android-strip go"><span class="kb-android-a p" role="button" aria-label="${c.trAria}">${I.tr}${c.trA}<small>${c.toTag}</small></span><span class="kb-android-a s" role="button">${parrot()}${c.imp}</span></div>`}),
+ translated:c=>({field:c.out,flang:c.to,send:1,
+  strip:`<div class="kb-android-strip st" role="status">${I.check}<span class="tx"><b>${c.doneB}</b><span>${c.was}</span></span><span class="kb-android-a s" role="button" aria-label="${c.undoA}">${I.undo}${c.undo}</span></div>`}),
+ voice:c=>({field:`<span class="pl">${c.ph}</span>`,pre:1,send:0,on:2,
+  strip:`<div class="kb-android-strip rec" role="status"><i class="kb-android-rdot"></i><span class="kb-android-rl">${c.rec}</span><span class="kb-android-rt">${c.recT}</span><span class="kb-android-wv" aria-hidden="true">${WAVE.map((h,i)=>`<i${i>18?' class="q"':''} style="height:${h}px"></i>`).join('')}</span></div>`,
+  area:`<div class="kb-android-vp"><div class="kb-android-live" aria-live="polite"><small>${c.liveL}</small><p>${c.raw}<i>${c.rawTail}</i>${car}</p></div>
+<div class="kb-android-ctl"><span class="side"><span class="kb-android-a s" role="button">${c.cancel}</span></span><span class="kb-android-stop" role="button" aria-label="${c.stopA}"><i></i></span><span class="side r"><span class="kb-android-lc" role="button" aria-label="${c.speakA}">${I.globe}${c.speak}</span></span></div></div>`}),
+ 'voice-done':c=>({field:`<span class="pl">${c.ph}</span>`,pre:1,send:0,on:2,
+  strip:`<div class="kb-android-strip st" role="status">${I.check}<span class="tx"><b>${c.vdB}</b><span>${c.vdS}</span></span></div>`,
+  area:`<div class="kb-android-vp" role="radiogroup"><div class="kb-android-ch" role="radio" aria-checked="false"><span class="lb"><span class="rd"></span>${c.mine}</span><p>${c.draft}</p></div>
+<div class="kb-android-ch on" role="radio" aria-checked="true"><span class="lb"><span class="rd">${I.checkS}</span>${c.trL}</span><p lang="${c.to}">${c.out}</p></div>
+<div class="kb-android-acts"><span class="kb-android-a s" role="button" aria-label="${c.againA}">${I.redo}${c.again}</span><span class="kb-android-a p" role="button" aria-label="${c.insertA}">${I.ins}${c.insert}<small>${c.toTag}</small></span></div></div>`})
+};
+function screen(id,light,c){
+ const s=S[id](c);
+ const f=s.pre?car+s.field:s.field+car;
+ const bar=`<div class="kb-android-bar">${BAR.map(([n,ic],i)=>{const on=s.on===i;
+  return `<span class="kb-android-ib${on?' on':''}" role="button" aria-label="${c[n]}"${on?' aria-pressed="true"':''}>${ic()}</span>`;}).join('')}</div>`;
+ const msgs=c.msgs.map(([d,t,tm])=>`<div class="m ${d}">${t}<span class="tm">${tm}</span></div>`).join('');
+ return `<div class="scr kb-android-scr ${light?'light':''}" lang="${c.html}">
+<div class="kb-android-sb"><span>9:41</span><span class="ic">${I.wifi}${I.cell}${I.batt}</span></div>
+<div class="nav"><span class="kb-android-hb" role="button" aria-label="${c.backA}">${I.back}</span><span class="av">${c.av}</span><span class="nm"><b>${c.who}</b><span>${c.online}</span></span><span class="kb-android-hb" role="button" aria-label="${c.moreA}">${I.more}</span></div>
+<div class="msgs"><div class="day">${c.today}</div>${msgs}</div>
+<div class="inp"><span class="f"><span${s.flang?` lang="${s.flang}"`:''}>${f}</span></span><span class="kb-android-sd${s.send?'':' off'}" role="button" aria-label="${c.sendA}">${I.send}</span></div>
+<div class="kb-android-kb">
+${s.strip}
+${bar}
+${s.area||`<div class="kb-android-rows">${keys(c,0)}</div>`}
+<div class="kb-android-nb"><span class="b" role="button" aria-label="${c.hideKb}">${I.hide}</span><i class="g"></i><span class="b" role="button" aria-label="${c.switchKb}">${I.kbd}</span></div></div></div>`;}
+const ph=(id,l,sc,c)=>`<div class="pf kb-android-pf ${l?'light':''}" style="--s:${sc}"><div class="shell"></div><div class="glass">${screen(id,l,c)}</div></div>`;
+
+function render(L){
+ const c=D[L];
+ document.documentElement.lang=c.html;document.title=c.title;
+ const $=id=>document.getElementById(id);
+ $('kb-android-lng').innerHTML=['ru','es','en'].map(x=>`<a href="?l=${x}" data-l="${x}" aria-current="${x===L}" lang="${x}">${x.toUpperCase()}</a>`).join('');
+ $('kb-android-t-draft').textContent=c.t_draft;$('kb-android-t-mock').textContent=c.t_mock;
+ $('kb-android-h1').textContent=c.h1;$('kb-android-lead').textContent=c.lead;
+ $('kb-android-copy').innerHTML=`<small>${c.copyH}</small><p style="margin:8px 0 0">${c.copyO}</p><b>${c.copyT}</b><p>${c.copyP}</p><span>${c.copyB}</span>`;
+ $('kb-android-h-st').textContent=c.hSt;$('kb-android-p-st').textContent=c.pSt;
+ $('kb-android-hero').innerHTML=
+ `<figure data-shot="kb-android--light--${L}">${ph('panel',1,1,c)}<div class="pcap"><span class="dot"></span><div><b>${c.capL[0]}</b><span>${c.capL[1]}</span></div></div></figure>
+<figure data-shot="kb-android--dark--${L}">${ph('panel',0,1,c)}<div class="pcap"><span class="dot"></span><div><b>${c.capD[0]}</b><span>${c.capD[1]}</span></div></div></figure>`;
+ $('kb-android-grid').innerHTML=Object.keys(S).map(id=>
+ `<article class="kb-android-st"><h3>${c.st[id][0]}<code>${id}</code></h3><p>${c.st[id][1]}</p><div class="kb-android-pair">
+<figure data-shot="kb-android--${id}--light--${L}">${ph(id,1,.6,c)}<div class="pcap"><div><b>${c.light}</b></div></div></figure>
+<figure data-shot="kb-android--${id}--dark--${L}">${ph(id,0,.6,c)}<div class="pcap"><div><b>${c.dark}</b></div></div></figure></div></article>`).join('');
+ const cs=t=>PAIRS[t].map(([k,a,b])=>`${PL[L][k]} ${fmt(cr(a,b),L)}`).join('; ');
+ const tok=TOK[L].map(x=>x.replace('CONTRAST_L',cs('L')).replace('CONTRAST_D',cs('D')));
+ $('kb-android-notes').innerHTML=`<div><h2>${c.hDec}</h2><ul>${c.dec.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h2>${c.hTok}</h2><ul>${tok.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h2>${c.hNo}</h2><ul>${c.no.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+ document.body.dataset.lang=L;
+}
+let L0=new URLSearchParams(location.search).get('l');if(!D[L0])L0='ru';
+render(L0);
+document.getElementById('kb-android-lng').addEventListener('click',e=>{const a=e.target.closest('a[data-l]');if(!a)return;e.preventDefault();const l=a.dataset.l;try{history.replaceState(null,'','?l='+l)}catch(_){}render(l);});
+window.KB_ANDROID_RENDER=render;
+document.body.dataset.ready='1';
+</script>
+</body>
+</html>
