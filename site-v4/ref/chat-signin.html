@@ -80,6 +80,9 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
 .chat-signin-btn .chat-signin-lg{width:28px;height:28px;border-radius:50%;background:#3A414B;color:var(--tx);display:flex;align-items:center;justify-content:center;font:700 15px/1 Inter}
 .chat-signin-btn.off .chat-signin-lg{background:#262C35;color:#6B7480}
 .chat-signin-btn svg{width:22px;height:22px}
+.chat-signin-btn.g{background:#131314;color:#E3E3E3;box-shadow:inset 0 0 0 1px #8E918F}
+.chat-signin-btn.g img{width:28px;height:28px;display:block;flex:none}
+.chat-signin-btn.g.off{background:#131314;color:#E3E3E3;box-shadow:inset 0 0 0 1px #8E918F;opacity:.38}
 .chat-signin-txt{height:44px;display:flex;align-items:center;justify-content:center;font:600 17px/1 Inter;color:var(--tx)}
 .chat-signin-txt.a{color:var(--acc)}
 .chat-signin-legal{margin:2px 8px 6px;text-align:center;font:400 13px/1.45 Inter;color:var(--sec)}
@@ -193,7 +196,8 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
  <div class="chat-signin-box">
   <h3>Не утверждено</h3>
   <ul>
-   <li>Кружки «A» и «G» — нейтральный плейсхолдер. В приложении будут официальные кнопки входа по правилам Apple и Google.</li>
+   <li>Значок Google — официальный (набор Google Identity, тёмная тема, без изменений); кнопка по правилам тёмной темы: фон #131314, текст #E3E3E3, рамка #8E918F, текст свой.</li>
+   <li>Кнопка Apple пока с плейсхолдером «A»: официальный набор Apple ещё не распакован, в приложении будет кнопка по правилам Apple.</li>
    <li>Фраза про Условия и Политику и названия документов <span class="chat-signin-tag">текст юриста</span></li>
    <li>Набор языков на шаге 2 (сейчас три) и подпись «по языку телефона».</li>
    <li>Анимация сцены на первом экране: тайминги и порядок (печать → Парло → перевод → ответ) пока описаны словами.</li>
@@ -228,6 +232,7 @@ function top(step,back){
  <div class="chat-signin-steps" role="img" aria-label="Шаг ${step} из 4">${d}</div><span class="chat-signin-cnt" aria-hidden="true">${step}/4</span></div>`;
 }
 const legal=`<p class="chat-signin-legal">Продолжая, ты принимаешь <u>Условия использования</u> и&nbsp;<u>Политику конфиденциальности</u></p>`;
+const google=(cls='')=>`<div class="chat-signin-btn g ${cls}" role="button"${cls.includes('off')?' aria-disabled="true"':''}><img src="../../brandbook/assets/third-party/google/ios-logo-dark-pill.svg" width="28" height="28" alt="">Продолжить с Google</div>`;
 const provider=(l,t,cls='')=>`<div class="chat-signin-btn s ${cls}" role="button"${cls.includes('off')?' aria-disabled="true"':''}><span class="chat-signin-lg">${l}</span>${t}</div>`;
 
 const S={
@@ -268,7 +273,7 @@ signin:()=>`${top(3,true)}
   <h2 class="chat-signin-h">Войди в Parrlo Chat</h2>
   <p class="chat-signin-sub">Пароль придумывать не нужно.<br>Твой язык — русский.</p>
  </div></div>
- <div class="chat-signin-bot">${provider('A','Продолжить с Apple')}${provider('G','Продолжить с Google')}${legal}</div>${home}`,
+ <div class="chat-signin-bot">${provider('A','Продолжить с Apple')}${google()}${legal}</div>${home}`,
 
 waiting:()=>`${top(3,false)}
  <div class="chat-signin-body"><div class="chat-signin-ctr">
@@ -276,7 +281,7 @@ waiting:()=>`${top(3,false)}
   <h2 class="chat-signin-h">Входим через Apple</h2>
   <p class="chat-signin-sub">Подтверди вход в открывшемся окне — потом вернёшься сюда.</p>
  </div></div>
- <div class="chat-signin-bot"><div class="chat-signin-btn s press" role="button" aria-busy="true">${IC.spin}Ждём Apple…</div>${provider('G','Продолжить с Google','off')}<div class="chat-signin-txt" role="button" style="margin-bottom:6px">Отмена</div></div>${home}`,
+ <div class="chat-signin-bot"><div class="chat-signin-btn s press" role="button" aria-busy="true">${IC.spin}Ждём Apple…</div>${google('off')}<div class="chat-signin-txt" role="button" style="margin-bottom:6px">Отмена</div></div>${home}`,
 
 error:()=>`${top(3,true)}
  <div class="chat-signin-body"><div class="chat-signin-ctr">
@@ -313,12 +318,12 @@ function L(h){const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=
 function R(a,b){const x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
 const rows=[
  ['Основной текст','#F2F5F7','#0E1116',4.5],['Вторичный текст','#9AA4B2','#0E1116',4.5],['Вторичный на карточке','#9AA4B2','#1C2026',4.5],
- ['Текст кнопки входа','#F2F5F7','#242B34',4.5],['Буква в кружке A/G','#F2F5F7','#3A414B',4.5],['Главная кнопка','#0E1116','#2BC48A',3],
+ ['Текст кнопки входа','#F2F5F7','#242B34',4.5],['Буква в кружке A','#F2F5F7','#3A414B',4.5],['Текст кнопки Google','#E3E3E3','#131314',4.5],['Главная кнопка','#0E1116','#2BC48A',3],
  ['Твой пузырь','#FFFFFF','#00875C',4.5],['Пузырь Lucía','#F2F5F7','#242B34',4.5],['Плашка «Парло переводит»','#BFF2DC','#202829',4.5],
  ['Выбранный язык, подпись','#9AA4B2','#14261F',4.5],['Код языка на акценте','#0E1116','#2BC48A',3],['Иконка ошибки (не текст)','#FF6B5E','#1C2026',3]
 ];
 document.getElementById('chat-signin-ct').innerHTML=rows.map(([n,f,b,min])=>{const r=R(f,b);return `<tr><td><span class="chat-signin-sw" style="background:${b};color:${f}">Аа</span>${n}</td><td>${r.toFixed(1).replace('.',',')} : 1 ${r>=min?'✓':'✗'}</td></tr>`}).join('')
- +`<tr><td colspan="2" style="white-space:normal;text-align:left;font-weight:400;color:#9AA4B2">Неактивная кнопка Google (#6B7480 на #191D23) — неактивный элемент, требование 4,5 : 1 не применяется; неактивность показана ещё и потускневшим кружком.</td></tr>`;
+ +`<tr><td colspan="2" style="white-space:normal;text-align:left;font-weight:400;color:#9AA4B2">Неактивная кнопка Google (вся кнопка с прозрачностью 38 %) — неактивный элемент, требование 4,5 : 1 не применяется; неактивность показана ещё и потускневшим кружком.</td></tr>`;
 if(location.hash==='#static')document.body.classList.add('chat-signin-static');
 })();
 </script>
