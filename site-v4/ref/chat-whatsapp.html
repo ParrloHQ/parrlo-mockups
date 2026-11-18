@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · WhatsApp</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.chat-whatsapp-w{max-width:1200px;margin:0 auto}
+.chat-whatsapp-lng{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-whatsapp-lng a{min-width:52px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#C9D1DA;text-decoration:none;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-whatsapp-lng a.on{background:#2BC48A;color:#0E1116;box-shadow:none}
+.chat-whatsapp-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-whatsapp-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-whatsapp-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-whatsapp-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-whatsapp-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-whatsapp-info ul,.chat-whatsapp-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-whatsapp-info li,.chat-whatsapp-sec li{margin:6px 0}
+.chat-whatsapp-w b{color:#F2F5F7;font-weight:600}
+.chat-whatsapp-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7;overflow-wrap:anywhere}
+.chat-whatsapp-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-whatsapp-lead{color:#9AA4B2;margin:0 0 32px;max-width:760px}
+.chat-whatsapp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:40px 24px;justify-items:center}
+.chat-whatsapp-card{width:273px}
+.chat-whatsapp-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.chat-whatsapp-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-whatsapp-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+.chat-whatsapp-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 40px}
+.chat-whatsapp-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-whatsapp-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-whatsapp-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-whatsapp-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-whatsapp-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-whatsapp-hero .pf{--s:.78!important}.chat-whatsapp-info h1{font-size:30px}.chat-whatsapp-hero{gap:24px}}
+
+/* ======= экран 430×932 ======= */
+.chat-whatsapp-scr{overflow:hidden}
+.chat-whatsapp-scr svg{display:block}
+.chat-whatsapp-nav{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 4px;border-bottom:1px solid var(--line)}
+.chat-whatsapp-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-whatsapp-ib svg{width:24px;height:24px}
+.chat-whatsapp-ib.bk{color:var(--acc)}.chat-whatsapp-ib.bk svg{width:28px;height:28px}
+.chat-whatsapp-ib.inf svg{color:var(--sec)}
+.chat-whatsapp-av{width:40px;height:40px;border-radius:50%;background:#F2B56B;color:#0E1116;font:800 17px/40px Nunito,Inter;text-align:center;flex:none}
+.chat-whatsapp-av.o{background:#E8A0BF}
+.chat-whatsapp-nm{flex:1;min-width:0;padding-left:4px}
+.chat-whatsapp-nm b{display:block;font:600 17px/22px Inter}
+.chat-whatsapp-nm span{display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-whatsapp-nm span svg{width:14px;height:14px;flex:none}
+
+.chat-whatsapp-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px}
+.chat-whatsapp-sys{align-self:center;max-width:340px;display:flex;gap:10px;align-items:flex-start;border-radius:16px;background:var(--sf);padding:10px 14px;font:400 13px/18px Inter;color:var(--sec);margin-bottom:8px}
+.chat-whatsapp-sys svg{width:16px;height:16px;flex:none;margin-top:1px;color:var(--mint)}
+.chat-whatsapp-sys b{color:var(--tx);font-weight:600}
+.chat-whatsapp-m{position:relative;max-width:80%;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px}
+.chat-whatsapp-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px;padding-bottom:0}
+.chat-whatsapp-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.chat-whatsapp-m.gap{margin-top:8px}
+.chat-whatsapp-m.wide{width:84%;max-width:84%}
+.chat-whatsapp-m.hl{box-shadow:0 0 0 2px var(--acc)}
+.chat-whatsapp-m.out.hl{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--acc)}
+/* метка «из WhatsApp · вставлено» над входящим */
+.chat-whatsapp-src{display:flex;align-items:center;gap:6px;font:600 12px/16px Inter;color:var(--sec);margin:0 0 4px}
+.chat-whatsapp-src svg{width:14px;height:14px;flex:none}
+/* подпись внизу входящего */
+.chat-whatsapp-ft{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin:0 -12px;padding:0 12px}
+.chat-whatsapp-tg{display:flex;align-items:center;gap:6px;min-height:44px;font:600 13px/18px Inter;color:var(--mint);white-space:nowrap}
+.chat-whatsapp-tg svg{width:16px;height:16px;flex:none}
+.chat-whatsapp-tg svg.cv{width:14px;height:14px;opacity:.9}
+.chat-whatsapp-tm{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;line-height:16px;flex:none}
+.chat-whatsapp-ft .chat-whatsapp-tm{color:var(--sec)}
+.chat-whatsapp-og{margin:8px 0 0;border-radius:12px;background:var(--sf);border-left:3px solid var(--mint);padding:8px 12px 10px}
+.chat-whatsapp-og .k{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin-bottom:2px}
+.chat-whatsapp-og .v{display:block;font-size:16px;line-height:22px;color:var(--tx)}
+/* исходящее: подпись «через WhatsApp» и что ушло */
+.chat-whatsapp-of{display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-top:4px;font:500 12px/16px Inter;color:#fff}
+.chat-whatsapp-of svg{width:14px;height:14px;flex:none}
+.chat-whatsapp-of .via{display:flex;align-items:center;gap:4px;font-weight:600}
+.chat-whatsapp-of .dt{opacity:.9}
+.chat-whatsapp-sent{margin:8px 0 2px;border-radius:12px;background:#006E4B;padding:8px 12px 10px}
+.chat-whatsapp-sent .k{display:flex;align-items:center;gap:6px;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:#D6F5E5;margin-bottom:2px}
+.chat-whatsapp-sent .k svg{width:14px;height:14px}
+.chat-whatsapp-sent .v{display:block;font-size:16px;line-height:22px;color:#fff}
+
+/* тост */
+.chat-whatsapp-toast{position:absolute;left:50%;transform:translateX(-50%);top:126px;z-index:7;display:flex;align-items:center;gap:8px;white-space:nowrap;height:40px;padding:0 16px 0 12px;border-radius:20px;background:#2A3039;box-shadow:0 10px 30px rgba(0,0,0,.45),inset 0 0 0 1px #3A414B;font:600 14px/1 Inter;color:var(--tx)}
+.chat-whatsapp-toast i{width:22px;height:22px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center}
+.chat-whatsapp-toast i svg{width:14px;height:14px}
+
+/* поле ввода и предпросмотр */
+.chat-whatsapp-cmp{flex:none;border-top:1px solid var(--line);padding:8px 12px 0;background:var(--bg)}
+.chat-whatsapp-row{display:flex;align-items:flex-end;gap:8px}
+.chat-whatsapp-pls{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-whatsapp-pls svg{width:26px;height:26px}
+.chat-whatsapp-f{flex:1;min-width:0;min-height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:10px 16px;font-size:17px;line-height:22px;color:var(--tx)}
+.chat-whatsapp-f .pl{color:var(--sec)}
+.chat-whatsapp-f .car{display:inline-block;width:2px;height:20px;background:var(--acc);vertical-align:-4px;margin-left:1px;border-radius:1px}
+.chat-whatsapp-go{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-whatsapp-go svg{width:22px;height:22px}
+.chat-whatsapp-pv{margin:0 0 8px;border-radius:16px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:2px 6px 12px 12px}
+.chat-whatsapp-pv .h{display:flex;align-items:center;gap:6px;min-height:44px;font:600 13px/18px Inter;color:var(--sec)}
+.chat-whatsapp-pv .h>svg{width:16px;height:16px;color:var(--mint);flex:none}
+.chat-whatsapp-pv .h .lb{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-whatsapp-pv p{margin:0 6px 0 0;font-size:16px;line-height:22px;color:var(--tx)}
+.chat-whatsapp-chip{flex:none;min-height:44px;display:flex;align-items:center}
+.chat-whatsapp-chip span{height:32px;border-radius:16px;background:#1E3734;box-shadow:inset 0 0 0 1px #2B5A4A;display:flex;align-items:center;gap:6px;padding:0 8px 0 10px;font:600 13px/1 Inter;color:var(--mint);white-space:nowrap}
+.chat-whatsapp-chip svg{width:16px;height:16px}
+.chat-whatsapp-chip svg.i{width:14px;height:14px;opacity:.85}
+/* вставка ответа */
+.chat-whatsapp-paste{display:flex;gap:8px;margin:0 0 8px}
+.chat-whatsapp-pb{flex:1;min-width:0;min-height:48px;border-radius:24px;background:var(--sf2);box-shadow:inset 0 0 0 1px #3A414B;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 16px;font:600 15px/20px Inter;color:var(--tx);white-space:nowrap}
+.chat-whatsapp-pb svg{width:20px;height:20px;color:var(--mint);flex:none}
+
+/* затемнение и карточка «Перевод готов» */
+.chat-whatsapp-dim{position:absolute;inset:0;background:rgba(9,11,14,.7);z-index:3}
+.chat-whatsapp-rdy{position:absolute;left:12px;right:12px;z-index:4;border-radius:24px;background:var(--sf);box-shadow:0 16px 40px rgba(0,0,0,.5),inset 0 0 0 1px var(--line);padding:4px 16px 16px}
+.chat-whatsapp-rdy .h{display:flex;align-items:center;gap:8px;min-height:40px;font:600 13px/18px Inter;color:var(--sec)}
+.chat-whatsapp-rdy .h svg{width:16px;height:16px;color:var(--mint);flex:none}
+.chat-whatsapp-rdy .h .ok{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--mint)}
+.chat-whatsapp-rdy .h .ok svg{width:14px;height:14px}
+.chat-whatsapp-rdy p{margin:0 0 4px;font:500 17px/24px Inter;color:var(--tx)}
+.chat-whatsapp-rdy .o{margin:0 0 12px;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-whatsapp-btn{height:52px;border-radius:26px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;gap:10px;font:900 18px/1 Nunito,sans-serif;white-space:nowrap}
+.chat-whatsapp-btn svg{width:22px;height:22px}
+.chat-whatsapp-btn.pr{box-shadow:0 0 0 4px rgba(43,196,138,.28);filter:brightness(.92)}
+
+/* системный лист «Поделиться» (обобщённый) */
+.chat-whatsapp-ss{position:absolute;left:0;right:0;bottom:0;z-index:5;background:#1C2026;border-radius:32px 32px 0 0;box-shadow:inset 0 1px 0 #2F3742,0 -20px 50px rgba(0,0,0,.45);display:flex;flex-direction:column;padding:8px 16px 0}
+.chat-whatsapp-grab{width:40px;height:5px;border-radius:3px;background:#3A414B;align-self:center;margin-bottom:12px;flex:none}
+.chat-whatsapp-ssh{display:flex;align-items:center;gap:12px;padding:0 0 16px;border-bottom:1px solid var(--line)}
+.chat-whatsapp-ssh>svg{width:52px;height:52px;border-radius:12px;flex:none}
+.chat-whatsapp-ssh>div{flex:1;min-width:0}
+.chat-whatsapp-ssh b{display:block;font:600 16px/22px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-whatsapp-ssh>div>span{display:block;font:400 14px/20px Inter;color:var(--sec)}
+.chat-whatsapp-x{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.chat-whatsapp-x svg{width:20px;height:20px}
+.chat-whatsapp-apps{display:flex;justify-content:space-between;padding:20px 4px}
+.chat-whatsapp-app{width:72px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+.chat-whatsapp-app>i{display:block;width:64px;height:64px;border-radius:50%;background:#3A414B}
+.chat-whatsapp-app>em{display:block;width:44px;height:10px;border-radius:5px;background:#2F3742;margin-top:4px}
+.chat-whatsapp-app>b{font:600 13px/18px Inter;color:var(--tx);white-space:nowrap}
+.chat-whatsapp-app.on>i{box-shadow:0 0 0 3px #1C2026,0 0 0 6px var(--acc)}
+.chat-whatsapp-tap{position:absolute;left:50%;top:32px;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:rgba(242,245,247,.28);box-shadow:0 0 0 8px rgba(242,245,247,.1)}
+.chat-whatsapp-grp{background:var(--sf2);border-radius:20px;overflow:hidden}
+.chat-whatsapp-gr{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:0 18px;font:400 17px Inter}
+.chat-whatsapp-gr+.chat-whatsapp-gr{border-top:1px solid var(--line)}
+.chat-whatsapp-gr svg{width:22px;height:22px;color:var(--sec)}
+.chat-whatsapp-ss .homebar{margin-top:auto}
+
+/* лист «Как это работает» */
+.chat-whatsapp-sh{position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--sf);border-radius:28px 28px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.45),inset 0 1px 0 var(--line);padding:8px 20px 0}
+.chat-whatsapp-shh{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.chat-whatsapp-shh img{width:72px;height:72px;flex:none;margin:-4px 0 0 -6px}
+.chat-whatsapp-shh>div{flex:1;min-width:0}
+.chat-whatsapp-shh h4{margin:4px 0 0;font:900 26px/32px Nunito,sans-serif}
+.chat-whatsapp-shh p{margin:4px 0 0;color:var(--sec);font-size:14px;line-height:20px}
+.chat-whatsapp-shx{width:44px;height:44px;margin:-2px -10px 0 0;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-whatsapp-shx i{width:32px;height:32px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center}
+.chat-whatsapp-shx svg{width:18px;height:18px}
+.chat-whatsapp-steps{margin:20px 0 0;border-radius:20px;background:var(--sf2);padding:4px 0}
+.chat-whatsapp-st{display:flex;gap:14px;padding:12px 16px;position:relative}
+.chat-whatsapp-st+.chat-whatsapp-st{border-top:1px solid var(--line)}
+.chat-whatsapp-st .n{width:36px;height:36px;border-radius:50%;background:#1E3734;color:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-whatsapp-st .n svg{width:20px;height:20px}
+.chat-whatsapp-st b{display:block;font:600 16px/22px Inter}
+.chat-whatsapp-st span{display:block;font-size:14px;line-height:20px;color:var(--sec);margin-top:2px}
+.chat-whatsapp-st .num{font:700 12px/16px Inter;color:var(--sec);letter-spacing:.06em;margin:0}
+.chat-whatsapp-cta{margin-top:20px;height:52px;border-radius:26px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;font:900 18px/1 Nunito,sans-serif}
+.chat-whatsapp-alt{margin-top:4px;height:48px;display:flex;align-items:center;justify-content:center;gap:8px;font:600 15px/1 Inter;color:var(--mint)}
+.chat-whatsapp-alt svg{width:18px;height:18px}
+</style>
+</head>
+<body>
+<div class="chat-whatsapp-w">
+<nav class="chat-whatsapp-lng" id="chat-whatsapp-lng" aria-label="Language"></nav>
+<section class="chat-whatsapp-hero">
+ <div><div class="pf p67" style="--s:1" data-state="send-via" id="chat-whatsapp-hero"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b id="chat-whatsapp-capb"></b><span id="chat-whatsapp-caps"></span></div></div></div>
+ <div class="chat-whatsapp-info">
+  <p class="chat-whatsapp-eb" id="chat-whatsapp-eb"></p>
+  <h1 id="chat-whatsapp-h1"></h1>
+  <p id="chat-whatsapp-intro"></p>
+  <ul id="chat-whatsapp-what"></ul>
+ </div>
+</section>
+<h2 class="chat-whatsapp-h2" id="chat-whatsapp-sth"></h2>
+<p class="chat-whatsapp-lead" id="chat-whatsapp-stl"></p>
+<div class="chat-whatsapp-grid" id="chat-whatsapp-grid"></div>
+<h2 class="chat-whatsapp-h2" id="chat-whatsapp-moreh"></h2>
+<div class="chat-whatsapp-cols">
+ <div class="chat-whatsapp-sec"><h2 id="chat-whatsapp-dech"></h2><ul id="chat-whatsapp-dec"></ul></div>
+ <div class="chat-whatsapp-sec"><h2 id="chat-whatsapp-tokh"></h2><table class="chat-whatsapp-ct" id="chat-whatsapp-ct"></table><ul style="margin-top:12px" id="chat-whatsapp-tok"></ul></div>
+ <div class="chat-whatsapp-sec"><h2 id="chat-whatsapp-nah"></h2><ul id="chat-whatsapp-na"></ul></div>
+</div>
+</div>
+<script>
+(function(){
+var H='‑',N=' ';
+/* ===== словарь: все тексты экрана и страницы ===== */
+var D={
+ru:{
+ htmlLang:'ru',docTitle:'Parrlo Chat · WhatsApp',
+ name:'Pedro',ini:'P',ava:'',sub:'без Parrlo · через WhatsApp',ul:'ru',rl:'es',
+ aBack:'Назад',aInfo:'Как работает переписка через WhatsApp',aMore:'Меню чата',aPlus:'Прикрепить',aMic:'Записать голосовое',aSend:'Отправить через WhatsApp',aClose:'Закрыть',
+ ph:'Сообщение',
+ sys:'<b>Pedro пока без Parrlo.</b> Твои сообщения уходят ему через WhatsApp, а его ответы можно вставить сюда.',
+ trFrom:'Перевод с испанского',hide:'Скрыть оригинал',ogK:'Оригинал · испанский',
+ src:'Из WhatsApp · вставлено',via:'через WhatsApp',viaFull:'Отправлено через WhatsApp',wentK:'Ушло по'+H+'испански',
+ th:[
+  ['in','Hola, soy Pedro, el fontanero. ¿Cuándo le viene bien que pase?','Здравствуйте, это Pedro, сантехник. Когда вам удобно, чтобы я зашёл?','09:31'],
+  ['out','Добрый день! Сможете завтра после пяти?','Buenas tardes. ¿Puede mañana después de las cinco?','09:33'],
+  ['in','Mañana a las seis me va perfecto. ¿Me manda la dirección?','Завтра в шесть мне отлично подходит. Пришлёте адрес?','09:38'],
+  ['out','Calle Mayor, 12, кв.'+N+'3B. Домофон не работает'+N+'— позвоните, я спущусь.','Calle Mayor, 12, 3.º'+N+'B. El portero no funciona: llámeme y bajo.','09:44'],
+  ['in','Perfecto, le llamo al llegar. ¡Hasta mañana!','Отлично, позвоню, как подъеду. До завтра!','09:47']
+ ],
+ pvL:'Pedro прочитает',
+ rdyL:'Перевод готов',rdyOk:'проверено',rdyO:'Ты написал'+N+'по'+H+'русски · копия останется здесь',
+ rdyO2:'Копия останется здесь, в чате',
+ btn:'Отправить через WhatsApp',
+ ssS:'Текст · Parrlo',ssActs:['Копировать','Сохранить в файл'],
+ toastKept:'Копия сохранена в чате',paste:'Вставить ответ Pedro',aPaste:'Вставить ответ Pedro из буфера обмена',
+ toastPaste:'Ответ Pedro переведён',
+ shT:'Как это работает',shS:'Pedro пока без Parrlo, а переписка всё равно в одном месте.',
+ steps:[['Пишешь здесь','По'+H+'русски, как обычно. Перевод видно ещё до отправки.'],['Отправляешь через WhatsApp','Pedro получит перевод как обычное сообщение. Копия остаётся в этом чате.'],['Вставляешь ответ','Скопируй ответ Pedro в WhatsApp и вставь сюда'+N+'— Parrlo переведёт.']],
+ done:'Понятно',alt:'Позвать Pedro в Parrlo',
+ /* страница */
+ eb:'Эталон · пачка 2 · chat-whatsapp · C-10 · только тёмная тема',
+ h1:'Не хочет новое приложение? Пусть остаётся в WhatsApp.',
+ intro:'Пишешь в Parrlo по'+H+'русски'+N+'— собеседник получает перевод в WhatsApp, как обычное сообщение. У тебя в Parrlo остаётся копия, чтобы весь разговор был в одном месте.',
+ capB:'Отправить через WhatsApp',capS:'Главный кадр. Перевод готов, открыт системный лист «Поделиться»: остаётся выбрать WhatsApp и чат с Pedro. Тексты — черновик.',
+ what:['<b>Метка «через WhatsApp»</b> в шапке чата и в предпросмотре: видно до отправки, куда уйдёт сообщение.','<b>Карточка «Перевод готов»</b> с кнопкой «Отправить через WhatsApp» над системным листом «Поделиться».','<b>Копия в Parrlo</b>: твой текст, под ним «Ушло по'+H+'испански» и подпись «Отправлено через WhatsApp».','<b>Ответ из буфера</b>: «Вставить ответ Pedro»'+N+'— сообщение встаёт в чат с переводом и меткой «Из WhatsApp · вставлено».'],
+ stH:'Состояния',stL:'Пять кадров одного чата. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-whatsapp--&lt;состояние&gt;--ru.png</code>, главный кадр'+N+'— <code>chat-whatsapp--ru.png</code>.',
+ st:{compose:['Пишу собеседнику без Parrlo','Pedro не в Parrlo: в шапке и над полем метка «через WhatsApp», в предпросмотре'+N+'— что он прочитает.'],
+  'send-via':['Отправить через WhatsApp','Нажата отправка: перевод готов, открылся системный лист «Поделиться», выбираю WhatsApp.'],
+  'copy-kept':['Копия осталась в Parrlo','Вернулся из WhatsApp: в чате мой текст, что ушло по'+H+'испански, и метка «Отправлено через WhatsApp».'],
+  'reply-paste':['Ответ вставлен','Скопировал ответ Pedro в WhatsApp и нажал «Вставить ответ»: он в чате, переведён, оригинал рядом.'],
+  how:['Как это работает','Касание «i» в шапке или метки «через WhatsApp»: три шага и приглашение в Parrlo.']},
+ moreH:'Решения, токены, открытые вопросы',decH:'Решения сверх сборки',
+ dec:['<b>Канал виден заранее</b>: «без Parrlo · через WhatsApp» в шапке и метка в предпросмотре, чтобы не было сюрприза при отправке.','<b>Карточка «Перевод готов» остаётся над листом «Поделиться»</b>: видно, какой текст уходит, пока выбираешь WhatsApp.','<b>Лист «Поделиться» обобщённый</b>, как в <code>translate-share</code>: серые кружки, WhatsApp'+N+'— только подпись под кружком, Parrlo'+N+'— своим значком как источник.','<b>У копии нет галочек «прочитано»</b>: Parrlo не знает, что происходит в WhatsApp, поэтому вместо них значок «отправлено наружу» и подпись канала.','<b>«Вставить ответ Pedro»</b> над полем после возврата из WhatsApp; вставленное сообщение помечено «Из WhatsApp · вставлено».','<b>Пояснение «Как это работает»</b> с маскотом и ссылкой «Позвать Pedro в Parrlo» (ведёт в <code>chat-guest</code>).'],
+ tokH:'Токены и контраст',
+ tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>.','Исходящие'+N+'— Deep Green <code>#00875C</code> + белый, блок «Ушло» <code>#006E4B</code>; перевод и метка канала'+N+'— Mint <code>#BFF2DC</code> на <code>#1E3734</code>; акцент <code>#2BC48A</code> + <code>#0E1116</code>.','Жёлтый только в значке Parrlo. Зоны нажатия ≥'+N+'44'+N+'pt: метка канала 32 в зоне 44, «Вставить ответ» 48, строки листа 56, кнопки 52.'],
+ naH:'Не утверждено',
+ na:['Все тексты'+N+'— черновик, включая испанский и английский интерфейс.','Юрист: WhatsApp не описан в Политике; на этом экране нет ни слова о данных.','В инвентаре канал помечен «да (без сервера)»'+N+'— смысл не расшифрован, ждём менеджера Chat.','Вставка ответа: кнопка «Вставить ответ Pedro» и метка «Из WhatsApp · вставлено» придуманы, в сборке экраны 49, 50 этого не показывают.','Нужна ли ссылка «Позвать Pedro в Parrlo» в пояснении.','Как называть системный лист в es/en (Compartir / Share)'+N+'— по системе.'],
+ ct:['Текст входящего','Перевод и метка канала (Mint)','Метка канала на #1E3734','Время и метки на входящем','Текст исходящего','Блок «Ушло по‑испански»','Подписи на фоне','Подписи на поверхности листа','Текст и значки на акценте']
+},
+es:{
+ htmlLang:'es',docTitle:'Parrlo Chat · WhatsApp',
+ name:'Olga',ini:'O',ava:'o',sub:'sin Parrlo · por WhatsApp',ul:'es',rl:'ru',
+ aBack:'Atrás',aInfo:'Cómo funciona escribir por WhatsApp',aMore:'Menú del chat',aPlus:'Adjuntar',aMic:'Grabar audio',aSend:'Enviar por WhatsApp',aClose:'Cerrar',
+ ph:'Mensaje',
+ sys:'<b>Olga aún no usa Parrlo.</b> Tus mensajes le llegan por WhatsApp, y sus respuestas puedes pegarlas aquí.',
+ trFrom:'Traducido del ruso',hide:'Ocultar original',ogK:'Original · ruso',
+ src:'De WhatsApp · pegado',via:'por WhatsApp',viaFull:'Enviado por WhatsApp',wentK:'Enviado en ruso',
+ th:[
+  ['in','Здравствуйте, это Ольга, сантехник. Когда вам удобно, чтобы я зашла?','Hola, soy Olga, la fontanera. ¿Cuándo le viene bien que pase?','09:31'],
+  ['out','Buenas tardes. ¿Puede mañana después de las cinco?','Добрый день! Сможете завтра после пяти?','09:33'],
+  ['in','Завтра в шесть мне отлично подходит. Пришлёте адрес?','Mañana a las seis me va perfecto. ¿Me manda la dirección?','09:38'],
+  ['out','Calle Mayor, 12, 3.º'+N+'B. El portero no funciona: llámeme y bajo.','Calle Mayor, 12, кв.'+N+'3B. Домофон не работает'+N+'— позвоните, я спущусь.','09:44'],
+  ['in','Отлично, позвоню, как подъеду. До завтра!','Perfecto, le llamo al llegar. ¡Hasta mañana!','09:47']
+ ],
+ pvL:'Olga leerá',
+ rdyL:'Traducción lista',rdyOk:'',rdyO2:'Una copia se queda aquí, en el chat',
+ btn:'Enviar por WhatsApp',
+ ssS:'Texto · Parrlo',ssActs:['Copiar','Guardar en archivo'],
+ toastKept:'Copia guardada en el chat',paste:'Pegar respuesta de Olga',aPaste:'Pegar la respuesta de Olga desde el portapapeles',
+ toastPaste:'Respuesta de Olga traducida',
+ shT:'Cómo funciona',shS:'Olga aún no usa Parrlo, pero la conversación sigue en un solo sitio.',
+ steps:[['Escribes aquí','En español, como siempre. Ves la traducción antes de enviar.'],['Envías por WhatsApp','A Olga le llega la traducción como un mensaje normal. La copia se queda en este chat.'],['Pegas la respuesta','Copia la respuesta de Olga en WhatsApp y pégala aquí: Parrlo la traduce.']],
+ done:'Entendido',alt:'Invitar a Olga a Parrlo',
+ eb:'Referencia · lote 2 · chat-whatsapp · C-10 · solo tema oscuro',
+ h1:'¿No quiere otra app? Que siga en WhatsApp.',
+ intro:'Escribes en Parrlo en español y a la otra persona le llega la traducción por WhatsApp, como un mensaje normal. En Parrlo te queda una copia, para tener toda la conversación en un solo sitio.',
+ capB:'Enviar por WhatsApp',capS:'Imagen principal. La traducción está lista y se abre la hoja «Compartir» del sistema: solo queda elegir WhatsApp y el chat con Olga. Textos provisionales.',
+ what:['<b>Etiqueta «por WhatsApp»</b> en la cabecera y en la vista previa: antes de enviar ya sabes por dónde sale el mensaje.','<b>Tarjeta «Traducción lista»</b> con el botón «Enviar por WhatsApp», sobre la hoja «Compartir» del sistema.','<b>Copia en Parrlo</b>: tu texto, debajo «Enviado en ruso» y la nota «Enviado por WhatsApp».','<b>Respuesta desde el portapapeles</b>: «Pegar respuesta de Olga» y el mensaje entra en el chat traducido, con la etiqueta «De WhatsApp · pegado».'],
+ stH:'Estados',stL:'Cinco momentos de un mismo chat. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-whatsapp--&lt;estado&gt;--es.png</code>; la imagen principal es <code>chat-whatsapp--es.png</code>.',
+ st:{compose:['Escribo a alguien sin Parrlo','Olga no usa Parrlo: en la cabecera y sobre el campo aparece «por WhatsApp»; en la vista previa, lo que leerá.'],
+  'send-via':['Enviar por WhatsApp','Al enviar: la traducción está lista y se abre la hoja «Compartir»; elijo WhatsApp.'],
+  'copy-kept':['La copia se queda en Parrlo','De vuelta de WhatsApp: en el chat, mi texto, lo que se envió en ruso y la nota «Enviado por WhatsApp».'],
+  'reply-paste':['Respuesta pegada','Copié la respuesta de Olga en WhatsApp y toqué «Pegar respuesta»: ya está en el chat, traducida y con el original.'],
+  how:['Cómo funciona','Al tocar la «i» de la cabecera o la etiqueta «por WhatsApp»: tres pasos y la invitación a Parrlo.']},
+ moreH:'Decisiones, tokens y temas abiertos',decH:'Decisiones nuevas respecto a la app',
+ dec:['<b>El canal se ve antes</b>: «sin Parrlo · por WhatsApp» en la cabecera y la etiqueta en la vista previa, para que el envío no sorprenda.','<b>La tarjeta «Traducción lista» queda sobre la hoja «Compartir»</b>: ves qué texto sale mientras eliges WhatsApp.','<b>Hoja «Compartir» genérica</b>, como en <code>translate-share</code>: círculos grises; WhatsApp, solo como texto bajo un círculo; Parrlo, con su icono como origen.','<b>La copia no lleva marcas de «leído»</b>: Parrlo no sabe qué pasa en WhatsApp; en su lugar, un icono de «enviado fuera» y el nombre del canal.','<b>«Pegar respuesta de Olga»</b> sobre el campo al volver de WhatsApp; el mensaje pegado lleva «De WhatsApp · pegado».','<b>Explicación «Cómo funciona»</b> con la mascota y el enlace «Invitar a Olga a Parrlo» (lleva a <code>chat-guest</code>).'],
+ tokH:'Tokens y contraste',
+ tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code>/<code>#242B34</code>, líneas <code>#2F3742</code>.','Mensajes propios: Deep Green <code>#00875C</code> + blanco, bloque «Enviado» <code>#006E4B</code>; traducción y etiqueta del canal: Mint <code>#BFF2DC</code> sobre <code>#1E3734</code>; acento <code>#2BC48A</code> + <code>#0E1116</code>.','Amarillo solo en el icono de Parrlo. Zonas táctiles ≥'+N+'44'+N+'pt: etiqueta de 32 dentro de 44, «Pegar respuesta» 48, filas de la hoja 56, botones 52.'],
+ naH:'Sin aprobar',
+ na:['Todos los textos son provisionales, incluidos los de la interfaz en español y en inglés.','Legal: la Política no menciona WhatsApp; esta pantalla no dice nada sobre datos.','En el inventario el canal figura como «sí (sin servidor)»; falta que el responsable de Chat lo aclare.','Pegar la respuesta: el botón y la etiqueta «De WhatsApp · pegado» son nuevos; las pantallas 49 y 50 de la app no lo muestran.','Si el enlace «Invitar a Olga a Parrlo» debe estar en la explicación.','Nombre de la hoja del sistema en cada idioma (Compartir / Share), según iOS.'],
+ ct:['Texto del mensaje recibido','Traducción y etiqueta del canal (Mint)','Etiqueta del canal sobre #1E3734','Hora y notas en el mensaje recibido','Texto de mensajes propios','Bloque «Enviado en ruso»','Notas sobre el fondo','Notas sobre la hoja','Texto e iconos sobre el acento']
+},
+en:{
+ htmlLang:'en',docTitle:'Parrlo Chat · WhatsApp',
+ name:'Pedro',ini:'P',ava:'',sub:'not on Parrlo · via WhatsApp',ul:'en',rl:'es',
+ aBack:'Back',aInfo:'How chatting via WhatsApp works',aMore:'Chat menu',aPlus:'Attach',aMic:'Record voice message',aSend:'Send via WhatsApp',aClose:'Close',
+ ph:'Message',
+ sys:'<b>Pedro isn’t on Parrlo yet.</b> Your messages reach him via WhatsApp, and you can paste his replies here.',
+ trFrom:'Translated from Spanish',hide:'Hide original',ogK:'Original · Spanish',
+ src:'From WhatsApp · pasted',via:'via WhatsApp',viaFull:'Sent via WhatsApp',wentK:'Sent in Spanish',
+ th:[
+  ['in','Hola, soy Pedro, el fontanero. ¿Cuándo le viene bien que pase?','Hi, this is Pedro, the plumber. When’s a good time for me to come by?','09:31'],
+  ['out','Good afternoon! Could you do tomorrow after five?','Buenas tardes. ¿Puede mañana después de las cinco?','09:33'],
+  ['in','Mañana a las seis me va perfecto. ¿Me manda la dirección?','Tomorrow at six works great. Could you send me the address?','09:38'],
+  ['out','Calle Mayor 12, apt'+N+'3B. The buzzer’s broken'+N+'— call me and I’ll come down.','Calle Mayor, 12, 3.º'+N+'B. El portero no funciona: llámeme y bajo.','09:44'],
+  ['in','Perfecto, le llamo al llegar. ¡Hasta mañana!','Perfect, I’ll call when I get there. See you tomorrow!','09:47']
+ ],
+ pvL:'Pedro will read',
+ rdyL:'Translation ready',rdyOk:'',rdyO2:'A copy stays here, in the chat',
+ btn:'Send via WhatsApp',
+ ssS:'Text · Parrlo',ssActs:['Copy','Save to file'],
+ toastKept:'Copy saved in the chat',paste:'Paste Pedro’s reply',aPaste:'Paste Pedro’s reply from the clipboard',
+ toastPaste:'Pedro’s reply translated',
+ shT:'How it works',shS:'Pedro isn’t on Parrlo yet, but your conversation stays in one place.',
+ steps:[['You write here','In English, as usual. You see the translation before you send.'],['You send via WhatsApp','Pedro gets the translation as a regular message. A copy stays in this chat.'],['You paste the reply','Copy Pedro’s reply in WhatsApp and paste it here'+N+'— Parrlo translates it.']],
+ done:'Got it',alt:'Invite Pedro to Parrlo',
+ eb:'Reference · batch 2 · chat-whatsapp · C-10 · dark theme only',
+ h1:'Won’t get another app? Let them stay on WhatsApp.',
+ intro:'You write in Parrlo in English, and the other person gets the translation on WhatsApp, like any other message. A copy stays in Parrlo, so the whole conversation lives in one place.',
+ capB:'Send via WhatsApp',capS:'Main frame. The translation is ready and the system Share sheet is open: just pick WhatsApp and the chat with Pedro. Draft copy.',
+ what:['<b>“via WhatsApp” label</b> in the chat header and the preview: before sending, you know where the message goes.','<b>“Translation ready” card</b> with the “Send via WhatsApp” button, above the system Share sheet.','<b>A copy in Parrlo</b>: your text, then “Sent in Spanish”, and the note “Sent via WhatsApp”.','<b>Reply from the clipboard</b>: “Paste Pedro’s reply” drops the message into the chat, translated, labeled “From WhatsApp · pasted”.'],
+ stH:'States',stL:'Five moments in one chat. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-whatsapp--&lt;state&gt;--en.png</code>; the main frame is <code>chat-whatsapp--en.png</code>.',
+ st:{compose:['Writing to someone without Parrlo','Pedro isn’t on Parrlo: the header and the preview say “via WhatsApp”, and the preview shows what he’ll read.'],
+  'send-via':['Send via WhatsApp','After tapping send: the translation is ready and the Share sheet opens; I pick WhatsApp.'],
+  'copy-kept':['The copy stays in Parrlo','Back from WhatsApp: the chat shows my text, what went out in Spanish, and “Sent via WhatsApp”.'],
+  'reply-paste':['Reply pasted','I copied Pedro’s reply in WhatsApp and tapped “Paste reply”: it’s in the chat, translated, with the original.'],
+  how:['How it works','Tap the “i” in the header or the “via WhatsApp” label: three steps and an invite to Parrlo.']},
+ moreH:'Decisions, tokens, open questions',decH:'Decisions beyond the current build',
+ dec:['<b>The channel shows up front</b>: “not on Parrlo · via WhatsApp” in the header and a label in the preview, so sending holds no surprises.','<b>The “Translation ready” card stays above the Share sheet</b>: you see what goes out while you pick WhatsApp.','<b>A generic Share sheet</b>, as in <code>translate-share</code>: grey circles; WhatsApp only as a caption under a circle; Parrlo with its own icon as the source.','<b>The copy has no read ticks</b>: Parrlo can’t see what happens in WhatsApp, so it shows a “sent out” icon and the channel name instead.','<b>“Paste Pedro’s reply”</b> above the field after coming back from WhatsApp; the pasted message is labeled “From WhatsApp · pasted”.','<b>“How it works”</b> sheet with the mascot and an “Invite Pedro to Parrlo” link (goes to <code>chat-guest</code>).'],
+ tokH:'Tokens and contrast',
+ tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code>/<code>#242B34</code>, lines <code>#2F3742</code>.','Own messages: Deep Green <code>#00875C</code> + white, “Sent” block <code>#006E4B</code>; translation and channel label: Mint <code>#BFF2DC</code> on <code>#1E3734</code>; accent <code>#2BC48A</code> + <code>#0E1116</code>.','Yellow only in the Parrlo icon. Touch targets ≥'+N+'44'+N+'pt: channel label 32 inside 44, “Paste reply” 48, sheet rows 56, buttons 52.'],
+ naH:'Not approved',
+ na:['All copy is a draft, including the Spanish and English UI.','Legal: the Privacy Policy doesn’t cover WhatsApp; this screen says nothing about data.','The inventory marks the channel “yes (no server)”; the meaning is still unclear, waiting on the Chat manager.','Pasting a reply: the button and the “From WhatsApp · pasted” label are new; screens 49 and 50 of the build don’t show this.','Whether the “Invite Pedro to Parrlo” link belongs in the explainer.','The system sheet’s name per language (Share / Compartir) follows iOS.'],
+ ct:['Incoming message text','Translation and channel label (Mint)','Channel label on #1E3734','Time and notes on incoming','Own message text','“Sent in …” block','Notes on the background','Notes on the sheet surface','Text and icons on the accent']
+}
+};
+var l=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase();if(!D[l])l='ru';
+var T=D[l];window.CHAT_WHATSAPP_LANG=l;
+
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra,cls){return '<svg viewBox="0 0 24 24" '+(extra||SW)+(cls?' class="'+cls+'"':'')+' aria-hidden="true">'+p+'</svg>'}
+var I={
+ back:ic('<path d="M15 5l-7 7 7 7"/>'),
+ more:ic('<circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/>','fill="currentColor"'),
+ info:ic('<circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/>'),
+ tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+ out:ic('<path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v3.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 4 17.5v-9A2.5 2.5 0 0 1 6.5 6H10"/>'),
+ outs:ic('<path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v3.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 4 17.5v-9A2.5 2.5 0 0 1 6.5 6H10"/>',null,'i'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ plus:ic('<path d="M12 5v14M5 12h14"/>'),
+ send:ic('<path d="M12 19V5M6 11l6-6 6 6"/>','fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"'),
+ copy:ic('<rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/>'),
+ save:ic('<path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M4.5 16.5v1a2.5 2.5 0 0 0 2.5 2.5h10a2.5 2.5 0 0 0 2.5-2.5v-1"/>'),
+ paste:ic('<rect x="5" y="4.5" width="14" height="16.5" rx="2.5"/><path d="M9 4.5V4a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 4v.5"/><path d="M9 11h6M9 15h4"/>'),
+ x:ic('<path d="M6 6l12 12M18 6L6 18"/>'),
+ cd:ic('<path d="M6 9l6 6 6-6"/>',null,'cv'),
+ cu:ic('<path d="M6 15l6-6 6 6"/>',null,'cv'),
+ chev:ic('<path d="M9 5l7 7-7 7"/>',null,'i'),
+ check:ic('<path d="M5 12.5l4.5 4.5L19 7.5"/>','fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"'),
+ pen:ic('<path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>'),
+ user:ic('<circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/><path d="M19 4v4M17 6h4"/>')
+};
+var icN=0;
+function chatIcon(){var n='chat-whatsapp-ic'+(icN++);return '<svg viewBox="0 0 1024 1024" aria-label="Parrlo"><defs><linearGradient id="'+n+'b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2F36"/><stop offset="1" stop-color="#1C2026"/></linearGradient><clipPath id="'+n+'c"><rect width="1024" height="1024" rx="228"/></clipPath></defs><g clip-path="url(#'+n+'c)"><rect width="1024" height="1024" fill="url(#'+n+'b)"/><g transform="translate(-10 -40)"><g fill="#fff"><path d="M345 800 L 235 925 L 420 895 Z" stroke="#fff" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><ellipse cx="430" cy="690" rx="165" ry="115" transform="rotate(-28 430 690)" fill="#C9EFDD"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#FFC247"/><circle cx="612" cy="372" r="44" fill="#0E1116"/><circle cx="627" cy="357" r="14" fill="#fff"/></g><circle cx="662" cy="880" r="34" fill="#fff"/><circle cx="750" cy="880" r="34" fill="#fff"/><circle cx="838" cy="880" r="34" fill="#FFC247"/></g></svg>'}
+var MASC='../../brandbook/assets/mascot/mascot-';
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function scr(inner,extra){return '<div class="scr chat-whatsapp-scr">'+sbar+inner+home+(extra||'')+'</div>'}
+function nav(){return '<div class="chat-whatsapp-nav"><span class="chat-whatsapp-ib bk" role="button" aria-label="'+T.aBack+'">'+I.back+'</span><span class="chat-whatsapp-av '+T.ava+'" aria-hidden="true">'+T.ini+'</span><div class="chat-whatsapp-nm"><b>'+T.name+'</b><span>'+I.out+T.sub+'</span></div><span class="chat-whatsapp-ib inf" role="button" aria-label="'+T.aInfo+'">'+I.info+'</span><span class="chat-whatsapp-ib" role="button" aria-label="'+T.aMore+'">'+I.more+'</span></div>'}
+var sys='<div class="chat-whatsapp-sys">'+I.info+'<span>'+T.sys+'</span></div>';
+/* входящее (вставлено из WhatsApp): перевод — основной текст, оригинал по касанию */
+function mi(m,open,cls){
+ var og=open?'<div class="chat-whatsapp-og" lang="'+T.rl+'"><span class="k">'+T.ogK+'</span><span class="v">'+m[1]+'</span></div>':'';
+ return '<div class="chat-whatsapp-m in '+(open?'wide ':'')+(cls||'')+'"><div class="chat-whatsapp-src">'+I.paste+T.src+'</div><span lang="'+T.ul+'">'+m[2]+'</span>'+og+
+  '<div class="chat-whatsapp-ft"><span class="chat-whatsapp-tg" role="button" aria-expanded="'+(open?'true':'false')+'">'+I.tr+(open?T.hide+I.cu:T.trFrom+I.cd)+'</span><span class="chat-whatsapp-tm">'+m[3]+'</span></div></div>'}
+/* исходящее: копия того, что ушло через WhatsApp */
+function mo(m,open,cls){
+ var s=open?'<div class="chat-whatsapp-sent" lang="'+T.rl+'"><span class="k">'+I.tr+T.wentK+'</span><span class="v">'+m[2]+'</span></div>':'';
+ return '<div class="chat-whatsapp-m out '+(open?'wide ':'')+(cls||'')+'"><span>'+m[1]+'</span>'+s+'<div class="chat-whatsapp-of"><span class="via">'+I.out+(open?T.viaFull:T.via)+'</span><span class="dt">· '+m[3]+'</span></div></div>'}
+function msg(i,open,cls){var m=T.th[i];return m[0]==='in'?mi(m,open,cls):mo(m,open,cls)}
+function cmpEmpty(paste){return '<div class="chat-whatsapp-cmp">'+(paste?'<div class="chat-whatsapp-paste"><span class="chat-whatsapp-pb" role="button" aria-label="'+T.aPaste+'">'+I.paste+T.paste+'</span></div>':'')+'<div class="chat-whatsapp-row"><span class="chat-whatsapp-pls" role="button" aria-label="'+T.aPlus+'">'+I.plus+'</span><span class="chat-whatsapp-f"><span class="pl">'+T.ph+'</span></span><span class="chat-whatsapp-go" role="button" aria-label="'+T.aMic+'">'+I.mic+'</span></div></div>'}
+function cmpTyped(){var m=T.th[3];return '<div class="chat-whatsapp-cmp"><div class="chat-whatsapp-pv"><div class="h">'+I.tr+'<span class="lb">'+T.pvL+'</span><span class="chat-whatsapp-chip" role="button" aria-label="'+T.aInfo+'"><span>'+I.out+T.via+I.chev+'</span></span></div><p lang="'+T.rl+'">'+m[2]+'</p></div>'+
+ '<div class="chat-whatsapp-row"><span class="chat-whatsapp-pls" role="button" aria-label="'+T.aPlus+'">'+I.plus+'</span><span class="chat-whatsapp-f"><span>'+m[1]+'<i class="car"></i></span></span><span class="chat-whatsapp-go" role="button" aria-label="'+T.aSend+'">'+I.send+'</span></div></div>'}
+function toast(t){return '<div class="chat-whatsapp-toast" role="status"><i>'+I.check+'</i>'+t+'</div>'}
+
+var S={};
+S.compose=function(){return scr(nav()+'<div class="chat-whatsapp-msgs">'+sys+msg(0)+msg(1)+msg(2,0,'gap')+'</div>'+cmpTyped())};
+S['send-via']=function(){var m=T.th[3];
+ return scr(nav()+'<div class="chat-whatsapp-msgs" style="padding-bottom:508px">'+sys+msg(0)+msg(1)+'</div>'+cmpEmpty(),
+ '<div class="chat-whatsapp-dim"></div>'+
+ '<div class="chat-whatsapp-rdy" style="bottom:386px"><div class="h">'+I.tr+'<span>'+T.rdyL+' · '+T.pvL+'</span></div><p lang="'+T.rl+'">'+m[2]+'</p><p class="o">'+T.rdyO2+'</p><div class="chat-whatsapp-btn pr" role="button">'+I.out+T.btn+'</div></div>'+
+ '<div class="chat-whatsapp-ss" role="dialog"><i class="chat-whatsapp-grab"></i>'+
+ '<div class="chat-whatsapp-ssh">'+chatIcon()+'<div><b lang="'+T.rl+'">'+m[2]+'</b><span>'+T.ssS+'</span></div><span class="chat-whatsapp-x" role="button" aria-label="'+T.aClose+'">'+I.x+'</span></div>'+
+ '<div class="chat-whatsapp-apps"><span class="chat-whatsapp-app on" role="button"><i></i><b>WhatsApp</b><u class="chat-whatsapp-tap"></u></span><span class="chat-whatsapp-app"><i></i><em></em></span><span class="chat-whatsapp-app"><i></i><em></em></span><span class="chat-whatsapp-app"><i></i><em></em></span><span class="chat-whatsapp-app"><i></i><em></em></span></div>'+
+ '<div class="chat-whatsapp-grp"><div class="chat-whatsapp-gr">'+T.ssActs[0]+I.copy+'</div><div class="chat-whatsapp-gr">'+T.ssActs[1]+I.save+'</div></div>'+home+'</div>')};
+S['copy-kept']=function(){return scr(nav()+'<div class="chat-whatsapp-msgs">'+msg(0)+msg(1)+msg(2,0,'gap')+msg(3,1,'gap hl')+'</div>'+cmpEmpty(1),toast(T.toastKept))};
+S['reply-paste']=function(){return scr(nav()+'<div class="chat-whatsapp-msgs">'+msg(1)+msg(2,0,'gap')+msg(3,0,'gap')+msg(4,1,'gap hl')+'</div>'+cmpEmpty(),toast(T.toastPaste))};
+S.how=function(){
+ var st=T.steps.map(function(s,i){return '<div class="chat-whatsapp-st"><span class="n">'+[I.pen,I.out,I.paste][i]+'</span><div><p class="num">'+(i+1)+'</p><b>'+s[0]+'</b><span>'+s[1]+'</span></div></div>'}).join('');
+ return scr(nav()+'<div class="chat-whatsapp-msgs">'+msg(1)+msg(2,0,'gap')+msg(3,0,'gap')+'</div>'+cmpEmpty(),
+ '<div class="chat-whatsapp-dim"></div><div class="chat-whatsapp-sh" role="dialog" aria-label="'+T.shT+'"><div class="chat-whatsapp-grab" style="margin:0 auto 12px"></div>'+
+ '<div class="chat-whatsapp-shh"><img src="'+MASC+'think-dark.svg" alt=""><div><h4>'+T.shT+'</h4><p>'+T.shS+'</p></div><span class="chat-whatsapp-shx" role="button" aria-label="'+T.aClose+'"><i>'+I.x+'</i></span></div>'+
+ '<div class="chat-whatsapp-steps">'+st+'</div>'+
+ '<div class="chat-whatsapp-cta" role="button">'+T.done+'</div><div class="chat-whatsapp-alt" role="button">'+I.user+T.alt+'</div><div style="height:38px"></div></div>')};
+window.CHAT_WHATSAPP_S=S;
+
+/* ===== страница ===== */
+document.documentElement.lang=T.htmlLang;document.title=T.docTitle;
+function $(id){return document.getElementById('chat-whatsapp-'+id)}
+$('lng').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" hreflang="'+k+'" class="'+(k===l?'on':'')+'"'+(k===l?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+$('eb').textContent=T.eb;$('h1').textContent=T.h1;$('intro').textContent=T.intro;
+$('capb').textContent=T.capB;$('caps').textContent=T.capS;
+$('what').innerHTML=T.what.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('sth').textContent=T.stH;$('stl').innerHTML=T.stL;
+var order=['compose','send-via','copy-kept','reply-paste','how'];window.CHAT_WHATSAPP_ORDER=order;
+$('grid').innerHTML=order.map(function(k){return '<div class="chat-whatsapp-card"><div class="pf p67" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+T.st[k][0]+' <code>'+k+'</code></h3><p>'+T.st[k][1]+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=S[p.dataset.state]()});
+$('moreh').textContent=T.moreH;$('dech').textContent=T.decH;$('tokh').textContent=T.tokH;$('nah').textContent=T.naH;
+$('dec').innerHTML=T.dec.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('tok').innerHTML=T.tok.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('na').innerHTML=T.na.map(function(x){return '<li>'+x+'</li>'}).join('');
+
+function Lu(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+var pairs=[['#F2F5F7','#242B34'],['#BFF2DC','#242B34'],['#BFF2DC','#1E3734'],['#9AA4B2','#242B34'],['#FFFFFF','#00875C'],['#FFFFFF','#006E4B'],['#9AA4B2','#0E1116'],['#9AA4B2','#1C2026'],['#0E1116','#2BC48A']];
+$('ct').innerHTML=pairs.map(function(r,i){return '<tr><td><span class="chat-whatsapp-sw" style="background:'+r[0]+'"></span><span class="chat-whatsapp-sw" style="background:'+r[1]+'"></span>'+T.ct[i]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_WHATSAPP_MIN=Math.min.apply(null,pairs.map(function(r){return cr(r[0],r[1])}));
+})();
+</script>
+</body>
+</html>
