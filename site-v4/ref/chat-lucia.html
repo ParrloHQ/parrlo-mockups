@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · Lucía</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.chat-lucia-w{max-width:1200px;margin:0 auto}
+.chat-lucia-lng{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-lucia-lng a{min-width:52px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#C9D1DA;text-decoration:none;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-lucia-lng a.on{background:#2BC48A;color:#0E1116;box-shadow:none}
+.chat-lucia-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-lucia-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-lucia-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-lucia-tag{display:inline-block;margin:0 0 12px;font:700 13px/1.3 Inter;color:#0E1116;background:#BFF2DC;border-radius:8px;padding:6px 10px}
+.chat-lucia-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-lucia-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-lucia-info ul,.chat-lucia-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-lucia-info li,.chat-lucia-sec li{margin:6px 0}
+.chat-lucia-w b{color:#F2F5F7;font-weight:600}
+.chat-lucia-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7;overflow-wrap:anywhere}
+.chat-lucia-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-lucia-lead{color:#9AA4B2;margin:0 0 32px;max-width:760px}
+.chat-lucia-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:40px 24px;justify-items:center}
+.chat-lucia-card{width:273px}
+.chat-lucia-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.chat-lucia-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-lucia-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+.chat-lucia-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 40px}
+.chat-lucia-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-lucia-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-lucia-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-lucia-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-lucia-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-lucia-hero .pf{--s:.78!important}.chat-lucia-info h1{font-size:30px}.chat-lucia-hero{gap:24px}}
+
+/* ======= экран 430×932 ======= */
+.chat-lucia-scr{overflow:hidden}
+.chat-lucia-scr svg{display:block}
+.chat-lucia-nav{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 4px;border-bottom:1px solid var(--line)}
+.chat-lucia-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-lucia-ib svg{width:24px;height:24px}
+.chat-lucia-ib.bk{color:var(--acc)}.chat-lucia-ib.bk svg{width:28px;height:28px}
+.chat-lucia-nm{flex:1;min-width:0;padding-left:4px}
+.chat-lucia-nm b{display:flex;align-items:center;gap:6px;font:600 17px/22px Inter}
+.chat-lucia-nm span.s{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-lucia-nm span.s.on{color:var(--acc)}
+.chat-lucia-end{flex:none;height:44px;display:flex;align-items:center}
+.chat-lucia-end span{height:34px;border-radius:17px;background:var(--sf2);display:flex;align-items:center;padding:0 14px;font:600 14px/1 Inter;color:var(--tx)}
+
+/* аватар-инициалы и плашка «ИИ» */
+.chat-lucia-av{display:block;position:relative;width:40px;height:40px;border-radius:50%;background:#F4B183;color:#0E1116;font:900 18px/40px Nunito,Inter;text-align:center;flex:none}
+.chat-lucia-av.p{background:#9CC9F5}
+.chat-lucia-av.v{background:#F4B183}
+.chat-lucia-av.l{background:#9CC9F5}
+.chat-lucia-av .chat-lucia-ai{position:absolute;left:50%;bottom:-7px;transform:translateX(-50%)}
+.chat-lucia-av.big{width:56px;height:56px;font-size:24px;line-height:56px}
+.chat-lucia-av.xl{width:104px;height:104px;font-size:46px;line-height:104px}
+.chat-lucia-av.xl .chat-lucia-ai{bottom:-8px;height:24px;padding:0 9px;font-size:13px;border-radius:8px}
+.chat-lucia-ai{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:6px;background:#2F3742;color:#F2F5F7;font:700 11px/1 Inter;letter-spacing:.04em;white-space:nowrap;box-shadow:0 0 0 2px var(--bg)}
+.chat-lucia-nm .chat-lucia-ai,.chat-lucia-pc .n .chat-lucia-ai,.chat-lucia-in h4 .chat-lucia-ai{box-shadow:none}
+.chat-lucia-av .chat-lucia-ai{height:16px;padding:0 5px;font-size:10px;border-radius:5px}
+
+/* лента */
+.chat-lucia-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px}
+.chat-lucia-sc{align-self:stretch;display:flex;gap:12px;align-items:flex-start;border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:12px 14px;margin-bottom:auto}
+.chat-lucia-sc .i{width:36px;height:36px;border-radius:50%;background:var(--sf2);color:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-lucia-sc .i svg{width:20px;height:20px}
+.chat-lucia-sc .k{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec)}
+.chat-lucia-sc b{display:block;font:700 16px/22px Inter}
+.chat-lucia-sc span.d{display:block;font-size:14px;line-height:20px;color:var(--sec);margin-top:2px}
+.chat-lucia-m{position:relative;max-width:82%;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px}
+.chat-lucia-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px;padding-bottom:0}
+.chat-lucia-m.wide{width:82%}
+.chat-lucia-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.chat-lucia-gap{margin-top:8px}
+.chat-lucia-t{margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.3);font-size:15px;line-height:20px}
+.chat-lucia-t .k{display:flex;align-items:center;gap:6px;font:600 12px/16px Inter;margin-bottom:2px}
+.chat-lucia-t .k svg{width:14px;height:14px}
+.chat-lucia-tm{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;line-height:16px;margin-top:2px}
+.chat-lucia-tm svg{width:16px;height:16px}
+.chat-lucia-ft{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin:0 -12px;padding:0 12px}
+.chat-lucia-tg{display:flex;align-items:center;gap:6px;min-height:44px;font:600 13px/18px Inter;color:var(--mint);white-space:nowrap}
+.chat-lucia-tg svg{width:16px;height:16px;flex:none}
+.chat-lucia-tg svg.cv{width:14px;height:14px}
+.chat-lucia-ft .chat-lucia-tm{margin:0;flex:none;color:var(--sec)}
+.chat-lucia-og{margin:8px 0 0;border-radius:12px;background:var(--sf);border-left:3px solid var(--mint);padding:8px 12px 10px}
+.chat-lucia-og .k{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin-bottom:2px}
+.chat-lucia-og .v{display:block;font-size:17px;line-height:24px;color:var(--tx);font-weight:500}
+.chat-lucia-ty{align-self:flex-start;display:flex;align-items:center;gap:8px}
+.chat-lucia-ty .b{height:36px;border-radius:18px;border-bottom-left-radius:6px;background:var(--sf2);display:flex;align-items:center;gap:4px;padding:0 14px}
+.chat-lucia-ty .b i{width:7px;height:7px;border-radius:50%;background:var(--sec)}
+.chat-lucia-ty .b i:nth-child(2){opacity:.7}.chat-lucia-ty .b i:nth-child(3){opacity:.45}
+.chat-lucia-ty span.l{font-size:13px;line-height:18px;color:var(--sec)}
+
+/* подсказка «Как сказать проще» */
+.chat-lucia-hc{align-self:flex-end;width:88%;border-radius:20px;background:var(--sf);box-shadow:inset 0 0 0 1.5px var(--mint);padding:4px 4px 14px 14px}
+.chat-lucia-hc .h{display:flex;align-items:center;gap:8px;min-height:44px}
+.chat-lucia-hc .h svg.b{width:20px;height:20px;color:var(--mint);flex:none}
+.chat-lucia-hc .h b{flex:1;font:700 15px/20px Inter;color:var(--mint)}
+.chat-lucia-hc .h .chat-lucia-ib{color:var(--sec)}
+.chat-lucia-hc .h .chat-lucia-ib svg{width:20px;height:20px}
+.chat-lucia-hc .body{padding-right:10px}
+.chat-lucia-hc .es{font:600 20px/27px Inter;color:var(--tx)}
+.chat-lucia-hc .tr{font-size:15px;line-height:21px;color:var(--sec);margin-top:2px}
+.chat-lucia-hc .why{font-size:14px;line-height:20px;color:var(--sec);margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.chat-lucia-hc .acts{display:flex;gap:8px;margin-top:12px}
+.chat-lucia-pri{height:52px;border-radius:26px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;gap:8px;font:900 18px/1 Nunito,sans-serif;white-space:nowrap}
+.chat-lucia-pri svg{width:20px;height:20px}
+.chat-lucia-hc .chat-lucia-pri{flex:1.5;height:44px;font-size:16px;min-width:0}
+.chat-lucia-sec2{height:52px;border-radius:26px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;font:600 16px/1 Inter;white-space:nowrap}
+.chat-lucia-sec2 svg{width:20px;height:20px;color:var(--sec)}
+.chat-lucia-hc .chat-lucia-sec2{flex:1;height:44px;font-size:15px;min-width:0}
+.chat-lucia-hl{align-self:flex-end;display:flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;background:rgba(191,242,220,.12);color:var(--mint);font:600 13px/1 Inter;margin-top:-2px}
+.chat-lucia-hl svg{width:16px;height:16px}
+
+/* поле ввода */
+.chat-lucia-cmp{flex:none;border-top:1px solid var(--line);padding:8px 12px 0;background:var(--bg)}
+.chat-lucia-row{display:flex;align-items:flex-end;gap:8px}
+.chat-lucia-f{flex:1;min-width:0;min-height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:10px 16px;font-size:16px;line-height:22px;color:var(--sec);white-space:nowrap;overflow:hidden}
+.chat-lucia-f span{overflow:hidden;text-overflow:ellipsis}
+.chat-lucia-go{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-lucia-go svg{width:22px;height:22px}
+.chat-lucia-hb{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--mint);flex:none;background:var(--sf2)}
+.chat-lucia-hb svg{width:22px;height:22px}
+
+/* выбор собеседника */
+.chat-lucia-pk{flex:1;min-height:0;display:flex;flex-direction:column;padding:4px 16px 12px}
+.chat-lucia-pk h4{margin:0;font:900 34px/40px Nunito,sans-serif}
+.chat-lucia-pk .lead{margin:4px 0 0;color:var(--sec);font-size:16px;line-height:22px}
+.chat-lucia-lb{font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin:24px 0 10px}
+.chat-lucia-pcs{display:flex;gap:12px}
+.chat-lucia-pc{position:relative;flex:1;min-width:0;border-radius:20px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:16px 14px 14px}
+.chat-lucia-pc.on{box-shadow:inset 0 0 0 2px var(--acc)}
+.chat-lucia-pc .ck{position:absolute;right:12px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center}
+.chat-lucia-pc .ck svg{width:15px;height:15px}
+.chat-lucia-pc .n{display:flex;align-items:center;gap:6px;margin-top:16px;font:700 17px/22px Inter}
+.chat-lucia-pc .r{display:block;font:600 13px/18px Inter;color:var(--mint);margin-top:2px}
+.chat-lucia-pc p{margin:6px 0 0;font-size:14px;line-height:20px;color:var(--sec)}
+.chat-lucia-sits{display:flex;flex-direction:column;gap:8px}
+.chat-lucia-si{min-height:64px;border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;gap:12px;padding:10px 14px}
+.chat-lucia-si.on{box-shadow:inset 0 0 0 2px var(--acc)}
+.chat-lucia-si .i{width:40px;height:40px;border-radius:50%;background:var(--sf2);color:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-lucia-si .i svg{width:22px;height:22px}
+.chat-lucia-si .t{flex:1;min-width:0}
+.chat-lucia-si .t b{display:block;font:600 16px/22px Inter}
+.chat-lucia-si .t span{display:block;font-size:14px;line-height:19px;color:var(--sec)}
+.chat-lucia-si>svg{flex:none;width:20px;height:20px;color:var(--sec)}
+.chat-lucia-si.on>svg{color:var(--acc)}
+.chat-lucia-nt{display:flex;gap:8px;margin:auto 0 12px;padding-top:16px;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-lucia-nt svg{flex:none;width:16px;height:16px;margin-top:1px}
+
+/* первая встреча */
+.chat-lucia-in{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;padding:28px 20px 12px;text-align:center}
+.chat-lucia-in h4{margin:24px 0 4px;font:900 30px/36px Nunito,sans-serif;display:flex;align-items:center;gap:8px}
+.chat-lucia-in h4 .chat-lucia-ai{height:24px;padding:0 8px;font-size:13px;border-radius:8px}
+.chat-lucia-in .lead{margin:0;color:var(--sec);font-size:16px;line-height:22px;max-width:360px}
+.chat-lucia-hon{align-self:stretch;display:flex;gap:12px;text-align:left;margin-top:24px;border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1.5px var(--mint);padding:14px 16px}
+.chat-lucia-hon svg{flex:none;width:22px;height:22px;color:var(--mint);margin-top:1px}
+.chat-lucia-hon b{display:block;font:700 16px/22px Inter}
+.chat-lucia-hon span{display:block;font-size:14px;line-height:20px;color:var(--sec);margin-top:2px}
+.chat-lucia-how{align-self:stretch;display:flex;flex-direction:column;gap:14px;text-align:left;margin-top:20px;padding:0 4px}
+.chat-lucia-how div{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:21px}
+.chat-lucia-how .i{width:36px;height:36px;border-radius:50%;background:var(--sf2);color:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-lucia-how .i svg{width:18px;height:18px}
+.chat-lucia-how span{padding-top:7px}
+.chat-lucia-bt{align-self:stretch;margin-top:auto;display:flex;flex-direction:column;gap:8px}
+
+/* итог */
+.chat-lucia-sum{flex:1;min-height:0;display:flex;flex-direction:column;padding:20px 16px 12px}
+.chat-lucia-sum .top{display:flex;align-items:center;gap:14px}
+.chat-lucia-sum .top .c{width:48px;height:48px;border-radius:50%;background:rgba(43,196,138,.16);color:var(--acc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-lucia-sum .top .c svg{width:26px;height:26px}
+.chat-lucia-sum .top .k{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec)}
+.chat-lucia-sum .top b{display:block;font:900 26px/32px Nunito,sans-serif}
+.chat-lucia-sum .lead{margin:12px 0 0;color:var(--sec);font-size:15px;line-height:21px}
+.chat-lucia-ph{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.chat-lucia-pr{display:flex;align-items:center;gap:12px;border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:12px 8px 12px 16px}
+.chat-lucia-pr .n{width:28px;height:28px;border-radius:50%;background:var(--sf2);color:var(--tx);font:800 14px/28px Nunito,Inter;text-align:center;flex:none;align-self:flex-start;margin-top:2px}
+.chat-lucia-pr .t{flex:1;min-width:0}
+.chat-lucia-pr .es{display:block;font:600 18px/25px Inter;color:var(--tx)}
+.chat-lucia-pr .tr{display:block;font-size:14px;line-height:20px;color:var(--mint);margin-top:2px}
+.chat-lucia-pr .ib{width:44px;height:44px;border-radius:50%;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-lucia-pr .ib svg{width:20px;height:20px}
+.chat-lucia-sum .chat-lucia-bt{margin-top:auto}
+.chat-lucia-by{display:flex;flex-direction:column;margin-top:20px}
+.chat-lucia-sum .lead{margin-top:20px}
+</style>
+</head>
+<body>
+<div class="chat-lucia-w">
+<nav class="chat-lucia-lng" id="chat-lucia-lng" aria-label="Language"></nav>
+
+<section class="chat-lucia-hero">
+ <div><div class="pf p67" style="--s:1" data-state="chat" id="chat-lucia-hero"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b id="chat-lucia-capb"></b><span id="chat-lucia-caps"></span></div></div></div>
+ <div class="chat-lucia-info">
+  <p class="chat-lucia-eb" id="chat-lucia-eb"></p>
+  <span class="chat-lucia-tag" id="chat-lucia-tag"></span>
+  <h1 id="chat-lucia-h1"></h1>
+  <p id="chat-lucia-intro"></p>
+  <ul id="chat-lucia-what"></ul>
+ </div>
+</section>
+
+<h2 class="chat-lucia-h2" id="chat-lucia-sth"></h2>
+<p class="chat-lucia-lead" id="chat-lucia-stl"></p>
+<div class="chat-lucia-grid" id="chat-lucia-grid"></div>
+
+<h2 class="chat-lucia-h2" id="chat-lucia-moreh"></h2>
+<div class="chat-lucia-cols">
+ <div class="chat-lucia-sec"><h2 id="chat-lucia-dech"></h2><ul id="chat-lucia-dec"></ul></div>
+ <div class="chat-lucia-sec"><h2 id="chat-lucia-tokh"></h2><table class="chat-lucia-ct" id="chat-lucia-ct"></table><ul style="margin-top:12px" id="chat-lucia-tok"></ul></div>
+ <div class="chat-lucia-sec"><h2 id="chat-lucia-nah"></h2><ul id="chat-lucia-na"></ul></div>
+</div>
+</div>
+
+<script>
+(function(){
+var NB=' ',H='‑';
+/* ===== словарь: все тексты экрана и страницы ===== */
+var D={
+ru:{
+ htmlLang:'ru',docTitle:'Parrlo Chat · Lucía',ai:'ИИ',
+ aBack:'Назад',aMic:'Записать голосовое',aSend:'Отправить',aPlay:'Послушать',aClose:'Скрыть подсказку',aHint:'Как сказать проще',
+ /* собеседники */
+ p1:'Lucía',p1i:'L',p1c:'',p2:'Pablo',p2i:'P',p2c:'p',bl:'es',ul:'ru',
+ p1r:'Бытовые ситуации',p1d:'Разыграет администратора, соседку или продавца',
+ p2r:'Разговорный язык',p2d:'Как говорят на улице, а не в учебнике',
+ pkT:'Практика',pkL:'Потренируйся до настоящего разговора. Собеседники говорят по'+H+'испански, перевод — сверху.',
+ pkWho:'Собеседник',pkSit:'Ситуация с Lucía',
+ sits:[['cup','В кафе','Заказать и попросить счёт'],['key','Снимаю квартиру','Договориться о просмотре и условиях'],['med','У врача','Записаться и рассказать, что беспокоит']],
+ pkNote:'Lucía и Pablo — ИИ'+H+'собеседники, не живые люди.',
+ start:'Начать с Lucía',
+ /* первая встреча */
+ inLead:'ИИ'+H+'собеседник для практики испанского в бытовых ситуациях',
+ honT:'Lucía — ИИ, не живой человек',honS:'Её ответы пишет ИИ. Здесь можно спокойно пробовать и ошибаться.',
+ how:[['tr','Пиши по'+H+'русски — Lucía увидит испанский'],['eye','Её реплики — с переводом сверху, оригинал по касанию'],['bulb','«Как сказать проще» — короткий вариант твоей фразы']],
+ inGo:'Понятно, начнём',inAlt:'Выбрать другую ситуацию',
+ /* чат */
+ sub:'Практика · снимаю квартиру',subTy:'печатает…',endB:'Завершить',
+ scK:'Ситуация',scT:'Снимаю квартиру',scD:'Lucía — хозяйка, ты пишешь по объявлению.',
+ trFrom:'Перевод с испанского',trHide:'Скрыть оригинал',ogK:'Оригинал · испанский',sees:'Lucía видит',
+ m0u:'Привет! Пишу по объявлению о квартире.',m0b:'¡Hola! Te escribo por el anuncio del piso.',
+ l1b:'¡Hola! Sí, el piso sigue libre. ¿Cuándo quieres verlo?',l1u:'Привет! Да, квартира ещё свободна. Когда хочешь посмотреть?',
+ m1u:'Можно завтра вечером? И коммуналка входит в цену?',m1b:'¿Puedo ir mañana por la tarde? ¿Y los gastos están incluidos?',
+ l2b:'Mañana a las seis me va bien. El agua está incluida; la luz y el gas, no.',l2u:'Завтра в шесть мне удобно. Вода входит, а свет и газ — нет.',
+ ph:'Ответь по'+H+'русски',
+ /* подсказка */
+ m2u:'Хотелось бы уточнить, можно ли заключить договор аренды на длительный срок?',m2b:'Quería preguntar si es posible firmar un contrato de alquiler de larga duración.',
+ hT:'Как сказать проще',hB:'¿Puedo alquilarlo por un año?',hU:'Можно снять на год?',
+ hWhy:'Короче и легче сказать вслух. Смысл тот же.',hUse:'Ответить так',hHide:'Скрыть',
+ /* итог */
+ eK:'Практика окончена',eT:'Снимаю квартиру',eL:'Три фразы с Lucía, которые стоит запомнить:',
+ ph3:[['¿El piso sigue libre?','Квартира ещё свободна?'],['¿Los gastos están incluidos?','Коммуналка входит в цену?'],['¿Puedo alquilarlo por un año?','Можно снять на год?']],
+ byB:'¡Buena charla! Nos vemos mañana a las seis.',byU:'Хорошо поговорили! Увидимся завтра в шесть.',
+ eGo:'Другая ситуация',eAgain:'Ещё раз с Lucía',
+ /* страница */
+ eb:'Эталон · пачка 2 · chat-lucia · C-08 · только тёмная тема',tagT:'Макет · показывать после подтверждения прода',
+ h1:'Потренируйся до настоящего разговора.',
+ intro:'Lucía разыграет с тобой разговор с администратором, соседкой или продавцом — по'+H+'испански и с переводом. Pablo покажет, как говорят на улице, а не в учебнике. Оба — ИИ, у обоих плашка «ИИ».',
+ capB:'Lucía, «Снимаю квартиру»',capS:'Главный кадр. Lucía пишет по'+H+'испански: сверху перевод, оригинал по касанию. Ты отвечаешь по'+H+'русски, Lucía видит испанский. Тексты — черновик.',
+ what:['<b>Плашка «ИИ»</b> — текстом у имени и на аватаре, в каждом кадре. Это метка собеседника, а не значок‑искра.','<b>Аватар</b> — инициалы на цветном круге, без фото людей.','<b>Входящие</b> — как в переписке (chat-thread): сверху перевод, внизу «Перевод с испанского ⌄», оригинал раскрывается в том же пузыре.','<b>Исходящие</b>: твой текст по'+H+'русски, под чертой — «Lucía видит» и испанский.','<b>Карточка ситуации</b> в начале ленты: кто такая Lucía в этой сцене и зачем ты пишешь.'],
+ stH:'Состояния',stL:'Пять кадров одной практики. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-lucia--&lt;состояние&gt;--ru.png</code>, главный кадр — <code>chat-lucia--ru.png</code>.',
+ st:{pick:['Выбор собеседника','Вход в практику: Lucía и Pablo с плашкой «ИИ» и ситуации Lucía. Выбрано «Снимаю квартиру».'],
+  intro:['Первая встреча','Один раз перед первой практикой: Lucía — ИИ, не живой человек, и как устроен разговор.'],
+  chat:['Снимаю квартиру','Главный кадр. Lucía пишет по'+H+'испански с переводом сверху; ты отвечаешь по'+H+'русски, она видит испанский.'],
+  hint:['Как сказать проще','К твоей длинной фразе: короткий испанский вариант, перевод и «Ответить так».'],
+  end:['Итог практики','После «Завершить»: три фразы из разговора, каждую можно послушать; дальше — другая ситуация.']},
+ moreH:'Решения, токены, открытые вопросы',decH:'Решения сверх сборки',
+ dec:['<b>Карточка ситуации</b> закреплена в начале ленты: роль Lucía и цель разговора — сцена понятна без инструкции.','<b>«Lucía видит»</b> в исходящем: подпись над испанским, чтобы было ясно, что получает собеседник, и испанскую фразу можно подсмотреть.','<b>Оригинал крупнее перевода</b> при раскрытии (17/500): в практике важен испанский текст.','<b>«Как сказать проще»</b> — мятная карточка под твоим сообщением с кнопкой «Ответить так»; вызывается и кнопкой‑лампочкой у поля.','<b>Итог из трёх фраз</b> с кнопкой «Послушать», без баллов и оценок.','<b>Первая встреча</b>: честная плашка «Lucía — ИИ, не живой человек» до первой реплики.','<b>Кнопка «Завершить»</b> в шапке — явный выход к итогу.','Маскот Парло здесь не используется: Lucía — отдельный собеседник, у неё свой аватар.'],
+ tokH:'Токены и контраст',
+ tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>.','Исходящие — Deep Green <code>#00875C</code> + белый; акцент Light Green <code>#2BC48A</code> + <code>#0E1116</code>; перевод и подсказка — Mint <code>#BFF2DC</code>.','Плашка «ИИ» — <code>#F2F5F7</code> на <code>#2F3742</code>, жирный 11 px. Аватары: Lucía <code>#F4B183</code>, Pablo <code>#9CC9F5</code>, буквы <code>#0E1116</code>.','Жёлтый не используется. Зоны нажатия ≥ 44 pt: кнопки 52 и 44, иконки 44×44, строки ситуаций 64.'],
+ naH:'Не утверждено',
+ na:['Все тексты — черновик, включая испанский и английский интерфейс и реплики Lucía.','Выкладка Lucía и Pablo на prod не подтверждена (GAP, строка 22): на сайте — только с пометкой «скоро».','Первая встреча, «Как сказать проще», итог из трёх фраз и «Послушать» — нет в сборке, придуманы для эталона.','Набор ситуаций (кафе, квартира, врач) и их подписи.','<b>es</b>: предложение — ИИ'+H+'собеседники для практики русского, Vera (бытовые ситуации) и Lev (разговорный язык). Имена и сама идея — не утверждены; альтернатива — та же Lucía по'+H+'испански.','Имя Lucía совпадает с демо‑контактом в других экранах Chat; цвет аватара отличается — нужно решение.','Плашка «ИИ» / «IA» / «AI» на аватаре и у имени — форма и цвет.'],
+ ct:['Текст на фоне','Подписи, время, плейсхолдер','Текст на поверхности','Подписи на поверхности','Перевод и подсказка (Mint)','Текст и испанский в исходящем','Плашка «ИИ»','Текст и значки на акценте','Акцент: «печатает…», выбранная ситуация','Буква на аватаре Lucía','Буква на аватаре Pablo','«Перевод с испанского» во входящем','Время во входящем']
+},
+es:{
+ htmlLang:'es',docTitle:'Parrlo Chat · Vera',ai:'IA',
+ aBack:'Atrás',aMic:'Grabar audio',aSend:'Enviar',aPlay:'Escuchar',aClose:'Ocultar sugerencia',aHint:'Más fácil de decir',
+ p1:'Vera',p1i:'V',p1c:'v',p2:'Lev',p2i:'L',p2c:'l',bl:'ru',ul:'es',
+ p1r:'Situaciones del día a día',p1d:'Hace de recepcionista, vecina o dependienta',
+ p2r:'Ruso coloquial',p2d:'Cómo se habla en la calle, no en los libros',
+ pkT:'Práctica',pkL:'Practica antes de la conversación de verdad. Hablan en ruso, con la traducción arriba.',
+ pkWho:'Con quién',pkSit:'Situación con Vera',
+ sits:[['cup','En la cafetería','Pedir algo y pedir la cuenta'],['key','Alquilar un piso','Quedar para verlo y preguntar condiciones'],['med','En el médico','Pedir cita y contar qué te pasa']],
+ pkNote:'Vera y Lev son interlocutores con IA, no personas reales.',
+ start:'Empezar con Vera',
+ inLead:'Interlocutora con IA para practicar ruso en situaciones cotidianas',
+ honT:'Vera es una IA, no una persona',honS:'Sus respuestas las escribe una IA. Aquí puedes probar y equivocarte con calma.',
+ how:[['tr','Escribe en español: Vera lo leerá en ruso'],['eye','Sus mensajes llevan la traducción arriba; el original, con un toque'],['bulb','«Más fácil de decir»: una versión corta de tu frase']],
+ inGo:'Entendido, empezamos',inAlt:'Elegir otra situación',
+ sub:'Práctica · alquilar un piso',subTy:'escribiendo…',endB:'Terminar',
+ scK:'Situación',scT:'Alquilar un piso',scD:'Vera es la dueña; le escribes por el anuncio.',
+ trFrom:'Traducido del ruso',trHide:'Ocultar original',ogK:'Original · ruso',sees:'Vera ve',
+ m0u:'¡Hola! Te escribo por el anuncio del piso.',m0b:'Привет! Пишу по объявлению о квартире.',
+ l1b:'Привет! Да, квартира ещё свободна. Когда хочешь посмотреть?',l1u:'¡Hola! Sí, el piso sigue libre. ¿Cuándo quieres verlo?',
+ m1u:'¿Puedo ir mañana por la tarde? ¿Y los gastos están incluidos?',m1b:'Можно завтра вечером? И коммуналка входит в цену?',
+ l2b:'Завтра в шесть мне удобно. Вода входит, а свет и газ — нет.',l2u:'Mañana a las seis me va bien. El agua está incluida; la luz y el gas, no.',
+ ph:'Responde en español',
+ m2u:'Quería preguntar si sería posible firmar un contrato de alquiler a largo plazo.',m2b:'Хочу уточнить: можно ли заключить договор аренды на долгий срок?',
+ hT:'Más fácil de decir',hB:'Можно снять на год?',hU:'¿Puedo alquilarlo por un año?',
+ hWhy:'Más corto y fácil de decir en voz alta. Significa lo mismo.',hUse:'Responder así',hHide:'Ocultar',
+ eK:'Práctica terminada',eT:'Alquilar un piso',eL:'Tres frases de tu charla con Vera que vale la pena recordar:',
+ ph3:[['Квартира ещё свободна?','¿El piso sigue libre?'],['Коммуналка входит в цену?','¿Los gastos están incluidos?'],['Можно снять на год?','¿Puedo alquilarlo por un año?']],
+ byB:'Хорошо поговорили! Увидимся завтра в шесть.',byU:'¡Buena charla! Nos vemos mañana a las seis.',
+ eGo:'Otra situación',eAgain:'Otra vez con Vera',
+ eb:'Referencia · lote 2 · chat-lucia · C-08 · solo tema oscuro',tagT:'Maqueta · mostrar cuando se confirme en producción',
+ h1:'Practica antes de la conversación de verdad.',
+ intro:'Propuesta para la interfaz en español: Vera hace contigo de recepcionista, vecina o dependienta, en ruso y con traducción. Lev te enseña el ruso de la calle, no el de los libros. Los dos son IA y llevan la etiqueta «IA».',
+ capB:'Vera, «Alquilar un piso»',capS:'Imagen principal. Vera escribe en ruso: arriba la traducción, el original con un toque. Tú respondes en español y Vera lo ve en ruso. Propuesta sin aprobar; textos provisionales.',
+ what:['<b>Etiqueta «IA»</b> en texto junto al nombre y sobre el avatar, en todas las pantallas. Identifica al interlocutor; no es un icono de destellos.','<b>Avatar</b>: iniciales sobre un círculo de color, sin fotos de personas.','<b>Mensajes recibidos</b>, como en el chat (chat-thread): arriba la traducción, abajo «Traducido del ruso ⌄»; el original se abre en la misma burbuja.','<b>Tus mensajes</b>: tu texto en español y, bajo la línea, «Vera ve» con el ruso.','<b>Tarjeta de situación</b> al principio: quién es Vera en esta escena y para qué le escribes.'],
+ stH:'Estados',stL:'Cinco momentos de una práctica. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-lucia--&lt;estado&gt;--es.png</code>; la imagen principal es <code>chat-lucia--es.png</code>.',
+ st:{pick:['Elegir interlocutor','Entrada a la práctica: Vera y Lev con la etiqueta «IA» y las situaciones de Vera. Elegida: «Alquilar un piso».'],
+  intro:['Primer encuentro','Una vez, antes de la primera práctica: Vera es una IA, no una persona, y cómo funciona la charla.'],
+  chat:['Alquilar un piso','Imagen principal. Vera escribe en ruso con la traducción arriba; tú respondes en español y ella lo ve en ruso.'],
+  hint:['Más fácil de decir','Para tu frase larga: una versión corta en ruso, su traducción y «Responder así».'],
+  end:['Resumen','Tras «Terminar»: tres frases de la charla, cada una con audio; después, otra situación.']},
+ moreH:'Decisiones, tokens y temas abiertos',decH:'Decisiones nuevas respecto a la app',
+ dec:['<b>Tarjeta de situación</b> fija al inicio: el papel de Vera y el objetivo; la escena se entiende sin instrucciones.','<b>«Vera ve»</b> en tus mensajes: una etiqueta sobre el ruso para que quede claro qué recibe y puedas fijarte en la frase.','<b>El original, más grande</b> que la traducción al abrirlo (17/500): en la práctica importa el texto en el otro idioma.','<b>«Más fácil de decir»</b>: tarjeta menta bajo tu mensaje con «Responder así»; también desde la bombilla junto al campo.','<b>Resumen de tres frases</b> con «Escuchar», sin puntos ni notas.','<b>Primer encuentro</b>: aviso claro «Vera es una IA, no una persona» antes del primer mensaje.','<b>Botón «Terminar»</b> en la cabecera: salida clara al resumen.','La mascota Parrlo no aparece: el interlocutor tiene su propio avatar.'],
+ tokH:'Tokens y contraste',
+ tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code>/<code>#242B34</code>, líneas <code>#2F3742</code>.','Mensajes propios: Deep Green <code>#00875C</code> + blanco; acento Light Green <code>#2BC48A</code> + <code>#0E1116</code>; traducción y sugerencia: Mint <code>#BFF2DC</code>.','Etiqueta «IA»: <code>#F2F5F7</code> sobre <code>#2F3742</code>, negrita 11 px. Avatares: Vera <code>#F4B183</code>, Lev <code>#9CC9F5</code>, letras <code>#0E1116</code>.','Sin amarillo. Zonas táctiles ≥ 44 pt: botones de 52 y 44, iconos 44×44, filas de situación de 64.'],
+ naH:'Sin aprobar',
+ na:['<b>Todo el concepto en español</b>: interlocutores con IA para practicar ruso, Vera (día a día) y Lev (coloquial). Nombres e idea sin aprobar; la alternativa es mostrar la misma Lucía en español.','Todos los textos son provisionales, incluidos los mensajes en ruso.','La publicación de Lucía y Pablo en producción no está confirmada (GAP, fila 22): en la web, solo como «próximamente».','Primer encuentro, «Más fácil de decir», resumen de tres frases y «Escuchar»: no existen en la app, se proponen aquí.','Las situaciones (cafetería, piso, médico) y sus descripciones.','Forma y color de la etiqueta «IA» sobre el avatar y junto al nombre.'],
+ ct:['Texto sobre el fondo','Notas, hora, marcador','Texto sobre superficie','Notas sobre superficie','Traducción y sugerencia (Mint)','Texto propio y ruso en tus mensajes','Etiqueta «IA»','Texto e iconos sobre el acento','Acento: «escribiendo…», situación elegida','Letra del avatar de Vera','Letra del avatar de Lev','«Traducido del ruso» en mensajes recibidos','Hora en mensajes recibidos']
+},
+en:{
+ htmlLang:'en',docTitle:'Parrlo Chat · Lucía',ai:'AI',
+ aBack:'Back',aMic:'Record voice message',aSend:'Send',aPlay:'Listen',aClose:'Hide tip',aHint:'Say it simpler',
+ p1:'Lucía',p1i:'L',p1c:'',p2:'Pablo',p2i:'P',p2c:'p',bl:'es',ul:'en',
+ p1r:'Everyday situations',p1d:'Plays a receptionist, neighbor or shop assistant',
+ p2r:'Casual Spanish',p2d:'How people really talk, not how textbooks do',
+ pkT:'Practice',pkL:'Practice before the real conversation. They speak Spanish, with a translation on top.',
+ pkWho:'Partner',pkSit:'Situation with Lucía',
+ sits:[['cup','At a café','Order and ask for the check'],['key','Renting an apartment','Set up a viewing and ask about terms'],['med','At the doctor’s','Book a visit and say what’s wrong']],
+ pkNote:'Lucía and Pablo are AI practice partners, not real people.',
+ start:'Start with Lucía',
+ inLead:'AI practice partner for everyday Spanish',
+ honT:'Lucía is AI, not a real person',honS:'Her replies are written by AI. Try things out and make mistakes; that’s the point.',
+ how:[['tr','Write in English. Lucía sees it in Spanish'],['eye','Her messages show a translation on top; tap for the original'],['bulb','“Say it simpler” gives you a shorter version of your line']],
+ inGo:'Got it, let’s start',inAlt:'Pick another situation',
+ sub:'Practice · renting an apartment',subTy:'typing…',endB:'End',
+ scK:'Situation',scT:'Renting an apartment',scD:'Lucía is the owner; you’re answering her listing.',
+ trFrom:'Translated from Spanish',trHide:'Hide original',ogK:'Original · Spanish',sees:'Lucía sees',
+ m0u:'Hi! I’m writing about your apartment listing.',m0b:'¡Hola! Te escribo por el anuncio del piso.',
+ l1b:'¡Hola! Sí, el piso sigue libre. ¿Cuándo quieres verlo?',l1u:'Hi! Yes, the apartment’s still available. When do you want to see it?',
+ m1u:'Could I come by tomorrow evening? And are utilities included?',m1b:'¿Puedo ir mañana por la tarde? ¿Y los gastos están incluidos?',
+ l2b:'Mañana a las seis me va bien. El agua está incluida; la luz y el gas, no.',l2u:'Tomorrow at six works for me. Water’s included; electricity and gas aren’t.',
+ ph:'Reply in English',
+ m2u:'I wanted to ask whether it would be possible to sign a long-term lease.',m2b:'Quería preguntar si es posible firmar un contrato de alquiler de larga duración.',
+ hT:'Say it simpler',hB:'¿Puedo alquilarlo por un año?',hU:'Can I rent it for a year?',
+ hWhy:'Shorter and easier to say out loud. Same meaning.',hUse:'Reply this way',hHide:'Hide',
+ eK:'Practice done',eT:'Renting an apartment',eL:'Three phrases from your chat with Lucía worth remembering:',
+ ph3:[['¿El piso sigue libre?','Is the apartment still available?'],['¿Los gastos están incluidos?','Are utilities included?'],['¿Puedo alquilarlo por un año?','Can I rent it for a year?']],
+ byB:'¡Buena charla! Nos vemos mañana a las seis.',byU:'Nice chat! See you tomorrow at six.',
+ eGo:'Another situation',eAgain:'Again with Lucía',
+ eb:'Reference · batch 2 · chat-lucia · C-08 · dark theme only',tagT:'Mockup · show once live in production is confirmed',
+ h1:'Practice before the real conversation.',
+ intro:'Lucía plays a receptionist, a neighbor or a shop assistant with you, in Spanish and with a translation. Pablo shows you how people talk on the street, not in textbooks. Both are AI, and both carry an AI label.',
+ capB:'Lucía, “Renting an apartment”',capS:'Hero frame. Lucía writes in Spanish: translation on top, tap for the original. You reply in English and Lucía sees Spanish. Copy is a draft.',
+ what:['<b>AI label</b> in text next to the name and on the avatar, in every frame. It labels the partner; it is not a sparkle icon.','<b>Avatar</b>: initials on a colored circle, no photos of people.','<b>Incoming</b>, as in the conversation screen (chat-thread): translation on top, “Translated from Spanish ⌄” below, original opens in the same bubble.','<b>Outgoing</b>: your English text and, below the line, “Lucía sees” with the Spanish.','<b>Situation card</b> at the start of the thread: who Lucía is in this scene and why you’re writing.'],
+ stH:'States',stL:'Five moments of one practice session. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-lucia--&lt;state&gt;--en.png</code>; hero frame is <code>chat-lucia--en.png</code>.',
+ st:{pick:['Pick a partner','Entry to practice: Lucía and Pablo with the AI label, plus Lucía’s situations. “Renting an apartment” is selected.'],
+  intro:['First meeting','Once, before the first session: Lucía is AI, not a real person, and how the chat works.'],
+  chat:['Renting an apartment','Hero frame. Lucía writes in Spanish with a translation on top; you reply in English and she sees Spanish.'],
+  hint:['Say it simpler','For your long line: a short Spanish version, its translation and “Reply this way”.'],
+  end:['Session recap','After End: three phrases from the chat, each with audio; then another situation.']},
+ moreH:'Decisions, tokens, open questions',decH:'Beyond the current build',
+ dec:['<b>Situation card</b> pinned at the top: Lucía’s role and your goal, so the scene needs no instructions.','<b>“Lucía sees”</b> on outgoing messages: a label above the Spanish, so it’s clear what she gets and you can glance at the phrase.','<b>Original larger than the translation</b> when opened (17/500): in practice, the Spanish is what matters.','<b>“Say it simpler”</b>: a mint card under your message with “Reply this way”; also from the bulb button by the field.','<b>Three‑phrase recap</b> with Listen, no scores or grades.','<b>First meeting</b>: an honest “Lucía is AI, not a real person” before the first message.','<b>End button</b> in the header: a clear way out to the recap.','No Parrlo mascot here: the partner has an avatar of its own.'],
+ tokH:'Tokens and contrast',
+ tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code>/<code>#242B34</code>, lines <code>#2F3742</code>.','Outgoing: Deep Green <code>#00875C</code> + white; accent Light Green <code>#2BC48A</code> + <code>#0E1116</code>; translation and tip: Mint <code>#BFF2DC</code>.','AI label: <code>#F2F5F7</code> on <code>#2F3742</code>, bold 11 px. Avatars: Lucía <code>#F4B183</code>, Pablo <code>#9CC9F5</code>, letters <code>#0E1116</code>.','No yellow. Tap targets ≥ 44 pt: 52 and 44 buttons, 44×44 icons, 64 situation rows.'],
+ naH:'Not approved',
+ na:['All copy is a draft, including the Spanish and English UI and Lucía’s lines.','Lucía and Pablo going live in production is unconfirmed (GAP, row 22): on the site, only as “coming soon”.','First meeting, “Say it simpler”, the three‑phrase recap and Listen are not in the app; they are proposed here.','The situations (café, apartment, doctor) and their captions.','Spanish UI: proposed AI partners for practicing Russian, Vera and Lev; alternative is the same Lucía in Spanish.','Shape and color of the AI label on the avatar and next to the name.'],
+ ct:['Text on background','Captions, time, placeholder','Text on surface','Captions on surface','Translation and tip (Mint)','Outgoing text and Spanish','AI label','Text and icons on accent','Accent: “typing…”, selected situation','Letter on Lucía’s avatar','Letter on Pablo’s avatar','“Translated from Spanish” on incoming','Time on incoming']
+}};
+
+var l=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase();if(!D[l])l='ru';
+var T=D[l];window.CHAT_LUCIA_LANG=l;
+
+/* ===== иконки: штрих 1,9, скругления ===== */
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra){return '<svg viewBox="0 0 24 24" '+(extra||SW)+' aria-hidden="true">'+p+'</svg>'}
+var I={
+ back:ic('<path d="M15 5l-7 7 7 7"/>'),
+ tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ send:ic('<path d="M12 19V5M6 11l6-6 6 6"/>','fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"'),
+ sendp:ic('<path d="M4.5 12L20 4.5 15.5 20l-3.2-6.8z"/><path d="M12.3 13.2L20 4.5"/>'),
+ x:ic('<path d="M6 6l12 12M18 6L6 18"/>'),
+ check:ic('<path d="M5 12.5l4.5 4.5L19 7.5"/>','fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"'),
+ done:ic('<path d="M2.5 12.5l4 4 8-9"/><path d="M11 15.5l1.5 1.5 9-10"/>'),
+ cd:ic('<path d="M6 9l6 6 6-6"/>').replace('<svg','<svg class="cv"'),
+ cu:ic('<path d="M6 15l6-6 6 6"/>').replace('<svg','<svg class="cv"'),
+ chev:ic('<path d="M9 5l7 7-7 7"/>'),
+ rad:ic('<circle cx="12" cy="12" r="8.5"/>'),
+ radon:ic('<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/>'),
+ bulb:ic('<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/>'),
+ eye:ic('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>'),
+ info:ic('<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/>'),
+ cup:ic('<path d="M4 9h12v4.5a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5z"/><path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3.5v2.5M12 3.5v2.5M3.5 21h13"/>'),
+ key:ic('<circle cx="8" cy="15" r="4.5"/><path d="M11.2 11.8L20 3M16.5 6.5l2.5 2.5M14 9l2 2"/>'),
+ med:ic('<rect x="3.5" y="6.5" width="17" height="13.5" rx="3"/><path d="M9 6.5V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v1.5M12 10v6M9 13h6"/>'),
+ home:ic('<path d="M4 10.5L12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19z"/><path d="M9.5 20.5v-5.5h5v5.5"/>'),
+ spk:ic('<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>'),
+ redo:ic('<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4.5v4h4"/>'),
+ grid:ic('<rect x="4" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8"/>')
+};
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function ai(){return '<span class="chat-lucia-ai" lang="'+T.htmlLang+'">'+T.ai+'</span>'}
+function av(i,c,sz){return '<span class="chat-lucia-av '+(c||'')+' '+(sz||'')+'" aria-hidden="true">'+i+ai()+'</span>'}
+function scr(inner){return '<div class="scr chat-lucia-scr">'+sbar+inner+home+'</div>'}
+function nav(typing,sub,noEnd){return '<div class="chat-lucia-nav"><span class="chat-lucia-ib bk" role="button" aria-label="'+T.aBack+'">'+I.back+'</span><span class="chat-lucia-av '+T.p1c+'" aria-hidden="true">'+T.p1i+'</span>'+
+ '<div class="chat-lucia-nm"><b>'+T.p1+ai()+'</b><span class="s'+(typing?' on':'')+'">'+(typing?T.subTy:(sub||T.sub))+'</span></div>'+
+ (noEnd?'':'<span class="chat-lucia-end" role="button"><span>'+T.endB+'</span></span>')+'</div>'}
+function bareNav(){return '<div class="chat-lucia-nav" style="border-bottom:0"><span class="chat-lucia-ib bk" role="button" aria-label="'+T.aBack+'">'+I.back+'</span></div>'}
+/* входящее: сверху перевод, внизу «Перевод с …»; open — оригинал в том же пузыре */
+function og(b){return '<div class="chat-lucia-og" lang="'+T.bl+'"><span class="k">'+T.ogK+'</span><span class="v">'+b+'</span></div>'}
+function ft(open,tm){return '<div class="chat-lucia-ft"><span class="chat-lucia-tg" role="button" aria-expanded="'+(open?'true':'false')+'">'+I.tr+(open?T.trHide+I.cu:T.trFrom+I.cd)+'</span><span class="chat-lucia-tm">'+tm+'</span></div>'}
+function mi(b,u,tm,cls,open){return '<div class="chat-lucia-m in '+(open?'wide ':'')+(cls||'')+'"><span lang="'+T.ul+'">'+u+'</span>'+(open?og(b):'')+ft(open,tm)+'</div>'}
+function mo(u,b,tm,cls){return '<div class="chat-lucia-m out '+(cls||'')+'"><span lang="'+T.ul+'">'+u+'</span><div class="chat-lucia-t"><span class="k">'+I.eye+T.sees+'</span><span lang="'+T.bl+'">'+b+'</span></div><span class="chat-lucia-tm">'+tm+I.done+'</span></div>'}
+function scene(){return '<div class="chat-lucia-sc"><span class="i">'+I.home+'</span><div><b>'+T.scK+': '+T.scT.toLowerCase()+'</b><span class="d">'+T.scD+'</span></div></div>'}
+function cmp(){return '<div class="chat-lucia-cmp"><div class="chat-lucia-row"><span class="chat-lucia-hb" role="button" aria-label="'+T.aHint+'">'+I.bulb+'</span><span class="chat-lucia-f"><span>'+T.ph+'</span></span><span class="chat-lucia-go" role="button" aria-label="'+T.aMic+'">'+I.mic+'</span></div></div>'}
+
+var S={};
+S.pick=function(){
+ function pc(n,i,c,r,d,on){return '<div class="chat-lucia-pc'+(on?' on':'')+'" role="radio" aria-checked="'+(on?'true':'false')+'">'+(on?'<span class="ck">'+I.check+'</span>':'')+av(i,c,'big')+'<div class="n">'+n+ai()+'</div><span class="r">'+r+'</span><p>'+d+'</p></div>'}
+ return scr(bareNav()+'<div class="chat-lucia-pk"><h4>'+T.pkT+'</h4><p class="lead">'+T.pkL+'</p>'+
+ '<div class="chat-lucia-lb">'+T.pkWho+'</div><div class="chat-lucia-pcs" role="radiogroup">'+pc(T.p1,T.p1i,T.p1c,T.p1r,T.p1d,true)+pc(T.p2,T.p2i,T.p2c,T.p2r,T.p2d,false)+'</div>'+
+ '<div class="chat-lucia-lb">'+T.pkSit+'</div><div class="chat-lucia-sits" role="radiogroup">'+T.sits.map(function(s,k){var on=k===1;return '<div class="chat-lucia-si'+(on?' on':'')+'" role="radio" aria-checked="'+on+'"><span class="i">'+I[s[0]]+'</span><div class="t"><b>'+s[1]+'</b><span>'+s[2]+'</span></div>'+(on?I.radon:I.rad)+'</div>'}).join('')+'</div>'+
+ '<div class="chat-lucia-nt">'+I.info+'<span>'+T.pkNote+'</span></div>'+
+ '<span class="chat-lucia-pri" role="button">'+T.start+'</span></div>')};
+S.intro=function(){return scr(bareNav()+'<div class="chat-lucia-in">'+av(T.p1i,T.p1c,'xl')+'<h4>'+T.p1+ai()+'</h4><p class="lead">'+T.inLead+'</p>'+
+ '<div class="chat-lucia-hon">'+I.info+'<div><b>'+T.honT+'</b><span>'+T.honS+'</span></div></div>'+
+ '<div class="chat-lucia-how">'+T.how.map(function(h){return '<div><span class="i">'+I[h[0]]+'</span><span>'+h[1]+'</span></div>'}).join('')+'</div>'+
+ '<div class="chat-lucia-bt"><span class="chat-lucia-pri" role="button">'+T.inGo+'</span><span class="chat-lucia-sec2" role="button">'+T.inAlt+'</span></div></div>')};
+S.chat=function(){return scr(nav()+'<div class="chat-lucia-msgs">'+scene()+
+ mo(T.m0u,T.m0b,'9:42')+
+ mi(T.l1b,T.l1u,'9:42','chat-lucia-gap')+
+ mo(T.m1u,T.m1b,'9:43')+
+ mi(T.l2b,T.l2u,'9:44','chat-lucia-gap',true)+
+ '</div>'+cmp())};
+S.hint=function(){return scr(nav()+'<div class="chat-lucia-msgs">'+
+ mo(T.m1u,T.m1b,'9:43')+
+ mi(T.l2b,T.l2u,'9:44','chat-lucia-gap')+
+ mo(T.m2u,T.m2b,'9:45','chat-lucia-gap')+
+ '<div class="chat-lucia-hc"><div class="h">'+I.bulb.replace('<svg','<svg class="b"')+'<b>'+T.hT+'</b><span class="chat-lucia-ib" role="button" aria-label="'+T.aClose+'">'+I.x+'</span></div>'+
+ '<div class="body"><div class="es" lang="'+T.bl+'">'+T.hB+'</div><div class="tr" lang="'+T.ul+'">'+T.hU+'</div><div class="why">'+T.hWhy+'</div>'+
+ '<div class="acts"><span class="chat-lucia-sec2" role="button">'+T.hHide+'</span><span class="chat-lucia-pri" role="button">'+I.sendp+T.hUse+'</span></div></div></div>'+
+  '</div>'+cmp())};
+S.end=function(){return scr(nav(false,T.eK,true)+'<div class="chat-lucia-sum"><div class="top"><span class="c">'+I.check+'</span><div><span class="k">'+T.eK+'</span><b>'+T.eT+'</b></div></div>'+
+ '<div class="chat-lucia-by">'+mi(T.byB,T.byU,'9:51','',true)+'</div><p class="lead">'+T.eL+'</p><div class="chat-lucia-ph">'+T.ph3.map(function(p,k){return '<div class="chat-lucia-pr"><span class="n">'+(k+1)+'</span><div class="t"><span class="es" lang="'+T.bl+'">'+p[0]+'</span><span class="tr" lang="'+T.ul+'">'+p[1]+'</span></div><span class="ib" role="button" aria-label="'+T.aPlay+'">'+I.spk+'</span></div>'}).join('')+'</div>'+
+ '<div class="chat-lucia-bt"><span class="chat-lucia-pri" role="button">'+I.grid+T.eGo+'</span><span class="chat-lucia-sec2" role="button">'+I.redo+T.eAgain+'</span></div></div>')};
+window.CHAT_LUCIA_S=S;
+
+/* ===== страница ===== */
+document.documentElement.lang=T.htmlLang;document.title=T.docTitle;
+function $(id){return document.getElementById('chat-lucia-'+id)}
+$('lng').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" hreflang="'+k+'" class="'+(k===l?'on':'')+'"'+(k===l?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+$('eb').textContent=T.eb;$('tag').textContent=T.tagT;$('h1').textContent=T.h1;$('intro').textContent=T.intro;
+$('capb').textContent=T.capB;$('caps').textContent=T.capS;
+$('what').innerHTML=T.what.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('sth').textContent=T.stH;$('stl').innerHTML=T.stL;
+var order=['pick','intro','chat','hint','end'];window.CHAT_LUCIA_ORDER=order;
+$('grid').innerHTML=order.map(function(k){return '<div class="chat-lucia-card"><div class="pf p67" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+T.st[k][0]+' <code>'+k+'</code></h3><p>'+T.st[k][1]+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=S[p.dataset.state]()});
+window.chatLuciaHero=function(k){var h=$('hero');h.dataset.state=k;h.querySelector('.glass').innerHTML=S[k]()};
+$('moreh').textContent=T.moreH;$('dech').textContent=T.decH;$('tokh').textContent=T.tokH;$('nah').textContent=T.naH;
+$('dec').innerHTML=T.dec.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('tok').innerHTML=T.tok.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('na').innerHTML=T.na.map(function(x){return '<li>'+x+'</li>'}).join('');
+
+function Lu(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+var pairs=[['#F2F5F7','#0E1116'],['#9AA4B2','#0E1116'],['#F2F5F7','#1C2026'],['#9AA4B2','#1C2026'],['#BFF2DC','#1C2026'],['#FFFFFF','#00875C'],['#F2F5F7','#2F3742'],['#0E1116','#2BC48A'],['#2BC48A','#1C2026'],['#0E1116','#F4B183'],['#0E1116','#9CC9F5'],['#BFF2DC','#242B34'],['#9AA4B2','#242B34']];
+$('ct').innerHTML=pairs.map(function(r,i){return '<tr><td><span class="chat-lucia-sw" style="background:'+r[0]+'"></span><span class="chat-lucia-sw" style="background:'+r[1]+'"></span>'+T.ct[i]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_LUCIA_MIN=Math.min.apply(null,pairs.map(function(r){return cr(r[0],r[1])}));
+})();
+</script>
+</body>
+</html>

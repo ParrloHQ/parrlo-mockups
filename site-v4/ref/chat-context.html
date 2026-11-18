@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · Объясни контекст</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.chat-context-w{max-width:1200px;margin:0 auto}
+.chat-context-lng{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-context-lng a{min-width:52px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#C9D1DA;text-decoration:none;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-context-lng a.on{background:#2BC48A;color:#0E1116;box-shadow:none}
+.chat-context-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-context-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-context-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-context-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-context-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-context-info ul,.chat-context-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-context-info li,.chat-context-sec li{margin:6px 0}
+.chat-context-w b{color:#F2F5F7;font-weight:600}
+.chat-context-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7;overflow-wrap:anywhere}
+.chat-context-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-context-lead{color:#9AA4B2;margin:0 0 32px;max-width:760px}
+.chat-context-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:40px 24px;justify-items:center}
+.chat-context-card{width:273px}
+.chat-context-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.chat-context-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-context-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+.chat-context-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 40px}
+.chat-context-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-context-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-context-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-context-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-context-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-context-hero .pf{--s:.78!important}.chat-context-info h1{font-size:30px}.chat-context-hero{gap:24px}}
+
+/* ======= экран 430×932 ======= */
+.chat-context-scr{overflow:hidden}
+.chat-context-scr svg{display:block}
+.chat-context-nav{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 4px;border-bottom:1px solid var(--line)}
+.chat-context-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-context-ib svg{width:24px;height:24px}
+.chat-context-ib.bk{color:var(--acc)}.chat-context-ib.bk svg{width:28px;height:28px}
+.chat-context-av{width:40px;height:40px;border-radius:50%;background:#6AA6F5;color:#0E1116;font:800 17px/40px Nunito,Inter;text-align:center;flex:none}
+.chat-context-av.o{background:#E8A0BF}
+.chat-context-nm{flex:1;min-width:0;padding-left:4px}
+.chat-context-nm b{display:block;font:600 17px/22px Inter}
+.chat-context-nm span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-context-lc{flex:none;height:44px;display:flex;align-items:center}
+.chat-context-lc span{height:32px;border-radius:16px;background:var(--sf2);display:flex;align-items:center;gap:6px;padding:0 12px;font:700 13px/1 Inter;letter-spacing:.04em;color:var(--tx)}
+.chat-context-lc svg{width:14px;height:14px;color:var(--sec)}
+
+.chat-context-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px}
+.chat-context-day{align-self:center;font:500 12px/16px Inter;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px;margin-bottom:4px}
+.chat-context-m{position:relative;max-width:80%;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px}
+.chat-context-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px;padding-bottom:0}
+.chat-context-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.chat-context-m.gap{margin-top:8px}
+.chat-context-m.wide{width:80%}
+.chat-context-tm{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;line-height:16px;margin-top:2px}
+.chat-context-tm svg{width:16px;height:16px}
+/* подпись «перевод» внутри входящего */
+.chat-context-ft{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin:0 -12px;padding:0 12px}
+.chat-context-tg{display:flex;align-items:center;gap:6px;min-height:44px;font:600 13px/18px Inter;color:var(--mint);white-space:nowrap}
+.chat-context-tg svg{width:16px;height:16px;flex:none}
+.chat-context-tg svg.cv{width:14px;height:14px;opacity:.9}
+.chat-context-ft .chat-context-tm{margin:0;color:var(--sec);flex:none}
+/* раскрытый оригинал */
+.chat-context-og{margin:8px 0 0;border-radius:12px;background:var(--sf);border-left:3px solid var(--mint);padding:8px 12px 10px}
+.chat-context-og .k{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin-bottom:2px}
+.chat-context-og .v{display:block;font-size:16px;line-height:22px;color:var(--tx)}
+.chat-context-m.hl{box-shadow:0 0 0 2px var(--acc)}
+.chat-context-rd{align-self:flex-end;display:flex;align-items:center;gap:4px;font:500 12px/16px Inter;color:var(--sec);margin:-2px 4px 0 0}
+.chat-context-rd svg{width:16px;height:16px;color:var(--acc)}
+
+/* поле ввода и предпросмотр */
+.chat-context-cmp{flex:none;border-top:1px solid var(--line);padding:8px 12px 0;background:var(--bg)}
+.chat-context-row{display:flex;align-items:flex-end;gap:8px}
+.chat-context-pls{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-context-pls svg{width:26px;height:26px}
+.chat-context-f{flex:1;min-width:0;min-height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:10px 16px;font-size:17px;line-height:22px;color:var(--tx)}
+.chat-context-f .pl{color:var(--sec)}
+.chat-context-f .car{display:inline-block;width:2px;height:20px;background:var(--acc);vertical-align:-4px;margin-left:1px;border-radius:1px}
+.chat-context-go{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-context-go svg{width:22px;height:22px}
+.chat-context-pv{margin:0 0 8px;border-radius:16px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:2px 6px 12px 12px}
+.chat-context-pv .h{display:flex;align-items:center;gap:6px;min-height:44px;font:600 13px/18px Inter;color:var(--sec)}
+.chat-context-pv .h>svg{width:16px;height:16px;color:var(--mint);flex:none}
+.chat-context-pv .h .lb{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-context-pv p{margin:0 6px 0 0;font-size:16px;line-height:22px;color:var(--tx)}
+.chat-context-chip{flex:none;min-height:44px;display:flex;align-items:center}
+.chat-context-chip span{height:32px;border-radius:16px;background:var(--sf2);box-shadow:inset 0 0 0 1px #3A414B;display:flex;align-items:center;gap:6px;padding:0 8px 0 12px;font:600 13px/1 Inter;color:var(--tx);white-space:nowrap}
+.chat-context-chip svg{width:14px;height:14px;color:var(--sec)}
+.chat-context-chip .sp{width:16px;height:16px;color:var(--mint)}
+
+/* затемнение, меню */
+.chat-context-dim{position:absolute;inset:0;background:rgba(9,11,14,.74);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:5}
+.chat-context-dim.s{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(9,11,14,.66)}
+.chat-context-pop{position:absolute;left:16px;right:16px;z-index:6;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.chat-context-pop .chat-context-m{box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.chat-context-mn{width:272px;border-radius:16px;background:var(--sf2);box-shadow:0 16px 40px rgba(0,0,0,.5),inset 0 0 0 1px var(--line);overflow:hidden}
+.chat-context-mn div{min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 16px;font-size:17px;line-height:22px;border-top:1px solid var(--line)}
+.chat-context-mn div:first-child{border-top:0}
+.chat-context-mn div.sep{border-top:6px solid #1A1F25}
+.chat-context-mn svg{width:22px;height:22px;color:var(--sec);flex:none}
+.chat-context-mn div.on svg{color:var(--mint)}
+
+.chat-context-st{display:inline-flex;align-items:center;gap:8px;margin:0 0 16px;padding:6px 12px;border-radius:14px;box-shadow:inset 0 0 0 1px #FFC247;color:#FFC247;font:600 13px/18px Inter}
+.chat-context-st i{width:8px;height:8px;border-radius:50%;background:#FFC247;flex:none}
+/* кнопка «Объясни контекст» под входящим */
+.chat-context-ask{align-self:flex-start;min-height:44px;display:flex;align-items:center;margin:-6px 0 -6px 0}
+.chat-context-ask span{height:34px;border-radius:17px;background:var(--sf);box-shadow:inset 0 0 0 1px #3A414B;display:flex;align-items:center;gap:8px;padding:0 14px 0 10px;font:600 14px/1 Inter;color:var(--tx);white-space:nowrap}
+.chat-context-ask svg{width:18px;height:18px;color:var(--mint);flex:none}
+.chat-context-pk{width:18px;height:18px;flex:none}
+/* лист «Что это значит» */
+.chat-context-sh{position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--sf);border-radius:28px 28px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.45),inset 0 1px 0 var(--line);padding:8px 20px 0}
+.chat-context-gr{width:40px;height:5px;border-radius:3px;background:#3A414B;margin:0 auto 12px}
+.chat-context-shh{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.chat-context-shh .ttl{display:flex;align-items:center;gap:10px;min-width:0}
+.chat-context-shh .ttl .pk{width:36px;height:36px;border-radius:50%;background:#1E3734;color:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-context-shh .ttl .pk svg{width:20px;height:20px}
+.chat-context-shh h4{margin:0;font:900 26px/32px Nunito,sans-serif}
+.chat-context-x{width:44px;height:44px;margin-right:-10px;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-context-x i{width:32px;height:32px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center}
+.chat-context-x svg{width:18px;height:18px}
+.chat-context-q{margin-top:12px;border-radius:16px;background:var(--bg);border-left:3px solid var(--mint);padding:10px 14px 12px}
+.chat-context-q .k{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec)}
+.chat-context-q .v{display:block;margin-top:2px;font:600 18px/24px Inter;color:var(--tx)}
+.chat-context-q .t{display:block;margin-top:2px;font-size:14px;line-height:20px;color:var(--sec)}
+.chat-context-k{display:flex;align-items:center;gap:6px;margin:16px 0 6px;font:600 13px/18px Inter;color:var(--sec)}
+.chat-context-k svg{width:16px;height:16px;color:var(--mint);flex:none}
+.chat-context-p{margin:0;font-size:16px;line-height:22px;color:var(--tx)}
+.chat-context-tn{display:flex;gap:8px}
+.chat-context-tn>span{flex:1;min-width:0;height:40px;border-radius:20px;background:var(--sf2);display:flex;align-items:center;justify-content:center;gap:4px;padding:0 6px;font:500 14px/1 Inter;color:var(--sec);white-space:nowrap}
+.chat-context-tn>span.on{background:#1E3734;box-shadow:inset 0 0 0 1.5px var(--acc);color:var(--mint);font-weight:700}
+.chat-context-tn svg{width:16px;height:16px;flex:none}
+.chat-context-tnn{margin:6px 0 0;font-size:14px;line-height:20px;color:var(--sec)}
+.chat-context-ad{display:flex;align-items:center;gap:12px}
+.chat-context-ad .b{width:56px;height:56px;border-radius:16px;background:#1E3734;box-shadow:inset 0 0 0 1.5px var(--acc);display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+.chat-context-ad .b b{font:900 20px/22px Nunito,sans-serif;color:var(--mint)}
+.chat-context-ad .b span{font:500 12px/14px Inter;color:var(--mint)}
+.chat-context-ad p{margin:0;font-size:15px;line-height:21px;color:var(--tx)}
+.chat-context-rp{border-radius:20px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);padding:12px 12px 12px}
+.chat-context-rp .u{margin-left:auto;max-width:92%;width:fit-content;border-radius:18px;border-bottom-right-radius:6px;background:var(--deep);color:#fff;padding:9px 14px;font:500 16px/22px Inter}
+.chat-context-rp .r{display:flex;align-items:center;gap:6px;margin:10px 2px 0;font:600 12px/16px Inter;color:var(--sec)}
+.chat-context-rp .r svg{width:14px;height:14px;color:var(--mint);flex:none}
+.chat-context-rp .rt{margin:2px 2px 0;font-size:15px;line-height:21px;color:var(--tx)}
+.chat-context-cta{margin-top:12px;height:52px;border-radius:26px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;gap:8px;font:900 18px/1 Nunito,sans-serif}
+.chat-context-cta svg{width:20px;height:20px}
+.chat-context-dc{margin:10px 0 0;font-size:12px;line-height:16px;color:var(--sec);text-align:center}
+</style>
+</head>
+<body>
+<div class="chat-context-w">
+<nav class="chat-context-lng" id="chat-context-lng" aria-label="Language"></nav>
+<section class="chat-context-hero">
+ <div><div class="pf p67" style="--s:1" data-state="explain" id="chat-context-hero"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b id="chat-context-capb"></b><span id="chat-context-caps"></span></div></div></div>
+ <div class="chat-context-info">
+  <p class="chat-context-eb" id="chat-context-eb"></p>
+  <p class="chat-context-st"><i></i><span id="chat-context-stat"></span></p>
+  <h1 id="chat-context-h1"></h1>
+  <p id="chat-context-intro"></p>
+  <ul id="chat-context-what"></ul>
+ </div>
+</section>
+<h2 class="chat-context-h2" id="chat-context-sth"></h2>
+<p class="chat-context-lead" id="chat-context-stl"></p>
+<div class="chat-context-grid" id="chat-context-grid"></div>
+<h2 class="chat-context-h2" id="chat-context-moreh"></h2>
+<div class="chat-context-cols">
+ <div class="chat-context-sec"><h2 id="chat-context-dech"></h2><ul id="chat-context-dec"></ul></div>
+ <div class="chat-context-sec"><h2 id="chat-context-tokh"></h2><table class="chat-context-ct" id="chat-context-ct"></table><ul style="margin-top:12px" id="chat-context-tok"></ul></div>
+ <div class="chat-context-sec"><h2 id="chat-context-nah"></h2><ul id="chat-context-na"></ul></div>
+</div>
+</div>
+<script>
+(function(){
+var NB=' ',H='‑';
+/* ===== словарь: все тексты экрана и страницы ===== */
+var D={
+ru:{
+ htmlLang:'ru',docTitle:'Parrlo Chat · Объясни контекст',today:'Сегодня',
+ name:'Lucía',ini:'L',ava:'',sub:'пишет по'+H+'испански',pair:['ES','RU'],ul:'ru',rl:'es',
+ aBack:'Назад',aMore:'Меню чата',aPair:'Языки чата: испанский и русский',aPlus:'Прикрепить',aMic:'Записать голосовое',aSend:'Отправить',aClose:'Закрыть',
+ ph:'Сообщение',trFrom:'Перевод с испанского',read:'Прочитано',
+ th:[
+  ['in','Por cierto, el martes viene el fontanero a revisar los contadores.','Кстати, во вторник придёт сантехник проверять счётчики.','09:20'],
+  ['out','Спасибо, что предупредила!','09:21'],
+  ['in','¡Hola! Soy Lucía, la del 3.º B. ¿Es tuya la bici del portal?','Привет! Это Lucía из 3'+NB+'«Б». Это твой велосипед в'+NB+'подъезде?','09:38'],
+  ['out','Да, мой. Мешает? Могу убрать','09:40'],
+  ['out','А может, поставим в подъезде стойку для велосипедов? Я могу всё заказать','09:41'],
+  ['in','Mmm… Ya hablaremos, ¿vale?','Хм… Потом поговорим, ладно?','09:52']
+ ],
+ ask:'Объясни контекст',
+ mn:['Оригинал','Объясни контекст','Копировать','Перевод неточный?'],
+ shT:'Что это значит',ogK:'Lucía · по'+H+'испански',
+ mK:'Смысл',mT:'Дословно — «потом поговорим». Так часто мягко откладывают разговор или вежливо отказывают, не говоря «нет» прямо.',
+ tK:'Тон',tones:['Дружеский','Вежливый','Резкий'],tOn:1,tN:'Мягко и немного уклончиво.',
+ aK:'«Ты» или «вы»',aB:['ты','tú'],aT:'Lucía пишет на «ты», как соседям и друзьям. Можешь отвечать так'+NB+'же.',
+ rK:'Как ответить',rU:'Хорошо, без спешки. Когда тебе удобно?',rR:'Lucía прочитает',rRt:'Vale, sin prisa. ¿Cuándo te viene bien?',
+ cta:'Вставить в ответ',dc:'Пояснение может быть неточным',
+ pvL:'Lucía прочитает',chip:'Дружески · на «ты»',aChip:'Как я звучу: дружески, на «ты». Изменить',
+ /* страница */
+ eb:'Эталон · пачка 2 · chat-context · C-16 · макет · только тёмная тема',
+ stat:'Предложение, ждёт „да“ Мурата',
+ h1:'Слова понятны. А что имелось в виду?',
+ intro:'Соседка пишет «ya hablaremos» — это «обсудим потом» или вежливое «нет»? Нажми «Объясни контекст», и Parrlo коротко скажет по'+H+'русски, что стоит за фразой и насколько она тёплая.',
+ capB:'Что это значит',capS:'Главный кадр. Lucía ответила «Ya hablaremos, ¿vale?»; лист объясняет смысл, тон, «ты» или «вы» и предлагает ответ. Тексты — черновик.',
+ what:['<b>Кнопка «Объясни контекст»</b> под входящим, где за словами может стоять больше, чем в переводе; у любого сообщения — в меню.','<b>Лист «Что это значит»</b>: фраза в оригинале, смысл по'+H+'простому, тон по шкале «дружеский / вежливый / резкий», «ты» или «вы».','<b>«Как ответить»</b>: готовая фраза на твоём языке и то, что прочитает собеседник; «Вставить в ответ» кладёт её в поле, отправляешь ты.','Мелкая пометка «Пояснение может быть неточным».'],
+ stH:'Состояния',stL:'Четыре кадра одного чата. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-context--&lt;состояние&gt;--ru.png</code>, главный кадр — <code>chat-context--ru.png</code>.',
+ st:{thread:['Переписка','Lucía ответила уклончиво; под её сообщением — кнопка «Объясни контекст».'],
+  menu:['Меню сообщения','Долгое нажатие на любое входящее: «Оригинал», «Объясни контекст», «Копировать».'],
+  explain:['Что это значит','Смысл фразы, тон, «ты» или «вы» и пример ответа — коротко и по'+H+'русски.'],
+  reply:['Ответ вставлен','После «Вставить в ответ»: фраза в поле, над ним — что прочитает Lucía. Можно поправить и отправить.']},
+ moreH:'Решения, токены, открытые вопросы',decH:'Решения сверх сборки',
+ dec:['<b>Функции нет в сборке</b> (C-16, «предложение»): весь экран — макет по описанию из карты и текстам сайта §4.','<b>Кнопка под пузырём, а не в нём</b>: перевод и подпись «Перевод с …» остаются как в <code>chat-original</code>; кнопка видна только там, где Parrlo замечает идиому или намёк, иначе — в меню.','<b>Значок — монохромный попугай Парло</b> (<code>spark</code> из <code>screens.js</code>), без «искр» и плашек «ИИ».','<b>Тон — шкала из трёх</b>; выбранное отмечено галочкой, рамкой и цветом, не только цветом. Ниже — одна строка оттенка.','<b>«Ты» или «вы»</b> — плитка с формой и её испанским соответствием; совет отвечать в том же обращении.','<b>«Вставить в ответ» не отправляет</b>: фраза идёт в поле с предпросмотром перевода, как обычное сообщение.','Пол собеседника и пользователя в пояснениях не нужен.'],
+ tokH:'Токены и контраст',
+ tok:['Фон <code>#0E1116</code>, лист <code>#1C2026</code>, плитки <code>#242B34</code>, линии <code>#2F3742</code>.','Пояснение — Mint <code>#BFF2DC</code> (значок попугая, полоса оригинала, выбранный тон); исходящие — Deep Green <code>#00875C</code> + белый; кнопка — <code>#2BC48A</code> + <code>#0E1116</code>.','Жёлтый на экране не используется (на странице — только метка статуса). Зоны нажатия ≥ 44 pt: кнопка под сообщением 34 визуально в зоне 44, пункты меню 52, «Вставить в ответ» 52.'],
+ naH:'Не утверждено',
+ na:['Сама функция — предложение, ждёт „да“ Мурата.','Все тексты — черновик, включая испанский и английский интерфейс.','[юрист] Пояснение отправляет переписку в ИИ — дописать Политику §2.3 (<code>gap/chat.md</code>, п. 12).','Когда показывать кнопку под сообщением: только у идиом и намёков или у каждого входящего.','Шкала тона («дружеский / вежливый / резкий») и её названия.','Название: «Объясни контекст» (тексты сайта) или короче — «Объясни».','Пример («ya hablaremos», велосипед в подъезде) — иллюстрация.'],
+ ct:['Перевод во входящем','Подпись «Перевод с …» (Mint)','Время во входящем','Текст листа','Подписи листа','Подписи на фоне','Оригинал в цитате','Выбранный тон (Mint)','Невыбранный тон','Исходящие и пример ответа','Текст на кнопке']
+},
+es:{
+ htmlLang:'es',docTitle:'Parrlo Chat · Explícame el contexto',today:'Hoy',
+ name:'Olga',ini:'O',ava:'o',sub:'escribe en ruso',pair:['RU','ES'],ul:'es',rl:'ru',
+ aBack:'Atrás',aMore:'Menú del chat',aPair:'Idiomas del chat: ruso y español',aPlus:'Adjuntar',aMic:'Grabar audio',aSend:'Enviar',aClose:'Cerrar',
+ ph:'Mensaje',trFrom:'Traducido del ruso',read:'Leído',
+ th:[
+  ['in','Кстати, во вторник придёт сантехник проверять счётчики.','Por cierto, el martes viene el fontanero a revisar los contadores.','09:20'],
+  ['out','¡Gracias por avisar!','09:21'],
+  ['in','Привет! Это Ольга из 3'+NB+'«Б». Это твой велосипед в'+NB+'подъезде?','¡Hola! Soy Olga, la del 3.º'+NB+'B. ¿Es tuya la bici del portal?','09:38'],
+  ['out','Sí, es mía. ¿Molesta? Puedo quitarla','09:40'],
+  ['out','¿Y si ponemos un aparcabicis en el portal? Yo me encargo de pedirlo','09:41'],
+  ['in','Хм… Давай потом обсудим, ладно?','Mmm… Ya lo hablamos, ¿vale?','09:52']
+ ],
+ ask:'Explícame el contexto',
+ mn:['Original','Explícame el contexto','Copiar','¿Traducción incorrecta?'],
+ shT:'Qué significa',ogK:'Olga · en ruso',
+ mK:'Sentido',mT:'Literalmente, «lo hablamos luego». A menudo es una forma suave de aplazar el tema o de decir que no sin decirlo.',
+ tK:'Tono',tones:['Cercano','Cortés','Brusco'],tOn:1,tN:'Suave y un poco evasivo.',
+ aK:'¿Tú o usted?',aB:['tú','ты'],aT:'Olga te habla de «ты», que equivale al tú: así se hablan vecinos y amigos. Puedes responder igual.',
+ rK:'Cómo responder',rU:'Vale, sin prisa. ¿Cuándo te viene bien?',rR:'Olga leerá',rRt:'Хорошо, без спешки. Когда тебе удобно?',
+ cta:'Usar en la respuesta',dc:'La explicación puede no ser exacta',
+ pvL:'Olga leerá',chip:'Cercano · de tú',aChip:'Cómo sueno: cercano, de tú. Cambiar',
+ eb:'Referencia · lote 2 · chat-context · C-16 · maqueta · solo tema oscuro',
+ stat:'Propuesta: pendiente del «sí» de Murat',
+ h1:'Las palabras se entienden. Pero ¿qué quería decir?',
+ intro:'Tu vecina te escribe «давай потом обсудим»: ¿es «lo hablamos luego» o un «no» educado? Toca «Explícame el contexto» y Parrlo te dirá en pocas palabras, en español, qué hay detrás de la frase y qué tan cálida suena.',
+ capB:'Qué significa',capS:'Imagen principal. Olga respondió «Давай потом обсудим, ладно?»; la hoja explica el sentido, el tono y el trato, y propone una respuesta. Textos provisionales.',
+ what:['<b>Botón «Explícame el contexto»</b> bajo el mensaje cuando detrás de las palabras puede haber más de lo que dice la traducción; en cualquier mensaje, desde el menú.','<b>Hoja «Qué significa»</b>: la frase original, su sentido en sencillo, el tono (cercano / cortés / brusco) y si te trata de tú o de usted.','<b>«Cómo responder»</b>: una frase lista en tu idioma y lo que leerá la otra persona; «Usar en la respuesta» la pone en el campo y la envías tú.','Nota pequeña: «La explicación puede no ser exacta».'],
+ stH:'Estados',stL:'Cuatro momentos de un mismo chat. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-context--&lt;estado&gt;--es.png</code>; la imagen principal es <code>chat-context--es.png</code>.',
+ st:{thread:['Conversación','Olga respondió con evasivas; bajo su mensaje aparece «Explícame el contexto».'],
+  menu:['Menú del mensaje','Pulsación larga en cualquier mensaje recibido: «Original», «Explícame el contexto», «Copiar».'],
+  explain:['Qué significa','Sentido de la frase, tono, tú o usted y un ejemplo de respuesta, breve y en español.'],
+  reply:['Respuesta lista','Tras «Usar en la respuesta»: la frase está en el campo y encima, lo que leerá Olga. Puedes retocarla y enviarla.']},
+ moreH:'Decisiones, tokens y temas abiertos',decH:'Decisiones nuevas respecto a la app',
+ dec:['<b>La función no existe en la app</b> (C-16, «propuesta»): toda la pantalla es una maqueta según el mapa y los textos del sitio, §4.','<b>El botón va bajo la burbuja, no dentro</b>: la traducción y el pie «Traducido del …» quedan como en <code>chat-original</code>; el botón solo aparece cuando Parrlo detecta una expresión o un sobrentendido; si no, está en el menú.','<b>Icono: el loro de Parrlo en monocromo</b> (<code>spark</code> de <code>screens.js</code>), sin «chispas» ni etiquetas de IA.','<b>Tono en una escala de tres</b>; la opción marcada lleva visto, borde y color, no solo color. Debajo, una línea con el matiz.','<b>Tú o usted</b>: una ficha con la forma y su equivalente en ruso, y el consejo de responder igual.','<b>«Usar en la respuesta» no envía</b>: la frase va al campo con la vista previa de la traducción, como cualquier mensaje.','Las explicaciones no necesitan el género de nadie.'],
+ tokH:'Tokens y contraste',
+ tok:['Fondo <code>#0E1116</code>, hoja <code>#1C2026</code>, fichas <code>#242B34</code>, líneas <code>#2F3742</code>.','Explicación: Mint <code>#BFF2DC</code> (loro, barra del original, tono elegido); mensajes propios: Deep Green <code>#00875C</code> + blanco; botón: <code>#2BC48A</code> + <code>#0E1116</code>.','Sin amarillo en la pantalla (en la página, solo la etiqueta de estado). Zonas táctiles ≥ 44 pt: botón bajo el mensaje de 34 dentro de una zona de 44, opciones de menú de 52, «Usar en la respuesta» de 52.'],
+ naH:'Sin aprobar',
+ na:['La función es una propuesta, pendiente del «sí» de Murat.','Todos los textos son provisionales, incluidos los de la interfaz en español y en inglés.','[legal] La explicación envía la conversación a la IA: falta completarlo en la Política, §2.3 (<code>gap/chat.md</code>, punto 12).','Cuándo mostrar el botón bajo el mensaje: solo con expresiones y sobrentendidos o en todos los recibidos.','La escala de tono («cercano / cortés / brusco») y sus nombres.','El nombre: «Explícame el contexto» o algo más corto, «Explícamelo».','El ejemplo («давай потом обсудим», la bici del portal) es ilustrativo.'],
+ ct:['Traducción en el mensaje recibido','Pie «Traducido del …» (Mint)','Hora en el mensaje recibido','Texto de la hoja','Notas de la hoja','Notas sobre el fondo','Original en la cita','Tono elegido (Mint)','Tono no elegido','Mensajes propios y ejemplo','Texto del botón']
+},
+en:{
+ htmlLang:'en',docTitle:'Parrlo Chat · Explain context',today:'Today',
+ name:'Lucía',ini:'L',ava:'',sub:'writes in Spanish',pair:['ES','EN'],ul:'en',rl:'es',
+ aBack:'Back',aMore:'Chat menu',aPair:'Chat languages: Spanish and English',aPlus:'Attach',aMic:'Record voice message',aSend:'Send',aClose:'Close',
+ ph:'Message',trFrom:'Translated from Spanish',read:'Read',
+ th:[
+  ['in','Por cierto, el martes viene el fontanero a revisar los contadores.','By the way, the plumber’s coming Tuesday to check the meters.','09:20'],
+  ['out','Thanks for the heads-up!','09:21'],
+  ['in','¡Hola! Soy Lucía, la del 3.º B. ¿Es tuya la bici del portal?','Hi! It’s Lucía from 3B. Is that your bike in the hallway?','09:38'],
+  ['out','Yes, it’s mine. Is it in the way? I can move it','09:40'],
+  ['out','What if we put a bike rack in the hallway? I can order one','09:41'],
+  ['in','Mmm… Ya hablaremos, ¿vale?','Hmm… We’ll talk about it, okay?','09:52']
+ ],
+ ask:'Explain context',
+ mn:['Original','Explain context','Copy','Translation inaccurate?'],
+ shT:'What it means',ogK:'Lucía · Spanish',
+ mK:'Meaning',mT:'Literally “we’ll talk later.” People often say it to put something off, or to say no politely without saying it outright.',
+ tK:'Tone',tones:['Friendly','Polite','Blunt'],tOn:1,tN:'Soft and a little evasive.',
+ aK:'tú or usted?',aB:['tú','casual'],aT:'Lucía uses tú, the casual form for neighbors and friends. You can reply the same way.',
+ rK:'How to reply',rU:'Sure, no rush. When works for you?',rR:'Lucía will read',rRt:'Vale, sin prisa. ¿Cuándo te viene bien?',
+ cta:'Use as reply',dc:'Explanations may not be accurate',
+ pvL:'Lucía will read',chip:'Friendly · tú',aChip:'How I sound: friendly, tú. Change',
+ eb:'Reference · batch 2 · chat-context · C-16 · mockup · dark theme only',
+ stat:'Proposal: waiting for Murat’s yes',
+ h1:'The words make sense. But what did they mean?',
+ intro:'Your neighbor writes “ya hablaremos.” Is that “let’s talk later” or a polite “no”? Tap “Explain context” and Parrlo tells you, briefly and in English, what’s behind the phrase and how warm it sounds.',
+ capB:'What it means',capS:'Main frame. Lucía replied “Ya hablaremos, ¿vale?”; the sheet explains the meaning, tone and tú / usted, and suggests a reply. Draft copy.',
+ what:['<b>An “Explain context” button</b> under incoming messages where there may be more behind the words than the translation shows; on any message, from the menu.','<b>A “What it means” sheet</b>: the original phrase, its meaning in plain words, the tone (friendly / polite / blunt) and tú or usted.','<b>“How to reply”</b>: a ready sentence in your language and what the other person will read; “Use as reply” puts it in the field, and you send it.','A small note: “Explanations may not be accurate.”'],
+ stH:'States',stL:'Four frames of one chat. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-context--&lt;state&gt;--en.png</code>; the main frame is <code>chat-context--en.png</code>.',
+ st:{thread:['Conversation','Lucía gave a vague answer; an “Explain context” button sits under her message.'],
+  menu:['Message menu','Long-press any incoming message: “Original”, “Explain context”, “Copy”.'],
+  explain:['What it means','The meaning, the tone, tú or usted, and a sample reply, short and in English.'],
+  reply:['Reply inserted','After “Use as reply”: the sentence is in the field, with what Lucía will read above it. Edit it or send.']},
+ moreH:'Decisions, tokens, open questions',decH:'Decisions beyond the current build',
+ dec:['<b>Not in the build</b> (C-16, “proposal”): the whole screen is a mockup based on the site map and site copy §4.','<b>The button sits under the bubble, not inside it</b>: the translation and “Translated from …” footer stay as in <code>chat-original</code>; the button shows only where Parrlo spots an idiom or subtext, otherwise it’s in the menu.','<b>Icon: Parrlo’s monochrome parrot</b> (<code>spark</code> from <code>screens.js</code>); no sparkles, no AI badges.','<b>Tone on a three-step scale</b>; the selected step has a check, an outline and color, not color alone. One line of nuance below.','<b>tú or usted</b>: a tile with the form and what it means, plus a tip to reply the same way.','<b>“Use as reply” doesn’t send</b>: the sentence goes into the field with the translation preview, like any message.','No gender needed in explanations, for anyone.'],
+ tokH:'Tokens and contrast',
+ tok:['Background <code>#0E1116</code>, sheet <code>#1C2026</code>, tiles <code>#242B34</code>, lines <code>#2F3742</code>.','Explanation: Mint <code>#BFF2DC</code> (parrot, original bar, selected tone); outgoing: Deep Green <code>#00875C</code> + white; button: <code>#2BC48A</code> + <code>#0E1116</code>.','No yellow on the screen (on the page, only the status tag). Tap targets ≥ 44 pt: 34 pt button under the message inside a 44 pt target, menu items 52, “Use as reply” 52.'],
+ naH:'Not approved',
+ na:['The feature itself is a proposal, waiting for Murat’s yes.','All copy is draft, including the Spanish and English UI.','[legal] Explanations send the conversation to AI: Privacy Policy §2.3 needs an update (<code>gap/chat.md</code>, item 12).','When to show the button under a message: only on idioms and subtext, or on every incoming message.','The tone scale (“friendly / polite / blunt”) and its labels.','The name: “Explain context” or shorter, “Explain”.','The example (“ya hablaremos”, the bike in the hallway) is illustrative.'],
+ ct:['Translation in incoming','“Translated from …” footer (Mint)','Time in incoming','Sheet text','Sheet captions','Captions on background','Original in the quote','Selected tone (Mint)','Unselected tone','Outgoing and sample reply','Button text']
+}
+};
+var l=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase();if(!D[l])l='ru';
+var T=D[l];window.CHAT_CONTEXT_LANG=l;
+
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra,cls){return '<svg viewBox="0 0 24 24" '+(extra||SW)+(cls?' class="'+cls+'"':'')+' aria-hidden="true">'+p+'</svg>'}
+var pkN=0;
+/* попугай Парло — spark из site-v4/screens.js, id маски уникален на странице */
+function pk(){var id='chat-context-pmk'+(pkN++);return '<svg viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="'+id+'" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#'+id+')"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>'}
+var I={
+ back:ic('<path d="M15 5l-7 7 7 7"/>'),
+ more:ic('<circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/>','fill="currentColor"'),
+ tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+ arr:ic('<path d="M5 12h14M14 7l5 5-5 5"/>'),
+ done:ic('<path d="M2.5 12.5l4 4 8-9"/><path d="M11 15.5l1.5 1.5 9-10"/>'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ plus:ic('<path d="M12 5v14M5 12h14"/>'),
+ send:ic('<path d="M12 19V5M6 11l6-6 6 6"/>','fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"'),
+ copy:ic('<rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/>'),
+ orig:ic('<path d="M4 6.5h16M4 11.5h16M4 16.5h9"/><path d="M17 15l2.5 2.5L17 20"/>'),
+ flag:ic('<path d="M5 21V4"/><path d="M5 4.5h11.5l-2 4 2 4H5"/>'),
+ x:ic('<path d="M6 6l12 12M18 6L6 18"/>'),
+ cd:ic('<path d="M6 9l6 6 6-6"/>',null,'cv'),
+ chev:ic('<path d="M9 5l7 7-7 7"/>'),
+ check:ic('<path d="M5 12.5l4.5 4.5L19 7.5"/>','fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"'),
+ bulb:ic('<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>'),
+ tone:ic('<path d="M3 12h2M7 8v8M11 5v14M15 9v6M19 11v2"/>'),
+ who:ic('<circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/>'),
+ rep:ic('<path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/>'),
+ ins:ic('<path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/>'),
+ voice:ic('<path d="M4.5 18.5V7a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6.5a3 3 0 0 1-3 3H8z"/><path d="M8.5 9.5v2M12 8v5M15.5 9.5v2"/>',null,'sp')
+};
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function scr(inner,extra){return '<div class="scr chat-context-scr">'+sbar+inner+home+(extra||'')+'</div>'}
+function nav(){return '<div class="chat-context-nav"><span class="chat-context-ib bk" role="button" aria-label="'+T.aBack+'">'+I.back+'</span><span class="chat-context-av '+T.ava+'" aria-hidden="true">'+T.ini+'</span><div class="chat-context-nm"><b>'+T.name+'</b><span>'+T.sub+'</span></div><span class="chat-context-lc" role="button" aria-label="'+T.aPair+'"><span>'+T.pair[0]+I.arr+T.pair[1]+'</span></span><span class="chat-context-ib" role="button" aria-label="'+T.aMore+'">'+I.more+'</span></div>'}
+/* входящее: перевод — основной текст, оригинал по касанию (как chat-original) */
+function mi(m,cls){
+ return '<div class="chat-context-m in '+(cls||'')+'"><span lang="'+T.ul+'">'+m[2]+'</span>'+
+  '<div class="chat-context-ft"><span class="chat-context-tg" role="button" aria-expanded="false">'+I.tr+T.trFrom+I.cd+'</span><span class="chat-context-tm">'+m[3]+'</span></div></div>'}
+function mo(m,cls){return '<div class="chat-context-m out '+(cls||'')+'"><span>'+m[1]+'</span><span class="chat-context-tm">'+m[2]+I.done+'</span></div>'}
+function msg(i,cls){var m=T.th[i];return m[0]==='in'?mi(m,cls):mo(m,cls)}
+function ask(){return '<div class="chat-context-ask" role="button" aria-label="'+T.ask+'"><span>'+pk()+T.ask+'</span></div>'}
+var day='<div class="chat-context-day">'+T.today+'</div>';
+function cmp(){return '<div class="chat-context-cmp"><div class="chat-context-row"><span class="chat-context-pls" role="button" aria-label="'+T.aPlus+'">'+I.plus+'</span><span class="chat-context-f"><span class="pl">'+T.ph+'</span></span><span class="chat-context-go" role="button" aria-label="'+T.aMic+'">'+I.mic+'</span></div></div>'}
+function cmpTyped(){return '<div class="chat-context-cmp"><div class="chat-context-pv"><div class="h">'+I.tr+'<span class="lb">'+T.pvL+'</span><span class="chat-context-chip" role="button" aria-label="'+T.aChip+'"><span>'+I.voice+T.chip+I.chev+'</span></span></div><p lang="'+T.rl+'">'+T.rRt+'</p></div>'+
+ '<div class="chat-context-row"><span class="chat-context-pls" role="button" aria-label="'+T.aPlus+'">'+I.plus+'</span><span class="chat-context-f"><span>'+T.rU+'<i class="car"></i></span></span><span class="chat-context-go" role="button" aria-label="'+T.aSend+'">'+I.send+'</span></div></div>'}
+function thread(){return day+msg(0)+msg(1)+msg(2,'gap')+msg(3)+msg(4)+msg(5,'gap')+ask()}
+
+var S={};
+S.thread=function(){return scr(nav()+'<div class="chat-context-msgs">'+thread()+'</div>'+cmp())};
+S.menu=function(){return scr(nav()+'<div class="chat-context-msgs">'+thread()+'</div>'+cmp(),
+ '<div class="chat-context-dim"></div><div class="chat-context-pop" style="top:400px">'+msg(5)+
+ '<div class="chat-context-mn" role="menu"><div role="menuitem"><span>'+T.mn[0]+'</span>'+I.orig+'</div><div role="menuitem" class="on"><span>'+T.mn[1]+'</span><span class="chat-context-pk">'+pk()+'</span></div><div role="menuitem"><span>'+T.mn[2]+'</span>'+I.copy+'</div><div role="menuitem" class="sep"><span>'+T.mn[3]+'</span>'+I.flag+'</div></div></div>')};
+S.explain=function(){
+ var tn=T.tones.map(function(t,i){var on=i===T.tOn;return '<span class="'+(on?'on':'')+'">'+(on?I.check:'')+t+'</span>'}).join('');
+ return scr(nav()+'<div class="chat-context-msgs">'+msg(3)+msg(4)+msg(5,'gap')+ask()+'</div>'+cmp(),
+ '<div class="chat-context-dim s"></div><div class="chat-context-sh" role="dialog" aria-label="'+T.shT+'"><div class="chat-context-gr"></div>'+
+ '<div class="chat-context-shh"><div class="ttl"><span class="pk">'+pk()+'</span><h4>'+T.shT+'</h4></div><span class="chat-context-x" role="button" aria-label="'+T.aClose+'"><i>'+I.x+'</i></span></div>'+
+ '<div class="chat-context-q"><span class="k">'+T.ogK+'</span><span class="v" lang="'+T.rl+'">'+T.th[5][1]+'</span><span class="t" lang="'+T.ul+'">'+T.th[5][2]+'</span></div>'+
+ '<div class="chat-context-k">'+I.bulb+T.mK+'</div><p class="chat-context-p">'+T.mT+'</p>'+
+ '<div class="chat-context-k">'+I.tone+T.tK+'</div><div class="chat-context-tn">'+tn+'</div><p class="chat-context-tnn">'+T.tN+'</p>'+
+ '<div class="chat-context-k">'+I.who+T.aK+'</div><div class="chat-context-ad"><span class="b"><b>'+T.aB[0]+'</b><span>'+T.aB[1]+'</span></span><p>'+T.aT+'</p></div>'+
+ '<div class="chat-context-k">'+I.rep+T.rK+'</div><div class="chat-context-rp"><div class="u">'+T.rU+'</div><div class="r">'+I.tr+T.rR+'</div><div class="rt" lang="'+T.rl+'">'+T.rRt+'</div></div>'+
+ '<div class="chat-context-cta" role="button">'+I.ins+T.cta+'</div><p class="chat-context-dc">'+T.dc+'</p><div style="height:34px"></div></div>')};
+S.reply=function(){return scr(nav()+'<div class="chat-context-msgs">'+msg(1)+msg(2,'gap')+msg(3)+msg(4)+msg(5,'gap')+ask()+'</div>'+cmpTyped())};
+window.CHAT_CONTEXT_S=S;
+
+/* ===== страница ===== */
+document.documentElement.lang=T.htmlLang;document.title=T.docTitle;
+function $(id){return document.getElementById('chat-context-'+id)}
+$('lng').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" hreflang="'+k+'" class="'+(k===l?'on':'')+'"'+(k===l?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+$('eb').textContent=T.eb;$('stat').textContent=T.stat;$('h1').textContent=T.h1;$('intro').textContent=T.intro;
+$('capb').textContent=T.capB;$('caps').textContent=T.capS;
+$('what').innerHTML=T.what.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('sth').textContent=T.stH;$('stl').innerHTML=T.stL;
+var order=['thread','menu','explain','reply'];window.CHAT_CONTEXT_ORDER=order;
+$('grid').innerHTML=order.map(function(k){return '<div class="chat-context-card"><div class="pf p67" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+T.st[k][0]+' <code>'+k+'</code></h3><p>'+T.st[k][1]+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=S[p.dataset.state]()});
+window.chatContextHero=function(k){var h=$('hero');h.dataset.state=k;h.querySelector('.glass').innerHTML=S[k]()};
+$('moreh').textContent=T.moreH;$('dech').textContent=T.decH;$('tokh').textContent=T.tokH;$('nah').textContent=T.naH;
+$('dec').innerHTML=T.dec.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('tok').innerHTML=T.tok.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('na').innerHTML=T.na.map(function(x){return '<li>'+x+'</li>'}).join('');
+
+function Lu(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+var pairs=[['#F2F5F7','#242B34'],['#BFF2DC','#242B34'],['#9AA4B2','#242B34'],['#F2F5F7','#1C2026'],['#9AA4B2','#1C2026'],['#9AA4B2','#0E1116'],['#F2F5F7','#0E1116'],['#BFF2DC','#1E3734'],['#9AA4B2','#242B34'],['#FFFFFF','#00875C'],['#0E1116','#2BC48A']];
+$('ct').innerHTML=pairs.map(function(r,i){return '<tr><td><span class="chat-context-sw" style="background:'+r[0]+'"></span><span class="chat-context-sw" style="background:'+r[1]+'"></span>'+T.ct[i]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_CONTEXT_MIN=Math.min.apply(null,pairs.map(function(r){return cr(r[0],r[1])}));
+})();
+</script>
+</body>
+</html>
