@@ -1,0 +1,79 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Parrlo Chat — вход (эталон)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../frame.css">
+<style>
+html{background:#0B0E12}body{margin:0;padding:32px 16px 48px;background:#0B0E12;color:#F2F5F7;font:400 15px/1.5 Inter,system-ui,sans-serif}
+.chat-signin-wrap{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:40px;justify-content:center;align-items:flex-start}
+.chat-signin-side{max-width:460px;flex:1 1 300px}
+.chat-signin-side h1{font:900 26px/1.2 Nunito,sans-serif;margin:0 0 6px}
+.chat-signin-side h2{font:800 17px/1.3 Nunito,sans-serif;margin:22px 0 6px}
+.chat-signin-side ul{margin:0;padding-left:20px;color:#C9D1DA}.chat-signin-side li{margin:4px 0}
+.chat-signin-side code{font:13px ui-monospace,monospace;color:#BFF2DC}
+.chat-signin-tag{display:inline-block;font:600 12px Inter;color:#FFC247;border:1px solid #FFC247;border-radius:8px;padding:1px 8px;margin-left:6px}
+.chat-signin-top{flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 8px;height:56px}
+.chat-signin-back{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.chat-signin-dots{display:flex;gap:8px;align-items:center}
+.chat-signin-dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.chat-signin-dots i.d{background:var(--sec)}
+.chat-signin-dots i.on{width:24px;border-radius:4px;background:var(--acc)}
+.chat-signin-top .sp{width:44px}
+.chat-signin-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 32px 24px}
+.chat-signin-main img{width:200px;height:200px;display:block}
+.chat-signin-main h1{font:900 32px/1.15 Nunito,sans-serif;margin:24px 0 12px}
+.chat-signin-main p{margin:0;font:400 17px/1.4 Inter;color:var(--sec)}
+.chat-signin-bot{flex:none;padding:0 20px 8px;display:flex;flex-direction:column;gap:12px}
+.chat-signin-btn{height:56px;border-radius:28px;background:var(--sf2);border:1px solid var(--line);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:12px;font:800 18px Nunito,sans-serif}
+.chat-signin-btn b{width:28px;height:28px;border-radius:50%;background:#3A414B;color:var(--tx);display:flex;align-items:center;justify-content:center;font:700 15px Inter}
+.chat-signin-legal{margin:8px 8px 14px;text-align:center;font:400 13px/1.45 Inter;color:var(--sec)}
+.chat-signin-legal u{white-space:nowrap;color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+@media(max-width:430px){.pf{--s:.86!important}.chat-signin-wrap{gap:28px}}
+</style></head><body>
+<div class="chat-signin-wrap">
+<div>
+<div class="pf" style="--s:1"><div class="shell"></div><div class="glass"><div class="scr">
+ <div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>
+ <div class="chat-signin-top">
+  <div class="chat-signin-back" aria-label="Назад"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div>
+  <div class="chat-signin-dots" role="img" aria-label="Шаг 3 из 7"><i class="d"></i><i class="d"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+  <div class="sp"></div>
+ </div>
+ <div class="chat-signin-main">
+  <img src="../../brandbook/assets/mascot/mascot-wow-dark.svg" alt="">
+  <h1>Войди в Parrlo Chat</h1>
+  <p>Пароль придумывать не нужно.</p>
+ </div>
+ <div class="chat-signin-bot">
+  <div class="chat-signin-btn"><b>A</b>Продолжить с Apple</div>
+  <div class="chat-signin-btn"><b>G</b>Продолжить с Google</div>
+  <p class="chat-signin-legal">Продолжая, ты принимаешь <u>Условия использования</u> и <u>Политику конфиденциальности</u></p>
+ </div>
+ <div class="homebar"><i></i></div>
+</div></div></div>
+<div class="pcap"><span class="dot"></span><div><b>Parrlo Chat · онбординг · вход</b><span>390×844, тёмная тема. Черновик текста.</span></div></div>
+</div>
+<div class="chat-signin-side">
+<h1>chat-signin</h1>
+<h2>Что на экране</h2>
+<ul>
+<li>Назад (зона 44×44) и индикатор шагов: 7 точек, текущая — шаг 3 из 7 (удлинённая, Light Green).</li>
+<li>Маскот <code>mascot-wow-dark.svg</code>, заголовок Nunito 900 32 pt «Войди в Parrlo Chat», подпись Inter 17 pt вторичным цветом.</li>
+<li>Две равные кнопки 56 pt (высота и ширина одинаковы, одна поверхность #242B34 с линией #2F3742, один вес текста Nunito 800). Слева нейтральные кружки «A» и «G».</li>
+<li>Мелкий текст про условия, ссылки акцентом #2BC48A с подчёркиванием <span class="chat-signin-tag">текст юриста</span></li>
+</ul>
+<h2>Токены</h2>
+<ul><li>Фон #0E1116, поверхность #242B34, линия #2F3742, текст #F2F5F7, вторичный #9AA4B2, акцент #2BC48A. Жёлтый не используется.</li></ul>
+<h2>Контраст текста</h2>
+<ul id="chat-signin-contrast"></ul>
+<h2>Не утверждено</h2>
+<ul>
+<li>Кружки «A» и «G» — плейсхолдер. Логотипы Apple и Google не рисовались: в приложении будут официальные кнопки по правилам Apple и Google.</li>
+<li>Все тексты — черновик; фраза про условия и названия документов — текст юриста.</li>
+<li>Выбор маскота (wow или happy) и число шагов (7, в утверждённом макете 6).</li>
+</ul>
+</div>
+</div>
+<script>
+function L(h){const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function R(a,b){const x=L(a),y=L(b);return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(1).replace('.',',')}
+[['Заголовок #F2F5F7 на #0E1116','#F2F5F7','#0E1116'],['Подпись и мелкий текст #9AA4B2 на #0E1116','#9AA4B2','#0E1116'],['Текст кнопок #F2F5F7 на #242B34','#F2F5F7','#242B34'],['Ссылки #2BC48A на #0E1116','#2BC48A','#0E1116'],['Буква в кружке #F2F5F7 на #3A414B','#F2F5F7','#3A414B']].forEach(r=>{const li=document.createElement('li');li.textContent=r[0]+': '+R(r[1],r[2])+' : 1';document.getElementById('chat-signin-contrast').appendChild(li)})
+</script>
+</body></html>

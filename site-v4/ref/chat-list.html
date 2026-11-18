@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · список чатов</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:40px 16px 80px}
+.chat-list-w{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-list-info{max-width:440px}
+.chat-list-info h1{font:900 36px/1.15 Nunito,sans-serif;margin:0 0 8px}
+.chat-list-info h2{font:900 20px/1.3 Nunito,sans-serif;margin:28px 0 8px}
+.chat-list-info p,.chat-list-info li{color:#9AA4B2;font-size:15px;margin:4px 0}
+.chat-list-info ul{padding-left:20px;margin:0}
+.chat-list-info code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.chat-list-info .ok{color:#2BC48A}
+@media (max-width:480px){.chat-list-fig .pf{--s:.9!important}}
+
+/* экран */
+.chat-list-scr{position:relative}
+.chat-list-hd{flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 16px 6px 20px;height:52px}
+.chat-list-hd h3{margin:0;font:900 32px/1 Nunito,sans-serif;letter-spacing:.01em}
+.chat-list-new{width:44px;height:44px;border-radius:50%;background:var(--sf2);color:var(--acc);display:flex;align-items:center;justify-content:center}
+.chat-list-new svg{width:24px;height:24px}
+.chat-list-sr{flex:none;margin:6px 16px 10px;height:40px;border-radius:12px;background:var(--sf);display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--sec);font-size:17px}
+.chat-list-sr svg{width:20px;height:20px;flex:none}
+.chat-list-pc{flex:none;margin:0 16px 4px;height:68px;border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;gap:12px;padding:0 14px 0 10px}
+.chat-list-pc img{width:48px;height:48px;flex:none;display:block}
+.chat-list-pc .tx{flex:1;min-width:0}
+.chat-list-pc b{display:block;font:900 18px/1.2 Nunito,sans-serif}
+.chat-list-pc span{display:block;font-size:14px;color:var(--sec);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-list-pc svg{width:20px;height:20px;color:var(--sec);flex:none}
+.chat-list-ls{flex:1;min-height:0;overflow:hidden;padding-top:2px}
+.chat-list-r{height:72px;display:flex;align-items:center;gap:12px;padding:0 16px}
+.chat-list-av{width:48px;height:48px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:900 20px Nunito,sans-serif;color:#0E1116;position:relative}
+.chat-list-av.w{color:#fff}
+.chat-list-av.g svg{position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;padding:3px;border-radius:50%;background:var(--bg);color:var(--sec);box-sizing:border-box;width:20px}
+.chat-list-bd{flex:1;min-width:0;border-bottom:1px solid var(--line);height:72px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.chat-list-r:last-child .chat-list-bd{border-bottom:0}
+.chat-list-l1,.chat-list-l2{display:flex;align-items:center;gap:8px}
+.chat-list-nm{flex:1;min-width:0;font:600 17px/1.25 Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-list-tm{flex:none;font-size:13px;color:var(--sec)}
+.chat-list-tm.u{color:var(--acc)}
+.chat-list-pv{flex:1;min-width:0;font-size:15px;color:var(--sec);display:flex;align-items:center;gap:5px}
+.chat-list-pv span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-list-pv svg{width:14px;height:14px;flex:none;color:var(--acc)}
+.chat-list-bg{flex:none;min-width:22px;height:22px;border-radius:11px;background:var(--acc);color:#0E1116;font:700 13px/22px Inter,sans-serif;text-align:center;padding:0 7px}
+.chat-list-tb{flex:none;display:flex;border-top:1px solid var(--line);background:var(--bg);padding-top:6px;height:54px}
+.chat-list-t{flex:1;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--sec);font:600 11px/1.2 Inter,sans-serif}
+.chat-list-t svg{width:26px;height:26px}
+.chat-list-t.on{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="chat-list-w">
+<figure class="chat-list-fig" style="margin:0">
+<div class="pf" style="--s:1"><div class="shell"></div><div class="glass"><div class="scr chat-list-scr">
+ <div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>
+ <div class="chat-list-hd"><h3>Чаты</h3><span class="chat-list-new" aria-label="Новый чат"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5H5.5a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2V12"/><path d="M17.5 15.5v6M14.5 18.5h6"/></svg></span></div>
+ <div class="chat-list-sr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>Поиск</div>
+ <div class="chat-list-pc"><img src="../../brandbook/assets/mascot/mascot-happy-dark.svg" alt=""><div class="tx"><b>Парло</b><span>3 новых · Pedro ждёт ответа</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></div>
+ <div class="chat-list-ls">
+  <div class="chat-list-r"><div class="chat-list-av" style="background:#6AA6F5">P</div><div class="chat-list-bd"><div class="chat-list-l1"><span class="chat-list-nm">Pedro</span><span class="chat-list-tm u">10:05</span></div><div class="chat-list-l2"><span class="chat-list-pv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg><span>Завтра в 10 у входа?</span></span><span class="chat-list-bg">1</span></div></div></div>
+  <div class="chat-list-r"><div class="chat-list-av g w" style="background:#00875C">P<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0z"/></svg></div><div class="chat-list-bd"><div class="chat-list-l1"><span class="chat-list-nm">Piso</span><span class="chat-list-tm u">10:02</span></div><div class="chat-list-l2"><span class="chat-list-pv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg><span>Olga: Купила хлеб, нужно молоко</span></span><span class="chat-list-bg">1</span></div></div></div>
+  <div class="chat-list-r"><div class="chat-list-av" style="background:#BFF2DC">L</div><div class="chat-list-bd"><div class="chat-list-l1"><span class="chat-list-nm">Lucía</span><span class="chat-list-tm u">9:58</span></div><div class="chat-list-l2"><span class="chat-list-pv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg><span>Документы у меня, до завтра!</span></span><span class="chat-list-bg">1</span></div></div></div>
+  <div class="chat-list-r"><div class="chat-list-av" style="background:#2BC48A">O</div><div class="chat-list-bd"><div class="chat-list-l1"><span class="chat-list-nm">Olga</span><span class="chat-list-tm">9:41</span></div><div class="chat-list-l2"><span class="chat-list-pv"><span>Ты уже на месте?</span></span></div></div></div>
+  <div class="chat-list-r"><div class="chat-list-av" style="background:#F2F5F7">C</div><div class="chat-list-bd"><div class="chat-list-l1"><span class="chat-list-nm">Carmen</span><span class="chat-list-tm">Вчера</span></div><div class="chat-list-l2"><span class="chat-list-pv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg><span>Спасибо за помощь с договором</span></span></div></div></div>
+  <div class="chat-list-r"><div class="chat-list-av" style="background:#6AA6F5">D</div><div class="chat-list-bd"><div class="chat-list-l1"><span class="chat-list-nm">Diego</span><span class="chat-list-tm">Вчера</span></div><div class="chat-list-l2"><span class="chat-list-pv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg><span>Встретимся в субботу на рынке</span></span></div></div></div>
+  <div class="chat-list-r"><div class="chat-list-av" style="background:#BFF2DC">M</div><div class="chat-list-bd"><div class="chat-list-l1"><span class="chat-list-nm">Marta</span><span class="chat-list-tm">Пн</span></div><div class="chat-list-l2"><span class="chat-list-pv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg><span>Адрес пришлю вечером</span></span></div></div></div>
+ </div>
+ <div class="chat-list-tb">
+  <div class="chat-list-t on"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5c-5 0-9 3.4-9 7.7 0 2.4 1.3 4.5 3.3 5.9L5.5 21l4.2-2.3c.7.1 1.5.2 2.3.2 5 0 9-3.4 9-7.7S17 3.5 12 3.5z"/></svg>Чаты</div>
+  <div class="chat-list-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 3.5h2.7l1.5 4-2 1.3a11 11 0 0 0 5.4 5.4l1.3-2 4 1.5v2.7a2 2 0 0 1-2.1 2A15.5 15.5 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1z"/></svg>Звонки</div>
+  <div class="chat-list-t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg>Настройки</div>
+ </div>
+ <div class="homebar"><i></i></div>
+</div></div></div>
+<figcaption class="pcap"><span class="dot"></span><div><b>Parrlo Chat · Чаты</b><span>Главный экран. Только тёмная тема. Текст экрана — черновик.</span></div></figcaption>
+</figure>
+<div class="chat-list-info">
+<h1>Чаты</h1>
+<p>Эталон главного экрана Parrlo Chat, 390×844 pt.</p>
+<h2>Что на экране</h2>
+<ul><li>Заголовок «Чаты» (Nunito 900, 32) и кнопка нового чата 44×44.</li><li>Поиск, карточка Парло с маскотом и сводкой.</li><li>7 чатов: аватар с буквой, имя, последнее сообщение в переводе на русский со значком перевода, время, счётчик непрочитанных. Группа «Piso» (3 участника) с маленьким значком группы.</li><li>Вкладки: Чаты (активна), Звонки, Настройки — иконка и подпись, зона 44+ pt.</li></ul>
+<h2>Токены</h2>
+<ul><li>Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>.</li><li>Текст <code>#F2F5F7</code>, вторичный <code>#9AA4B2</code>.</li><li>Акцент <code>#2BC48A</code>, текст на нём <code>#0E1116</code> (счётчики); <code>#00875C</code> с белым текстом (аватар Piso).</li><li>Жёлтый на экране не используется (кроме клюва маскота).</li></ul>
+<h2>Контраст</h2>
+<ul id="chat-list-ctr"></ul>
+<h2>Не утверждено</h2>
+<ul><li>Все тексты и демо-имена (Pedro, Piso, Olga, Lucía, Carmen, Diego, Marta) — черновик.</li><li>Формулировка сводки Парло и её переход по нажатию.</li><li>Значок перевода (иконка «перевод» из набора клавиатуры) и место счётчика в группах.</li><li>Состав вкладок и иконки.</li></ul>
+</div>
+</div>
+<script>
+function L(h){const c=[0,2,4].map(i=>parseInt(h.slice(1+i,3+i),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function R(a,b){const x=L(a),y=L(b);return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(1).replace('.',',')}
+const rows=[['Основной текст #F2F5F7 на #0E1116','#F2F5F7','#0E1116'],['Вторичный #9AA4B2 на #0E1116','#9AA4B2','#0E1116'],['Вторичный #9AA4B2 на #1C2026 (карточка)','#9AA4B2','#1C2026'],['Счётчик #0E1116 на #2BC48A','#0E1116','#2BC48A'],['Акцент #2BC48A на #0E1116 (время, вкладка)','#2BC48A','#0E1116'],['Белый на #00875C (аватар Piso)','#FFFFFF','#00875C'],['Буква #0E1116 на #6AA6F5','#0E1116','#6AA6F5']];
+document.getElementById('chat-list-ctr').innerHTML=rows.map(r=>`<li>${r[0]}: <b class="ok">${R(r[1],r[2])}:1</b></li>`).join('');
+</script>
+</body>
+</html>
