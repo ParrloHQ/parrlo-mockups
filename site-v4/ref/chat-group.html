@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · группа</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.chat-group-w{max-width:1200px;margin:0 auto}
+.chat-group-lng{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-group-lng a{min-width:52px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#C9D1DA;text-decoration:none;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-group-lng a.on{background:#2BC48A;color:#0E1116;box-shadow:none}
+.chat-group-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-group-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-group-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-group-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-group-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-group-info ul,.chat-group-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-group-info li,.chat-group-sec li{margin:6px 0}
+.chat-group-w b{color:#F2F5F7;font-weight:600}
+.chat-group-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7;overflow-wrap:anywhere}
+.chat-group-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-group-lead{color:#9AA4B2;margin:0 0 32px;max-width:760px}
+.chat-group-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:40px 24px;justify-items:center}
+.chat-group-card{width:273px}
+.chat-group-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.chat-group-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-group-card h3 .mk{font:700 12px/1 Inter;color:#0E1116;background:#BFF2DC;border-radius:6px;padding:4px 7px;align-self:center}
+.chat-group-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+.chat-group-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 40px}
+.chat-group-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-group-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-group-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-group-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-group-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-group-hero .pf{--s:.78!important}.chat-group-info h1{font-size:30px}.chat-group-hero{gap:24px}}
+
+/* ======= экран 430×932 ======= */
+.chat-group-scr{overflow:hidden}
+.chat-group-scr svg{display:block}
+.chat-group-nav{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 4px;border-bottom:1px solid var(--line)}
+.chat-group-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-group-ib svg{width:24px;height:24px}
+.chat-group-ib.bk{color:var(--acc)}.chat-group-ib.bk svg{width:28px;height:28px}
+.chat-group-gav{width:40px;height:40px;border-radius:12px;background:#1E3734;color:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-group-gav svg{width:22px;height:22px}
+.chat-group-nm{flex:1;min-width:0;min-height:44px;display:flex;flex-direction:column;justify-content:center;padding-left:4px}
+.chat-group-nm b{display:block;font:600 17px/22px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-group-nm span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-group-ttl{flex:1;min-width:0;text-align:center;font:600 17px/22px Inter;padding-right:44px}
+
+/* лента */
+.chat-group-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px}
+.chat-group-day{align-self:center;font:500 12px/16px Inter;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px}
+.chat-group-sys{align-self:center;display:flex;align-items:center;gap:6px;font:500 13px/18px Inter;color:var(--sec);margin:0 0 4px}
+.chat-group-sys svg{width:16px;height:16px}
+.chat-group-r{display:flex;align-items:flex-end;gap:8px;max-width:86%}
+.chat-group-r.gap,.chat-group-m.gap{margin-top:6px}
+.chat-group-av{width:32px;height:32px;border-radius:50%;color:#0E1116;font:800 14px/32px Nunito,Inter;text-align:center;flex:none}
+.chat-group-av.L{background:#6AA6F5}.chat-group-av.P{background:#C3A6F7}.chat-group-av.O{background:#E8A0BF}.chat-group-av.Y{background:#2BC48A}
+.chat-group-m{position:relative;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px;min-width:0}
+.chat-group-m.in{background:var(--sf2);border-bottom-left-radius:6px}
+.chat-group-m.out{align-self:flex-end;max-width:80%;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.chat-group-m.hl{box-shadow:0 0 0 2px var(--acc)}
+.chat-group-who{display:block;font:600 13px/18px Inter;margin-bottom:2px}
+.chat-group-who.L{color:#6AA6F5}.chat-group-who.P{color:#C3A6F7}.chat-group-who.O{color:#E8A0BF}
+.chat-group-ft{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;line-height:16px;min-height:20px}
+.chat-group-lb{display:flex;align-items:center;gap:6px;color:var(--mint);font:500 12px/16px Inter;min-width:0;white-space:nowrap}
+.chat-group-lb svg{width:14px;height:14px;flex:none}
+.chat-group-lb i{font:700 11px/1 Inter;letter-spacing:.06em;font-style:normal;height:20px;padding:0 6px;border-radius:6px;display:flex;align-items:center;background:rgba(191,242,220,.14);color:var(--mint)}
+.chat-group-lb.or{color:var(--sec)}
+.chat-group-lb.or i{background:rgba(154,164,178,.18);color:var(--tx)}
+.chat-group-tm{margin-left:auto;padding-left:8px;display:flex;align-items:center;gap:4px;color:var(--sec);white-space:nowrap}
+.chat-group-tm svg{width:16px;height:16px}
+.chat-group-m.out .chat-group-lb{color:#fff}
+.chat-group-m.out .chat-group-lb i{background:rgba(255,255,255,.18);color:#fff}
+.chat-group-m.out .chat-group-tm{color:#fff}
+.chat-group-rd{align-self:flex-end;display:flex;align-items:center;gap:4px;font:500 12px/16px Inter;color:var(--sec);margin:-2px 4px 0 0}
+.chat-group-rd svg{width:16px;height:16px;color:var(--acc)}
+/* раскрытый оригинал */
+.chat-group-og{margin-top:8px;padding:8px 10px 8px;border-radius:12px;background:rgba(14,17,22,.42);box-shadow:inset 3px 0 0 var(--mint)}
+.chat-group-og .k{font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec)}
+.chat-group-og .v{font-size:16px;line-height:22px;margin-top:2px;color:var(--tx)}
+.chat-group-oga{display:flex;gap:12px;margin:4px 0 -6px}
+.chat-group-r.op{width:86%}.chat-group-r.op .chat-group-m{flex:1}
+.chat-group-oga span{height:44px;display:flex;align-items:center;gap:6px;white-space:nowrap;font:600 14px/1 Inter;color:var(--acc);padding:0 4px}
+.chat-group-oga span.s{color:var(--sec);font-weight:500}
+.chat-group-oga svg{width:16px;height:16px}
+
+/* поле ввода */
+.chat-group-cmp{flex:none;border-top:1px solid var(--line);padding:8px 12px 0;background:var(--bg)}
+.chat-group-crow{display:flex;align-items:flex-end;gap:8px}
+.chat-group-pls{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-group-pls svg{width:26px;height:26px}
+.chat-group-f{flex:1;min-width:0;min-height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:10px 16px;font-size:17px;line-height:22px;color:var(--sec);white-space:nowrap;overflow:hidden}
+.chat-group-f span{overflow:hidden;text-overflow:ellipsis}
+.chat-group-f.on{color:var(--tx)}
+.chat-group-f .car{display:inline-block;width:2px;height:20px;background:var(--acc);vertical-align:-4px;margin-left:1px;border-radius:1px}
+.chat-group-go{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-group-go svg{width:22px;height:22px}
+
+/* подсказка Парло */
+.chat-group-pc{margin:0 0 8px;border-radius:20px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:12px 14px 12px}
+.chat-group-ph{display:flex;align-items:center;gap:10px}
+.chat-group-pav{position:relative;width:32px;height:32px;border-radius:50%;background:#173A2E;overflow:hidden;flex:none}
+.chat-group-pav img{position:absolute;width:52px;height:52px;left:-11px;top:-7px}
+.chat-group-ph b{font:700 15px/20px Inter}
+.chat-group-ph span.v{display:flex;align-items:center;gap:4px;font-size:12px;line-height:16px;color:var(--sec)}
+.chat-group-ph span.v svg{width:14px;height:14px}
+.chat-group-ph .x{margin-left:auto;width:44px;height:44px;margin-right:-10px;display:flex;align-items:center;justify-content:center;color:var(--sec)}
+.chat-group-ph .x svg{width:20px;height:20px}
+.chat-group-pc p{margin:6px 0 0;font-size:15px;line-height:21px;color:var(--tx)}
+.chat-group-sg{margin-top:10px;border-radius:18px;border-bottom-right-radius:6px;background:var(--deep);color:#fff;padding:9px 14px;font-size:16px;line-height:22px}
+.chat-group-sgn{display:flex;gap:6px;align-items:center;margin-top:8px;font-size:13px;line-height:18px;color:var(--mint)}
+.chat-group-sgn svg{width:16px;height:16px;flex:none}
+.chat-group-pa{display:flex;gap:8px;margin-top:10px}
+.chat-group-pa span{flex:1;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:6px;font:600 15px/1 Inter;white-space:nowrap}
+.chat-group-pa .p{background:var(--acc);color:var(--onacc);font:900 16px/1 Nunito,sans-serif}
+.chat-group-pa .s{background:var(--sf2);color:var(--tx)}
+.chat-group-pa svg{width:18px;height:18px}
+
+/* о группе */
+.chat-group-body{flex:1;min-height:0;overflow:hidden;padding:0 16px}
+.chat-group-gh{display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 0 4px}
+.chat-group-gh .chat-group-gav{width:80px;height:80px;border-radius:24px}
+.chat-group-gh .chat-group-gav svg{width:40px;height:40px}
+.chat-group-gh h4{margin:12px 0 2px;font:900 26px/32px Nunito,sans-serif}
+.chat-group-gh>span:not(.chat-group-gav){font-size:14px;line-height:20px;color:var(--sec)}
+.chat-group-qa{display:flex;gap:8px;margin:16px 0 0}
+.chat-group-qa div{flex:1;min-width:0;height:64px;border-radius:16px;background:var(--sf);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:500 13px/16px Inter;color:var(--tx)}
+.chat-group-qa div svg{width:22px;height:22px;color:var(--acc)}
+.chat-group-ln{margin:12px 0 0;display:flex;gap:10px;border-radius:16px;background:#16241F;box-shadow:inset 0 0 0 1px rgba(191,242,220,.18);padding:10px 14px;font-size:14px;line-height:20px;color:#DCEFE6}
+.chat-group-ln svg{flex:none;width:18px;height:18px;margin-top:1px;color:var(--mint)}
+.chat-group-sh2{font:600 12px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin:20px 4px 8px}
+.chat-group-list{border-radius:16px;background:var(--sf);overflow:hidden}
+.chat-group-li{min-height:60px;display:flex;align-items:center;gap:12px;padding:8px 14px;border-top:1px solid var(--line)}
+.chat-group-li:first-child{border-top:0}
+.chat-group-li .chat-group-av{width:40px;height:40px;font-size:17px;line-height:40px}
+.chat-group-li .t{flex:1;min-width:0}
+.chat-group-li .t b{display:flex;align-items:center;gap:8px;font:600 16px/22px Inter}
+.chat-group-li .t b em{font:600 11px/1 Inter;font-style:normal;color:var(--sec);background:var(--sf2);border-radius:6px;padding:4px 6px;text-transform:uppercase;letter-spacing:.04em}
+.chat-group-li .t span{display:block;font-size:13px;line-height:18px;color:var(--sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-group-code{flex:none;height:28px;min-width:40px;border-radius:8px;background:var(--sf2);display:flex;align-items:center;justify-content:center;font:700 12px/1 Inter;letter-spacing:.06em;color:var(--tx);padding:0 8px}
+.chat-group-li.ac{color:var(--acc);font:600 16px/22px Inter;min-height:52px}
+.chat-group-li.ac .ic{width:40px;height:40px;border-radius:50%;background:rgba(43,196,138,.14);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-group-li.ac .ic svg{width:20px;height:20px}
+.chat-group-li .ch{width:18px;height:18px;color:var(--sec);flex:none}
+.chat-group-li .vl{font-size:14px;color:var(--sec)}
+
+/* лист приглашения */
+.chat-group-dim{position:absolute;inset:0;background:rgba(9,11,14,.66);z-index:5}
+.chat-group-sht{position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--sf);border-radius:28px 28px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.45),inset 0 1px 0 var(--line);padding:8px 20px 0}
+.chat-group-gr{width:40px;height:5px;border-radius:3px;background:#3A414B;margin:0 auto 12px}
+.chat-group-shh{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.chat-group-shh h4{margin:0;font:900 24px/30px Nunito,sans-serif}
+.chat-group-shh p{margin:4px 0 0;color:var(--sec);font-size:14px;line-height:20px}
+.chat-group-x{width:44px;height:44px;margin:-6px -10px 0 0;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-group-x i{width:32px;height:32px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center}
+.chat-group-x svg{width:18px;height:18px}
+.chat-group-qr{display:flex;gap:16px;align-items:center;margin-top:16px}
+.chat-group-qr .q{flex:none;width:148px;height:148px;border-radius:16px;background:#fff;padding:10px}
+.chat-group-qr .q svg{width:128px;height:128px}
+.chat-group-qr .d{flex:1;min-width:0}
+.chat-group-qr .d .k{font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec)}
+.chat-group-qr .d .lk{margin-top:4px;height:44px;border-radius:12px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 6px 0 12px;font:500 15px/1 ui-monospace,Menlo,monospace;color:var(--tx)}
+.chat-group-qr .d .lk svg{width:18px;height:18px;color:var(--acc)}
+.chat-group-qr .d p{margin:8px 0 0;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-group-cta{margin-top:16px;height:52px;border-radius:26px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;gap:8px;font:900 18px/1 Nunito,sans-serif}
+.chat-group-cta svg{width:20px;height:20px}
+.chat-group-al{display:flex;gap:8px;margin-top:8px}
+.chat-group-al span{flex:1;min-width:0;height:48px;border-radius:24px;background:var(--sf2);display:flex;align-items:center;justify-content:center;gap:8px;font:600 15px/1 Inter;white-space:nowrap}
+.chat-group-al svg{width:18px;height:18px;color:var(--sec);flex:none}
+.chat-group-nt{display:flex;gap:8px;margin:14px 0 0;font-size:13px;line-height:18px;color:var(--mint)}
+.chat-group-nt svg{flex:none;width:16px;height:16px;margin-top:1px}
+</style>
+</head>
+<body>
+<div class="chat-group-w">
+<nav class="chat-group-lng" id="chat-group-lng" aria-label="Language"></nav>
+
+<section class="chat-group-hero">
+ <div><div class="pf p67" style="--s:1" data-state="main" id="chat-group-hero"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b id="chat-group-capb"></b><span id="chat-group-caps"></span></div></div></div>
+ <div class="chat-group-info">
+  <p class="chat-group-eb" id="chat-group-eb"></p>
+  <h1 id="chat-group-h1"></h1>
+  <p id="chat-group-intro"></p>
+  <ul id="chat-group-what"></ul>
+ </div>
+</section>
+
+<h2 class="chat-group-h2" id="chat-group-sth"></h2>
+<p class="chat-group-lead" id="chat-group-stl"></p>
+<div class="chat-group-grid" id="chat-group-grid"></div>
+
+<h2 class="chat-group-h2" id="chat-group-moreh"></h2>
+<div class="chat-group-cols">
+ <div class="chat-group-sec"><h2 id="chat-group-dech"></h2><ul id="chat-group-dec"></ul></div>
+ <div class="chat-group-sec"><h2 id="chat-group-tokh"></h2><table class="chat-group-ct" id="chat-group-ct"></table><ul style="margin-top:12px" id="chat-group-tok"></ul></div>
+ <div class="chat-group-sec"><h2 id="chat-group-nah"></h2><ul id="chat-group-na"></ul></div>
+</div>
+</div>
+
+<script>
+(function(){
+var N=' ';
+/* ===== словарь: все тексты экрана и страницы =====
+   Состав группы один на всех языках: Lucía пишет по‑испански, Pedro — по‑английски, Olga — по‑русски, «я» — на языке интерфейса.
+   orig — что написал человек; tr — как это видит «я». Совпал язык с моим — перевода нет, метка «оригинал». */
+var MSG={
+ L1:{who:'L',lang:'es',tm:'9:41',orig:'¡Buenos días! El fontanero viene el sábado a las 10 para arreglar el grifo del patio.',
+  tr:{ru:'Доброе утро! Сантехник придёт в субботу в'+N+'10, починит кран во дворе.',en:'Morning! The plumber’s coming on Saturday at'+N+'10 to fix the courtyard tap.'}},
+ P1:{who:'P',lang:'en',tm:'9:44',orig:'Great! I can open the gate for him.',
+  tr:{ru:'Отлично! Могу открыть ему ворота.',es:'¡Genial! Yo le puedo abrir el portón.'}},
+ O1:{who:'O',lang:'ru',tm:'9:47',orig:'Спасибо, Pedro! Ключ от подвала оставлю у Lucía.',
+  tr:{es:'¡Gracias, Pedro! Le dejo a Lucía la llave del sótano.',en:'Thanks, Pedro! I’ll leave the basement key with Lucía.'}},
+ L2:{who:'L',lang:'es',tm:'9:55',orig:'¡Perfecto! ¿Nos vemos todos en el patio a las 10?',
+  tr:{ru:'Прекрасно! Встречаемся все во дворе в'+N+'10?',en:'Perfect! Shall we all meet in the courtyard at'+N+'10?'}}
+};
+var D={
+ru:{
+ htmlLang:'ru',docTitle:'Parrlo Chat · группа',today:'Сегодня',me:'ru',
+ gname:'Соседи · Colón 12',gsub:'4 участника · ES · EN · RU',
+ who:{L:'Lucía',P:'Pedro',O:'Olga'},
+ from:{es:'с испанского',pt:'с португальского',ru:'с русского',en:'с английского'},
+ orig:'оригинал',
+ lname:{es:'испанский',pt:'португальский',ru:'русский',en:'английский'},
+ writes:{es:'пишет по‑испански',en:'пишет по‑английски',ru:'пишет по‑русски'},
+ mine:'Супер! А я куплю новый шланг для полива.',trFor:'Переведено: ES · EN',readAll:'Прочитали все',
+ sys:'Pedro вступил по ссылке‑приглашению',
+ ph:'Сообщение по‑русски',
+ aBack:'Назад',aMore:'Меню группы',aPlus:'Прикрепить',aMic:'Записать голосовое',aSend:'Отправить',aClose:'Закрыть',aCopy:'Скопировать',
+ ogK:'Оригинал · ',ogHide:'Скрыть',ogBad:'Перевод неточный?',
+ info:'О группе',edit:'Изм.',infoSub:'4 участника · 3 языка',
+ qa:['Пригласить','Поиск','Без звука'],
+ ln:'Каждый пишет на своём языке и читает всё на своём. Язык оригинала видно у каждого сообщения.',
+ memH:'Участники',you:'Ты',admin:'админ',yourLang:'по‑русски · твой язык',
+ invRow:'Пригласить по ссылке',parRow:'Парло в группе',parVal:'разрешён',
+ invT:'Пригласить в группу',invP:'Любой, у кого есть ссылка, сможет вступить. Отправляй её только тем, кому доверяешь.',
+ linkK:'Ссылка',qrP:'Или покажи QR‑код: его можно отсканировать камерой.',
+ copy:'Скопировать ссылку',share:'Поделиться',reset:'Сбросить',
+ invN:'Общий язык не нужен: новый участник выберет свой при входе.',
+ pName:'Парло',pVis:'видно только тебе',
+ pBody:'Lucía спрашивает, встречаетесь ли все во дворе в'+N+'10. Ответить?',
+ pSug:'Да, в'+N+'10 буду во дворе!',pNote:'Lucía, Pedro и Olga прочтут на своём языке',
+ pUse:'В поле',pNo:'Не сейчас',
+ /* страница */
+ eb:'Эталон · пачка 2 · chat-group · C‑05 · только тёмная тема',
+ h1:'Дом, школа, соседи'+N+'— каждый читает на своём языке',
+ intro:'Группа соседей: Lucía пишет по‑испански, Pedro'+N+'— по‑английски, Olga и ты'+N+'— по‑русски. Ты видишь всю ленту по‑русски, а у каждого сообщения есть метка языка, на котором его написали. Оригинал открывается одним нажатием.',
+ capB:'Группа «Соседи · Colón 12»',capS:'Главный кадр. Всё по‑русски; мятная метка ES или EN значит «переведено», серая RU'+N+'— «написано по‑русски, без перевода». Тексты'+N+'— черновик.',
+ what:['<b>Шапка</b>: название группы, число участников и языки группы кодами'+N+'— ES · EN · RU.','<b>Входящие</b>: имя автора своим цветом и аватар с инициалом; текст'+N+'— на твоём языке; внизу метка исходного языка: код + «с испанского».','<b>Свои</b>: под твоим текстом'+N+'— на какие языки его перевели для других (ES · EN); Olga читает по‑русски, ей перевод не нужен.','<b>Без фото людей</b>: аватары'+N+'— инициалы, имена демо.'],
+ stH:'Состояния',stL:'Пять кадров одной группы. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-group--&lt;состояние&gt;--ru.png</code>, главный кадр'+N+'— <code>chat-group--ru.png</code>.',
+ mk:'макет',
+ st:{main:['Группа','Главный кадр: лента соседей на трёх языках, всё читается по‑русски, у каждого сообщения'+N+'— метка языка.'],
+  original:['Оригинал','Нажатие на сообщение Pedro: под переводом раскрыт английский оригинал, можно скрыть или отметить неточность.'],
+  members:['Участники и языки','Нажатие на шапку: кто в группе и на каком языке пишет, кто админ; приглашение и настройки.'],
+  invite:['Приглашение','«Пригласить»: ссылка и QR‑код; общий язык не нужен, новый участник выберет свой.'],
+  parrlo:['Парло в группе','Подсказка видна только тебе: Lucía задала вопрос'+N+'— Парло предлагает ответ, отправляешь ты.']},
+ moreH:'Решения, токены, открытые вопросы',decH:'Решения сверх сборки',
+ dec:['<b>Метка языка у каждого сообщения</b>, а не только «Переведено с испанского» у части: код языка + слово. Мятная'+N+'— перевод, серая'+N+'— оригинал без перевода. Не только цветом: разный текст.','<b>Языки группы в шапке</b> (ES · EN · RU)'+N+'— сразу видно, что группа многоязычная.','<b>«Переведено: ES · EN» у своих сообщений</b>'+N+'— видно, на какие языки ушёл твой текст.','<b>Оригинал раскрывается внутри пузыря</b>, с языком и действиями «Скрыть» и «Перевод неточный?» (как в chat-thread).','<b>Участники с языками</b>: у каждого строка «пишет по‑…» и код; твоя строка'+N+'— «твой язык».','<b>Приглашение</b>: ссылка и QR на одном листе, и фраза «общий язык не нужен».','<b>Подсказка Парло в ленте</b>'+N+'— карточка «видно только тебе» над полем, ответ вставляется в поле, а не уходит сам. Аватар'+N+'— маскот, без искр.'],
+ tokH:'Токены и контраст',
+ tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>.','Свои'+N+'— Deep Green <code>#00875C</code> + белый; акцент Light Green <code>#2BC48A</code> + <code>#0E1116</code>; перевод и метка перевода'+N+'— Mint <code>#BFF2DC</code>.','Цвета авторов: Lucía <code>#6AA6F5</code>, Pedro <code>#C3A6F7</code>, Olga <code>#E8A0BF</code>; автор всегда подписан именем. Жёлтый не используется.','Зоны нажатия ≥ 44 pt: кнопки 44–52, пункты списка 52–60, действия у оригинала 44.'],
+ naH:'Не утверждено',
+ na:['Все тексты'+N+'— черновик, включая испанский и английский интерфейс.','Метка языка у каждого сообщения и коды языков в шапке'+N+'— новое; в сборке'+N+'— «Переведено с … · Показать» у переведённых.','Цвета имён авторов в группе.','Подсказка Парло в группе'+N+'— функции нет (GAP №34, «скоро»): кадр'+N+'— макет. Как участники узнают, что кто-то пользуется помощником (строка в шапке из макета group-parrlo), и текст об обработке'+N+'— решают юристы; на кадре не показано.','«Без звука», «Поиск» и QR на листе приглашения'+N+'— нет в сборке, нарисовано как должно быть.','Имя маскота в es и en: написано «Parrlo»'+N+'— нужно решение.'],
+ ct:['Текст во входящем','Метка перевода (Mint) во входящем','Метка оригинала, время во входящем','Имя Lucía','Имя Pedro','Имя Olga','Текст и метки в своём сообщении','Подписи на фоне','Текст и значки на акценте','Подсказка о языках','Текст на поверхности','Ссылка на тёмном поле']
+},
+es:{
+ htmlLang:'es',docTitle:'Parrlo Chat · grupo',today:'Hoy',me:'es',
+ gname:'Vecinos · Colón 12',gsub:'4 miembros · ES · EN · RU',
+ who:{L:'Lucía',P:'Pedro',O:'Olga'},
+ from:{es:'del español',pt:'del portugués',ru:'del ruso',en:'del inglés'},
+ orig:'original',
+ lname:{es:'español',pt:'portugués',ru:'ruso',en:'inglés'},
+ writes:{es:'escribe en español',en:'escribe en inglés',ru:'escribe en ruso'},
+ mine:'¡Estupendo! Y yo compro una manguera nueva para regar.',trFor:'Traducido: EN · RU',readAll:'Lo han leído todos',
+ sys:'Pedro se unió con el enlace de invitación',
+ ph:'Mensaje en español',
+ aBack:'Atrás',aMore:'Menú del grupo',aPlus:'Adjuntar',aMic:'Grabar audio',aSend:'Enviar',aClose:'Cerrar',aCopy:'Copiar',
+ ogK:'Original · ',ogHide:'Ocultar',ogBad:'¿Traducción rara?',
+ info:'Info del grupo',edit:'Editar',infoSub:'4 miembros · 3 idiomas',
+ qa:['Invitar','Buscar','Silenciar'],
+ ln:'Cada uno escribe en su idioma y lo lee todo en el suyo. En cada mensaje se ve en qué idioma se escribió.',
+ memH:'Miembros',you:'Tú',admin:'admin',yourLang:'en español · tu idioma',
+ invRow:'Invitar con un enlace',parRow:'Parrlo en el grupo',parVal:'permitido',
+ invT:'Invitar al grupo',invP:'Cualquiera con el enlace podrá unirse. Compártelo solo con gente de confianza.',
+ linkK:'Enlace',qrP:'O enseña el código QR: se escanea con la cámara.',
+ copy:'Copiar enlace',share:'Compartir',reset:'Restablecer',
+ invN:'No hace falta un idioma común: cada persona elige el suyo al entrar.',
+ pName:'Parrlo',pVis:'solo lo ves tú',
+ pBody:'Lucía pregunta si quedáis todos en el patio a las'+N+'10. ¿Le respondes?',
+ pSug:'¡Sí, a las'+N+'10 estoy en el patio!',pNote:'Lucía, Pedro y Olga lo leerán en su idioma',
+ pUse:'Usar',pNo:'Ahora no',
+ eb:'Referencia · lote 2 · chat-group · C‑05 · solo tema oscuro',
+ h1:'Casa, cole, vecinos: cada uno lee en su idioma',
+ intro:'Un grupo de vecinos: Lucía y tú escribís en español, Pedro en inglés y Olga en ruso. Tú lo lees todo en español, y cada mensaje lleva una etiqueta con el idioma en que se escribió. El original se abre con un toque.',
+ capB:'Grupo «Vecinos · Colón 12»',capS:'Imagen principal. Todo en español; la etiqueta menta EN o RU significa «traducido», la gris ES significa «escrito en español, sin traducir». Textos provisionales.',
+ what:['<b>Cabecera</b>: nombre del grupo, número de miembros e idiomas del grupo con su código: ES · EN · RU.','<b>Mensajes recibidos</b>: nombre del autor en su color y avatar con la inicial; el texto, en tu idioma; abajo, la etiqueta del idioma original: código + «del ruso».','<b>Tus mensajes</b>: debajo, a qué idiomas se tradujo para los demás (EN · RU); Lucía lee en español, así que no necesita traducción.','<b>Sin fotos de personas</b>: avatares con iniciales y nombres de demo.'],
+ stH:'Estados',stL:'Cinco momentos de un mismo grupo. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-group--&lt;estado&gt;--es.png</code>; la imagen principal es <code>chat-group--es.png</code>.',
+ mk:'maqueta',
+ st:{main:['Grupo','Imagen principal: el grupo de vecinos en tres idiomas, todo se lee en español y cada mensaje lleva su etiqueta de idioma.'],
+  original:['Original','Al tocar el mensaje de Pedro: bajo la traducción se abre el original en inglés; se puede ocultar o marcar como traducción rara.'],
+  members:['Miembros e idiomas','Al tocar la cabecera: quién está en el grupo, en qué idioma escribe y quién es admin; invitar y ajustes.'],
+  invite:['Invitación','«Invitar»: enlace y código QR. No hace falta idioma común: quien entra elige el suyo.'],
+  parrlo:['Parrlo en el grupo','Una sugerencia que solo ves tú: Lucía ha preguntado algo y Parrlo propone una respuesta. La envías tú.']},
+ moreH:'Decisiones, tokens y temas abiertos',decH:'Decisiones nuevas respecto a la app',
+ dec:['<b>Etiqueta de idioma en cada mensaje</b>, no solo «Traducido del …» en algunos: código + palabra. Menta = traducido; gris = original sin traducir. No depende solo del color: el texto cambia.','<b>Idiomas del grupo en la cabecera</b> (ES · EN · RU): se ve al instante que el grupo es multilingüe.','<b>«Traducido: EN · RU» en tus mensajes</b>: ves a qué idiomas ha llegado tu texto.','<b>El original se abre dentro de la burbuja</b>, con su idioma y las acciones «Ocultar» y «¿Traducción rara?» (como en chat-thread).','<b>Miembros con idioma</b>: cada fila dice «escribe en …» y lleva el código; la tuya, «tu idioma».','<b>Invitación</b>: enlace y QR en la misma hoja, con la frase «no hace falta un idioma común».','<b>Sugerencia de Parrlo en el chat</b>: tarjeta «solo lo ves tú» encima del campo; la respuesta va al campo, no se envía sola. Avatar: la mascota, sin destellos.'],
+ tokH:'Tokens y contraste',
+ tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code>/<code>#242B34</code>, líneas <code>#2F3742</code>.','Tus mensajes: Deep Green <code>#00875C</code> + blanco; acento Light Green <code>#2BC48A</code> + <code>#0E1116</code>; traducción y su etiqueta: Mint <code>#BFF2DC</code>.','Colores de autor: Lucía <code>#6AA6F5</code>, Pedro <code>#C3A6F7</code>, Olga <code>#E8A0BF</code>; el autor siempre va con su nombre. Sin amarillo.','Zonas táctiles ≥ 44 pt: botones de 44 a 52, filas de 52 a 60, acciones del original de 44.'],
+ naH:'Sin aprobar',
+ na:['Todos los textos son provisionales, incluidos los de la interfaz en español y en inglés.','Etiqueta de idioma en cada mensaje y códigos en la cabecera: es nuevo; en la app hoy pone «Traducido del … · Mostrar» solo en los traducidos.','Colores de los nombres de autor.','Sugerencias de Parrlo en grupos: la función no existe (GAP n.º 34, «próximamente»), es maqueta. Cómo se avisa a los demás de que alguien usa el asistente (línea en la cabecera del diseño group-parrlo) y el texto sobre el tratamiento: lo deciden los abogados; aquí no se muestra.','«Silenciar», «Buscar» y el QR de la invitación: no están en la app; dibujados como deberían ser.','Nombre de la mascota en es y en: aquí «Parrlo»; falta decisión.'],
+ ct:['Texto del mensaje recibido','Etiqueta de traducción (Mint)','Etiqueta de original, hora','Nombre de Lucía','Nombre de Pedro','Nombre de Olga','Texto y etiquetas de tus mensajes','Notas sobre el fondo','Texto e iconos sobre el acento','Nota sobre idiomas','Texto sobre superficie','Enlace en campo oscuro']
+},
+en:{
+ htmlLang:'en',docTitle:'Parrlo Chat · group',today:'Today',me:'en',
+ gname:'Neighbors · Colón 12',gsub:'4 members · ES · EN · RU',
+ who:{L:'Lucía',P:'Pedro',O:'Olga'},
+ from:{es:'from Spanish',pt:'from Portuguese',ru:'from Russian',en:'from English'},
+ orig:'original',
+ lname:{es:'Spanish',pt:'Portuguese',ru:'Russian',en:'English'},
+ writes:{es:'writes in Spanish',en:'writes in English',ru:'writes in Russian'},
+ mine:'Nice! I’ll pick up a new hose for the garden.',trFor:'Translated: ES · RU',readAll:'Read by everyone',
+ sys:'Pedro joined via invite link',
+ ph:'Message in English',
+ aBack:'Back',aMore:'Group menu',aPlus:'Attach',aMic:'Record voice message',aSend:'Send',aClose:'Close',aCopy:'Copy',
+ ogK:'Original · ',ogHide:'Hide',ogBad:'Translation off?',
+ info:'Group info',edit:'Edit',infoSub:'4 members · 3 languages',
+ qa:['Invite','Search','Mute'],
+ ln:'Everyone writes in their own language and reads everything in theirs. Each message shows the language it was written in.',
+ memH:'Members',you:'You',admin:'admin',yourLang:'in English · your language',
+ invRow:'Invite with a link',parRow:'Parrlo in this group',parVal:'allowed',
+ invT:'Invite to group',invP:'Anyone with the link can join. Only share it with people you trust.',
+ linkK:'Link',qrP:'Or show the QR code so they can scan it with their camera.',
+ copy:'Copy link',share:'Share',reset:'Reset',
+ invN:'No shared language needed: each person picks their own when they join.',
+ pName:'Parrlo',pVis:'only you can see this',
+ pBody:'Lucía’s asking if everyone’s meeting in the courtyard at'+N+'10. Want to reply?',
+ pSug:'Yes, I’ll be in the courtyard at'+N+'10!',pNote:'Lucía, Pedro and Olga will read it in their own language',
+ pUse:'Use reply',pNo:'Not now',
+ eb:'Reference · batch 2 · chat-group · C‑05 · dark theme only',
+ h1:'Home, school, neighbors: everyone reads in their own language',
+ intro:'A neighbors’ group: Lucía writes in Spanish, Pedro and you in English, Olga in Russian. You read the whole thread in English, and every message is tagged with the language it was written in. One tap shows the original.',
+ capB:'Group “Neighbors · Colón 12”',capS:'Hero frame. Everything reads in English; the mint ES or RU tag means “translated”; the gray EN tag means “written in English, not translated”. Copy is a draft.',
+ what:['<b>Header</b>: group name, member count and the group’s languages as codes: ES · EN · RU.','<b>Incoming</b>: the author’s name in their color and an initial avatar; the text in your language; below it, the source-language tag: code + “from Spanish”.','<b>Yours</b>: under your text, which languages it was translated into for the others (ES · RU); Pedro reads English, so he needs no translation.','<b>No photos of people</b>: initial avatars and demo names.'],
+ stH:'States',stL:'Five moments of one group. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-group--&lt;state&gt;--en.png</code>; hero frame is <code>chat-group--en.png</code>.',
+ mk:'mockup',
+ st:{main:['Group','Hero frame: a neighbors’ group in three languages, all of it readable in English, each message tagged with its language.'],
+  original:['Original','Tap Lucía’s message: the Spanish original opens under the translation; hide it or flag the translation.'],
+  members:['Members and languages','Tap the header: who’s in the group, which language each person writes in, who’s admin; invite and settings.'],
+  invite:['Invite','Invite: link and QR code. No shared language needed: new members pick their own.'],
+  parrlo:['Parrlo in the group','A hint only you can see: Lucía asked a question and Parrlo suggests a reply. You send it.']},
+ moreH:'Decisions, tokens, open questions',decH:'Beyond the current build',
+ dec:['<b>A language tag on every message</b>, not just “Translated from …” on some: code + word. Mint = translated, gray = original, untranslated. Not color alone: the words differ.','<b>Group languages in the header</b> (ES · EN · RU): you can tell at a glance the group is multilingual.','<b>“Translated: ES · RU” on your messages</b>: you see which languages your text went out in.','<b>The original opens inside the bubble</b>, with its language plus Hide and “Translation off?” (as in chat-thread).','<b>Members with languages</b>: each row says “writes in …” with a code; yours says “your language”.','<b>Invite</b>: link and QR on one sheet, plus “No shared language needed”.','<b>Parrlo hint in the thread</b>: an “only you can see this” card above the field; the reply goes into the field and never sends itself. Avatar is the mascot, no sparkles.'],
+ tokH:'Tokens and contrast',
+ tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code>/<code>#242B34</code>, lines <code>#2F3742</code>.','Yours: Deep Green <code>#00875C</code> + white; accent Light Green <code>#2BC48A</code> + <code>#0E1116</code>; translation and its tag: Mint <code>#BFF2DC</code>.','Author colors: Lucía <code>#6AA6F5</code>, Pedro <code>#C3A6F7</code>, Olga <code>#E8A0BF</code>; the author is always named. No yellow.','Tap targets ≥ 44 pt: 44–52 buttons, 52–60 list rows, 44 actions under the original.'],
+ naH:'Not approved',
+ na:['All copy is a draft, including the Spanish and English UI.','A language tag on every message and codes in the header are new; the app today shows “Translated from … · Show” on translated messages only.','Author name colors in groups.','Parrlo hints in groups: the feature doesn’t exist yet (GAP #34, “coming soon”), so this frame is a mockup. How others are told that someone uses the assistant (the header line from the group-parrlo mockup) and the processing notice are for legal to decide; not shown here.','Mute, Search and the QR on the invite sheet aren’t in the app; drawn as they should be.','Mascot name in es and en: “Parrlo” here; needs a decision.'],
+ ct:['Incoming text','Translation tag (Mint), incoming','Original tag, time, incoming','Lucía’s name','Pedro’s name','Olga’s name','Text and tags in your messages','Captions on background','Text and icons on accent','Language note','Text on surface','Link on dark field']
+}};
+
+var l=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase();if(!D[l])l='ru';
+var T=D[l];window.CHAT_GROUP_LANG=l;
+
+/* ===== иконки: штрих 1,9, скругления ===== */
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra){return '<svg viewBox="0 0 24 24" '+(extra||SW)+' aria-hidden="true">'+p+'</svg>'}
+var I={
+ back:ic('<path d="M15 5l-7 7 7 7"/>'),
+ more:ic('<circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/>','fill="currentColor" aria-hidden="true"'),
+ tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+ done:ic('<path d="M2.5 12.5l4 4 8-9"/><path d="M11 15.5l1.5 1.5 9-10"/>'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ plus:ic('<path d="M12 5v14M5 12h14"/>'),
+ send:ic('<path d="M12 19V5M6 11l6-6 6 6"/>','fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"'),
+ house:ic('<path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>'),
+ x:ic('<path d="M6 6l12 12M18 6L6 18"/>'),
+ flag:ic('<path d="M5 21V4"/><path d="M5 4.5h11.5l-2 4 2 4H5"/>'),
+ up:ic('<path d="M6 15l6-6 6 6"/>'),
+ join:ic('<circle cx="10" cy="8" r="3.5"/><path d="M3.5 19.5a6.5 6.5 0 0 1 13 0"/><path d="M19 8v6M16 11h6"/>'),
+ search:ic('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>'),
+ bell:ic('<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/><path d="M4 4l16 16"/>'),
+ link:ic('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'),
+ chev:ic('<path d="M9 5l7 7-7 7"/>'),
+ copy:ic('<rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/>'),
+ share:ic('<path d="M12 15V3.5M7.5 8L12 3.5 16.5 8"/><path d="M5 12v6.5A2 2 0 0 0 7 20.5h10a2 2 0 0 0 2-2V12"/>'),
+ retry:ic('<path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4.5h-4.5"/>'),
+ eye:ic('<path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>'),
+ globe:ic('<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z"/>'),
+ field:ic('<path d="M4 12h12M12 7l5 5-5 5"/><path d="M20 5v14"/>')
+};
+var M='../../brandbook/assets/mascot/';
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function scr(inner,extra){return '<div class="scr chat-group-scr">'+sbar+inner+home+(extra||'')+'</div>'}
+function btn(cls,label,inner){return '<span class="'+cls+'" role="button" aria-label="'+label+'">'+inner+'</span>'}
+function nav(){return '<div class="chat-group-nav">'+btn('chat-group-ib bk',T.aBack,I.back)+'<span class="chat-group-gav" aria-hidden="true">'+I.house+'</span><div class="chat-group-nm" role="button"><b>'+T.gname+'</b><span>'+T.gsub+'</span></div>'+btn('chat-group-ib',T.aMore,I.more)+'</div>'}
+function cmp(pre){return '<div class="chat-group-cmp">'+(pre||'')+'<div class="chat-group-crow">'+btn('chat-group-pls',T.aPlus,I.plus)+'<span class="chat-group-f"><span>'+T.ph+'</span></span>'+btn('chat-group-go',T.aMic,I.mic)+'</div></div>'}
+/* входящее: текст на моём языке + метка исходного языка */
+function mi(id,o){o=o||{};var m=MSG[id],same=m.lang===T.me,txt=same?m.orig:m.tr[l];
+ var lb=same?'<span class="chat-group-lb or"><i>'+m.lang.toUpperCase()+'</i>'+T.orig+'</span>':'<span class="chat-group-lb">'+I.tr+'<i>'+m.lang.toUpperCase()+'</i>'+T.from[m.lang]+'</span>';
+ var og=o.open&&!same?'<div class="chat-group-og" lang="'+m.lang+'"><div class="k">'+T.ogK+T.lname[m.lang]+'</div><div class="v">'+m.orig+'</div></div><div class="chat-group-oga"><span role="button">'+I.up+T.ogHide+'</span><span class="s" role="button">'+I.flag+T.ogBad+'</span></div>':'';
+ return '<div class="chat-group-r'+(o.gap?' gap':'')+(o.open?' op':'')+'"><span class="chat-group-av '+m.who+'" aria-hidden="true">'+T.who[m.who][0]+'</span><div class="chat-group-m in'+(o.open?' hl':'')+'" role="button"><span class="chat-group-who '+m.who+'">'+T.who[m.who]+'</span><span lang="'+(same?m.lang:l)+'">'+txt+'</span>'+og+'<div class="chat-group-ft">'+lb+'<span class="chat-group-tm">'+m.tm+'</span></div></div></div>'}
+function mo(tm){return '<div class="chat-group-m out gap"><span>'+T.mine+'</span><div class="chat-group-ft"><span class="chat-group-lb">'+I.tr+T.trFor+'</span><span class="chat-group-tm">'+tm+I.done+'</span></div></div>'}
+var day='<div class="chat-group-day">'+T.today+'</div>';
+var sys='<div class="chat-group-sys">'+I.join+T.sys+'</div>';
+function read(){return '<div class="chat-group-rd">'+I.done+T.readAll+'</div>'}
+
+/* QR-рисунок: условный узор (не сканируется) */
+function qr(){var n=25,s='',seed=7;function r(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff}
+ function fin(x,y){return '<rect x="'+x+'" y="'+y+'" width="7" height="7" fill="#0E1116"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" fill="#0E1116"/>'}
+ for(var y=0;y<n;y++)for(var x=0;x<n;x++){if((x<8&&y<8)||(x>=n-8&&y<8)||(x<8&&y>=n-8))continue;if(r()>.52)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1"/>'}
+ return '<svg viewBox="0 0 25 25" shape-rendering="crispEdges" aria-hidden="true"><g fill="#0E1116">'+s+'</g>'+fin(0,0)+fin(n-7,0)+fin(0,n-7)+'</svg>'}
+
+var S={};
+S.main=function(){return scr(nav()+'<div class="chat-group-msgs">'+day+sys+mi('L1')+mi('P1',{gap:1})+mi('O1',{gap:1})+mo('9:52')+mi('L2',{gap:1})+'</div>'+cmp())};
+S.original=function(){var oL=MSG.P1.lang===T.me;return scr(nav()+'<div class="chat-group-msgs">'+mi('L1',{open:oL})+mi('P1',{gap:1,open:!oL})+mi('O1',{gap:1})+mo('9:52')+mi('L2',{gap:1})+'</div>'+cmp())};
+function members(){
+ var rows=[['L','es',1],['P','en'],['O','ru']].map(function(r){return '<div class="chat-group-li"><span class="chat-group-av '+r[0]+'" aria-hidden="true">'+T.who[r[0]][0]+'</span><div class="t"><b>'+T.who[r[0]]+(r[2]?'<em>'+T.admin+'</em>':'')+'</b><span>'+T.writes[r[1]]+'</span></div><span class="chat-group-code">'+r[1].toUpperCase()+'</span></div>'}).join('');
+ rows+='<div class="chat-group-li"><span class="chat-group-av Y" aria-hidden="true">'+T.you[0]+'</span><div class="t"><b>'+T.you+'</b><span>'+T.yourLang+'</span></div><span class="chat-group-code">'+T.me.toUpperCase()+'</span></div>';
+ return '<div class="chat-group-nav">'+btn('chat-group-ib bk',T.aBack,I.back)+'<div class="chat-group-ttl">'+T.info+'</div></div>'+
+ '<div class="chat-group-body"><div class="chat-group-gh"><span class="chat-group-gav" aria-hidden="true">'+I.house+'</span><h4>'+T.gname+'</h4><span>'+T.infoSub+'</span></div>'+
+ '<div class="chat-group-qa"><div role="button">'+I.join+T.qa[0]+'</div><div role="button">'+I.search+T.qa[1]+'</div><div role="button">'+I.bell+T.qa[2]+'</div></div>'+
+ '<div class="chat-group-ln">'+I.globe+'<span>'+T.ln+'</span></div>'+
+ '<div class="chat-group-sh2">'+T.memH+' · 4</div><div class="chat-group-list">'+rows+'</div>'+
+ '<div class="chat-group-list" style="margin-top:12px"><div class="chat-group-li ac" role="button"><span class="ic">'+I.link+'</span><span style="flex:1">'+T.invRow+'</span>'+I.chev.replace('<svg','<svg class="ch"')+'</div>'+
+ '<div class="chat-group-li" role="button" style="min-height:52px"><span class="chat-group-pav" style="width:40px;height:40px" aria-hidden="true"><img src="'+M+'mascot-listen-dark.svg" alt="" style="width:64px;height:64px;left:-14px;top:-9px"></span><span style="flex:1;font:500 16px/22px Inter">'+T.parRow+'</span><span class="vl">'+T.parVal+'</span>'+I.chev.replace('<svg','<svg class="ch"')+'</div></div>'+
+ '</div>'}
+S.members=function(){return scr(members())};
+S.invite=function(){return scr(members(),'<div class="chat-group-dim"></div><div class="chat-group-sht" role="dialog"><div class="chat-group-gr"></div>'+
+ '<div class="chat-group-shh"><div><h4>'+T.invT+'</h4><p>'+T.invP+'</p></div>'+btn('chat-group-x',T.aClose,'<i>'+I.x+'</i>')+'</div>'+
+ '<div class="chat-group-qr"><div class="q">'+qr()+'</div><div class="d"><div class="k">'+T.linkK+'</div><div class="lk"><span>…/join/7Kq2x9</span>'+btn('chat-group-ib',T.aCopy,I.copy)+'</div><p>'+T.qrP+'</p></div></div>'+
+ '<div class="chat-group-cta" role="button">'+I.copy+T.copy+'</div>'+
+ '<div class="chat-group-al"><span role="button">'+I.share+T.share+'</span><span role="button">'+I.retry+T.reset+'</span></div>'+
+ '<div class="chat-group-nt">'+I.globe+'<span>'+T.invN+'</span></div><div style="height:42px"></div></div>')};
+S.parrlo=function(){var card='<div class="chat-group-pc" role="region" aria-label="'+T.pName+'"><div class="chat-group-ph"><span class="chat-group-pav" aria-hidden="true"><img src="'+M+'mascot-listen-dark.svg" alt=""></span><div><b>'+T.pName+'</b><span class="v">'+I.eye+T.pVis+'</span></div>'+btn('x',T.aClose,I.x)+'</div>'+
+ '<p>'+T.pBody+'</p><div class="chat-group-sg">'+T.pSug+'</div><div class="chat-group-sgn">'+I.tr+'<span>'+T.pNote+'</span></div>'+
+ '<div class="chat-group-pa"><span class="p" role="button">'+I.field+T.pUse+'</span><span class="s" role="button">'+T.pNo+'</span></div></div>';
+ return scr(nav()+'<div class="chat-group-msgs">'+mi('P1')+mi('O1',{gap:1})+mo('9:52')+mi('L2',{gap:1})+'</div>'+cmp(card))};
+window.CHAT_GROUP_S=S;
+
+/* ===== страница ===== */
+document.documentElement.lang=T.htmlLang;document.title=T.docTitle;
+function $(id){return document.getElementById('chat-group-'+id)}
+$('lng').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" hreflang="'+k+'" class="'+(k===l?'on':'')+'"'+(k===l?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+$('eb').textContent=T.eb;$('h1').textContent=T.h1;$('intro').textContent=T.intro;
+$('capb').textContent=T.capB;$('caps').textContent=T.capS;
+$('what').innerHTML=T.what.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('sth').textContent=T.stH;$('stl').innerHTML=T.stL;
+var order=['main','original','members','invite','parrlo'];window.CHAT_GROUP_ORDER=order;
+$('grid').innerHTML=order.map(function(k){return '<div class="chat-group-card"><div class="pf p67" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+T.st[k][0]+' <code>'+k+'</code>'+(k==='parrlo'?'<span class="mk">'+T.mk+'</span>':'')+'</h3><p>'+T.st[k][1]+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=S[p.dataset.state]()});
+window.chatGroupHero=function(k){var h=$('hero');h.dataset.state=k;h.querySelector('.glass').innerHTML=S[k]()};
+$('moreh').textContent=T.moreH;$('dech').textContent=T.decH;$('tokh').textContent=T.tokH;$('nah').textContent=T.naH;
+$('dec').innerHTML=T.dec.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('tok').innerHTML=T.tok.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('na').innerHTML=T.na.map(function(x){return '<li>'+x+'</li>'}).join('');
+
+function Lu(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+/* фон метки перевода ≈ #242B34 + 14% Mint = #3A4646; фон метки оригинала ≈ #3A424D */
+var pairs=[['#F2F5F7','#242B34'],['#BFF2DC','#3A4646'],['#9AA4B2','#242B34'],['#6AA6F5','#242B34'],['#C3A6F7','#242B34'],['#E8A0BF','#242B34'],['#FFFFFF','#00875C'],['#9AA4B2','#0E1116'],['#0E1116','#2BC48A'],['#DCEFE6','#16241F'],['#F2F5F7','#1C2026'],['#F2F5F7','#0E1116']];
+$('ct').innerHTML=pairs.map(function(r,i){return '<tr><td><span class="chat-group-sw" style="background:'+r[0]+'"></span><span class="chat-group-sw" style="background:'+r[1]+'"></span>'+T.ct[i]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_GROUP_MIN=Math.min.apply(null,pairs.map(function(r){return cr(r[0],r[1])}));
+})();
+</script>
+</body>
+</html>
