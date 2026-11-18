@@ -9,8 +9,11 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#0B0E12;color:#F2F5F7}
-body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:48px 16px 80px}
+body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
 .translate-talk-w{max-width:1200px;margin:0 auto}
+.translate-talk-lsw{display:flex;gap:4px;justify-content:flex-end;margin-bottom:24px}
+.translate-talk-lsw a{min-width:48px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;font:700 14px/1 Inter,sans-serif;color:#C3CBD5;text-decoration:none;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-talk-lsw a[aria-current="true"]{background:#2BC48A;color:#0E1116;box-shadow:none}
 .translate-talk-w h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:12px}
 .translate-talk-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
 .translate-talk-lead{color:#9AA4B2;max-width:820px}
@@ -23,9 +26,9 @@ body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:48px 16px 80px}
 .translate-talk-w ul{padding-left:20px;color:#C3CBD5;font-size:15px;max-width:860px}
 .translate-talk-w li{margin:8px 0}
 .translate-talk-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
-.translate-talk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:48px 24px;margin-top:32px}
+.translate-talk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:48px 24px;margin-top:32px}
 .translate-talk-grid figure{margin:0;display:flex;flex-direction:column;align-items:center}
-.translate-talk-grid figcaption{margin-top:16px;width:248px;font-size:14px;line-height:1.45;color:#9AA4B2}
+.translate-talk-grid figcaption{margin-top:16px;width:272px;font-size:14px;line-height:1.45;color:#9AA4B2}
 .translate-talk-grid figcaption b{display:block;color:#F2F5F7;font:900 17px/1.3 Nunito,sans-serif;margin-bottom:4px}
 .translate-talk-grid figcaption code{font-size:12px}
 .translate-talk-tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
@@ -33,211 +36,164 @@ body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:48px 16px 80px}
 .translate-talk-tbl th{color:#9AA4B2;font-weight:600}
 .translate-talk-tw{overflow-x:auto}
 .translate-talk-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:0 0 0 1px #3A414B}
-@media (max-width:760px){.translate-talk-w h1{font-size:30px}.translate-talk-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-talk-hero .pf{--s:.8!important}}
-@media (max-width:420px){.translate-talk-hero .pf{--s:.78!important}}
+@media (max-width:760px){.translate-talk-w h1{font-size:30px}.translate-talk-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-talk-hero .pf{--s:.74!important}}
+@media (max-width:420px){.translate-talk-hero .pf{--s:.7!important}}
 
-/* ===== экран ===== */
+/* ===== экран 430×932 — каркас как у translate-clear / translate-word ===== */
 .translate-talk-scr{--me:#2BC48A;--es:#BFF2DC;--err:#FF6B5E}
-.translate-talk-top{flex:none;display:flex;align-items:center;gap:8px;padding:8px 16px}
+.translate-talk-top{flex:none;height:64px;display:flex;align-items:center;gap:8px;padding:0 16px}
 .translate-talk-cb{width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
 .translate-talk-pair{flex:1;min-width:0;display:flex;justify-content:center}
 .translate-talk-pair>span{height:48px;border-radius:24px;background:var(--sf2);display:inline-flex;align-items:center;gap:8px;padding:0 16px;font:900 19px/1 Nunito,sans-serif;letter-spacing:.02em}
-.translate-talk-pair .translate-talk-swp{color:var(--sec);display:flex}
+.translate-talk-swp{color:var(--sec);display:flex}
 .translate-talk-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--me)}
-.translate-talk-dot.translate-talk-es{background:var(--es)}
-.translate-talk-main{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 16px;overflow:hidden}
+.translate-talk-dot.translate-talk-p{background:var(--es)}
+.translate-talk-main{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 16px;position:relative}
 .translate-talk-bot{flex:none;display:flex;flex-direction:column;gap:12px;padding:12px 16px 4px}
+.translate-talk-hint{height:20px;display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center;white-space:nowrap}
+.translate-talk-hint svg{width:16px;height:16px;flex:none}
 .translate-talk-btns{display:flex;gap:12px}
-.translate-talk-pb{flex:1;min-width:0;height:80px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:10px;color:#0E1116;position:relative}
+.translate-talk-pb{flex:1;min-width:0;height:80px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:10px;color:#0E1116}
 .translate-talk-pb svg{flex:none;width:26px;height:26px}
 .translate-talk-pb b{display:block;font:900 21px/24px Nunito,sans-serif;white-space:nowrap}
 .translate-talk-pb small{display:block;font:600 13px/1.3 Inter,sans-serif;margin-top:2px}
 .translate-talk-pb.translate-talk-me{background:var(--me)}
-.translate-talk-pb.translate-talk-es{background:var(--es)}
+.translate-talk-pb.translate-talk-pt{background:var(--es)}
 .translate-talk-pb.translate-talk-next{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--es),0 0 36px rgba(191,242,220,.28)}
-.translate-talk-pb.translate-talk-next.translate-talk-me{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--me),0 0 36px rgba(43,196,138,.3)}
-.translate-talk-hint{display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center}
-.translate-talk-hint svg{width:16px;height:16px;flex:none}
-.translate-talk-hint b{color:var(--tx);font-weight:600}
-.translate-talk-sec{height:56px;border-radius:28px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;font:600 16px Inter,sans-serif;flex:1}
-.translate-talk-sec svg{width:20px;height:20px}
-.translate-talk-pri{height:56px;border-radius:28px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;gap:8px;font:900 19px Nunito,sans-serif;flex:1}
-.translate-talk-pri svg{width:22px;height:22px}
-.translate-talk-lbl{font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+.translate-talk-sec{flex:none;width:136px;height:80px;border-radius:40px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;font:600 16px Inter,sans-serif}
+.translate-talk-sec svg{width:20px;height:20px;flex:none}
+.translate-talk-stop{flex:1;min-width:0;height:80px;border-radius:40px;background:#F2F5F7;color:#0E1116;display:flex;align-items:center;justify-content:center;gap:12px;font:900 24px Nunito,sans-serif;white-space:nowrap}
+.translate-talk-stop i{width:20px;height:20px;border-radius:5px;background:#E0483B;flex:none}
+.translate-talk-lbl{flex:none;height:20px;display:flex;align-items:center;gap:8px;font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;white-space:nowrap}
+.translate-talk-lbl .translate-talk-sp{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--tx);font:600 15px/20px Inter,sans-serif;font-variant-numeric:tabular-nums}
+.translate-talk-lbl .translate-talk-sp i{width:10px;height:10px;border-radius:50%;background:var(--err);box-shadow:0 0 0 4px rgba(255,107,94,.22)}
 
-/* idle */
-.translate-talk-idle{align-items:center;text-align:center;justify-content:center;gap:0}
-.translate-talk-idle img{width:128px;height:128px;margin-bottom:8px}
-.translate-talk-idle h3{font:900 30px/1.15 Nunito,sans-serif;margin-bottom:8px}
-.translate-talk-idle>p{font:400 16px/24px Inter,sans-serif;color:var(--sec);max-width:310px;margin-bottom:24px}
-.translate-talk-steps{align-self:stretch;background:var(--sf);border-radius:24px;padding:8px 20px;text-align:left;box-shadow:inset 0 0 0 1px var(--line)}
-.translate-talk-step{display:flex;gap:16px;align-items:center;min-height:56px;font:500 16px/22px Inter,sans-serif}
-.translate-talk-step+.translate-talk-step{border-top:1px solid var(--line)}
-.translate-talk-step i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--sf2);color:var(--tx);font:900 15px/28px Nunito,sans-serif;font-style:normal;text-align:center}
-.translate-talk-step em{font-style:normal;font-weight:700}
+/* idle — T‑01 */
+.translate-talk-idle{align-items:center;text-align:center;justify-content:center;padding-bottom:8px}
+.translate-talk-idle img{width:120px;height:120px;margin-bottom:12px}
+.translate-talk-idle h3{font:900 32px/38px Nunito,sans-serif;margin-bottom:8px}
+.translate-talk-idle>p{font:400 17px/25px Inter,sans-serif;color:var(--sec);max-width:360px;margin-bottom:28px}
+.translate-talk-set{align-self:stretch;background:var(--sf);border-radius:24px;padding:4px 16px 4px 20px;text-align:left;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-talk-row{display:flex;align-items:center;gap:12px;min-height:72px}
+.translate-talk-row+.translate-talk-row{border-top:1px solid var(--line)}
+.translate-talk-row>div{flex:1;min-width:0}
+.translate-talk-row b{display:block;font:600 16px/22px Inter,sans-serif}
+.translate-talk-row small{display:block;text-wrap:balance;font:400 14px/19px Inter,sans-serif;color:var(--sec)}
+.translate-talk-row .translate-talk-val{flex:none;display:flex;align-items:center;gap:6px;height:44px;font:600 15px Inter,sans-serif;color:var(--tx)}
+.translate-talk-row .translate-talk-val svg{width:18px;height:18px;color:var(--sec)}
+.translate-talk-seg{flex:none;display:flex;background:var(--bg);border-radius:24px;padding:2px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-talk-seg span{min-width:56px;height:44px;border-radius:22px;padding:0 14px;display:flex;align-items:center;justify-content:center;gap:6px;font:600 15px Inter,sans-serif;color:var(--sec)}
+.translate-talk-seg span.translate-talk-sel{background:var(--es);color:#0E1116}
+.translate-talk-seg span svg{width:16px;height:16px}
 
-/* listening */
-.translate-talk-ls{align-items:center;text-align:center;padding-top:16px}
-.translate-talk-turn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:18px;background:#1E3734;color:var(--me);font:600 15px Inter,sans-serif}
-.translate-talk-turn.translate-talk-es{background:#243A33;color:var(--es)}
-.translate-talk-turn svg{width:18px;height:18px}
-.translate-talk-ls h3{font:900 32px/1.15 Nunito,sans-serif;margin-top:28px}
-.translate-talk-ls .translate-talk-sub{font:400 16px/24px Inter,sans-serif;color:var(--sec);margin-top:4px}
-.translate-talk-time{margin-top:40px;font:600 48px/56px Inter,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.translate-talk-rec{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font:600 14px Inter,sans-serif;color:var(--tx)}
-.translate-talk-rec i{width:10px;height:10px;border-radius:50%;background:var(--err);box-shadow:0 0 0 4px rgba(255,107,94,.22)}
-.translate-talk-wave{height:160px;display:flex;align-items:center;justify-content:center;gap:4px;margin-top:28px;align-self:stretch;position:relative}
+/* запись: блоки как в translate-clear */
+.translate-talk-rec{gap:12px}
+.translate-talk-slot{position:relative;border-radius:28px;padding:20px 20px 0;display:flex;flex-direction:column;overflow:hidden}
+.translate-talk-a{flex:1;min-height:0;background:var(--sf);box-shadow:inset 0 0 0 2px var(--me)}
+.translate-talk-a.translate-talk-ap{box-shadow:inset 0 0 0 2px var(--es)}
+.translate-talk-c{flex:none;height:176px;background:transparent;border:1.5px dashed #3A414B;padding:20px 24px 0}
+.translate-talk-ask{flex:none;display:flex;gap:10px;align-items:flex-start;background:#243A33;color:var(--es);border-radius:20px;padding:14px 16px;font:600 17px/24px Inter,sans-serif}
+.translate-talk-ask svg{width:22px;height:22px;flex:none;margin-top:1px}
+.translate-talk-live{margin-top:16px;font:500 26px/35px Inter,sans-serif;color:var(--tx)}
+.translate-talk-car{display:inline-block;width:2px;height:28px;background:var(--me);vertical-align:-5px;margin-left:3px;border-radius:1px}
+.translate-talk-ap .translate-talk-car{background:var(--es)}
+.translate-talk-wave{position:absolute;left:20px;right:20px;bottom:24px;height:120px;display:flex;align-items:center;gap:4px}
 .translate-talk-wave i{width:4px;border-radius:2px;background:var(--me);flex:none}
-.translate-talk-wave i.translate-talk-f{background:#3A414B;height:4px!important}
-.translate-talk-wave.translate-talk-es i{background:var(--es)}
-.translate-talk-wave.translate-talk-es i.translate-talk-f{background:#3A414B}
-.translate-talk-tip{margin-top:auto;margin-bottom:8px;font:400 14px/20px Inter,sans-serif;color:var(--sec);display:flex;gap:8px;align-items:center}
-.translate-talk-tip svg{width:16px;height:16px}
-.translate-talk-stop{flex:1;height:80px;border-radius:40px;background:#F2F5F7;color:#0E1116;display:flex;align-items:center;justify-content:center;gap:12px;font:900 24px Nunito,sans-serif}
-.translate-talk-stop i{width:20px;height:20px;border-radius:5px;background:#E0483B}
-.translate-talk-cancel{flex:none;width:120px;height:80px;border-radius:40px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;font:600 16px Inter,sans-serif}
+.translate-talk-ap .translate-talk-wave i{background:var(--es)}
+.translate-talk-wave i.translate-talk-z{background:#3A414B!important;height:4px!important}
+.translate-talk-empty{margin-top:12px;font:400 17px/25px Inter,sans-serif;color:var(--sec);max-width:340px}
+.translate-talk-sk{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.translate-talk-sk i{display:block;height:16px;border-radius:8px;background:#1C2026}
 
-/* processing */
-.translate-talk-pr{padding-top:16px;gap:16px}
-.translate-talk-stepper{display:flex;align-items:center;gap:12px;background:var(--sf);border-radius:20px;padding:14px 16px;box-shadow:inset 0 0 0 1px var(--line)}
-.translate-talk-stepper>span{display:flex;align-items:center;gap:8px;font:600 15px/20px Inter,sans-serif;white-space:nowrap}
-.translate-talk-stepper .translate-talk-ok{color:var(--sec)}
-.translate-talk-stepper .translate-talk-ok svg{color:var(--me)}
-.translate-talk-stepper svg{width:22px;height:22px;flex:none}
-.translate-talk-stepper .translate-talk-arr{flex:1;height:2px;background:var(--line);border-radius:1px;min-width:12px}
-.translate-talk-spin{animation:translate-talk-rot 1s linear infinite}
-@keyframes translate-talk-rot{to{transform:rotate(360deg)}}
-.translate-talk-said{position:relative;background:var(--sf);border-radius:20px;padding:16px 20px;box-shadow:inset 0 0 0 1px var(--line)}
-.translate-talk-said p{font:400 19px/26px Inter,sans-serif;margin-top:8px}
-.translate-talk-said .translate-talk-row{height:20px}
-.translate-talk-said .translate-talk-row+p{margin-top:8px}
-.translate-talk-skel{background:#123A2C;border-radius:28px;padding:24px 24px 28px;display:flex;flex-direction:column;gap:14px}
-.translate-talk-skel>i{display:block;height:22px;border-radius:11px;background:linear-gradient(90deg,rgba(191,242,220,.10),rgba(191,242,220,.22),rgba(191,242,220,.10))}
-.translate-talk-skel .translate-talk-lbl{color:#BFF2DC}
-
-/* done */
-.translate-talk-dn{padding-top:12px;gap:16px}
-.translate-talk-card{background:var(--deep);border-radius:28px;padding:20px 24px 20px;color:#fff}
-.translate-talk-card .translate-talk-lbl{color:#FFFFFF}
-.translate-talk-card p{font:900 31px/1.2 Nunito,sans-serif;margin:12px 0 20px;letter-spacing:.005em}
-.translate-talk-acts{display:flex;gap:8px}
-.translate-talk-act{height:48px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 14px;font:600 16px Inter,sans-serif;background:#FFFFFF;color:#0E1116}
-.translate-talk-act.translate-talk-ghost{background:#005E40;color:#fff}
-.translate-talk-act svg{width:20px;height:20px}
-.translate-talk-said .translate-talk-row{display:flex;justify-content:space-between;align-items:center}
-.translate-talk-ed{position:absolute;right:4px;top:4px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec)}
-.translate-talk-ed svg{width:20px;height:20px}
-.translate-talk-note{font:400 13px/18px Inter,sans-serif;color:var(--sec);display:flex;gap:8px;align-items:flex-start;padding:0 4px}
-.translate-talk-note svg{width:16px;height:16px;flex:none;margin-top:1px}
-
-/* conversation */
-.translate-talk-feed{justify-content:flex-end;gap:4px;padding-bottom:4px;-webkit-mask-image:linear-gradient(transparent 0,#000 48px);mask-image:linear-gradient(transparent 0,#000 48px)}
-.translate-talk-day{align-self:center;font:500 13px Inter,sans-serif;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px;margin-bottom:8px}
-.translate-talk-bb{max-width:86%;border-radius:24px;padding:12px 18px 14px}
+/* разговор — T‑03 */
+.translate-talk-conv{padding:0}
+.translate-talk-gchip{flex:none;align-self:center;display:flex;align-items:center;gap:10px;height:44px;padding:0 14px 0 6px;border-radius:22px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);font:600 14px/18px Inter,sans-serif;white-space:nowrap;margin-bottom:4px}
+.translate-talk-gchip .translate-talk-av{width:32px;height:32px;border-radius:50%;background:var(--es);color:#0E1116;display:flex;align-items:center;justify-content:center}
+.translate-talk-gchip .translate-talk-av svg{width:18px;height:18px}
+.translate-talk-gchip span{color:var(--sec);font-weight:500}
+.translate-talk-gchip>svg{width:16px;height:16px;color:var(--sec)}
+.translate-talk-feed{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:0 16px 4px;overflow:hidden;-webkit-mask-image:linear-gradient(transparent 0,#000 56px);mask-image:linear-gradient(transparent 0,#000 56px)}
+.translate-talk-bb{flex:none;max-width:88%;border-radius:24px;padding:12px 18px 14px;position:relative}
 .translate-talk-bb .translate-talk-o{display:block;font:400 14px/19px Inter,sans-serif;padding-bottom:8px;margin-bottom:8px}
-.translate-talk-bb .translate-talk-t{display:block;font:600 18px/24px Inter,sans-serif}
+.translate-talk-bb .translate-talk-t{display:block;font:600 18px/25px Inter,sans-serif}
 .translate-talk-bb.translate-talk-l{align-self:flex-start;background:var(--es);color:#0E1116;border-bottom-left-radius:8px}
-.translate-talk-bb.translate-talk-l .translate-talk-o{color:#2E4A3F;border-bottom:1px solid rgba(14,17,22,.14)}
+.translate-talk-bb.translate-talk-l .translate-talk-orig{display:flex;align-items:center;gap:6px;margin-top:8px;font:600 13px/16px Inter,sans-serif;color:#2E4A3F}
+.translate-talk-bb.translate-talk-l .translate-talk-orig svg{width:14px;height:14px}
 .translate-talk-bb.translate-talk-r{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:8px}
-.translate-talk-bb.translate-talk-r .translate-talk-o{color:#FFFFFF;border-bottom:1px solid rgba(255,255,255,.22)}
-.translate-talk-bb.translate-talk-big{max-width:100%;position:relative;padding-right:68px}
-.translate-talk-bb.translate-talk-big .translate-talk-t{font:900 24px/30px Nunito,sans-serif}
-.translate-talk-bb .translate-talk-spk{position:absolute;right:10px;bottom:10px;width:44px;height:44px;border-radius:50%;background:#005E40;display:flex;align-items:center;justify-content:center;color:#fff}
-.translate-talk-meta{font:500 12px/16px Inter,sans-serif;color:var(--sec);margin:4px 8px 8px}
+.translate-talk-bb.translate-talk-r .translate-talk-o{color:#FFFFFF;border-bottom:1px solid rgba(255,255,255,.24)}
+.translate-talk-bb.translate-talk-big{max-width:100%;padding-right:72px}
+.translate-talk-bb.translate-talk-big .translate-talk-t{font:900 25px/31px Nunito,sans-serif}
+.translate-talk-bb .translate-talk-spk{position:absolute;right:12px;bottom:12px;width:48px;height:48px;border-radius:50%;background:#005E40;display:flex;align-items:center;justify-content:center;color:#fff}
+.translate-talk-bb .translate-talk-spk svg{width:22px;height:22px}
+.translate-talk-g{text-decoration:underline dotted;text-decoration-thickness:2px;text-underline-offset:5px}
+.translate-talk-l .translate-talk-g{text-decoration-color:rgba(14,17,22,.6)}
+.translate-talk-r .translate-talk-g{text-decoration-color:rgba(255,255,255,.8)}
+.translate-talk-meta{flex:none;font:500 12px/16px Inter,sans-serif;color:var(--sec);margin:2px 8px 8px}
 .translate-talk-meta.translate-talk-l{align-self:flex-start}
 .translate-talk-meta.translate-talk-r{align-self:flex-end}
 
-/* face */
-.translate-talk-fc{padding:4px 12px 0;gap:0}
+/* лицом к лицу */
+.translate-talk-fc{padding:4px 12px 0}
 .translate-talk-pan{flex:1;min-height:0;background:var(--deep);border-radius:32px;transform:rotate(180deg);display:flex;flex-direction:column;padding:24px;color:#fff}
 .translate-talk-pan .translate-talk-lbl{color:#FFFFFF}
-.translate-talk-pan p{font:900 36px/44px Nunito,sans-serif;margin-top:16px}
-.translate-talk-pan .translate-talk-acts{margin-top:auto;gap:12px}
-.translate-talk-pan .translate-talk-pb{height:64px;border-radius:32px}
-.translate-talk-pan .translate-talk-pb b{font-size:20px}
-.translate-talk-pan .translate-talk-act{height:64px;border-radius:32px;padding:0 22px 0 18px;font-size:17px}
-.translate-talk-mid{flex:none;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px Inter,sans-serif;color:var(--sec)}
+.translate-talk-pan p{font:900 38px/46px Nunito,sans-serif;margin-top:16px}
+.translate-talk-pan .translate-talk-acts{margin-top:auto;display:flex;gap:12px}
+.translate-talk-act{flex:1;min-width:0;height:64px;border-radius:32px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 18px;font:600 17px Inter,sans-serif;background:#FFFFFF;color:#0E1116;white-space:nowrap}
+.translate-talk-act svg{width:22px;height:22px;flex:none}
+.translate-talk-act.translate-talk-pm{background:var(--es);font:900 20px Nunito,sans-serif}
+.translate-talk-mid{flex:none;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px Inter,sans-serif;color:var(--sec);white-space:nowrap}
 .translate-talk-mid svg{width:18px;height:18px}
 .translate-talk-mine{flex:none;padding:0 4px 4px;display:flex;flex-direction:column;gap:16px}
 .translate-talk-mine p{font:400 19px/26px Inter,sans-serif;margin-top:6px}
-.translate-talk-mine .translate-talk-btns .translate-talk-pb{height:64px;border-radius:32px}
+.translate-talk-mine .translate-talk-btns>span{height:64px;border-radius:32px}
+.translate-talk-mine .translate-talk-sec{flex:1;width:auto}
 
-/* error */
-.translate-talk-er{align-items:center;text-align:center;padding-top:8px}
+/* ошибка */
+.translate-talk-er{align-items:center;text-align:center;justify-content:center}
 .translate-talk-er img{width:112px;height:112px}
-.translate-talk-erb{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:16px;background:#3C2A2E;color:#FF8A7F;font:600 14px Inter,sans-serif;margin-top:4px}
+.translate-talk-erb{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:16px;background:#3C2A2E;color:#FF8A7F;font:600 14px Inter,sans-serif;margin-top:8px}
 .translate-talk-erb svg{width:16px;height:16px}
-.translate-talk-er h3{font:900 28px/1.2 Nunito,sans-serif;margin-top:16px}
-.translate-talk-er>p{font:400 16px/24px Inter,sans-serif;color:var(--sec);margin-top:8px;max-width:320px}
-.translate-talk-clip{align-self:stretch;margin-top:24px;background:var(--sf);border-radius:20px;padding:12px 16px 12px 12px;display:flex;align-items:center;gap:12px;box-shadow:inset 0 0 0 1px var(--line);text-align:left}
+.translate-talk-er h3{font:900 30px/36px Nunito,sans-serif;margin-top:16px}
+.translate-talk-er>p{font:400 17px/25px Inter,sans-serif;color:var(--sec);margin-top:8px;max-width:340px}
+.translate-talk-clip{align-self:stretch;margin-top:28px;background:var(--sf);border-radius:24px;padding:12px 16px 12px 12px;display:flex;align-items:center;gap:12px;box-shadow:inset 0 0 0 1px var(--line);text-align:left}
 .translate-talk-play{flex:none;width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
 .translate-talk-play svg{width:20px;height:20px}
-.translate-talk-clip .translate-talk-cw{flex:1;min-width:0}
-.translate-talk-clip .translate-talk-cw b{display:block;font:600 15px/20px Inter,sans-serif}
-.translate-talk-clip .translate-talk-cw span{display:flex;align-items:center;gap:6px;font:500 13px/18px Inter,sans-serif;color:var(--sec)}
-.translate-talk-clip .translate-talk-cw span svg{width:14px;height:14px;color:var(--me)}
-.translate-talk-mw{display:flex;align-items:center;gap:3px;height:28px;margin-top:4px}
+.translate-talk-cw{flex:1;min-width:0}
+.translate-talk-cw b{display:block;font:600 15px/20px Inter,sans-serif}
+.translate-talk-mw{display:flex;align-items:center;gap:3px;height:28px;margin-top:4px;overflow:hidden}
 .translate-talk-mw i{width:3px;border-radius:2px;background:#5B6472;flex:none}
-.translate-talk-mw i.translate-talk-pl{background:var(--me)}
 .translate-talk-dur{font:600 14px Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--sec)}
-.translate-talk-tips{align-self:stretch;margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.translate-talk-tips span{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;background:var(--sf);font:500 13px Inter,sans-serif;color:#C3CBD5;box-shadow:inset 0 0 0 1px var(--line)}
-.translate-talk-tips svg{width:15px;height:15px}
-.translate-talk-bot .translate-talk-btns.translate-talk-v{flex-direction:column}
-.translate-talk-btns.translate-talk-v>span{flex:none}
+.translate-talk-v{flex-direction:column}
+.translate-talk-pri{height:64px;border-radius:32px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;gap:10px;font:900 21px Nunito,sans-serif}
+.translate-talk-pri svg{width:22px;height:22px}
+.translate-talk-v .translate-talk-sec{width:auto;height:56px;border-radius:28px}
 </style>
 </head>
 <body>
 <div class="translate-talk-w">
-<span class="translate-talk-tag">Эталон v2 · черновик текста</span>
-<h1>Translate · разговор лицом к лицу</h1>
-<p class="translate-talk-lead">Один телефон на двоих: вы говорите по‑русски, собеседник — по‑испански. Каждая реплика проходит путь «запись → распознавание → перевод», а перевод показывается крупно или разворачивается к собеседнику. Только тёмная тема, интерфейс на «вы». Экран 390×844 pt, PNG @3× — 1170×2532.</p>
+<nav class="translate-talk-lsw" id="translate-talk-lsw" aria-label="Language"></nav>
+<span class="translate-talk-tag" id="translate-talk-tag"></span>
+<h1 id="translate-talk-h1"></h1>
+<p class="translate-talk-lead" id="translate-talk-lead"></p>
 
 <section class="translate-talk-hero">
  <figure id="translate-talk-hero-ph"></figure>
- <div class="translate-talk-hero-t">
-  <h3>Главный кадр · разговор в кафе</h3>
-  <p>Реплики обеих сторон в одной ленте. У каждой — то, что сказали, и перевод для того, кто слушает: собеседнику — на испанском (Deep Green), вам — на русском (Mint). Последний перевод крупнее и с кнопкой «Озвучить».</p>
-  <p>Цвет закреплён за стороной во всём экране: зелёный #2BC48A — вы и «Я говорю», мятный #BFF2DC — собеседник и «Yo hablo». Под кнопками — подсказка, чья очередь, словами, а не только цветом.</p>
- </div>
+ <div class="translate-talk-hero-t" id="translate-talk-hero-t"></div>
 </section>
 
-<h2>Состояния</h2>
-<p class="translate-talk-lead">Порядок — как в живом разговоре. Под каждым экраном: когда он показывается и что делает пользователь. Масштаб 0,6.</p>
+<h2 id="translate-talk-h-states"></h2>
+<p class="translate-talk-lead" id="translate-talk-states-lead"></p>
 <div class="translate-talk-grid" id="translate-talk-grid"></div>
 
-<h2>Решения</h2>
-<ul>
-<li><b>Цвет = сторона.</b> Точки в пилюле «RU ⇆ ES», кнопки, волна записи и пузыри ленты окрашены по стороне: вы — #2BC48A, собеседник — #BFF2DC. Жёлтая точка RU из сборки убрана: жёлтый на экране остаётся только в клюве маскота.</li>
-<li><b>«Чья очередь» словами.</b> После перевода следующая кнопка получает кольцо, а над ней строка «Теперь очередь собеседника». Во время записи вторая кнопка скрыта, вместо неё — «Отменить» и крупный «Стоп».</li>
-<li><b>Запись собеседника — по‑испански.</b> Отдельное состояние <code>listening-es</code>: крупный текст на испанском («Hable ahora»), чтобы собеседник понимал, что говорить можно ему; подсказка для вас — по‑русски.</li>
-<li><b>Этапы без обещаний скорости.</b> «Распознаём речь → Переводим»: галочка у пройденного шага, распознанная фраза появляется сразу, перевод — скелетоном. Есть «Отменить».</li>
-<li><b>Готово = карточка для собеседника.</b> Крупный перевод (Nunito 900, 31 pt), «Озвучить» и «Показать собеседнику»; ниже «Вы сказали» с кнопкой «Исправить» (правка текста перед повторным переводом). Микроподпись честно говорит, что перевод может быть неточным.</li>
-<li><b>Режим «к собеседнику».</b> Верхняя половина развёрнута на 180°: телефон кладут на стол между людьми, собеседник читает перевод со своей стороны и сам нажимает «Yo hablo» или «Escuchar». Нижняя половина остаётся вашей.</li>
-<li><b>Ошибки не теряют запись.</b> «Нет соединения» и «Не расслышали» (добавлено сверх задания) показывают сохранённую запись с прослушиванием и одно главное действие: «Повторить» / «Сказать ещё раз». Для «не расслышали» — запасной путь «Ввести текстом» и короткие советы.</li>
-<li><b>Верхняя панель.</b> Отступ 16 pt от краёв, круги 48 pt, пилюля языков по центру сжимается, а не выталкивает кнопки. Красный «стоп» из сборки заменён на «Назад»: завершение записи — только крупной кнопкой «Стоп».</li>
-</ul>
+<h2 id="translate-talk-h-dec"></h2>
+<ul id="translate-talk-dec"></ul>
 
-<h2>Токены и контраст</h2>
-<div class="translate-talk-tw"><table class="translate-talk-tbl" id="translate-talk-ctr">
-<tr><th>Пара (текст / фон)</th><th>Где</th><th>Контраст</th><th>Норма</th></tr>
-</table></div>
-<ul>
-<li>Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code> — тёмная тема v2.3.</li>
-<li>Сторона «вы»: <code>#2BC48A</code> (dark.primary), подложка чипа <code>#1E3734</code> (dark.successBg). Сторона собеседника: <code>#BFF2DC</code> (dark.partnerButtonBg). Перевод для собеседника — <code>#00875C</code> (brand.deep); кнопки внутри карточки — <code>#005E40</code>.</li>
-<li>Ошибка: <code>#FF6B5E</code> / <code>#3C2A2E</code> (dark.error / errorBg); текст бейджа — <code>#FF8A7F</code>. Значок записи на кнопке «Стоп» — <code>#E0483B</code> (на светлой кнопке; не текст).</li>
-<li>Шрифты: Nunito 900 — заголовки, кнопки, крупный перевод; Inter 400/500/600 — интерфейс. Сетка 4 pt, поля 16, карточки 20–24. Зоны нажатия ≥ 44 pt (круги 48, кнопки 56–80).</li>
-</ul>
+<h2 id="translate-talk-h-tok"></h2>
+<div class="translate-talk-tw"><table class="translate-talk-tbl" id="translate-talk-ctr"></table></div>
+<ul id="translate-talk-tok"></ul>
 
-<h2>Не утверждено</h2>
-<ul>
-<li>Все тексты — черновик, включая испанские («Hable ahora», «Escuchar», «Traducción para usted»).</li>
-<li>Отказ от жёлтой точки RU и цветовая схема «сторона = цвет» — предложение, в брендбуке не закреплено.</li>
-<li>Состояния <code>listening-es</code> и <code>unclear</code>, кнопки «Исправить», «Ввести текстом», «Показать собеседнику», прослушивание сохранённой записи — функции сверх текущей сборки.</li>
-<li>Режим «к собеседнику»: включать вручную (кнопка) или по положению телефона — не решено; на макете — кнопкой.</li>
-<li>Цвета <code>#005E40</code>, <code>#123A2C</code>, <code>#243A33</code>, <code>#FF8A7F</code>, <code>#E0483B</code>, <code>#2E4A3F</code> — производные, в токенах v2.3 их нет.</li>
-<li>Что происходит с сохранённой записью при выходе из разговора — не решено (на макете не обещаем хранение).</li>
-</ul>
+<h2 id="translate-talk-h-na"></h2>
+<ul id="translate-talk-na"></ul>
 </div>
 
 <script src="../screens.js"></script>
@@ -252,163 +208,284 @@ const I={
  back:`<svg class="ic" viewBox="0 0 24 24" ${SW}><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>`,
  swap:`<svg viewBox="0 0 24 24" ${SW} style="width:20px;height:20px"><path d="M4 8h14M14.5 4.5L18 8l-3.5 3.5"/><path d="M20 16H6M9.5 12.5L6 16l3.5 3.5"/></svg>`,
  spk:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
- check:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M8 12.3l2.7 2.7L16 9.6"/></svg>`,
- ok:`<svg viewBox="0 0 24 24" ${SW}><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
- spin:`<svg class="${P}spin" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9" stroke="#2F3742"/><path d="M12 3a9 9 0 0 1 9 9" stroke="#2BC48A"/></svg>`,
  rot:`<svg viewBox="0 0 24 24" ${SW}><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 6h3"/><path d="M3 10.5a8 8 0 0 0 1.7 6.3M2.6 14.6l2 2.4 2.6-1.6"/></svg>`,
- pencil:`<svg viewBox="0 0 24 24" ${SW}><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>`,
  play:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
- wifioff:`<svg viewBox="0 0 24 24" ${SW}><path d="M2.5 9a14 14 0 0 1 5-2.9M11 5.6A14 14 0 0 1 21.5 9"/><path d="M5.5 12.5a9.5 9.5 0 0 1 4-2.2M14.5 10.6a9.5 9.5 0 0 1 4 1.9"/><path d="M8.8 15.8a5 5 0 0 1 6.4 0"/><path d="M12 19.5h.01"/><path d="M3 3l18 18"/></svg>`,
- ear:`<svg viewBox="0 0 24 24" ${SW}><path d="M6.5 9a5.5 5.5 0 0 1 11 0c0 3-2.5 3.8-3 6.3-.4 2-1.6 3.7-3.7 3.7A3 3 0 0 1 8 16.5"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.2-1 1.6-1.4 2.5"/></svg>`,
- info:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/></svg>`,
  retry:`<svg viewBox="0 0 24 24" ${SW}><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/></svg>`,
  down:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 5v13M6.5 13L12 18.5 17.5 13"/></svg>`,
- vol:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/></svg>`,
- walk:`<svg viewBox="0 0 24 24" ${SW}><rect x="7.5" y="2.5" width="9" height="15" rx="2.2"/><path d="M12 20.5v1M8 21h8"/></svg>`,
+ info:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/></svg>`,
+ chev:`<svg viewBox="0 0 24 24" ${SW}><path d="M9.5 6l6 6-6 6"/></svg>`,
+ chevd:`<svg viewBox="0 0 24 24" ${SW}><path d="M6.5 9.5l5.5 5.5 5.5-5.5"/></svg>`,
+ ok:`<svg viewBox="0 0 24 24" ${SW}><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ person:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="8" r="3.8"/><path d="M4.8 20a7.2 7.2 0 0 1 14.4 0"/></svg>`,
+ ear:`<svg viewBox="0 0 24 24" ${SW}><path d="M6.5 9a5.5 5.5 0 0 1 11 0c0 3-2.5 3.8-3 6.3-.4 2-1.6 3.7-3.7 3.7A3 3 0 0 1 8 16.5"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.2-1 1.6-1.4 2.5"/></svg>`,
+ wifioff:`<svg viewBox="0 0 24 24" ${SW}><path d="M2.5 9a14 14 0 0 1 5-2.9M11 5.6A14 14 0 0 1 21.5 9"/><path d="M5.5 12.5a9.5 9.5 0 0 1 4-2.2M14.5 10.6a9.5 9.5 0 0 1 4 1.9"/><path d="M8.8 15.8a5 5 0 0 1 6.4 0"/><path d="M12 19.5h.01"/><path d="M3 3l18 18"/></svg>`,
 };
 const MASC='../../brandbook/assets/mascot/mascot-';
-const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
-const home=`<div class="homebar"><i></i></div>`;
-const top=`<div class="${P}top"><span class="${P}cb" aria-label="Назад">${I.back}</span><span class="${P}pair"><span><i class="${P}dot"></i>RU<i class="${P}swp">${I.swap}</i>ES<i class="${P}dot ${P}es"></i></span></span><span class="${P}cb" aria-label="Ввести текстом">${I.kbd}</span><span class="${P}cb" aria-label="Ещё">${I.more}</span></div>`;
-const pbMe=(x='')=>`<span class="${P}pb ${P}me ${x}">${I.mic}<span><b>Я говорю</b><small>по‑русски</small></span></span>`;
-const pbEs=(x='')=>`<span class="${P}pb ${P}es ${x}">${I.mic}<span><b>Yo hablo</b><small>en español</small></span></span>`;
+
+/* ===== словарь: экран + страница =====
+   conv: [сторона, оригинал, перевод]; {…} — слово, где Parrlo поставил род собеседника.
+   Демо‑реплика 1 — фраза «горячая вода» с сайта (copy-ru/translate.md, сайт site-c3). */
+const T={
+ru:{
+ pair:['RU','ES'], pl:'es', ml:'ru',
+ me:['Я говорю','по‑русски'], pt:['Yo hablo','en español'],
+ aBack:'Назад', aKbd:'Ввести текстом', aMore:'Ещё', aPlay:'Озвучить', aListen:'Прослушать запись', aOrig:'Показать оригинал',
+ idleH:'Говорите по очереди', idleP:'Как с живым переводчиком рядом. Нажми «Я говорю» и скажи своими словами — с паузами, повторами, поправками.',
+ rLang:['Языки','Русский ⇄ Español'], rG:['Собеседник','Чтобы перевод был в нужном роде'], seg:['Он','Она'],
+ hIdle:'Положи телефон между вами и начинай',
+ recLbl:'Говоришь ты · по‑русски', recLive:'Отлично, тогда я буду дома', cLbl:'Español · для собеседника', cWait:'Перевод появится, как только нажмёшь «Стоп»', hRec:'Паузы не мешают — говори до «Стоп»',
+ cancel:'Отменить', stop:'Стоп',
+ oLbl:'Говорит собеседник · Español', oAsk:'Te escucho. Cuando termines, pulsa «Parar».', oLive:'Sí. Yo misma le abro la puerta', oCLbl:'Русский · для тебя', oWait:'Перевод появится, когда собеседник закончит', hOther:'Собеседник нажмёт «Parar», когда закончит', oStop:'Parar · Стоп',
+ gchip:['Собеседник: она','род учтён в переводе'], orig:'Оригинал', who:['Собеседник','Ты'], hTurn:'Теперь очередь собеседника',
+ conv:[
+  ['m','Добрый день. В квартире не работает горячая вода, и хозяин не отвечает. Что мне делать?','Buenos días. En mi piso no hay agua caliente, y el propietario no contesta. ¿Qué debo hacer?'],
+  ['p','Soy la administradora del edificio. Ayer ya llamé al técnico.','Я администратор дома. Вчера я уже {позвонила} мастеру.'],
+  ['m','Спасибо! Вы уверены, что он придёт сегодня?','¡Gracias! ¿Está {segura} de que viene hoy?'],
+  ['p','Sí. Yo misma le abro la puerta a las cinco.','Да. Я {сама открою} ему дверь в пять.'],
+  ['m','Отлично, тогда я буду дома в пять.','Perfecto, entonces estaré en casa a las cinco.']],
+ face:{lbl:'Traducción para ti', play:'Escuchar', mic:'Yo hablo'}, mid:'Верх экрана — для собеседника', mine:'Твоя фраза · Русский', normal:'Обычный вид',
+ err:{badge:'Нет сети', h:'Не получилось перевести', p:'Перевод работает через интернет. Проверь подключение и попробуй ещё раз.', clip:'Твоя запись', retry:'Повторить', redo:'Записать заново'},
+ page:{title:'Parrlo Translate · разговор',tag:'Эталон · пачка 2 · черновик текста',h1:'Translate · разговор лицом к лицу',
+  lead:'T‑01 и T‑03 карты сайта. Один телефон на двоих: ты говоришь по‑русски, собеседник — по‑испански. Главный экран с двумя кнопками, запись с каждой стороны, лента разговора с правильным родом, режим «лицом к лицу» и ошибка с действием. Каркас — как у T‑02 и T‑10: та же шапка, блоки и нижняя панель. Только тёмная тема, интерфейс на «ты». Экран 430×932 pt, PNG @3× — 1290×2796.',
+  heroH:'Главный кадр · разговор с администратором дома',
+  heroP:['Пять реплик по очереди. Твои — тёмно‑зелёные: сверху твоя фраза, снизу перевод для собеседника. Ответы собеседника — мятные: сверху перевод для тебя, оригинал по касанию. Последний перевод крупнее и с кнопкой «Озвучить».','Правильный род: собеседник — женщина, и Parrlo это помнит. Слова, где род взят из этого знания, подчёркнуты пунктиром: «позвонила», «сама открою», «segura» — в исходной фразе рода не было. Чип над лентой говорит словами, что род учтён, и позволяет его поменять.'],
+  cap:['Translate · разговор','Только тёмная тема. Тексты — черновик.'],
+  hStates:'Состояния',statesLead:'Порядок — как в живом разговоре. Масштаб 0,6.',
+  st:{idle:['Главный экран','T‑01. Открыли Translate: спокойный экран, пара языков и род собеседника. Пользователь нажимает «Я говорю» или передаёт слово собеседнику.'],
+      listening:['Говоришь ты','Нажали «Я говорю». Живой текст и волна в зелёной рамке, ниже — место для перевода. «Стоп» — перевести, «Отменить» — сбросить.'],
+      'listening-other':['Говорит собеседник','Нажали «Yo hablo». Рамка и волна мятные; подсказка — на языке собеседника, «Стоп» подписан на обоих языках.'],
+      conversation:['Разговор','T‑03. Реплики по очереди, род собеседника учтён. Следующая кнопка — с кольцом, очередь названа словами.'],
+      face:['Лицом к лицу','Нажали «Показать». Верхняя половина развёрнута к собеседнику: он читает перевод и сам отвечает. Нижняя — твоя.'],
+      error:['Нет сети','Связь пропала после записи. Запись можно прослушать; «Повторить» отправит её на перевод ещё раз.']},
+  hDec:'Решения',
+  dec:['<b>Один каркас с T‑02 и T‑10.</b> Шапка 64 pt (назад · пара языков · текст · ещё), нижняя панель с подсказкой и кнопками 80 pt, блоки со скруглением 28. Блоки записи — те же, что в «до / после»: активный с рамкой, место перевода — пунктиром.',
+   '<b>Кнопки «Я говорю» / «Yo hablo»</b> — по текстам сайта. Кнопка собеседника подписана на его языке: телефон передают через стол.',
+   '<b>Цвет = сторона.</b> Ты — #2BC48A (кнопка, рамка и волна записи, точка в пилюле), собеседник — #BFF2DC. Твои реплики — Deep Green, его — мятные. Очередь — ещё и словами («Теперь очередь собеседника») и кольцом вокруг кнопки.',
+   '<b>Правильный род виден.</b> Род собеседника задаётся на главном экране («Он / Она») и висит чипом над лентой. Слова, где род поставлен по этому знанию, подчёркнуты пунктиром. Род пользователя не используется нигде: в интерфейсе — «Твоя фраза», «Ты».',
+   '<b>Входящий пузырь — как в сборке:</b> сверху перевод, оригинал по касанию (строка «Оригинал» внизу пузыря).',
+   '<b>Подсказка для собеседника — на его языке.</b> В записи собеседника над живым текстом плашка «Te escucho…», а «Стоп» подписан на двух языках.',
+   '<b>Лицом к лицу.</b> Верхняя половина повёрнута на 180°: перевод крупно (Nunito 38), «Escuchar» и своя кнопка «Yo hablo». Внизу — твоя фраза и «Я говорю».',
+   '<b>Ошибка не теряет запись.</b> Запись можно прослушать, «Повторить» — главное действие, «Записать заново» — запасное.'],
+  hTok:'Токены и контраст',
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code> — тёмная тема v2.3.',
+   'Ты: <code>#2BC48A</code>. Собеседник: <code>#BFF2DC</code>, плашка его подсказки <code>#243A33</code>. Твои реплики — <code>#00875C</code>, кнопка «Озвучить» в пузыре <code>#005E40</code>. Ошибка: <code>#FF8A7F</code> на <code>#3C2A2E</code>.',
+   'Nunito 900 — заголовки, кнопки, крупный перевод (25 pt в ленте, 38 pt лицом к лицу); Inter 400/500/600 — интерфейс. Сетка 4 pt, поля 16, блоки 20–24. Зоны нажатия ≥ 44 pt.'],
+  ctrH:['Пара (текст / фон)','Где','Контраст','Норма'],
+  hNa:'Не утверждено',
+  na:['Все тексты — черновик, включая испанский и английский варианты интерфейса и демо‑разговор (реплика 1 — фраза «горячая вода» с сайта, остальные дописаны).','В карте сайта (T‑01) кнопки названы «Я» и «Собеседник»; в текстах сайта — «Я говорю» / «Yo hablo». На макете — по текстам сайта, как в T‑02 и T‑10.','Пунктир под словами с учётом рода и чип «Собеседник: она» — предложение; в сборке род задаётся переключателем, без пометок в ленте.','Плашка подсказки на языке собеседника, двуязычный «Стоп», режим лицом к лицу кнопкой «Показать» и прослушивание записи при ошибке — сверх текущей сборки.','Цвета <code>#005E40</code>, <code>#243A33</code>, <code>#2E4A3F</code>, <code>#FF8A7F</code>, <code>#E0483B</code> — производные, в токенах v2.3 их нет.'],
+  ctr:['основной текст','подписи, подсказки на фоне','подписи в блоках и чипе','кнопки «Отменить», «Обычный вид», пилюля','«Я говорю», «Повторить»','«Yo hablo», пузырь собеседника','строка «Оригинал» в пузыре собеседника','подсказка собеседнику','твоя реплика и перевод в пузыре','крупный перевод (Nunito)','кнопка «Озвучить» в пузыре','«Escuchar» лицом к лицу','кнопка «Стоп»','бейдж ошибки']}
+},
+es:{
+ pair:['ES','RU'], pl:'ru', ml:'es',
+ me:['Hablo yo','en español'], pt:['Я говорю','по‑русски'],
+ aBack:'Atrás', aKbd:'Escribir', aMore:'Más', aPlay:'Escuchar', aListen:'Escuchar la grabación', aOrig:'Ver el original',
+ idleH:'Hablad por turnos', idleP:'Como con un intérprete al lado. Pulsa «Hablo yo» y dilo a tu manera, con pausas, repeticiones y correcciones.',
+ rLang:['Idiomas','Español ⇄ Русский'], rG:['La otra persona','Para acertar con el género'], seg:['Él','Ella'],
+ hIdle:'Deja el móvil entre los dos y empieza',
+ recLbl:'Hablas tú · en español', recLive:'Perfecto, entonces estaré en', cLbl:'Русский · para la otra persona', cWait:'La traducción sale en cuanto pulses «Parar»', hRec:'Las pausas no importan: habla hasta «Parar»',
+ cancel:'Cancelar', stop:'Parar',
+ oLbl:'Habla la otra persona · Русский', oAsk:'Слушаю тебя. Когда закончишь, нажми «Стоп».', oLive:'Да. Я сама открою ему', oCLbl:'Español · para ti', oWait:'La traducción sale cuando la otra persona termine', hOther:'La otra persona pulsa «Стоп» al terminar', oStop:'Стоп · Parar',
+ gchip:['La otra persona: ella','género aplicado'], orig:'Original', who:['Otra persona','Tú'], hTurn:'Ahora le toca a la otra persona',
+ conv:[
+  ['m','Buenos días. En mi piso no hay agua caliente, y el propietario no contesta. ¿Qué debo hacer?','Добрый день. В квартире нет горячей воды, а хозяин не отвечает. Что мне делать?'],
+  ['p','Я администратор дома. Вчера я уже позвонила мастеру.','Soy {la administradora} del edificio. Ayer ya llamé al técnico.'],
+  ['m','¡Gracias! ¿Está segura de que viene hoy?','Спасибо! Вы уверены, что он придёт сегодня?'],
+  ['p','Да. Я сама открою ему дверь в пять.','Sí. Yo {misma} le abro la puerta a las cinco.'],
+  ['m','Perfecto, entonces estaré en casa a las cinco.','Отлично, тогда я буду дома в пять.']],
+ face:{lbl:'Перевод для тебя', play:'Озвучить', mic:'Я говорю'}, mid:'La parte de arriba es para la otra persona', mine:'Tu frase · Español', normal:'Vista normal',
+ err:{badge:'Sin conexión', h:'No se pudo traducir', p:'La traducción necesita internet. Revisa la conexión y vuelve a intentarlo.', clip:'Tu grabación', retry:'Reintentar', redo:'Grabar de nuevo'},
+ page:{title:'Parrlo Translate · conversación',tag:'Referencia · lote 2 · textos en borrador',h1:'Translate · conversación cara a cara',
+  lead:'T‑01 y T‑03 del mapa del sitio. Un móvil para dos: tú hablas en español y la otra persona, en ruso. Pantalla principal con dos botones, grabación de cada lado, conversación con el género correcto, modo cara a cara y error con acción. Misma estructura que T‑02 y T‑10: cabecera, bloques y panel inferior. Solo tema oscuro, interfaz de «tú». Pantalla de 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Fotograma principal · hablando con la administradora',
+  heroP:['Cinco frases por turnos. Las tuyas, en verde oscuro: arriba lo que dijiste y abajo la traducción. Las de la otra persona, en menta: arriba la traducción para ti y el original al tocar. La última traducción, más grande y con «Escuchar».','Género correcto: la otra persona es mujer y Parrlo lo recuerda. Las palabras que concuerdan gracias a eso llevan subrayado punteado («la administradora», «misma»): en ruso «администратор» no marca el género. El chip sobre la conversación lo dice con palabras y permite cambiarlo.'],
+  cap:['Translate · conversación','Solo tema oscuro. Textos en borrador.'],
+  hStates:'Estados',statesLead:'En el orden de una conversación real. Escala 0,6.',
+  st:{idle:['Pantalla principal','T‑01. Al abrir Translate: pantalla tranquila, par de idiomas y género de la otra persona. Pulsas «Hablo yo» o le pasas la palabra.'],
+      listening:['Hablas tú','Tras pulsar «Hablo yo». Texto en vivo y onda con borde verde; debajo, el hueco para la traducción. «Parar» traduce, «Cancelar» descarta.'],
+      'listening-other':['Habla la otra persona','Tras pulsar «Я говорю». Borde y onda en menta; el aviso, en el idioma de la otra persona, y «Parar» en los dos idiomas.'],
+      conversation:['Conversación','T‑03. Frases por turnos con el género de la otra persona. El siguiente botón lleva anillo y el turno se dice con palabras.'],
+      face:['Cara a cara','Tras pulsar «Mostrar». La mitad de arriba, girada hacia la otra persona: lee la traducción y responde sola. La de abajo es tuya.'],
+      error:['Sin conexión','Se cortó la red tras grabar. Puedes escuchar la grabación; «Reintentar» la vuelve a enviar.']},
+  hDec:'Decisiones',
+  dec:['<b>Misma estructura que T‑02 y T‑10.</b> Cabecera de 64 pt, panel inferior con aviso y botones de 80 pt, bloques con radio 28. Los bloques de grabación son los de «antes / después».',
+   '<b>Botones «Hablo yo» / «Я говорю»</b>, según los textos del sitio. El de la otra persona va en su idioma: el móvil pasa de un lado a otro de la mesa.',
+   '<b>Color = lado.</b> Tú, #2BC48A; la otra persona, #BFF2DC. Tus frases en verde oscuro, las suyas en menta. El turno también se dice con palabras y con el anillo del botón.',
+   '<b>El género se ve.</b> Se elige en la pantalla principal («Él / Ella») y queda en un chip sobre la conversación. Lo que concuerda gracias a eso va subrayado. El género del usuario no se usa nunca.',
+   '<b>Burbuja entrante como en la app:</b> traducción arriba y original al tocar.',
+   '<b>Aviso para la otra persona en su idioma,</b> y «Parar» en dos idiomas mientras habla.',
+   '<b>Cara a cara.</b> Mitad de arriba girada 180°: traducción grande (Nunito 38), «Озвучить» y su propio botón. Abajo, tu frase y «Hablo yo».',
+   '<b>El error no pierde la grabación.</b> Se puede escuchar; «Reintentar» es la acción principal.'],
+  hTok:'Tokens y contraste',
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>, texto <code>#F2F5F7</code> / <code>#9AA4B2</code>: tema oscuro v2.3.',
+   'Tú: <code>#2BC48A</code>. La otra persona: <code>#BFF2DC</code>, fondo de su aviso <code>#243A33</code>. Tus frases: <code>#00875C</code>; botón «Escuchar» en la burbuja: <code>#005E40</code>. Error: <code>#FF8A7F</code> sobre <code>#3C2A2E</code>.',
+   'Nunito 900 para títulos, botones y traducción grande; Inter 400/500/600 para la interfaz. Retícula de 4 pt, márgenes de 16. Zonas táctiles ≥ 44 pt.'],
+  ctrH:['Par (texto / fondo)','Dónde','Contraste','Mínimo'],
+  hNa:'Pendiente de aprobar',
+  na:['Todos los textos son borrador, también las versiones en español e inglés y la conversación de ejemplo.','En el mapa del sitio (T‑01) los botones se llaman «Yo» y «La otra persona»; en los textos del sitio, «Я говорю» / «Yo hablo». La maqueta sigue los textos, como T‑02 y T‑10.','El subrayado del género y el chip son una propuesta.','Aviso en el idioma de la otra persona, «Parar» bilingüe, cara a cara con «Mostrar» y escucha de la grabación en el error: más allá de la versión actual.','Los colores <code>#005E40</code>, <code>#243A33</code>, <code>#2E4A3F</code>, <code>#FF8A7F</code>, <code>#E0483B</code> son derivados.'],
+  ctr:['texto principal','etiquetas y avisos sobre el fondo','etiquetas en bloques y chip','«Cancelar», «Vista normal», selector','«Hablo yo», «Reintentar»','«Я говорю», burbuja entrante','«Original» en la burbuja entrante','aviso para la otra persona','tu frase y traducción en burbuja','traducción grande (Nunito)','«Escuchar» en la burbuja','«Озвучить» cara a cara','botón «Parar»','etiqueta de error']}
+},
+en:{
+ pair:['EN','ES'], pl:'es', ml:'en',
+ me:['I speak','in English'], pt:['Yo hablo','en español'],
+ aBack:'Back', aKbd:'Type instead', aMore:'More', aPlay:'Play', aListen:'Play recording', aOrig:'Show original',
+ idleH:'Take turns talking', idleP:'Like having an interpreter beside you. Tap “I speak” and say it your way — pauses, repeats, corrections and all.',
+ rLang:['Languages','English ⇄ Español'], rG:['Other person','So the translation uses the right gender'], seg:['He','She'],
+ hIdle:'Put the phone between you and start',
+ recLbl:'You’re speaking · English', recLive:'Perfect, then I’ll be home', cLbl:'Español · for the other person', cWait:'The translation appears as soon as you tap Stop', hRec:'Pauses are fine — keep talking until Stop',
+ cancel:'Cancel', stop:'Stop',
+ oLbl:'Other person · Español', oAsk:'Te escucho. Cuando termines, pulsa «Parar».', oLive:'Sí. Yo misma le abro la puerta', oCLbl:'English · for you', oWait:'The translation appears when they finish', hOther:'They tap “Parar” when they’re done', oStop:'Parar · Stop',
+ gchip:['Other person: she','gender applied'], orig:'Original', who:['Other person','You'], hTurn:'Now it’s the other person’s turn',
+ conv:[
+  ['m','Good morning. There’s no hot water in my flat, and the landlord isn’t answering. What should I do?','Buenos días. En mi piso no hay agua caliente, y el propietario no contesta. ¿Qué debo hacer?'],
+  ['p','Soy la administradora del edificio. Ayer ya llamé al técnico.','I’m the building manager. I already called the repairman yesterday.'],
+  ['m','Thank you! Are you sure he’s coming today?','¡Gracias! ¿Está {segura} de que viene hoy?'],
+  ['p','Sí. Yo misma le abro la puerta a las cinco.','Yes. I’ll let him in myself at five.'],
+  ['m','Perfect, then I’ll be home at five.','Perfecto, entonces estaré en casa a las cinco.']],
+ face:{lbl:'Traducción para ti', play:'Escuchar', mic:'Yo hablo'}, mid:'Top half faces the other person', mine:'Your phrase · English', normal:'Normal view',
+ err:{badge:'No connection', h:'Couldn’t translate', p:'Translation needs the internet. Check your connection and try again.', clip:'Your recording', retry:'Try again', redo:'Record again'},
+ page:{title:'Parrlo Translate · conversation',tag:'Reference · batch 2 · draft copy',h1:'Translate · face‑to‑face conversation',
+  lead:'T‑01 and T‑03 on the site map. One phone for two: you speak English, the other person speaks Spanish. Home screen with two buttons, recording from each side, a conversation with the right gender, face‑to‑face mode and an error with an action. Same layout as T‑02 and T‑10: header, blocks and bottom panel. Dark theme only. Screen 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Hero frame · talking to the building manager',
+  heroP:['Five turns. Yours are deep green: what you said on top, the translation below. The other person’s are mint: the translation for you on top, the original on tap. The latest translation is larger and has Play.','The right gender: the other person is a woman and Parrlo remembers it. English “Are you sure?” has no gender, so “segura” is dotted‑underlined: it comes from that setting. The chip above the conversation says so in words and lets you change it.'],
+  cap:['Translate · conversation','Dark theme only. Draft copy.'],
+  hStates:'States',statesLead:'In the order of a real conversation. Scale 0.6.',
+  st:{idle:['Home screen','T‑01. Translate just opened: a calm screen with the language pair and the other person’s gender. Tap “I speak” or hand over to the other person.'],
+      listening:['You’re speaking','After “I speak”. Live text and wave in a green frame, the translation slot below. Stop translates, Cancel throws it away.'],
+      'listening-other':['They’re speaking','After “Yo hablo”. Frame and wave turn mint; the prompt is in their language, and Stop is labeled in both.'],
+      conversation:['Conversation','T‑03. Turns back and forth, the other person’s gender applied. The next button gets a ring, and the turn is named in words.'],
+      face:['Face to face','After Show. The top half turns to the other person: they read the translation and reply on their own. The bottom half is yours.'],
+      error:['No connection','The network dropped after recording. You can play the recording back; Try again resends it.']},
+  hDec:'Decisions',
+  dec:['<b>Same layout as T‑02 and T‑10.</b> 64 pt header, bottom panel with hint and 80 pt buttons, 28 pt radius blocks. Recording blocks are the “before / after” ones.',
+   '<b>“I speak” / “Yo hablo” buttons</b>, following the site copy. The other person’s button is in their language: the phone gets passed across the table.',
+   '<b>Color = side.</b> You #2BC48A, the other person #BFF2DC. Your turns deep green, theirs mint. Whose turn is also said in words and shown with a ring.',
+   '<b>Gender you can see.</b> Set on the home screen (He / She) and shown as a chip above the conversation. Words that agree because of it get a dotted underline. The user’s own gender is never used.',
+   '<b>Incoming bubble as in the app:</b> translation on top, original on tap.',
+   '<b>The prompt for the other person is in their language,</b> and Stop is bilingual while they talk.',
+   '<b>Face to face.</b> Top half rotated 180°: large translation (Nunito 38), Escuchar and their own button. Below: your phrase and “I speak”.',
+   '<b>The error keeps the recording.</b> Play it back; Try again is the main action.'],
+  hTok:'Tokens and contrast',
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>, text <code>#F2F5F7</code> / <code>#9AA4B2</code>: dark theme v2.3.',
+   'You: <code>#2BC48A</code>. Other person: <code>#BFF2DC</code>, their prompt <code>#243A33</code>. Your turns: <code>#00875C</code>; Play in the bubble <code>#005E40</code>. Error: <code>#FF8A7F</code> on <code>#3C2A2E</code>.',
+   'Nunito 900 for titles, buttons and large translations; Inter 400/500/600 for the UI. 4 pt grid, 16 margins. Tap targets ≥ 44 pt.'],
+  ctrH:['Pair (text / background)','Where','Contrast','Minimum'],
+  hNa:'Not approved',
+  na:['All copy is draft, including the Spanish and English UI and the sample conversation.','The site map (T‑01) names the buttons “Me” and “Other person”; the site copy says “Я говорю” / “Yo hablo”. The mockup follows the copy, like T‑02 and T‑10.','The gender underline and chip are a proposal.','Prompt in the other person’s language, bilingual Stop, face‑to‑face via Show and recording playback on error go beyond the current build.','Colors <code>#005E40</code>, <code>#243A33</code>, <code>#2E4A3F</code>, <code>#FF8A7F</code>, <code>#E0483B</code> are derived.'],
+  ctr:['body text','labels and hints on background','labels in blocks and chip','Cancel, Normal view, pill','I speak, Try again','Yo hablo, incoming bubble','“Original” in incoming bubble','prompt for the other person','your turn and translation in bubble','large translation (Nunito)','Play in bubble','Escuchar face to face','Stop button','error badge']}
+}};
+
+const LANGS=['ru','es','en'];
+let L=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase(); if(!LANGS.includes(L))L='ru';
+
 function rnd(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
-function wave(n,live,seed,cls,maxH){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const env=Math.sin(Math.PI*(i+1)/(live+1));const v=i<live?Math.max(6,Math.round((0.25+0.75*r())*maxH*(0.35+0.65*env))):4;h+=`<i class="${i<live?'':P+'f'}" style="height:${v}px"></i>`;}return h;}
-function mini(n,played,seed){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const v=Math.round(5+r()*21*Math.sin(Math.PI*(i+.5)/n)+3);h+=`<i class="${i<played?P+'pl':''}" style="height:${v}px"></i>`;}return h;}
-const scr=(body)=>`<div class="scr ${P}scr">${sbar}${body}${home}</div>`;
+function wave(n,live,seed,maxH){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const env=0.4+0.6*Math.sin(Math.PI*(i+1)/(live+1));const v=i<live?Math.max(6,Math.round((0.25+0.75*r())*maxH*env)):4;h+=`<i class="${i<live?'':P+'z'}" style="height:${v}px"></i>`;}return h;}
+function mini(n,seed){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const v=Math.round(5+r()*19*Math.sin(Math.PI*(i+.5)/n)+3);h+=`<i style="height:${v}px"></i>`;}return h;}
+const gw=s=>s.replace(/\{([^}]*)\}/g,`<span class="${P}g">$1</span>`);
 
-const ST={
-idle:{t:'Начало разговора',d:'Открыли «Разговор» — подсказка в три шага и две большие кнопки. Пользователь нажимает свою кнопку или отдаёт телефон собеседнику.',
-h:scr(`${top}
-<div class="${P}main ${P}idle">
- <img src="${MASC}listen-dark.svg" alt="">
- <h3>Говорите по очереди</h3>
- <p>Положите телефон между вами. Parrlo переведёт каждую реплику и покажет её крупно.</p>
- <div class="${P}steps">
-  <div class="${P}step"><i>1</i><span>Нажмите свою кнопку и говорите</span></div>
-  <div class="${P}step"><i>2</i><span>Закончили — нажмите <em>«Стоп»</em></span></div>
-  <div class="${P}step"><i>3</i><span>Покажите перевод или нажмите <em>«Озвучить»</em></span></div>
- </div>
-</div>
-<div class="${P}bot"><div class="${P}hint">Собеседник нажимает <b>«Yo hablo»</b></div><div class="${P}btns">${pbMe()}${pbEs()}</div></div>`)},
+function screen(st,t){
+ const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
+ const home=`<div class="homebar"><i></i></div>`;
+ const top=`<div class="${P}top"><span class="${P}cb" role="button" aria-label="${t.aBack}">${I.back}</span><span class="${P}pair"><span><i class="${P}dot"></i>${t.pair[0]}<i class="${P}swp">${I.swap}</i>${t.pair[1]}<i class="${P}dot ${P}p"></i></span></span><span class="${P}cb" role="button" aria-label="${t.aKbd}">${I.kbd}</span><span class="${P}cb" role="button" aria-label="${t.aMore}">${I.more}</span></div>`;
+ const pbMe=(x='')=>`<span class="${P}pb ${P}me ${x}" role="button">${I.mic}<span><b>${t.me[0]}</b><small>${t.me[1]}</small></span></span>`;
+ const pbPt=(x='')=>`<span class="${P}pb ${P}pt ${x}" role="button" lang="${t.pl}">${I.mic}<span><b>${t.pt[0]}</b><small>${t.pt[1]}</small></span></span>`;
+ const wrap=(body,bot)=>`<div class="scr ${P}scr" data-state="${st}">${sbar}${body}${bot?`<div class="${P}bot">${bot}</div>`:''}${home}</div>`;
+ const mic18=I.mic.replace('style="width:26px;height:26px"','');
 
-listening:{t:'Идёт запись · вы',d:'Нажали «Я говорю». Волна живая, таймер идёт; «Стоп» — закончить и перевести, «Отменить» — сбросить запись.',
-h:scr(`${top}
-<div class="${P}main ${P}ls">
- <span class="${P}turn">${I.mic.replace('style="width:26px;height:26px"','style="width:18px;height:18px"')}Говорите вы · по‑русски</span>
- <h3>Слушаем вас</h3>
- <div class="${P}sub">Говорите обычным темпом</div>
- <div class="${P}time">0:04</div>
- <div class="${P}rec"><i></i>Запись</div>
- <div class="${P}wave">${wave(40,30,7,'',150)}</div>
- <div class="${P}tip">${I.info}Паузы не мешают — запись идёт до «Стоп»</div>
-</div>
-<div class="${P}bot"><div class="${P}btns"><span class="${P}cancel">Отменить</span><span class="${P}stop"><i></i>Стоп</span></div></div>`)},
+ if(st==='idle') return wrap(`${top}<div class="${P}main ${P}idle">
+  <img src="${MASC}listen-dark.svg" alt="">
+  <h3>${t.idleH}</h3><p>${t.idleP}</p>
+  <div class="${P}set">
+   <div class="${P}row"><div><b>${t.rLang[0]}</b></div><span class="${P}val" role="button">${t.rLang[1]}${I.chev}</span></div>
+   <div class="${P}row"><div><b>${t.rG[0]}</b><small>${t.rG[1]}</small></div><span class="${P}seg" role="radiogroup"><span role="radio" aria-checked="false">${t.seg[0]}</span><span class="${P}sel" role="radio" aria-checked="true">${I.ok}${t.seg[1]}</span></span></div>
+  </div></div>`,
+  `<div class="${P}hint">${t.hIdle}</div><div class="${P}btns">${pbMe()}${pbPt()}</div>`);
 
-'listening-es':{t:'Идёт запись · собеседник',d:'Собеседник нажал «Yo hablo». Крупный текст — по‑испански для него, строка выше — по‑русски для вас. Кнопка «Стоп» подписана на обоих языках.',
-h:scr(`${top}
-<div class="${P}main ${P}ls">
- <span class="${P}turn ${P}es">${I.mic.replace('style="width:26px;height:26px"','style="width:18px;height:18px"')}Говорит собеседник · Español</span>
- <h3>Hable ahora</h3>
- <div class="${P}sub">Le escuchamos en español</div>
- <div class="${P}time">0:07</div>
- <div class="${P}rec"><i></i>Grabando · Запись</div>
- <div class="${P}wave ${P}es">${wave(40,34,23,'',150)}</div>
- <div class="${P}tip">${I.info}Pulse «Parar» al terminar</div>
-</div>
-<div class="${P}bot"><div class="${P}btns"><span class="${P}cancel">Отменить</span><span class="${P}stop"><i></i>Parar · Стоп</span></div></div>`)},
+ if(st==='listening') return wrap(`${top}<div class="${P}main ${P}rec">
+  <div class="${P}slot ${P}a"><div class="${P}lbl"><i class="${P}dot"></i>${t.recLbl}<span class="${P}sp"><i></i>0:03</span></div>
+   <p class="${P}live" lang="${t.ml}">${t.recLive}<i class="${P}car"></i></p>
+   <div class="${P}wave" aria-hidden="true">${wave(44,34,7,104)}</div></div>
+  <div class="${P}slot ${P}c"><div class="${P}lbl"><i class="${P}dot ${P}p"></i>${t.cLbl}</div><p class="${P}empty">${t.cWait}</p><div class="${P}sk" aria-hidden="true"><i style="width:84%"></i><i style="width:52%"></i></div></div>
+ </div>`,
+  `<div class="${P}hint">${I.info}${t.hRec}</div><div class="${P}btns"><span class="${P}sec" role="button">${t.cancel}</span><span class="${P}stop" role="button"><i></i>${t.stop}</span></div>`);
 
-processing:{t:'Распознаём и переводим',d:'После «Стоп». Видно, какой этап идёт; распознанная фраза уже на экране, перевод — скелетоном. Можно отменить.',
-h:scr(`${top}
-<div class="${P}main ${P}pr">
- <div class="${P}stepper"><span class="${P}ok">${I.ok}Распознаём речь</span><i class="${P}arr"></i><span>${I.spin}Переводим</span></div>
- <div class="${P}said"><div class="${P}lbl"><i class="${P}dot"></i>Вы сказали · Русский</div><p>Можно счёт и бутылку воды без газа с собой?</p></div>
- <div class="${P}skel" aria-label="Перевод готовится"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>Español · готовим перевод</div><i style="width:92%"></i><i style="width:78%"></i><i style="width:54%"></i></div>
-</div>
-<div class="${P}bot"><div class="${P}hint">Можно отменить и сказать заново</div><div class="${P}btns"><span class="${P}sec">Отменить</span></div></div>`)},
+ if(st==='listening-other') return wrap(`${top}<div class="${P}main ${P}rec">
+  <div class="${P}ask" lang="${t.pl}">${I.ear}${t.oAsk}</div>
+  <div class="${P}slot ${P}a ${P}ap"><div class="${P}lbl"><i class="${P}dot ${P}p"></i>${t.oLbl}<span class="${P}sp"><i></i>0:04</span></div>
+   <p class="${P}live" lang="${t.pl}">${t.oLive}<i class="${P}car"></i></p>
+   <div class="${P}wave" aria-hidden="true">${wave(44,38,23,104)}</div></div>
+  <div class="${P}slot ${P}c"><div class="${P}lbl"><i class="${P}dot"></i>${t.oCLbl}</div><p class="${P}empty">${t.oWait}</p></div>
+ </div>`,
+  `<div class="${P}hint">${I.info}${t.hOther}</div><div class="${P}btns"><span class="${P}sec" role="button">${t.cancel}</span><span class="${P}stop" role="button"><i></i>${t.oStop}</span></div>`);
 
-done:{t:'Перевод готов',d:'Крупный перевод для собеседника. Пользователь нажимает «Озвучить» или «Показать»; при ошибке распознавания — «Исправить».',
-h:scr(`${top}
-<div class="${P}main ${P}dn">
- <div class="${P}card"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>Español · для собеседника</div>
-  <p>¿Me trae la cuenta y una botella de agua sin gas para llevar?</p>
-  <div class="${P}acts"><span class="${P}act">${I.spk}Озвучить</span><span class="${P}act ${P}ghost">${I.rot}Показать</span></div></div>
- <div class="${P}said"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot"></i>Вы сказали · Русский</div><span class="${P}ed" aria-label="Исправить">${I.pencil}</span></div><p>Можно счёт и бутылку воды без газа с собой?</p></div>
- <div class="${P}note">${I.info}Перевод может быть неточным. Важное — проверьте с собеседником.</div>
-</div>
-<div class="${P}bot"><div class="${P}hint">${I.down}Теперь очередь собеседника</div><div class="${P}btns">${pbMe()}${pbEs(P+'next')}</div></div>`)},
+ if(st==='conversation'){
+  const times=['9:41','9:41','9:42','9:43','9:43'];
+  const n=t.conv.length;
+  const feed=t.conv.map(([s,o,tr],i)=>{
+   const last=i===n-1;
+   if(s==='p') return `<div class="${P}bb ${P}l" role="button" aria-label="${t.aOrig}"><span class="${P}t" lang="${t.ml}">${gw(tr)}</span><span class="${P}orig">${I.chevd}${t.orig} · ${t.pair[1]}</span></div><div class="${P}meta ${P}l">${t.who[0]} · ${times[i]}</div>`;
+   return `<div class="${P}bb ${P}r ${last?P+'big':''}"><span class="${P}o" lang="${t.ml}">${o}</span><span class="${P}t" lang="${t.pl}">${gw(tr)}</span>${last?`<span class="${P}spk" role="button" aria-label="${t.aPlay}">${I.spk}</span>`:''}</div><div class="${P}meta ${P}r">${t.who[1]} · ${times[i]}</div>`;
+  }).join('');
+  return wrap(`${top}<div class="${P}main ${P}conv">
+   <span class="${P}gchip" role="button"><span class="${P}av">${I.person}</span>${t.gchip[0]}<span>· ${t.gchip[1]}</span>${I.chev}</span>
+   <div class="${P}feed">${feed}</div></div>`,
+   `<div class="${P}hint">${I.down}${t.hTurn}</div><div class="${P}btns">${pbMe()}${pbPt(P+'next')}</div>`);
+ }
 
-conversation:{t:'Разговор',d:'Несколько реплик подряд с обеих сторон. Вы читаете мятные пузыри, собеседник — зелёные; у последнего перевода — «Озвучить».',
-h:scr(`${top}
-<div class="${P}main ${P}feed">
- <span class="${P}day">Сегодня · 9:41</span>
- <div class="${P}bb ${P}l"><span class="${P}o">Buenas tardes. ¿Qué le pongo?</span><span class="${P}t">Добрый день. Что вам принести?</span></div>
- <div class="${P}meta ${P}l">Собеседник · 9:41</div>
- <div class="${P}bb ${P}r"><span class="${P}o">Капучино и круассан, пожалуйста.</span><span class="${P}t">Un capuchino y un cruasán, por favor.</span></div>
- <div class="${P}meta ${P}r">Вы · 9:42</div>
- <div class="${P}bb ${P}l"><span class="${P}o">¿Para tomar aquí o para llevar?</span><span class="${P}t">Здесь или с собой?</span></div>
- <div class="${P}meta ${P}l">Собеседник · 9:42</div>
- <div class="${P}bb ${P}r ${P}big"><span class="${P}o">С собой. И можно счёт?</span><span class="${P}t">Para llevar. ¿Y me trae la cuenta?</span><span class="${P}spk" aria-label="Озвучить">${I.vol}</span></div>
- <div class="${P}meta ${P}r">Вы · 9:43</div>
-</div>
-<div class="${P}bot"><div class="${P}hint">${I.down}Теперь очередь собеседника</div><div class="${P}btns">${pbMe()}${pbEs(P+'next')}</div></div>`)},
+ if(st==='face'){
+  const last=t.conv[t.conv.length-1];
+  return wrap(`<div class="${P}main ${P}fc">
+  <div class="${P}pan" lang="${t.pl}">
+   <div class="${P}lbl"><i class="${P}dot ${P}p"></i>${t.face.lbl}</div>
+   <p>${last[2]}</p>
+   <div class="${P}acts"><span class="${P}act" role="button">${I.spk}${t.face.play}</span><span class="${P}act ${P}pm" role="button">${mic18}${t.face.mic}</span></div>
+  </div>
+  <div class="${P}mid">${I.rot}${t.mid}</div>
+  <div class="${P}mine">
+   <div><div class="${P}lbl"><i class="${P}dot"></i>${t.mine}</div><p lang="${t.ml}">${last[1]}</p></div>
+   <div class="${P}btns"><span class="${P}sec" role="button">${t.normal}</span><span class="${P}pb ${P}me" role="button">${I.mic}<span><b>${t.me[0]}</b></span></span></div>
+  </div></div>`,'');
+ }
 
-face:{t:'К собеседнику',d:'Нажали «Показать». Верх экрана развёрнут к собеседнику: он читает перевод и сам отвечает «Yo hablo». Низ — ваш.',
-h:scr(`<div class="${P}main ${P}fc">
- <div class="${P}pan">
-  <div class="${P}lbl"><i class="${P}dot ${P}es"></i>Traducción para usted</div>
-  <p>¿Me trae la cuenta y una botella de agua sin gas para llevar?</p>
-  <div class="${P}acts"><span class="${P}act">${I.spk}Escuchar</span>${pbEs().replace('<small>en español</small>','')}</div>
- </div>
- <div class="${P}mid">${I.rot}Верх экрана — для собеседника</div>
- <div class="${P}mine">
-  <div><div class="${P}lbl"><i class="${P}dot"></i>Вы сказали · Русский</div><p>Можно счёт и бутылку воды без газа с собой?</p></div>
-  <div class="${P}btns"><span class="${P}sec" style="height:64px;border-radius:32px">Обычный вид</span>${pbMe().replace('<small>по‑русски</small>','')}</div>
- </div>
-</div>`)},
-
-error:{t:'Нет соединения',d:'Сеть пропала после записи. Запись сохранена, её можно прослушать; «Повторить» отправит её на перевод снова.',
-h:scr(`${top}
-<div class="${P}main ${P}er">
- <img src="${MASC}think-dark.svg" alt="">
- <span class="${P}erb">${I.wifioff}Нет сети</span>
- <h3>Не удалось перевести</h3>
- <p>Распознавание и перевод работают через интернет. Проверьте подключение и повторите.</p>
- <div class="${P}clip"><span class="${P}play" aria-label="Прослушать">${I.play}</span><div class="${P}cw"><b>Ваша запись</b><span>${I.check}Сохранена</span><div class="${P}mw">${mini(34,0,11)}</div></div><span class="${P}dur">0:06</span></div>
-</div>
-<div class="${P}bot"><div class="${P}btns ${P}v"><span class="${P}pri" style="height:64px;border-radius:32px">${I.retry}Повторить</span><span class="${P}sec">Записать заново</span></div></div>`)},
-
-unclear:{t:'Не расслышали',d:'Речь не распознана: тихо или шумно. Запись сохранена; можно прослушать её, сказать ещё раз или ввести текстом.',
-h:scr(`${top}
-<div class="${P}main ${P}er">
- <img src="${MASC}listen-dark.svg" alt="">
- <span class="${P}erb">${I.ear}Речь не распознана</span>
- <h3>Не расслышали</h3>
- <p>Похоже, было тихо или шумно. Попробуйте ещё раз, держа телефон ближе.</p>
- <div class="${P}clip"><span class="${P}play" aria-label="Прослушать">${I.play}</span><div class="${P}cw"><b>Ваша запись</b><span>${I.check}Сохранена</span><div class="${P}mw">${mini(34,12,5)}</div></div><span class="${P}dur">0:02</span></div>
- <div class="${P}tips"><span>${I.walk}Ближе к телефону</span><span>${I.vol}Чуть громче</span></div>
-</div>
-<div class="${P}bot"><div class="${P}btns ${P}v"><span class="${P}pri" style="height:64px;border-radius:32px">${I.mic.replace('style="width:26px;height:26px"','')}Сказать ещё раз</span><span class="${P}sec">${I.kbd.replace('class="ic"','')}Ввести текстом</span></div></div>`)},
-};
-window.TT_STATES=Object.keys(ST);
-const ph=(id,s,html)=>`<div class="pf" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
-document.getElementById(P+'hero-ph').innerHTML=ph('translate-talk',.8,ST.conversation.h)+`<div class="pcap"><span class="dot"></span><div><b>Translate · разговор</b><span>Только тёмная тема. Тексты — черновик.</span></div></div>`;
-document.getElementById(P+'grid').innerHTML=Object.entries(ST).map(([k,v])=>`<figure>${ph(P+'-'+k,.6,v.h)}<figcaption><b>${v.t}</b><code>${k}</code> · ${v.d}</figcaption></figure>`).join('');
+ /* error */
+ const e=t.err;
+ return wrap(`${top}<div class="${P}main ${P}er">
+  <img src="${MASC}think-dark.svg" alt="">
+  <span class="${P}erb">${I.wifioff}${e.badge}</span>
+  <h3>${e.h}</h3><p>${e.p}</p>
+  <div class="${P}clip"><span class="${P}play" role="button" aria-label="${t.aListen}">${I.play}</span><div class="${P}cw"><b>${e.clip}</b><div class="${P}mw" aria-hidden="true">${mini(40,11)}</div></div><span class="${P}dur">0:04</span></div>
+ </div>`,
+ `<div class="${P}btns ${P}v"><span class="${P}pri" role="button">${I.retry}${e.retry}</span><span class="${P}sec" role="button">${mic18}${e.redo}</span></div>`);
+}
 
 /* контраст */
-function L(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
-function cr(a,b){const x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
-const pairs=[
- ['#F2F5F7','#0E1116','основной текст на фоне',4.5],['#9AA4B2','#0E1116','подписи, подсказки',4.5],['#9AA4B2','#1C2026','подписи в карточках',4.5],
- ['#F2F5F7','#242B34','кнопки «Назад», «Отменить», пилюля',4.5],['#0E1116','#2BC48A','«Я говорю», «Повторить»',4.5],['#0E1116','#BFF2DC','«Yo hablo», пузырь собеседника',4.5],
- ['#2E4A3F','#BFF2DC','оригинал в пузыре собеседника',4.5],['#FFFFFF','#00875C','перевод для собеседника (крупный)',3],['#FFFFFF','#00875C','оригинал в своём пузыре, подписи на карточке',4.5],
- ['#FFFFFF','#005E40','«Показать», «Озвучить» в пузыре',4.5],['#0E1116','#FFFFFF','«Озвучить» на карточке',4.5],
- ['#0E1116','#F2F5F7','кнопка «Стоп»',4.5],['#2BC48A','#1E3734','чип «Говорите вы»',4.5],['#BFF2DC','#243A33','чип «Говорит собеседник»',4.5],
- ['#BFF2DC','#123A2C','подпись в скелетоне',4.5],['#FF8A7F','#3C2A2E','бейдж ошибки',4.5],['#C3CBD5','#1C2026','советы-чипы',4.5],
-];
-document.getElementById(P+'ctr').insertAdjacentHTML('beforeend',pairs.map(([a,b,w,n])=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${w}</td><td><b>${v.toFixed(2).replace('.',',')}:1</b></td><td>${v>=n?'≥ '+String(n).replace('.',',')+' ✓':'ниже нормы'}</td></tr>`;}).join(''));
-window.TT_CR=pairs.map(([a,b,w,n])=>[w,cr(a,b).toFixed(2),n]);
-document.body.dataset.ready='1';
+function Lu(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const PAIRS=[['#F2F5F7','#0E1116',4.5],['#9AA4B2','#0E1116',4.5],['#9AA4B2','#1C2026',4.5],['#F2F5F7','#242B34',4.5],['#0E1116','#2BC48A',4.5],['#0E1116','#BFF2DC',4.5],['#2E4A3F','#BFF2DC',4.5],['#BFF2DC','#243A33',4.5],['#FFFFFF','#00875C',4.5],['#FFFFFF','#00875C',3],['#FFFFFF','#005E40',4.5],['#0E1116','#FFFFFF',4.5],['#0E1116','#F2F5F7',4.5],['#FF8A7F','#3C2A2E',4.5]];
+
+const STATES=['idle','listening','listening-other','conversation','face','error'];
+const ph=(id,s,html)=>`<div class="pf p67" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
+const $=id=>document.getElementById(P+id);
+function render(){
+ const t=T[L],p=t.page;
+ document.documentElement.lang=L; document.title=p.title;
+ $('lsw').innerHTML=LANGS.map(l=>`<a href="?l=${l}" data-l="${l}" aria-current="${l===L}">${l.toUpperCase()}</a>`).join('');
+ $('tag').textContent=p.tag; $('h1').textContent=p.h1; $('lead').textContent=p.lead;
+ $('hero-ph').innerHTML=ph('translate-talk',.8,screen('conversation',t))+`<div class="pcap"><span class="dot"></span><div><b>${p.cap[0]}</b><span>${p.cap[1]}</span></div></div>`;
+ $('hero-t').innerHTML=`<h3>${p.heroH}</h3>`+p.heroP.map(x=>`<p>${x}</p>`).join('');
+ $('h-states').textContent=p.hStates; $('states-lead').textContent=p.statesLead;
+ $('grid').innerHTML=STATES.map((k,i)=>`<figure>${ph(P+'-'+k,.6,screen(k,t))}<figcaption><b>${i+1} · ${p.st[k][0]}</b><code>${k}</code> · ${p.st[k][1]}</figcaption></figure>`).join('');
+ $('h-dec').textContent=p.hDec; $('dec').innerHTML=p.dec.map(x=>`<li>${x}</li>`).join('');
+ $('h-tok').textContent=p.hTok; $('tok').innerHTML=p.tok.map(x=>`<li>${x}</li>`).join('');
+ const fmt=v=>L==='en'?v.toFixed(2):v.toFixed(2).replace('.',',');
+ const fn=n=>L==='en'?String(n):String(n).replace('.',',');
+ $('ctr').innerHTML=`<tr>${p.ctrH.map(h=>`<th>${h}</th>`).join('')}</tr>`+PAIRS.map(([a,b,n],i)=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${p.ctr[i]}</td><td><b>${fmt(v)}:1</b></td><td>${v>=n?'≥ '+fn(n)+' ✓':'✗'}</td></tr>`;}).join('');
+ $('h-na').textContent=p.hNa; $('na').innerHTML=p.na.map(x=>`<li>${x}</li>`).join('');
+ window.TT_CR=PAIRS.map(([a,b,n],i)=>[p.ctr[i],+cr(a,b).toFixed(2),n]);
+ document.body.dataset.ready=L;
+}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-l]');if(!a)return;e.preventDefault();L=a.dataset.l;history.replaceState(null,'','?l='+L);render();});
+window.TT_STATES=STATES;
+render();
 })();
 </script>
 </body>
