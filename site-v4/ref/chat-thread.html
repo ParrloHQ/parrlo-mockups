@@ -54,12 +54,12 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
 .chat-thread-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px}
 .chat-thread-day{align-self:center;font:500 12px/16px Inter;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px;margin-bottom:4px}
 .chat-thread-m{position:relative;max-width:80%;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px}
-.chat-thread-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px}
+.chat-thread-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px;padding-bottom:0}
+.chat-thread-m.wide{width:80%}
 .chat-thread-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
 .chat-thread-m.gap{margin-top:8px}
 .chat-thread-t{display:flex;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid rgba(154,164,178,.28);font-size:15px;line-height:20px}
 .chat-thread-t svg{flex:none;width:16px;height:16px;margin-top:2px}
-.chat-thread-m.in .chat-thread-t{color:var(--mint)}
 .chat-thread-m.out .chat-thread-t{color:#fff;border-top-color:rgba(255,255,255,.3)}
 .chat-thread-tm{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;line-height:16px;margin-top:2px}
 .chat-thread-m.in .chat-thread-tm{color:var(--sec)}
@@ -68,6 +68,16 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
 .chat-thread-rd svg{width:16px;height:16px;color:var(--acc)}
 .chat-thread-m.hl{box-shadow:0 0 0 2px var(--acc)}
 .chat-thread-hlb{position:absolute;inset:-6px -200px -6px -16px;background:rgba(43,196,138,.08);border-radius:0;z-index:-1}
+
+/* входящее: перевод — основной текст, подпись «Перевод с …» мятным, оригинал по касанию */
+.chat-thread-ft{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin:0 -12px;padding:0 12px}
+.chat-thread-tg{display:flex;align-items:center;gap:6px;min-height:44px;font:600 13px/18px Inter;color:var(--mint);white-space:nowrap}
+.chat-thread-tg svg{width:16px;height:16px;flex:none}
+.chat-thread-tg svg.cv{width:14px;height:14px;opacity:.9}
+.chat-thread-ft .chat-thread-tm{margin:0;flex:none}
+.chat-thread-og{margin:8px 0 0;border-radius:12px;background:var(--sf);border-left:3px solid var(--mint);padding:8px 12px 10px}
+.chat-thread-og .k{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin-bottom:2px}
+.chat-thread-og .v{display:block;font-size:16px;line-height:22px;color:var(--tx)}
 
 /* цитата в сообщении */
 .chat-thread-q{display:block;border-left:3px solid var(--mint);background:rgba(14,17,22,.22);border-radius:8px;padding:4px 8px 4px 8px;margin:0 0 6px;font-size:13px;line-height:18px}
@@ -90,8 +100,7 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
 .chat-thread-wv i.p{background:var(--acc);opacity:1}
 .chat-thread-vd{display:flex;justify-content:space-between;font-size:12px;line-height:16px;color:var(--sec);margin:0 0 4px 54px}
 .chat-thread-vd b{font-weight:600;color:var(--tx);background:rgba(154,164,178,.18);border-radius:6px;padding:0 6px}
-.chat-thread-lb{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin:6px 0 2px}
-.chat-thread-lis{display:flex;align-items:center;gap:6px;height:32px;margin:6px 0 0;padding:0 12px 0 10px;border-radius:16px;background:rgba(191,242,220,.12);color:var(--mint);font:600 13px/1 Inter;width:max-content}
+.chat-thread-lis{display:flex;align-items:center;gap:6px;height:32px;margin:8px 0 0;padding:0 12px 0 10px;border-radius:16px;background:rgba(191,242,220,.12);color:var(--mint);font:600 13px/1 Inter;width:max-content}
 .chat-thread-lis svg{width:16px;height:16px}
 
 /* поле ввода */
@@ -196,9 +205,9 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
  <div class="chat-thread-info">
   <p class="chat-thread-eb">Эталон v2 · chat-thread · только тёмная тема</p>
   <h1>Переписка без языкового барьера</h1>
-  <p>Каждое сообщение — два слоя: что написал человек и как это читается на другом языке. Оригинал всегда рядом, поэтому перевод можно проверить, а неточность — исправить, не выходя из чата.</p>
+  <p>Каждое сообщение — два слоя: что написал человек и как это читается на другом языке. Входящие читаешь сразу на своём языке, оригинал раскрывается в том же пузыре по касанию — перевод можно проверить, а неточность исправить, не выходя из чата.</p>
   <ul>
-   <li><b>Входящие</b>: испанский оригинал, под ним перевод на русский мятным цветом со значком перевода.</li>
+   <li><b>Входящие</b>: сверху перевод на русский — основной текст, снизу мятная подпись «Перевод с испанского ⌄»; по касанию под переводом раскрывается испанский оригинал (как в сборке).</li>
    <li><b>Исходящие</b>: твой русский текст, под ним — испанский, который увидит Lucía.</li>
    <li><b>Статус</b>: галочки в пузыре и подпись «Прочитано» под последним сообщением — не только цветом.</li>
    <li><b>Шапка</b>: «в сети» (точка на аватаре + текст), языковая пара ES → RU (нажатие открывает настройки языков чата), меню.</li>
@@ -214,10 +223,10 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
 <div class="chat-thread-cols">
  <div class="chat-thread-sec"><h2>Решения сверх текущей сборки</h2><ul>
   <li><b>Живой предпросмотр «Lucía прочитает: …»</b> над полем — видно испанский до отправки; можно переписать фразу, если смысл ушёл.</li>
-  <li><b>Мятный перевод во входящих</b> — один постоянный признак «это перевод Parrlo», плюс значок; оригинал остаётся основным текстом.</li>
-  <li><b>Голосовое = волна + расшифровка + перевод</b> и кнопка «Слушать по‑русски» (озвучка перевода синтезом).</li>
+  <li><b>Перевод — основной текст входящего</b>, как в сборке: сверху русский, снизу мятная подпись «Перевод с испанского ⌄» со значком — постоянный признак «это перевод Parrlo». Оригинал свёрнут и раскрывается по касанию в том же пузыре («Скрыть оригинал ⌃»). Порядок один с <code>chat-original</code> и <code>chat-voice</code>.</li>
+  <li><b>Голосовое = волна + перевод расшифровки</b>, кнопка «Слушать по‑русски» (озвучка перевода синтезом); испанская расшифровка — по касанию подписи, как у текста.</li>
   <li><b>Ответ с цитатой</b> показывает цитату на твоём языке; в отправленном сообщении цитата видна и Lucía — на её языке.</li>
-  <li><b>Меню по долгому нажатию</b>: реакции своими иконками в стиле Parrlo (без системных эмодзи), четыре действия, «Перевод неточный» отделён.</li>
+  <li><b>Меню по долгому нажатию</b>: реакции своими иконками в стиле Parrlo (без системных эмодзи), четыре действия, «Перевод неточный» отделён; оригинал в выбранном пузыре раскрыт, пункт меню — «Скрыть оригинал».</li>
   <li><b>«Перевод неточный» — не тупик</b>: лист с оригиналом, текущим и другим вариантом перевода с пояснением, плюс «Спросить Lucía» — вежливый вопрос по‑испански.</li>
   <li><b>Честная ошибка отправки</b>: баннер с причиной, пузырь с красной обводкой и значком, подпись «Не отправлено — нет сети» и «Повторить»; перевод не показан — он появится после отправки (перевод идёт на сервере).</li>
   <li><b>Пустой чат</b> с Парло: объясняет механику на мини-примере и даёт три фразы для начала.</li>
@@ -232,7 +241,7 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
   </ul></div>
  <div class="chat-thread-sec"><h2>Не утверждено</h2><ul>
   <li>Все тексты — черновик.</li>
-  <li>Мятный цвет перевода во входящих (в v1 был вторичный серый).</li>
+  <li>Мятный цвет подписи «Перевод с …» (в v1 перевод был вторичным серым).</li>
   <li>Набор и вид реакций, их количество.</li>
   <li>Озвучка перевода голосового («Слушать по‑русски») и предпросмотр перевода при наборе — новые функции, нет в сборке.</li>
   <li>Лист «Перевод неточный»: другой вариант и «Спросить Lucía» — новые функции; формулировка вопроса Lucía.</li>
@@ -272,7 +281,9 @@ var I={
  laugh:ic('<circle cx="12" cy="12" r="9"/><path d="M7.5 13.5h9a4.5 4.5 0 0 1-9 0z"/><path d="M8 9.5l1.6-1 1.4 1M13 9.5l1.4-1 1.6 1"/>'),
  wow:ic('<circle cx="12" cy="12" r="9"/><circle cx="9" cy="9.5" r=".7" fill="currentColor"/><circle cx="15" cy="9.5" r=".7" fill="currentColor"/><ellipse cx="12" cy="15" rx="2" ry="2.5"/>'),
  hands:ic('<circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/>'),
- add:ic('<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>')
+ add:ic('<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>'),
+ cd:ic('<path d="M6 9l6 6 6-6"/>').replace('<svg','<svg class="cv"'),
+ cu:ic('<path d="M6 15l6-6 6 6"/>').replace('<svg','<svg class="cv"')
 };
 var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
 var home='<div class="homebar"><i></i></div>';
@@ -280,7 +291,10 @@ function nav(sub){
  sub=sub||'<span><i style="width:6px;height:6px;border-radius:50%;background:var(--acc);display:inline-block"></i>в сети</span>';
  return '<div class="chat-thread-nav"><span class="chat-thread-ib bk" aria-label="Назад">'+I.back+'</span><span class="chat-thread-av">L<i></i></span><div class="chat-thread-nm"><b>Lucía</b>'+sub+'</div><span class="chat-thread-lc" aria-label="Языки чата: испанский и русский"><span>ES'+I.arr+'RU</span></span><span class="chat-thread-ib" aria-label="Меню чата">'+I.more+'</span></div>';
 }
-function mi(es,ru,tm,cls){return '<div class="chat-thread-m in '+(cls||'')+'"><span lang="es">'+es+'</span><div class="chat-thread-t" lang="ru" aria-label="Перевод">'+I.tr+'<span>'+ru+'</span></div><span class="chat-thread-tm">'+tm+'</span></div>'}
+/* входящее: сверху перевод на русский, снизу «Перевод с испанского ⌄»; open — оригинал раскрыт в том же пузыре */
+function og(es){return '<div class="chat-thread-og" lang="es"><span class="k">Оригинал · испанский</span><span class="v">'+es+'</span></div>'}
+function ft(open,tm){return '<div class="chat-thread-ft"><span class="chat-thread-tg" role="button" aria-expanded="'+(open?'true':'false')+'">'+I.tr+(open?'Скрыть оригинал'+I.cu:'Перевод с испанского'+I.cd)+'</span><span class="chat-thread-tm">'+tm+'</span></div>'}
+function mi(es,ru,tm,cls,open){return '<div class="chat-thread-m in '+(open?'wide ':'')+(cls||'')+'"><span lang="ru">'+ru+'</span>'+(open?og(es):'')+ft(open,tm)+'</div>'}
 function mo(ru,es,tm,cls,q){return '<div class="chat-thread-m out '+(cls||'')+'">'+(q||'')+'<span>'+ru+'</span><div class="chat-thread-t" lang="es" aria-label="Перевод">'+I.tr+'<span>'+es+'</span></div><span class="chat-thread-tm">'+tm+I.done+'</span></div>'}
 function read(t){return '<div class="chat-thread-rd">'+I.done+'Прочитано '+t+'</div>'}
 var day='<div class="chat-thread-day">Сегодня</div>';
@@ -290,7 +304,7 @@ function scr(inner,extra){return '<div class="scr chat-thread-scr">'+sbar+inner+
 function wave(n,played){var h=[8,14,22,12,26,18,30,20,10,16,28,22,14,24,30,18,12,20,26,16,10,22,18,12,8,14,20,10],s='';for(var i=0;i<n;i++)s+='<i class="'+(i<played?'p':'')+'" style="height:'+h[i%h.length]+'px"></i>';return s}
 
 var S={};
-S.main={t:'Переписка',w:'Обычный вид чата: входящие с переводом, твои ответы с испанским ниже, отметка «Прочитано».',
+S.main={t:'Переписка',w:'Обычный вид чата: входящие — перевод на русский с подписью «Перевод с испанского ⌄», твои ответы с испанским ниже, отметка «Прочитано».',
  h:scr(nav()+'<div class="chat-thread-msgs">'+day+
   mo('Отлично, все очень помогают','¡Genial, todos me ayudan mucho!','09:44')+
   mi('¿Quedamos mañana a las 10 en la oficina?','Встретимся завтра в 10 в офисе?','10:02','gap')+
@@ -306,16 +320,15 @@ S.typing={t:'Набор и предпросмотр',w:'Ты печатаешь:
   mi('¡Perfecto! Te espero en recepción.','Отлично! Жду тебя на ресепшене.','10:04','gap')+
   '<div class="chat-thread-ty"><span class="b" aria-label="Lucía печатает"><i></i><i></i><i></i></span><span>Lucía печатает…</span></div>'+
   '</div>'+cmpText('Я уже у входа. Где тебя найти?','Ya estoy en la entrada. ¿Dónde te encuentro?'))};
-S.voice={t:'Голосовое',w:'Lucía прислала голосовое: волна с прослушанной частью, расшифровка на испанском и перевод.',
+S.voice={t:'Голосовое',w:'Lucía прислала голосовое: волна с прослушанной частью, сверху перевод расшифровки на русский; испанская расшифровка — по касанию «Перевод с испанского».',
  h:scr(nav()+'<div class="chat-thread-msgs">'+
   mi('¡Perfecto! Te espero en recepción.','Отлично! Жду тебя на ресепшене.','10:02')+
   mo('Я уже у входа. Где тебя найти?','Ya estoy en la entrada. ¿Dónde te encuentro?','10:04')+read('10:04')+
   '<div class="chat-thread-m in vc gap"><div class="chat-thread-vr"><span class="chat-thread-pl" aria-label="Пауза">'+ic('<rect x="6.5" y="5" width="3.5" height="14" rx="1"/><rect x="14" y="5" width="3.5" height="14" rx="1"/>','fill="currentColor"')+'</span><span class="chat-thread-wv" aria-hidden="true">'+wave(28,11)+'</span></div>'+
   '<div class="chat-thread-vd"><span>0:04 / 0:11</span><b>1×</b></div>'+
-  '<span class="chat-thread-lb">Расшифровка</span><span lang="es">Estoy en recepción, al lado de la planta grande. Sube al segundo piso.</span>'+
-  '<div class="chat-thread-t" lang="ru">'+I.tr+'<span>Я на ресепшене, рядом с большим растением. Поднимайся на второй этаж.</span></div>'+
+  '<span lang="ru">Я на ресепшене, рядом с большим растением. Поднимайся на второй этаж.</span>'+
   '<span class="chat-thread-lis">'+I.spk+'Слушать по‑русски</span>'+
-  '<span class="chat-thread-tm">10:05</span></div>'+
+  ft(false,'10:05')+'</div>'+
   '</div>'+cmpMain())};
 var qIn='<span class="chat-thread-q"><b>Lucía</b><span lang="es">¿Quedamos mañana a las 10?</span></span>';
 S.reply={t:'Ответ на сообщение',w:'Свайп вправо по сообщению: цитата над полем, исходное сообщение подсвечено; Lucía увидит цитату у себя.',
@@ -326,20 +339,20 @@ S.reply={t:'Ответ на сообщение',w:'Свайп вправо по 
   mo('Хорошо, паспорт возьму','Vale, llevo el pasaporte.','10:04')+read('10:04')+
   '</div>'+cmpText('Да, в 10 буду там','Sí, a las 10 estaré allí.',
   '<div class="chat-thread-rq"><span class="bar"></span><div class="tx"><b>'+I.reply+'Ответ для Lucía</b><span>Встретимся завтра в 10 в офисе?</span></div><span class="chat-thread-ib" aria-label="Отменить ответ" style="color:var(--sec)">'+I.x+'</span></div>'))};
-var idiomThread=nav()+'<div class="chat-thread-msgs">'+day+
+function idiomThread(open){return nav()+'<div class="chat-thread-msgs">'+day+
   mi('¡Hola! ¿Qué tal tu primer día?','Привет! Как твой первый день?','09:41')+
   mo('Отлично, все очень помогают','¡Genial, todos me ayudan mucho!','09:44')+
   mo('Кажется, я уже понимаю испанский','Creo que ya entiendo español.','09:56')+
-  mi('¡Me tomas el pelo!','Ты тянешь меня за волосы!','09:58','gap')+
+  mi('¡Me tomas el pelo!','Ты тянешь меня за волосы!','09:58','gap',open)+
   mo('Почему за волосы?','¿Por qué del pelo?','09:59')+read('09:59')+
-  '</div>'+cmpMain();
-S.menu={t:'Меню сообщения',w:'Долгое нажатие на сообщение: реакции сверху, действия снизу, остальной чат приглушён.',
- h:scr(idiomThread,'<div class="chat-thread-dim"></div><div class="chat-thread-pop" style="top:300px">'+
+  '</div>'+cmpMain()}
+S.menu={t:'Меню сообщения',w:'Долгое нажатие на сообщение: реакции сверху, действия снизу, остальной чат приглушён. Оригинал раскрыт под переводом — видно, откуда странный перевод.',
+ h:scr(idiomThread(false),'<div class="chat-thread-dim"></div><div class="chat-thread-pop" style="top:300px">'+
   '<div class="chat-thread-rx" aria-label="Реакции"><span class="on" aria-label="Нравится">'+I.heart+'</span><span aria-label="Класс">'+I.thumb+'</span><span aria-label="Смешно">'+I.laugh+'</span><span aria-label="Ого">'+I.wow+'</span><span aria-label="Принято">'+I.hands+'</span><span class="more" aria-label="Ещё реакции">'+I.add+'</span></div>'+
-  mi('¡Me tomas el pelo!','Ты тянешь меня за волосы!','09:58')+
-  '<div class="chat-thread-mn" role="menu"><div><span>Ответить</span>'+I.reply+'</div><div><span>Копировать перевод</span>'+I.copy+'</div><div><span>Показать оригинал</span>'+I.orig+'</div><div class="sep wr"><span>Перевод неточный</span>'+I.flag+'</div></div></div>')};
+  mi('¡Me tomas el pelo!','Ты тянешь меня за волосы!','09:58','',true)+
+  '<div class="chat-thread-mn" role="menu"><div><span>Ответить</span>'+I.reply+'</div><div><span>Копировать перевод</span>'+I.copy+'</div><div><span>Скрыть оригинал</span>'+I.orig+'</div><div class="sep wr"><span>Перевод неточный</span>'+I.flag+'</div></div></div>')};
 S.inaccurate={t:'Перевод неточный',w:'После «Перевод неточный»: оригинал, текущий и другой вариант перевода, можно спросить Lucía.',
- h:scr(idiomThread,'<div class="chat-thread-dim" style="backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(9,11,14,.62)"></div><div class="chat-thread-sh"><div class="chat-thread-gr"></div>'+
+ h:scr(idiomThread(true),'<div class="chat-thread-dim" style="backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(9,11,14,.62)"></div><div class="chat-thread-sh"><div class="chat-thread-gr"></div>'+
   '<div class="chat-thread-shh"><div><h4>Перевод неточный?</h4><p>Сообщение Lucía · 09:58</p></div><span class="chat-thread-x" aria-label="Закрыть"><i>'+I.x+'</i></span></div>'+
   '<div class="chat-thread-bx"><div class="k">Оригинал · испанский</div><div class="v" lang="es">¡Me tomas el pelo!</div></div>'+
   '<div class="chat-thread-bx"><div class="k">Сейчас</div><div class="v x">Ты тянешь меня за волосы!</div></div>'+
@@ -357,7 +370,7 @@ S.failed={t:'Не отправилось',w:'Пропала сеть: банне
   '<div class="chat-thread-er"><span class="r">'+I.alert+'Не отправлено: нет сети</span><span class="chat-thread-rt" aria-label="Повторить отправку"><span>'+I.retry+'Повторить</span></span></div>'+
   '</div>'+cmpMain())};
 S.empty={t:'Новый чат',w:'Первое открытие чата с Lucía: Парло объясняет, как работает перевод, и предлагает фразы для начала.',
- h:scr(nav('<span>пишет по‑испански</span>')+'<div class="chat-thread-em"><img src="../../brandbook/assets/mascot/mascot-happy-dark.svg" alt="Парло"><h4>Начни разговор с Lucía</h4><p>Пиши по‑русски — Lucía прочитает по‑испански. Её ответы придут по‑русски, оригинал всегда рядом.</p>'+
+ h:scr(nav('<span>пишет по‑испански</span>')+'<div class="chat-thread-em"><img src="../../brandbook/assets/mascot/mascot-happy-dark.svg" alt="Парло"><h4>Начни разговор с Lucía</h4><p>Пиши по‑русски — Lucía прочитает по‑испански. Её ответы придут по‑русски, оригинал — по касанию.</p>'+
   '<div class="chat-thread-ex" aria-hidden="true">'+mo('Привет!','¡Hola!','')+mi('¡Hola! ¿Qué tal?','Привет! Как дела?','')+'</div></div>'+
   '<div class="chat-thread-sth">С ЧЕГО НАЧАТЬ</div><div class="chat-thread-st"><span>Привет! Как дела?</span><span>Когда тебе удобно созвониться?</span><span>Спасибо за помощь!</span></div>'+cmpMain())};
 
@@ -370,7 +383,7 @@ document.querySelectorAll('.chat-thread-ex .chat-thread-tm').forEach(function(e)
 
 function L(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
 function cr(a,b){var x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
-var rows=[['#F2F5F7','#242B34','Текст во входящем'],['#BFF2DC','#242B34','Перевод (Mint) во входящем'],['#9AA4B2','#242B34','Время, подписи во входящем'],['#FFFFFF','#00875C','Текст, перевод и время в исходящем'],['#9AA4B2','#0E1116','«Прочитано», «в сети», подписи на фоне'],['#2BC48A','#0E1116','Акцент: «печатает…», галочки, «Ответ для»'],['#9AA4B2','#1C2026','Плейсхолдер поля, подпись предпросмотра'],['#F2F5F7','#1C2026','Предпросмотр «Lucía прочитает»'],['#0E1116','#2BC48A','Значки и текст на акценте'],['#FF6B5E','#0E1116','«Не отправлено: нет сети»'],['#E4C9CC','#3C2A2E','Пояснение в баннере ошибки'],['#F2F5F7','#173A2E','Текст неотправленного сообщения'],['#C9D1DA','#173A2E','«Переведём после отправки»'],['#BFF2DC','#1E3734','«Другой вариант» на успех-фоне'],['#C9D1DA','#242B34','Зачёркнутый текущий перевод']];
+var rows=[['#F2F5F7','#242B34','Перевод — основной текст во входящем'],['#BFF2DC','#242B34','Подпись «Перевод с испанского» (Mint) во входящем'],['#9AA4B2','#1C2026','«Оригинал · испанский» в раскрытом блоке'],['#F2F5F7','#1C2026','Текст оригинала в раскрытом блоке'],['#9AA4B2','#242B34','Время, подписи во входящем'],['#FFFFFF','#00875C','Текст, перевод и время в исходящем'],['#9AA4B2','#0E1116','«Прочитано», «в сети», подписи на фоне'],['#2BC48A','#0E1116','Акцент: «печатает…», галочки, «Ответ для»'],['#9AA4B2','#1C2026','Плейсхолдер поля, подпись предпросмотра'],['#F2F5F7','#1C2026','Предпросмотр «Lucía прочитает»'],['#0E1116','#2BC48A','Значки и текст на акценте'],['#FF6B5E','#0E1116','«Не отправлено: нет сети»'],['#E4C9CC','#3C2A2E','Пояснение в баннере ошибки'],['#F2F5F7','#173A2E','Текст неотправленного сообщения'],['#C9D1DA','#173A2E','«Переведём после отправки»'],['#BFF2DC','#1E3734','«Другой вариант» на успех-фоне'],['#C9D1DA','#242B34','Зачёркнутый текущий перевод']];
 document.getElementById('chat-thread-ct').innerHTML=rows.map(function(r){return '<tr><td><span class="chat-thread-sw" style="background:'+r[0]+'"></span><span class="chat-thread-sw" style="background:'+r[1]+'"></span>'+r[2]+' <code>'+r[0]+'</code> на <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
 window.CHAT_THREAD_MIN=Math.min.apply(null,rows.map(function(r){return cr(r[0],r[1])}));
 })();
