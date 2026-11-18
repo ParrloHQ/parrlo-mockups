@@ -3,94 +3,413 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Parrlo Translate · разговор в кафе</title>
+<title>Parrlo Translate · разговор</title>
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../frame.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:#0B0E12;color:#F2F5F7}
-body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:40px 16px 72px}
-.translate-talk-w{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
-.translate-talk-w h1{font:900 30px/1.15 Nunito,sans-serif;margin-bottom:6px}
-.translate-talk-info{max-width:520px;flex:1 1 340px}
-.translate-talk-info .pcap{margin-top:0;max-width:none}
-.translate-talk-info h2{font:900 19px/1.3 Nunito,sans-serif;margin:28px 0 8px}
-.translate-talk-info ul{padding-left:20px;color:#C3CBD5;font-size:15px}
-.translate-talk-info li{margin:6px 0}
-.translate-talk-info code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px}
-.translate-talk-info .tag{display:inline-block;margin-top:10px;font-size:13px;color:#FFC247}
-@media (max-width:480px){.translate-talk-w .pf{--s:.82!important}}
+body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:48px 16px 80px}
+.translate-talk-w{max-width:1200px;margin:0 auto}
+.translate-talk-w h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:12px}
+.translate-talk-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.translate-talk-lead{color:#9AA4B2;max-width:820px}
+.translate-talk-tag{display:inline-block;margin-bottom:12px;font:600 13px/1 Inter,sans-serif;color:#0E1116;background:#BFF2DC;border-radius:8px;padding:6px 10px}
+.translate-talk-hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;margin-top:40px;padding:48px 40px;border-radius:32px;background:#12161C;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-talk-hero figure{margin:0}
+.translate-talk-hero-t{flex:1 1 320px;max-width:520px}
+.translate-talk-hero-t h3{font:900 24px/1.25 Nunito,sans-serif;margin-bottom:12px}
+.translate-talk-hero-t p{color:#C3CBD5;margin-bottom:12px}
+.translate-talk-w ul{padding-left:20px;color:#C3CBD5;font-size:15px;max-width:860px}
+.translate-talk-w li{margin:8px 0}
+.translate-talk-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.translate-talk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:48px 24px;margin-top:32px}
+.translate-talk-grid figure{margin:0;display:flex;flex-direction:column;align-items:center}
+.translate-talk-grid figcaption{margin-top:16px;width:248px;font-size:14px;line-height:1.45;color:#9AA4B2}
+.translate-talk-grid figcaption b{display:block;color:#F2F5F7;font:900 17px/1.3 Nunito,sans-serif;margin-bottom:4px}
+.translate-talk-grid figcaption code{font-size:12px}
+.translate-talk-tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
+.translate-talk-tbl th,.translate-talk-tbl td{text-align:left;vertical-align:top;border-bottom:1px solid #2F3742;padding:10px 12px 10px 0}
+.translate-talk-tbl th{color:#9AA4B2;font-weight:600}
+.translate-talk-tw{overflow-x:auto}
+.translate-talk-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:0 0 0 1px #3A414B}
+@media (max-width:760px){.translate-talk-w h1{font-size:30px}.translate-talk-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-talk-hero .pf{--s:.8!important}}
+@media (max-width:420px){.translate-talk-hero .pf{--s:.78!important}}
 
-/* экран */
-.translate-talk-scr .top{display:flex;align-items:center;gap:8px;padding:8px 14px}
-.translate-talk-scr .cb{width:52px;height:52px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
-.translate-talk-scr .stop{width:16px;height:16px;border-radius:3px;background:#FF6B5E}
-.translate-talk-scr .pair{flex:1;min-width:0;display:flex;justify-content:center}
-.translate-talk-scr .pair span{height:52px;border-radius:26px;background:var(--sf2);display:inline-flex;align-items:center;gap:8px;padding:0 16px;font:900 20px Nunito,sans-serif;letter-spacing:.02em}
-.translate-talk-scr .d{width:9px;height:9px;border-radius:50%;background:#FFC247}
-.translate-talk-scr .d.g{background:#2BC48A}
-.translate-talk-scr .sw{color:var(--sec);font:400 20px Inter,sans-serif;font-style:normal}
-.translate-talk-feed{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 14px 18px;gap:6px}
-.translate-talk-feed .b{border-radius:24px;padding:13px 20px;font-size:18px;line-height:1.35;max-width:88%}
-.translate-talk-feed .wait{align-self:flex-start;background:var(--sf);color:#C9D1DA;border-bottom-left-radius:8px;box-shadow:inset 0 0 0 1px var(--line)}
-.translate-talk-feed .ru{align-self:flex-start;background:var(--mint);color:#0E1116;font-weight:600;border-bottom-left-radius:8px}
-.translate-talk-feed .me{align-self:flex-end;background:#173A2E;color:#E8F7F0;border-bottom-right-radius:8px}
-.translate-talk-feed .es{max-width:100%;background:var(--deep);color:#fff;font:700 24px/1.32 Inter,sans-serif;position:relative;padding:16px 64px 16px 22px;border-radius:26px}
-.translate-talk-feed .spk{position:absolute;right:10px;bottom:6px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#fff}
-.translate-talk-feed .meta{font-size:13px;color:var(--sec);margin:0 8px 8px}
-.translate-talk-feed .meta.l{align-self:flex-start}
-.translate-talk-feed .meta.r{align-self:flex-end}
-.translate-talk-btns{flex:none;display:flex;gap:12px;padding:0 14px 6px}
-.translate-talk-btns .pb{flex:1;height:76px;border-radius:38px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 21px Nunito,sans-serif;color:#0E1116}
-.translate-talk-btns .a{background:#2BC48A;box-shadow:0 0 32px rgba(43,196,138,.35)}
-.translate-talk-btns .b2{background:var(--mint)}
+/* ===== экран ===== */
+.translate-talk-scr{--me:#2BC48A;--es:#BFF2DC;--err:#FF6B5E}
+.translate-talk-top{flex:none;display:flex;align-items:center;gap:8px;padding:8px 16px}
+.translate-talk-cb{width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.translate-talk-pair{flex:1;min-width:0;display:flex;justify-content:center}
+.translate-talk-pair>span{height:48px;border-radius:24px;background:var(--sf2);display:inline-flex;align-items:center;gap:8px;padding:0 16px;font:900 19px/1 Nunito,sans-serif;letter-spacing:.02em}
+.translate-talk-pair .translate-talk-swp{color:var(--sec);display:flex}
+.translate-talk-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--me)}
+.translate-talk-dot.translate-talk-es{background:var(--es)}
+.translate-talk-main{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 16px;overflow:hidden}
+.translate-talk-bot{flex:none;display:flex;flex-direction:column;gap:12px;padding:12px 16px 4px}
+.translate-talk-btns{display:flex;gap:12px}
+.translate-talk-pb{flex:1;min-width:0;height:80px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:10px;color:#0E1116;position:relative}
+.translate-talk-pb svg{flex:none;width:26px;height:26px}
+.translate-talk-pb b{display:block;font:900 21px/24px Nunito,sans-serif;white-space:nowrap}
+.translate-talk-pb small{display:block;font:600 13px/1.3 Inter,sans-serif;margin-top:2px}
+.translate-talk-pb.translate-talk-me{background:var(--me)}
+.translate-talk-pb.translate-talk-es{background:var(--es)}
+.translate-talk-pb.translate-talk-next{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--es),0 0 36px rgba(191,242,220,.28)}
+.translate-talk-pb.translate-talk-next.translate-talk-me{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--me),0 0 36px rgba(43,196,138,.3)}
+.translate-talk-hint{display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center}
+.translate-talk-hint svg{width:16px;height:16px;flex:none}
+.translate-talk-hint b{color:var(--tx);font-weight:600}
+.translate-talk-sec{height:56px;border-radius:28px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;font:600 16px Inter,sans-serif;flex:1}
+.translate-talk-sec svg{width:20px;height:20px}
+.translate-talk-pri{height:56px;border-radius:28px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;gap:8px;font:900 19px Nunito,sans-serif;flex:1}
+.translate-talk-pri svg{width:22px;height:22px}
+.translate-talk-lbl{font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+
+/* idle */
+.translate-talk-idle{align-items:center;text-align:center;justify-content:center;gap:0}
+.translate-talk-idle img{width:128px;height:128px;margin-bottom:8px}
+.translate-talk-idle h3{font:900 30px/1.15 Nunito,sans-serif;margin-bottom:8px}
+.translate-talk-idle>p{font:400 16px/24px Inter,sans-serif;color:var(--sec);max-width:310px;margin-bottom:24px}
+.translate-talk-steps{align-self:stretch;background:var(--sf);border-radius:24px;padding:8px 20px;text-align:left;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-talk-step{display:flex;gap:16px;align-items:center;min-height:56px;font:500 16px/22px Inter,sans-serif}
+.translate-talk-step+.translate-talk-step{border-top:1px solid var(--line)}
+.translate-talk-step i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--sf2);color:var(--tx);font:900 15px/28px Nunito,sans-serif;font-style:normal;text-align:center}
+.translate-talk-step em{font-style:normal;font-weight:700}
+
+/* listening */
+.translate-talk-ls{align-items:center;text-align:center;padding-top:16px}
+.translate-talk-turn{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:18px;background:#1E3734;color:var(--me);font:600 15px Inter,sans-serif}
+.translate-talk-turn.translate-talk-es{background:#243A33;color:var(--es)}
+.translate-talk-turn svg{width:18px;height:18px}
+.translate-talk-ls h3{font:900 32px/1.15 Nunito,sans-serif;margin-top:28px}
+.translate-talk-ls .translate-talk-sub{font:400 16px/24px Inter,sans-serif;color:var(--sec);margin-top:4px}
+.translate-talk-time{margin-top:40px;font:600 48px/56px Inter,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.translate-talk-rec{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font:600 14px Inter,sans-serif;color:var(--tx)}
+.translate-talk-rec i{width:10px;height:10px;border-radius:50%;background:var(--err);box-shadow:0 0 0 4px rgba(255,107,94,.22)}
+.translate-talk-wave{height:160px;display:flex;align-items:center;justify-content:center;gap:4px;margin-top:28px;align-self:stretch;position:relative}
+.translate-talk-wave i{width:4px;border-radius:2px;background:var(--me);flex:none}
+.translate-talk-wave i.translate-talk-f{background:#3A414B;height:4px!important}
+.translate-talk-wave.translate-talk-es i{background:var(--es)}
+.translate-talk-wave.translate-talk-es i.translate-talk-f{background:#3A414B}
+.translate-talk-tip{margin-top:auto;margin-bottom:8px;font:400 14px/20px Inter,sans-serif;color:var(--sec);display:flex;gap:8px;align-items:center}
+.translate-talk-tip svg{width:16px;height:16px}
+.translate-talk-stop{flex:1;height:80px;border-radius:40px;background:#F2F5F7;color:#0E1116;display:flex;align-items:center;justify-content:center;gap:12px;font:900 24px Nunito,sans-serif}
+.translate-talk-stop i{width:20px;height:20px;border-radius:5px;background:#E0483B}
+.translate-talk-cancel{flex:none;width:120px;height:80px;border-radius:40px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;font:600 16px Inter,sans-serif}
+
+/* processing */
+.translate-talk-pr{padding-top:16px;gap:16px}
+.translate-talk-stepper{display:flex;align-items:center;gap:12px;background:var(--sf);border-radius:20px;padding:14px 16px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-talk-stepper>span{display:flex;align-items:center;gap:8px;font:600 15px/20px Inter,sans-serif;white-space:nowrap}
+.translate-talk-stepper .translate-talk-ok{color:var(--sec)}
+.translate-talk-stepper .translate-talk-ok svg{color:var(--me)}
+.translate-talk-stepper svg{width:22px;height:22px;flex:none}
+.translate-talk-stepper .translate-talk-arr{flex:1;height:2px;background:var(--line);border-radius:1px;min-width:12px}
+.translate-talk-spin{animation:translate-talk-rot 1s linear infinite}
+@keyframes translate-talk-rot{to{transform:rotate(360deg)}}
+.translate-talk-said{position:relative;background:var(--sf);border-radius:20px;padding:16px 20px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-talk-said p{font:400 19px/26px Inter,sans-serif;margin-top:8px}
+.translate-talk-said .translate-talk-row{height:20px}
+.translate-talk-said .translate-talk-row+p{margin-top:8px}
+.translate-talk-skel{background:#123A2C;border-radius:28px;padding:24px 24px 28px;display:flex;flex-direction:column;gap:14px}
+.translate-talk-skel>i{display:block;height:22px;border-radius:11px;background:linear-gradient(90deg,rgba(191,242,220,.10),rgba(191,242,220,.22),rgba(191,242,220,.10))}
+.translate-talk-skel .translate-talk-lbl{color:#BFF2DC}
+
+/* done */
+.translate-talk-dn{padding-top:12px;gap:16px}
+.translate-talk-card{background:var(--deep);border-radius:28px;padding:20px 24px 20px;color:#fff}
+.translate-talk-card .translate-talk-lbl{color:#FFFFFF}
+.translate-talk-card p{font:900 31px/1.2 Nunito,sans-serif;margin:12px 0 20px;letter-spacing:.005em}
+.translate-talk-acts{display:flex;gap:8px}
+.translate-talk-act{height:48px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 14px;font:600 16px Inter,sans-serif;background:#FFFFFF;color:#0E1116}
+.translate-talk-act.translate-talk-ghost{background:#005E40;color:#fff}
+.translate-talk-act svg{width:20px;height:20px}
+.translate-talk-said .translate-talk-row{display:flex;justify-content:space-between;align-items:center}
+.translate-talk-ed{position:absolute;right:4px;top:4px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec)}
+.translate-talk-ed svg{width:20px;height:20px}
+.translate-talk-note{font:400 13px/18px Inter,sans-serif;color:var(--sec);display:flex;gap:8px;align-items:flex-start;padding:0 4px}
+.translate-talk-note svg{width:16px;height:16px;flex:none;margin-top:1px}
+
+/* conversation */
+.translate-talk-feed{justify-content:flex-end;gap:4px;padding-bottom:4px;-webkit-mask-image:linear-gradient(transparent 0,#000 48px);mask-image:linear-gradient(transparent 0,#000 48px)}
+.translate-talk-day{align-self:center;font:500 13px Inter,sans-serif;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px;margin-bottom:8px}
+.translate-talk-bb{max-width:86%;border-radius:24px;padding:12px 18px 14px}
+.translate-talk-bb .translate-talk-o{display:block;font:400 14px/19px Inter,sans-serif;padding-bottom:8px;margin-bottom:8px}
+.translate-talk-bb .translate-talk-t{display:block;font:600 18px/24px Inter,sans-serif}
+.translate-talk-bb.translate-talk-l{align-self:flex-start;background:var(--es);color:#0E1116;border-bottom-left-radius:8px}
+.translate-talk-bb.translate-talk-l .translate-talk-o{color:#2E4A3F;border-bottom:1px solid rgba(14,17,22,.14)}
+.translate-talk-bb.translate-talk-r{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:8px}
+.translate-talk-bb.translate-talk-r .translate-talk-o{color:#FFFFFF;border-bottom:1px solid rgba(255,255,255,.22)}
+.translate-talk-bb.translate-talk-big{max-width:100%;position:relative;padding-right:68px}
+.translate-talk-bb.translate-talk-big .translate-talk-t{font:900 24px/30px Nunito,sans-serif}
+.translate-talk-bb .translate-talk-spk{position:absolute;right:10px;bottom:10px;width:44px;height:44px;border-radius:50%;background:#005E40;display:flex;align-items:center;justify-content:center;color:#fff}
+.translate-talk-meta{font:500 12px/16px Inter,sans-serif;color:var(--sec);margin:4px 8px 8px}
+.translate-talk-meta.translate-talk-l{align-self:flex-start}
+.translate-talk-meta.translate-talk-r{align-self:flex-end}
+
+/* face */
+.translate-talk-fc{padding:4px 12px 0;gap:0}
+.translate-talk-pan{flex:1;min-height:0;background:var(--deep);border-radius:32px;transform:rotate(180deg);display:flex;flex-direction:column;padding:24px;color:#fff}
+.translate-talk-pan .translate-talk-lbl{color:#FFFFFF}
+.translate-talk-pan p{font:900 36px/44px Nunito,sans-serif;margin-top:16px}
+.translate-talk-pan .translate-talk-acts{margin-top:auto;gap:12px}
+.translate-talk-pan .translate-talk-pb{height:64px;border-radius:32px}
+.translate-talk-pan .translate-talk-pb b{font-size:20px}
+.translate-talk-pan .translate-talk-act{height:64px;border-radius:32px;padding:0 22px 0 18px;font-size:17px}
+.translate-talk-mid{flex:none;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px Inter,sans-serif;color:var(--sec)}
+.translate-talk-mid svg{width:18px;height:18px}
+.translate-talk-mine{flex:none;padding:0 4px 4px;display:flex;flex-direction:column;gap:16px}
+.translate-talk-mine p{font:400 19px/26px Inter,sans-serif;margin-top:6px}
+.translate-talk-mine .translate-talk-btns .translate-talk-pb{height:64px;border-radius:32px}
+
+/* error */
+.translate-talk-er{align-items:center;text-align:center;padding-top:8px}
+.translate-talk-er img{width:112px;height:112px}
+.translate-talk-erb{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:16px;background:#3C2A2E;color:#FF8A7F;font:600 14px Inter,sans-serif;margin-top:4px}
+.translate-talk-erb svg{width:16px;height:16px}
+.translate-talk-er h3{font:900 28px/1.2 Nunito,sans-serif;margin-top:16px}
+.translate-talk-er>p{font:400 16px/24px Inter,sans-serif;color:var(--sec);margin-top:8px;max-width:320px}
+.translate-talk-clip{align-self:stretch;margin-top:24px;background:var(--sf);border-radius:20px;padding:12px 16px 12px 12px;display:flex;align-items:center;gap:12px;box-shadow:inset 0 0 0 1px var(--line);text-align:left}
+.translate-talk-play{flex:none;width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.translate-talk-play svg{width:20px;height:20px}
+.translate-talk-clip .translate-talk-cw{flex:1;min-width:0}
+.translate-talk-clip .translate-talk-cw b{display:block;font:600 15px/20px Inter,sans-serif}
+.translate-talk-clip .translate-talk-cw span{display:flex;align-items:center;gap:6px;font:500 13px/18px Inter,sans-serif;color:var(--sec)}
+.translate-talk-clip .translate-talk-cw span svg{width:14px;height:14px;color:var(--me)}
+.translate-talk-mw{display:flex;align-items:center;gap:3px;height:28px;margin-top:4px}
+.translate-talk-mw i{width:3px;border-radius:2px;background:#5B6472;flex:none}
+.translate-talk-mw i.translate-talk-pl{background:var(--me)}
+.translate-talk-dur{font:600 14px Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--sec)}
+.translate-talk-tips{align-self:stretch;margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.translate-talk-tips span{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;background:var(--sf);font:500 13px Inter,sans-serif;color:#C3CBD5;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-talk-tips svg{width:15px;height:15px}
+.translate-talk-bot .translate-talk-btns.translate-talk-v{flex-direction:column}
+.translate-talk-btns.translate-talk-v>span{flex:none}
 </style>
 </head>
 <body>
 <div class="translate-talk-w">
-<figure>
-<div class="pf" id="translate-talk" style="--s:1"><div class="shell"></div><div class="glass"><div class="scr translate-talk-scr">
- <div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>
- <div class="top"><span class="cb"><i class="stop"></i></span><span class="pair"><span><i class="d"></i>RU<i class="sw">⇆</i>ES<i class="d g"></i></span></span><span class="cb" data-i="kbd"></span><span class="cb" data-i="more"></span></div>
- <div class="translate-talk-feed">
-  <div class="b wait">Buenas tardes. ¿Qué le pongo?</div><div class="meta l">Собеседник · Español</div>
-  <div class="b ru">Добрый день. Что вам принести?</div><div class="meta l">Русский</div>
-  <div class="b me">Можно счёт и бутылку воды без газа с собой?</div><div class="meta r">Вы · литературно</div>
-  <div class="b es">¿Me trae la cuenta y una botella de agua sin gas para llevar?<span class="spk" data-i="spk"></span></div><div class="meta r">Español</div>
+<span class="translate-talk-tag">Эталон v2 · черновик текста</span>
+<h1>Translate · разговор лицом к лицу</h1>
+<p class="translate-talk-lead">Один телефон на двоих: вы говорите по‑русски, собеседник — по‑испански. Каждая реплика проходит путь «запись → распознавание → перевод», а перевод показывается крупно или разворачивается к собеседнику. Только тёмная тема, интерфейс на «вы». Экран 390×844 pt, PNG @3× — 1170×2532.</p>
+
+<section class="translate-talk-hero">
+ <figure id="translate-talk-hero-ph"></figure>
+ <div class="translate-talk-hero-t">
+  <h3>Главный кадр · разговор в кафе</h3>
+  <p>Реплики обеих сторон в одной ленте. У каждой — то, что сказали, и перевод для того, кто слушает: собеседнику — на испанском (Deep Green), вам — на русском (Mint). Последний перевод крупнее и с кнопкой «Озвучить».</p>
+  <p>Цвет закреплён за стороной во всём экране: зелёный #2BC48A — вы и «Я говорю», мятный #BFF2DC — собеседник и «Yo hablo». Под кнопками — подсказка, чья очередь, словами, а не только цветом.</p>
  </div>
- <div class="translate-talk-btns"><span class="pb a" data-i="mic">Я говорю</span><span class="pb b2" data-i="mic">Yo hablo</span></div>
- <div class="homebar"><i></i></div>
-</div></div></div>
-<div class="pcap"><span class="dot"></span><div><b>Translate · разговор в кафе</b><span>Только тёмная тема. Тексты — черновик.</span></div></div>
-</figure>
-<div class="translate-talk-info">
-<h1>translate-talk</h1>
-<h2>Что на экране</h2>
+</section>
+
+<h2>Состояния</h2>
+<p class="translate-talk-lead">Порядок — как в живом разговоре. Под каждым экраном: когда он показывается и что делает пользователь. Масштаб 0,6.</p>
+<div class="translate-talk-grid" id="translate-talk-grid"></div>
+
+<h2>Решения</h2>
 <ul>
-<li>Сверху: стоп (красный квадрат <code>#FF6B5E</code>), пилюля «RU ⇆ ES» (Nunito 900; точка RU <code>#FFC247</code> — единственный жёлтый элемент, точка ES <code>#2BC48A</code>), клавиатура, «⋯». Круги 52 pt.</li>
-<li>Лента: реплика собеседника (ES, <code>#1C2026</code>) → перевод на русский (Mint <code>#BFF2DC</code>) → реплика пользователя (<code>#173A2E</code>, «Вы · литературно») → крупный перевод на Deep Green <code>#00875C</code>, белый Inter 700 24 pt, кнопка «озвучить» 44×44 внутри, подпись «Español».</li>
-<li>Снизу: «Я говорю» (<code>#2BC48A</code>, свечение) и «Yo hablo» (<code>#BFF2DC</code>), 76 pt, Nunito 900 21, микрофон; текст <code>#0E1116</code>.</li>
+<li><b>Цвет = сторона.</b> Точки в пилюле «RU ⇆ ES», кнопки, волна записи и пузыри ленты окрашены по стороне: вы — #2BC48A, собеседник — #BFF2DC. Жёлтая точка RU из сборки убрана: жёлтый на экране остаётся только в клюве маскота.</li>
+<li><b>«Чья очередь» словами.</b> После перевода следующая кнопка получает кольцо, а над ней строка «Теперь очередь собеседника». Во время записи вторая кнопка скрыта, вместо неё — «Отменить» и крупный «Стоп».</li>
+<li><b>Запись собеседника — по‑испански.</b> Отдельное состояние <code>listening-es</code>: крупный текст на испанском («Hable ahora»), чтобы собеседник понимал, что говорить можно ему; подсказка для вас — по‑русски.</li>
+<li><b>Этапы без обещаний скорости.</b> «Распознаём речь → Переводим»: галочка у пройденного шага, распознанная фраза появляется сразу, перевод — скелетоном. Есть «Отменить».</li>
+<li><b>Готово = карточка для собеседника.</b> Крупный перевод (Nunito 900, 31 pt), «Озвучить» и «Показать собеседнику»; ниже «Вы сказали» с кнопкой «Исправить» (правка текста перед повторным переводом). Микроподпись честно говорит, что перевод может быть неточным.</li>
+<li><b>Режим «к собеседнику».</b> Верхняя половина развёрнута на 180°: телефон кладут на стол между людьми, собеседник читает перевод со своей стороны и сам нажимает «Yo hablo» или «Escuchar». Нижняя половина остаётся вашей.</li>
+<li><b>Ошибки не теряют запись.</b> «Нет соединения» и «Не расслышали» (добавлено сверх задания) показывают сохранённую запись с прослушиванием и одно главное действие: «Повторить» / «Сказать ещё раз». Для «не расслышали» — запасной путь «Ввести текстом» и короткие советы.</li>
+<li><b>Верхняя панель.</b> Отступ 16 pt от краёв, круги 48 pt, пилюля языков по центру сжимается, а не выталкивает кнопки. Красный «стоп» из сборки заменён на «Назад»: завершение записи — только крупной кнопкой «Стоп».</li>
 </ul>
-<h2>Контраст текста (WCAG)</h2>
+
+<h2>Токены и контраст</h2>
+<div class="translate-talk-tw"><table class="translate-talk-tbl" id="translate-talk-ctr">
+<tr><th>Пара (текст / фон)</th><th>Где</th><th>Контраст</th><th>Норма</th></tr>
+</table></div>
 <ul>
-<li>белый на Deep Green — 4,55:1</li>
-<li>#0E1116 на Mint — 15,3:1; на #2BC48A — 8,4:1</li>
-<li>основной на #242B34 — 13,1:1; реплика собеседника #C9D1DA на #1C2026 — не ниже 9:1</li>
-<li>#E8F7F0 на #173A2E — 11,3:1</li>
-<li>подписи #9AA4B2 на #0E1116 — 7,5:1</li>
+<li>Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code> — тёмная тема v2.3.</li>
+<li>Сторона «вы»: <code>#2BC48A</code> (dark.primary), подложка чипа <code>#1E3734</code> (dark.successBg). Сторона собеседника: <code>#BFF2DC</code> (dark.partnerButtonBg). Перевод для собеседника — <code>#00875C</code> (brand.deep); кнопки внутри карточки — <code>#005E40</code>.</li>
+<li>Ошибка: <code>#FF6B5E</code> / <code>#3C2A2E</code> (dark.error / errorBg); текст бейджа — <code>#FF8A7F</code>. Значок записи на кнопке «Стоп» — <code>#E0483B</code> (на светлой кнопке; не текст).</li>
+<li>Шрифты: Nunito 900 — заголовки, кнопки, крупный перевод; Inter 400/500/600 — интерфейс. Сетка 4 pt, поля 16, карточки 20–24. Зоны нажатия ≥ 44 pt (круги 48, кнопки 56–80).</li>
 </ul>
+
 <h2>Не утверждено</h2>
 <ul>
-<li>Все тексты — черновик (реплики, «Вы · литературно», «Собеседник · Español»).</li>
-<li>Подпись «на телефоне» с оригинала сознательно убрана (обещание «на устройстве» запрещено).</li>
-<li>Цвет Mint для перевода на русский и поверхность реплики собеседника — по брифу, в брендбуке v2.3 отдельно не закреплены.</li>
+<li>Все тексты — черновик, включая испанские («Hable ahora», «Escuchar», «Traducción para usted»).</li>
+<li>Отказ от жёлтой точки RU и цветовая схема «сторона = цвет» — предложение, в брендбуке не закреплено.</li>
+<li>Состояния <code>listening-es</code> и <code>unclear</code>, кнопки «Исправить», «Ввести текстом», «Показать собеседнику», прослушивание сохранённой записи — функции сверх текущей сборки.</li>
+<li>Режим «к собеседнику»: включать вручную (кнопка) или по положению телефона — не решено; на макете — кнопкой.</li>
+<li>Цвета <code>#005E40</code>, <code>#123A2C</code>, <code>#243A33</code>, <code>#FF8A7F</code>, <code>#E0483B</code>, <code>#2E4A3F</code> — производные, в токенах v2.3 их нет.</li>
+<li>Что происходит с сохранённой записью при выходе из разговора — не решено (на макете не обещаем хранение).</li>
 </ul>
 </div>
-</div>
+
 <script src="../screens.js"></script>
 <script>
-document.querySelectorAll('[data-i]').forEach(function(e){e.insertAdjacentHTML('afterbegin',window.SITE_ICONS[e.dataset.i]);});
+(function(){
+const P='translate-talk-';
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const S=window.SITE_ICONS;
+const I={
+ mic:S.mic.replace('class="ic"','class="ic" style="width:26px;height:26px"'),
+ kbd:S.kbd, more:S.more,
+ back:`<svg class="ic" viewBox="0 0 24 24" ${SW}><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>`,
+ swap:`<svg viewBox="0 0 24 24" ${SW} style="width:20px;height:20px"><path d="M4 8h14M14.5 4.5L18 8l-3.5 3.5"/><path d="M20 16H6M9.5 12.5L6 16l3.5 3.5"/></svg>`,
+ spk:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+ check:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M8 12.3l2.7 2.7L16 9.6"/></svg>`,
+ ok:`<svg viewBox="0 0 24 24" ${SW}><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ spin:`<svg class="${P}spin" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9" stroke="#2F3742"/><path d="M12 3a9 9 0 0 1 9 9" stroke="#2BC48A"/></svg>`,
+ rot:`<svg viewBox="0 0 24 24" ${SW}><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 6h3"/><path d="M3 10.5a8 8 0 0 0 1.7 6.3M2.6 14.6l2 2.4 2.6-1.6"/></svg>`,
+ pencil:`<svg viewBox="0 0 24 24" ${SW}><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>`,
+ play:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
+ wifioff:`<svg viewBox="0 0 24 24" ${SW}><path d="M2.5 9a14 14 0 0 1 5-2.9M11 5.6A14 14 0 0 1 21.5 9"/><path d="M5.5 12.5a9.5 9.5 0 0 1 4-2.2M14.5 10.6a9.5 9.5 0 0 1 4 1.9"/><path d="M8.8 15.8a5 5 0 0 1 6.4 0"/><path d="M12 19.5h.01"/><path d="M3 3l18 18"/></svg>`,
+ ear:`<svg viewBox="0 0 24 24" ${SW}><path d="M6.5 9a5.5 5.5 0 0 1 11 0c0 3-2.5 3.8-3 6.3-.4 2-1.6 3.7-3.7 3.7A3 3 0 0 1 8 16.5"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.2-1 1.6-1.4 2.5"/></svg>`,
+ info:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/></svg>`,
+ retry:`<svg viewBox="0 0 24 24" ${SW}><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/></svg>`,
+ down:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 5v13M6.5 13L12 18.5 17.5 13"/></svg>`,
+ vol:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/></svg>`,
+ walk:`<svg viewBox="0 0 24 24" ${SW}><rect x="7.5" y="2.5" width="9" height="15" rx="2.2"/><path d="M12 20.5v1M8 21h8"/></svg>`,
+};
+const MASC='../../brandbook/assets/mascot/mascot-';
+const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
+const home=`<div class="homebar"><i></i></div>`;
+const top=`<div class="${P}top"><span class="${P}cb" aria-label="Назад">${I.back}</span><span class="${P}pair"><span><i class="${P}dot"></i>RU<i class="${P}swp">${I.swap}</i>ES<i class="${P}dot ${P}es"></i></span></span><span class="${P}cb" aria-label="Ввести текстом">${I.kbd}</span><span class="${P}cb" aria-label="Ещё">${I.more}</span></div>`;
+const pbMe=(x='')=>`<span class="${P}pb ${P}me ${x}">${I.mic}<span><b>Я говорю</b><small>по‑русски</small></span></span>`;
+const pbEs=(x='')=>`<span class="${P}pb ${P}es ${x}">${I.mic}<span><b>Yo hablo</b><small>en español</small></span></span>`;
+function rnd(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
+function wave(n,live,seed,cls,maxH){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const env=Math.sin(Math.PI*(i+1)/(live+1));const v=i<live?Math.max(6,Math.round((0.25+0.75*r())*maxH*(0.35+0.65*env))):4;h+=`<i class="${i<live?'':P+'f'}" style="height:${v}px"></i>`;}return h;}
+function mini(n,played,seed){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const v=Math.round(5+r()*21*Math.sin(Math.PI*(i+.5)/n)+3);h+=`<i class="${i<played?P+'pl':''}" style="height:${v}px"></i>`;}return h;}
+const scr=(body)=>`<div class="scr ${P}scr">${sbar}${body}${home}</div>`;
+
+const ST={
+idle:{t:'Начало разговора',d:'Открыли «Разговор» — подсказка в три шага и две большие кнопки. Пользователь нажимает свою кнопку или отдаёт телефон собеседнику.',
+h:scr(`${top}
+<div class="${P}main ${P}idle">
+ <img src="${MASC}listen-dark.svg" alt="">
+ <h3>Говорите по очереди</h3>
+ <p>Положите телефон между вами. Parrlo переведёт каждую реплику и покажет её крупно.</p>
+ <div class="${P}steps">
+  <div class="${P}step"><i>1</i><span>Нажмите свою кнопку и говорите</span></div>
+  <div class="${P}step"><i>2</i><span>Закончили — нажмите <em>«Стоп»</em></span></div>
+  <div class="${P}step"><i>3</i><span>Покажите перевод или нажмите <em>«Озвучить»</em></span></div>
+ </div>
+</div>
+<div class="${P}bot"><div class="${P}hint">Собеседник нажимает <b>«Yo hablo»</b></div><div class="${P}btns">${pbMe()}${pbEs()}</div></div>`)},
+
+listening:{t:'Идёт запись · вы',d:'Нажали «Я говорю». Волна живая, таймер идёт; «Стоп» — закончить и перевести, «Отменить» — сбросить запись.',
+h:scr(`${top}
+<div class="${P}main ${P}ls">
+ <span class="${P}turn">${I.mic.replace('style="width:26px;height:26px"','style="width:18px;height:18px"')}Говорите вы · по‑русски</span>
+ <h3>Слушаем вас</h3>
+ <div class="${P}sub">Говорите обычным темпом</div>
+ <div class="${P}time">0:04</div>
+ <div class="${P}rec"><i></i>Запись</div>
+ <div class="${P}wave">${wave(40,30,7,'',150)}</div>
+ <div class="${P}tip">${I.info}Паузы не мешают — запись идёт до «Стоп»</div>
+</div>
+<div class="${P}bot"><div class="${P}btns"><span class="${P}cancel">Отменить</span><span class="${P}stop"><i></i>Стоп</span></div></div>`)},
+
+'listening-es':{t:'Идёт запись · собеседник',d:'Собеседник нажал «Yo hablo». Крупный текст — по‑испански для него, строка выше — по‑русски для вас. Кнопка «Стоп» подписана на обоих языках.',
+h:scr(`${top}
+<div class="${P}main ${P}ls">
+ <span class="${P}turn ${P}es">${I.mic.replace('style="width:26px;height:26px"','style="width:18px;height:18px"')}Говорит собеседник · Español</span>
+ <h3>Hable ahora</h3>
+ <div class="${P}sub">Le escuchamos en español</div>
+ <div class="${P}time">0:07</div>
+ <div class="${P}rec"><i></i>Grabando · Запись</div>
+ <div class="${P}wave ${P}es">${wave(40,34,23,'',150)}</div>
+ <div class="${P}tip">${I.info}Pulse «Parar» al terminar</div>
+</div>
+<div class="${P}bot"><div class="${P}btns"><span class="${P}cancel">Отменить</span><span class="${P}stop"><i></i>Parar · Стоп</span></div></div>`)},
+
+processing:{t:'Распознаём и переводим',d:'После «Стоп». Видно, какой этап идёт; распознанная фраза уже на экране, перевод — скелетоном. Можно отменить.',
+h:scr(`${top}
+<div class="${P}main ${P}pr">
+ <div class="${P}stepper"><span class="${P}ok">${I.ok}Распознаём речь</span><i class="${P}arr"></i><span>${I.spin}Переводим</span></div>
+ <div class="${P}said"><div class="${P}lbl"><i class="${P}dot"></i>Вы сказали · Русский</div><p>Можно счёт и бутылку воды без газа с собой?</p></div>
+ <div class="${P}skel" aria-label="Перевод готовится"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>Español · готовим перевод</div><i style="width:92%"></i><i style="width:78%"></i><i style="width:54%"></i></div>
+</div>
+<div class="${P}bot"><div class="${P}hint">Можно отменить и сказать заново</div><div class="${P}btns"><span class="${P}sec">Отменить</span></div></div>`)},
+
+done:{t:'Перевод готов',d:'Крупный перевод для собеседника. Пользователь нажимает «Озвучить» или «Показать»; при ошибке распознавания — «Исправить».',
+h:scr(`${top}
+<div class="${P}main ${P}dn">
+ <div class="${P}card"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>Español · для собеседника</div>
+  <p>¿Me trae la cuenta y una botella de agua sin gas para llevar?</p>
+  <div class="${P}acts"><span class="${P}act">${I.spk}Озвучить</span><span class="${P}act ${P}ghost">${I.rot}Показать</span></div></div>
+ <div class="${P}said"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot"></i>Вы сказали · Русский</div><span class="${P}ed" aria-label="Исправить">${I.pencil}</span></div><p>Можно счёт и бутылку воды без газа с собой?</p></div>
+ <div class="${P}note">${I.info}Перевод может быть неточным. Важное — проверьте с собеседником.</div>
+</div>
+<div class="${P}bot"><div class="${P}hint">${I.down}Теперь очередь собеседника</div><div class="${P}btns">${pbMe()}${pbEs(P+'next')}</div></div>`)},
+
+conversation:{t:'Разговор',d:'Несколько реплик подряд с обеих сторон. Вы читаете мятные пузыри, собеседник — зелёные; у последнего перевода — «Озвучить».',
+h:scr(`${top}
+<div class="${P}main ${P}feed">
+ <span class="${P}day">Сегодня · 9:41</span>
+ <div class="${P}bb ${P}l"><span class="${P}o">Buenas tardes. ¿Qué le pongo?</span><span class="${P}t">Добрый день. Что вам принести?</span></div>
+ <div class="${P}meta ${P}l">Собеседник · 9:41</div>
+ <div class="${P}bb ${P}r"><span class="${P}o">Капучино и круассан, пожалуйста.</span><span class="${P}t">Un capuchino y un cruasán, por favor.</span></div>
+ <div class="${P}meta ${P}r">Вы · 9:42</div>
+ <div class="${P}bb ${P}l"><span class="${P}o">¿Para tomar aquí o para llevar?</span><span class="${P}t">Здесь или с собой?</span></div>
+ <div class="${P}meta ${P}l">Собеседник · 9:42</div>
+ <div class="${P}bb ${P}r ${P}big"><span class="${P}o">С собой. И можно счёт?</span><span class="${P}t">Para llevar. ¿Y me trae la cuenta?</span><span class="${P}spk" aria-label="Озвучить">${I.vol}</span></div>
+ <div class="${P}meta ${P}r">Вы · 9:43</div>
+</div>
+<div class="${P}bot"><div class="${P}hint">${I.down}Теперь очередь собеседника</div><div class="${P}btns">${pbMe()}${pbEs(P+'next')}</div></div>`)},
+
+face:{t:'К собеседнику',d:'Нажали «Показать». Верх экрана развёрнут к собеседнику: он читает перевод и сам отвечает «Yo hablo». Низ — ваш.',
+h:scr(`<div class="${P}main ${P}fc">
+ <div class="${P}pan">
+  <div class="${P}lbl"><i class="${P}dot ${P}es"></i>Traducción para usted</div>
+  <p>¿Me trae la cuenta y una botella de agua sin gas para llevar?</p>
+  <div class="${P}acts"><span class="${P}act">${I.spk}Escuchar</span>${pbEs().replace('<small>en español</small>','')}</div>
+ </div>
+ <div class="${P}mid">${I.rot}Верх экрана — для собеседника</div>
+ <div class="${P}mine">
+  <div><div class="${P}lbl"><i class="${P}dot"></i>Вы сказали · Русский</div><p>Можно счёт и бутылку воды без газа с собой?</p></div>
+  <div class="${P}btns"><span class="${P}sec" style="height:64px;border-radius:32px">Обычный вид</span>${pbMe().replace('<small>по‑русски</small>','')}</div>
+ </div>
+</div>`)},
+
+error:{t:'Нет соединения',d:'Сеть пропала после записи. Запись сохранена, её можно прослушать; «Повторить» отправит её на перевод снова.',
+h:scr(`${top}
+<div class="${P}main ${P}er">
+ <img src="${MASC}think-dark.svg" alt="">
+ <span class="${P}erb">${I.wifioff}Нет сети</span>
+ <h3>Не удалось перевести</h3>
+ <p>Распознавание и перевод работают через интернет. Проверьте подключение и повторите.</p>
+ <div class="${P}clip"><span class="${P}play" aria-label="Прослушать">${I.play}</span><div class="${P}cw"><b>Ваша запись</b><span>${I.check}Сохранена</span><div class="${P}mw">${mini(34,0,11)}</div></div><span class="${P}dur">0:06</span></div>
+</div>
+<div class="${P}bot"><div class="${P}btns ${P}v"><span class="${P}pri" style="height:64px;border-radius:32px">${I.retry}Повторить</span><span class="${P}sec">Записать заново</span></div></div>`)},
+
+unclear:{t:'Не расслышали',d:'Речь не распознана: тихо или шумно. Запись сохранена; можно прослушать её, сказать ещё раз или ввести текстом.',
+h:scr(`${top}
+<div class="${P}main ${P}er">
+ <img src="${MASC}listen-dark.svg" alt="">
+ <span class="${P}erb">${I.ear}Речь не распознана</span>
+ <h3>Не расслышали</h3>
+ <p>Похоже, было тихо или шумно. Попробуйте ещё раз, держа телефон ближе.</p>
+ <div class="${P}clip"><span class="${P}play" aria-label="Прослушать">${I.play}</span><div class="${P}cw"><b>Ваша запись</b><span>${I.check}Сохранена</span><div class="${P}mw">${mini(34,12,5)}</div></div><span class="${P}dur">0:02</span></div>
+ <div class="${P}tips"><span>${I.walk}Ближе к телефону</span><span>${I.vol}Чуть громче</span></div>
+</div>
+<div class="${P}bot"><div class="${P}btns ${P}v"><span class="${P}pri" style="height:64px;border-radius:32px">${I.mic.replace('style="width:26px;height:26px"','')}Сказать ещё раз</span><span class="${P}sec">${I.kbd.replace('class="ic"','')}Ввести текстом</span></div></div>`)},
+};
+window.TT_STATES=Object.keys(ST);
+const ph=(id,s,html)=>`<div class="pf" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
+document.getElementById(P+'hero-ph').innerHTML=ph('translate-talk',.8,ST.conversation.h)+`<div class="pcap"><span class="dot"></span><div><b>Translate · разговор</b><span>Только тёмная тема. Тексты — черновик.</span></div></div>`;
+document.getElementById(P+'grid').innerHTML=Object.entries(ST).map(([k,v])=>`<figure>${ph(P+'-'+k,.6,v.h)}<figcaption><b>${v.t}</b><code>${k}</code> · ${v.d}</figcaption></figure>`).join('');
+
+/* контраст */
+function L(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const pairs=[
+ ['#F2F5F7','#0E1116','основной текст на фоне',4.5],['#9AA4B2','#0E1116','подписи, подсказки',4.5],['#9AA4B2','#1C2026','подписи в карточках',4.5],
+ ['#F2F5F7','#242B34','кнопки «Назад», «Отменить», пилюля',4.5],['#0E1116','#2BC48A','«Я говорю», «Повторить»',4.5],['#0E1116','#BFF2DC','«Yo hablo», пузырь собеседника',4.5],
+ ['#2E4A3F','#BFF2DC','оригинал в пузыре собеседника',4.5],['#FFFFFF','#00875C','перевод для собеседника (крупный)',3],['#FFFFFF','#00875C','оригинал в своём пузыре, подписи на карточке',4.5],
+ ['#FFFFFF','#005E40','«Показать», «Озвучить» в пузыре',4.5],['#0E1116','#FFFFFF','«Озвучить» на карточке',4.5],
+ ['#0E1116','#F2F5F7','кнопка «Стоп»',4.5],['#2BC48A','#1E3734','чип «Говорите вы»',4.5],['#BFF2DC','#243A33','чип «Говорит собеседник»',4.5],
+ ['#BFF2DC','#123A2C','подпись в скелетоне',4.5],['#FF8A7F','#3C2A2E','бейдж ошибки',4.5],['#C3CBD5','#1C2026','советы-чипы',4.5],
+];
+document.getElementById(P+'ctr').insertAdjacentHTML('beforeend',pairs.map(([a,b,w,n])=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${w}</td><td><b>${v.toFixed(2).replace('.',',')}:1</b></td><td>${v>=n?'≥ '+String(n).replace('.',',')+' ✓':'ниже нормы'}</td></tr>`;}).join(''));
+window.TT_CR=pairs.map(([a,b,w,n])=>[w,cr(a,b).toFixed(2),n]);
 document.body.dataset.ready='1';
+})();
 </script>
 </body>
 </html>

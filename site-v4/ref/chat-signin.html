@@ -1,79 +1,326 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Parrlo Chat — вход (эталон)</title>
-<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../frame.css">
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · онбординг и вход</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
 <style>
-html{background:#0B0E12}body{margin:0;padding:32px 16px 48px;background:#0B0E12;color:#F2F5F7;font:400 15px/1.5 Inter,system-ui,sans-serif}
-.chat-signin-wrap{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:40px;justify-content:center;align-items:flex-start}
-.chat-signin-side{max-width:460px;flex:1 1 300px}
-.chat-signin-side h1{font:900 26px/1.2 Nunito,sans-serif;margin:0 0 6px}
-.chat-signin-side h2{font:800 17px/1.3 Nunito,sans-serif;margin:22px 0 6px}
-.chat-signin-side ul{margin:0;padding-left:20px;color:#C9D1DA}.chat-signin-side li{margin:4px 0}
-.chat-signin-side code{font:13px ui-monospace,monospace;color:#BFF2DC}
-.chat-signin-tag{display:inline-block;font:600 12px Inter;color:#FFC247;border:1px solid #FFC247;border-radius:8px;padding:1px 8px;margin-left:6px}
-.chat-signin-top{flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 8px;height:56px}
-.chat-signin-back{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--tx)}
-.chat-signin-dots{display:flex;gap:8px;align-items:center}
-.chat-signin-dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
-.chat-signin-dots i.d{background:var(--sec)}
-.chat-signin-dots i.on{width:24px;border-radius:4px;background:var(--acc)}
-.chat-signin-top .sp{width:44px}
-.chat-signin-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 32px 24px}
-.chat-signin-main img{width:200px;height:200px;display:block}
-.chat-signin-main h1{font:900 32px/1.15 Nunito,sans-serif;margin:24px 0 12px}
-.chat-signin-main p{margin:0;font:400 17px/1.4 Inter;color:var(--sec)}
-.chat-signin-bot{flex:none;padding:0 20px 8px;display:flex;flex-direction:column;gap:12px}
-.chat-signin-btn{height:56px;border-radius:28px;background:var(--sf2);border:1px solid var(--line);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:12px;font:800 18px Nunito,sans-serif}
-.chat-signin-btn b{width:28px;height:28px;border-radius:50%;background:#3A414B;color:var(--tx);display:flex;align-items:center;justify-content:center;font:700 15px Inter}
-.chat-signin-legal{margin:8px 8px 14px;text-align:center;font:400 13px/1.45 Inter;color:var(--sec)}
-.chat-signin-legal u{white-space:nowrap;color:var(--acc);text-decoration:underline;text-underline-offset:2px}
-@media(max-width:430px){.pf{--s:.86!important}.chat-signin-wrap{gap:28px}}
-</style></head><body>
-<div class="chat-signin-wrap">
-<div>
-<div class="pf" style="--s:1"><div class="shell"></div><div class="glass"><div class="scr">
- <div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>
- <div class="chat-signin-top">
-  <div class="chat-signin-back" aria-label="Назад"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></div>
-  <div class="chat-signin-dots" role="img" aria-label="Шаг 3 из 7"><i class="d"></i><i class="d"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
-  <div class="sp"></div>
+*{box-sizing:border-box}
+html{background:#0B0E12}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:40px 16px 80px}
+.chat-signin-page{max-width:1200px;margin:0 auto}
+.chat-signin-page h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 8px}
+.chat-signin-page h2{font:900 26px/1.2 Nunito,sans-serif;margin:64px 0 16px}
+.chat-signin-lead{color:#9AA4B2;max-width:720px;margin:0 0 36px;font-size:17px}
+.chat-signin-page code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 6px;border-radius:5px;color:#BFF2DC}
+.chat-signin-tag{display:inline-block;font:600 12px/18px Inter;color:#FFC247;border:1px solid #FFC247;border-radius:8px;padding:0 8px;margin-left:4px;vertical-align:1px}
+
+/* герой */
+.chat-signin-hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;justify-content:center}
+.chat-signin-hero-fig{flex:none}
+.chat-signin-hero-txt{flex:1 1 320px;max-width:460px}
+.chat-signin-hero-txt h3{font:900 22px/1.25 Nunito,sans-serif;margin:0 0 8px}
+.chat-signin-hero-txt p{color:#9AA4B2;margin:0 0 16px}
+.chat-signin-flow{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.chat-signin-flow li{display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:14px;background:#14181D;box-shadow:inset 0 0 0 1px #2F3742;font-size:15px;color:#C9D1DA}
+.chat-signin-flow b{flex:none;width:28px;height:28px;border-radius:50%;background:#242B34;color:#F2F5F7;font:900 14px/28px Nunito,sans-serif;text-align:center}
+.chat-signin-flow code{margin-left:auto}
+
+/* сетка состояний */
+.chat-signin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(264px,1fr));gap:48px 28px;justify-items:center}
+.chat-signin-card{width:264px;display:flex;flex-direction:column;align-items:flex-start}
+.chat-signin-card h3{margin:18px 0 2px;font:900 18px/1.3 Nunito,sans-serif;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.chat-signin-card h3 code{font-size:12px}
+.chat-signin-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+
+/* блоки снизу */
+.chat-signin-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.chat-signin-box{background:#14181D;border-radius:20px;box-shadow:inset 0 0 0 1px #2F3742;padding:20px 24px}
+.chat-signin-box h3{font:900 18px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-signin-box ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-signin-box li{margin:6px 0}
+.chat-signin-ct{width:100%;border-collapse:collapse;font-size:14px}
+.chat-signin-ct td{padding:7px 8px 7px 0;border-bottom:1px solid #2F3742;vertical-align:middle;color:#C9D1DA}
+.chat-signin-ct td:last-child{text-align:right;white-space:nowrap;font-weight:600;color:#F2F5F7}
+.chat-signin-sw{display:inline-flex;align-items:center;justify-content:center;width:34px;height:22px;border-radius:6px;font:700 12px Inter;margin-right:8px;vertical-align:middle;box-shadow:inset 0 0 0 1px #2F3742}
+
+@media (max-width:760px){
+ .chat-signin-page h1{font-size:32px}
+ .chat-signin-hero .pf{--s:.78!important}
+}
+@media (max-width:360px){.chat-signin-hero .pf{--s:.7!important}}
+
+/* ====== экран 390×844 ====== */
+.chat-signin-scr{position:relative}
+.chat-signin-scr .chat-signin-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px 360px at 50% 34%,rgba(43,196,138,.13),rgba(43,196,138,0) 70%)}
+.chat-signin-scr>:not(.chat-signin-glow){position:relative}
+.chat-signin-top{flex:none;height:56px;display:grid;grid-template-columns:56px 1fr 56px;align-items:center;padding:0 8px}
+.chat-signin-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.chat-signin-ib svg{width:28px;height:28px}
+.chat-signin-steps{display:flex;justify-content:center;align-items:center;gap:6px}
+.chat-signin-steps i{display:block;width:8px;height:8px;border-radius:4px;background:var(--line)}
+.chat-signin-steps i.d{background:var(--sec)}
+.chat-signin-steps i.on{width:28px;background:var(--acc)}
+.chat-signin-cnt{justify-self:end;margin-right:8px;font:600 15px/1 Inter;color:var(--sec);font-variant-numeric:tabular-nums}
+
+.chat-signin-body{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 24px}
+.chat-signin-ctr{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.chat-signin-h{font:900 32px/1.12 Nunito,sans-serif;margin:0;letter-spacing:-.005em}
+.chat-signin-sub{margin:12px 0 0;font:400 17px/1.4 Inter;color:var(--sec)}
+.chat-signin-masc{display:block;width:176px;height:176px;margin:0 auto 20px}
+.chat-signin-bot{flex:none;padding:0 20px 4px;display:flex;flex-direction:column;gap:12px}
+
+.chat-signin-btn{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:12px;font:900 18px/1 Nunito,sans-serif;position:relative}
+.chat-signin-btn.p{background:var(--acc);color:var(--onacc)}
+.chat-signin-btn.s{background:var(--sf2);color:var(--tx);box-shadow:inset 0 0 0 1px var(--line)}
+.chat-signin-btn.s.press{box-shadow:inset 0 0 0 2px var(--acc);background:#1E2A2A}
+.chat-signin-btn.s.off{color:#6B7480;background:#191D23;box-shadow:inset 0 0 0 1px #262C35}
+.chat-signin-btn .chat-signin-lg{width:28px;height:28px;border-radius:50%;background:#3A414B;color:var(--tx);display:flex;align-items:center;justify-content:center;font:700 15px/1 Inter}
+.chat-signin-btn.off .chat-signin-lg{background:#262C35;color:#6B7480}
+.chat-signin-btn svg{width:22px;height:22px}
+.chat-signin-txt{height:44px;display:flex;align-items:center;justify-content:center;font:600 17px/1 Inter;color:var(--tx)}
+.chat-signin-txt.a{color:var(--acc)}
+.chat-signin-legal{margin:2px 8px 6px;text-align:center;font:400 13px/1.45 Inter;color:var(--sec)}
+.chat-signin-legal u{white-space:nowrap;color:var(--tx);text-decoration:underline;text-decoration-color:var(--sec);text-underline-offset:3px}
+.chat-signin-spin{width:28px;height:28px;flex:none;animation:chat-signin-r 1s linear infinite}
+@keyframes chat-signin-r{to{transform:rotate(360deg)}}
+.chat-signin-static .chat-signin-spin{animation:none}
+
+/* welcome: сцена */
+.chat-signin-scene{flex:none;height:324px;position:relative;margin:4px 0 0}
+.chat-signin-lbl{position:absolute;font:600 13px/16px Inter;color:var(--sec);display:flex;align-items:center;gap:6px}
+.chat-signin-lbl .chat-signin-av{width:20px;height:20px;border-radius:50%;background:#6AA6F5;color:#0E1116;font:700 11px/20px Inter;text-align:center}
+.chat-signin-bub{position:absolute;border-radius:24px;padding:14px 18px 12px;font:500 19px/1.3 Inter;max-width:286px}
+.chat-signin-bub.out{right:0;background:var(--deep);color:#fff;border-bottom-right-radius:8px}
+.chat-signin-bub.in{left:0;background:var(--sf2);color:var(--tx);border-bottom-left-radius:8px;box-shadow:inset 0 0 0 1px var(--line)}
+.chat-signin-bub .chat-signin-car{display:inline-block;width:2px;height:22px;background:#fff;vertical-align:-4px;margin-left:2px;border-radius:1px}
+.chat-signin-bub .chat-signin-tm{display:block;text-align:right;font:400 12px/16px Inter;margin-top:4px;opacity:.85}
+.chat-signin-bub.in .chat-signin-tm{color:var(--sec);opacity:1}
+.chat-signin-ghost{position:absolute;right:12px;border-radius:24px;background:var(--deep);opacity:.18}
+.chat-signin-tr{display:flex;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(154,164,178,.3);font:400 15px/1.3 Inter;color:var(--sec)}
+.chat-signin-tr svg{flex:none;width:16px;height:16px;margin-top:2px}
+.chat-signin-node{position:absolute;left:50%;top:108px;transform:translateX(-50%);display:flex;align-items:center;gap:10px}
+.chat-signin-node img{width:64px;height:64px;display:block;border-radius:50%;background:#14181D;box-shadow:0 0 0 1px var(--line),0 0 0 8px rgba(43,196,138,.08)}
+.chat-signin-pill{height:32px;padding:0 14px;border-radius:16px;background:rgba(191,242,220,.1);color:var(--mint);font:600 14px/32px Inter;box-shadow:inset 0 0 0 1px rgba(191,242,220,.25);white-space:nowrap}
+.chat-signin-path{position:absolute;inset:0;width:100%;height:100%;color:var(--acc)}
+
+/* language */
+.chat-signin-lhd{padding:12px 0 24px}
+.chat-signin-lhd .chat-signin-h{text-align:left}
+.chat-signin-lhd .chat-signin-sub{text-align:left}
+.chat-signin-langs{display:flex;flex-direction:column;gap:12px}
+.chat-signin-lang{height:80px;border-radius:22px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;gap:16px;padding:0 20px 0 16px}
+.chat-signin-lang.sel{background:#14261F;box-shadow:inset 0 0 0 2px var(--acc)}
+.chat-signin-code{flex:none;width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;font:900 16px/1 Nunito,sans-serif;letter-spacing:.04em;color:var(--tx)}
+.chat-signin-lang.sel .chat-signin-code{background:var(--acc);color:var(--onacc)}
+.chat-signin-lang .chat-signin-nm{flex:1;min-width:0}
+.chat-signin-lang b{display:block;font:900 23px/1.15 Nunito,sans-serif}
+.chat-signin-nm>span{display:block;font:400 15px/1.3 Inter;color:var(--sec);margin-top:2px}
+.chat-signin-radio{flex:none;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 2px #4A5361}
+.chat-signin-chk{flex:none;width:28px;height:28px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center}
+.chat-signin-chk svg{width:18px;height:18px}
+.chat-signin-note{display:flex;gap:8px;align-items:center;margin:20px 4px 0;font:400 14px/1.4 Inter;color:var(--sec)}
+.chat-signin-note svg{flex:none;width:18px;height:18px}
+
+/* error */
+.chat-signin-err{margin:24px 0 0;border-radius:20px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:16px 18px;display:flex;gap:14px;text-align:left}
+.chat-signin-err .chat-signin-ei{flex:none;width:40px;height:40px;border-radius:50%;background:rgba(255,107,94,.14);color:#FF6B5E;display:flex;align-items:center;justify-content:center}
+.chat-signin-err .chat-signin-ei svg{width:22px;height:22px}
+.chat-signin-err b{display:block;font:600 17px/1.3 Inter}
+.chat-signin-err div>span{display:block;font:400 15px/1.4 Inter;color:var(--sec);margin-top:4px}
+
+/* done */
+.chat-signin-next{margin:28px 0 0;width:100%;border-radius:22px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:16px 18px;display:flex;gap:14px;align-items:center;text-align:left}
+.chat-signin-next .chat-signin-ni{flex:none;width:48px;height:48px;border-radius:50%;background:rgba(43,196,138,.14);color:var(--acc);display:flex;align-items:center;justify-content:center}
+.chat-signin-next .chat-signin-ni svg{width:24px;height:24px}
+.chat-signin-next small{display:block;font:700 12px/16px Inter;letter-spacing:.08em;text-transform:uppercase;color:var(--sec)}
+.chat-signin-next b{display:block;font:900 19px/1.25 Nunito,sans-serif;margin-top:2px}
+.chat-signin-next div>span{display:block;font:400 14px/1.35 Inter;color:var(--sec);margin-top:2px}
+</style>
+</head>
+<body>
+<main class="chat-signin-page">
+<h1>Parrlo Chat · онбординг и вход</h1>
+<p class="chat-signin-lead">Эталон первого запуска Parrlo Chat: 4 шага, шесть состояний. Тёмная тема, 390×844 pt. Это не текущая сборка, а продукт, каким он должен быть; приложение потом догонит макет. Все тексты — черновик.</p>
+
+<section class="chat-signin-hero">
+ <figure class="chat-signin-hero-fig" style="margin:0">
+  <div class="pf" style="--s:.8" data-state="hero"></div>
+  <div class="pcap"><span class="dot"></span><div><b>Первый экран: «пиши по‑русски — читают по‑испански»</b><span>Состояние welcome. Сцена живая (сообщение печатается, Парло переводит, ответ приходит с переводом), здесь показан её финальный кадр.</span></div></div>
+ </figure>
+ <div class="chat-signin-hero-txt">
+  <h3>Путь пользователя</h3>
+  <p>Один индикатор на всех экранах: 4 шага, текущий — длинная зелёная полоска, пройденные — серые точки, справа счётчик «2/4», чтобы шаг читался не только цветом.</p>
+  <ol class="chat-signin-flow">
+   <li><b>1</b>Знакомство<code>welcome</code></li>
+   <li><b>2</b>Свой язык<code>language</code></li>
+   <li><b>3</b>Вход<code>signin · waiting · error</code></li>
+   <li><b>4</b>Готово<code>done</code></li>
+  </ol>
  </div>
- <div class="chat-signin-main">
-  <img src="../../brandbook/assets/mascot/mascot-wow-dark.svg" alt="">
-  <h1>Войди в Parrlo Chat</h1>
-  <p>Пароль придумывать не нужно.</p>
+</section>
+
+<h2>Состояния</h2>
+<div class="chat-signin-grid" id="chat-signin-grid"></div>
+
+<h2>Решения и проверка</h2>
+<div class="chat-signin-cols">
+ <div class="chat-signin-box">
+  <h3>Решения (сверх текущей сборки)</h3>
+  <ul>
+   <li><b>Сцена на первом экране</b> вместо одного маскота: продукт объясняется до первого нажатия — твоё сообщение по‑русски, Парло посередине, Lucía читает его по‑испански, её ответ приходит с переводом.</li>
+   <li><b>Шаги сокращены до 4</b> (было 7): знакомство, язык, вход, готово. Ожидание и ошибка — подсостояния шага 3, индикатор на них не двигается.</li>
+   <li><b>Язык до входа</b>: выбор не требует аккаунта и сохраняется при ошибке входа. Русский выбран заранее по языку телефона — об этом говорит подпись в строке.</li>
+   <li><b>Ожидание на самой кнопке</b>: индикатор вместо буквы, текст «Ждём Apple…», вторая кнопка неактивна, есть «Отмена» — пользователь не застревает.</li>
+   <li><b>Ошибка с причиной и действием</b>: что случилось, что проверить, что уже сохранено; «Попробовать снова» повторяет тот же способ, «Войти по-другому» возвращает к выбору.</li>
+   <li><b>Готово с первым шагом</b>: карточка «Позови первого собеседника» и главная кнопка «Пригласить», «Позже» ведёт в пустой список чатов.</li>
+   <li>«У меня уже есть аккаунт» на первом экране — короткий путь сразу ко входу.</li>
+  </ul>
  </div>
- <div class="chat-signin-bot">
-  <div class="chat-signin-btn"><b>A</b>Продолжить с Apple</div>
-  <div class="chat-signin-btn"><b>G</b>Продолжить с Google</div>
-  <p class="chat-signin-legal">Продолжая, ты принимаешь <u>Условия использования</u> и <u>Политику конфиденциальности</u></p>
+ <div class="chat-signin-box">
+  <h3>Токены и контраст</h3>
+  <ul style="margin-bottom:12px">
+   <li>Фон #0E1116, поверхности #1C2026 / #242B34, линия #2F3742, текст #F2F5F7, вторичный #9AA4B2.</li>
+   <li>Акцент #2BC48A (кнопки «Начать», «Дальше», «Попробовать снова», «Пригласить», текст на нём #0E1116), Deep Green #00875C — твой пузырь, Mint #BFF2DC — плашка «Парло переводит».</li>
+   <li>Жёлтый #FFC247 отдельно не используется: жёлтое только в самом маскоте (клюв, искры у «Готово»).</li>
+   <li>Ошибка: #FF6B5E только для иконки, текст причины — основным и вторичным цветом.</li>
+   <li>Сетка 4 pt, поля экрана 24, кнопки 56, все зоны нажатия ≥ 44.</li>
+  </ul>
+  <table class="chat-signin-ct" id="chat-signin-ct"></table>
  </div>
- <div class="homebar"><i></i></div>
-</div></div></div>
-<div class="pcap"><span class="dot"></span><div><b>Parrlo Chat · онбординг · вход</b><span>390×844, тёмная тема. Черновик текста.</span></div></div>
+ <div class="chat-signin-box">
+  <h3>Не утверждено</h3>
+  <ul>
+   <li>Кружки «A» и «G» — нейтральный плейсхолдер. В приложении будут официальные кнопки входа по правилам Apple и Google.</li>
+   <li>Фраза про Условия и Политику и названия документов <span class="chat-signin-tag">текст юриста</span></li>
+   <li>Набор языков на шаге 2 (сейчас три) и подпись «по языку телефона».</li>
+   <li>Анимация сцены на первом экране: тайминги и порядок (печать → Парло → перевод → ответ) пока описаны словами.</li>
+   <li>Приглашение собеседника по ссылке на шаге «Готово» — новой функции нет в сборке.</li>
+   <li>Все тексты — черновик.</li>
+  </ul>
+ </div>
 </div>
-<div class="chat-signin-side">
-<h1>chat-signin</h1>
-<h2>Что на экране</h2>
-<ul>
-<li>Назад (зона 44×44) и индикатор шагов: 7 точек, текущая — шаг 3 из 7 (удлинённая, Light Green).</li>
-<li>Маскот <code>mascot-wow-dark.svg</code>, заголовок Nunito 900 32 pt «Войди в Parrlo Chat», подпись Inter 17 pt вторичным цветом.</li>
-<li>Две равные кнопки 56 pt (высота и ширина одинаковы, одна поверхность #242B34 с линией #2F3742, один вес текста Nunito 800). Слева нейтральные кружки «A» и «G».</li>
-<li>Мелкий текст про условия, ссылки акцентом #2BC48A с подчёркиванием <span class="chat-signin-tag">текст юриста</span></li>
-</ul>
-<h2>Токены</h2>
-<ul><li>Фон #0E1116, поверхность #242B34, линия #2F3742, текст #F2F5F7, вторичный #9AA4B2, акцент #2BC48A. Жёлтый не используется.</li></ul>
-<h2>Контраст текста</h2>
-<ul id="chat-signin-contrast"></ul>
-<h2>Не утверждено</h2>
-<ul>
-<li>Кружки «A» и «G» — плейсхолдер. Логотипы Apple и Google не рисовались: в приложении будут официальные кнопки по правилам Apple и Google.</li>
-<li>Все тексты — черновик; фраза про условия и названия документов — текст юриста.</li>
-<li>Выбор маскота (wow или happy) и число шагов (7, в утверждённом макете 6).</li>
-</ul>
-</div>
-</div>
+</main>
+
 <script>
+(function(){
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const IC={
+ back:`<svg viewBox="0 0 24 24" ${SW}><path d="M15 5l-7 7 7 7"/></svg>`,
+ check:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ tr:`<svg viewBox="0 0 24 24" ${SW}><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg>`,
+ gear:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg>`,
+ wifioff:`<svg viewBox="0 0 24 24" ${SW}><path d="M2.5 8.8a14 14 0 0 1 4.3-2.6M10.2 5.1A14 14 0 0 1 21.5 8.8"/><path d="M5.5 12.2a9.5 9.5 0 0 1 3.6-2.1M14.6 10.3a9.5 9.5 0 0 1 3.9 1.9"/><path d="M8.7 15.5a5 5 0 0 1 6.6 0"/><path d="M12 19.5h.01"/><path d="M3.5 3.5l17 17"/></svg>`,
+ retry:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4h-4"/></svg>`,
+ invite:`<svg viewBox="0 0 24 24" ${SW}><circle cx="9.5" cy="8" r="3.5"/><path d="M3 19.5c.6-3.4 3.2-5.5 6.5-5.5s5.9 2.1 6.5 5.5"/><path d="M18.5 8v6M15.5 11h6"/></svg>`,
+ share:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3.5M7.5 7.5L12 3l4.5 4.5"/><path d="M5 12v6.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V12"/></svg>`,
+ spin:`<svg class="chat-signin-spin" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="11" stroke="#3A414B" stroke-width="3"/><path d="M14 3a11 11 0 0 1 11 11" stroke="#2BC48A" stroke-width="3" stroke-linecap="round"/></svg>`
+};
+const M=n=>`../../brandbook/assets/mascot/mascot-${n}-dark.svg`;
+const sbar=`<div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>`;
+const home=`<div class="homebar"><i></i></div>`;
+/* единый индикатор шагов: step 1..4, back — показывать ли «Назад» */
+function top(step,back){
+ let d='';for(let i=1;i<=4;i++)d+=`<i class="${i<step?'d':i===step?'on':''}"></i>`;
+ return `<div class="chat-signin-top"><span>${back?`<span class="chat-signin-ib" role="button" aria-label="Назад">${IC.back}</span>`:''}</span>
+ <div class="chat-signin-steps" role="img" aria-label="Шаг ${step} из 4">${d}</div><span class="chat-signin-cnt" aria-hidden="true">${step}/4</span></div>`;
+}
+const legal=`<p class="chat-signin-legal">Продолжая, ты принимаешь <u>Условия использования</u> и&nbsp;<u>Политику конфиденциальности</u></p>`;
+const provider=(l,t,cls='')=>`<div class="chat-signin-btn s ${cls}" role="button"${cls.includes('off')?' aria-disabled="true"':''}><span class="chat-signin-lg">${l}</span>${t}</div>`;
+
+const S={
+welcome:()=>`${top(1,false)}
+ <div class="chat-signin-glow"></div>
+ <div class="chat-signin-body">
+  <div class="chat-signin-scene" aria-label="Ты пишешь по‑русски, Lucía читает по‑испански">
+   <svg class="chat-signin-path" viewBox="0 0 342 324" fill="none" aria-hidden="true"><path d="M300 104 C 302 120, 300 130, 292 138" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="2 6" opacity=".7"/><path d="M56 150 C 36 156, 26 166, 24 184" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="2 6" opacity=".7"/><path d="M18 178l6 8 6-8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></svg>
+   <div class="chat-signin-lbl" style="right:4px;top:0">Ты пишешь по‑русски</div>
+   <div class="chat-signin-ghost" style="top:28px;width:230px;height:66px;transform:translate(-14px,-6px)"></div>
+   <div class="chat-signin-bub out" style="top:24px">Привет! Во&nbsp;сколько встречаемся?<span class="chat-signin-car"></span></div>
+   <div class="chat-signin-node"><img src="${M('speak')}" alt=""><span class="chat-signin-pill">Парло переводит</span></div>
+   <div class="chat-signin-lbl" style="left:40px;top:188px"><span class="chat-signin-av">L</span>Lucía читает по‑испански</div>
+   <div class="chat-signin-bub in" style="top:212px" lang="es">¡Hola! ¿A&nbsp;qué hora quedamos?<div class="chat-signin-tr" lang="ru">${IC.tr}<span>Оригинал: Привет! Во сколько встречаемся?</span></div></div>
+  </div>
+  <div class="chat-signin-ctr" style="justify-content:flex-end;padding-bottom:12px">
+   <h2 class="chat-signin-h" style="font-size:32px">Пиши по‑русски —<br>читают по‑испански</h2>
+   <p class="chat-signin-sub">Parrlo Chat переводит каждое сообщение. Собеседник отвечает на своём языке, ты читаешь на своём.</p>
+  </div>
+ </div>
+ <div class="chat-signin-bot"><div class="chat-signin-btn p" role="button">Начать</div><div class="chat-signin-txt" role="button">У меня уже есть аккаунт</div></div>${home}`,
+
+language:()=>`${top(2,true)}
+ <div class="chat-signin-body">
+  <div class="chat-signin-lhd"><h2 class="chat-signin-h">Твой язык</h2><p class="chat-signin-sub">На нём ты пишешь и читаешь. Собеседник выберет свой.</p></div>
+  <div class="chat-signin-langs" role="radiogroup" aria-label="Твой язык">
+   <div class="chat-signin-lang sel" role="radio" aria-checked="true"><span class="chat-signin-code">RU</span><span class="chat-signin-nm"><b>Русский</b><span>По языку телефона</span></span><span class="chat-signin-chk">${IC.check}</span></div>
+   <div class="chat-signin-lang" role="radio" aria-checked="false" lang="es"><span class="chat-signin-code">ES</span><span class="chat-signin-nm"><b>Español</b><span lang="ru">Испанский</span></span><span class="chat-signin-radio"></span></div>
+   <div class="chat-signin-lang" role="radio" aria-checked="false" lang="en"><span class="chat-signin-code">EN</span><span class="chat-signin-nm"><b>English</b><span lang="ru">Английский</span></span><span class="chat-signin-radio"></span></div>
+  </div>
+  <p class="chat-signin-note">${IC.gear}Язык можно поменять позже в настройках.</p>
+ </div>
+ <div class="chat-signin-bot" style="padding-bottom:12px"><div class="chat-signin-btn p" role="button">Дальше</div></div>${home}`,
+
+signin:()=>`${top(3,true)}
+ <div class="chat-signin-body"><div class="chat-signin-ctr">
+  <img class="chat-signin-masc" src="${M('happy')}" alt="">
+  <h2 class="chat-signin-h">Войди в Parrlo Chat</h2>
+  <p class="chat-signin-sub">Пароль придумывать не нужно.<br>Твой язык — русский.</p>
+ </div></div>
+ <div class="chat-signin-bot">${provider('A','Продолжить с Apple')}${provider('G','Продолжить с Google')}${legal}</div>${home}`,
+
+waiting:()=>`${top(3,false)}
+ <div class="chat-signin-body"><div class="chat-signin-ctr">
+  <img class="chat-signin-masc" src="${M('listen')}" alt="">
+  <h2 class="chat-signin-h">Входим через Apple</h2>
+  <p class="chat-signin-sub">Подтверди вход в открывшемся окне — потом вернёшься сюда.</p>
+ </div></div>
+ <div class="chat-signin-bot"><div class="chat-signin-btn s press" role="button" aria-busy="true">${IC.spin}Ждём Apple…</div>${provider('G','Продолжить с Google','off')}<div class="chat-signin-txt" role="button" style="margin-bottom:6px">Отмена</div></div>${home}`,
+
+error:()=>`${top(3,true)}
+ <div class="chat-signin-body"><div class="chat-signin-ctr">
+  <img class="chat-signin-masc" src="${M('think')}" alt="" style="width:160px;height:160px">
+  <h2 class="chat-signin-h">Не получилось войти</h2>
+  <div class="chat-signin-err" role="alert"><span class="chat-signin-ei">${IC.wifioff}</span><div><b>Нет подключения к интернету</b><span>Проверь Wi‑Fi или мобильную сеть и попробуй снова. Выбранный язык сохранён.</span></div></div>
+ </div></div>
+ <div class="chat-signin-bot"><div class="chat-signin-btn p" role="button">${IC.retry}Попробовать снова</div><div class="chat-signin-txt" role="button" style="margin-bottom:6px">Войти по-другому</div></div>${home}`,
+
+done:()=>`${top(4,false)}
+ <div class="chat-signin-glow"></div>
+ <div class="chat-signin-body"><div class="chat-signin-ctr">
+  <div style="position:relative"><img class="chat-signin-masc" src="${M('happy')}" alt="" style="width:200px;height:200px"></div>
+  <h2 class="chat-signin-h" style="font-size:40px">Готово!</h2>
+  <p class="chat-signin-sub">Ты в Parrlo Chat. Пиши по‑русски — собеседник прочитает на своём языке.</p>
+  <div class="chat-signin-next"><span class="chat-signin-ni">${IC.invite}</span><div><small>Следующий шаг</small><b>Позови первого собеседника</b><span>Отправь ссылку — собеседник сам выберет язык.</span></div></div>
+ </div></div>
+ <div class="chat-signin-bot"><div class="chat-signin-btn p" role="button">${IC.share}Пригласить собеседника</div><div class="chat-signin-txt" role="button" style="margin-bottom:6px">Позже</div></div>${home}`
+};
+const META=[
+ ['welcome','Знакомство','Первый запуск. Пользователь видит, что делает продукт, и нажимает «Начать».'],
+ ['language','Свой язык','Шаг 2. Русский выбран по языку телефона; можно выбрать другой и нажать «Дальше».'],
+ ['signin','Вход','Шаг 3. Два равных способа входа, мелким шрифтом — Условия и Политика.'],
+ ['waiting','Ожидание входа','После нажатия «Продолжить с Apple»: ждём системное окно, Google неактивен, можно отменить.'],
+ ['error','Вход не удался','Нет сети или провайдер вернул ошибку. Причина, что проверить, кнопка «Попробовать снова».'],
+ ['done','Готово','Вход прошёл. Маскот радуется, карточка следующего шага ведёт к приглашению собеседника.']
+];
+const phone=(st,s)=>`<div class="shell"></div><div class="glass"><div class="scr chat-signin-scr" data-scr="${st}">${sbar}${S[st]()}</div></div>`;
+document.querySelector('[data-state="hero"]').innerHTML=phone('welcome');
+document.getElementById('chat-signin-grid').innerHTML=META.map(([id,t,d])=>`<article class="chat-signin-card"><div class="pf" style="--s:.6" data-state="${id}">${phone(id)}</div><h3>${t} <code>${id}</code></h3><p>${d}</p></article>`).join('');
+
+/* контраст */
 function L(h){const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]}
-function R(a,b){const x=L(a),y=L(b);return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(1).replace('.',',')}
-[['Заголовок #F2F5F7 на #0E1116','#F2F5F7','#0E1116'],['Подпись и мелкий текст #9AA4B2 на #0E1116','#9AA4B2','#0E1116'],['Текст кнопок #F2F5F7 на #242B34','#F2F5F7','#242B34'],['Ссылки #2BC48A на #0E1116','#2BC48A','#0E1116'],['Буква в кружке #F2F5F7 на #3A414B','#F2F5F7','#3A414B']].forEach(r=>{const li=document.createElement('li');li.textContent=r[0]+': '+R(r[1],r[2])+' : 1';document.getElementById('chat-signin-contrast').appendChild(li)})
+function R(a,b){const x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+const rows=[
+ ['Основной текст','#F2F5F7','#0E1116',4.5],['Вторичный текст','#9AA4B2','#0E1116',4.5],['Вторичный на карточке','#9AA4B2','#1C2026',4.5],
+ ['Текст кнопки входа','#F2F5F7','#242B34',4.5],['Буква в кружке A/G','#F2F5F7','#3A414B',4.5],['Главная кнопка','#0E1116','#2BC48A',3],
+ ['Твой пузырь','#FFFFFF','#00875C',4.5],['Пузырь Lucía','#F2F5F7','#242B34',4.5],['Плашка «Парло переводит»','#BFF2DC','#202829',4.5],
+ ['Выбранный язык, подпись','#9AA4B2','#14261F',4.5],['Код языка на акценте','#0E1116','#2BC48A',3],['Иконка ошибки (не текст)','#FF6B5E','#1C2026',3]
+];
+document.getElementById('chat-signin-ct').innerHTML=rows.map(([n,f,b,min])=>{const r=R(f,b);return `<tr><td><span class="chat-signin-sw" style="background:${b};color:${f}">Аа</span>${n}</td><td>${r.toFixed(1).replace('.',',')} : 1 ${r>=min?'✓':'✗'}</td></tr>`}).join('')
+ +`<tr><td colspan="2" style="white-space:normal;text-align:left;font-weight:400;color:#9AA4B2">Неактивная кнопка Google (#6B7480 на #191D23) — неактивный элемент, требование 4,5 : 1 не применяется; неактивность показана ещё и потускневшим кружком.</td></tr>`;
+if(location.hash==='#static')document.body.classList.add('chat-signin-static');
+})();
 </script>
-</body></html>
+</body>
+</html>
