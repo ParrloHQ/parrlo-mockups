@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo · клавиатура, включение</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
+.kb-setup-w{max-width:1200px;margin:0 auto}
+.kb-setup-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px}
+.kb-setup-tags{display:flex;gap:8px;flex-wrap:wrap}
+.kb-setup-tag{display:inline-block;font:600 13px/20px Inter,sans-serif;color:#0E1116;background:#FFC247;border-radius:8px;padding:2px 10px}
+.kb-setup-tag.g{background:#242B34;color:#F2F5F7}
+.kb-setup-tag.m{background:#BFF2DC;color:#0E1116}
+.kb-setup-lang{display:flex;gap:4px;background:#171C23;border-radius:24px;padding:4px}
+.kb-setup-lang a{min-width:56px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 15px Inter,sans-serif;color:#C5CCD5;text-decoration:none}
+.kb-setup-lang a[aria-current="true"]{background:#2BC48A;color:#0E1116}
+.kb-setup-w h1{font:900 36px/1.15 Nunito,sans-serif;margin:0 0 8px}
+.kb-setup-w h2{font:900 24px/1.2 Nunito,sans-serif;margin:0 0 8px}
+.kb-setup-lead{color:#9AA4B2;max-width:780px;margin:0 0 32px}
+.kb-setup-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:center;padding:48px 24px 40px;border-radius:32px;background:#171C23}
+.kb-setup-hero figure,.kb-setup-st figure{margin:0}
+.kb-setup-copy{max-width:420px;min-width:0}
+.kb-setup-copy .ey{font:700 13px/20px Inter,sans-serif;color:#2BC48A;letter-spacing:.04em;text-transform:uppercase;margin:0 0 8px}
+.kb-setup-copy h2{font-size:32px;margin:0 0 20px}
+.kb-setup-copy ol{margin:0 0 20px;padding-left:24px;color:#C5CCD5;font-size:17px}
+.kb-setup-copy li{margin:0 0 10px}
+.kb-setup-copy .src{font-size:13px;color:#9AA4B2;margin:0}
+.kb-setup-note{display:flex;gap:12px;align-items:flex-start;margin:0 0 0;padding:14px 16px;border-radius:16px;background:#0E1116;border:1px dashed #4A525D;color:#C5CCD5;font-size:15px;max-width:420px}
+.kb-setup-note b{color:#F2F5F7}
+.kb-setup-sec{margin-top:64px}
+.kb-setup-sec>p{color:#9AA4B2;margin:0 0 24px;max-width:780px}
+.kb-setup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+.kb-setup-st{background:#171C23;border-radius:24px;padding:24px;display:flex;flex-direction:column}
+.kb-setup-st h3{font:900 20px/1.25 Nunito,sans-serif;margin:0 0 4px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.kb-setup-st h3 code{font:500 13px ui-monospace,Menlo,monospace;color:#9AA4B2;background:#0E1116;border-radius:6px;padding:1px 6px}
+.kb-setup-st>p{margin:0 0 20px;color:#9AA4B2;font-size:15px;flex:1}
+.kb-setup-st figure{display:flex;flex-direction:column;align-items:center}
+.kb-setup-st .pcap{margin-top:10px;font-size:13px}
+.kb-setup-st .pcap b{font-size:14px}
+.kb-setup-trust{background:#171C23;border-radius:32px;padding:40px 32px}
+.kb-setup-trust .ey{font:700 13px/20px Inter,sans-serif;color:#2BC48A;letter-spacing:.04em;text-transform:uppercase;margin:0 0 8px}
+.kb-setup-trust h2{font-size:30px;margin:0 0 28px;max-width:760px}
+.kb-setup-tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin:0 0 24px;padding:0;list-style:none}
+.kb-setup-tl li{border-top:2px solid #2BC48A;padding-top:16px;color:#C5CCD5}
+.kb-setup-tl b{display:block;font:900 20px/1.3 Nunito,sans-serif;color:#F2F5F7;margin-bottom:6px}
+.kb-setup-law{display:inline-block;font:600 12px/18px Inter,sans-serif;color:#0E1116;background:#FFC247;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:1px}
+.kb-setup-trust .foot{display:flex;flex-wrap:wrap;gap:16px;align-items:center;color:#9AA4B2;font-size:14px}
+.kb-setup-trust .btn{display:inline-flex;align-items:center;height:48px;padding:0 20px;border-radius:24px;background:#242B34;color:#F2F5F7;font:700 15px Inter,sans-serif;text-decoration:none}
+.kb-setup-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px}
+.kb-setup-notes h2{font-size:20px;margin:0 0 10px}
+.kb-setup-notes ul{margin:0;padding-left:20px;color:#9AA4B2}
+.kb-setup-notes li{margin:6px 0}
+.kb-setup-notes b{color:#F2F5F7;font-weight:600}
+.kb-setup-st .pf{--s:.6!important}
+body.kb-setup-cap .pf{--s:1!important}
+body.kb-setup-cap .kb-setup-grid{grid-template-columns:1fr}
+@media (max-width:660px){
+ .kb-setup-st{padding:16px}
+ .kb-setup-hero{padding:24px 8px;gap:28px}
+ .kb-setup-hero .pf{--s:.72!important}
+ .kb-setup-w h1{font-size:28px}
+ .kb-setup-copy{padding:0 8px}
+ .kb-setup-copy h2{font-size:26px}
+ .kb-setup-trust{padding:28px 20px}
+ .kb-setup-trust h2{font-size:24px}
+}
+
+/* ===== экран 430×932 ===== */
+.kb-setup-scr{--key:#3A414B;--key2:#2A3038;--ring:rgba(43,196,138,.28)}
+.kb-setup-nav{flex:none;position:relative;height:52px;display:flex;align-items:center;padding:0 8px}
+.kb-setup-bk{height:44px;min-width:44px;display:flex;align-items:center;gap:0;padding:0 8px 0 0;color:var(--acc);font:500 17px Inter,sans-serif}
+.kb-setup-bk svg{width:28px;height:28px}
+.kb-setup-nt{position:absolute;left:110px;right:110px;top:0;height:52px;display:flex;align-items:center;justify-content:center;font:700 17px Inter,sans-serif;white-space:nowrap}
+.kb-setup-body{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 20px;overflow:hidden}
+.kb-setup-home{flex:none;height:34px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.kb-setup-home i{width:140px;height:5px;border-radius:3px;background:var(--tx)}
+/* приложение */
+.kb-setup-masc{display:block;width:112px;height:112px;margin:4px auto 8px}
+.kb-setup-h{font:900 32px/38px Nunito,sans-serif;text-align:center;margin:0 0 6px}
+.kb-setup-sub{font-size:17px;line-height:24px;color:var(--sec);text-align:center;margin:0 0 24px}
+.kb-setup-steps{border-radius:20px;background:var(--sf);margin:0;padding:0;list-style:none}
+.kb-setup-steps li{display:flex;gap:14px;padding:16px;border-top:1px solid var(--line)}
+.kb-setup-steps li:first-child{border-top:0}
+.kb-setup-n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;font:900 17px Nunito,sans-serif}
+.kb-setup-n svg{width:18px;height:18px}
+.kb-setup-steps li.ok .kb-setup-n{background:var(--acc);color:var(--onacc)}
+.kb-setup-steps .tx{flex:1;min-width:0;font-size:17px;line-height:24px;padding-top:4px}
+.kb-setup-steps .tx small{display:block;font-size:14px;line-height:20px;color:var(--sec);margin-top:4px}
+.kb-setup-steps li.ok .tx small{color:var(--acc)}
+.kb-setup-gk{display:inline-flex;vertical-align:-6px;width:30px;height:26px;border-radius:6px;background:var(--key);box-shadow:0 1px 0 rgba(0,0,0,.6);align-items:center;justify-content:center;margin:0 2px;color:var(--tx)}
+.kb-setup-gk svg{width:18px;height:18px}
+.kb-setup-why{display:flex;align-items:center;gap:12px;height:52px;margin-top:12px;padding:0 12px 0 16px;border-radius:16px;font:600 16px Inter,sans-serif;color:var(--tx)}
+.kb-setup-why>svg{flex:none;width:22px;height:22px;color:var(--acc)}
+.kb-setup-why span{flex:1}
+.kb-setup-why i svg{width:20px;height:20px;color:var(--sec)}
+.kb-setup-fill{flex:1}
+.kb-setup-cta{flex:none;height:60px;border-radius:30px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;gap:10px;font:900 20px Nunito,sans-serif;margin:0 0 8px;box-shadow:0 0 32px rgba(43,196,138,.28)}
+.kb-setup-cta svg{width:22px;height:22px}
+.kb-setup-sec2{flex:none;height:48px;display:flex;align-items:center;justify-content:center;font:600 16px Inter,sans-serif;color:var(--tx);margin-bottom:4px}
+/* схема Настроек */
+.kb-setup-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;margin:4px 0 20px;padding:10px 14px;border-radius:14px;background:var(--sf);font-size:14px;line-height:20px;color:var(--sec)}
+.kb-setup-crumbs svg{width:14px;height:14px;opacity:.9}
+.kb-setup-crumbs b{color:var(--tx);font-weight:600}
+.kb-setup-gh{font:600 14px/20px Inter,sans-serif;color:var(--sec);margin:0 0 8px 16px}
+.kb-setup-grp{border-radius:16px;background:var(--sf);margin:0 0 24px;position:relative}
+.kb-setup-row{display:flex;align-items:center;gap:14px;min-height:52px;padding:6px 16px;border-top:1px solid var(--line);font-size:17px;line-height:22px}
+.kb-setup-row:first-child{border-top:0}
+.kb-setup-row .tx{flex:1;min-width:0}
+.kb-setup-row .tx small{display:block;font-size:14px;line-height:19px;color:var(--sec)}
+.kb-setup-row.hl{border-radius:16px;box-shadow:0 0 0 2px var(--acc),0 0 0 8px var(--ring);position:relative;z-index:1;background:var(--sf2)}
+.kb-setup-grp .kb-setup-row.hl+.kb-setup-row{border-top-color:transparent}
+.kb-setup-ico{flex:none;width:36px;height:36px;border-radius:9px;background:linear-gradient(160deg,#067A52,#12A06C);color:#fff;display:flex;align-items:center;justify-content:center}
+.kb-setup-ico svg{width:22px;height:22px}
+.kb-setup-tap{flex:none;width:32px;height:32px;border-radius:50%;border:2px solid var(--mint);display:flex;align-items:center;justify-content:center}
+.kb-setup-tap i{width:14px;height:14px;border-radius:50%;background:var(--mint)}
+.kb-setup-sw{flex:none;width:52px;height:32px;border-radius:16px;background:#4A525D;position:relative}
+.kb-setup-sw i{position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:#F2F5F7;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.kb-setup-sw.on{background:var(--acc)}
+.kb-setup-sw.on i{left:23px}
+.kb-setup-row.dim .tx{color:var(--sec)}
+.kb-setup-lt{font:900 30px/36px Nunito,sans-serif;margin:0 0 12px 4px}
+.kb-setup-call{position:relative;margin:-10px 0 24px;padding:16px 18px;border-radius:18px;background:var(--mint);color:#0E1116;font-size:16px;line-height:23px}
+.kb-setup-call:before{content:"";position:absolute;top:-8px;right:34px;width:18px;height:18px;background:var(--mint);transform:rotate(45deg);border-radius:3px}
+.kb-setup-call b{display:flex;gap:8px;align-items:center;font:800 18px/24px Nunito,sans-serif;margin-bottom:6px}
+.kb-setup-call b svg{width:20px;height:20px}
+.kb-setup-call p{margin:0}
+.kb-setup-call p+p,.kb-setup-call ul+p{margin-top:10px}
+.kb-setup-call ul{margin:10px 0 0;padding:0;list-style:none}
+.kb-setup-call li{display:flex;gap:8px;align-items:flex-start;margin-top:6px}
+.kb-setup-call li svg{flex:none;width:20px;height:20px;margin-top:2px}
+/* готово */
+.kb-setup-demo{border-radius:24px;background:var(--sf);padding:20px 16px 16px;margin:0 0 16px}
+.kb-setup-pop{width:212px;margin:0 0 10px 30px;border-radius:14px;background:var(--sf2);box-shadow:0 8px 24px rgba(0,0,0,.4);padding:4px 0}
+.kb-setup-pop div{height:44px;display:flex;align-items:center;gap:10px;padding:0 14px;font-size:16px;color:var(--tx)}
+.kb-setup-pop div+div{border-top:1px solid var(--line)}
+.kb-setup-pop .on{font-weight:700}
+.kb-setup-pop .on svg{width:18px;height:18px;color:var(--acc);margin-left:auto}
+.kb-setup-keys{display:flex;gap:6px}
+.kb-setup-key{flex:1 1 0;height:46px;border-radius:8px;background:var(--key2);box-shadow:0 1px 0 rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;font:500 16px Inter,sans-serif;color:var(--tx)}
+.kb-setup-key svg{width:24px;height:24px}
+.kb-setup-key.sp{flex:4 1 0;background:var(--key);color:#C5CCD5;font-weight:400}
+.kb-setup-key.gl{box-shadow:0 0 0 2px var(--acc),0 0 0 7px var(--ring)}
+.kb-setup-done{margin:0;padding:0;list-style:none;border-radius:20px;background:var(--sf)}
+.kb-setup-done li{display:flex;align-items:center;gap:12px;min-height:52px;padding:0 16px;border-top:1px solid var(--line);font-size:17px}
+.kb-setup-done li:first-child{border-top:0}
+.kb-setup-done li svg{flex:none;width:24px;height:24px;color:var(--acc)}
+.kb-setup-big{font:700 19px/26px Inter,sans-serif;color:var(--tx);text-align:center;margin:0 0 20px}
+</style>
+</head>
+<body>
+<div class="kb-setup-w">
+<div class="kb-setup-top">
+ <div class="kb-setup-tags"><span class="kb-setup-tag" id="kb-setup-t-draft"></span><span class="kb-setup-tag g" id="kb-setup-t-soon"></span><span class="kb-setup-tag m" id="kb-setup-t-scheme"></span></div>
+ <nav class="kb-setup-lang" id="kb-setup-lang" aria-label="Language"></nav>
+</div>
+<h1 id="kb-setup-h1"></h1>
+<p class="kb-setup-lead" id="kb-setup-lead"></p>
+<div class="kb-setup-hero" id="kb-setup-hero"></div>
+<section class="kb-setup-sec">
+<h2 id="kb-setup-h-st"></h2>
+<p id="kb-setup-p-st"></p>
+<div class="kb-setup-grid" id="kb-setup-grid"></div>
+</section>
+<section class="kb-setup-sec kb-setup-trust" id="kb-setup-trust"></section>
+<section class="kb-setup-sec kb-setup-notes" id="kb-setup-notes"></section>
+</div>
+<script>
+(function(){
+const NB=' ',NH='‑';
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+let pmN=0;
+/* знак Parrlo — ключ spark из site-v4/screens.js, с уникальным id маски */
+const spark=()=>{const id='kb-setup-pm'+(++pmN);return `<svg viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#${id})"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>`;};
+const I={
+ back:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>`,
+ chev:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>`,
+ crumb:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>`,
+ check:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ checkC:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M7.8 12.3l2.9 2.9 5.5-5.7" stroke-width="2.2"/></svg>`,
+ dash:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M8 12h8" stroke-width="2.2"/></svg>`,
+ globe:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg>`,
+ info:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5"/><path d="M12 7.6v.1" stroke-width="2.6"/></svg>`,
+ out:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></svg>`,
+ cloud:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M7 18.5h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.6 9.1 4.7 4.7 0 0 0 7 18.5z"/></svg>`,
+ ret:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5v6a3 3 0 0 1-3 3H5"/><path d="M9 10l-4 4 4 4"/></svg>`};
+const MASC='../../brandbook/assets/mascot/';
+
+/* ===== словарь: экран + страница ===== */
+const L={
+ru:{back:'Назад',
+ g:{h:'Включи клавиатуру',sub:'Включить — дело одной минуты.',
+  s:['Открой Parrlo Translate один раз.','«Настройки» → «Parrlo Translate» → «Клавиатуры»: включи Parrlo и «Полный доступ».','В любом чате удерживай значок глобуса {g} и выбери Parrlo.'],
+  s1:'Готово — ты уже здесь',s2:'Кнопка ниже ведёт прямо туда.',
+  why:'Зачем полный доступ?',cta:'Открыть Настройки',later:'Позже'},
+ set:{kbs:'Клавиатуры',app:'Parrlo Translate',crumbs:['Настройки','Parrlo Translate'],
+  apps:'Другие приложения',langs:'Языки',ll:['Русский','Español','English','Català','Deutsch'],
+  addC:'Включи «Parrlo» — клавиатура появится в списке.',
+  on:'Полный доступ',
+  whyT:'Зачем полный доступ',
+  whyP:'Перевод и «Улучшить» идут через сервер Parrlo, поэтому клавиатуре нужна связь.',
+  can:'Печатать можно и без него',cant:'«Перевести» и «Улучшить» — только с ним',
+  only:'Текст уходит только по твоему нажатию.'},
+ done:{h:'Готово!',sub:'Переключайся на Parrlo кнопкой {g}',
+  pop:['Русский','Español','Parrlo'],space:'пробел',
+  list:['Клавиатура Parrlo добавлена','Полный доступ включён'],cta:'Понятно',sec:'Что видит клавиатура'},
+ page:{title:'Parrlo · клавиатура, включение',draft:'Черновик текста',soon:'Скоро · макет',scheme:'Настройки iOS — схема, не снимок',
+  h1:'Клавиатура Parrlo · Включение (K‑08)',
+  lead:'Как подключить клавиатуру за минуту: экран в Parrlo Translate с тремя шагами и кнопкой «Открыть Настройки», затем два шага в Настройках iPhone на странице «Настройки › Parrlo Translate › Клавиатуры» — туда ведёт кнопка — и экран «Готово». Настройки нарисованы схемой в теме Parrlo: это не снимок экрана iOS, без значков Apple и без точного повтора их интерфейса. Приложение и схема — только в тёмной теме.',
+  heroC:'Экран в приложении · главный кадр',heroS:'Три шага из текста сайта и одна кнопка. Первый шаг уже отмечен: раз ты видишь этот экран, Parrlo открыт.',
+  copyEy:'Начало',copyH:'Включить — дело одной минуты.',
+  copyS:['Открой Parrlo Translate один раз.','«Настройки» → «Parrlo Translate» → «Клавиатуры»: включи Parrlo и «Полный доступ».','В любом чате удерживай значок глобуса и выбери Parrlo.'],
+  copySrc:'Текст секции — дословно из copy-ru/keyboard.md, §15.',
+  noteB:'Схема, не снимок.',noteT:'Кадры «Включить Parrlo» и «Полный доступ» показывают страницу «Настройки › Parrlo Translate › Клавиатуры» обобщённо, в цветах Parrlo. Мятная выноска — подсказка сайта, в самих Настройках её нет. Запасной путь вручную: «Настройки › Основные › Клавиатура › Клавиатуры › Новая клавиатура» → Parrlo.',
+  hSt:'Состояния',pSt:'Четыре кадра по порядку: приложение → Настройки (схема) → Настройки (схема) → приложение.',
+  cap:{app:'Приложение',sch:'Схема Настроек'},
+  st:{'app-guide':['Включи клавиатуру','Первый запуск Parrlo Translate или вход из подсказки клавиатуры «Включи клавиатуру…». Человек нажимает «Открыть Настройки».','app'],
+   'step-keyboards':['Включить Parrlo','«Настройки › Parrlo Translate › Клавиатуры» — сюда сразу ведёт «Открыть Настройки». Человек включает переключатель «Parrlo».','sch'],
+   'step-full-access':['Полный доступ','Та же страница: Parrlo уже включена. Человек включает «Полный доступ»; выноска честно объясняет зачем: перевод идёт через сервер Parrlo.','sch'],
+   done:['Готово','Человек вернулся в Parrlo. Последний шаг — переключиться кнопкой с глобусом; меню раскладок показано рядом с ней.','app']},
+  trEy:'Доверие',trH:'Нажимаешь — Parrlo помогает. Не нажимаешь — его нет.',
+  tr:[['Только по нажатию.','Текст уходит на перевод или исправление, только когда ты сам нажмёшь «Перевести» или «Улучшить».'],
+   ['Нажатия не записываются.','Parrlo не записывает, что ты набираешь.'],
+   ['Пароли — без Parrlo.','В полях паролей iOS сама переключает на системную клавиатуру.']],
+  law:'юрист',trBtn:'Подробнее о безопасности',trNote:'По желанию, §17 «Что видит клавиатура» — дословно из copy‑ru. Каждая строка требует сверки юриста: в Политике раздела о клавиатуре пока нет.',
+  hDec:'Решения',dec:[
+   ['Первый шаг уже отмечен.','Экран открыт в Parrlo Translate — значит, шаг «Открой Parrlo один раз» выполнен. Человек видит, что минута уже началась.'],
+   ['Одна главная кнопка.','«Открыть Настройки» — единственная зелёная. «Позже» — текстом, чтобы не спорить с ней.'],
+   ['Схема вместо снимка.','Настройки iOS — нейтральный список в теме Parrlo: крупный заголовок, путь крошками, нужная строка в зелёной рамке с точкой касания. Значков Apple нет; у строки Parrlo — свой значок. Оба шага — на одной странице, куда ведёт кнопка: меньше переходов.'],
+   ['Выноска честно отвечает «зачем».','Полный доступ нужен, потому что перевод и «Улучшить» идут через сервер Parrlo. Две строки: что работает без него и что — только с ним. Слова «приватно» нет.'],
+   ['Глобус — значок, а не эмодзи.','В тексте «кнопкой 🌐» эмодзи нарисован клавишей с глобусом: так он одинаков на всех устройствах и совпадает с клавишей на клавиатуре.'],
+   ['Без «Шаг 2 из 3» в Настройках.','Пользователь в Настройках не видит подсказок Parrlo; номер шага и объяснение — только на сайте, в выноске.']],
+  hTok:'Токены и контраст',tok:[
+   ['Тёмная тема:','фон #0E1116, группы #1C2026, выделенная строка #242B34, линии #2F3742, текст #F2F5F7, вторичный #9AA4B2, акцент #2BC48A / #0E1116, выноска Mint #BFF2DC / #0E1116.'],
+   ['Переключатель:','вкл. #2BC48A, выкл. #4A525D, ручка #F2F5F7; положение ручки меняется — состояние не только цветом.'],
+   ['Контраст (WCAG, расчёт):','','calc'],
+   ['Зоны нажатия:','«Назад» 44, строки списков 52, «Зачем полный доступ?» 52, «Открыть Настройки» 60, «Позже» 48, пункты меню раскладок 44.'],
+   ['Жёлтый:','на экране не используется.']],
+  hNo:'Не утверждено',no:[
+   'Все тексты — черновик, особенно es и en.',
+   'Путь — «Настройки › Parrlo Translate › Клавиатуры», как в copy‑ru §15 (решение 18.11). Ручной путь через «Основные» — только строкой на странице.',
+   'Строка «Текст уходит только по твоему нажатию» на экране «Полный доступ» — из §18 copy‑ru с пометкой [юрист].',
+   '§17 «Что видит клавиатура» — дословно, все три строки и заголовок помечены [юрист]. Заголовок заменён на нейтральный по роду (решение 18.11): «Нажимаешь — Parrlo помогает. Не нажимаешь — его нет.»',
+   'Подписи в Настройках («Клавиатуры», «Полный доступ») — по смыслу, не сверены с текстами iOS на ru/es/en. iOS ещё показывает своё подтверждение при включении полного доступа — на схеме его нет.',
+   'Шаги нужно сверить с реальным iPhone после проверки на prod (GAP №11, №15). Функции на проде нет — экран «скоро».'],
+  ok:'нарушений нет'}},
+es:{back:'Atrás',
+ g:{h:'Activa el teclado',sub:'Activarlo es cosa de un minuto.',
+  s:['Abre Parrlo Translate una vez.','«Ajustes» → «Parrlo Translate» → «Teclados»: activa Parrlo y «Acceso completo».','En cualquier chat, mantén pulsado el globo {g} y elige Parrlo.'],
+  s1:'Hecho: ya estás aquí',s2:'El botón de abajo te lleva directo.',
+  why:'¿Para qué el acceso completo?',cta:'Abrir Ajustes',later:'Más tarde'},
+ set:{kbs:'Teclados',app:'Parrlo Translate',crumbs:['Ajustes','Parrlo Translate'],
+  apps:'Otras apps',langs:'Idiomas',ll:['Español','Русский','English','Català','Deutsch'],
+  addC:'Activa «Parrlo» y el teclado aparecerá en tu lista.',
+  on:'Acceso completo',
+  whyT:'Para qué sirve el acceso completo',
+  whyP:'La traducción y «Mejorar» pasan por el servidor de Parrlo, así que el teclado necesita conexión.',
+  can:'Escribir funciona también sin él',cant:'«Traducir» y «Mejorar», solo con él',
+  only:'El texto solo se envía cuando tú tocas el botón.'},
+ done:{h:'¡Listo!',sub:'Cambia a Parrlo con el botón {g}',
+  pop:['Español','Русский','Parrlo'],space:'espacio',
+  list:['Teclado Parrlo añadido','Acceso completo activado'],cta:'Entendido',sec:'Qué ve el teclado'},
+ page:{title:'Parrlo · teclado, activación',draft:'Texto provisional',soon:'Próximamente · maqueta',scheme:'Ajustes de iOS: esquema, no captura',
+  h1:'Teclado Parrlo · Activación (K‑08)',
+  lead:'Cómo activar el teclado en un minuto: una pantalla en Parrlo Translate con tres pasos y el botón «Abrir Ajustes», luego dos pasos en la página «Ajustes › Parrlo Translate › Teclados» —adonde lleva el botón— y la pantalla «¡Listo!». Los Ajustes son un esquema con los colores de Parrlo: no es una captura de iOS, no lleva iconos de Apple ni copia su interfaz. La app y el esquema solo existen en tema oscuro.',
+  heroC:'Pantalla en la app · imagen principal',heroS:'Los tres pasos del texto del sitio y un solo botón. El primer paso ya está marcado: si ves esta pantalla, Parrlo está abierto.',
+  copyEy:'Primeros pasos',copyH:'Activarlo es cosa de un minuto.',
+  copyS:['Abre Parrlo Translate una vez.','«Ajustes» → «Parrlo Translate» → «Teclados»: activa Parrlo y «Acceso completo».','En cualquier chat, mantén pulsado el globo y elige Parrlo.'],
+  copySrc:'Traducción de copy-ru/keyboard.md, §15.',
+  noteB:'Esquema, no captura.',noteT:'«Activar Parrlo» y «Acceso completo» muestran la página «Ajustes › Parrlo Translate › Teclados» de forma genérica, con los colores de Parrlo. La nota menta es una ayuda del sitio: en Ajustes no aparece. Ruta manual alternativa: «Ajustes › General › Teclado › Teclados › Añadir teclado» → Parrlo.',
+  hSt:'Estados',pSt:'Cuatro pantallas en orden: app → Ajustes (esquema) → Ajustes (esquema) → app.',
+  cap:{app:'App',sch:'Esquema de Ajustes'},
+  st:{'app-guide':['Activa el teclado','Primer inicio de Parrlo Translate o al llegar desde el aviso del teclado. La persona toca «Abrir Ajustes».','app'],
+   'step-keyboards':['Activar Parrlo','«Ajustes › Parrlo Translate › Teclados»: aquí lleva directamente «Abrir Ajustes». La persona activa el interruptor «Parrlo».','sch'],
+   'step-full-access':['Acceso completo','La misma página, con Parrlo ya activado. La persona activa «Acceso completo»; la nota explica sin rodeos por qué: la traducción pasa por el servidor de Parrlo.','sch'],
+   done:['¡Listo!','La persona vuelve a Parrlo. Falta cambiar de teclado con el botón del globo; el menú de teclados aparece junto a él.','app']},
+  trEy:'Confianza',trH:'Lo pides y Parrlo te ayuda. Si no lo pides, no está.',
+  tr:[['Solo cuando lo pides.','El texto se envía para traducir o corregir solo cuando tú tocas «Traducir» o «Mejorar».'],
+   ['No guarda lo que tecleas.','Parrlo no registra lo que escribes.'],
+   ['Contraseñas, sin Parrlo.','En los campos de contraseña, iOS cambia solo al teclado del sistema.']],
+  law:'legal',trBtn:'Más sobre seguridad',trNote:'Opcional, §17 «Qué ve el teclado», traducido de copy‑ru. Cada línea necesita revisión legal: la Política aún no tiene un apartado sobre el teclado.',
+  hDec:'Decisiones',dec:[
+   ['El primer paso ya está hecho.','La pantalla está en Parrlo Translate, así que «Abre Parrlo una vez» ya se cumplió. Se nota que el minuto ya empezó.'],
+   ['Un solo botón principal.','«Abrir Ajustes» es el único verde. «Más tarde» va como texto para no competir.'],
+   ['Esquema en vez de captura.','Los Ajustes de iOS son una lista neutra con el tema de Parrlo: título grande, ruta arriba, la fila buscada con borde verde y punto de toque. Sin iconos de Apple; la fila de Parrlo lleva su propio icono. Los dos pasos están en la misma página a la que lleva el botón.'],
+   ['La nota responde «para qué» con honestidad.','El acceso completo hace falta porque la traducción y «Mejorar» pasan por el servidor de Parrlo. Dos líneas: qué funciona sin él y qué solo con él. Sin la palabra «privado».'],
+   ['El globo es un icono, no un emoji.','El «🌐» del texto se dibuja como tecla con globo: igual en todos los dispositivos y como la tecla real.'],
+   ['Sin «Paso 2 de 3» dentro de Ajustes.','En Ajustes la persona no ve ayudas de Parrlo; el número de paso y la explicación están solo en el sitio, en la nota.']],
+  hTok:'Tokens y contraste',tok:[
+   ['Tema oscuro:','fondo #0E1116, grupos #1C2026, fila resaltada #242B34, líneas #2F3742, texto #F2F5F7, secundario #9AA4B2, acento #2BC48A / #0E1116, nota menta #BFF2DC / #0E1116.'],
+   ['Interruptor:','activado #2BC48A, desactivado #4A525D, botón #F2F5F7; el botón cambia de lado, no solo el color.'],
+   ['Contraste (WCAG, calculado):','','calc'],
+   ['Zonas táctiles:','«Atrás» 44, filas 52, «¿Para qué el acceso completo?» 52, «Abrir Ajustes» 60, «Más tarde» 48, opciones del menú 44.'],
+   ['Amarillo:','no se usa en la pantalla.']],
+  hNo:'Sin aprobar',no:[
+   'Todos los textos son provisionales, sobre todo es y en.',
+   'Ruta: «Ajustes › Parrlo Translate › Teclados», como en copy‑ru §15 (decisión del 18.11). La ruta manual por «General» va solo como una línea en la página.',
+   'La frase «El texto solo se envía cuando tú tocas el botón» viene de §18 de copy‑ru, marcada [legal].',
+   '§17: el título y las tres líneas llevan [legal]. Título neutro en género (decisión del 18.11).',
+   'Los textos de Ajustes («Teclados», «Acceso completo») son aproximados, sin cotejar con iOS. iOS además pide confirmar el acceso completo; el esquema no lo muestra.',
+   'Hay que cotejar los pasos con un iPhone real tras la prueba en prod (GAP n.º 11 y 15). No está en prod: pantalla «próximamente».'],
+  ok:'sin incidencias'}},
+en:{back:'Back',
+ g:{h:'Turn on the keyboard',sub:'It only takes a minute.',
+  s:['Open Parrlo Translate once.','Settings → Parrlo Translate → Keyboards: turn on Parrlo and Full Access.','In any chat, press and hold the globe {g} and pick Parrlo.'],
+  s1:'Done — you’re here',s2:'The button below takes you straight there.',
+  why:'Why Full Access?',cta:'Open Settings',later:'Later'},
+ set:{kbs:'Keyboards',app:'Parrlo Translate',crumbs:['Settings','Parrlo Translate'],
+  apps:'Other apps',langs:'Languages',ll:['English','Español','Русский','Català','Deutsch'],
+  addC:'Turn on Parrlo to add it to your keyboards.',
+  on:'Full Access',
+  whyT:'Why Full Access',
+  whyP:'Translation and Improve run on Parrlo’s server, so the keyboard needs a connection.',
+  can:'Typing works without it',cant:'Translate and Improve need it',
+  only:'Text is sent only when you tap a button.'},
+ done:{h:'Done!',sub:'Switch to Parrlo with the {g} key',
+  pop:['English','Español','Parrlo'],space:'space',
+  list:['Parrlo keyboard added','Full Access on'],cta:'Got it',sec:'What the keyboard sees'},
+ page:{title:'Parrlo · keyboard, setup',draft:'Draft copy',soon:'Coming soon · mockup',scheme:'iOS Settings: diagram, not a screenshot',
+  h1:'Parrlo keyboard · Setup (K‑08)',
+  lead:'How to turn the keyboard on in a minute: a Parrlo Translate screen with three steps and an Open Settings button, then two steps on the Settings › Parrlo Translate › Keyboards page — where the button lands — and a Done screen. Settings are drawn as a diagram in Parrlo’s colors — not an iOS screenshot, no Apple icons, no copy of their interface. The app and the diagram are dark theme only.',
+  heroC:'In‑app screen · main frame',heroS:'The three steps from the site copy and one button. Step one is already checked: if you can see this screen, Parrlo is open.',
+  copyEy:'Getting started',copyH:'Turning it on takes a minute.',
+  copyS:['Open Parrlo Translate once.','Settings → Parrlo Translate → Keyboards: turn on Parrlo and Full Access.','In any chat, press and hold the globe and pick Parrlo.'],
+  copySrc:'Translated from copy-ru/keyboard.md, §15.',
+  noteB:'A diagram, not a screenshot.',noteT:'“Turn on Parrlo” and “Full Access” show the Settings › Parrlo Translate › Keyboards page in generic form, in Parrlo’s colors. The mint callout is a site annotation; it isn’t in Settings. Manual fallback: Settings › General › Keyboard › Keyboards › Add New Keyboard → Parrlo.',
+  hSt:'States',pSt:'Four frames in order: app → Settings (diagram) → Settings (diagram) → app.',
+  cap:{app:'App',sch:'Settings diagram'},
+  st:{'app-guide':['Turn on the keyboard','First launch of Parrlo Translate, or arriving from the keyboard’s “Turn on the keyboard” hint. The person taps Open Settings.','app'],
+   'step-keyboards':['Turn on Parrlo','Settings › Parrlo Translate › Keyboards — Open Settings lands right here. The person turns on the Parrlo switch.','sch'],
+   'step-full-access':['Full Access','Same page, Parrlo already on. The person turns on Full Access; the callout says plainly why: translation runs on Parrlo’s server.','sch'],
+   done:['Done','Back in Parrlo. The last step is switching with the globe key; the keyboard menu is shown next to it.','app']},
+  trEy:'Trust',trH:'You tap, Parrlo helps. You don’t, it isn’t there.',
+  tr:[['Only when you tap.','Text goes out for translation or correction only when you tap Translate or Improve yourself.'],
+   ['Keystrokes aren’t recorded.','Parrlo doesn’t record what you type.'],
+   ['Passwords stay with iOS.','In password fields, iOS switches to the system keyboard on its own.']],
+  law:'legal',trBtn:'More about safety',trNote:'Optional, §17 “What the keyboard sees”, translated from copy‑ru. Every line needs legal review: the Privacy Policy has no keyboard section yet.',
+  hDec:'Decisions',dec:[
+   ['Step one is already checked.','The screen is inside Parrlo Translate, so “Open Parrlo once” is done. The person sees the minute has already started.'],
+   ['One main button.','Open Settings is the only green control. Later is plain text so it doesn’t compete.'],
+   ['A diagram, not a screenshot.','iOS Settings is a neutral list in Parrlo’s theme: large title, path as breadcrumbs, the target row in a green outline with a tap dot. No Apple icons; the Parrlo row has our own icon. Both steps sit on the one page the button opens.'],
+   ['The callout answers “why” honestly.','Full Access is needed because translation and Improve run on Parrlo’s server. Two lines: what works without it and what needs it. No “private”.'],
+   ['The globe is an icon, not an emoji.','The “🌐” in the copy is drawn as a globe key: the same on every device, and it matches the real key.'],
+   ['No “Step 2 of 3” inside Settings.','Inside Settings the person sees no Parrlo hints; the step and the explanation live only on the site, in the callout.']],
+  hTok:'Tokens and contrast',tok:[
+   ['Dark theme:','background #0E1116, groups #1C2026, highlighted row #242B34, lines #2F3742, text #F2F5F7, secondary #9AA4B2, accent #2BC48A / #0E1116, mint callout #BFF2DC / #0E1116.'],
+   ['Switch:','on #2BC48A, off #4A525D, knob #F2F5F7; the knob moves, so state isn’t color alone.'],
+   ['Contrast (WCAG, computed):','','calc'],
+   ['Tap targets:','Back 44, list rows 52, Why Full Access? 52, Open Settings 60, Later 48, keyboard menu items 44.'],
+   ['Yellow:','not used on the screen.']],
+  hNo:'Not approved',no:[
+   'All copy is draft, especially es and en.',
+   'Path: Settings › Parrlo Translate › Keyboards, as in copy‑ru §15 (decided 18.11). The manual route via General is one line on the page only.',
+   '“Text is sent only when you tap a button” on the Full Access frame comes from copy‑ru §18, flagged [legal].',
+   '§17: the headline and all three lines are flagged [legal]. Headline is gender‑neutral (decided 18.11).',
+   'Settings labels (Keyboards, Full Access) are approximate, not checked against iOS strings. iOS also shows its own confirmation when Full Access is turned on; the diagram leaves it out.',
+   'Check the steps on a real iPhone after the prod test (GAP #11, #15). Not live on prod yet: “coming soon”.'],
+  ok:'no issues'}}};
+
+const qs=new URLSearchParams(location.search);
+const LG=['ru','es','en'].includes(qs.get('l'))?qs.get('l'):'ru';
+const C=L[LG],P=C.page;
+document.documentElement.lang=LG;document.title=P.title;
+const gk=`<span class="kb-setup-gk" role="img" aria-label="🌐">${I.globe}</span>`;
+const fill=s=>s.replace('{g}',gk);
+
+/* ===== экраны ===== */
+const sbar=`<div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>`;
+const home=`<div class="kb-setup-home"><i></i></div>`;
+const nav=(back,title)=>`<div class="kb-setup-nav"><span class="kb-setup-bk" role="button" aria-label="${C.back}">${I.back}${back||''}</span>${title?`<span class="kb-setup-nt">${title}</span>`:''}</div>`;
+const crumbs=last=>`<div class="kb-setup-crumbs">${[...C.set.crumbs,last].map((c,i,a)=>i===a.length-1?`<b>${c}</b>`:`<span>${c}</span>${I.crumb}`).join('')}</div>`;
+const sw=on=>`<span class="kb-setup-sw${on?' on':''}" role="switch" aria-checked="${on}"><i></i></span>`;
+const pIco=()=>`<span class="kb-setup-ico">${spark()}</span>`;
+const S={
+ 'app-guide':()=>`${nav('','')}
+<div class="kb-setup-body">
+ <img class="kb-setup-masc" src="${MASC}mascot-listen-dark.svg" alt="">
+ <h4 class="kb-setup-h">${C.g.h}</h4>
+ <p class="kb-setup-sub">${C.g.sub}</p>
+ <ol class="kb-setup-steps">
+  <li class="ok"><span class="kb-setup-n">${I.check}</span><span class="tx">${C.g.s[0]}<small>${C.g.s1}</small></span></li>
+  <li><span class="kb-setup-n">2</span><span class="tx">${C.g.s[1]}<small>${C.g.s2}</small></span></li>
+  <li><span class="kb-setup-n">3</span><span class="tx">${fill(C.g.s[2])}</span></li>
+ </ol>
+ <div class="kb-setup-why" role="button">${I.info}<span>${C.g.why}</span><i>${I.chev}</i></div>
+ <div class="kb-setup-fill"></div>
+ <div class="kb-setup-cta" role="button">${C.g.cta}${I.out}</div>
+ <div class="kb-setup-sec2" role="button">${C.g.later}</div>
+</div>`,
+ 'step-keyboards':()=>`${nav(C.set.app,'')}
+<div class="kb-setup-body">
+ <h4 class="kb-setup-lt">${C.set.kbs}</h4>
+ ${crumbs(C.set.kbs)}
+ <div class="kb-setup-grp">
+  <div class="kb-setup-row hl" role="button">${pIco()}<span class="tx">Parrlo</span><span class="kb-setup-tap" aria-hidden="true"><i></i></span>${sw(false)}</div>
+  <div class="kb-setup-row dim" role="button"><span class="tx">${C.set.on}</span>${sw(false)}</div>
+ </div>
+ <div class="kb-setup-call" role="note"><p>${C.set.addC}</p></div>
+</div>`,
+ 'step-full-access':()=>`${nav(C.set.app,'')}
+<div class="kb-setup-body">
+ <h4 class="kb-setup-lt">${C.set.kbs}</h4>
+ ${crumbs(C.set.kbs)}
+ <div class="kb-setup-grp">
+  <div class="kb-setup-row" role="button">${pIco()}<span class="tx">Parrlo</span>${sw(true)}</div>
+  <div class="kb-setup-row hl" role="button"><span class="tx">${C.set.on}</span><span class="kb-setup-tap" aria-hidden="true"><i></i></span>${sw(true)}</div>
+ </div>
+ <div class="kb-setup-call" role="note"><b>${I.cloud}${C.set.whyT}</b><p>${C.set.whyP}</p>
+  <ul><li>${I.checkC}<span>${C.set.can}</span></li><li>${I.dash}<span>${C.set.cant}</span></li></ul>
+  <p>${C.set.only}</p></div>
+</div>`,
+ done:()=>`${nav('','')}
+<div class="kb-setup-body">
+ <img class="kb-setup-masc" src="${MASC}mascot-speak-dark.svg" alt="">
+ <h4 class="kb-setup-h">${C.done.h}</h4>
+ <p class="kb-setup-big">${fill(C.done.sub)}</p>
+ <div class="kb-setup-demo" aria-hidden="true">
+  <div class="kb-setup-pop">${C.done.pop.map((n,i)=>i===2?`<div class="on">${n}${I.check}</div>`:`<div>${n}</div>`).join('')}</div>
+  <div class="kb-setup-keys"><span class="kb-setup-key">123</span><span class="kb-setup-key gl">${I.globe}</span><span class="kb-setup-key sp">${C.done.space}</span><span class="kb-setup-key">${I.ret}</span></div>
+ </div>
+ <ul class="kb-setup-done">${C.done.list.map(t=>`<li>${I.checkC}<span>${t}</span></li>`).join('')}</ul>
+ <div class="kb-setup-fill"></div>
+ <div class="kb-setup-cta" role="button">${C.done.cta}</div>
+ <div class="kb-setup-sec2" role="button">${C.done.sec}</div>
+</div>`};
+const screen=id=>`<div class="scr kb-setup-scr" lang="${LG}">${sbar}${S[id]()}${home}</div>`;
+const ph=(id,sc)=>`<div class="pf p67" style="--s:${sc}"><div class="shell"></div><div class="glass">${screen(id)}</div></div>`;
+
+/* ===== страница ===== */
+const $=id=>document.getElementById(id);
+$('kb-setup-t-draft').textContent=P.draft;$('kb-setup-t-soon').textContent=P.soon;$('kb-setup-t-scheme').textContent=P.scheme;
+$('kb-setup-lang').innerHTML=['ru','es','en'].map(l=>`<a href="?l=${l}" hreflang="${l}"${l===LG?' aria-current="true"':''}>${l.toUpperCase()}</a>`).join('');
+$('kb-setup-h1').textContent=P.h1;$('kb-setup-lead').textContent=P.lead;
+$('kb-setup-h-st').textContent=P.hSt;$('kb-setup-p-st').textContent=P.pSt;
+$('kb-setup-hero').innerHTML=
+`<figure data-shot="kb-setup--dark--${LG}">${ph('app-guide',1)}<div class="pcap"><span class="dot"></span><div><b>${P.heroC}</b><span>${P.heroS}</span></div></div></figure>
+<div class="kb-setup-copy"><p class="ey">${P.copyEy}</p><h2>${P.copyH}</h2><ol>${P.copyS.map(s=>`<li>${s}</li>`).join('')}</ol>
+<div class="kb-setup-note">${I.info.replace('<svg','<svg width="22" height="22" style="flex:none;color:#BFF2DC;margin-top:1px"')}<span><b>${P.noteB}</b> ${P.noteT}</span></div>
+<p class="src" style="margin-top:16px">${P.copySrc}</p></div>`;
+$('kb-setup-grid').innerHTML=Object.keys(S).map(id=>{const [t,w,k]=P.st[id];return `<article class="kb-setup-st"><h3>${t}<code>${id}</code></h3><p>${w}</p>
+<figure data-shot="kb-setup--${id}--dark--${LG}">${ph(id,.6)}<div class="pcap"><div><b>${P.cap[k]}</b></div></div></figure></article>`}).join('');
+$('kb-setup-trust').innerHTML=`<p class="ey">${P.trEy}</p><h2>${P.trH}<span class="kb-setup-law">${P.law}</span></h2>
+<ul class="kb-setup-tl">${P.tr.map(([b,t])=>`<li><b>${b}</b>${t}<span class="kb-setup-law">${P.law}</span></li>`).join('')}</ul>
+<div class="foot"><a class="btn" href="#">${P.trBtn} →</a><span>${P.trNote}</span></div>`;
+const li=a=>`<li><b>${a[0]}</b> ${a[1]}</li>`;
+$('kb-setup-notes').innerHTML=`<div><h2>${P.hDec}</h2><ul>${P.dec.map(li).join('')}</ul></div>
+<div><h2>${P.hTok}</h2><ul>${P.tok.map(a=>a[2]?`<li><b>${a[0]}</b> <span id="kb-setup-calc"></span></li>`:li(a)).join('')}</ul></div>
+<div><h2>${P.hNo}</h2><ul>${P.no.map(t=>`<li>${t}</li>`).join('')}</ul></div>`;
+
+/* контраст: по вычисленным цветам CSS */
+function rgb(s){const m=s.match(/[\d.]+/g);return m?m.map(Number):[0,0,0,0];}
+function lum([r,g,b]){const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)};return .2126*f(r)+.7152*f(g)+.0722*f(b);}
+function bgOf(el){while(el){const c=rgb(getComputedStyle(el).backgroundColor);if(c.length<4||c[3]>0.5)return c;el=el.parentElement;}return [14,17,22];}
+function blend(fg,bg,a){return fg.slice(0,3).map((v,i)=>v*a+bg[i]*(1-a));}
+let minC=99,bad=[];
+document.querySelectorAll('.scr *').forEach(el=>{if(![...el.childNodes].some(n=>n.nodeType===3&&n.data.trim()))return;
+ const cs=getComputedStyle(el);let a=1,e=el;while(e&&!e.classList.contains('scr')){a*=+getComputedStyle(e).opacity;e=e.parentElement;}
+ const c=rgb(cs.color);const bg=bgOf(el);const fg=blend(c,bg,(c[3]??1)*a);
+ const L1=lum(fg),L2=lum(bg);const r=(Math.max(L1,L2)+.05)/(Math.min(L1,L2)+.05);
+ const big=parseFloat(cs.fontSize)>=24||(parseFloat(cs.fontSize)>=18.66&&+cs.fontWeight>=700);
+ if(r<(big?3:4.5))bad.push(el.textContent.trim().slice(0,20)+' '+r.toFixed(2));minC=Math.min(minC,r);});
+$('kb-setup-calc').textContent=(LG==='ru'?'минимум по тексту экрана ':LG==='es'?'mínimo en el texto de la pantalla ':'minimum across screen text ')+minC.toFixed(1).replace('.',LG==='en'?'.':',')+' : 1 — '+(bad.length?bad.join('; '):P.ok)+'.';
+window.KB_SETUP_BAD=bad;window.KB_SETUP_MIN=minC;
+document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>
