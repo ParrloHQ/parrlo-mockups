@@ -1,10 +1,12 @@
 /* Parrlo · эталонный шаблон экрана приложения для сайта (v2.3).
    Нейтральная рамка: без выреза, кнопок и других деталей конкретного телефона (правила Apple для обобщённых устройств).
-   Экран рисуется в 390×844 и масштабируется переменной --s. */
+   Экран рисуется в 390×844 (или 430×932 с классом .p67) и масштабируется переменной --s. */
 @font-face{font-family:Inter;src:url(../brandbook/fonts/inter.ttf) format("truetype");font-weight:100 900}
 @font-face{font-family:Nunito;src:url(../brandbook/fonts/nunito.ttf) format("truetype");font-weight:200 1000}
 
-.pf{--s:1;--bz:12px;--r:56px;position:relative;display:inline-block;width:calc((390px + 2*var(--bz))*var(--s));height:calc((844px + 2*var(--bz))*var(--s));flex:none}
+.pf{--s:1;--bz:12px;--r:56px;--pw:390px;--ph:844px;position:relative;display:inline-block;width:calc((var(--pw) + 2*var(--bz))*var(--s));height:calc((var(--ph) + 2*var(--bz))*var(--s));flex:none}
+/* 6,7″ (1290×2796 @3×): кадры пачки 2 по карте сайта v0.5 */
+.pf.p67{--pw:430px;--ph:932px;--r:60px}
 .pf>.shell{position:absolute;inset:0;border-radius:calc(var(--r)*var(--s));background:#14181D;
   box-shadow:inset 0 0 0 calc(1.5px*var(--s)) #3A414B,
    0 calc(60px*var(--s)) calc(120px*var(--s)) calc(-30px*var(--s)) rgba(14,17,22,.45),
@@ -14,9 +16,9 @@
    0 calc(18px*var(--s)) calc(36px*var(--s)) calc(-12px*var(--s)) rgba(14,17,22,.18)}
 .pf.flat>.shell{box-shadow:inset 0 0 0 calc(1.5px*var(--s)) #3A414B}
 .pf.light.flat>.shell{box-shadow:inset 0 0 0 calc(1.5px*var(--s)) #C9CFD6}
-.pf .glass{position:absolute;left:calc(var(--bz)*var(--s));top:calc(var(--bz)*var(--s));width:calc(390px*var(--s));height:calc(844px*var(--s));
+.pf .glass{position:absolute;left:calc(var(--bz)*var(--s));top:calc(var(--bz)*var(--s));width:calc(var(--pw)*var(--s));height:calc(var(--ph)*var(--s));
   border-radius:calc((var(--r) - var(--bz))*var(--s));overflow:hidden;background:#0E1116}
-.pf .glass>.scr{width:390px;height:844px;transform:scale(var(--s));transform-origin:0 0}
+.pf .glass>.scr{width:var(--pw);height:var(--ph);transform:scale(var(--s));transform-origin:0 0}
 /* подпись к телефону */
 .pcap{display:flex;gap:10px;align-items:flex-start;margin-top:20px;max-width:340px;font:400 15px/1.45 Inter,system-ui,sans-serif}
 .pcap .dot{flex:none;width:10px;height:10px;border-radius:50%;margin-top:6px;background:#2BC48A}
