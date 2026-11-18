@@ -9,7 +9,7 @@ const I={
   back:`<svg class="ic" viewBox="0 0 24 24" ${SW} style="width:28px;height:28px"><path d="M15 5l-7 7 7 7"/></svg>`,
   send:`<svg class="ic" viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M12 4l7 7h-4.5v9h-5v-9H5z"/></svg>`,
   tr:`<svg viewBox="0 0 24 24" ${SW}><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg>`,
-  spark:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg>`,
+  /* «Улучшить» — знак Parrlo; искры запрещены брендбуком (знаки «ИИ») */ spark:`<svg viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="pmk" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#pmk)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>`,
   voice:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
   gear:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg>`,
   shift:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.5l8 8.5h-4.5v7.5h-7V12H4z"/></svg>`,
@@ -49,7 +49,7 @@ function keyboard(theme){
 /* Parrlo Chat — только тёмная тема */
 function chat(){
   return `<div class="scr">${sbar()}
-  <div class="nav"><span class="bk">${I.back}</span><span class="av">L</span><span class="nm"><b>Lucía</b><span>пишет по-испански · ты читаешь по-русски</span></span></div>
+  <div class="nav"><span class="bk">${I.back}</span><span class="av">L</span><span class="nm"><b>Lucía</b><span>пишет по‑испански · ты читаешь по‑русски</span></span></div>
   <div class="msgs">
    <div class="day">Сегодня</div>
    <div class="m in">¡Hola! ¿Qué tal el primer día?<span class="t">${I.tr}<span>Привет! Как первый день?</span></span><span class="tm">09:41</span></div>
