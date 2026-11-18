@@ -90,7 +90,7 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
 @keyframes kb-translate-rot{to{transform:rotate(360deg)}}
 /* клавиши */
 .kb-translate-rows{position:relative;display:flex;flex-direction:column;gap:11px;padding-top:6px}
-.kb-translate-r{display:flex;gap:5px}
+.kb-translate-r{display:flex;gap:4px}
 .kb-translate-k{flex:1 1 0;min-width:0;height:41px;border-radius:7px;background:var(--kb-key);box-shadow:var(--kb-sh);color:var(--kb-tx);display:flex;align-items:center;justify-content:center;font:400 22px/1 Inter,sans-serif}
 .kb-translate-k.f{background:var(--kb-key2)}
 .kb-translate-k.f svg{width:22px;height:22px}
@@ -158,11 +158,11 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
 <li><b>Контраст, светлая (WCAG):</b> текст на клавише и полосе 18,9; вторичный #5B6472 на полосе 6,0; «Вернуть», «Повторить» #00875C на белом 4,55; белое на акценте 4,55; текст на служебной клавише 8,8; ошибка #C42B1F на белом 5,7.</li>
 <li><b>Контраст, тёмная:</b> текст на клавише и полосе 9,4; вторичный #C5CCD5 на полосе 6,4; акцент #2BC48A на полосе 4,6; #0E1116 на акценте 8,4; текст на служебной 12,2; ошибка #FF8A80 на полосе 4,5 (у токена #FF6B5E было бы 3,7).</li>
 <li><b>Не только цветом:</b> выбранный чип — с галочкой, активная функция — заливка и aria-pressed, недоступные — приглушены и названы в подсказке «Нет сети», запись — точка и текст «Запись в Parrlo».</li>
+<li><b>Раскладка:</b> русская во всех состояниях (пользователь пишет по‑русски); испанский только в результате — в поле после перевода и в предпросмотре «Улучшить». В ряду 11 клавиш, зазор 4 pt, ширина клавиши около 31 pt.</li>
 <li><b>Зоны нажатия:</b> иконки панели 60×44, «Вернуть»/«Отмена»/«Повторить» ≥ 64×44, чипы 36 pt в полосе 44 pt, «Вставить» 44, кнопки диктовки 48.</li>
 </ul></div>
 <div><h2>Не утверждено</h2><ul>
 <li>Все тексты — черновик: подсказка в «Готово к переводу», «Переводим…», «Вернуть», названия вариантов «Улучшить».</li>
-<li>Раскладка ES во всех состояниях взята из v1 по заданию; при наборе по‑русски в продукте, скорее всего, будет русская раскладка — нужно решение.</li>
 <li>Механика диктовки на iPhone: как долго запись в Parrlo живёт в фоне и как текст попадает обратно в поле — требует проверки в сборке.</li>
 <li>Показывать ли обратный перевод в «Улучшить» всегда или по касанию.</li>
 <li>Цвет ошибки в тёмной клавиатуре #FF8A80 — светлее токена #FF6B5E ради контраста на #3A414B.</li>
@@ -230,7 +230,7 @@ error:{t:'Не получилось перевести',when:'Сервер не 
  field:RU+car,
  strip:()=>`<div class="kb-translate-strip err" role="alert">${I.alert.replace('<svg','<svg class="kb-translate-ic-err"')}<span class="tx"><b>Не получилось перевести</b><span>Текст не изменился</span></span><span class="kb-translate-act" role="button">Повторить</span></div>`}
 };
-const R=['qwertyuiop','asdfghjklñ','zxcvbnm'];
+const R=['йцукенгшщзх','фывапролджэ','ячсмитьбю'];
 const k=c=>`<span class="kb-translate-k">${c.toUpperCase()}</span>`;
 const row=s=>[...s].map(k).join('');
 const BAR=[['Улучшить',parrot],['Перевести',()=>I.tr],['Диктовка',()=>I.mic],['Голосовое',()=>I.voice],['Настройки',()=>I.gear]];
@@ -248,7 +248,7 @@ ${s.strip(light)}
 <div class="kb-translate-bar">${bar}</div>
 <div class="kb-translate-rows"><div class="kb-translate-r">${row(R[0])}</div><div class="kb-translate-r">${row(R[1])}</div>
 <div class="kb-translate-r"><span class="kb-translate-k f w">${I.shift}</span><span class="kb-translate-g"></span>${row(R[2])}<span class="kb-translate-g"></span><span class="kb-translate-k f w">${I.del}</span></div>
-<div class="kb-translate-r"><span class="kb-translate-k f n">123</span><span class="kb-translate-k p">,</span><span class="kb-translate-k sp"><i>‹</i>Español<i>›</i></span><span class="kb-translate-k p">.</span><span class="kb-translate-k rt">${I.ret}</span></div>
+<div class="kb-translate-r"><span class="kb-translate-k f n">123</span><span class="kb-translate-k p">,</span><span class="kb-translate-k sp"><i>‹</i>Русский<i>›</i></span><span class="kb-translate-k p">.</span><span class="kb-translate-k rt">${I.ret}</span></div>
 ${s.ov?s.ov(light):''}</div>
 <div class="kb-translate-home"><i></i></div></div></div>`;}
 const ph=(id,l,sc)=>`<div class="pf ${l?'light':''}" style="--s:${sc}"><div class="shell"></div><div class="glass">${screen(id,l)}</div></div>`;

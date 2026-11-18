@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · фото</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:40px 16px 80px}
+.chat-photo-w{max-width:1200px;margin:0 auto}
+.chat-photo-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-photo-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-photo-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-photo-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-photo-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-photo-info ul,.chat-photo-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-photo-info li,.chat-photo-sec li{margin:6px 0}
+.chat-photo-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.chat-photo-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-photo-lead{color:#9AA4B2;margin:0 0 32px;max-width:720px}
+.chat-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(264px,1fr));gap:40px 24px;justify-items:center}
+.chat-photo-card{width:264px}
+.chat-photo-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.chat-photo-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-photo-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+.chat-photo-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px 40px}
+.chat-photo-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-photo-sec b{color:#F2F5F7;font-weight:600}
+.chat-photo-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-photo-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-photo-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-photo-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-photo-hero .pf{--s:.86!important}.chat-photo-info h1{font-size:32px}.chat-photo-cols{grid-template-columns:1fr}}
+
+/* ======= экран: база из эталона chat-thread ======= */
+.chat-photo-scr{overflow:hidden}
+.chat-photo-scr svg{display:block}
+.chat-photo-nav{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 4px;border-bottom:1px solid var(--line)}
+.chat-photo-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-photo-ib svg{width:24px;height:24px}
+.chat-photo-ib.bk{color:var(--acc);width:40px}.chat-photo-ib.bk svg{width:28px;height:28px}
+.chat-photo-av{position:relative;width:40px;height:40px;border-radius:50%;background:#6AA6F5;color:#0E1116;font:800 17px/40px Nunito,Inter;text-align:center;flex:none}
+.chat-photo-av i{position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 2.5px var(--bg)}
+.chat-photo-nm{flex:1;min-width:0;padding-left:4px}
+.chat-photo-nm b{display:block;font:600 17px/22px Inter}
+.chat-photo-nm span{overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;font-size:13px;line-height:18px;color:var(--sec);white-space:nowrap}
+.chat-photo-nm span.on{color:var(--acc)}
+.chat-photo-lc{flex:none;height:44px;display:flex;align-items:center}
+.chat-photo-lc span{height:32px;border-radius:16px;background:var(--sf2);display:flex;align-items:center;gap:6px;padding:0 12px;font:700 13px/1 Inter;letter-spacing:.04em;color:var(--tx)}
+.chat-photo-lc svg{width:14px;height:14px;color:var(--sec)}
+
+.chat-photo-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px}
+.chat-photo-day{align-self:center;font:500 12px/16px Inter;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px;margin-bottom:4px}
+.chat-photo-m{position:relative;max-width:80%;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px}
+.chat-photo-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px}
+.chat-photo-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.chat-photo-m.gap{margin-top:8px}
+.chat-photo-t{display:flex;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid rgba(154,164,178,.28);font-size:15px;line-height:20px}
+.chat-photo-t svg{flex:none;width:16px;height:16px;margin-top:2px}
+.chat-photo-m.in .chat-photo-t{color:var(--mint)}
+.chat-photo-m.out .chat-photo-t{color:#fff;border-top-color:rgba(255,255,255,.3)}
+.chat-photo-tm{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;line-height:16px;margin-top:2px}
+.chat-photo-m.in .chat-photo-tm{color:var(--sec)}
+.chat-photo-tm svg{width:16px;height:16px}
+.chat-photo-rd{align-self:flex-end;display:flex;align-items:center;gap:4px;font:500 12px/16px Inter;color:var(--sec);margin:-2px 4px 0 0}
+.chat-photo-rd svg{width:16px;height:16px;color:var(--acc)}
+.chat-photo-m.hl{box-shadow:0 0 0 2px var(--acc)}
+.chat-photo-hlb{position:absolute;inset:-6px -200px -6px -16px;background:rgba(43,196,138,.08);border-radius:0;z-index:-1}
+
+/* цитата в сообщении */
+.chat-photo-q{display:block;border-left:3px solid var(--mint);background:rgba(14,17,22,.22);border-radius:8px;padding:4px 8px 4px 8px;margin:0 0 6px;font-size:13px;line-height:18px}
+.chat-photo-q b{display:block;font-weight:600}
+
+/* печатает */
+.chat-photo-ty{align-self:flex-start;display:flex;align-items:center;gap:8px}
+.chat-photo-ty .b{height:36px;border-radius:18px;border-bottom-left-radius:6px;background:var(--sf2);display:flex;align-items:center;gap:4px;padding:0 14px}
+.chat-photo-ty .b i{width:7px;height:7px;border-radius:50%;background:var(--sec)}
+.chat-photo-ty .b i:nth-child(2){opacity:.7}.chat-photo-ty .b i:nth-child(3){opacity:.45}
+.chat-photo-ty span{font-size:12px;color:var(--sec)}
+
+/* голосовое */
+.chat-photo-m.vc{width:80%}
+.chat-photo-vr{display:flex;align-items:center;gap:10px;padding:2px 0 4px}
+.chat-photo-pl{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-photo-pl svg{width:20px;height:20px;margin-left:2px}
+.chat-photo-wv{flex:1;display:flex;align-items:center;gap:2px;height:32px}
+.chat-photo-wv i{flex:1;border-radius:2px;background:var(--sec);opacity:.55}
+.chat-photo-wv i.p{background:var(--acc);opacity:1}
+.chat-photo-vd{display:flex;justify-content:space-between;font-size:12px;line-height:16px;color:var(--sec);margin:0 0 4px 54px}
+.chat-photo-vd b{font-weight:600;color:var(--tx);background:rgba(154,164,178,.18);border-radius:6px;padding:0 6px}
+.chat-photo-lb{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin:6px 0 2px}
+.chat-photo-lis{display:flex;align-items:center;gap:6px;height:32px;margin:6px 0 0;padding:0 12px 0 10px;border-radius:16px;background:rgba(191,242,220,.12);color:var(--mint);font:600 13px/1 Inter;width:max-content}
+.chat-photo-lis svg{width:16px;height:16px}
+
+/* поле ввода */
+.chat-photo-cmp{flex:none;border-top:1px solid var(--line);padding:8px 12px 0;background:var(--bg)}
+.chat-photo-row{display:flex;align-items:flex-end;gap:8px}
+.chat-photo-pls{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-photo-pls svg{width:26px;height:26px}
+.chat-photo-f{flex:1;min-width:0;min-height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:10px 16px;font-size:17px;line-height:22px;color:var(--tx)}
+.chat-photo-f .pl{color:var(--sec)}
+.chat-photo-f .car{display:inline-block;width:2px;height:20px;background:var(--acc);vertical-align:-4px;margin-left:1px;border-radius:1px}
+.chat-photo-go{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-photo-go svg{width:22px;height:22px}
+.chat-photo-pv{margin:0 0 8px;border-radius:16px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:8px 12px 10px}
+.chat-photo-pv .h{display:flex;align-items:center;gap:6px;font:600 12px/16px Inter;color:var(--sec)}
+.chat-photo-pv .h svg{width:14px;height:14px;color:var(--mint)}
+.chat-photo-pv .h .lv{margin-left:auto;display:flex;align-items:center;gap:4px;font-weight:500}
+.chat-photo-pv .h .lv i{width:6px;height:6px;border-radius:50%;background:var(--acc)}
+.chat-photo-pv p{margin:4px 0 0;font-size:16px;line-height:22px;color:var(--tx)}
+.chat-photo-pv p em{font-style:normal;color:var(--sec)}
+.chat-photo-rq{display:flex;align-items:center;gap:8px;margin:0 0 8px;padding-left:4px}
+.chat-photo-rq .bar{align-self:stretch;width:3px;border-radius:2px;background:var(--acc);flex:none}
+.chat-photo-rq .tx{flex:1;min-width:0;font-size:14px;line-height:20px}
+.chat-photo-rq .tx b{display:flex;align-items:center;gap:6px;font-weight:600;color:var(--acc);font-size:13px}
+.chat-photo-rq .tx b svg{width:14px;height:14px}
+.chat-photo-rq .tx span{display:block;color:var(--sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* баннер сети, ошибка */
+.chat-photo-bn{flex:none;display:flex;align-items:center;gap:10px;margin:8px 16px 0;padding:10px 12px;border-radius:14px;background:#3C2A2E;font-size:14px;line-height:20px}
+.chat-photo-bn svg{width:20px;height:20px;color:#FF6B5E;flex:none}
+.chat-photo-bn b{display:block;font-weight:600}
+.chat-photo-bn span{color:#E4C9CC}
+.chat-photo-m.fl{opacity:1;background:#173A2E;box-shadow:inset 0 0 0 1px rgba(255,107,94,.55)}
+.chat-photo-m.fl .chat-photo-t{color:#C9D1DA;border-top-color:rgba(255,255,255,.16)}
+.chat-photo-m.fl .chat-photo-tm{color:#C9D1DA}
+.chat-photo-er{align-self:flex-end;display:flex;align-items:center;gap:8px;margin-top:-2px}
+.chat-photo-er .r{display:flex;align-items:center;gap:6px;font:500 13px/18px Inter;color:#FF6B5E}
+.chat-photo-er .r svg{width:16px;height:16px}
+.chat-photo-rt{height:44px;display:flex;align-items:center}
+.chat-photo-rt span{height:32px;border-radius:16px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;gap:6px;padding:0 14px;font:800 14px/1 Nunito,Inter}
+.chat-photo-rt svg{width:16px;height:16px}
+.chat-photo-snd{align-self:flex-end;display:flex;align-items:center;gap:4px;font-size:12px;color:var(--sec);margin:-2px 4px 0 0}
+.chat-photo-snd svg{width:14px;height:14px}
+
+/* меню по долгому нажатию */
+.chat-photo-dim{position:absolute;inset:0;background:rgba(9,11,14,.74);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:5}
+.chat-photo-pop{position:absolute;left:16px;right:16px;z-index:6;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.chat-photo-rx{display:flex;align-items:center;gap:2px;padding:4px;border-radius:28px;background:var(--sf2);box-shadow:0 12px 32px rgba(0,0,0,.45),inset 0 0 0 1px var(--line)}
+.chat-photo-rx span{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.chat-photo-rx span svg{width:26px;height:26px}
+.chat-photo-rx span.on{background:rgba(43,196,138,.18);color:var(--acc)}
+.chat-photo-rx span.more{color:var(--sec)}
+.chat-photo-pop .chat-photo-m{max-width:80%;box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.chat-photo-mn{width:256px;border-radius:16px;background:var(--sf2);box-shadow:0 16px 40px rgba(0,0,0,.5),inset 0 0 0 1px var(--line);overflow:hidden}
+.chat-photo-mn div{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:16px;border-top:1px solid var(--line)}
+.chat-photo-mn div:first-child{border-top:0}
+.chat-photo-mn div.sep{border-top:6px solid #1A1F25}
+.chat-photo-mn svg{width:22px;height:22px;color:var(--sec)}
+.chat-photo-mn div.wr span{color:var(--tx)}
+.chat-photo-mn div.wr svg{color:var(--sec)}
+
+/* лист «перевод неточный» */
+.chat-photo-sh{position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--sf);border-radius:28px 28px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.45),inset 0 1px 0 var(--line);padding:8px 20px 0}
+.chat-photo-gr{width:40px;height:5px;border-radius:3px;background:#3A414B;margin:0 auto 12px}
+.chat-photo-shh{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.chat-photo-shh h4{margin:0;font:900 24px/30px Nunito,sans-serif}
+.chat-photo-shh p{margin:2px 0 0;color:var(--sec);font-size:14px;line-height:20px}
+.chat-photo-x{width:44px;height:44px;margin:-6px -10px 0 0;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-photo-x svg{width:22px;height:22px}
+.chat-photo-x i{width:32px;height:32px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center}
+.chat-photo-x i svg{width:18px;height:18px}
+.chat-photo-bx{margin-top:12px;border-radius:16px;background:var(--sf2);padding:10px 14px 12px}
+.chat-photo-bx .k{display:flex;align-items:center;gap:6px;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec)}
+.chat-photo-bx .v{font-size:17px;line-height:24px;margin-top:2px}
+.chat-photo-bx .v.x{color:#C9D1DA;text-decoration:line-through;text-decoration-color:rgba(255,107,94,.8);text-decoration-thickness:1.5px}
+.chat-photo-bx.ok{background:#1E3734;box-shadow:inset 0 0 0 1.5px var(--acc)}
+.chat-photo-bx.ok .k{color:var(--mint)}
+.chat-photo-bx .why{margin-top:4px;font-size:13px;line-height:18px;color:#C9D1DA}
+.chat-photo-cta{margin-top:16px;height:52px;border-radius:26px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;font:900 18px/1 Nunito,sans-serif}
+.chat-photo-al{display:flex;gap:12px;margin-top:8px}
+.chat-photo-al span{flex:1;min-height:48px;border-radius:24px;background:var(--sf2);display:flex;align-items:center;justify-content:center;gap:8px;font:600 15px/20px Inter;padding:0 12px;text-align:center}
+.chat-photo-al svg{width:18px;height:18px;color:var(--mint);flex:none}
+.chat-photo-nt{margin:12px 0 0;font-size:13px;line-height:18px;color:var(--sec);text-align:center}
+
+/* пустой чат */
+.chat-photo-em{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px;text-align:center}
+.chat-photo-em img{width:132px;height:132px;display:block;margin-bottom:12px}
+.chat-photo-em h4{margin:0 0 8px;font:900 26px/32px Nunito,sans-serif}
+.chat-photo-em p{margin:0;color:var(--sec);font-size:15px;line-height:22px}
+.chat-photo-ex{margin:20px 0 0;width:100%;display:flex;flex-direction:column;gap:6px}
+.chat-photo-ex .chat-photo-m{max-width:88%;text-align:left}
+.chat-photo-st{flex:none;display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 12px;justify-content:center}
+.chat-photo-st span{height:44px;border-radius:22px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;padding:0 16px;font-size:15px}
+.chat-photo-sth{flex:none;text-align:center;font:600 12px/16px Inter;color:var(--sec);letter-spacing:.04em;margin:0 0 8px}
+
+
+/* ======= фото в переписке ======= */
+.chat-photo-m.ph{padding:4px;max-width:none}
+.chat-photo-m.ph.in{width:256px}
+.chat-photo-m.ph.out{width:256px}
+.chat-photo-m.ph.al{width:264px}
+.chat-photo-img{position:relative;display:block;border-radius:16px;overflow:hidden;background:#2F3742}
+.chat-photo-img svg{width:100%;height:100%}
+.chat-photo-r43{aspect-ratio:4/3}.chat-photo-r34{aspect-ratio:3/4}
+.chat-photo-cap{padding:6px 8px 2px}
+.chat-photo-cap .chat-photo-t{margin-top:6px}
+.chat-photo-alb{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.chat-photo-alb .chat-photo-img:first-child{border-radius:16px 6px 6px 16px}
+.chat-photo-alb .chat-photo-img:last-child{border-radius:6px 16px 16px 6px}
+/* метки поверх фото */
+.chat-photo-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.chat-photo-ring{position:relative;width:52px;height:52px;border-radius:50%;background:rgba(14,17,22,.72);display:flex;align-items:center;justify-content:center;color:#F2F5F7}
+.chat-photo-ring>svg{position:absolute;inset:4px;width:44px;height:44px}
+.chat-photo-ring .x{width:20px;height:20px;position:relative}
+.chat-photo-ok{position:absolute;right:6px;bottom:6px;width:24px;height:24px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center}
+.chat-photo-ok svg{width:16px;height:16px}
+.chat-photo-dimm{position:absolute;inset:0;background:rgba(14,17,22,.58)}
+.chat-photo-al{position:relative;width:44px;height:44px;border-radius:50%;background:#3C2A2E;color:#FF6B5E;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1.5px rgba(255,107,94,.55)}
+.chat-photo-al svg{width:24px;height:24px}
+.chat-photo-up{align-self:flex-end;display:flex;align-items:center;gap:8px;margin-top:-2px}
+.chat-photo-up .s{display:flex;align-items:center;gap:6px;font:500 13px/18px Inter;color:var(--sec)}
+.chat-photo-up .s svg{width:16px;height:16px}
+.chat-photo-cn{height:44px;display:flex;align-items:center}
+.chat-photo-cn span{height:32px;border-radius:16px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;gap:6px;padding:0 14px;font:600 14px/1 Inter}
+.chat-photo-cn svg{width:16px;height:16px;color:var(--sec)}
+.chat-photo-bar{display:block;height:3px;border-radius:2px;background:rgba(255,255,255,.22);margin:8px 8px 0;overflow:hidden}
+.chat-photo-bar i{display:block;height:100%;border-radius:2px;background:#fff}
+
+/* лист выбора фото */
+.chat-photo-pk{padding:8px 12px 0}
+.chat-photo-pkh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 8px}
+.chat-photo-pkh h4{margin:0;font:900 24px/30px Nunito,sans-serif}
+.chat-photo-pkh p{margin:0;color:var(--sec);font-size:14px;line-height:20px}
+.chat-photo-pkh p b{color:var(--acc);font-weight:600}
+.chat-photo-tabs{display:flex;gap:8px;margin:12px 0 12px}
+.chat-photo-tabs span{height:36px;border-radius:18px;padding:0 14px;display:flex;align-items:center;gap:6px;font:600 14px/1 Inter;background:var(--sf2);color:var(--tx)}
+.chat-photo-tabs span.on{background:var(--tx);color:var(--bg)}
+.chat-photo-tabs svg{width:16px;height:16px}
+.chat-photo-pg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 -8px}
+.chat-photo-tl{position:relative;aspect-ratio:1;overflow:hidden;border-radius:4px;background:#2F3742}
+.chat-photo-tl svg{width:100%;height:100%}
+.chat-photo-tl .ck{position:absolute;right:6px;top:6px;width:28px;height:28px;border-radius:50%;border:2px solid #fff;background:rgba(14,17,22,.32);display:flex;align-items:center;justify-content:center;font:800 15px/1 Inter;color:var(--onacc)}
+.chat-photo-tl.sel .ck{background:var(--acc);border-color:var(--acc)}
+.chat-photo-tl.sel::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px var(--acc);border-radius:4px}
+.chat-photo-tl.sel>svg{transform:scale(.9);border-radius:6px}
+.chat-photo-tl.cam{background:var(--sf2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--tx);font:600 13px/1 Inter}
+.chat-photo-tl.cam svg{width:30px;height:30px}
+.chat-photo-tl .du{position:absolute;left:6px;bottom:6px;font:600 11px/16px Inter;color:#fff;background:rgba(14,17,22,.72);border-radius:6px;padding:0 5px}
+.chat-photo-pcm{display:flex;align-items:flex-end;gap:8px;padding:12px 0 0}
+.chat-photo-pcm .chat-photo-f{font-size:15px;padding:10px 12px;white-space:nowrap;letter-spacing:-.01em}
+.chat-photo-sbtn{position:relative;width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-photo-sbtn svg{width:22px;height:22px}
+.chat-photo-sbtn b{position:absolute;right:-4px;top:-4px;min-width:20px;height:20px;border-radius:10px;background:var(--tx);color:var(--bg);font:800 12px/20px Inter;text-align:center;padding:0 5px;box-shadow:0 0 0 2px var(--sf)}
+
+/* просмотр на весь экран */
+.chat-photo-vw{background:#0E1116}
+.chat-photo-vt{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px}
+.chat-photo-vt .nm{flex:1;min-width:0;text-align:center}
+.chat-photo-vt .nm b{display:block;font:600 17px/22px Inter}
+.chat-photo-vt .nm span{display:block;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-photo-vt .chat-photo-ib i{width:36px;height:36px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center}
+.chat-photo-vt .chat-photo-ib i svg{width:20px;height:20px}
+.chat-photo-vp{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.chat-photo-vp .chat-photo-img{border-radius:0;width:390px}
+.chat-photo-tog{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;height:44px;display:flex;align-items:center}
+.chat-photo-tog span{height:36px;border-radius:18px;background:rgba(14,17,22,.86);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);display:flex;align-items:center;gap:8px;padding:0 6px 0 12px;font:600 14px/1 Inter;color:#F2F5F7;white-space:nowrap}
+.chat-photo-tog span>svg{width:16px;height:16px;color:var(--mint)}
+.chat-photo-tog .sw{width:40px;height:24px;border-radius:12px;background:#3A414B;position:relative;flex:none}
+.chat-photo-tog .sw i{position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#F2F5F7}
+.chat-photo-tog.on .sw{background:var(--acc)}.chat-photo-tog.on .sw i{left:19px;background:#0E1116}
+.chat-photo-vc{flex:none;padding:12px 20px 4px}
+.chat-photo-vc .o{font-size:17px;line-height:24px}
+.chat-photo-vc .chat-photo-t{margin-top:8px;padding-top:8px;font-size:16px;line-height:22px;color:var(--mint);border-top-color:var(--line)}
+.chat-photo-vc .chat-photo-t svg{margin-top:3px}
+.chat-photo-va{flex:none;display:flex;justify-content:space-around;padding:8px 12px 0}
+.chat-photo-va span{width:96px;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:500 13px/16px Inter;color:var(--tx)}
+.chat-photo-va span svg{width:24px;height:24px}
+.chat-photo-dots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.chat-photo-dots i{width:6px;height:6px;border-radius:50%;background:#4A525D}
+.chat-photo-dots i.on{background:var(--tx);width:18px;border-radius:3px}
+.chat-photo-hint{margin:6px 0 0;font-size:13px;line-height:18px;color:var(--sec)}
+</style>
+</head>
+<body>
+<div class="chat-photo-w">
+
+<section class="chat-photo-hero">
+ <div><div class="pf" style="--s:1" data-state="thread" data-hero="1"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b>Parrlo Chat · фото в переписке</b><span>Подпись к фото переводится так же, как обычное сообщение: оригинал сверху, перевод ниже. Тексты — черновик.</span></div></div></div>
+ <div class="chat-photo-info">
+  <p class="chat-photo-eb">Эталон v2 · chat-photo · только тёмная тема</p>
+  <h1>Фото с подписью, которую поймут</h1>
+  <p>Фото в Parrlo Chat — это сообщение с картинкой. Подпись к нему переводится как любой текст в чате, поэтому «я на террасе напротив» дойдёт до Lucía по&#8209;испански, а её ответ — до тебя по&#8209;русски.</p>
+  <ul>
+   <li><b>Превью</b> в пузыре с исходными пропорциями (4:3, 3:4), скругление 16 pt внутри пузыря 20 pt, отступ 4 pt.</li>
+   <li><b>Подпись</b> под фото: оригинал + перевод со значком; во входящих перевод мятным, в исходящих — белым на Deep Green.</li>
+   <li><b>Альбом</b> из двух фото — плитка 2 в ряд, общая подпись.</li>
+   <li><b>Отправка</b> видна на каждом превью: кольцо прогресса, отметка «готово», «Отменить»; ошибка — значок, текст и «Повторить».</li>
+  </ul>
+ </div>
+</section>
+
+<h2 class="chat-photo-h2">Состояния</h2>
+<p class="chat-photo-lead">Шесть кадров. PNG @3× каждого лежат в <code>site-v4/ref/png/chat-photo--&lt;состояние&gt;.png</code>. Стиль переписки — из эталона <a href="chat-thread.html" style="color:#2BC48A">chat-thread</a>. Все снимки — условные иллюстрации, не фото людей.</p>
+<div class="chat-photo-grid" id="chat-photo-grid"></div>
+
+<h2 class="chat-photo-h2">Решения, токены, открытые вопросы</h2>
+<div class="chat-photo-cols">
+ <div class="chat-photo-sec"><h2>Решения сверх текущей сборки</h2><ul>
+  <li><b>Подпись = сообщение.</b> Переводится тем же механизмом и выглядит так же, как текст в chat-thread: один визуальный язык для «оригинал / перевод».</li>
+  <li><b>Подсказка в поле подписи</b> «Подпись — Lucía прочитает по&#8209;испански» объясняет, что подпись тоже переведут, ещё до набора.</li>
+  <li><b>Выбор с номерами.</b> Выбранные фото помечены номером порядка (1, 2), обводкой и уменьшением превью — не только цветом; счётчик на кнопке отправки.</li>
+  <li><b>Прогресс на каждом фото альбома</b>: готовое получает отметку, текущее — кольцо с крестиком (отмена этого фото), под пузырём «Отправляется · 1 из 2» и «Отменить».</li>
+  <li><b>Честная ошибка</b>: превью приглушены, значок «!» на каждом, «Не отправлено: нет сети», «Повторить», баннер с причиной; подпись не переведена — «Переведём после отправки» (перевод идёт на сервере).</li>
+  <li><b>Просмотр</b>: имя и время сверху, подпись в оригинале и переводе снизу, три действия; «Ответить» возвращает в чат с цитатой-превью фото.</li>
+  <li><b>Новое: «Перевод текста на фото»</b> в просмотре — переключатель накладывает русский перевод поверх строк документа или вывески. Оригинал — одним нажатием обратно.</li>
+ </ul></div>
+ <div class="chat-photo-sec"><h2>Токены и контраст</h2>
+  <table class="chat-photo-ct" id="chat-photo-ct"></table>
+  <ul style="margin-top:12px">
+   <li>Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>; исходящие Deep Green <code>#00875C</code>, перевод во входящих Mint <code>#BFF2DC</code>, акцент <code>#2BC48A</code>.</li>
+   <li>Подложки поверх фото — <code>#0E1116</code> 72–86 %; контраст посчитан для худшего случая — белого снимка под подложкой.</li>
+   <li>Ошибка <code>#FF6B5E</code> на <code>#3C2A2E</code>. Жёлтый бренда не используется (в иллюстрациях — только приглушённые тёплые оттенки).</li>
+   <li>Зоны нажатия ≥ 44 pt: плитки 116 pt, кнопки 44×44, действия просмотра 96×60, чипы 32–36 визуально в зоне 44.</li>
+  </ul></div>
+ <div class="chat-photo-sec"><h2>Не утверждено</h2><ul>
+  <li>Все тексты — черновик.</li>
+  <li>Перевод текста на фото — новая функция, нет в сборке; поведение для длинных текстов и рукописи.</li>
+  <li>Отмена одного фото из альбома (крестик в кольце) против отмены всей отправки.</li>
+  <li>Подсказка «До 10 фото, каждое до 10 МБ» — ограничения продукта со слов менеджера мессенджера (18.11); формулировка и место в листе.</li>
+  <li>Вкладки листа «Недавние / Альбомы» и вход в камеру из первой плитки. В Chat — только фото, без видео и файлов.</li>
+  <li>Сохранение: в фото телефона по умолчанию или с выбором альбома.</li>
+  <li>Поведение при возврате сети: сейчас отправка только по «Повторить», как в chat-thread.</li>
+ </ul></div>
+</div>
+</div>
+
+<script>
+(function(){
+var NB='‑';
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra){return '<svg viewBox="0 0 24 24" '+(extra||SW)+'>'+p+'</svg>'}
+var I={
+ back:ic('<path d="M15 5l-7 7 7 7"/>'),
+ more:ic('<circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/>','fill="currentColor"'),
+ tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+ arr:ic('<path d="M5 12h14M14 7l5 5-5 5"/>'),
+ done:ic('<path d="M2.5 12.5l4 4 8-9"/><path d="M11 15.5l1.5 1.5 9-10"/>'),
+ check:ic('<path d="M5 12.5l4.5 4.5L19 7.5"/>','fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ plus:ic('<path d="M12 5v14M5 12h14"/>'),
+ send:ic('<path d="M12 19V5M6 11l6-6 6 6"/>','fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"'),
+ reply:ic('<path d="M9.5 6L4 11.5 9.5 17"/><path d="M4.5 11.5H14a6 6 0 0 1 6 6V19"/>'),
+ x:ic('<path d="M6 6l12 12M18 6L6 18"/>'),
+ xb:ic('<path d="M6 6l12 12M18 6L6 18"/>','fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"'),
+ woff:ic('<path d="M3 3l18 18"/><path d="M8.5 16.3a5 5 0 0 1 5.2-1"/><path d="M5.2 12.9a9.6 9.6 0 0 1 3.6-2.3M12.4 9.6a9.6 9.6 0 0 1 6.4 3.3"/><path d="M2 9.3a14.5 14.5 0 0 1 3.7-2.4M10 5.6A14.5 14.5 0 0 1 22 9.3"/><circle cx="12" cy="19.5" r=".6" fill="currentColor"/>'),
+ alert:ic('<circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><circle cx="12" cy="16.5" r=".6" fill="currentColor"/>'),
+ excl:ic('<path d="M12 6v8"/><circle cx="12" cy="18.3" r="1.1" fill="currentColor" stroke="none"/>','fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"'),
+ retry:ic('<path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4.5h-4.5"/>'),
+ clock:ic('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'),
+ up:ic('<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/>'),
+ share:ic('<path d="M12 15V3.5M7.5 8L12 3.5 16.5 8"/><path d="M8 11H6.5A2 2 0 0 0 4.5 13v6a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H16"/>'),
+ save:ic('<path d="M12 3.5V15M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 16v2.5a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V16"/>'),
+ cam:ic('<path d="M3.5 8.5a2 2 0 0 1 2-2h2.3l1.5-2.5h5.4l1.5 2.5h2.3a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.8"/>'),
+ img:ic('<rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M4 17.5l5-4.5 4 3.5 2.5-2 4.5 3.5"/>'),
+ file:ic('<path d="M6.5 3.5h7l4 4v11a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2z"/><path d="M13.5 3.5v4h4M8.5 13h7M8.5 16.5h5"/>'),
+ alb:ic('<rect x="3.5" y="6.5" width="13" height="13" rx="2.5"/><path d="M7.5 3.5h10a3 3 0 0 1 3 3v10"/>'),
+ txt:ic('<path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><path d="M8 9h8M12 9v7"/>')
+};
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function nav(sub,noDot){
+ sub=sub||'<span><i style="width:6px;height:6px;border-radius:50%;background:var(--acc);display:inline-block"></i>в сети</span>';
+ return '<div class="chat-photo-nav"><span class="chat-photo-ib bk" aria-label="Назад">'+I.back+'</span><span class="chat-photo-av">L'+(noDot?'':'<i></i>')+'</span><div class="chat-photo-nm"><b>Lucía</b>'+sub+'</div><span class="chat-photo-lc" aria-label="Языки чата: испанский и русский"><span>ES'+I.arr+'RU</span></span><span class="chat-photo-ib" aria-label="Меню чата">'+I.more+'</span></div>';
+}
+function mi(es,ru,tm,cls){return '<div class="chat-photo-m in '+(cls||'')+'"><span lang="es">'+es+'</span><div class="chat-photo-t" lang="ru">'+I.tr+'<span>'+ru+'</span></div><span class="chat-photo-tm">'+tm+'</span></div>'}
+function mo(ru,es,tm,cls){return '<div class="chat-photo-m out '+(cls||'')+'"><span>'+ru+'</span><div class="chat-photo-t" lang="es">'+I.tr+'<span>'+es+'</span></div><span class="chat-photo-tm">'+tm+I.done+'</span></div>'}
+function read(t){return '<div class="chat-photo-rd">'+I.done+'Прочитано '+t+'</div>'}
+function cmpMain(){return '<div class="chat-photo-cmp"><div class="chat-photo-row"><span class="chat-photo-pls" aria-label="Прикрепить фото или файл">'+I.plus+'</span><span class="chat-photo-f"><span class="pl">Сообщение по'+NB+'русски</span></span><span class="chat-photo-go" aria-label="Записать голосовое">'+I.mic+'</span></div></div>'}
+function scr(inner,extra,cls){return '<div class="scr chat-photo-scr '+(cls||'')+'">'+sbar+inner+home+(extra||'')+'</div>'}
+
+/* ===== условные «снимки»: только формы и градиенты, без людей ===== */
+var P='preserveAspectRatio="xMidYMid slice" aria-hidden="true"';
+function cafe(){return '<svg viewBox="0 0 400 300" '+P+'><defs><linearGradient id="cpS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0BFA0"/><stop offset="1" stop-color="#F6DCC2"/></linearGradient><linearGradient id="cpG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D8BE9C"/><stop offset="1" stop-color="#BFA07E"/></linearGradient></defs>'+
+ '<rect width="400" height="300" fill="url(#cpS)"/>'+
+ '<rect x="-10" y="28" width="250" height="190" fill="#C77857"/><rect x="240" y="58" width="170" height="160" fill="#B5674A"/>'+
+ [40,100,160].map(function(x){return '<rect x="'+x+'" y="48" width="34" height="44" rx="17" fill="#7E4434"/><rect x="'+(x-6)+'" y="92" width="46" height="4" fill="#5E3428"/>'}).join('')+
+ [270,330].map(function(x){return '<rect x="'+x+'" y="76" width="34" height="40" fill="#7E4434"/><rect x="'+(x-4)+'" y="116" width="42" height="4" fill="#5E3428"/>'}).join('')+
+ '<rect x="-10" y="150" width="420" height="68" fill="#3A2822"/><rect x="40" y="160" width="140" height="58" fill="#5C3D30"/><rect x="230" y="160" width="130" height="58" fill="#5C3D30"/>'+
+ '<path d="M-10 128h420l-14 34H4z" fill="#00875C"/>'+[0,1,2,3,4,5,6,7,8,9].map(function(i){return '<path d="M'+(-10+i*42+21)+' 128h21l-1.4 34h-21z" fill="#BFF2DC"/>'}).join('')+
+ '<path d="M4 162q10.5 10 21 0t21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0 21 0" fill="#00875C"/>'+
+ '<rect y="218" width="400" height="82" fill="url(#cpG)"/><path d="M0 238h400M0 266h400" stroke="#B39472" stroke-width="2"/>'+
+ tbl(90,248)+tbl(230,256)+tbl(340,244)+
+ '<rect x="6" y="196" width="26" height="30" rx="4" fill="#9A5A3E"/><circle cx="19" cy="186" r="18" fill="#2E6B4F"/><circle cx="30" cy="178" r="11" fill="#3F8F65"/>'+
+ '</svg>'}
+function tbl(x,y){return '<rect x="'+(x-46)+'" y="'+(y-26)+'" width="12" height="20" rx="3" fill="#1F9C6D"/><rect x="'+(x-48)+'" y="'+(y-8)+'" width="18" height="5" rx="2" fill="#1F9C6D"/><path d="M'+(x-46)+' '+(y-3)+'v20M'+(x-32)+' '+(y-3)+'v20" stroke="#17714F" stroke-width="3"/>'+
+ '<rect x="'+(x+34)+'" y="'+(y-26)+'" width="12" height="20" rx="3" fill="#1F9C6D"/><rect x="'+(x+30)+'" y="'+(y-8)+'" width="18" height="5" rx="2" fill="#1F9C6D"/><path d="M'+(x+32)+' '+(y-3)+'v20M'+(x+46)+' '+(y-3)+'v20" stroke="#17714F" stroke-width="3"/>'+
+ '<ellipse cx="'+x+'" cy="'+(y-14)+'" rx="28" ry="7" fill="#F2F5F7"/><path d="M'+x+' '+(y-8)+'v26" stroke="#5B6472" stroke-width="4"/><ellipse cx="'+x+'" cy="'+(y+19)+'" rx="12" ry="3" fill="#5B6472"/><rect x="'+(x-6)+'" y="'+(y-28)+'" width="10" height="12" rx="2" fill="#F2F5F7"/><path d="M'+(x+4)+' '+(y-25)+'h3v5h-3" fill="none" stroke="#F2F5F7" stroke-width="2"/>'}
+function entrance(){return '<svg viewBox="0 0 300 400" '+P+'><defs><linearGradient id="cpE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A9CBE6"/><stop offset="1" stop-color="#E1EDF5"/></linearGradient></defs>'+
+ '<rect width="300" height="400" fill="url(#cpE)"/><rect x="20" y="40" width="260" height="300" fill="#5E6B7A"/>'+
+ [0,1,2,3].map(function(r){return [0,1,2,3,4].map(function(c){return '<rect x="'+(34+c*50)+'" y="'+(54+r*44)+'" width="40" height="34" fill="'+((r+c)%3?'#8FB3CF':'#B7D0E3')+'"/>'}).join('')}).join('')+
+ '<rect x="20" y="230" width="260" height="12" fill="#3A414B"/><rect x="96" y="250" width="108" height="90" fill="#2F3742"/><rect x="104" y="258" width="44" height="82" fill="#6E93AE"/><rect x="152" y="258" width="44" height="82" fill="#6E93AE"/><path d="M143 300v14M157 300v14" stroke="#E1EDF5" stroke-width="3" stroke-linecap="round"/>'+
+ '<rect x="106" y="236" width="88" height="0" fill="#BFF2DC"/><rect x="0" y="340" width="300" height="60" fill="#B9BFC6"/><path d="M70 340h160l10 14H60zM60 354h180l10 14H50z" fill="#9AA1A9"/>'+
+ '<rect x="40" y="290" width="18" height="50" rx="4" fill="#3A414B"/><circle cx="49" cy="280" r="16" fill="#2E6B4F"/><rect x="242" y="290" width="18" height="50" rx="4" fill="#3A414B"/><circle cx="251" cy="280" r="16" fill="#2E6B4F"/>'+
+ '</svg>'}
+/* документ (снимок 4:3, лист на столе); ru=true — поверх строк перевод */
+function doc(ru){
+ var L=[['SOLICITUD DE ACCESO','ЗАЯВКА НА ПРОПУСК',46],['Nombre y apellidos','Имя и фамилия',80],['Documento (DNI / NIE)','Документ (DNI / NIE)',118],['Fecha de la visita','Дата визита',156],['Persona de contacto','Контактное лицо',194],['Acepto las normas del edificio','Принимаю правила здания',238],['Firma','Подпись',268]];
+ var s='<svg viewBox="0 0 400 300" '+P+'><defs><linearGradient id="cpW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A5A43"/><stop offset="1" stop-color="#5A4031"/></linearGradient></defs><rect width="400" height="300" fill="url(#cpW)"/>'+
+ '<path d="M0 70q200 -16 400 6M0 180q200 -12 400 4M0 260q200 -14 400 6" stroke="#6A4C39" stroke-width="3" fill="none" opacity=".6"/>'+
+ '<rect x="318" y="196" width="60" height="9" rx="4.5" fill="#1C2026" transform="rotate(-28 348 200)"/><rect x="368" y="178" width="12" height="9" rx="2" fill="#00875C" transform="rotate(-28 348 200)"/>'+
+ '<g transform="rotate(-1.5 200 150)"><rect x="92" y="12" width="216" height="280" rx="3" fill="#000" opacity=".25" transform="translate(4 5)"/><rect x="92" y="12" width="216" height="280" rx="3" fill="#F7F5F0"/>';
+ L.forEach(function(l,i){var y=l[2];var t=ru?l[1]:l[0];
+  if(i===0){s+=ru?'<rect x="106" y="'+(y-15)+'" width="188" height="22" rx="5" fill="#BFF2DC"/><text x="200" y="'+y+'" text-anchor="middle" font-family="Inter" font-weight="800" font-size="14" fill="#0E1116">'+t+'</text>':'<text x="200" y="'+y+'" text-anchor="middle" font-family="Inter" font-weight="800" font-size="14" fill="#1C2026" letter-spacing=".4">'+t+'</text><rect x="166" y="'+(y+7)+'" width="68" height="2" fill="#00875C"/>';return}
+  if(i===5){s+='<rect x="106" y="'+(y-10)+'" width="12" height="12" rx="2" fill="none" stroke="#5B6472" stroke-width="1.5"/><path d="M108.5 '+(y-4)+'l3 3 5-6" stroke="#1F4FA0" stroke-width="1.8" fill="none" stroke-linecap="round"/>';}
+  var x=i===5?124:106;
+  if(ru){s+='<rect x="'+(x-3)+'" y="'+(y-11)+'" width="'+(t.length*6.2+8)+'" height="15" rx="4" fill="#BFF2DC"/>';}
+  s+='<text x="'+x+'" y="'+y+'" font-family="Inter" font-weight="'+(ru?600:500)+'" font-size="'+(ru?10.5:11)+'" fill="'+(ru?'#0E1116':'#3A414B')+'">'+t+'</text>';
+  if(i>0&&i<5)s+='<rect x="106" y="'+(y+6)+'" width="188" height="18" rx="3" fill="none" stroke="#C9CED4" stroke-width="1.2"/>';
+  if(i===6)s+='<path d="M140 '+(y+2)+'h150" stroke="#C9CED4" stroke-width="1.2"/>';
+ });
+ if(!ru)s+='<path d="M112 98c10-6 16 4 24-2s12-4 20 0" stroke="#1F4FA0" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
+ return s+'</g></svg>'}
+function doc2(){return '<svg viewBox="0 0 300 400" '+P+'><rect width="300" height="400" fill="#664A38"/><g transform="rotate(1.5 150 200)"><rect x="28" y="22" width="244" height="358" rx="3" fill="#F7F5F0"/><rect x="46" y="44" width="150" height="12" rx="2" fill="#3A414B"/>'+[0,1,2,3,4,5,6,7,8,9,10,11,12,13].map(function(i){return '<rect x="'+(i%5?58:46)+'" y="'+(76+i*20)+'" width="'+(i%5?(150+(i*37)%50):12)+'" height="6" rx="3" fill="#B7BCC3"/>'}).join('')+'</g></svg>'}
+function sea(){return '<svg viewBox="0 0 100 100" '+P+'><defs><linearGradient id="cpSe" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8A08C"/><stop offset="1" stop-color="#F6D3B4"/></linearGradient></defs><rect width="100" height="100" fill="url(#cpSe)"/><circle cx="64" cy="52" r="12" fill="#FBE7D2"/><rect y="56" width="100" height="26" fill="#3E7C9A"/><path d="M10 64h18M46 70h22M70 62h14" stroke="#7FB0C6" stroke-width="1.5"/><path d="M0 82q50 -8 100 0v18H0z" fill="#E3C9A6"/></svg>'}
+function plant(){return '<svg viewBox="0 0 100 100" '+P+'><rect width="100" height="100" fill="#E6DED1"/><rect y="76" width="100" height="24" fill="#CDBFA9"/><path d="M50 70C38 52 26 46 22 30c12 2 22 14 28 40zM50 70c4-22 10-36 24-44 0 16-10 30-24 44zM50 70c-2-20 0-34 2-48 6 12 6 30-2 48z" fill="#3F8F65"/><path d="M50 70C42 56 36 52 30 44" stroke="#2E6B4F" stroke-width="1.5" fill="none"/><path d="M36 68h28l-4 22H40z" fill="#C77857"/></svg>'}
+function night(){return '<svg viewBox="0 0 100 100" '+P+'><rect width="100" height="100" fill="#1B2433"/><rect x="4" y="34" width="28" height="66" fill="#2A3446"/><rect x="36" y="20" width="30" height="80" fill="#323D52"/><rect x="70" y="42" width="28" height="58" fill="#2A3446"/>'+[[10,42],[20,52],[10,62],[42,28],[54,38],[42,58],[54,68],[76,50],[86,60],[76,76]].map(function(p){return '<rect x="'+p[0]+'" y="'+p[1]+'" width="6" height="6" fill="#E9CF9C"/>'}).join('')+'<circle cx="80" cy="16" r="5" fill="#DDE3EA"/></svg>'}
+function cup(){return '<svg viewBox="0 0 100 100" '+P+'><rect width="100" height="100" fill="#CBB59A"/><path d="M0 70h100" stroke="#B9A285" stroke-width="2"/><ellipse cx="50" cy="60" rx="30" ry="12" fill="#F2F5F7"/><ellipse cx="50" cy="60" rx="20" ry="7" fill="#DDE1E6"/><path d="M34 40h32l-3 20H37z" fill="#F7F7F5"/><ellipse cx="50" cy="40" rx="16" ry="5" fill="#6B4430"/><path d="M66 44q8 0 7 7t-8 6" fill="none" stroke="#F7F7F5" stroke-width="3"/></svg>'}
+function hills(){return '<svg viewBox="0 0 100 100" '+P+'><rect width="100" height="100" fill="#BFD8E6"/><path d="M0 70L28 34l18 22 16-30 38 44v30H0z" fill="#6E8CA3"/><path d="M56 38l6-12 8 9-6 2-4-3z" fill="#F2F5F7"/><path d="M0 80q30-18 60-6t40 -4v30H0z" fill="#4E7A62"/></svg>'}
+function ph(svg,ratio,inner){return '<span class="chat-photo-img '+ratio+'">'+svg+(inner||'')+'</span>'}
+
+/* сообщения-фото */
+function phIn(svg,ratio,es,ru,tm,cls){return '<div class="chat-photo-m in ph '+(cls||'')+'" aria-label="Фото от Lucía">'+ph(svg,ratio)+'<div class="chat-photo-cap"><span lang="es">'+es+'</span><div class="chat-photo-t" lang="ru">'+I.tr+'<span>'+ru+'</span></div><span class="chat-photo-tm">'+tm+'</span></div></div>'}
+function phOut(body,ru,tr,tm,cls,tick){return '<div class="chat-photo-m out ph '+(cls||'')+'">'+body+'<div class="chat-photo-cap"><span>'+ru+'</span>'+tr+'<span class="chat-photo-tm">'+tm+(tick===false?'':tick||I.done)+'</span></div></div>'}
+function trOut(es){return '<div class="chat-photo-t" lang="es">'+I.tr+'<span>'+es+'</span></div>'}
+function ring(p){var C=2*Math.PI*19;return '<span class="chat-photo-ring" role="progressbar" aria-valuenow="'+Math.round(p*100)+'" aria-valuemin="0" aria-valuemax="100" aria-label="Отправка фото, '+Math.round(p*100)+'%. Нажми, чтобы отменить"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="3"/><circle cx="22" cy="22" r="19" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="'+C.toFixed(2)+'" stroke-dashoffset="'+(C*(1-p)).toFixed(2)+'" transform="rotate(-90 22 22)"/></svg><span class="x">'+I.xb+'</span></span>'}
+
+var capIn={es:'Te espero en la terraza.',ru:'Жду тебя на террасе.'};
+var capDoc={ru:'Это нужно заполнить до встречи?',es:'¿Hay que rellenar esto antes de la reunión?'};
+var capAlb={ru:'Я у входа. И вот вторая страница.',es:'Estoy en la entrada. Y aquí está la segunda página.'};
+var threadMsgs='<div class="chat-photo-msgs">'+
+  phIn(cafe(),'chat-photo-r43',capIn.es,capIn.ru,'10:04')+
+  phOut(ph(doc(false),'chat-photo-r43'),capDoc.ru,trOut(capDoc.es),'10:05','gap')+read('10:05')+
+  '</div>';
+
+var S={};
+S.thread={t:'Фото в переписке',w:'Lucía прислала фото с подписью — перевод ниже мятным. Твоё фото документа с подписью и испанским переводом.',
+ h:scr(nav()+threadMsgs+cmpMain())};
+
+var tiles=[['cam'],[entrance,1],[doc2,2],[cafe],[sea],[plant],[night],[cup],[hills]];
+S.picker={t:'Выбор фото',w:'Нажатие «+» в поле ввода: лист с последними фото, выбрано два, подпись переведут при отправке.',
+ h:scr(nav()+threadMsgs+cmpMain(),'<div class="chat-photo-dim" style="backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(9,11,14,.62)"></div><div class="chat-photo-sh chat-photo-pk"><div class="chat-photo-gr"></div>'+
+  '<div class="chat-photo-pkh"><div><h4>Фото для Lucía</h4><p>Выбрано: <b>2</b> · порядок по номерам</p></div><span class="chat-photo-x" aria-label="Закрыть" style="margin:0 -10px 0 0"><i>'+I.x+'</i></span></div>'+
+  '<div class="chat-photo-tabs" role="tablist"><span class="on" role="tab" aria-selected="true">'+I.img+'Недавние</span><span role="tab">'+I.alb+'Альбомы</span></div>'+
+  '<div class="chat-photo-pg">'+tiles.map(function(t){
+   if(t[0]==='cam')return '<span class="chat-photo-tl cam" aria-label="Снять фото">'+I.cam+'Камера</span>';
+   return '<span class="chat-photo-tl'+(t[1]?' sel':'')+'" aria-label="Фото'+(t[1]?', выбрано '+t[1]:'')+'">'+t[0]()+(t[2]?'<span class="du">'+t[2]+'</span>':'')+'<span class="ck">'+(t[1]||'')+'</span></span>'}).join('')+'</div>'+
+  '<p class="chat-photo-hint" style="margin:8px 0 0;padding:0 8px">До 10\u00A0фото, каждое до 10\u00A0МБ</p>'+
+  '<div class="chat-photo-pcm"><span class="chat-photo-f"><span class="pl">Подпись — Lucía прочитает по'+NB+'испански</span></span><span class="chat-photo-sbtn" aria-label="Отправить 2 фото">'+I.send+'<b>2</b></span></div>'+
+  '<div style="height:42px"></div></div>')};
+
+function album(a,b){return '<div class="chat-photo-alb">'+ph(entrance(),'chat-photo-r34',a)+ph(doc2(),'chat-photo-r34',b)+'</div>'}
+var prevMsgs=mo('Подхожу к офису','Estoy llegando a la oficina.','10:01')+mi('¿Ya estás? Bajo a buscarte.','Ты уже здесь? Спущусь за тобой.','10:05','gap');
+S.uploading={t:'Отправляется',w:'Два фото уходят альбомом: первое загружено, на втором кольцо прогресса. Подпись уже видна, отправку можно отменить.',
+ h:scr(nav()+'<div class="chat-photo-msgs">'+prevMsgs+
+  phOut(album('<span class="chat-photo-ok" aria-label="Загружено">'+I.check+'</span>','<span class="chat-photo-ov">'+ring(.62)+'</span>'),capAlb.ru,trOut(capAlb.es),'10:06','al gap',I.clock)+
+  '<div class="chat-photo-up"><span class="s" role="status">'+I.up+'Отправляется · 1 из 2</span><span class="chat-photo-cn" aria-label="Отменить отправку"><span>'+I.x+'Отменить</span></span></div>'+
+  '</div>'+cmpMain())};
+
+var fl='<span class="chat-photo-dimm"></span><span class="chat-photo-ov"><span class="chat-photo-al" aria-label="Не отправлено">'+I.excl+'</span></span>';
+S.failed={t:'Не отправилось',w:'Пропала сеть во время загрузки: превью приглушены со значком, «Не отправлено: нет сети» и «Повторить».',
+ h:scr(nav('<span>была в сети в 10:05</span>',true)+'<div class="chat-photo-bn" role="status">'+I.woff+'<div><b>Нет подключения к интернету</b><span>Проверь Wi'+NB+'Fi или мобильные данные</span></div></div><div class="chat-photo-msgs">'+prevMsgs+
+  phOut(album(fl,fl),capAlb.ru,'<div class="chat-photo-t">'+I.clock+'<span>Переведём после отправки</span></div>','10:06','al fl gap',false)+
+  '<div class="chat-photo-er"><span class="r">'+I.alert+'Не отправлено: нет сети</span><span class="chat-photo-rt" aria-label="Повторить отправку"><span>'+I.retry+'Повторить</span></span></div>'+
+  '</div>'+cmpMain())};
+
+function viewer(who,when,photo,orig,origLang,tr,trLang,extra,dots){return scr(
+  '<div class="chat-photo-vt"><span class="chat-photo-ib" aria-label="Закрыть"><i>'+I.x+'</i></span><div class="nm"><b>'+who+'</b><span>'+when+'</span></div><span class="chat-photo-ib" aria-label="Ещё"><i>'+I.more+'</i></span></div>'+
+  '<div class="chat-photo-vp">'+photo+(extra||'')+'</div>'+
+  '<div class="chat-photo-vc"><div class="o" lang="'+origLang+'">'+orig+'</div><div class="chat-photo-t" lang="'+trLang+'">'+I.tr+'<span>'+tr+'</span></div>'+(dots||'')+'</div>'+
+  '<div class="chat-photo-va"><span aria-label="Поделиться">'+I.share+'Поделиться</span><span aria-label="Сохранить в фото">'+I.save+'Сохранить</span><span aria-label="Ответить на фото">'+I.reply+'Ответить</span></div>',
+  '','chat-photo-vw')}
+S.viewer={t:'Просмотр',w:'Нажатие на фото: весь экран, сверху имя и время, снизу подпись в оригинале и переводе, три действия.',
+ h:viewer('Lucía','Сегодня, 10:04',ph(cafe(),'chat-photo-r43'),capIn.es,'es',capIn.ru,'ru')};
+S['photo-text']={t:'Текст на фото',w:'Новое: в просмотре фото с текстом переключатель накладывает перевод поверх строк документа.',
+ h:viewer('Ты','Сегодня, 10:05',ph(doc(true),'chat-photo-r43'),capDoc.ru,'ru',capDoc.es,'es',
+  '<span class="chat-photo-tog on" role="switch" aria-checked="true" aria-label="Перевод текста на фото"><span>'+I.txt+'Текст на фото по'+NB+'русски<i class="sw"><i></i></i></span></span>')};
+
+window.CHAT_PHOTO_S=S;var order=['thread','picker','uploading','failed','viewer','photo-text'];
+var grid=document.getElementById('chat-photo-grid');
+grid.innerHTML=order.map(function(k){return '<div class="chat-photo-card"><div class="pf" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+S[k].t+' <code>'+k+'</code></h3><p>'+S[k].w+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=S[p.dataset.state].h});
+
+function hx(h){return [1,3,5].map(function(i){return parseInt(h.substr(i,2),16)})}
+function L(h){var c=hx(h).map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+function mix(a,al,b){var A=hx(a),B=hx(b);return '#'+A.map(function(v,i){return ('0'+Math.round(v*al+B[i]*(1-al)).toString(16)).slice(-2)}).join('').toUpperCase()}
+var o72=mix('#0E1116',.72,'#FFFFFF'),o86=mix('#0E1116',.86,'#FFFFFF');
+var rows=[['#F2F5F7','#242B34','Подпись во входящем'],['#BFF2DC','#242B34','Перевод подписи (Mint) во входящем'],['#9AA4B2','#242B34','Время во входящем'],['#FFFFFF','#00875C','Подпись, перевод и время в исходящем'],['#9AA4B2','#0E1116','«Прочитано», «Отправляется», имя/время в просмотре'],['#BFF2DC','#0E1116','Перевод подписи в просмотре'],['#F2F5F7','#0E1116','Подпись и действия в просмотре'],['#9AA4B2','#1C2026','Плейсхолдер подписи, «Выбрано» в листе'],['#2BC48A','#1C2026','«2» в «Выбрано: 2»'],['#0E1116','#2BC48A','Номер выбора, счётчик, «Повторить»'],['#0E1116','#F2F5F7','Активная вкладка «Недавние»'],['#F2F5F7','#242B34','Вкладки, «Отменить»'],['#FFFFFF',o72,'Крестик в кольце на подложке 72 % (над белым)'],['#F2F5F7',o86,'Переключатель «Текст на фото» на подложке 86 % (над белым)'],['#FF6B5E','#0E1116','«Не отправлено: нет сети»'],['#FF6B5E','#3C2A2E','Значок «!» на приглушённом превью'],['#E4C9CC','#3C2A2E','Пояснение в баннере ошибки'],['#F2F5F7','#173A2E','Подпись неотправленного альбома'],['#C9D1DA','#173A2E','«Переведём после отправки»'],['#0E1116','#BFF2DC','Перевод поверх строк документа']];
+document.getElementById('chat-photo-ct').innerHTML=rows.map(function(r){return '<tr><td><span class="chat-photo-sw" style="background:'+r[0]+'"></span><span class="chat-photo-sw" style="background:'+r[1]+'"></span>'+r[2]+' <code>'+r[0]+'</code> на <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_PHOTO_MIN=Math.min.apply(null,rows.map(function(r){return cr(r[0],r[1])}));
+})();
+</script>
+</body>
+</html>
