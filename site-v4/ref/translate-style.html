@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Translate · языки, стили, числа</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0B0E12;color:#F2F5F7}
+body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
+.translate-style-w{max-width:1200px;margin:0 auto}
+.translate-style-langs{display:flex;gap:8px;margin-bottom:28px}
+.translate-style-langs a{min-width:56px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;padding:0 16px;font:700 15px/1 Inter,sans-serif;color:#F2F5F7;background:#1C2026;box-shadow:inset 0 0 0 1px #2F3742;text-decoration:none}
+.translate-style-langs a[aria-current="true"]{background:#2BC48A;color:#0E1116;box-shadow:none}
+.translate-style-w h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:12px}
+.translate-style-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.translate-style-lead{color:#9AA4B2;max-width:820px}
+.translate-style-tag{display:inline-block;margin-bottom:12px;font:600 13px/1 Inter,sans-serif;color:#0E1116;background:#BFF2DC;border-radius:8px;padding:6px 10px}
+.translate-style-hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;margin-top:40px;padding:48px 40px;border-radius:32px;background:#12161C;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-style-hero figure{margin:0}
+.translate-style-hero-t{flex:1 1 300px;max-width:520px}
+.translate-style-hero-t h3{font:900 24px/1.25 Nunito,sans-serif;margin-bottom:12px}
+.translate-style-hero-t p{color:#C3CBD5;margin-bottom:12px}
+.translate-style-w ul{padding-left:20px;color:#C3CBD5;font-size:15px;max-width:860px}
+.translate-style-w li{margin:8px 0}
+.translate-style-w li b{color:#F2F5F7}
+.translate-style-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.translate-style-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(284px,1fr));gap:48px 24px;margin-top:32px}
+.translate-style-grid figure{margin:0;display:flex;flex-direction:column;align-items:center}
+.translate-style-grid figcaption{margin-top:16px;width:272px;font-size:14px;line-height:1.45;color:#9AA4B2}
+.translate-style-grid figcaption b{display:block;color:#F2F5F7;font:900 17px/1.3 Nunito,sans-serif;margin-bottom:4px}
+.translate-style-grid figcaption code{font-size:12px}
+.translate-style-tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
+.translate-style-tbl th,.translate-style-tbl td{text-align:left;vertical-align:top;border-bottom:1px solid #2F3742;padding:10px 12px 10px 0}
+.translate-style-tbl th{color:#9AA4B2;font-weight:600}
+.translate-style-tw{overflow-x:auto}
+.translate-style-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:0 0 0 1px #3A414B}
+@media (max-width:760px){.translate-style-w h1{font-size:30px}.translate-style-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-style-hero .pf{--s:.8!important}}
+@media (max-width:480px){.translate-style-hero .pf{--s:.7!important}}
+
+/* ===== экран 430×932 ===== */
+.translate-style-scr{--me:#2BC48A;--es:#BFF2DC;--q:#FFC247;--qbg:#3A3426}
+.translate-style-top{flex:none;display:flex;align-items:center;gap:8px;padding:8px 16px;position:relative}
+.translate-style-cb{width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.translate-style-pair{flex:1;min-width:0;display:flex;justify-content:center}
+.translate-style-pair>span{height:48px;border-radius:24px;background:var(--sf2);display:inline-flex;align-items:center;gap:8px;padding:0 16px;font:900 19px/1 Nunito,sans-serif;letter-spacing:.02em}
+.translate-style-pair.translate-style-up{z-index:3}
+.translate-style-pair.translate-style-up>span{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--me)}
+.translate-style-swp{color:var(--sec);display:flex}
+.translate-style-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--me)}
+.translate-style-dot.translate-style-es{background:var(--es)}
+.translate-style-main{flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:12px 16px 0;position:relative}
+.translate-style-bot{flex:none;display:flex;flex-direction:column;gap:12px;padding:12px 16px 4px}
+.translate-style-btns{display:flex;gap:12px}
+.translate-style-pb{flex:1;min-width:0;height:80px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:10px;color:#0E1116}
+.translate-style-pb svg{flex:none;width:26px;height:26px}
+.translate-style-pb b{display:block;font:900 21px/24px Nunito,sans-serif;white-space:nowrap}
+.translate-style-pb small{display:block;font:600 13px/1.3 Inter,sans-serif;margin-top:2px}
+.translate-style-pb.translate-style-me{background:var(--me)}
+.translate-style-pb.translate-style-es{background:var(--es)}
+.translate-style-pb.translate-style-next{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--es),0 0 36px rgba(191,242,220,.28)}
+.translate-style-hint{display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center}
+.translate-style-hint svg{width:16px;height:16px;flex:none}
+.translate-style-lbl{font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;display:flex;align-items:center;gap:8px;min-width:0}
+.translate-style-lbl .translate-style-par{width:18px;height:18px;flex:none;color:var(--me);display:flex}
+.translate-style-lbl .translate-style-par svg{width:18px;height:18px}
+.translate-style-row{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:20px}
+
+/* «Что понял Parrlo» */
+.translate-style-said{position:relative;background:var(--sf);border-radius:24px;padding:16px 20px 16px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-style-said p{font:500 19px/28px Inter,sans-serif;margin-top:8px;padding-right:28px}
+.translate-style-ed{position:absolute;right:6px;top:4px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec)}
+.translate-style-ed svg{width:20px;height:20px}
+/* число: пунктирная рамка + подложка — видно без цвета */
+.translate-style-n{white-space:nowrap;padding:1px 5px;margin:0 1px;border-radius:7px;font-weight:700;background:#2F3742;box-shadow:inset 0 0 0 1.5px transparent;outline:1.5px dashed #9AA4B2;outline-offset:-1.5px}
+.translate-style-card .translate-style-n{font-weight:inherit;background:#005E40;outline-color:rgba(255,255,255,.85);padding:0 6px}
+.translate-style-n.translate-style-on{outline:2px solid var(--q);background:var(--qbg);color:var(--q)}
+
+/* переключатель стиля */
+.translate-style-stl{display:flex;flex-direction:column;gap:8px}
+.translate-style-seg{display:flex;gap:4px;padding:4px;border-radius:28px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line)}
+.translate-style-seg span{flex:1;min-width:0;height:48px;border-radius:24px;display:flex;align-items:center;justify-content:center;gap:6px;font:600 15px/1 Inter,sans-serif;color:var(--tx);white-space:nowrap}
+.translate-style-seg span svg{width:16px;height:16px;flex:none}
+.translate-style-seg span[aria-checked="true"]{background:#F2F5F7;color:#0E1116;font-weight:700}
+.translate-style-desc{font:500 14px/20px Inter,sans-serif;color:var(--sec);padding:0 8px;text-align:center}
+.translate-style-o{min-height:68px!important;padding:10px 12px 10px 18px!important}
+.translate-style-desc b{color:var(--tx);font-weight:600}
+
+/* перевод */
+.translate-style-card{background:var(--deep);border-radius:28px;padding:20px 24px;color:#fff}
+.translate-style-card .translate-style-lbl{color:#FFFFFF}
+.translate-style-card p{font:900 25px/33px Nunito,sans-serif;margin:12px 0 20px}
+.translate-style-acts{display:flex;gap:8px}
+.translate-style-card.translate-style-c p{font-size:24px;line-height:31px;margin:12px 0 16px}
+.translate-style-main.translate-style-tight{gap:12px}
+.translate-style-act{height:48px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 14px;font:600 16px Inter,sans-serif;background:#FFFFFF;color:#0E1116}
+.translate-style-act.translate-style-ghost{background:#005E40;color:#fff}
+.translate-style-act svg{width:20px;height:20px}
+
+/* другие стили */
+.translate-style-oth{background:var(--sf);border-radius:20px;box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.translate-style-o{display:flex;align-items:center;gap:12px;min-height:72px;padding:12px 12px 12px 18px}
+.translate-style-o+.translate-style-o{border-top:1px solid var(--line)}
+.translate-style-o>div{flex:1;min-width:0}
+.translate-style-o b{display:block;font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em}
+.translate-style-o span.translate-style-ot{display:block;font:500 15px/21px Inter,sans-serif;color:var(--tx);margin-top:4px}
+.translate-style-chev{flex:none;width:20px;color:var(--sec);display:flex}
+.translate-style-chev svg{width:20px;height:20px}
+
+/* пометка «Проверь числа» — иконка + текст + счётчик + стрелка */
+.translate-style-chk{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 12px 10px 14px;border-radius:20px;background:var(--qbg);box-shadow:inset 0 0 0 1.5px var(--q)}
+.translate-style-chk>i{flex:none;width:40px;height:40px;border-radius:12px;background:var(--q);color:#0E1116;display:flex;align-items:center;justify-content:center}
+.translate-style-chk>i svg{width:22px;height:22px}
+.translate-style-chk>div{flex:1;min-width:0}
+.translate-style-chk b{display:block;font:700 16px/21px Inter,sans-serif;color:var(--q)}
+.translate-style-chk span{display:block;font:400 14px/19px Inter,sans-serif;color:#F2F5F7}
+.translate-style-chk .translate-style-chev{color:var(--q)}
+
+/* затемнение и лист */
+.translate-style-dim{position:absolute;inset:0;background:rgba(5,7,10,.66);z-index:2}
+.translate-style-sheet{position:absolute;left:0;right:0;bottom:0;z-index:4;background:#1C2026;border-radius:32px 32px 0 0;box-shadow:inset 0 1px 0 #2F3742,0 -20px 50px rgba(0,0,0,.45);display:flex;flex-direction:column;padding:8px 16px 0}
+.translate-style-grab{width:40px;height:5px;border-radius:3px;background:#3A414B;align-self:center;margin-bottom:8px}
+.translate-style-sh{display:flex;align-items:flex-start;gap:12px;padding:4px 4px 12px}
+.translate-style-sh>div{flex:1;min-width:0}
+.translate-style-sh h3{font:900 24px/30px Nunito,sans-serif}
+.translate-style-sub{display:block;font:500 15px/20px Inter,sans-serif;color:var(--sec);margin-top:2px}
+.translate-style-x{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.translate-style-x svg{width:20px;height:20px}
+.translate-style-sl{display:flex;align-items:center;gap:8px;font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;padding:8px 4px}
+.translate-style-list{background:var(--sf2);border-radius:20px;overflow:hidden}
+
+/* языки */
+.translate-style-lg{display:flex;align-items:center;gap:14px;min-height:60px;padding:8px 16px;position:relative}
+.translate-style-lg+.translate-style-lg{border-top:1px solid var(--line)}
+.translate-style-lg>div{flex:1;min-width:0}
+.translate-style-lg b{display:block;font:900 20px/24px Nunito,sans-serif}
+.translate-style-lg small{display:block;font:400 14px/18px Inter,sans-serif;color:var(--sec)}
+.translate-style-lg .translate-style-cd{flex:none;width:36px;font:700 13px/1 Inter,sans-serif;color:var(--sec);letter-spacing:.04em}
+.translate-style-rd{flex:none;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 2px #5B6472;display:flex;align-items:center;justify-content:center;color:#0E1116}
+.translate-style-rd svg{width:18px;height:18px}
+.translate-style-lg.translate-style-sel{box-shadow:inset 0 0 0 2px var(--me);border-radius:20px}
+.translate-style-lg.translate-style-sel .translate-style-rd{background:var(--me);box-shadow:none}
+.translate-style-lg.translate-style-sel.translate-style-p{box-shadow:inset 0 0 0 2px var(--es)}
+.translate-style-lg.translate-style-sel.translate-style-p .translate-style-rd{background:var(--es)}
+.translate-style-lg.translate-style-sel+.translate-style-lg,.translate-style-lg+.translate-style-lg.translate-style-sel{border-top-color:transparent}
+.translate-style-lg.translate-style-off b{color:var(--sec)}
+.translate-style-lg.translate-style-off .translate-style-rd{box-shadow:inset 0 0 0 2px #3A414B}
+.translate-style-mine{flex:none;height:28px;display:inline-flex;align-items:center;gap:6px;padding:0 10px;border-radius:14px;background:#1E3734;color:var(--me);font:600 13px Inter,sans-serif}
+.translate-style-mine i{width:8px;height:8px;border-radius:50%;background:var(--me)}
+.translate-style-swap{align-self:center;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px 0 14px;margin:8px 0 0;border-radius:22px;background:var(--sf2);box-shadow:inset 0 0 0 1px #3A414B;font:600 15px Inter,sans-serif;color:var(--tx)}
+.translate-style-swap svg{width:20px;height:20px;transform:rotate(90deg)}
+.translate-style-done{height:56px;border-radius:28px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;font:900 20px Nunito,sans-serif;margin-top:16px}
+.translate-style-foot{display:flex;gap:8px;align-items:flex-start;font:400 13px/18px Inter,sans-serif;color:var(--sec);padding:12px 4px 0}
+.translate-style-foot svg{width:16px;height:16px;flex:none;margin-top:1px}
+
+/* сверка чисел */
+.translate-style-cols{display:grid;grid-template-columns:1fr 20px 1fr;gap:8px;padding:4px 16px 8px;font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em}
+.translate-style-nr{padding:12px 16px 14px}
+.translate-style-nr+.translate-style-nr{border-top:1px solid var(--line)}
+.translate-style-kind{display:flex;align-items:center;gap:8px;font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em}
+.translate-style-kind svg{width:16px;height:16px}
+.translate-style-cmp{display:grid;grid-template-columns:1fr 20px 1fr;gap:8px;align-items:center;margin-top:8px}
+.translate-style-cmp b{font:900 20px/24px Nunito,sans-serif;white-space:nowrap}
+.translate-style-cmp b.translate-style-to{color:var(--es)}
+.translate-style-cmp i{display:flex;color:var(--sec)}
+.translate-style-cmp i svg{width:20px;height:20px}
+.translate-style-say{display:flex;align-items:center;gap:8px;margin-top:6px;font:400 14px/19px Inter,sans-serif;color:var(--sec)}
+.translate-style-say svg{width:16px;height:16px;flex:none}
+.translate-style-say em{font-style:normal;color:var(--tx)}
+.translate-style-vb{display:flex;gap:12px;margin-top:16px}
+.translate-style-sec{flex:1;height:56px;border-radius:28px;background:var(--sf2);box-shadow:inset 0 0 0 1px #3A414B;color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;font:600 16px Inter,sans-serif}
+.translate-style-sec svg{width:18px;height:18px}
+.translate-style-pri{flex:1.3;height:56px;border-radius:28px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;gap:8px;font:900 20px Nunito,sans-serif}
+.translate-style-pri svg{width:20px;height:20px}
+</style>
+</head>
+<body>
+<div class="translate-style-w">
+<nav class="translate-style-langs" id="translate-style-langs" aria-label="Language"></nav>
+<span class="translate-style-tag" id="translate-style-tag"></span>
+<h1 id="translate-style-h1"></h1>
+<p class="translate-style-lead" id="translate-style-lead"></p>
+
+<section class="translate-style-hero">
+ <figure id="translate-style-hero-ph"></figure>
+ <div class="translate-style-hero-t" id="translate-style-hero-t"></div>
+</section>
+
+<h2 id="translate-style-h-st"></h2>
+<p class="translate-style-lead" id="translate-style-st-lead"></p>
+<div class="translate-style-grid" id="translate-style-grid"></div>
+
+<h2 id="translate-style-h-dec"></h2>
+<ul id="translate-style-dec"></ul>
+
+<h2 id="translate-style-h-tok"></h2>
+<div class="translate-style-tw"><table class="translate-style-tbl" id="translate-style-ctr"></table></div>
+<ul id="translate-style-tok"></ul>
+
+<h2 id="translate-style-h-na"></h2>
+<ul id="translate-style-na"></ul>
+</div>
+
+<script src="../screens.js"></script>
+<script>
+(function(){
+const P='translate-style-';
+const $=id=>document.getElementById(P+id);
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const S=window.SITE_ICONS;
+const I={
+ mic:S.mic.replace('class="ic"','class="ic" style="width:26px;height:26px"'),
+ kbd:S.kbd, more:S.more, spark:S.spark,
+ back:`<svg class="ic" viewBox="0 0 24 24" ${SW}><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>`,
+ swap:`<svg viewBox="0 0 24 24" ${SW} style="width:20px;height:20px"><path d="M4 8h14M14.5 4.5L18 8l-3.5 3.5"/><path d="M20 16H6M9.5 12.5L6 16l3.5 3.5"/></svg>`,
+ spk:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+ rot:`<svg viewBox="0 0 24 24" ${SW}><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 6h3"/><path d="M3 10.5a8 8 0 0 0 1.7 6.3M2.6 14.6l2 2.4 2.6-1.6"/></svg>`,
+ pencil:`<svg viewBox="0 0 24 24" ${SW}><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>`,
+ ok:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ okt:`<svg viewBox="0 0 24 24" ${SW}><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ info:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/></svg>`,
+ x:`<svg viewBox="0 0 24 24" ${SW}><path d="M6 6l12 12M18 6L6 18"/></svg>`,
+ chev:`<svg viewBox="0 0 24 24" ${SW}><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg>`,
+ arr:`<svg viewBox="0 0 24 24" ${SW}><path d="M4 12h15M13.5 6.5L19 12l-5.5 5.5"/></svg>`,
+ down:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 5v13M6.5 13L12 18.5 17.5 13"/></svg>`,
+ num:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.2"><path d="M10 4L8 20M16 4l-2 16M4.5 9h15M4 15h15"/></svg>`,
+ cal:`<svg viewBox="0 0 24 24" ${SW}><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>`,
+ clock:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 7v5.2l3.4 2"/></svg>`,
+ cash:`<svg viewBox="0 0 24 24" ${SW}><rect x="2.5" y="6" width="19" height="12" rx="3"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg>`,
+};
+
+/* ===== словарь: экран + страница ===== */
+/* {…} — число в фразе (пунктирная рамка) */
+const T={
+ru:{
+ code:['RU','ES'], lc:'ru', tl:'es', meN:'Русский', ptN:'Español',
+ said:'Что понял Parrlo', edit:'Изменить фразу', forPt:'для собеседника',
+ me:['Я говорю','по‑русски'], pt:['Yo hablo','en español'],
+ play:'Озвучить', show:'Показать', next:'Теперь очередь собеседника',
+ /* стили — названия из приложения (GAP Translate №16, copy-ru/translate.md §5) */
+ stLbl:'Стиль перевода', styles:['Как сказал','Литературно','Официально'],
+ stDesc:['Для соседа','Когда хочется красиво','Для регистратуры, банка и администрации'],
+ stPh:'Слушай, в четверг не получится. Давай перенесём на понедельник?',
+ stTr:['Oye, el jueves no puedo. ¿Lo pasamos al lunes?','El jueves no me viene bien. ¿Te parece si lo dejamos para el lunes?','Lamentablemente, el jueves no me será posible. ¿Podríamos pasar la cita al lunes?'],
+ stOth:'В других стилях',
+ /* числа */
+ nPh:'Можно прийти посмотреть квартиру {14 марта} в {9:30}? Залог — {500 евро}, верно?',
+ nTr:'¿Puedo ir a ver el piso el {14 de marzo} a las {9:30}? La fianza es de {500 €}, ¿verdad?',
+ chkT:'Проверь числа', chkS2:'3 числа: дата, время, сумма. Коснись, чтобы сверить',
+ nT:'Сверь числа', nSub:'Как они звучат в оригинале и в переводе', cols:['В оригинале','В переводе'],
+ kinds:['Дата','Время','Сумма'], from:['14 марта','9:30','500 евро'], to:['14 de marzo','9:30','500 €'],
+ sayL:'Вслух:', say:['el catorce de marzo','a las nueve y media','quinientos euros'],
+ fix:'Поправить', allOk:'Всё верно', nFoot:'Суммы, даты, время и дозировки Parrlo подсвечивает. Если число не то — поправь фразу, перевод обновится.',
+ /* языки */
+ lT:'Языки разговора', lSub:'Любая пара из трёх языков, в обе стороны', lMe:'Я говорю', lPt:'Собеседник говорит',
+ names:[['Русский',''],['Español','испанский'],['English','английский']], meI:0, ptI:1, mine:'Твой язык', swap:'Поменять местами', done:'Готово',
+ close:'Закрыть', aBack:'Назад', aKbd:'Ввести текстом', aMore:'Ещё',
+ page:{tag:'Эталон · пачка 2 · черновик текста',h1:'Translate · языки, стили, числа',
+  lead:'T‑09, T‑11 и T‑12 карты сайта: выбор пары из трёх языков, один смысл в трёх стилях и пометка «проверь числа» со сверкой. Всё есть в сборке; экран показывает, как это должно выглядеть. Только тёмная тема, интерфейс на «ты». Экран 430×932 pt, PNG @3× — 1290×2796.',
+  cap:['Translate · стили','Только тёмная тема. Тексты — черновик.'],
+  heroH:'Для друга, для врача, для банка.',
+  heroP:['Главный кадр: одна фраза, переключатель из трёх стилей прямо над переводом и превью двух других вариантов. Выбран «Официально» — перевод для регистратуры. Касание превью меняет стиль, и крупный перевод обновляется.','Названия стилей — как в приложении: «Как сказал», «Литературно», «Официально». Под переключателем — одна строка, для кого этот стиль (из текстов сайта).'],
+  hSt:'Состояния',stLead:'Четыре состояния. Цвет = сторона: зелёный #2BC48A — ты и твой язык, мятный #BFF2DC — собеседник. Жёлтый — только пометка «Проверь числа». Масштаб 0,6.',
+  st:{languages:['Языки','Касание пары «RU ⇄ ES» вверху. Лист с тремя языками для каждой стороны, «Поменять местами» и «Готово». Язык собеседника не может совпасть с твоим.'],
+      styles:['Стили','Переключатель «Как сказал / Литературно / Официально» над переводом. Перевод меняется по стилю, два других варианта видны ниже.'],
+      numbers:['Проверь числа','Во фразе есть дата, время и сумма. Числа обведены пунктиром в фразе и в переводе, под переводом — пометка с иконкой и текстом.'],
+      'numbers-detail':['Сверка чисел','Касание пометки. Лист «в оригинале → в переводе» для каждого числа и как оно прозвучит вслух. «Всё верно» или «Поправить».']},
+  hDec:'Решения',
+  dec:['<b>Стиль — прямо над переводом.</b> В сборке стиль меняется в Настройках → Стиль. Здесь переключатель в самом разговоре; выбор запоминается для следующих фраз, а в настройках остаётся стиль по умолчанию.',
+   '<b>Превью двух других стилей.</b> Под крупным переводом — короткий список с остальными вариантами той же фразы: выбирают, видя результат, а не по названию.',
+   '<b>Одна строка «для кого».</b> Под переключателем — описание стиля из текстов сайта: «Для соседа», «Когда хочется красиво», «Для регистратуры, банка и администрации».',
+   '<b>Пометка не только цветом.</b> Числа обведены пунктирной рамкой в фразе и в переводе; пометка под переводом — с иконкой «#», текстом «Проверь числа», перечнем и стрелкой. Это единственный жёлтый элемент экрана.',
+   '<b>Сверка «в оригинале → в переводе».</b> Сверх сборки: лист с каждой датой, временем и суммой и строкой «Вслух» — как число прозвучит у собеседника. Пятьсот не спутать с пятнадцатью.',
+   '<b>Языки без флагов.</b> Язык ≠ страна: строка — название на самом языке и подпись на языке интерфейса. Твой язык в списке собеседника помечен «Твой язык» и не выбирается. Других языков в списке нет.',
+   '<b>Значок блока — попугай Parrlo</b> (монохромный знак из <code>screens.js</code>, ключ <code>spark</code>), никаких «искр».'],
+  hTok:'Токены и контраст',
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code> — тёмная тема v2.3.',
+   'Ты: <code>#2BC48A</code>, метка «Твой язык» на <code>#1E3734</code>. Собеседник: <code>#BFF2DC</code>. Перевод — <code>#00875C</code>, числа в переводе и «Показать» — <code>#005E40</code>. Пометка «Проверь числа»: <code>#FFC247</code> на <code>#3A3426</code>.',
+   'Nunito 900 — перевод (25 pt), языки, числа в сверке, кнопки; Inter 400–700 — интерфейс. Сетка 4 pt, поля 16, блоки 20–24. Зоны нажатия ≥ 44 pt: сегменты 48, строки языков 60, превью 68, пометка 64, кнопки 56–80.'],
+  thP:'Пара (текст / фон)',thW:'Где',thC:'Контраст',thN:'Норма',low:'ниже нормы',
+  hNa:'Не утверждено',
+  na:['Все тексты — черновик, включая испанский и английский интерфейс. Демо‑фразы для стилей и чисел придуманы: в <code>copy-ru/translate.md</code> их нет.',
+   'Инвентаря <code>docs/showcase/inventory/</code> в parrlo-mockups нет; названия стилей взяты из <code>docs/site/gap/translate.md</code> (№16) и <code>copy-ru/translate.md</code> (§5).',
+   'Испанские и английские названия стилей — предложение: «Tal cual / Literario / Formal», «As said / Literary / Formal».',
+   '«Как сказал» — глагол мужского рода, а правило — без рода пользователя. Предлагаю «Как есть»; решение за Муратом. Пока оставлено название из приложения.',
+   'Переключатель стиля в разговоре, превью других стилей и лист сверки со строкой «Вслух» — сверх текущей сборки.',
+   'Цвета <code>#005E40</code>, <code>#1E3734</code>, <code>#3A3426</code>, <code>#C3CBD5</code> — производные, в токенах v2.3 их нет.'],
+  ctr:['основной текст','подписи на фоне','подписи на поверхности','подписи в списках листа','выбранный сегмент стиля','перевод и подписи на карточке','числа в переводе, «Показать»','пометка «Проверь числа»','текст пометки','«Я говорю», «Готово», «Всё верно»','«Yo hablo», язык собеседника','«Твой язык»','«Озвучить»']}
+},
+es:{
+ code:['ES','RU'], lc:'es', tl:'ru', meN:'Español', ptN:'Русский',
+ said:'Lo que entendió Parrlo', edit:'Editar la frase', forPt:'para la otra persona',
+ me:['Hablo yo','en español'], pt:['Я говорю','по‑русски'],
+ play:'Escuchar', show:'Mostrar', next:'Ahora le toca a la otra persona',
+ stLbl:'Estilo de traducción', styles:['Tal cual','Literario','Formal'],
+ stDesc:['Para el vecino','Cuando quieres que suene bonito','Para la recepción, el banco y la administración'],
+ stPh:'Oye, el jueves no me va bien. ¿Lo pasamos al lunes?',
+ stTr:['Слушай, в четверг не выйдет. Давай перенесём на понедельник?','В четверг мне неудобно. Может, перенесём на понедельник?','К сожалению, в четверг я не смогу. Можно ли перенести встречу на понедельник?'],
+ stOth:'En otros estilos',
+ nPh:'¿Puedo ir a ver el piso el {14 de marzo} a las {9:30}? La fianza es de {500 €}, ¿verdad?',
+ nTr:'Можно прийти посмотреть квартиру {14 марта} в {9:30}? Залог — {500 евро}, верно?',
+ chkT:'Revisa los números', chkS2:'3 datos: fecha, hora e importe. Toca para compararlos',
+ nT:'Compara los números', nSub:'Cómo quedan en el original y en la traducción', cols:['En el original','En la traducción'],
+ kinds:['Fecha','Hora','Importe'], from:['14 de marzo','9:30','500 €'], to:['14 марта','9:30','500 евро'],
+ sayL:'En voz alta:', say:['четырнадцатое марта','в девять тридцать','пятьсот евро'],
+ fix:'Corregir', allOk:'Todo bien', nFoot:'Parrlo resalta importes, fechas, horas y dosis. Si un número no cuadra, corrige la frase y la traducción se actualiza.',
+ lT:'Idiomas de la conversación', lSub:'Cualquier par de los tres, en los dos sentidos', lMe:'Hablo yo', lPt:'La otra persona habla',
+ names:[['Русский','ruso'],['Español',''],['English','inglés']], meI:1, ptI:0, mine:'Tu idioma', swap:'Intercambiar', done:'Listo',
+ close:'Cerrar', aBack:'Atrás', aKbd:'Escribir', aMore:'Más',
+ page:{tag:'Referencia · lote 2 · textos en borrador',h1:'Translate · idiomas, estilos y números',
+  lead:'T‑09, T‑11 y T‑12 del mapa del sitio: elegir un par entre tres idiomas, una misma idea en tres estilos y el aviso «revisa los números» con su comparación. Todo existe en la app; la pantalla muestra cómo debería verse. Solo tema oscuro, interfaz de «tú». Pantalla de 430×932 pt, PNG @3×: 1290×2796.',
+  cap:['Translate · estilos','Solo tema oscuro. Textos en borrador.'],
+  heroH:'Para un amigo, para el médico, para el banco.',
+  heroP:['Fotograma principal: una frase, el selector de tres estilos justo encima de la traducción y la vista previa de las otras dos versiones. Está elegido «Formal», la traducción para la recepción. Al tocar una vista previa cambia el estilo y se actualiza la traducción grande.','Los nombres de estilo siguen la app («Как сказал», «Литературно», «Официально»); en español son una propuesta. Debajo del selector, una línea dice para quién es cada estilo.'],
+  hSt:'Estados',stLead:'Cuatro estados. Color = lado: verde #2BC48A para ti y tu idioma, menta #BFF2DC para la otra persona. El amarillo, solo para el aviso «Revisa los números». Escala 0,6.',
+  st:{languages:['Idiomas','Al tocar el par «ES ⇄ RU» arriba. Hoja con los tres idiomas para cada lado, «Intercambiar» y «Listo». El idioma de la otra persona no puede ser el tuyo.'],
+      styles:['Estilos','Selector «Tal cual / Literario / Formal» encima de la traducción. La traducción cambia según el estilo; las otras dos versiones se ven debajo.'],
+      numbers:['Revisa los números','La frase lleva fecha, hora e importe. Los números van con borde punteado en la frase y en la traducción; debajo, un aviso con icono y texto.'],
+      'numbers-detail':['Comparar números','Al tocar el aviso. Hoja «original → traducción» para cada número y cómo sonará en voz alta. «Todo bien» o «Corregir».']},
+  hDec:'Decisiones',
+  dec:['<b>El estilo, justo encima de la traducción.</b> En la app se cambia en Ajustes → Estilo. Aquí el selector está en la conversación; la elección se recuerda para las siguientes frases y en Ajustes queda el estilo por defecto.',
+   '<b>Vista previa de los otros dos estilos.</b> Bajo la traducción grande, una lista breve con las otras versiones de la misma frase: se elige viendo el resultado, no por el nombre.',
+   '<b>Una línea «para quién».</b> Bajo el selector, la descripción del estilo según los textos del sitio.',
+   '<b>El aviso no depende solo del color.</b> Los números llevan borde punteado en la frase y en la traducción; el aviso tiene icono «#», el texto «Revisa los números», la lista y una flecha. Es el único elemento amarillo.',
+   '<b>Comparación «original → traducción».</b> Más allá de la app actual: una hoja con cada fecha, hora e importe y la línea «En voz alta», cómo lo oirá la otra persona. Quinientos no se confunde con quince.',
+   '<b>Idiomas sin banderas.</b> Idioma ≠ país: cada fila lleva el nombre en ese idioma y una etiqueta en el idioma de la interfaz. Tu idioma aparece marcado en la lista de la otra persona y no se puede elegir. No hay más idiomas en la lista.',
+   '<b>El icono del bloque es el loro de Parrlo</b> (marca monocroma de <code>screens.js</code>, clave <code>spark</code>), sin «chispas».'],
+  hTok:'Tokens y contraste',
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>, texto <code>#F2F5F7</code> / <code>#9AA4B2</code>: tema oscuro v2.3.',
+   'Tú: <code>#2BC48A</code>, etiqueta «Tu idioma» sobre <code>#1E3734</code>. La otra persona: <code>#BFF2DC</code>. Traducción: <code>#00875C</code>; números en la traducción y «Mostrar»: <code>#005E40</code>. Aviso: <code>#FFC247</code> sobre <code>#3A3426</code>.',
+   'Nunito 900 para la traducción (25 pt), los idiomas, los números y los botones; Inter 400–700 para la interfaz. Retícula de 4 pt, márgenes de 16. Zonas táctiles ≥ 44 pt.'],
+  thP:'Par (texto / fondo)',thW:'Dónde',thC:'Contraste',thN:'Mínimo',low:'por debajo',
+  hNa:'Pendiente de aprobar',
+  na:['Todos los textos son borrador, también la interfaz en español e inglés. Las frases de ejemplo de estilos y números son nuevas: no están en <code>copy-ru/translate.md</code>.',
+   'En parrlo-mockups no hay inventario <code>docs/showcase/inventory/</code>; los nombres de estilo salen de <code>docs/site/gap/translate.md</code> (n.º 16) y <code>copy-ru/translate.md</code> (§5).',
+   'Los nombres en español e inglés son una propuesta: «Tal cual / Literario / Formal», «As said / Literary / Formal».',
+   '«Как сказал» lleva verbo en masculino, y la regla es no marcar el género del usuario. Propuesta: «Как есть». Decide Murat.',
+   'El selector de estilo en la conversación, la vista previa y la hoja de comparación con «En voz alta» van más allá de la app actual.',
+   'Los colores <code>#005E40</code>, <code>#1E3734</code>, <code>#3A3426</code> y <code>#C3CBD5</code> son derivados; no están en los tokens v2.3.'],
+  ctr:['texto principal','etiquetas sobre el fondo','etiquetas sobre superficie','etiquetas en las listas','segmento elegido','traducción y etiquetas de la tarjeta','números en la traducción, «Mostrar»','aviso «Revisa los números»','texto del aviso','«Hablo yo», «Listo», «Todo bien»','«Я говорю», idioma de la otra persona','«Tu idioma»','«Escuchar»']}
+},
+en:{
+ code:['EN','ES'], lc:'en', tl:'es', meN:'English', ptN:'Español',
+ said:'What Parrlo understood', edit:'Edit phrase', forPt:'for the other person',
+ me:['I speak','in English'], pt:['Yo hablo','en español'],
+ play:'Play', show:'Show', next:'Now it’s the other person’s turn',
+ stLbl:'Translation style', styles:['As said','Literary','Formal'],
+ stDesc:['For your neighbor','When you want it to sound nice','For the front desk, the bank and official offices'],
+ stPh:'Hey, Thursday doesn’t work for me. Can we move it to Monday?',
+ stTr:['Oye, el jueves no me va bien. ¿Lo pasamos al lunes?','El jueves no me viene bien. ¿Te parece si lo dejamos para el lunes?','Lamentablemente, el jueves no me será posible. ¿Podríamos pasar la cita al lunes?'],
+ stOth:'In other styles',
+ nPh:'Can I come see the apartment on {March 14} at {9:30}? The deposit is {€500}, right?',
+ nTr:'¿Puedo ir a ver el piso el {14 de marzo} a las {9:30}? La fianza es de {500 €}, ¿verdad?',
+ chkT:'Check the numbers', chkS2:'3 to check: date, time, amount. Tap to compare',
+ nT:'Compare the numbers', nSub:'How they read in the original and the translation', cols:['Original','Translation'],
+ kinds:['Date','Time','Amount'], from:['March 14','9:30','€500'], to:['14 de marzo','9:30','500 €'],
+ sayL:'Spoken:', say:['el catorce de marzo','a las nueve y media','quinientos euros'],
+ fix:'Edit', allOk:'All correct', nFoot:'Parrlo highlights amounts, dates, times and doses. If a number is off, edit the phrase and the translation updates.',
+ lT:'Conversation languages', lSub:'Any pair of the three, both ways', lMe:'I speak', lPt:'The other person speaks',
+ names:[['Русский','Russian'],['Español','Spanish'],['English','']], meI:2, ptI:1, mine:'Your language', swap:'Swap', done:'Done',
+ close:'Close', aBack:'Back', aKbd:'Type instead', aMore:'More',
+ page:{tag:'Reference · batch 2 · draft copy',h1:'Translate · languages, styles, numbers',
+  lead:'T‑09, T‑11 and T‑12 on the site map: picking a pair from three languages, one meaning in three styles, and the “check the numbers” flag with a side‑by‑side check. All of it is in the build; this screen shows how it should look. Dark theme only. Screen 430×932 pt, PNG @3×: 1290×2796.',
+  cap:['Translate · styles','Dark theme only. Draft copy.'],
+  heroH:'For a friend, for the doctor, for the bank.',
+  heroP:['Hero frame: one phrase, a three‑style switch right above the translation, and previews of the other two versions. Formal is selected — the translation for a front desk. Tapping a preview switches the style and the large translation updates.','Style names follow the app (“Как сказал”, “Литературно”, “Официально”); the English ones are a proposal. Under the switch, one line says who each style is for.'],
+  hSt:'States',stLead:'Four states. Color = side: green #2BC48A is you and your language, mint #BFF2DC is the other person. Yellow is only for the “Check the numbers” flag. Scale 0.6.',
+  st:{languages:['Languages','After tapping the “EN ⇄ ES” pair at the top. A sheet with the three languages for each side, Swap and Done. The other person’s language can’t match yours.'],
+      styles:['Styles','An “As said / Literary / Formal” switch above the translation. The translation changes with the style; the other two versions show below.'],
+      numbers:['Check the numbers','The phrase has a date, a time and an amount. Numbers get a dashed outline in the phrase and the translation, with a flag (icon and text) below.'],
+      'numbers-detail':['Number check','After tapping the flag. An “original → translation” sheet for each number and how it will sound out loud. All correct, or Edit.']},
+  hDec:'Decisions',
+  dec:['<b>Style sits right above the translation.</b> In the build it lives in Settings → Style. Here the switch is in the conversation; the choice sticks for the next phrases, and Settings keeps the default.',
+   '<b>Previews of the other two styles.</b> Under the large translation, a short list with the other versions of the same phrase: people choose by seeing the result, not the name.',
+   '<b>One “who it’s for” line.</b> Under the switch, the style description from the site copy.',
+   '<b>The flag isn’t color alone.</b> Numbers get a dashed outline in the phrase and the translation; the flag has a “#” icon, the text “Check the numbers”, the list and a chevron. It’s the only yellow element.',
+   '<b>“Original → translation” check.</b> Beyond the current build: a sheet with each date, time and amount and a “Spoken” line — how the other person will hear it. Five hundred won’t pass for fifteen.',
+   '<b>Languages without flags.</b> Language ≠ country: each row shows the name in that language and a label in the interface language. Your language is marked in the other person’s list and can’t be picked. No other languages in the list.',
+   '<b>The block icon is the Parrlo parrot</b> (the monochrome mark from <code>screens.js</code>, key <code>spark</code>), no “sparkles”.'],
+  hTok:'Tokens and contrast',
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>, text <code>#F2F5F7</code> / <code>#9AA4B2</code>: dark theme v2.3.',
+   'You: <code>#2BC48A</code>, “Your language” tag on <code>#1E3734</code>. Other person: <code>#BFF2DC</code>. Translation: <code>#00875C</code>; numbers in the translation and Show: <code>#005E40</code>. Flag: <code>#FFC247</code> on <code>#3A3426</code>.',
+   'Nunito 900 for the translation (25 pt), languages, numbers and buttons; Inter 400–700 for the UI. 4 pt grid, 16 margins. Tap targets ≥ 44 pt.'],
+  thP:'Pair (text / background)',thW:'Where',thC:'Contrast',thN:'Minimum',low:'too low',
+  hNa:'Not approved',
+  na:['All copy is draft, including the Spanish and English interface. The sample phrases for styles and numbers are new: they aren’t in <code>copy-ru/translate.md</code>.',
+   'There’s no <code>docs/showcase/inventory/</code> in parrlo-mockups; style names come from <code>docs/site/gap/translate.md</code> (#16) and <code>copy-ru/translate.md</code> (§5).',
+   'Spanish and English style names are a proposal: “Tal cual / Literario / Formal”, “As said / Literary / Formal”.',
+   '“Как сказал” uses a masculine verb, while the rule is no user gender. Proposal: “Как есть”. Murat decides.',
+   'The in‑conversation style switch, previews and the number‑check sheet with the “Spoken” line go beyond the current build.',
+   'Colors <code>#005E40</code>, <code>#1E3734</code>, <code>#3A3426</code>, <code>#C3CBD5</code> are derived; they aren’t in the v2.3 tokens.'],
+  ctr:['body text','labels on background','labels on surface','labels in sheet lists','selected style segment','translation and card labels','numbers in translation, Show','“Check the numbers” flag','flag text','I speak, Done, All correct','Yo hablo, other person’s language','“Your language”','Play']}
+}};
+let L=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase(); if(!T[L])L='ru';
+const D=T[L];
+document.documentElement.lang=L;
+
+const nb=s=>s.replace(/(\d) (?=[^\s{}])/g,'$1\u00A0').replace(/(March) (?=\d)/g,'$1\u00A0');
+const nums=(s,on)=>nb(s).replace(/\{([^}]*)\}/g,`<span class="${P}n${on?' '+P+'on':''}">$1</span>`);
+const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
+const home=`<div class="homebar"><i></i></div>`;
+const top=(up)=>`<div class="${P}top"><span class="${P}cb" role="button" aria-label="${D.aBack}">${I.back}</span><span class="${P}pair ${up?P+'up':''}"><span role="button"><i class="${P}dot"></i>${D.code[0]}<i class="${P}swp">${I.swap}</i>${D.code[1]}<i class="${P}dot ${P}es"></i></span></span><span class="${P}cb" role="button" aria-label="${D.aKbd}">${I.kbd}</span><span class="${P}cb" role="button" aria-label="${D.aMore}">${I.more}</span></div>`;
+const btns=(x)=>`<div class="${P}btns"><span class="${P}pb ${P}me" role="button">${I.mic}<span><b>${D.me[0]}</b><small>${D.me[1]}</small></span></span><span class="${P}pb ${P}es ${x||''}" role="button">${I.mic}<span><b>${D.pt[0]}</b><small>${D.pt[1]}</small></span></span></div>`;
+const said=(txt)=>`<div class="${P}said"><div class="${P}row"><div class="${P}lbl"><span class="${P}par">${I.spark}</span>${D.said}</div></div><span class="${P}ed" role="button" aria-label="${D.edit}">${I.pencil}</span><p lang="${D.lc}">${txt}</p></div>`;
+const card=(lbl,txt)=>`<div class="${P}card"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>${lbl}</div></div><p lang="${D.tl}">${txt}</p><div class="${P}acts"><span class="${P}act" role="button">${I.spk}${D.play}</span><span class="${P}act ${P}ghost" role="button">${I.rot}${D.show}</span></div></div>`;
+const scr=(body)=>`<div class="scr ${P}scr">${sbar}${body}${home}</div>`;
+const sheetHead=(t,sub)=>`<i class="${P}grab"></i><div class="${P}sh"><div><h3>${t}</h3><span class="${P}sub">${sub}</span></div><span class="${P}x" role="button" aria-label="${D.close}">${I.x}</span></div>`;
+
+function styles(k){
+ const seg=D.styles.map((s,i)=>`<span role="radio" aria-checked="${i===k}">${s}</span>`).join('');
+ const oth=D.styles.map((s,i)=>i===k?'':`<div class="${P}o" role="button"><div><b>${s}</b><span class="${P}ot" lang="${D.tl}">${D.stTr[i]}</span></div><span class="${P}chev">${I.chev}</span></div>`).join('');
+ return scr(`${top()}
+<div class="${P}main ${P}tight">
+ ${said(D.stPh)}
+ <div class="${P}stl"><div class="${P}seg" role="radiogroup" aria-label="${D.stLbl}">${seg}</div><div class="${P}desc">${D.stDesc[k]}</div></div>
+ ${card(D.ptN+' · '+D.styles[k],D.stTr[k]).replace(P+'card"',P+'card '+P+'c"')}
+ <div class="${P}oth" aria-label="${D.stOth}">${oth}</div>
+</div>
+<div class="${P}bot">${btns()}</div>`);
+}
+const chk=`<div class="${P}chk" role="button"><i>${I.num}</i><div><b>${D.chkT}</b><span>${D.chkS2}</span></div><span class="${P}chev">${I.chev}</span></div>`;
+const numMain=(on)=>`${top()}
+<div class="${P}main">
+ ${said(nums(D.nPh,false))}
+ ${card(D.ptN+' · '+D.forPt,nums(D.nTr,false))}
+ ${chk}
+</div>
+<div class="${P}bot"><div class="${P}hint">${I.down}${D.next}</div>${btns(P+'next')}</div>`;
+const kIc=[I.cal,I.clock,I.cash];
+
+function langRow(i,side){
+ const [n,sub]=D.names[i], sel=side==='me'?i===D.meI:i===D.ptI, off=side==='pt'&&i===D.meI;
+ return `<div class="${P}lg ${sel?P+'sel':''} ${side==='pt'?P+'p':''} ${off?P+'off':''}" role="radio" aria-checked="${sel}" ${off?'aria-disabled="true"':''}><span class="${P}cd">${['RU','ES','EN'][i]}</span><div><b lang="${['ru','es','en'][i]}">${n}</b>${sub?`<small>${sub}</small>`:''}</div>${off?`<span class="${P}mine"><i></i>${D.mine}</span>`:`<span class="${P}rd">${sel?I.ok:''}</span>`}</div>`;
+}
+
+const H={
+languages:`<div class="scr ${P}scr">${sbar}${top(1)}
+<div class="${P}main">${said(nums(D.nPh,false))}</div>
+<div class="${P}bot">${btns()}</div>${home}
+<div class="${P}dim"></div>
+<div class="${P}sheet">
+ ${sheetHead(D.lT,D.lSub)}
+ <div class="${P}sl"><i class="${P}dot"></i>${D.lMe}</div>
+ <div class="${P}list" role="radiogroup">${[0,1,2].map(i=>langRow(i,'me')).join('')}</div>
+ <span class="${P}swap" role="button">${I.swap}${D.swap}</span>
+ <div class="${P}sl"><i class="${P}dot ${P}es"></i>${D.lPt}</div>
+ <div class="${P}list" role="radiogroup">${[0,1,2].map(i=>langRow(i,'pt')).join('')}</div>
+ <span class="${P}done" role="button">${D.done}</span>
+ ${home}
+</div></div>`,
+styles:styles(2),
+numbers:scr(numMain()),
+'numbers-detail':`<div class="scr ${P}scr">${sbar}${numMain()}${home}
+<div class="${P}dim"></div>
+<div class="${P}sheet">
+ ${sheetHead(D.nT,D.nSub)}
+ <div class="${P}cols"><span>${D.cols[0]}</span><span></span><span>${D.cols[1]}</span></div>
+ <div class="${P}list">${D.kinds.map((k,i)=>`<div class="${P}nr"><div class="${P}kind">${kIc[i]}${k}</div><div class="${P}cmp"><b lang="${D.lc}">${nb(D.from[i])}</b><i>${I.arr}</i><b class="${P}to" lang="${D.tl}">${nb(D.to[i])}</b></div><div class="${P}say">${I.spk}<span>${D.sayL} <em lang="${D.tl}">«${D.say[i]}»</em></span></div></div>`).join('')}</div>
+ <div class="${P}vb"><span class="${P}sec" role="button">${I.pencil}${D.fix}</span><span class="${P}pri" role="button">${I.okt}${D.allOk}</span></div>
+ <div class="${P}foot">${I.info}<span>${D.nFoot}</span></div>
+ ${home}
+</div></div>`,
+};
+const ORDER=['styles','languages','numbers','numbers-detail'];
+window.TS_STATES=ORDER; window.TS_LANG=L;
+
+/* ===== страница ===== */
+const G=D.page;
+$('langs').innerHTML=['ru','es','en'].map(l=>`<a href="?l=${l}" aria-current="${l===L}">${l.toUpperCase()}</a>`).join('');
+$('tag').textContent=G.tag; $('h1').textContent=G.h1; $('lead').textContent=G.lead;
+document.title='Parrlo Translate · '+G.h1.split(' · ')[1];
+const ph=(id,s,html)=>`<div class="pf p67" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
+$('hero-ph').innerHTML=ph('translate-style',.8,H.styles)+`<div class="pcap"><span class="dot"></span><div><b>${G.cap[0]}</b><span>${G.cap[1]}</span></div></div>`;
+$('hero-t').innerHTML=`<h3>${G.heroH}</h3>`+G.heroP.map(p=>`<p>${p}</p>`).join('');
+$('h-st').textContent=G.hSt; $('st-lead').textContent=G.stLead;
+$('grid').innerHTML=ORDER.map((k,i)=>`<figure>${ph(P+'-'+k,.6,H[k])}<figcaption><b>${i+1} · ${G.st[k][0]}</b><code>${k}</code> · ${G.st[k][1]}</figcaption></figure>`).join('');
+$('h-dec').textContent=G.hDec; $('dec').innerHTML=G.dec.map(x=>`<li>${x}</li>`).join('');
+$('h-tok').textContent=G.hTok; $('tok').innerHTML=G.tok.map(x=>`<li>${x}</li>`).join('');
+$('h-na').textContent=G.hNa; $('na').innerHTML=G.na.map(x=>`<li>${x}</li>`).join('');
+
+/* контраст */
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const pairs=[['#F2F5F7','#0E1116',4.5],['#9AA4B2','#0E1116',4.5],['#9AA4B2','#1C2026',4.5],['#9AA4B2','#242B34',4.5],['#0E1116','#F2F5F7',4.5],['#FFFFFF','#00875C',4.5],['#FFFFFF','#005E40',4.5],['#FFC247','#3A3426',4.5],['#F2F5F7','#3A3426',4.5],['#0E1116','#2BC48A',4.5],['#0E1116','#BFF2DC',4.5],['#2BC48A','#1E3734',4.5],['#0E1116','#FFFFFF',4.5]];
+const dec=x=>L==='en'?String(x):String(x).replace('.',',');
+$('ctr').innerHTML=`<tr><th>${G.thP}</th><th>${G.thW}</th><th>${G.thC}</th><th>${G.thN}</th></tr>`+pairs.map(([a,b,n],i)=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${G.ctr[i]}</td><td><b>${dec(v.toFixed(2))}:1</b></td><td>${v>=n?'≥ '+dec(n)+' ✓':G.low}</td></tr>`;}).join('');
+window.TS_CR=pairs.map(([a,b,n],i)=>[G.ctr[i],+cr(a,b).toFixed(2),n]);
+document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>
