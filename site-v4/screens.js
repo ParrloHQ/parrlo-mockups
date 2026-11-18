@@ -17,7 +17,7 @@ const I={
   ret:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5v6a3 3 0 0 1-3 3H5"/><path d="M9 10l-4 4 4 4"/></svg>`,
 };
 window.SITE_ICONS=I;
-const sbar=()=>`<div class="sbar"><b>9:41</b><span class="sig"><i class="w"></i><i></i></span></div>`;
+const sbar=()=>`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
 /* Translate — только тёмная тема */
 function translate(){
   return `<div class="scr tr">${sbar()}
@@ -58,7 +58,7 @@ function chat(){
    <div class="m out">Да, буду. Возьму документы.<span class="t">${I.tr}<span>Sí, allí estaré. Llevo los documentos.</span></span><span class="tm">10:04</span></div>
    <div class="m in">¡Genial! Te espero en recepción.<span class="t">${I.tr}<span>Отлично! Жду тебя на ресепшене.</span></span><span class="tm">10:05</span></div>
   </div>
-  <div class="inp"><span class="f"><span class="ph">Сообщение</span></span><span class="sd">${I.mic}</span></div><div class="homebar"><i></i></div></div>`;
+  <div class="inp"><span class="f"><span class="pl">Сообщение</span></span><span class="sd">${I.mic}</span></div><div class="homebar"><i></i></div></div>`;
 }
 /* телефон в нейтральной рамке */
 function phone(screen,o={}){

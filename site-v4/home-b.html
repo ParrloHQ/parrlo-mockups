@@ -42,6 +42,10 @@ h2{font:900 56px/1.05 Nunito,sans-serif;letter-spacing:-.015em;margin-bottom:14p
 h2+.lead{margin-bottom:40px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .card{position:relative;border-radius:36px;height:720px;overflow:hidden;padding:34px 32px;display:flex;flex-direction:column}
+.kicker{display:inline-block;font:700 14px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--g);margin-bottom:14px}
+.card .more{margin-top:14px;font-weight:600;font-size:16px;position:relative}
+.card .cta{align-self:flex-start;margin-top:16px;position:relative;z-index:1}
+.card.c3 .tag.live{background:var(--g);color:var(--ink)}
 .card .tag{align-self:flex-start;font:700 13px Inter;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:14px;background:rgba(255,255,255,.18);margin-bottom:18px}
 .card h3{font:900 38px/1.05 Nunito,sans-serif;margin-bottom:10px}
 .card p{font-size:17px;opacity:.85;max-width:330px}
@@ -110,42 +114,43 @@ footer .logo img{width:28px;height:28px}
 <body>
 <span class="draft">Черновик · тексты не утверждены</span>
 <header><div class="w"><a class="logo" href="#"><img src="../brandbook/assets/logo/mark-color-dark.svg" alt="">Parrlo</a>
-<nav><a class="on" href="#">Обзор</a><a href="#cards">Translate</a><a href="#cards">Клавиатура</a><a href="#cards">Chat</a></nav>
-<a class="cta s" href="https://app.parrlo.com">Попробовать в браузере</a></div></header>
+<nav><a class="on" href="#">Обзор</a><a href="#cards">Chat</a><a href="#cards">Translate</a><a href="#cards">Клавиатура</a></nav>
+<a class="cta s" href="#launch">Узнать о запуске</a></div></header>
 
 <div class="hero"><div class="w">
  <div>
-  <h1>Испанский, на&nbsp;котором ты <em>уже</em> говоришь.</h1>
-  <p class="lead">Говори и пиши по-русски — Parrlo переведёт смысл на испанский: в разговоре, в любом мессенджере и в своём чате.</p>
-  <div class="ctas"><a class="cta" href="https://app.parrlo.com">Попробовать в браузере</a><a class="cta lt" href="#launch">Узнать о запуске</a></div>
-  <div class="trust"><span><b>3</b> продукта</span><span>Русский ⇆ испанский</span><span>Для iPhone и Android</span></div>
+  <span class="kicker">Parrlo Chat</span>
+  <h1>Пиши по-русски. <em>Читают</em> по&#8209;испански.</h1>
+  <p class="lead">Мессенджер, где каждый пишет на своём языке, а собеседник читает на своём. Оригинал — всегда рядом с переводом.</p>
+  <div class="ctas"><a class="cta" href="#launch">Узнать о запуске</a><a class="cta lt" href="https://app.parrlo.com">Попробовать Translate в браузере</a></div>
+  <div class="trust"><span>Русский ⇆ испанский</span><span>Для iPhone и Android</span><span><b>Translate</b> уже работает в браузере</span></div>
  </div>
- <div class="fan"><div data-ph="keyboard-light" class="p1" data-s=".72" data-light="1"></div><div data-ph="translate" class="p2" data-s=".76"></div><div data-ph="chat" class="p3" data-s=".72"></div></div>
+ <div class="fan"><div data-ph="keyboard-light" class="p1" data-s=".72" data-light="1"></div><div data-ph="chat" class="p2" data-s=".76"></div><div data-ph="translate" class="p3" data-s=".72"></div></div>
 </div></div>
 
 <section id="cards"><div class="w">
- <h2>Выбери, как говорить.</h2>
- <p class="lead">Три продукта для трёх ситуаций. Работают отдельно и вместе.</p>
+ <h2>Chat — и ещё два способа говорить.</h2>
+ <p class="lead">Переписка, разговор вживую и перевод в любом приложении. Translate можно попробовать уже сейчас.</p>
  <div class="cards">
-  <a class="card c1" href="#"><span class="tag">Вживую</span><h3>Translate</h3><p>Разговор лицом к лицу: по кнопке на каждого, перевод звучит вслух.</p><div data-ph="translate" data-s=".7"></div></a>
-  <a class="card c2" href="#"><span class="tag">В любом приложении</span><h3>Клавиатура</h3><p>Пишешь по-русски — отправляешь по-испански. В WhatsApp, Telegram, почте.</p><div data-ph="keyboard-light" data-s=".7" data-light="1"></div></a>
-  <a class="card c3" href="#"><span class="tag">Переписка</span><h3>Chat</h3><p>Мессенджер, где каждый пишет и читает на своём языке.</p><div data-ph="chat" data-s=".7"></div></a>
+  <div class="card c1"><span class="tag">Главное · скоро</span><h3>Chat</h3><p>Мессенджер для двух языков: каждое сообщение — в оригинале и в переводе.</p><a class="more" href="#launch">Узнать о запуске →</a><div data-ph="chat" data-s=".7"></div></div>
+  <div class="card c3"><span class="tag live">Работает сейчас</span><h3>Translate</h3><p>Разговор лицом к лицу: по кнопке на каждого, перевод звучит вслух.</p><a class="cta s" href="https://app.parrlo.com">Попробовать в браузере</a><div data-ph="translate" data-s=".7"></div></div>
+  <div class="card c2"><span class="tag">Скоро</span><h3>Клавиатура</h3><p>Пишешь по-русски — отправляешь по-испански. В WhatsApp, Telegram, почте.</p><a class="more" href="#launch">Узнать о запуске →</a><div data-ph="keyboard-light" data-s=".7" data-light="1"></div></div>
  </div>
 </div></section>
 
 <section id="ba" style="padding-top:0"><div class="w">
- <h2>Говори как получится.</h2>
- <p class="lead">Parrlo убирает «эээ», повторы и оговорки и переводит то, что ты хотел сказать.</p>
+ <h2>Пиши как пишешь.</h2>
+ <p class="lead">Без заглавных, со скобками и «короч» — Parrlo переводит смысл, а не каждую букву.</p>
  <div class="ba">
-  <div class="l"><small>Сказали по-русски</small><p><span class="f">Так,</span> слушай, <span class="f">ну</span> мы завтра <span class="f">это…</span> в десять, да? В офисе <span class="f">в общем,</span> встречаемся?</p></div>
-  <div class="r"><small>Parrlo</small><p>¿Nos vemos mañana a las 10 en la oficina?</p><span class="lang">Español · можно прослушать</span></div>
+  <div class="l"><small>Написали по-русски</small><p>привет<span class="f">)))</span> слушай а завтра в 10 норм? в офисе <span class="f">короч</span></p></div>
+  <div class="r"><small>Lucía читает</small><p>¡Hola! ¿Te va bien mañana a las 10 en la oficina?</p><span class="lang">Español · оригинал рядом</span></div>
  </div>
  <div class="bento">
-  <div class="bx big"><div data-ph="keyboard-dark" data-s=".62"></div><h4>Перевод над клавишами</h4><p>Одна кнопка — и сообщение уже на испанском.</p></div>
-  <div class="bx"><span class="ico" id="i1"></span><h4>Литературно или как в жизни</h4><p>Выбери тон перевода.</p></div>
-  <div class="bx dk"><span class="ico" id="i2"></span><h4>Диктовка</h4><p>Скажи — Parrlo напишет.</p></div>
-  <div class="bx dk"><span class="ico" id="i3"></span><h4>Вслух</h4><p>Перевод можно прослушать.</p></div>
-  <div class="bx"><span class="ico" id="i4"></span><h4>Светлая и тёмная</h4><p>Клавиатура — как на телефоне.</p></div>
+  <div class="bx big"><div data-ph="chat" data-s=".62"></div><h4>Перевод под каждым сообщением</h4><p>Читаешь на своём языке, оригинал — строкой ниже.</p></div>
+  <div class="bx"><span class="ico" id="i1"></span><h4>Группы на разных языках</h4><p>Каждый пишет и читает на своём.</p></div>
+  <div class="bx dk"><span class="ico" id="i2"></span><h4>Голосом</h4><p>Скажи — Parrlo напишет текст.</p></div>
+  <div class="bx dk"><span class="ico" id="i3"></span><h4>Translate — уже сейчас</h4><p>Разговор вживую, в браузере.</p></div>
+  <div class="bx"><span class="ico" id="i4"></span><h4>Клавиатура Parrlo</h4><p>Перевод над клавишами в любом приложении.</p></div>
  </div>
 </div></section>
 
@@ -160,7 +165,7 @@ footer .logo img{width:28px;height:28px}
 document.querySelectorAll('[data-ph]').forEach(el=>{const k=el.dataset.ph,s=el.dataset.s,light=!!el.dataset.light,extra=el.className;
   const scr=k==='translate'?SITE.translate():k==='chat'?SITE.chat():SITE.keyboard(k==='keyboard-light'?'light':'dark');
   el.outerHTML=SITE.phone(scr,{s,light}).replace('class="pf','class="ph '+extra+' pf');});
-const I=SITE_ICONS;[['i1',I.spark],['i2',I.mic.replace('class="ic" ','')],['i3',I.voice],['i4',I.gear]].forEach(([id,s])=>document.getElementById(id).innerHTML=s);
+const I=SITE_ICONS;[['i1',I.tr],['i2',I.mic.replace('class="ic" ','')],['i3',I.voice],['i4',I.spark]].forEach(([id,s])=>document.getElementById(id).innerHTML=s);
 document.body.dataset.ready='1';
 </script>
 </body>
