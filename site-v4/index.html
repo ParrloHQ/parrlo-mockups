@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo · витрина · концепция</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:Nunito;src:url(../brandbook/fonts/nunito.ttf) format("truetype");font-weight:200 1000}
+@font-face{font-family:Inter;src:url(../brandbook/fonts/inter.ttf) format("truetype");font-weight:100 900}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#F4F6F8;color:#0E1116;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:40px 32px 80px}
+.w{max-width:1600px;margin:0 auto}
+h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:10px}
+h2{font:900 26px/1.2 Nunito,sans-serif;margin:48px 0 6px}
+p.s{color:#5B6472;max-width:900px;margin-bottom:8px}
+a{color:#006B48;font-weight:600}
+.row{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;margin-top:16px}
+.vp{background:#fff;border-radius:16px;box-shadow:0 1px 3px rgba(14,17,22,.12);overflow:hidden}
+.vp .bar{font:600 13px Inter;color:#5B6472;padding:8px 12px;border-bottom:1px solid #E9EDF0}
+.vp .cut{overflow:hidden;position:relative}
+.vp iframe{border:0;display:block;transform-origin:0 0}
+.d .cut{width:720px;height:1100px}.d iframe{width:1440px;height:2200px;transform:scale(.5)}
+.m .cut{width:293px;height:1100px}.m iframe{width:390px;height:1466px;transform:scale(.75)}
+ul{color:#5B6472;max-width:900px;padding-left:20px}li{margin:4px 0}
+</style>
+</head>
+<body><div class="w">
+<h1>parrlo.com · визуальная концепция витрины</h1>
+<p class="s">Задача 18.11: витрина уровня лучших продуктовых сайтов, три продукта — Translate, Клавиатура, Chat. Два варианта главной (desktop 1440 и мобильная 390) и эталонный шаблон экрана приложения. Стиль — брендбук v2.3, свои приёмы, без копирования чужих сайтов. Тексты черновые.</p>
+<ul>
+<li><b>Вариант А «Сцена»</b> — тёмная, кинематографичная: один большой телефон в центре и «до/после» по бокам, три продукта плитками, затем разворот по каждому продукту. <a href="home-a.html">Открыть</a></li>
+<li><b>Вариант Б «Карточки»</b> — светлая, плотная: заголовок слева и веер из трёх телефонов, продукты — цветными карточками (на мобильной листаются), «до/после» одной карточкой, сетка возможностей. <a href="home-b.html">Открыть</a></li>
+<li><b>Эталонный шаблон экрана</b> — нейтральная рамка, тень, светлая и тёмная, подписи, размеры и правила. <a href="frame.html">Открыть</a></li>
+</ul>
+
+<h2>Вариант А «Сцена»</h2>
+<div class="row"><div class="vp d"><div class="bar">Desktop 1440 · 50 %</div><div class="cut"><iframe src="home-a.html" loading="lazy" title="Вариант А, 1440"></iframe></div></div>
+<div class="vp m"><div class="bar">Мобильная 390 · 75 %</div><div class="cut"><iframe src="home-a.html" loading="lazy" title="Вариант А, 390"></iframe></div></div></div>
+
+<h2>Вариант Б «Карточки»</h2>
+<div class="row"><div class="vp d"><div class="bar">Desktop 1440 · 50 %</div><div class="cut"><iframe src="home-b.html" loading="lazy" title="Вариант Б, 1440"></iframe></div></div>
+<div class="vp m"><div class="bar">Мобильная 390 · 75 %</div><div class="cut"><iframe src="home-b.html" loading="lazy" title="Вариант Б, 390"></iframe></div></div></div>
+</div></body>
+</html>
