@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo · главная · вариант Б «Карточки»</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="frame.css">
+<style>
+:root{--ink:#0E1116;--bg:#F4F6F8;--card:#FFFFFF;--tx:#0E1116;--sec:#5B6472;--line:#D5DBE1;--g:#2BC48A;--deep:#00875C;--dk:#006B48;--mint:#E3F7EE;--mint2:#BFF2DC;--y:#FFC247}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--tx);font:400 18px/1.5 Inter,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.w{max-width:1240px;margin:0 auto;padding:0 32px}
+.draft{position:fixed;right:12px;bottom:12px;z-index:9;background:var(--y);color:var(--ink);font:700 12px Inter;padding:6px 10px;border-radius:8px}
+header .w{display:flex;align-items:center;gap:32px;height:72px}
+header .logo{display:flex;align-items:center;gap:10px;font:900 24px Nunito,sans-serif}
+header .logo img{width:32px;height:32px}
+header nav{display:flex;gap:6px;flex:1}
+header nav a{padding:8px 14px;border-radius:20px;font-size:15px;color:var(--sec)}
+header nav a.on{background:var(--card);color:var(--tx);box-shadow:0 1px 2px rgba(14,17,22,.08)}
+.cta{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:26px;background:var(--deep);color:#fff;font:800 17px Nunito,sans-serif}
+.cta.s{min-height:42px;padding:0 18px;font-size:15px}
+.cta.lt{background:var(--card);color:var(--tx);box-shadow:inset 0 0 0 1.5px var(--line)}
+/* герой: текст слева, веер телефонов справа */
+.hero .w{display:grid;grid-template-columns:1.05fr 1fr;gap:24px;align-items:center;padding-top:56px;padding-bottom:40px}
+h1{font:900 84px/1.02 Nunito,sans-serif;letter-spacing:-.02em;margin-bottom:22px}
+h1 em{font-style:normal;color:var(--deep)}
+.lead{font-size:21px;color:var(--sec);max-width:560px;margin-bottom:30px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;gap:20px;margin-top:28px;font-size:14px;color:var(--sec)}
+.trust b{color:var(--tx)}
+.fan{position:relative;height:700px}
+.fan .ph{position:absolute;top:40px}
+.fan .p1{left:0;top:90px;transform:rotate(-7deg)}
+.fan .p2{left:50%;margin-left:-160px;z-index:2}
+.fan .p3{right:0;top:90px;transform:rotate(7deg)}
+/* продуктовые карточки */
+section{padding:96px 0}
+h2{font:900 56px/1.05 Nunito,sans-serif;letter-spacing:-.015em;margin-bottom:14px}
+h2+.lead{margin-bottom:40px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{position:relative;border-radius:36px;height:720px;overflow:hidden;padding:34px 32px;display:flex;flex-direction:column}
+.card .tag{align-self:flex-start;font:700 13px Inter;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:14px;background:rgba(255,255,255,.18);margin-bottom:18px}
+.card h3{font:900 38px/1.05 Nunito,sans-serif;margin-bottom:10px}
+.card p{font-size:17px;opacity:.85;max-width:330px}
+.card .ph{position:absolute;left:50%;bottom:-170px;transform:translateX(-50%)}
+.card.c1{background:var(--deep);color:#fff}
+.card.c2{background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}.card.c2 .tag{background:var(--mint)}
+.card.c3{background:var(--ink);color:#F2F5F7}.card.c3 .tag{background:#1C2026}
+/* до / после: одна карточка с двумя половинами */
+.ba{display:grid;grid-template-columns:1fr 1fr;border-radius:36px;overflow:hidden;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+.ba>div{padding:48px 44px;display:flex;flex-direction:column;gap:18px}
+.ba small{font:700 13px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec)}
+.ba .l p{font-size:26px;line-height:1.5}
+.ba .l .f{color:#9AA4B2;text-decoration:line-through;text-decoration-color:#C42B1F}
+.ba .r{background:var(--mint)}
+.ba .r small{color:var(--dk)}
+.ba .r p{font:800 36px/1.22 Nunito,sans-serif;color:var(--ink)}
+.ba .r .lang{display:flex;gap:8px;font-size:15px;color:var(--dk);font-weight:600}
+/* сетка возможностей */
+.bento{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:260px;gap:20px;margin-top:20px}
+.bx{border-radius:28px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;position:relative}
+.bx h4{font:900 26px/1.15 Nunito,sans-serif;margin-bottom:6px}
+.bx p{font-size:16px;color:var(--sec)}
+.bx.big{grid-row:span 2;background:var(--mint)}
+.bx.big .ph{position:absolute;right:28px;top:28px}
+.bx.dk{background:var(--ink);color:#F2F5F7}.bx.dk p{color:#9AA4B2}
+.bx .ico{width:52px;height:52px;border-radius:16px;background:var(--mint);color:var(--deep);display:flex;align-items:center;justify-content:center;margin-bottom:auto}
+.bx.dk .ico{background:#1C2026;color:var(--g)}
+.bx .ico svg{width:28px;height:28px}
+footer{background:var(--ink);color:#9AA4B2;padding:56px 0 80px;font-size:14px;margin-top:40px}
+footer .w{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between}
+footer .logo{display:flex;gap:10px;align-items:center;color:#F2F5F7;font:900 22px Nunito}
+footer .logo img{width:28px;height:28px}
+@media (max-width:760px){
+ body{font-size:16px}
+ .w{padding:0 16px}
+ header nav{display:none}header .w{justify-content:space-between;height:60px}
+ .hero .w{grid-template-columns:1fr;padding-top:28px}
+ h1{font-size:44px}
+ .lead{font-size:17px}
+ .ctas{flex-direction:column}.ctas .cta{width:100%}
+ .trust{flex-wrap:wrap;gap:8px 16px}
+ .fan{height:470px;margin:0 -16px;overflow:hidden}
+ .fan .ph{--s:.5!important}
+ .fan .p1{left:6px;top:50px}.fan .p2{margin-left:-107px;top:10px}.fan .p3{right:6px;top:50px}
+ section{padding:64px 0}
+ h2{font-size:36px}
+ .cards{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:86%;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 8px;gap:12px}
+ .card{scroll-snap-align:start;height:600px;padding:26px 24px}
+ .card .ph{--s:.62!important;bottom:-180px}
+ .ba{grid-template-columns:1fr}
+ .ba>div{padding:28px 24px}
+ .ba .l p{font-size:20px}.ba .r p{font-size:26px}
+ .bento{grid-template-columns:1fr;grid-auto-rows:auto}
+ .bx{min-height:200px}
+ .bx.big{grid-row:auto;min-height:520px}
+ .bx.big .ph{--s:.52!important;right:50%;margin-right:-105px}
+}
+</style>
+</head>
+<body>
+<span class="draft">Черновик · тексты не утверждены</span>
+<header><div class="w"><a class="logo" href="#"><img src="../brandbook/assets/logo/mark-color.svg" alt="">Parrlo</a>
+<nav><a class="on" href="#">Обзор</a><a href="#cards">Translate</a><a href="#cards">Клавиатура</a><a href="#cards">Chat</a></nav>
+<a class="cta s" href="#">Попробовать</a></div></header>
+
+<div class="hero"><div class="w">
+ <div>
+  <h1>Испанский, на&nbsp;котором ты <em>уже</em> говоришь.</h1>
+  <p class="lead">Говори и пиши по-русски — Parrlo переведёт смысл на испанский: в разговоре, в любом мессенджере и в своём чате.</p>
+  <div class="ctas"><a class="cta" href="#">Получить доступ к тесту</a><a class="cta lt" href="#ba">Как это звучит</a></div>
+  <div class="trust"><span><b>3</b> продукта</span><span>Русский ⇆ испанский</span><span>Для iPhone и Android</span></div>
+ </div>
+ <div class="fan"><div data-ph="keyboard-light" class="p1" data-s=".72" data-light="1"></div><div data-ph="translate" class="p2" data-s=".76"></div><div data-ph="chat" class="p3" data-s=".72"></div></div>
+</div></div>
+
+<section id="cards"><div class="w">
+ <h2>Выбери, как говорить.</h2>
+ <p class="lead">Три продукта для трёх ситуаций. Работают отдельно и вместе.</p>
+ <div class="cards">
+  <a class="card c1" href="#"><span class="tag">Вживую</span><h3>Translate</h3><p>Разговор лицом к лицу: по кнопке на каждого, перевод звучит вслух.</p><div data-ph="translate" data-s=".7"></div></a>
+  <a class="card c2" href="#"><span class="tag">В любом приложении</span><h3>Клавиатура</h3><p>Пишешь по-русски — отправляешь по-испански. В WhatsApp, Telegram, почте.</p><div data-ph="keyboard-light" data-s=".7" data-light="1"></div></a>
+  <a class="card c3" href="#"><span class="tag">Переписка</span><h3>Chat</h3><p>Мессенджер, где каждый пишет и читает на своём языке.</p><div data-ph="chat" data-s=".7"></div></a>
+ </div>
+</div></section>
+
+<section id="ba" style="padding-top:0"><div class="w">
+ <h2>Говори как получится.</h2>
+ <p class="lead">Parrlo убирает «эээ», повторы и оговорки и переводит то, что ты хотел сказать.</p>
+ <div class="ba">
+  <div class="l"><small>Сказали по-русски</small><p><span class="f">Так,</span> слушай, <span class="f">ну</span> мы завтра <span class="f">это…</span> в десять, да? В офисе <span class="f">в общем,</span> встречаемся?</p></div>
+  <div class="r"><small>Parrlo</small><p>¿Nos vemos mañana a las 10 en la oficina?</p><span class="lang">Español · можно прослушать</span></div>
+ </div>
+ <div class="bento">
+  <div class="bx big"><div data-ph="keyboard-dark" data-s=".62"></div><h4>Перевод над клавишами</h4><p>Одна кнопка — и сообщение уже на испанском.</p></div>
+  <div class="bx"><span class="ico" id="i1"></span><h4>Литературно или как в жизни</h4><p>Выбери тон перевода.</p></div>
+  <div class="bx dk"><span class="ico" id="i2"></span><h4>Диктовка</h4><p>Скажи — Parrlo напишет.</p></div>
+  <div class="bx dk"><span class="ico" id="i3"></span><h4>Вслух</h4><p>Перевод можно прослушать.</p></div>
+  <div class="bx"><span class="ico" id="i4"></span><h4>Светлая и тёмная</h4><p>Клавиатура — как на телефоне.</p></div>
+ </div>
+</div></section>
+
+<footer><div class="w"><span class="logo"><img src="../brandbook/assets/logo/mark-color-dark.svg" alt="">Parrlo</span><span>Политика конфиденциальности · Условия · Контакты</span><span>© 2026 Parrlo</span></div></footer>
+<script src="screens.js"></script>
+<script>
+document.querySelectorAll('[data-ph]').forEach(el=>{const k=el.dataset.ph,s=el.dataset.s,light=!!el.dataset.light,extra=el.className;
+  const scr=k==='translate'?SITE.translate():k==='chat'?SITE.chat():SITE.keyboard(k==='keyboard-light'?'light':'dark');
+  el.outerHTML=SITE.phone(scr,{s,light}).replace('class="pf','class="ph '+extra+' pf');});
+const I=SITE_ICONS;[['i1',I.spark],['i2',I.mic.replace('class="ic" ','')],['i3',I.voice],['i4',I.gear]].forEach(([id,s])=>document.getElementById(id).innerHTML=s);
+document.body.dataset.ready='1';
+</script>
+</body>
+</html>

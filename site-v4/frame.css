@@ -1,0 +1,94 @@
+/* Parrlo · эталонный шаблон экрана приложения для сайта (v2.3).
+   Нейтральная рамка: без выреза, кнопок и других деталей конкретного телефона (правила Apple для обобщённых устройств).
+   Экран рисуется в 390×844 и масштабируется переменной --s. */
+@font-face{font-family:Inter;src:url(../brandbook/fonts/inter.ttf) format("truetype");font-weight:100 900}
+@font-face{font-family:Nunito;src:url(../brandbook/fonts/nunito.ttf) format("truetype");font-weight:200 1000}
+
+.pf{--s:1;--bz:12px;--r:56px;position:relative;display:inline-block;width:calc((390px + 2*var(--bz))*var(--s));height:calc((844px + 2*var(--bz))*var(--s));flex:none}
+.pf>.shell{position:absolute;inset:0;border-radius:calc(var(--r)*var(--s));background:#14181D;
+  box-shadow:inset 0 0 0 calc(1.5px*var(--s)) #3A414B,
+   0 calc(60px*var(--s)) calc(120px*var(--s)) calc(-30px*var(--s)) rgba(14,17,22,.45),
+   0 calc(18px*var(--s)) calc(36px*var(--s)) calc(-12px*var(--s)) rgba(14,17,22,.35)}
+.pf.light>.shell{background:#E7EAEE;box-shadow:inset 0 0 0 calc(1.5px*var(--s)) #C9CFD6,
+   0 calc(60px*var(--s)) calc(120px*var(--s)) calc(-30px*var(--s)) rgba(14,17,22,.22),
+   0 calc(18px*var(--s)) calc(36px*var(--s)) calc(-12px*var(--s)) rgba(14,17,22,.18)}
+.pf.flat>.shell{box-shadow:inset 0 0 0 calc(1.5px*var(--s)) #3A414B}
+.pf.light.flat>.shell{box-shadow:inset 0 0 0 calc(1.5px*var(--s)) #C9CFD6}
+.pf .glass{position:absolute;left:calc(var(--bz)*var(--s));top:calc(var(--bz)*var(--s));width:calc(390px*var(--s));height:calc(844px*var(--s));
+  border-radius:calc((var(--r) - var(--bz))*var(--s));overflow:hidden;background:#0E1116}
+.pf .glass>.scr{width:390px;height:844px;transform:scale(var(--s));transform-origin:0 0}
+/* подпись к телефону */
+.pcap{display:flex;gap:10px;align-items:flex-start;margin-top:20px;max-width:340px;font:400 15px/1.45 Inter,system-ui,sans-serif}
+.pcap .dot{flex:none;width:10px;height:10px;border-radius:50%;margin-top:6px;background:#2BC48A}
+.pcap b{display:block;font:800 17px/1.3 Nunito,Inter,sans-serif}
+.pcap span{opacity:.72}
+
+/* ===== экраны (390×844) ===== */
+.scr{position:relative;display:flex;flex-direction:column;text-align:left;font:400 17px/1.32 Inter,system-ui,sans-serif;
+  --bg:#0E1116;--sf:#1C2026;--sf2:#242B34;--tx:#F2F5F7;--sec:#9AA4B2;--line:#2F3742;--acc:#2BC48A;--onacc:#0E1116;--deep:#00875C;--mint:#BFF2DC;
+  background:var(--bg);color:var(--tx)}
+.scr.light{--bg:#FFFFFF;--sf:#F2F4F6;--sf2:#E9EDF0;--tx:#0E1116;--sec:#5B6472;--line:#D5DBE1;--acc:#00875C;--onacc:#FFFFFF}
+.scr svg{display:block}
+.sbar{flex:none;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 34px 0;font:600 17px Inter,sans-serif}
+.sbar .sig{display:flex;gap:6px;align-items:center}.sbar .sig i{display:block;width:18px;height:11px;border-radius:3px;border:1.6px solid currentColor;opacity:.85}
+.sbar .sig i.w{width:16px;height:11px;border:0;background:linear-gradient(currentColor,currentColor) 0 100%/3px 4px no-repeat,linear-gradient(currentColor,currentColor) 5px 100%/3px 7px no-repeat,linear-gradient(currentColor,currentColor) 10px 100%/3px 11px no-repeat}
+.ic{width:24px;height:24px}
+/* Translate */
+.tr .top{display:flex;align-items:center;gap:10px;padding:8px 14px}
+.tr .cb{width:52px;height:52px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.tr .cb .stop{width:14px;height:14px;border-radius:3px;background:#FF6B5E}
+.tr .pair{flex:1;display:flex;justify-content:center}
+.tr .pair span{height:52px;border-radius:26px;background:var(--sf2);display:inline-flex;align-items:center;gap:12px;padding:0 22px;font:900 20px Nunito,sans-serif;letter-spacing:.02em}
+.tr .pair .d{width:9px;height:9px;border-radius:50%;background:#FFC247}.tr .pair .d.g{background:#2BC48A}
+.tr .pair .sw{color:var(--sec);font:400 20px Inter}
+.tr .body{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 14px 20px;gap:6px}
+.tr .b{border-radius:26px;padding:16px 22px;font-size:19px;line-height:1.35}
+.tr .b.me{align-self:flex-end;max-width:86%;background:#173A2E;color:#E8F7F0}
+.tr .b.es{background:var(--deep);color:#fff;font:700 24px/1.32 Inter,sans-serif;position:relative;padding-right:60px}
+.tr .b.es .spk{position:absolute;right:16px;bottom:14px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
+.tr .meta{align-self:flex-end;font-size:13px;color:var(--sec);margin:0 8px 8px}.tr .meta.l{align-self:flex-start}
+.tr .b.pt{align-self:flex-start;max-width:86%;background:var(--sf2);color:var(--tx);opacity:.72}
+.tr .b.ru{align-self:flex-start;max-width:86%;background:#E3F7EE;color:#0E1116;font-weight:600;opacity:.72}
+.tr .btns{flex:none;display:flex;gap:12px;padding:0 14px 30px}
+.tr .pb{flex:1;height:76px;border-radius:38px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 21px Nunito,sans-serif}
+.tr .pb.a{background:#2BC48A;color:#0E1116;box-shadow:0 0 32px rgba(43,196,138,.35)}
+.tr .pb.b{background:var(--mint);color:#0E1116}
+/* мессенджер (хост клавиатуры и Parrlo Chat) */
+.nav{flex:none;display:flex;align-items:center;gap:10px;padding:6px 14px 10px;border-bottom:1px solid var(--line)}
+.nav .bk{color:var(--acc);display:flex;align-items:center}
+.nav .av{width:40px;height:40px;border-radius:50%;background:#6AA6F5;color:#0E1116;font:700 16px/40px Inter;text-align:center}
+.nav .nm{flex:1}.nav .nm b{display:block;font:600 17px Inter}.nav .nm span{font-size:13px;color:var(--sec)}
+.msgs{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:14px;overflow:hidden}
+.day{align-self:center;font-size:13px;color:var(--sec);background:var(--sf);padding:3px 10px;border-radius:10px;margin-bottom:4px}
+.m{max-width:80%;border-radius:20px;padding:10px 14px;font-size:17px}
+.m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px}
+.m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.scr.light .m.out{background:#D6F5E5;color:#0E1116}
+.m .t{display:flex;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid rgba(154,164,178,.3);font-size:15px;opacity:.85}
+.m .t svg{flex:none;width:16px;height:16px;margin-top:2px}
+.m .tm{display:block;text-align:right;font-size:12px;opacity:.6;margin-top:2px}
+.inp{flex:none;display:flex;gap:8px;align-items:center;padding:8px 12px 10px;border-top:1px solid var(--line)}
+.inp .f{flex:1;min-height:40px;border-radius:20px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:0 14px;font-size:17px}
+.inp .f .ph{color:var(--sec)}
+.inp .f .car{width:2px;height:22px;background:var(--acc);margin-left:1px}
+.inp .sd{width:38px;height:38px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center}
+/* клавиатура Parrlo v2 */
+.kb{flex:none;background:#D3D7DC;padding:0 3px 4px;--key:#fff;--key2:#ABB2BB;--ktx:#0E1116;--ksh:0 1px 0 rgba(0,0,0,.3)}
+.scr:not(.light) .kb{background:#1B1F25;--key:#3A414B;--key2:#2A3038;--ktx:#F2F5F7;--ksh:0 1px 0 rgba(0,0,0,.6)}
+.kb .tb{height:50px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;color:var(--ktx)}
+.kb .tb .ib{width:58px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.kb .tb .ib svg{width:26px;height:26px}
+.kb .tb .ib.on{background:var(--acc);color:var(--onacc)}
+.kb .rows{display:flex;flex-direction:column;gap:12px;padding-top:6px}
+.kb .r{display:flex;gap:6px}
+.kb .k{flex:1 1 0;height:46px;border-radius:8px;background:var(--key);box-shadow:var(--ksh);color:var(--ktx);display:flex;align-items:center;justify-content:center;font:400 24px Inter}
+.kb .k.f{background:var(--key2);font-size:17px}.kb .k.f svg{width:24px;height:24px}
+.kb .k.w{flex:1.38 1 0}.kb .hp{flex:.5 1 0}.kb .g3{flex:.18 1 0}
+.kb .k.sp{flex:4.4 1 0;font-size:16px;gap:10px}.kb .k.sp i{font-style:normal;color:var(--sec)}
+.kb .k.p{flex:.85 1 0}.kb .k.rt{flex:1.55 1 0;background:var(--acc);color:var(--onacc);box-shadow:none}
+.kb .sys{height:34px}
+.kb .hm{width:140px;height:5px;border-radius:3px;background:var(--tx);margin:12px auto 0}
+.chip{margin:6px 8px 0;border-radius:14px;background:var(--key);box-shadow:var(--ksh);padding:10px 12px;display:flex;gap:10px;align-items:center;color:var(--ktx);font-size:15px}
+.chip svg{flex:none;width:20px;height:20px;color:var(--acc)}
+.chip b{font-weight:600}
+.homebar{flex:none;height:34px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}.homebar i{width:140px;height:5px;border-radius:3px;background:var(--tx)}
