@@ -1,0 +1,72 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Parrlo Chat — переписка</title>
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:40px 16px 72px}
+.chat-thread-w{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-thread-w h1{font:900 30px/1.15 Nunito,sans-serif;margin:0 0 6px}
+.chat-thread-info{flex:1 1 340px;max-width:560px}
+.chat-thread-info p{color:#9AA4B2;margin:0 0 18px}
+.chat-thread-info h2{font:900 18px Nunito,sans-serif;margin:22px 0 8px}
+.chat-thread-info ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}.chat-thread-info li{margin:5px 0}
+.chat-thread-info code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px}
+.chat-thread-col{flex:none}
+@media(max-width:480px){.chat-thread-col .pf{--s:.9!important}}
+/* экран */
+.chat-thread-scr .chat-thread-nav{flex:none;display:flex;align-items:center;gap:8px;padding:2px 6px 8px 4px;border-bottom:1px solid var(--line)}
+.chat-thread-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--acc);flex:none}
+.chat-thread-ib.s{color:var(--tx)}
+.chat-thread-nav .av{width:40px;height:40px;border-radius:50%;background:#6AA6F5;color:#0E1116;font:700 16px/40px Inter;text-align:center;flex:none}
+.chat-thread-nav .nm{flex:1;min-width:0}.chat-thread-nav .nm b{display:block;font:600 17px/1.25 Inter}
+.chat-thread-nav .nm span{display:block;white-space:nowrap;font-size:12.5px;line-height:1.25;color:var(--sec)}
+.chat-thread-msgs{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:10px 14px 12px;overflow:hidden}
+.chat-thread-day{align-self:center;font-size:13px;color:var(--sec);background:var(--sf);padding:3px 12px;border-radius:10px}
+.chat-thread-m{max-width:82%;border-radius:20px;padding:7px 13px 5px;font-size:16px;line-height:1.28}
+.chat-thread-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px}
+.chat-thread-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.chat-thread-t{display:flex;gap:6px;margin-top:4px;padding-top:4px;border-top:1px solid rgba(154,164,178,.3);font-size:14px;line-height:1.25}
+.chat-thread-t svg{flex:none;width:15px;height:15px;margin-top:2px}
+.chat-thread-m.in .chat-thread-t{color:var(--sec)}
+.chat-thread-m.out .chat-thread-t{color:#fff;border-top-color:rgba(255,255,255,.28)}
+.chat-thread-tm{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;margin-top:1px}
+.chat-thread-m.in .chat-thread-tm{color:var(--sec)}.chat-thread-m.out .chat-thread-tm{color:#fff}
+.chat-thread-tm svg{width:17px;height:17px;color:#fff}
+.chat-thread-inp{flex:none;display:flex;gap:8px;align-items:center;padding:8px 10px 6px 12px;border-top:1px solid var(--line)}
+.chat-thread-f{flex:1;height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:0 16px;font-size:17px;color:var(--sec)}
+.chat-thread-mic{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+</style></head><body>
+<div class="chat-thread-w">
+<div class="chat-thread-col"><div class="pf" style="--s:1"><div class="shell"></div><div class="glass"><div class="scr chat-thread-scr" id="chat-thread">
+<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>
+<div class="chat-thread-nav"><span class="chat-thread-ib" aria-label="Назад"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px"><path d="M15 5l-7 7 7 7"/></svg></span><span class="av">L</span><span class="nm"><b>Lucía</b><span>пишет по-испански</span><span>ты читаешь по-русски</span></span><span class="chat-thread-ib s" aria-label="Поиск в чате"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span></div>
+<div class="chat-thread-msgs">
+<div class="chat-thread-day">Сегодня</div>
+<div class="chat-thread-m in" lang="es">¡Hola! ¿Qué tal el primer día?<div class="chat-thread-t" lang="ru">TR<span>Привет! Как первый день?</span></div><span class="chat-thread-tm">09:41</span></div>
+<div class="chat-thread-m out">Отлично, все очень помогают<div class="chat-thread-t" lang="es">TR<span>¡Genial, todos me ayudan mucho!</span></div><span class="chat-thread-tm">09:44</span></div>
+<div class="chat-thread-m in" lang="es">¿Nos vemos mañana a las 10 en la oficina?<div class="chat-thread-t" lang="ru">TR<span>Увидимся завтра в 10 в офисе?</span></div><span class="chat-thread-tm">10:02</span></div>
+<div class="chat-thread-m out">Да, буду. Возьму документы.<div class="chat-thread-t" lang="es">TR<span>Sí, allí estaré. Llevo los documentos.</span></div><span class="chat-thread-tm">10:03</span></div>
+<div class="chat-thread-m in" lang="es">¡Genial! Te espero en recepción.<div class="chat-thread-t" lang="ru">TR<span>Отлично! Жду тебя на ресепшене.</span></div><span class="chat-thread-tm">10:04</span></div>
+<div class="chat-thread-m out">Скоро буду, напишу от входа<div class="chat-thread-t" lang="es">TR<span>Ya casi llego, te escribo desde la entrada.</span></div><span class="chat-thread-tm">10:05 DONE</span></div>
+</div>
+<div class="chat-thread-inp"><span class="chat-thread-f">Сообщение</span><span class="chat-thread-mic" aria-label="Микрофон">MIC</span></div>
+<div class="homebar"><i></i></div>
+</div></div></div>
+<div class="pcap"><span class="dot"></span><div><b>Parrlo Chat · переписка</b><span>Lucía пишет по-испански, ты читаешь по-русски. Текст черновой.</span></div></div></div>
+<div class="chat-thread-info"><h1>chat-thread</h1><p>Переписка с Lucía. Только тёмная тема, 390×844.</p>
+<h2>Что на экране</h2><ul><li>Шапка: назад, аватар, «Lucía», подпись, поиск в чате (44×44).</li><li>Плашка «Сегодня»; шесть сообщений, у каждого перевод строкой ниже со значком перевода.</li><li>Входящие: испанский, перевод на русский приглушённым цветом. Исходящие: русский, испанский ниже.</li><li>Время у каждого, у последнего исходящего галочки «прочитано».</li><li>Поле «Сообщение», микрофон (акцент), полоска «домой».</li></ul>
+<h2>Токены</h2><ul><li>Фон <code>#0E1116</code>, входящие <code>#242B34</code>, линии <code>#2F3742</code>, вторичный <code>#9AA4B2</code>.</li><li>Исходящие Deep Green <code>#00875C</code>, текст белый, перевод и время <code>#FFFFFF</code>, галочки белые.</li><li>Микрофон Light Green <code>#2BC48A</code>, значок <code>#0E1116</code>. Жёлтый не используется.</li></ul>
+<h2>Контраст</h2><ul id="chat-thread-contrast"></ul>
+<h2>Не утверждено</h2><ul><li>Все тексты (черновик).</li><li>Значок перевода и вид галочек.</li><li>Способ скрыть или показать оригинал по нажатию (в макете есть, здесь не показан).</li></ul></div>
+</div>
+<script>
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+var TR='<svg viewBox="0 0 24 24" '+SW+'><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg>';
+var DONE='<svg viewBox="0 0 24 24" '+SW+'><path d="M2.5 12.5l4 4 8-9"/><path d="M11 15.5l1.5 1.5 9-10"/></svg>';
+var MIC='<svg class="ic" viewBox="0 0 24 24" '+SW+'><rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/></svg>';
+var s=document.getElementById('chat-thread');
+s.innerHTML=s.innerHTML.replace(/TR(?=<span>)/g,TR).replace(/10:05 DONE/,'10:05'+DONE).replace('>MIC<','>'+MIC+'<');
+function L(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=L(a),y=L(b);return ((Math.max(x,y)+.05)/(Math.min(x,y)+.05)).toFixed(2)}
+var rows=[['Основной текст #F2F5F7 на входящем #242B34',cr('#F2F5F7','#242B34')],['Перевод #9AA4B2 на #242B34',cr('#9AA4B2','#242B34')],['Время #9AA4B2 на #242B34',cr('#9AA4B2','#242B34')],['Белый на Deep Green #00875C',cr('#FFFFFF','#00875C')],['Перевод и время #FFFFFF на #00875C',cr('#FFFFFF','#00875C')],['Подпись #9AA4B2 на фоне #0E1116',cr('#9AA4B2','#0E1116')],['Плейсхолдер #9AA4B2 на #1C2026',cr('#9AA4B2','#1C2026')],['Значок #0E1116 на акценте #2BC48A',cr('#0E1116','#2BC48A')]];
+document.getElementById('chat-thread-contrast').innerHTML=rows.map(function(r){return '<li>'+r[0]+': '+r[1]+':1</li>'}).join('');
+</script></body></html>
