@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo · папки контактов</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.kb-contact-w{max-width:1200px;margin:0 auto}
+.kb-contact-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.kb-contact-tags{display:flex;gap:8px;flex-wrap:wrap}
+.kb-contact-tag{display:inline-block;font:600 13px/20px Inter,sans-serif;color:#0E1116;background:#FFC247;border-radius:8px;padding:2px 10px}
+.kb-contact-tag.m{background:#2F3742;color:#F2F5F7}
+.kb-contact-lng{display:flex;gap:4px;background:#171C23;border-radius:14px;padding:4px}
+.kb-contact-lng a{min-width:56px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font:700 15px Inter,sans-serif;color:#C5CCD5;text-decoration:none}
+.kb-contact-lng a[aria-current="true"]{background:#2BC48A;color:#0E1116}
+.kb-contact-w h1{font:900 36px/1.15 Nunito,sans-serif;margin:0 0 8px}
+.kb-contact-w h2{font:900 24px/1.2 Nunito,sans-serif;margin:0 0 8px}
+.kb-contact-lead{color:#9AA4B2;max-width:760px;margin:0 0 32px}
+.kb-contact-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;padding:48px 24px 40px;border-radius:32px;background:#171C23}
+.kb-contact-hero figure,.kb-contact-st figure{margin:0}
+.kb-contact-sec{margin-top:64px}
+.kb-contact-sec>p{color:#9AA4B2;margin:0 0 24px;max-width:760px}
+.kb-contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(560px,1fr));gap:24px}
+.kb-contact-st{background:#171C23;border-radius:24px;padding:24px}
+.kb-contact-st h3{font:900 20px/1.25 Nunito,sans-serif;margin:0 0 4px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.kb-contact-st h3 code{font:500 13px ui-monospace,Menlo,monospace;color:#9AA4B2;background:#0E1116;border-radius:6px;padding:1px 6px}
+.kb-contact-st>p{margin:0 0 20px;color:#9AA4B2;font-size:15px}
+.kb-contact-st .kb-contact-where{display:inline-block;font:600 12px/18px Inter,sans-serif;color:#C5CCD5;background:#0E1116;border-radius:6px;padding:1px 8px;margin-left:auto}
+.kb-contact-pair{display:flex;gap:20px;justify-content:center}
+.kb-contact-pair .pcap{margin-top:10px;font-size:13px}
+.kb-contact-pair .pcap b{font-size:14px}
+.kb-contact-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px}
+.kb-contact-notes h2{font-size:20px;margin:0 0 10px}
+.kb-contact-notes ul{margin:0;padding-left:20px;color:#9AA4B2}
+.kb-contact-notes li{margin:6px 0}
+.kb-contact-notes b{color:#F2F5F7;font-weight:600}
+.kb-contact-st .pf{--s:.6!important}
+@media (max-width:660px){
+ .kb-contact-grid{grid-template-columns:1fr}
+ .kb-contact-st{padding:16px}
+ .kb-contact-pair{gap:12px}
+ .kb-contact-st .pf{--s:.345!important}
+ .kb-contact-st .kb-contact-one .pf{--s:.66!important}
+ .kb-contact-hero{padding:24px 8px;gap:24px}
+ .kb-contact-hero .pf{--s:.76!important}
+ .kb-contact-w h1{font-size:28px}
+}
+
+/* ================= приложение (только тёмная) ================= */
+.kb-contact-app{--y:#FFC247}
+.kb-contact-hd{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 16px 0;height:60px}
+.kb-contact-cb{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center}
+.kb-contact-cb svg{width:22px;height:22px}
+.kb-contact-hd .kb-contact-ht{flex:1;min-width:0;text-align:center;font:600 16px/20px Inter,sans-serif;color:var(--sec)}
+.kb-contact-body{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 16px;overflow:hidden}
+.kb-contact-h{font:900 34px/40px Nunito,sans-serif;margin:8px 4px 4px}
+.kb-contact-sub{font:400 15px/21px Inter,sans-serif;color:var(--sec);margin:0 4px 20px}
+/* список */
+.kb-contact-gh{display:flex;align-items:center;gap:8px;font:600 13px/16px Inter,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--sec);margin:0 4px 8px}
+.kb-contact-gh svg{width:16px;height:16px;flex:none}
+.kb-contact-gh span.d{text-transform:none;letter-spacing:0;font-weight:500;margin-left:auto}
+.kb-contact-grp{background:var(--sf);border-radius:20px;box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;margin-bottom:20px}
+.kb-contact-row{display:flex;align-items:center;gap:14px;min-height:72px;padding:12px 12px 12px 16px}
+.kb-contact-row+.kb-contact-row{border-top:1px solid var(--line)}
+.kb-contact-av{flex:none;width:44px;height:44px;border-radius:50%;color:#0E1116;font:700 17px/44px Inter,sans-serif;text-align:center}
+.kb-contact-row>div{flex:1;min-width:0}
+.kb-contact-row b{display:block;font:600 17px/22px Inter,sans-serif}
+.kb-contact-row b small{font:400 15px Inter,sans-serif;color:var(--sec)}
+.kb-contact-row span.s{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.kb-contact-pl{font:500 13px/20px Inter,sans-serif;color:var(--tx);background:var(--sf2);border-radius:7px;padding:0 7px;white-space:nowrap}
+.kb-contact-chev{flex:none;color:var(--sec);display:flex}.kb-contact-chev svg{width:20px;height:20px}
+.kb-contact-bot{flex:none;padding:12px 16px 0}
+.kb-contact-btn{height:56px;border-radius:28px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;gap:10px;font:900 19px Nunito,sans-serif}
+.kb-contact-btn svg{width:22px;height:22px}
+.kb-contact-btn2{height:48px;border-radius:24px;color:var(--tx);display:flex;align-items:center;justify-content:center;font:600 16px Inter,sans-serif;margin-top:8px}
+/* карточка */
+.kb-contact-id{display:flex;align-items:center;gap:16px;margin:12px 4px 28px}
+.kb-contact-id .kb-contact-av{width:64px;height:64px;font:900 26px/64px Nunito,sans-serif}
+.kb-contact-id h2{font:900 30px/36px Nunito,sans-serif;margin:0}
+.kb-contact-fold{display:inline-flex;align-items:center;gap:6px;height:44px;margin:-4px 0 -8px -2px;padding:0 2px;font:500 15px Inter,sans-serif;color:var(--sec)}
+.kb-contact-fold svg{width:16px;height:16px}
+.kb-contact-fold b{color:var(--tx);font-weight:600}
+.kb-contact-f{margin-bottom:26px}
+.kb-contact-lb{font:600 13px/16px Inter,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--sec);margin:0 4px 8px}
+.kb-contact-chips{display:flex;gap:8px;flex-wrap:nowrap}
+.kb-contact-chip{flex:none;height:44px;border-radius:22px;padding:0 16px;display:flex;align-items:center;gap:6px;font:500 16px Inter,sans-serif;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);color:var(--tx);white-space:nowrap}
+.kb-contact-chip svg{width:18px;height:18px}
+.kb-contact-chip.on{background:#F2F5F7;color:#0E1116;box-shadow:none;font-weight:700;padding-left:12px}
+.kb-contact-chip.add{width:44px;padding:0;justify-content:center;color:var(--sec)}
+.kb-contact-seg{display:flex;gap:4px;padding:4px;border-radius:26px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line)}
+.kb-contact-seg span{flex:1;min-width:0;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:6px;font:500 16px/1 Inter,sans-serif;white-space:nowrap}
+.kb-contact-seg span svg{width:16px;height:16px;flex:none}
+.kb-contact-seg span[aria-checked="true"]{background:#F2F5F7;color:#0E1116;font-weight:700}
+.kb-contact-note{position:relative;background:var(--sf);border-radius:20px;box-shadow:inset 0 0 0 2px var(--acc);padding:14px 16px 12px}
+.kb-contact-note p{margin:0;font:400 17px/24px Inter,sans-serif}
+.kb-contact-car{display:inline-block;width:2px;height:21px;background:var(--acc);vertical-align:-4px;margin-left:1px}
+.kb-contact-meter{display:flex;align-items:center;gap:10px;margin-top:12px}
+.kb-contact-bar{flex:1;height:6px;border-radius:3px;background:var(--sf2);overflow:hidden}
+.kb-contact-bar i{display:block;height:100%;border-radius:3px;background:var(--y)}
+.kb-contact-left{flex:none;display:flex;align-items:center;gap:6px;font:600 13px/16px Inter,sans-serif;color:var(--y)}
+.kb-contact-left svg{width:16px;height:16px}
+.kb-contact-tip{display:flex;gap:10px;margin:10px 4px 0;font:400 14px/20px Inter,sans-serif;color:var(--sec)}
+.kb-contact-tip svg{flex:none;width:18px;height:18px;margin-top:1px}
+/* пусто */
+.kb-contact-em{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 12px 24px}
+.kb-contact-em img{width:168px;height:168px}
+.kb-contact-em h3{font:900 28px/34px Nunito,sans-serif;margin:12px 0 8px}
+.kb-contact-em p{font:400 16px/23px Inter,sans-serif;color:var(--sec);margin:0 0 24px;max-width:340px}
+.kb-contact-ex{display:flex;flex-direction:column;gap:8px;width:100%}
+.kb-contact-exr{display:flex;align-items:center;gap:12px;height:56px;border-radius:18px;padding:0 16px;box-shadow:inset 0 0 0 1.5px var(--line);border:0;text-align:left}
+.kb-contact-exr svg{flex:none;width:22px;height:22px;color:var(--acc)}
+.kb-contact-exr b{font:600 16px Inter,sans-serif;flex:none}
+.kb-contact-exr span{font:400 15px Inter,sans-serif;color:var(--sec);flex:1;min-width:0;text-align:right;white-space:nowrap}
+
+/* ================= клавиатура (обе темы), каркас kb-before ================= */
+.scr.light{--kb-bg:#D3D7DC;--kb-key:#FFFFFF;--kb-key2:#ABB2BB;--kb-tx:#0E1116;--kb-sec:#5B6472;--kb-sh:0 1px 0 rgba(0,0,0,.3);--kb-acc:#00875C;--kb-onacc:#FFFFFF;--kb-line:#D5DBE1}
+.scr:not(.light){--kb-bg:#1B1F25;--kb-key:#3A414B;--kb-key2:#2A3038;--kb-tx:#F2F5F7;--kb-sec:#C5CCD5;--kb-sh:0 1px 0 rgba(0,0,0,.6);--kb-acc:#2BC48A;--kb-onacc:#0E1116;--kb-line:#4A525D}
+.kb-contact-scr .nav{padding:6px 16px 10px}
+.kb-contact-scr .nav .av{color:#0E1116}
+.kb-contact-scr .nav .bk svg{width:28px;height:28px}
+.kb-contact-scr .msgs{padding:12px 16px}
+.kb-contact-scr .m{max-width:78%}
+.kb-contact-scr .m .tm{opacity:1;color:var(--sec)}
+.kb-contact-scr .m.out .tm{color:inherit;opacity:.85}
+.kb-contact-scr.light .m.out .tm{color:#3E5A4D;opacity:1}
+.kb-contact-scr .inp{padding:8px 12px 10px;align-items:flex-end}
+.kb-contact-scr .inp .f{color:var(--tx);flex:1;min-width:0;padding:8px 14px;line-height:24px;font-size:17px;border-radius:20px;min-height:42px}
+.kb-contact-scr .inp .f .pl{color:var(--sec)}
+.kb-contact-scr .inp .sd{flex:none;width:38px;height:38px;margin-bottom:2px}
+.kb-contact-scr .inp .sd.off{background:var(--sf2);color:var(--sec)}
+.kb-contact-kcar{display:inline-block;width:2px;height:22px;background:var(--acc);vertical-align:-5px;margin-left:1px}
+.kb-contact-kb{flex:none;background:var(--kb-bg);padding:0 3px;color:var(--kb-tx)}
+.kb-contact-strip{position:relative;margin:8px 5px 0;height:60px;border-radius:14px;background:var(--kb-key);box-shadow:var(--kb-sh);padding:0 8px 0 12px;display:flex;align-items:center;gap:10px;font-size:14px;line-height:19px;overflow:hidden}
+.kb-contact-strip>svg{flex:none;width:22px;height:22px;color:var(--kb-acc)}
+.kb-contact-strip .tx{flex:1;min-width:0}
+.kb-contact-strip .tx b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-contact-strip .tx span{display:block;color:var(--kb-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-contact-a{flex:none;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 14px;font:700 15px Inter,sans-serif;white-space:nowrap;background:var(--kb-key2);color:var(--kb-tx)}
+.kb-contact-a svg{width:18px;height:18px}
+/* ряд контактов */
+.kb-contact-strip.row{padding:0 6px;gap:6px}
+.kb-contact-kc{flex:none;height:48px;border-radius:24px;display:flex;align-items:center;gap:8px;padding:0 12px;font:600 15px/18px Inter,sans-serif;white-space:nowrap;color:var(--kb-tx)}
+.kb-contact-kc .kb-contact-av{width:30px;height:30px;font:700 13px/30px Inter,sans-serif}
+.kb-contact-kc.on{background:var(--kb-acc);color:var(--kb-onacc);padding:0 14px 0 9px;margin-right:2px}
+.kb-contact-kc.on small{display:block;font:500 12px/15px Inter,sans-serif}
+.kb-contact-kc.on b{display:block;font-weight:700}
+.kb-contact-kd{flex:none;width:1px;height:28px;background:var(--kb-line)}
+.kb-contact-kc.more{width:44px;padding:0;justify-content:center;color:var(--kb-sec);margin-left:auto}
+.kb-contact-kc.more svg{width:22px;height:22px}
+/* панель иконок */
+.kb-contact-tbar{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;margin-top:4px}
+.kb-contact-ib{width:64px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--kb-tx)}
+.kb-contact-ib svg{width:26px;height:26px}
+.kb-contact-ib .pm{width:25px;height:25px}
+.kb-contact-rows{position:relative;display:flex;flex-direction:column;gap:11px;padding-top:6px}
+.kb-contact-r{display:flex;gap:5px}
+.kb-contact-k{position:relative;flex:1 1 0;min-width:0;height:45px;border-radius:8px;background:var(--kb-key);box-shadow:var(--kb-sh);color:var(--kb-tx);display:flex;align-items:center;justify-content:center;font:400 24px/1 Inter,sans-serif}
+.kb-contact-k.f{background:var(--kb-key2)}
+.kb-contact-k.f svg{width:23px;height:23px}
+.kb-contact-k.w{flex:1.38 1 0}
+.kb-contact-g{flex:.18 1 0}
+.kb-contact-hp{flex:.5 1 0}
+.kb-contact-k.n{flex:1.25 1 0;font-size:17px;font-weight:500}
+.kb-contact-k.p{flex:.85 1 0}
+.kb-contact-k.sp{flex:4.4 1 0;font-size:16px;gap:10px}
+.kb-contact-k.sp i{font-style:normal;color:var(--kb-sec);font-size:18px}
+.kb-contact-k.rt{flex:1.55 1 0;background:var(--kb-acc);color:var(--kb-onacc);box-shadow:none}
+.kb-contact-k.rt svg{width:25px;height:25px}
+.kb-contact-home{height:34px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.kb-contact-home i{width:140px;height:5px;border-radius:3px;background:var(--kb-tx)}
+</style>
+</head>
+<body>
+<div class="kb-contact-w">
+<div class="kb-contact-top"><div class="kb-contact-tags"><span class="kb-contact-tag" id="kb-contact-t-draft"></span><span class="kb-contact-tag m" id="kb-contact-t-mock"></span></div>
+<nav class="kb-contact-lng" id="kb-contact-lng" aria-label="Language"></nav></div>
+<h1 id="kb-contact-h1"></h1>
+<p class="kb-contact-lead" id="kb-contact-lead"></p>
+<div class="kb-contact-hero" id="kb-contact-hero"></div>
+<section class="kb-contact-sec">
+<h2 id="kb-contact-h-st"></h2>
+<p id="kb-contact-p-st"></p>
+<div class="kb-contact-grid" id="kb-contact-grid"></div>
+</section>
+<section class="kb-contact-sec kb-contact-notes" id="kb-contact-notes"></section>
+</div>
+<script>
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+let pmN=0;
+/* «Улучшить» — монохромный попугай Parrlo (ключ spark из screens.js) */
+const parrot=()=>{const id='kb-contact-pm'+(++pmN);return `<svg class="pm" viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#${id})"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>`;};
+const ic=(p,extra='')=>`<svg viewBox="0 0 24 24" ${SW} ${extra} aria-hidden="true">${p}</svg>`;
+const I={
+tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+voice:ic('<path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/>'),
+gear:ic('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'),
+shift:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l8 8.5h-4.5v7.5h-7V12H4z"/></svg>`,
+shiftOn:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l8 8.5h-4.5v7.5h-7V12H4z"/></svg>`,
+del:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 5H20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H8.5L3 12z"/><path d="M11.5 9.5l5 5M16.5 9.5l-5 5" stroke-linecap="round"/></svg>`,
+ret:ic('<path d="M19 5v6a3 3 0 0 1-3 3H5"/><path d="M9 10l-4 4 4 4"/>','stroke-width="2"'),
+back:ic('<path d="M15 5l-7 7 7 7"/>','stroke-width="2.2"'),
+send:`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>`,
+plus:ic('<path d="M12 5v14M5 12h14"/>','stroke-width="2.1"'),
+more:ic('<circle cx="5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="19" cy="12" r="1.2" fill="currentColor"/>'),
+chev:ic('<path d="M9 5l7 7-7 7"/>','stroke-width="2"'),
+down:ic('<path d="M7 10l5 5 5-5"/>','stroke-width="2.1"'),
+check:ic('<path d="M5 12.5l4.5 4.5L19 7.5"/>','stroke-width="2.4"'),
+work:ic('<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/><path d="M3 12.5h18"/>'),
+family:ic('<path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/>'),
+home:ic('<path d="M4 10.5L12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/>'),
+reply:ic('<path d="M10 8L5 12.5l5 4.5"/><path d="M5 12.5h9a5 5 0 0 1 5 5V19"/>'),
+x:ic('<path d="M6 6l12 12M18 6L6 18"/>','stroke-width="2.1"'),
+info:ic('<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/>'),
+pen:ic('<path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>'),
+clock:ic('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>')
+};
+const AVC=['#6AA6F5','#F5B36A','#B9A2F7','#F59AC0','#7FD6C2'];
+const av=(ch,ci,cls='')=>`<span class="kb-contact-av ${cls}" style="background:${AVC[ci]}" aria-hidden="true">${ch}</span>`;
+
+/* ===== все тексты экрана и страницы ===== */
+const D={
+ru:{html:'ru',kb:'ru',space:'Русский',ph:'Сообщение',online:'в сети',today:'Сегодня',
+ who:'Pedro',whoAv:'P',
+ msgs:[['in','¡Hola! ¿Qué tal el piso? ¿Va bien la calefacción?','9:52'],['out','¡Hola, Pedro! Sí, todo bien, gracias.','9:55'],['in','Genial. Mañana viene el técnico a revisar la caldera. ¿A qué hora te viene bien?','10:01']],
+ draft:'Завтра после 10 удобно. Я буду дома.',
+ imp:'Улучшить',tr:'Перевести',dict:'Диктовка',voice:'Голосовое',set:'Настройки',shift:'Заглавные',del:'Удалить',num:'Цифры',ret:'Ввод',
+ /* приложение */
+ kbd:'Клавиатура',back:'Назад',add:'Добавить контакт',moreA:'Ещё',
+ lH:'Контакты',lSub:'Для каждого — свой голос. Настрой один раз — дальше Parrlo помнит сам.',
+ folders:[['work','Работа','на «вы»'],['family','Семья','тепло'],['home','Дом','по делу']],
+ people:[ // folder, имя, роль, обращение, тон, буква, цвет
+  ['work','Olga','директор','на «вы»','вежливо','O',1],
+  ['family','Мама','','на «ты»','тепло','М',3],
+  ['home','Pedro','арендодатель','на «вы»','по делу','P',0],
+  ['home','Lucía','соседка','на «ты»','тепло','L',2]],
+ fName:'Pedro',fAv:'P',fFolderL:'Папка',fFolder:'Дом',
+ lRole:'Роль',roles:['арендодатель','врач','сосед'],roleAdd:'Своя роль',
+ lAddr:'Обращение',addr:['на «ты»','на «вы»'],
+ lTone:'Тон',tones:['Тепло','Вежливо','По делу'],
+ lNote:'Заметка для Parrlo',
+ note:'Коротко и по делу, без смайликов. Сначала дата и время, потом вопрос. Благодарить можно, извиняться лишний раз — не надо.',
+ left:'Осталось немного',
+ tip:'Напиши, как должны звучать сообщения этому человеку. Не пиши сюда пароли и номера документов.',
+ save:'Сохранить',
+ eH:'Пока никого',eP:'Добавь тех, кому пишешь чаще всего. Parrlo запомнит, как с ними говорить: кому на «вы», кому тепло.',
+ eEx:[['work','Работа','директору — на «вы»'],['family','Семья','маме — тепло'],['home','Дом','арендодателю — по делу']],
+ eHow:'Как это работает',
+ /* клавиатура */
+ guess:'угадано',kOthers:[['Olga','O',1],['Lucía','L',2],['Мама','М',3]],kMore:'Все контакты',
+ hB:'Учтён ответ Pedro',hS:'На «вы» · по делу',hX:'Не учитывать',
+ /* страница */
+ title:'Parrlo · папки контактов',t_draft:'Черновик текста',t_mock:'Макет · скоро',
+ h1:'Папки контактов: для каждого — свой голос',
+ lead:'Экран K-11 / K-12 карты сайта. В приложении Parrlo (Настройки клавиатуры → Контакты) у каждого человека своя папка: роль, «ты / вы», тон и «Заметка для Parrlo». Клавиатура в чате узнаёт собеседника и пишет с учётом его папки и последнего ответа. Приложение — тёмная тема, клавиатура — светлая и тёмная.',
+ capF:['Карточка контакта','Pedro, папка «Дом»: арендодатель, на «вы», по делу. Заметка почти заполнена — полоска жёлтая.'],
+ capH:['Клавиатура в чате с Pedro','Полоса «Учтён ответ Pedro» с действием «Не учитывать».'],
+ hSt:'Состояния',pSt:'Приложение показано только в тёмной теме; клавиатура — слева светлая, справа тёмная. Каркас клавиатуры — как у kb-before и kb-translate.',
+ app:'Приложение',kbw:'Клавиатура',light:'Светлая',dark:'Тёмная',
+ st:{list:['Список по папкам','Настройки клавиатуры → Контакты: люди разложены по папкам «Работа», «Семья», «Дом», у каждого видно обращение и тон.'],
+  folder:['Карточка контакта','Касание по Pedro: роль, «ты / вы», тон и заметка. Полоска под заметкой показывает, что место кончается, — без цифр.'],
+  row:['Ряд контактов в клавиатуре','Открыли чат и коснулись поля: Parrlo угадал собеседника — Pedro выбран с меткой «угадано», другого можно выбрать касанием.'],
+  'keyboard-hint':['«Учтён ответ…»','Черновик написан: полоса говорит, что учтён последний ответ Pedro и его папка. «Не учитывать» — писать без этого.'],
+  empty:['Контактов ещё нет','Первый вход в «Контакты»: Парло и три примера папок — нажми «Добавить контакт».']},
+ hDec:'Решения',dec:[
+  '<b>Папки из текста сайта</b>: «Работа», «Семья», «Дом» с подписями «на «вы»», «тепло», «по делу» — это и группировка списка, и примеры в пустом состоянии.',
+  '<b>Роль — чипы, а не поле</b>: арендодатель, врач, сосед и «+» для своей. Обращение и тон — сегменты; выбранный пункт белый с тёмным текстом, а не только зелёный.',
+  '<b>Счётчик заметки без цифр</b>: полоска заполняется по мере набора; когда места мало — жёлтая и подпись «Осталось немного». Это единственный жёлтый элемент экрана.',
+  '<b>Подсказка к заметке — совет</b>: что писать (как должны звучать сообщения) и чего не писать (пароли, номера документов). Без обещаний о данных.',
+  '<b>«Угадано» — внутри выбранного чипа</b>, второй строкой под именем: видно, что Parrlo выбрал сам и это можно поменять касанием по другому имени.',
+  '<b>«Учтён ответ…» занимает ту же полосу 60 pt</b>, что статусы kb-translate: одна полоса — одно сообщение и одно действие. «Не учитывать» — вторичная кнопка с крестиком.',
+  'Карточка открывается из «Контактов» в настройках клавиатуры, кнопка «Назад» подписана «Клавиатура» в списке и «Контакты» в карточке.'],
+ hTok:'Токены и контраст',
+ hNo:'Не утверждено',no:[
+  'Статус «скоро»: в сборке папок контактов, угадывания собеседника и «Учтён ответ» нет (GAP keyboard №18–20). Это макет.',
+  'Нужно заключение юриста: данные третьих лиц в папках и заметке, автоматическая догадка о собеседнике (GAP keyboard, юр. п. 5).',
+  'Все тексты — черновик; es и en не вычитаны носителем. Слово «угадано» и его переводы (adivinado / guessed) — под вопросом.',
+  'Подсказка к заметке короче, чем в kb-mvp: убраны «не пишите о здоровье, вере, политике» и фраза об отправке на сервер. Решить вместе с юристом, что оставить.',
+  'Набор ролей и тонов (три тона вместо «деловой / дружеский / тёплый» в kb-mvp) и наличие «+ своя роль».',
+  'Порог, с которого полоска заметки становится жёлтой.']},
+es:{html:'es',kb:'es',space:'Español',ph:'Mensaje',online:'en línea',today:'Hoy',
+ who:'Olga',whoAv:'O',
+ msgs:[['in','Добрый день! Как вам квартира? С отоплением всё в порядке?','9:52'],['out','Здравствуйте, Ольга! Да, всё хорошо, спасибо.','9:55'],['in','Отлично. Завтра придёт мастер проверить котёл. Во сколько вам удобно?','10:01']],
+ draft:'Mañana después de las 10 me va bien. Estaré en casa.',
+ imp:'Mejorar',tr:'Traducir',dict:'Dictado',voice:'Nota de voz',set:'Ajustes',shift:'Mayúsculas',del:'Borrar',num:'Números',ret:'Intro',
+ kbd:'Teclado',back:'Atrás',add:'Añadir contacto',moreA:'Más',
+ lH:'Contactos',lSub:'A cada uno, su tono. Configúralo una vez y Parrlo se acuerda.',
+ folders:[['work','Trabajo','de usted'],['family','Familia','cercano'],['home','Casa','al grano']],
+ people:[
+  ['work','Pedro','jefe','de usted','educado','P',0],
+  ['family','Mamá','','de tú','cercano','M',3],
+  ['home','Olga','casera','de usted','al grano','O',1],
+  ['home','Lucía','vecina','de tú','cercano','L',2]],
+ fName:'Olga',fAv:'O',fFolderL:'Carpeta',fFolder:'Casa',
+ lRole:'Rol',roles:['casera','médico','vecino'],roleAdd:'Otro rol',
+ lAddr:'Trato',addr:['de tú','de usted'],
+ lTone:'Tono',tones:['Cercano','Educado','Al grano'],
+ lNote:'Nota para Parrlo',
+ note:'Breve y al grano, sin emojis. Primero el día y la hora, luego la pregunta. Dar las gracias, sí; disculparse de más, no.',
+ left:'Queda poco',
+ tip:'Escribe cómo deben sonar tus mensajes a esta persona. No pongas aquí contraseñas ni números de documentos.',
+ save:'Guardar',
+ eH:'Aún no hay nadie',eP:'Añade a las personas a las que más escribes. Parrlo recordará cómo hablarles: a quién de usted y con quién en un tono cercano.',
+ eEx:[['work','Trabajo','al jefe, de usted'],['family','Familia','a mamá, cercano'],['home','Casa','a la casera, al grano']],
+ eHow:'Cómo funciona',
+ guess:'adivinado',kOthers:[['Pedro','P',0],['Lucía','L',2],['Mamá','M',3]],kMore:'Todos los contactos',
+ hB:'Tengo en cuenta lo que dijo Olga',hS:'De usted · al grano',hX:'Ignorar',
+ title:'Parrlo · carpetas de contactos',t_draft:'Texto provisional',t_mock:'Maqueta · próximamente',
+ h1:'Carpetas de contactos: a cada uno, su tono',
+ lead:'Pantallas K-11 / K-12 del mapa del sitio. En la app Parrlo (Ajustes del teclado → Contactos) cada persona tiene su carpeta: rol, tú o usted, tono y «Nota para Parrlo». En el chat, el teclado reconoce a la otra persona y escribe teniendo en cuenta su carpeta y su último mensaje. La app va en tema oscuro; el teclado, en claro y oscuro.',
+ capF:['Ficha del contacto','Olga, carpeta «Casa»: casera, de usted, al grano. La nota está casi llena: la barra se pone amarilla.'],
+ capH:['Teclado en el chat con Olga','La franja indica que se tiene en cuenta lo que dijo Olga, con la opción «Ignorar».'],
+ hSt:'Estados',pSt:'La app se muestra solo en tema oscuro; el teclado, claro a la izquierda y oscuro a la derecha. La estructura del teclado es la de kb-before y kb-translate.',
+ app:'App',kbw:'Teclado',light:'Claro',dark:'Oscuro',
+ st:{list:['Lista por carpetas','Ajustes del teclado → Contactos: las personas están en «Trabajo», «Familia» y «Casa», y de cada una se ve el trato y el tono.'],
+  folder:['Ficha del contacto','Tocas a Olga: rol, tú o usted, tono y nota. La barra bajo la nota avisa de que queda poco espacio, sin cifras.'],
+  row:['Fila de contactos en el teclado','Abres el chat y tocas el campo: Parrlo adivina con quién hablas. Olga aparece marcada como «adivinado»; puedes tocar a otra persona.'],
+  'keyboard-hint':['«Tengo en cuenta…»','Con el borrador escrito, la franja indica que se tiene en cuenta el último mensaje de Olga y su carpeta. «Ignorar»: escribir sin eso.'],
+  empty:['Sin contactos','La primera vez en «Contactos»: Parlo y tres ejemplos de carpeta. Toca «Añadir contacto».']},
+ hDec:'Decisiones',dec:[
+  '<b>Carpetas del texto del sitio</b>: «Trabajo», «Familia» y «Casa», con «de usted», «cercano» y «al grano»; agrupan la lista y sirven de ejemplo en el estado vacío.',
+  '<b>El rol va en chips</b>: casera, médico, vecino y «+» para uno propio. Trato y tono, en segmentos; la opción elegida va en blanco con texto oscuro, no solo en verde.',
+  '<b>Contador sin cifras</b>: la barra se llena al escribir; cuando queda poco, se vuelve amarilla y dice «Queda poco». Es el único elemento amarillo de la pantalla.',
+  '<b>El aviso de la nota es un consejo</b>: qué escribir (cómo deben sonar los mensajes) y qué no (contraseñas, números de documentos). Sin promesas sobre datos.',
+  '<b>«Adivinado» va dentro del chip elegido</b>, bajo el nombre: se ve que lo eligió Parrlo y que basta tocar otro nombre para cambiarlo.',
+  '<b>«Tengo en cuenta…» ocupa la misma franja de 60 pt</b> que los avisos de kb-translate: un mensaje y una acción. «Ignorar» es un botón secundario con una cruz.',
+  'La ficha se abre desde «Contactos» en los ajustes del teclado; el botón de volver dice «Teclado» en la lista y «Contactos» en la ficha.'],
+ hTok:'Colores y contraste',
+ hNo:'Pendiente de aprobar',no:[
+  'Estado «próximamente»: la versión actual no tiene carpetas de contactos, ni adivina con quién hablas, ni «Tengo en cuenta…» (GAP keyboard n.º 18–20). Es una maqueta.',
+  'Falta el informe jurídico: datos de terceros en carpetas y notas, y la suposición automática de con quién se habla.',
+  'Todos los textos son provisionales; español e inglés sin revisar por nativos. La palabra «adivinado» está por decidir.',
+  'El aviso de la nota es más corto que en kb-mvp: se quitaron salud, religión y política y la frase sobre el envío al servidor. Decidirlo con el equipo jurídico.',
+  'Roles y tonos (tres tonos en lugar de los de kb-mvp) y la opción «+ otro rol».',
+  'A partir de qué punto la barra de la nota se vuelve amarilla.']},
+en:{html:'en',kb:'en',space:'English',ph:'Message',online:'online',today:'Today',
+ who:'Pedro',whoAv:'P',
+ msgs:[['in','¡Hola! ¿Qué tal el piso? ¿Va bien la calefacción?','9:52'],['out','¡Hola, Pedro! Sí, todo bien, gracias.','9:55'],['in','Genial. Mañana viene el técnico a revisar la caldera. ¿A qué hora te viene bien?','10:01']],
+ draft:'Tomorrow after 10 works for me. I’ll be home.',
+ imp:'Improve',tr:'Translate',dict:'Dictate',voice:'Voice note',set:'Settings',shift:'Shift',del:'Delete',num:'Numbers',ret:'Return',
+ kbd:'Keyboard',back:'Back',add:'Add contact',moreA:'More',
+ lH:'Contacts',lSub:'Everyone gets their own voice. Set it up once — Parrlo remembers.',
+ folders:[['work','Work','formal'],['family','Family','warm'],['home','Home','to the point']],
+ people:[
+  ['work','Olga','manager','formal','polite','O',1],
+  ['family','Mom','','casual','warm','M',3],
+  ['home','Pedro','landlord','formal','to the point','P',0],
+  ['home','Lucía','neighbor','casual','warm','L',2]],
+ fName:'Pedro',fAv:'P',fFolderL:'Folder',fFolder:'Home',
+ lRole:'Role',roles:['landlord','doctor','neighbor'],roleAdd:'Custom role',
+ lAddr:'Spanish “you”',addr:['tú · casual','usted · formal'],
+ lTone:'Tone',tones:['Warm','Polite','To the point'],
+ lNote:'Note for Parrlo',
+ note:'Short and to the point, no emoji. Day and time first, then the question. Saying thanks is fine; no needless apologies.',
+ left:'Almost full',
+ tip:'Describe how your messages to this person should sound. Don’t put passwords or ID numbers here.',
+ save:'Save',
+ eH:'No one here yet',eP:'Add the people you write to most. Parrlo will remember how to talk to each of them — formal with some, warm with others.',
+ eEx:[['work','Work','your boss — formal'],['family','Family','Mom — warm'],['home','Home','landlord — to the point']],
+ eHow:'How it works',
+ guess:'guessed',kOthers:[['Olga','O',1],['Lucía','L',2],['Mom','M',3]],kMore:'All contacts',
+ hB:'Using Pedro’s last reply',hS:'Formal (usted) · to the point',hX:'Ignore',
+ title:'Parrlo · contact folders',t_draft:'Draft copy',t_mock:'Mockup · coming soon',
+ h1:'Contact folders: everyone gets their own voice',
+ lead:'Screens K-11 / K-12 from the site map. In the Parrlo app (Keyboard settings → Contacts), each person has a folder: role, formal or casual “you”, tone and a “Note for Parrlo”. In a chat, the keyboard recognizes who you’re writing to and takes their folder and last reply into account. The app is dark only; the keyboard comes in light and dark.',
+ capF:['Contact card','Pedro, “Home” folder: landlord, formal, to the point. The note is nearly full, so the bar turns yellow.'],
+ capH:['Keyboard in the chat with Pedro','The strip says Pedro’s last reply is being used, with an “Ignore” action.'],
+ hSt:'States',pSt:'The app is shown in dark only; the keyboard in light (left) and dark (right). The keyboard skeleton matches kb-before and kb-translate.',
+ app:'App',kbw:'Keyboard',light:'Light',dark:'Dark',
+ st:{list:['List by folder','Keyboard settings → Contacts: people sit in “Work”, “Family” and “Home” folders, each showing the address form and tone.'],
+  folder:['Contact card','Tap Pedro: role, formal or casual, tone and note. The bar under the note shows space is running out — no numbers.'],
+  row:['Contact row in the keyboard','Open the chat and tap the field: Parrlo guesses who you’re writing to. Pedro is selected and marked “guessed”; tap someone else to switch.'],
+  'keyboard-hint':['“Using … last reply”','Once the draft is written, the strip says Pedro’s last reply and folder are taken into account. “Ignore” writes without them.'],
+  empty:['No contacts yet','First visit to Contacts: Parlo and three example folders. Tap “Add contact”.']},
+ hDec:'Decisions',dec:[
+  '<b>Folders come from the site copy</b>: “Work”, “Family” and “Home” with “formal”, “warm” and “to the point” — they group the list and double as examples in the empty state.',
+  '<b>Role as chips, not a text field</b>: landlord, doctor, neighbor, plus “+” for your own. Address and tone are segments; the selected one is white with dark text, not just green.',
+  '<b>A note counter without numbers</b>: the bar fills as you type; when space runs low it turns yellow and says “Almost full”. It’s the only yellow element on screen.',
+  '<b>The note hint is advice</b>: what to write (how messages should sound) and what not to (passwords, ID numbers). No promises about data.',
+  '<b>“Guessed” sits inside the selected chip</b>, under the name: it’s clear Parrlo picked it and that tapping another name changes it.',
+  '<b>“Using … last reply” takes the same 60 pt strip</b> as kb-translate’s status: one message, one action. “Ignore” is a secondary button with a cross.',
+  'In English the address control is labelled Spanish “you”: it decides between tú and usted in the translation.'],
+ hTok:'Tokens and contrast',
+ hNo:'Not approved',no:[
+  '“Coming soon”: contact folders, contact guessing and “Using … last reply” are not in the build (GAP keyboard #18–20). This is a mockup.',
+  'Legal review needed: third‑party data in folders and notes, and automatically guessing who you’re writing to.',
+  'All copy is draft; Spanish and English not proofread by native speakers. The word “guessed” is still open.',
+  'The note hint is shorter than in kb-mvp: health, religion, politics and the line about sending to the server were dropped. Decide with legal what to keep.',
+  'Set of roles and tones (three tones instead of kb-mvp’s) and whether to offer “+ custom role”.',
+  'The point at which the note bar turns yellow.']}
+};
+const TOK={
+ru:['<b>Приложение (тёмная):</b> фон #0E1116, карточки #1C2026, вторые #242B34, линии #2F3742, текст #F2F5F7, вторичный #9AA4B2, акцент #2BC48A / #0E1116, выбранный сегмент #F2F5F7 / #0E1116, предупреждение #FFC247.',
+ '<b>Клавиатура:</b> токены kb-before — светлая: фон #D3D7DC, клавиши #FFFFFF, служебные #ABB2BB, акцент #00875C / #FFFFFF; тёмная: фон #1B1F25, клавиши #3A414B, служебные #2A3038, акцент #2BC48A / #0E1116.',
+ '<b>Контраст, приложение:</b> CONTRAST_A.','<b>Контраст, клавиатура светлая:</b> CONTRAST_L.','<b>Контраст, клавиатура тёмная:</b> CONTRAST_D.',
+ '<b>Не только цветом:</b> выбранные чип и сегмент — белая заливка и галочка; «угадано» — словом; «осталось немного» — словом и значком часов; «Не учитывать» — словом и крестиком.',
+ '<b>Зоны нажатия:</b> круглые кнопки 44×44, чипы и сегменты 44 pt, строки списка 72 pt, «Сохранить» 56 pt, чипы контактов в клавиатуре 48 pt, «Не учитывать» 44 pt.'],
+es:['<b>App (oscuro):</b> fondo #0E1116, tarjetas #1C2026, segundo nivel #242B34, líneas #2F3742, texto #F2F5F7, secundario #9AA4B2, acento #2BC48A / #0E1116, segmento elegido #F2F5F7 / #0E1116, aviso #FFC247.',
+ '<b>Teclado:</b> los colores de kb-before. Claro: fondo #D3D7DC, teclas #FFFFFF, función #ABB2BB, acento #00875C / #FFFFFF; oscuro: fondo #1B1F25, teclas #3A414B, función #2A3038, acento #2BC48A / #0E1116.',
+ '<b>Contraste, app:</b> CONTRAST_A.','<b>Contraste, teclado claro:</b> CONTRAST_L.','<b>Contraste, teclado oscuro:</b> CONTRAST_D.',
+ '<b>No solo con color:</b> chip y segmento elegidos llevan relleno blanco y marca; «adivinado», con texto; «Queda poco», con texto y reloj; «Ignorar», con texto y cruz.',
+ '<b>Zonas táctiles:</b> botones redondos 44×44, chips y segmentos 44 pt, filas 72 pt, «Guardar» 56 pt, chips de contacto 48 pt, «Ignorar» 44 pt.'],
+en:['<b>App (dark):</b> background #0E1116, cards #1C2026, second level #242B34, lines #2F3742, text #F2F5F7, secondary #9AA4B2, accent #2BC48A / #0E1116, selected segment #F2F5F7 / #0E1116, warning #FFC247.',
+ '<b>Keyboard:</b> kb-before tokens. Light: background #D3D7DC, keys #FFFFFF, function #ABB2BB, accent #00875C / #FFFFFF; dark: background #1B1F25, keys #3A414B, function #2A3038, accent #2BC48A / #0E1116.',
+ '<b>Contrast, app:</b> CONTRAST_A.','<b>Contrast, keyboard light:</b> CONTRAST_L.','<b>Contrast, keyboard dark:</b> CONTRAST_D.',
+ '<b>Not by colour alone:</b> selected chip and segment have a white fill and a check; “guessed” is a word; “Almost full” has a word and a clock; “Ignore” has a word and a cross.',
+ '<b>Touch targets:</b> round buttons 44×44, chips and segments 44 pt, list rows 72 pt, “Save” 56 pt, keyboard contact chips 48 pt, “Ignore” 44 pt.']};
+
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const PAIRS={
+ A:[['A1','#F2F5F7','#0E1116'],['A2','#9AA4B2','#1C2026'],['A3','#F2F5F7','#242B34'],['A4','#0E1116','#F2F5F7'],['A5','#0E1116','#2BC48A'],['A6','#FFC247','#1C2026'],['A7','#0E1116','#6AA6F5']],
+ L:[['K1','#0E1116','#FFFFFF'],['K2','#5B6472','#FFFFFF'],['K3','#FFFFFF','#00875C'],['K4','#0E1116','#ABB2BB']],
+ D:[['K1','#F2F5F7','#3A414B'],['K2','#C5CCD5','#3A414B'],['K3','#0E1116','#2BC48A'],['K4','#F2F5F7','#2A3038']]};
+const PL={ru:{A1:'текст на фоне',A2:'вторичный на карточке',A3:'метка на #242B34',A4:'выбранный сегмент',A5:'«Сохранить»',A6:'«Осталось немного»',A7:'буква на аватаре',K1:'текст на полосе',K2:'вторичный на полосе',K3:'чип «угадано» на акценте',K4:'«Не учитывать»'},
+ es:{A1:'texto sobre fondo',A2:'secundario en tarjeta',A3:'etiqueta sobre #242B34',A4:'segmento elegido',A5:'«Guardar»',A6:'«Queda poco»',A7:'letra del avatar',K1:'texto en la franja',K2:'secundario en la franja',K3:'chip «adivinado» sobre acento',K4:'«Ignorar»'},
+ en:{A1:'text on background',A2:'secondary on card',A3:'tag on #242B34',A4:'selected segment',A5:'“Save”',A6:'“Almost full”',A7:'avatar letter',K1:'text on strip',K2:'secondary on strip',K3:'“guessed” chip on accent',K4:'“Ignore”'}};
+const fmt=(v,l)=>l==='en'?v.toFixed(1):v.toFixed(1).replace('.',',');
+
+/* ================= приложение ================= */
+const sbar='<div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>';
+const hb='<div class="homebar"><i></i></div>';
+const fic=k=>I[k];
+const APP={
+ list:c=>`${sbar}<div class="kb-contact-hd"><span class="kb-contact-cb" role="button" aria-label="${c.back}">${I.back}</span><span class="kb-contact-ht">${c.kbd}</span><span class="kb-contact-cb" role="button" aria-label="${c.add}">${I.plus}</span></div>
+<div class="kb-contact-body"><h2 class="kb-contact-h">${c.lH}</h2><p class="kb-contact-sub">${c.lSub}</p>
+${c.folders.map(([k,n,d])=>{const ps=c.people.filter(p=>p[0]===k);return `<div class="kb-contact-gh">${fic(k)}${n}<span class="d">${d}</span></div><div class="kb-contact-grp">${ps.map(p=>`<div class="kb-contact-row" role="button">${av(p[5],p[6])}<div><b>${p[1]}${p[2]?` <small>· ${p[2]}</small>`:''}</b><span class="s"><span class="kb-contact-pl">${p[3]}</span><span class="kb-contact-pl">${p[4]}</span></span></div><span class="kb-contact-chev">${I.chev}</span></div>`).join('')}</div>`;}).join('')}
+</div>${hb}`,
+ folder:c=>{const pct=Math.round(c.note.length/140*100);return `${sbar}<div class="kb-contact-hd"><span class="kb-contact-cb" role="button" aria-label="${c.back}">${I.back}</span><span class="kb-contact-ht">${c.lH}</span><span class="kb-contact-cb" role="button" aria-label="${c.moreA}">${I.more}</span></div>
+<div class="kb-contact-body"><div class="kb-contact-id">${av(c.fAv,c.fAv==='P'?0:1)}<div><h2>${c.fName}</h2><span class="kb-contact-fold" role="button">${I.home}${c.fFolderL}&nbsp;<b>${c.fFolder}</b>${I.down}</span></div></div>
+<div class="kb-contact-f"><div class="kb-contact-lb">${c.lRole}</div><div class="kb-contact-chips" role="radiogroup">${c.roles.map((r,i)=>`<span class="kb-contact-chip${i===0?' on':''}" role="radio" aria-checked="${i===0}">${i===0?I.check:''}${r}</span>`).join('')}<span class="kb-contact-chip add" role="button" aria-label="${c.roleAdd}">${I.plus}</span></div></div>
+<div class="kb-contact-f"><div class="kb-contact-lb">${c.lAddr}</div><div class="kb-contact-seg" role="radiogroup">${c.addr.map((r,i)=>`<span role="radio" aria-checked="${i===1}">${i===1?I.check:''}${r}</span>`).join('')}</div></div>
+<div class="kb-contact-f"><div class="kb-contact-lb">${c.lTone}</div><div class="kb-contact-seg" role="radiogroup">${c.tones.map((r,i)=>`<span role="radio" aria-checked="${i===2}">${i===2?I.check:''}${r}</span>`).join('')}</div></div>
+<div class="kb-contact-f" style="margin-bottom:0"><div class="kb-contact-lb">${c.lNote}</div><div class="kb-contact-note"><p>${c.note}<i class="kb-contact-car"></i></p>
+<div class="kb-contact-meter"><span class="kb-contact-bar" role="meter" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${c.left}"><i style="width:${pct}%"></i></span><span class="kb-contact-left">${I.clock}${c.left}</span></div></div>
+<div class="kb-contact-tip">${I.info}<span>${c.tip}</span></div></div>
+</div><div class="kb-contact-bot"><div class="kb-contact-btn" role="button">${c.save}</div></div>${hb}`;},
+ empty:c=>`${sbar}<div class="kb-contact-hd"><span class="kb-contact-cb" role="button" aria-label="${c.back}">${I.back}</span><span class="kb-contact-ht">${c.kbd}</span><span style="width:44px"></span></div>
+<div class="kb-contact-body"><h2 class="kb-contact-h">${c.lH}</h2>
+<div class="kb-contact-em"><img src="../../brandbook/assets/mascot/mascot-happy-dark.svg" alt=""><h3>${c.eH}</h3><p>${c.eP}</p>
+<div class="kb-contact-ex">${c.eEx.map(([k,n,d])=>`<div class="kb-contact-exr">${fic(k)}<b>${n}</b><span>${d}</span></div>`).join('')}</div></div></div>
+<div class="kb-contact-bot"><div class="kb-contact-btn" role="button">${I.plus}${c.add}</div><div class="kb-contact-btn2" role="button">${c.eHow}</div></div>${hb}`
+};
+const appScr=(id,c)=>`<div class="scr kb-contact-app" lang="${c.html}">${APP[id](c)}</div>`;
+
+/* ================= клавиатура ================= */
+const ROWS={ru:['йцукенгшщзх','фывапролджэ','ячсмитьбю'],es:['qwertyuiop','asdfghjklñ','zxcvbnm'],en:['qwertyuiop','asdfghjkl','zxcvbnm']};
+const BAR=[['imp',parrot],['tr',()=>I.tr],['dict',()=>I.mic],['voice',()=>I.voice],['set',()=>I.gear]];
+function keys(c,up){
+ const R=ROWS[c.kb];
+ const k=ch=>`<span class="kb-contact-k" role="button">${up?ch.toLocaleUpperCase(c.kb):ch}</span>`;
+ const row=s=>[...s].map(k).join('');
+ const half=R[1].length<R[0].length?'<span class="kb-contact-hp"></span>':'';
+ return `<div class="kb-contact-r">${row(R[0])}</div><div class="kb-contact-r">${half}${row(R[1])}${half}</div>
+<div class="kb-contact-r"><span class="kb-contact-k f w" role="button" aria-label="${c.shift}"${up?' aria-pressed="true"':''}>${up?I.shiftOn:I.shift}</span><span class="kb-contact-g"></span>${row(R[2])}<span class="kb-contact-g"></span><span class="kb-contact-k f w" role="button" aria-label="${c.del}">${I.del}</span></div>
+<div class="kb-contact-r"><span class="kb-contact-k f n" role="button" aria-label="${c.num}">123</span><span class="kb-contact-k p" role="button">,</span><span class="kb-contact-k sp" role="button"><i>‹</i>${c.space}<i>›</i></span><span class="kb-contact-k p" role="button">.</span><span class="kb-contact-k rt" role="button" aria-label="${c.ret}">${I.ret}</span></div>`;}
+const car='<i class="kb-contact-kcar"></i>';
+const KB={
+ row:c=>({field:car+`<span class="pl">${c.ph}</span>`,up:1,send:0,
+  strip:`<div class="kb-contact-strip row" role="radiogroup"><span class="kb-contact-kc on" role="radio" aria-checked="true">${av(c.whoAv,c.whoAv==='P'?0:1)}<span><b>${c.who}</b><small>${c.guess}</small></span></span>${c.kOthers.map(([n,a,ci],i)=>`${i?'<i class="kb-contact-kd"></i>':''}<span class="kb-contact-kc" role="radio" aria-checked="false">${n}</span>`).join('')}<span class="kb-contact-kc more" role="button" aria-label="${c.kMore}">${I.down}</span></div>`}),
+ 'keyboard-hint':c=>({field:c.draft+car,up:0,send:1,
+  strip:`<div class="kb-contact-strip">${I.reply}<span class="tx"><b>${c.hB}</b><span>${c.hS}</span></span><span class="kb-contact-a" role="button">${I.x}${c.hX}</span></div>`})
+};
+function kbScr(id,light,c){
+ const s=KB[id](c);
+ const bar=BAR.map(([n,f])=>`<span class="kb-contact-ib" role="button" aria-label="${c[n]}">${f()}</span>`).join('');
+ const msgs=c.msgs.map(([d,t,tm])=>`<div class="m ${d}">${t}<span class="tm">${tm}</span></div>`).join('');
+ return `<div class="scr kb-contact-scr ${light?'light':''}" lang="${c.html}">${sbar}
+<div class="nav"><span class="bk">${I.back}</span><span class="av" style="background:${AVC[c.whoAv==='P'?0:1]}">${c.whoAv}</span><span class="nm"><b>${c.who}</b><span>${c.online}</span></span></div>
+<div class="msgs"><div class="day">${c.today}</div>${msgs}</div>
+<div class="inp"><span class="f"><span>${s.field}</span></span><span class="sd${s.send?'':' off'}">${I.send}</span></div>
+<div class="kb-contact-kb">${s.strip}<div class="kb-contact-tbar">${bar}</div><div class="kb-contact-rows">${keys(c,s.up)}</div><div class="kb-contact-home"><i></i></div></div></div>`;}
+
+const phApp=(id,sc,c)=>`<div class="pf p67" style="--s:${sc}"><div class="shell"></div><div class="glass">${appScr(id,c)}</div></div>`;
+const phKb=(id,l,sc,c)=>`<div class="pf p67 ${l?'light':''}" style="--s:${sc}"><div class="shell"></div><div class="glass">${kbScr(id,l,c)}</div></div>`;
+const ORDER=[['list','app'],['folder','app'],['row','kb'],['keyboard-hint','kb'],['empty','app']];
+
+function render(L){
+ const c=D[L];pmN=0;
+ document.documentElement.lang=c.html;document.title=c.title;
+ const $=id=>document.getElementById(id);
+ $('kb-contact-lng').innerHTML=['ru','es','en'].map(x=>`<a href="?l=${x}" data-l="${x}" aria-current="${x===L}" lang="${x}">${x.toUpperCase()}</a>`).join('');
+ $('kb-contact-t-draft').textContent=c.t_draft;$('kb-contact-t-mock').textContent=c.t_mock;
+ $('kb-contact-h1').textContent=c.h1;$('kb-contact-lead').textContent=c.lead;
+ $('kb-contact-h-st').textContent=c.hSt;$('kb-contact-p-st').textContent=c.pSt;
+ $('kb-contact-hero').innerHTML=
+ `<figure data-shot="kb-contact--${L}">${phApp('folder',1,c)}<div class="pcap"><span class="dot"></span><div><b>${c.capF[0]}</b><span>${c.capF[1]}</span></div></div></figure>
+<figure>${phKb('keyboard-hint',1,1,c)}<div class="pcap"><span class="dot"></span><div><b>${c.capH[0]}</b><span>${c.capH[1]}</span></div></div></figure>`;
+ $('kb-contact-grid').innerHTML=ORDER.map(([id,t])=>
+ `<article class="kb-contact-st"><h3>${c.st[id][0]}<code>${id}</code><span class="kb-contact-where">${t==='app'?c.app:c.kbw}</span></h3><p>${c.st[id][1]}</p><div class="kb-contact-pair${t==='app'?' kb-contact-one':''}">`+
+ (t==='app'?`<figure data-shot="kb-contact--${id}--${L}">${phApp(id,.6,c)}</figure>`:
+ `<figure data-shot="kb-contact--${id}--light--${L}">${phKb(id,1,.6,c)}<div class="pcap"><div><b>${c.light}</b></div></div></figure>
+<figure data-shot="kb-contact--${id}--dark--${L}">${phKb(id,0,.6,c)}<div class="pcap"><div><b>${c.dark}</b></div></div></figure>`)+`</div></article>`).join('');
+ const cs=t=>PAIRS[t].map(([k,a,b])=>`${PL[L][k]} ${fmt(cr(a,b),L)}`).join('; ');
+ const tok=TOK[L].map(x=>x.replace('CONTRAST_A',cs('A')).replace('CONTRAST_L',cs('L')).replace('CONTRAST_D',cs('D')));
+ $('kb-contact-notes').innerHTML=`<div><h2>${c.hDec}</h2><ul>${c.dec.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h2>${c.hTok}</h2><ul>${tok.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h2>${c.hNo}</h2><ul>${c.no.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+ document.body.dataset.lang=L;
+}
+let L0=new URLSearchParams(location.search).get('l');if(!D[L0])L0='ru';
+render(L0);
+document.getElementById('kb-contact-lng').addEventListener('click',e=>{const a=e.target.closest('a[data-l]');if(!a)return;e.preventDefault();const l=a.dataset.l;try{history.replaceState(null,'','?l='+l)}catch(_){}render(l);});
+document.body.dataset.ready='1';
+</script>
+</body>
+</html>
