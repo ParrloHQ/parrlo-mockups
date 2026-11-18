@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Translate · Мой голос</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0B0E12;color:#F2F5F7}
+body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
+.translate-myvoice-w{max-width:1200px;margin:0 auto}
+.translate-myvoice-lsw{display:flex;gap:4px;justify-content:flex-end;margin-bottom:24px}
+.translate-myvoice-lsw a{min-width:48px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;font:700 14px/1 Inter,sans-serif;color:#C3CBD5;text-decoration:none;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-myvoice-lsw a[aria-current="true"]{background:#2BC48A;color:#0E1116;box-shadow:none}
+.translate-myvoice-w h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:12px}
+.translate-myvoice-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.translate-myvoice-lead{color:#9AA4B2;max-width:820px}
+.translate-myvoice-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.translate-myvoice-tag{display:inline-block;font:600 13px/1 Inter,sans-serif;color:#0E1116;background:#BFF2DC;border-radius:8px;padding:6px 10px}
+.translate-myvoice-tag.translate-myvoice-legal{background:#FFC247}
+.translate-myvoice-hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;margin-top:40px;padding:48px 40px;border-radius:32px;background:#12161C;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-myvoice-hero figure{margin:0}
+.translate-myvoice-hero-t{flex:1 1 320px;max-width:520px}
+.translate-myvoice-hero-t h3{font:900 24px/1.25 Nunito,sans-serif;margin-bottom:12px}
+.translate-myvoice-hero-t p{color:#C3CBD5;margin-bottom:12px}
+.translate-myvoice-w ul{padding-left:20px;color:#C3CBD5;font-size:15px;max-width:860px}
+.translate-myvoice-w li{margin:8px 0}
+.translate-myvoice-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.translate-myvoice-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:48px 24px;margin-top:32px}
+.translate-myvoice-grid figure{margin:0;display:flex;flex-direction:column;align-items:center}
+.translate-myvoice-grid figcaption{margin-top:16px;width:272px;font-size:14px;line-height:1.45;color:#9AA4B2}
+.translate-myvoice-grid figcaption b{display:block;color:#F2F5F7;font:900 17px/1.3 Nunito,sans-serif;margin-bottom:4px}
+.translate-myvoice-grid figcaption code{font-size:12px}
+.translate-myvoice-grid figcaption em{font-style:normal;color:#FFC247}
+.translate-myvoice-tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
+.translate-myvoice-tbl th,.translate-myvoice-tbl td{text-align:left;vertical-align:top;border-bottom:1px solid #2F3742;padding:10px 12px 10px 0}
+.translate-myvoice-tbl th{color:#9AA4B2;font-weight:600}
+.translate-myvoice-tw{overflow-x:auto}
+.translate-myvoice-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:0 0 0 1px #3A414B}
+@media (max-width:760px){.translate-myvoice-w h1{font-size:30px}.translate-myvoice-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-myvoice-hero .pf{--s:.74!important}}
+@media (max-width:420px){.translate-myvoice-hero .pf{--s:.7!important}}
+
+/* ===== экран 430×932 ===== */
+.translate-myvoice-scr{--me:#2BC48A;--es:#BFF2DC;--err:#FF6B5E}
+.translate-myvoice-top{flex:none;height:64px;display:flex;align-items:center;gap:8px;padding:0 16px}
+.translate-myvoice-cb{width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.translate-myvoice-cb.translate-myvoice-nil{background:transparent}
+.translate-myvoice-ttl{flex:1;min-width:0;text-align:center;font:900 19px/24px Nunito,sans-serif;letter-spacing:.01em;white-space:nowrap}
+.translate-myvoice-main{flex:1;min-height:0;display:flex;flex-direction:column;padding:0 16px}
+.translate-myvoice-bot{flex:none;display:flex;flex-direction:column;gap:12px;padding:12px 16px 8px}
+.translate-myvoice-btns{display:flex;gap:12px;height:80px}
+.translate-myvoice-sec{flex:none;min-width:112px;height:80px;border-radius:40px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;padding:0 18px;font:600 16px/1 Inter,sans-serif;white-space:nowrap}
+.translate-myvoice-sec svg{width:20px;height:20px;flex:none}
+.translate-myvoice-go{flex:1;min-width:0;height:80px;border-radius:40px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;gap:10px;font:900 22px/1 Nunito,sans-serif;white-space:nowrap;box-shadow:0 0 32px rgba(43,196,138,.28)}
+.translate-myvoice-go svg{width:24px;height:24px;flex:none}
+.translate-myvoice-hint{height:20px;display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center;white-space:nowrap}
+.translate-myvoice-hint svg{width:16px;height:16px;flex:none}
+.translate-myvoice-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--me)}
+.translate-myvoice-dot.translate-myvoice-p{background:var(--es)}
+.translate-myvoice-lbl{flex:none;height:20px;display:flex;align-items:center;gap:8px;font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em}
+
+/* intro */
+.translate-myvoice-art{flex:none;align-self:center;position:relative;width:148px;height:148px;margin-top:12px}
+.translate-myvoice-art::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(43,196,138,.22),rgba(43,196,138,0) 70%)}
+.translate-myvoice-art img{position:absolute;inset:8px;width:132px;height:132px}
+.translate-myvoice-h{flex:none;margin-top:16px;text-align:center;font:900 32px/38px Nunito,sans-serif}
+.translate-myvoice-para{flex:none;margin:8px auto 0;max-width:380px;text-wrap:balance;text-align:center;font:400 17px/25px Inter,sans-serif;color:#C3CBD5}
+.translate-myvoice-steps{flex:none;margin-top:24px;border-radius:28px;background:var(--sf);padding:8px 20px}
+.translate-myvoice-step{min-height:56px;padding:6px 0;display:flex;align-items:center;gap:14px;font:500 16px/22px Inter,sans-serif}
+.translate-myvoice-step+.translate-myvoice-step{border-top:1px solid var(--line)}
+.translate-myvoice-step i{flex:none;width:36px;height:36px;border-radius:50%;background:#1E3734;color:var(--me);display:flex;align-items:center;justify-content:center}
+.translate-myvoice-step i svg{width:20px;height:20px}
+.translate-myvoice-age{border-radius:28px;background:var(--sf);box-shadow:inset 0 0 0 2px var(--me);padding:20px 20px 20px}
+.translate-myvoice-age b{display:block;font:900 23px/28px Nunito,sans-serif;text-align:center}
+.translate-myvoice-age>span{display:block;margin-top:4px;text-align:center;font:500 14px/20px Inter,sans-serif;color:var(--sec)}
+.translate-myvoice-age .translate-myvoice-btns{margin-top:16px;height:64px}
+.translate-myvoice-age .translate-myvoice-sec,.translate-myvoice-age .translate-myvoice-go{height:64px;border-radius:32px;box-shadow:none}
+.translate-myvoice-age .translate-myvoice-sec{background:var(--sf2)}
+
+/* consent */
+.translate-myvoice-eb{flex:none;margin-top:8px;font:600 13px/16px Inter,sans-serif;color:var(--me);letter-spacing:.06em;text-transform:uppercase}
+.translate-myvoice-h.translate-myvoice-l{text-align:left;margin-top:8px;font-size:30px;line-height:36px}
+.translate-myvoice-doc{flex:1;min-height:0;margin:20px 0 4px;border-radius:28px;border:1.5px dashed #3A414B;padding:24px 22px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.translate-myvoice-doch{flex:none;display:flex;align-items:center;gap:12px;font:600 17px/24px Inter,sans-serif;color:var(--tx)}
+.translate-myvoice-doch i{flex:none;width:40px;height:40px;border-radius:12px;background:var(--sf2);color:var(--sec);display:flex;align-items:center;justify-content:center}
+.translate-myvoice-doch i svg{width:22px;height:22px}
+.translate-myvoice-sk{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.translate-myvoice-sk i{display:block;height:12px;border-radius:6px;background:#1C2026}
+.translate-myvoice-sk i.translate-myvoice-gap{margin-top:10px}
+.translate-myvoice-fade{position:absolute;left:0;right:0;bottom:0;height:96px;background:linear-gradient(rgba(14,17,22,0),#0E1116 80%)}
+
+/* reading */
+.translate-myvoice-prog{flex:none;margin-top:4px;display:flex;flex-direction:column;gap:10px}
+.translate-myvoice-prog .translate-myvoice-lbl{justify-content:space-between}
+.translate-myvoice-prog .translate-myvoice-lbl b{font:600 13px/16px Inter,sans-serif;color:var(--tx);font-variant-numeric:tabular-nums}
+.translate-myvoice-seg{display:flex;gap:6px;height:6px}
+.translate-myvoice-seg i{flex:1;border-radius:3px;background:var(--sf2);overflow:hidden;position:relative}
+.translate-myvoice-seg i.translate-myvoice-full{background:var(--me)}
+.translate-myvoice-seg i b{position:absolute;left:0;top:0;bottom:0;background:var(--me);border-radius:3px}
+.translate-myvoice-card{flex:1;min-height:0;margin-top:16px;border-radius:28px;background:var(--sf);box-shadow:inset 0 0 0 2px var(--me);padding:20px 22px 0;position:relative;display:flex;flex-direction:column;overflow:hidden}
+.translate-myvoice-card .translate-myvoice-lbl .translate-myvoice-rec{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--tx);font:600 15px/20px Inter,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:0}
+.translate-myvoice-rec i{width:10px;height:10px;border-radius:50%;background:var(--err);box-shadow:0 0 0 4px rgba(255,107,94,.22)}
+.translate-myvoice-read{margin-top:16px;font:500 27px/39px Inter,sans-serif;color:var(--tx)}
+.translate-myvoice-read .translate-myvoice-done{color:var(--me)}
+.translate-myvoice-read .translate-myvoice-cur{background:var(--me);color:#0E1116;border-radius:8px;padding:1px 6px;margin:0 -2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.translate-myvoice-wave{position:absolute;left:22px;right:22px;bottom:18px;height:48px;display:flex;align-items:center;gap:3px}
+.translate-myvoice-wave i{width:4px;border-radius:2px;background:var(--me);flex:none}
+.translate-myvoice-wave i.translate-myvoice-z{background:#3A414B;height:4px!important}
+.translate-myvoice-tip{flex:none;margin-top:14px;height:20px}
+.translate-myvoice-sec.translate-myvoice-sm{min-width:0;width:100px;padding:0 8px;flex-direction:column;gap:6px;font-size:15px}
+
+/* ready */
+.translate-myvoice-art.translate-myvoice-ok{width:128px;height:128px;margin-top:4px}
+.translate-myvoice-art.translate-myvoice-ok img{inset:6px;width:116px;height:116px}
+.translate-myvoice-badge{position:absolute;right:6px;bottom:8px;width:36px;height:36px;border-radius:50%;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--bg)}
+.translate-myvoice-badge svg{width:20px;height:20px}
+.translate-myvoice-h.translate-myvoice-sm{margin-top:12px;font-size:30px;line-height:36px}
+.translate-myvoice-smp{flex:none;margin-top:24px;border-radius:28px;background:var(--deep);color:#fff;padding:20px 22px 18px}
+.translate-myvoice-smp .translate-myvoice-lbl{color:#fff}
+.translate-myvoice-out{margin-top:10px;font:900 26px/32px Nunito,sans-serif}
+.translate-myvoice-pl{margin-top:16px;display:flex;align-items:center;gap:12px;height:52px}
+.translate-myvoice-pb{flex:none;width:52px;height:52px;border-radius:50%;background:#fff;color:#0E1116;display:flex;align-items:center;justify-content:center}
+.translate-myvoice-pb svg{width:20px;height:20px;margin-left:2px}
+.translate-myvoice-mw{flex:1;min-width:0;display:flex;align-items:center;gap:3px;height:32px;overflow:hidden}
+.translate-myvoice-mw i{width:3px;border-radius:2px;background:rgba(255,255,255,.55);flex:none}
+.translate-myvoice-mw i.translate-myvoice-on{background:#fff}
+.translate-myvoice-dur{font:600 14px Inter,sans-serif;font-variant-numeric:tabular-nums;color:#fff}
+.translate-myvoice-row{display:flex;align-items:center;gap:14px;min-height:60px;padding:0 20px}
+.translate-myvoice-row>i{flex:none;width:36px;height:36px;border-radius:50%;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center}
+.translate-myvoice-row>i svg{width:20px;height:20px}
+.translate-myvoice-rt{flex:1;min-width:0;font:600 16px/22px Inter,sans-serif}
+.translate-myvoice-rt small{display:block;font:400 14px/20px Inter,sans-serif;color:var(--sec);margin-top:2px}
+.translate-myvoice-tg{flex:none;margin-top:12px;border-radius:24px;background:var(--sf);padding:12px 0}
+.translate-myvoice-swi{flex:none;width:56px;height:44px;display:flex;align-items:center;justify-content:center}
+.translate-myvoice-swi b{width:52px;height:32px;border-radius:16px;background:var(--me);position:relative;display:block}
+.translate-myvoice-swi b::after{content:"";position:absolute;right:3px;top:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.translate-myvoice-swi b svg{position:absolute;left:8px;top:9px;width:14px;height:14px;color:#0E1116}
+
+/* settings */
+.translate-myvoice-st{flex:none;margin-top:8px;border-radius:24px;background:var(--sf);padding:16px 20px;display:flex;align-items:center;gap:14px}
+.translate-myvoice-av{flex:none;width:52px;height:52px;border-radius:50%;background:#1E3734;color:var(--me);display:flex;align-items:center;justify-content:center}
+.translate-myvoice-av svg{width:26px;height:26px}
+.translate-myvoice-st b{display:block;font:900 20px/26px Nunito,sans-serif}
+.translate-myvoice-st span{display:block;font:400 14px/20px Inter,sans-serif;color:var(--sec)}
+.translate-myvoice-grp{flex:none;margin-top:12px;border-radius:24px;background:var(--sf);overflow:hidden}
+.translate-myvoice-grp .translate-myvoice-row+.translate-myvoice-row{box-shadow:0 -1px 0 var(--line)}
+.translate-myvoice-grp .translate-myvoice-row.translate-myvoice-tall{min-height:76px}
+.translate-myvoice-chev{flex:none;color:var(--sec);display:flex}
+.translate-myvoice-chev svg{width:20px;height:20px}
+.translate-myvoice-del{color:var(--err)}
+.translate-myvoice-del>i{background:rgba(255,107,94,.14);color:var(--err)}
+.translate-myvoice-sh{font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;margin:20px 4px 0}
+.translate-myvoice-dim{position:absolute;inset:0;background:rgba(5,7,10,.66)}
+.translate-myvoice-sheet{position:absolute;left:0;right:0;bottom:0;border-radius:36px 36px 0 0;background:var(--sf);padding:12px 20px 42px;display:flex;flex-direction:column;align-items:center}
+.translate-myvoice-grab{width:40px;height:5px;border-radius:3px;background:#3A414B}
+.translate-myvoice-ico{margin-top:24px;width:56px;height:56px;border-radius:50%;background:rgba(255,107,94,.14);color:var(--err);display:flex;align-items:center;justify-content:center}
+.translate-myvoice-ico svg{width:28px;height:28px}
+.translate-myvoice-sheet b{margin-top:16px;font:900 26px/32px Nunito,sans-serif;text-align:center}
+.translate-myvoice-sheet p{margin-top:8px;max-width:340px;text-align:center;font:400 16px/23px Inter,sans-serif;color:#C3CBD5}
+.translate-myvoice-sbtn{margin-top:24px;align-self:stretch;display:flex;flex-direction:column;gap:10px}
+.translate-myvoice-sbtn span{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:8px;font:600 17px/1 Inter,sans-serif}
+.translate-myvoice-sbtn .translate-myvoice-red{background:var(--err);color:#0E1116;font:900 19px/1 Nunito,sans-serif}
+.translate-myvoice-sbtn .translate-myvoice-red svg{width:20px;height:20px}
+.translate-myvoice-sbtn .translate-myvoice-cn{background:var(--sf2);color:var(--tx)}
+.translate-myvoice-scr .homebar{position:relative;z-index:2}
+.translate-myvoice-ovl{position:absolute;inset:0;z-index:1}
+.translate-myvoice-ovl~.homebar{position:absolute;left:0;right:0;bottom:0}
+</style>
+</head>
+<body>
+<div class="translate-myvoice-w">
+<nav class="translate-myvoice-lsw" id="translate-myvoice-lsw" aria-label="Language"></nav>
+<div class="translate-myvoice-tags"><span class="translate-myvoice-tag" id="translate-myvoice-tag"></span><span class="translate-myvoice-tag translate-myvoice-legal" id="translate-myvoice-tag2"></span></div>
+<h1 id="translate-myvoice-h1"></h1>
+<p class="translate-myvoice-lead" id="translate-myvoice-lead"></p>
+
+<section class="translate-myvoice-hero">
+ <figure id="translate-myvoice-hero-ph"></figure>
+ <div class="translate-myvoice-hero-t" id="translate-myvoice-hero-t"></div>
+</section>
+
+<h2 id="translate-myvoice-h-states"></h2>
+<p class="translate-myvoice-lead" id="translate-myvoice-states-lead"></p>
+<div class="translate-myvoice-grid" id="translate-myvoice-grid"></div>
+
+<h2 id="translate-myvoice-h-dec"></h2>
+<ul id="translate-myvoice-dec"></ul>
+
+<h2 id="translate-myvoice-h-tok"></h2>
+<div class="translate-myvoice-tw"><table class="translate-myvoice-tbl" id="translate-myvoice-ctr"></table></div>
+<ul id="translate-myvoice-tok"></ul>
+
+<h2 id="translate-myvoice-h-na"></h2>
+<ul id="translate-myvoice-na"></ul>
+</div>
+
+<script src="../screens.js"></script>
+<script>
+(function(){
+const P='translate-myvoice-';
+const M='../../brandbook/assets/mascot/';
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const S=window.SITE_ICONS;
+const I={
+ mic:`<svg viewBox="0 0 24 24" ${SW}><rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/></svg>`,
+ back:`<svg class="ic" viewBox="0 0 24 24" ${SW}><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>`,
+ spk:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+ play:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
+ pause:`<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1.3"/><rect x="13.5" y="5" width="4" height="14" rx="1.3"/></svg>`,
+ retry:`<svg viewBox="0 0 24 24" ${SW}><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/></svg>`,
+ ok:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ info:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/></svg>`,
+ trash:`<svg viewBox="0 0 24 24" ${SW}><path d="M4.5 6.5h15M9.5 6.5V4.8c0-.7.6-1.3 1.3-1.3h2.4c.7 0 1.3.6 1.3 1.3v1.7"/><path d="M6.5 6.5l.9 12.2a2 2 0 0 0 2 1.8h5.2a2 2 0 0 0 2-1.8l.9-12.2"/><path d="M10.3 10.5v6M13.7 10.5v6"/></svg>`,
+ chev:`<svg viewBox="0 0 24 24" ${SW}><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg>`,
+ doc:`<svg viewBox="0 0 24 24" ${SW}><path d="M6.5 3.5h7l4 4v11.5a1.5 1.5 0 0 1-1.5 1.5h-9.5A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M13.5 3.5v4h4M8.5 12h7M8.5 15.5h5"/></svg>`,
+ tgl:`<svg viewBox="0 0 24 24" ${SW}><rect x="2.5" y="7" width="19" height="10" rx="5"/><circle cx="16.5" cy="12" r="2.6"/></svg>`,
+ wave:`<svg viewBox="0 0 24 24" ${SW}><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10.5v3"/></svg>`,
+ chk:`<svg viewBox="0 0 24 24" ${SW} stroke-width="3"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+};
+const N=' ';
+
+/* ===== словарь ===== */
+/* read: «[слово]» — текущее слово, всё до него — прочитано */
+const T={
+ru:{
+ name:'Мой голос', back:'Назад',
+ iP:'Переводы можно озвучивать голосом, похожим на твой.',
+ iSteps:['Прочитай вслух короткий текст','Послушай пример и реши, оставить ли его','Включи озвучку переводов'],
+ age:'Тебе есть 18'+N+'лет?', ageSub:'«Мой голос» — только с 18'+N+'лет', ageNo:'Нет', ageYes:'Да, есть',
+ cEb:'Мой голос', cH:'С твоего согласия', cPh:'Текст согласия — от юриста', cNo:'Не сейчас', cYes:'Принимаю',
+ rTtl:'Запись образца', rStep:'Абзац 2 из 4', rLbl:'Прочитай вслух', rRec:'Запись',
+ read:'В кафе на углу уже открывают ставни. На рынке уже раскладывают апельсины, а у моря кричат [первые] чайки. Я люблю это время: город только просыпается, и кажется, что день будет долгим и спокойным.',
+ rTip:'Читай в обычном темпе, как в разговоре', redo:'Заново', pause:'Пауза', fin:'Завершить',
+ okH:'Голос готов', okP:'Послушай пример и реши, оставить ли его.',
+ smpLbl:'Español · пример', smp:'¿Me trae la cuenta, por favor?', smpLang:'es',
+ tg:'Озвучивать переводы моим голосом', tgSub:'Выключено — звучит стандартный голос',
+ again:'Записать заново', done:'Готово', play:'Послушать пример', playA:'Воспроизвести',
+ stH:'Голос записан', stSub:'18'+N+'ноября · по‑русски', grp:'Озвучка', del:'Удалить голос',
+ dH:'Удалить голос?', dP:'Переводы снова будут звучать стандартным голосом.', dYes:'Удалить голос', dNo:'Отмена',
+ page:{title:'Parrlo Translate · Мой голос',tag:'Эталон · пачка 2 · черновик текста',legal:'макет · ждёт юриста',h1:'Translate · «Мой голос»',
+  lead:'T‑07 карты сайта, статус «скоро». Путь от первого знакомства до управления голосом: что это и проверка 18+ → согласие → чтение вслух для записи образца → пример и включение озвучки → настройки и «Удалить голос». Юридически чувствительный экран: 18+, согласие, внешний сервис. Тексты согласия здесь не пишутся — на их месте плейсхолдер. Только тёмная тема, интерфейс на «ты». Экран 430×932 pt, PNG @3× — 1290×2796.',
+  heroH:'Главный кадр · чтение вслух',
+  heroP:['Крупный текст для чтения: прочитанное — зелёным, текущее слово — на зелёной плашке, впереди — белым. Прогресс по абзацам сверху, живая волна и время записи — внизу карточки.','Три действия из карты сайта: «Заново», «Пауза», «Завершить». Главное — «Завершить», зелёное, как сторона «ты» в Translate.'],
+  cap:['Translate · Мой голос','макет · ждёт юриста'],
+  hStates:'Состояния',statesLead:'Пять кадров по порядку. Масштаб 0,6.',
+  st:{intro:['Что это и 18+','Первый вход в «Мой голос». Объяснение в одну строку, три шага и проверка возраста: «Да, есть» ведёт к согласию. <em>Формулировка «голосом, похожим на твой» не утверждена.</em>'],
+      consent:['Согласие','После «Да, есть». Место для текста согласия — <em>текст от юриста</em>, на экране только плейсхолдер. «Принимаю» начинает запись, «Не сейчас» — выход.'],
+      reading:['Чтение вслух','Идёт запись образца. Пользователь читает текст; «Пауза» — остановиться, «Заново» — переписать абзац, «Завершить» — закончить.'],
+      ready:['Голос готов','После «Завершить». Пример фразы на языке собеседника — послушать; переключатель «Озвучивать переводы моим голосом» включён.'],
+      settings:['Настройки и удаление','Позже, из настроек Translate. Управление голосом; нажали «Удалить голос» — лист подтверждения поверх.']},
+  hDec:'Решения',
+  dec:['<b>Возраст — до согласия.</b> Вопрос «Тебе есть 18 лет?» стоит прямо на первом экране, рядом с объяснением: кому меньше 18, дальше не идёт и не видит согласия.',
+   '<b>Согласие — отдельный шаг с явной кнопкой.</b> «Принимаю» (без рода) и «Не сейчас». Текст согласия не придуман: пунктирная рамка, плейсхолдер «Текст согласия — от юриста» и строки‑заглушки, чтобы был виден объём.',
+   '<b>Чтение как караоке.</b> Прочитанное зелёное, текущее слово на плашке — не только цвет, но и форма. Прогресс — по абзацам, без минут и без числа‑лимита.',
+   '<b>Пример — на языке собеседника.</b> На экране «Голос готов» звучит фраза перевода (карточка перевода #00875C из Translate), потому что так голос и будет использоваться.',
+   '<b>Удаление — только кнопкой.</b> «Удалить голос» — в настройках и в листе подтверждения. Текст подтверждения говорит лишь, что переводы снова зазвучат стандартным голосом, — без обещаний о хранении и удалении данных.',
+   '<b>Без названий сервисов и без «клона».</b> Ни поставщика, ни «копии», ни «вашим голосом» на экранах нет.',
+   '<b>Подписи — из copy-ru.</b> «Прочитай вслух», «С твоего согласия», «Заново», «Пауза», «Завершить», «Удалить голос», «“Мой голос” — только с 18 лет», «Послушай пример и реши, оставить ли его» — из <code>docs/site/copy-ru/translate.md</code>, §11.'],
+  hTok:'Токены и контраст',
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code> — тёмная тема v2.3.',
+   'Сторона «ты»: <code>#2BC48A</code> (прочитанное, главные кнопки, переключатель), подложки значков <code>#1E3734</code>. Пример перевода — <code>#00875C</code>, точка языка собеседника <code>#BFF2DC</code>. Удаление и запись — <code>#FF6B5E</code>.',
+   'Nunito 900 — заголовки, кнопки, пример (26 pt); Inter 400/500/600 — интерфейс, текст для чтения Inter 500 27/39 pt. Сетка 4 pt, поля 16, карточки 20–22. Зоны нажатия ≥ 44 pt (круги 48, переключатель 56×44, кнопки 56–80).'],
+  ctrH:['Пара (текст / фон)','Где','Контраст','Норма'],
+  hNa:'Не утверждено',
+  na:['<b>Ждёт юриста:</b> весь экран — макет. Текст согласия, порядок «18+ → согласие», текст подтверждения удаления, упоминание поставщика в Политике (GAP: «Мой голос», шлюз <code>voice-deletion</code> закрыт).',
+   'Формулировки «голосом, похожим на твой» (intro) и «Озвучивать переводы моим голосом» (переключатель) — не утверждены.',
+   'В <code>copy-ru/translate.md</code> (§11 и FAQ 7) есть «твоим голосом», «копия голоса», «двух минут», «удалить в любой момент… письмом» — по заданию на экраны не взяты.',
+   'Тексты es и en — перевод черновика, не вычитаны носителем; названия «Mi voz» / «My Voice» не утверждены.',
+   'Текст для чтения вслух — демо; настоящий текст для записи образца не выбран.',
+   'Цвета <code>#1E3734</code>, <code>#FF6B5E</code>, <code>#C3CBD5</code> — производные, в токенах v2.3 их нет.'],
+  ctr:['основной текст','подписи на фоне','подписи на карточке','прочитанный текст','кнопки «Заново», «Пауза», «Нет»','«Завершить», «Принимаю», текущее слово','пример перевода (крупный)','подпись карточки примера','поясняющий текст','«Удалить голос» в списке','кнопка «Удалить голос»']}
+},
+es:{
+ name:'Mi voz', back:'Atrás',
+ iP:'Tus traducciones pueden sonar con una voz parecida a la tuya.',
+ iSteps:['Lee en voz alta un texto corto','Escucha un ejemplo y decide si te lo quedas','Activa la voz para tus traducciones'],
+ age:'¿Tienes 18'+N+'años o más?', ageSub:'«Mi voz» es solo para mayores de 18'+N+'años', ageNo:'No', ageYes:'Sí, los tengo',
+ cEb:'Mi voz', cH:'Con tu consentimiento', cPh:'Texto del consentimiento — pendiente del abogado', cNo:'Ahora no', cYes:'Acepto',
+ rTtl:'Grabar muestra', rStep:'Párrafo 2 de 4', rLbl:'Lee en voz alta', rRec:'Grabando',
+ read:'En el café de la esquina ya suben la persiana. En el mercado ya colocan las naranjas y junto al mar se oyen las [primeras] gaviotas. Me encanta esta hora: la ciudad apenas despierta y parece que el día será largo y tranquilo.',
+ rTip:'Lee a tu ritmo, como si hablaras con alguien', redo:'Repetir', pause:'Pausa', fin:'Terminar',
+ okH:'La voz está lista', okP:'Escucha el ejemplo y decide si te lo quedas.',
+ smpLbl:'Русский · ejemplo', smp:'Можно счёт, пожалуйста?', smpLang:'ru',
+ tg:'Leer mis traducciones con mi voz', tgSub:'Desactivado, suena la voz estándar',
+ again:'Grabar otra vez', done:'Listo', play:'Escuchar ejemplo', playA:'Reproducir',
+ stH:'Voz grabada', stSub:'18 de noviembre · en español', grp:'Voz', del:'Eliminar voz',
+ dH:'¿Eliminar la voz?', dP:'Tus traducciones volverán a sonar con la voz estándar.', dYes:'Eliminar voz', dNo:'Cancelar',
+ page:{title:'Parrlo Translate · Mi voz',tag:'Referencia · lote 2 · textos en borrador',legal:'maqueta · pendiente del abogado',h1:'Translate · «Mi voz»',
+  lead:'T‑07 del mapa del sitio, estado «próximamente». El recorrido completo: qué es y control de edad → consentimiento → lectura en voz alta para grabar la muestra → ejemplo y activación → ajustes y «Eliminar voz». Pantalla sensible a nivel legal: 18+, consentimiento, servicio externo. Los textos de consentimiento no se redactan aquí: en su lugar hay un marcador. Solo tema oscuro, interfaz de «tú». Pantalla de 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Fotograma principal · lectura en voz alta',
+  heroP:['Texto grande para leer: lo ya leído en verde, la palabra actual sobre una etiqueta verde, lo que falta en blanco. Arriba, el progreso por párrafos; abajo, la onda en vivo y el tiempo de grabación.','Las tres acciones del mapa del sitio: «Repetir», «Pausa», «Terminar». La principal es «Terminar», en verde, como tu lado en Translate.'],
+  cap:['Translate · Mi voz','maqueta · pendiente del abogado'],
+  hStates:'Estados',statesLead:'Cinco fotogramas en orden. Escala 0,6.',
+  st:{intro:['Qué es y 18+','Primera vez en «Mi voz». Una frase de explicación, tres pasos y el control de edad: «Sí, los tengo» lleva al consentimiento. <em>La frase «una voz parecida a la tuya» no está aprobada.</em>'],
+      consent:['Consentimiento','Tras «Sí, los tengo». Hueco para el texto del consentimiento — <em>lo redacta el abogado</em>; en pantalla solo hay un marcador. «Acepto» empieza la grabación; «Ahora no» sale.'],
+      reading:['Lectura en voz alta','Se graba la muestra. El usuario lee el texto; «Pausa» para, «Repetir» vuelve a grabar el párrafo, «Terminar» acaba.'],
+      ready:['La voz está lista','Tras «Terminar». Una frase de ejemplo en el idioma de la otra persona para escucharla; el interruptor «Leer mis traducciones con mi voz», activado.'],
+      settings:['Ajustes y eliminación','Más tarde, desde los ajustes de Translate. Gestión de la voz; al pulsar «Eliminar voz» aparece la hoja de confirmación.']},
+  hDec:'Decisiones',
+  dec:['<b>La edad, antes del consentimiento.</b> «¿Tienes 18 años o más?» está en la primera pantalla, junto a la explicación: quien no los tiene no sigue ni ve el consentimiento.',
+   '<b>El consentimiento es un paso propio con un botón explícito.</b> «Acepto» y «Ahora no». El texto no se inventa: borde punteado, el marcador y líneas de relleno que muestran el volumen.',
+   '<b>Lectura tipo karaoke.</b> Lo leído en verde y la palabra actual en una etiqueta: no solo color, también forma. Progreso por párrafos, sin minutos ni límites.',
+   '<b>El ejemplo, en el idioma de la otra persona.</b> En «La voz está lista» suena una frase traducida (tarjeta de traducción #00875C de Translate), porque así se usará la voz.',
+   '<b>Eliminar, solo con el botón.</b> «Eliminar voz» en ajustes y en la hoja de confirmación. La confirmación solo dice que las traducciones volverán a la voz estándar, sin promesas sobre guardar o borrar datos.',
+   '<b>Sin nombres de servicios ni «clones».</b> En pantalla no hay proveedor, ni «copia», ni «con tu voz exacta».',
+   '<b>Textos de copy-ru.</b> Las etiquetas salen de <code>docs/site/copy-ru/translate.md</code>, §11, traducidas al español.'],
+  hTok:'Tokens y contraste',
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>, texto <code>#F2F5F7</code> / <code>#9AA4B2</code>: tema oscuro v2.3.',
+   'Tu lado: <code>#2BC48A</code> (lo leído, botones principales, interruptor), fondos de iconos <code>#1E3734</code>. Ejemplo traducido: <code>#00875C</code>; punto del idioma de la otra persona <code>#BFF2DC</code>. Eliminar y grabar: <code>#FF6B5E</code>.',
+   'Nunito 900 para títulos, botones y el ejemplo (26 pt); Inter 400/500/600 para la interfaz, texto de lectura en Inter 500 27/39 pt. Retícula de 4 pt, márgenes de 16. Zonas táctiles ≥ 44 pt.'],
+  ctrH:['Par (texto / fondo)','Dónde','Contraste','Mínimo'],
+  hNa:'Pendiente de aprobar',
+  na:['<b>Pendiente del abogado:</b> toda la pantalla es maqueta. Texto del consentimiento, el orden «18+ → consentimiento», el texto de la confirmación, el proveedor en la Política (GAP: «Mi voz», puerta <code>voice-deletion</code> cerrada).',
+   'Las frases «una voz parecida a la tuya» y «Leer mis traducciones con mi voz» no están aprobadas.',
+   'En <code>copy-ru/translate.md</code> (§11 y FAQ 7) aparecen «con tu voz», «copia de la voz», «dos minutos», «eliminar en cualquier momento… por correo»: por encargo, no se usan en pantalla.',
+   'Textos en español e inglés: traducción del borrador, sin revisar por nativos; los nombres «Mi voz» / «My Voice» no están fijados.',
+   'El texto para leer es de demo; el texto real de la muestra no está elegido.',
+   'Los colores <code>#1E3734</code>, <code>#FF6B5E</code> y <code>#C3CBD5</code> son derivados; no están en los tokens v2.3.'],
+  ctr:['texto principal','etiquetas sobre el fondo','etiquetas en la tarjeta','texto ya leído','«Repetir», «Pausa», «No»','«Terminar», «Acepto», palabra actual','ejemplo traducido (grande)','etiqueta de la tarjeta','texto explicativo','«Eliminar voz» en la lista','botón «Eliminar voz»']}
+},
+en:{
+ name:'My Voice', back:'Back',
+ iP:'Your translations can be read aloud in a voice that sounds like yours.',
+ iSteps:['Read a short text aloud','Hear a sample and decide whether to keep it','Turn it on for your translations'],
+ age:'Are you 18 or older?', ageSub:'My Voice is only for people 18 and over', ageNo:'No', ageYes:'Yes, I am',
+ cEb:'My Voice', cH:'With your consent', cPh:'Consent text — from legal', cNo:'Not now', cYes:'I agree',
+ rTtl:'Voice sample', rStep:'Paragraph 2 of 4', rLbl:'Read aloud', rRec:'Recording',
+ read:'The café on the corner is opening its shutters. At the market they’re already setting out oranges, and the [first] gulls are calling by the sea. I love this time of day: the town is just waking up, and the day feels long and calm.',
+ rTip:'Read at your normal pace, like you’re talking', redo:'Restart', pause:'Pause', fin:'Finish',
+ okH:'Voice is ready', okP:'Hear the sample and decide whether to keep it.',
+ smpLbl:'Español · sample', smp:'¿Me trae la cuenta, por favor?', smpLang:'es',
+ tg:'Read my translations in my voice', tgSub:'When off, the standard voice is used',
+ again:'Record again', done:'Done', play:'Play sample', playA:'Play',
+ stH:'Voice recorded', stSub:'Nov 18 · English', grp:'Voice', del:'Delete voice',
+ dH:'Delete voice?', dP:'Your translations will go back to the standard voice.', dYes:'Delete voice', dNo:'Cancel',
+ page:{title:'Parrlo Translate · My Voice',tag:'Reference · batch 2 · draft copy',legal:'mockup · waiting on legal',h1:'Translate · “My Voice”',
+  lead:'T‑07 on the site map, status “coming soon”. The whole path: what it is and the age check → consent → reading aloud to record a sample → sample and turning it on → settings and Delete voice. Legally sensitive: 18+, consent, an external service. Consent copy isn’t written here; a placeholder stands in. Dark theme only. Screen 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Hero frame · reading aloud',
+  heroP:['Large text to read: what’s been read is green, the current word sits on a green tag, what’s ahead is white. Paragraph progress on top; the live waveform and recording time at the bottom of the card.','The three actions from the site map: Restart, Pause, Finish. Finish is the primary, in green, like your side in Translate.'],
+  cap:['Translate · My Voice','mockup · waiting on legal'],
+  hStates:'States',statesLead:'Five frames in order. Scale 0.6.',
+  st:{intro:['What it is and 18+','First time in My Voice. One line of explanation, three steps and the age check: “Yes, I am” leads to consent. <em>The phrase “a voice that sounds like yours” isn’t approved.</em>'],
+      consent:['Consent','After “Yes, I am”. Room for the consent text — <em>from legal</em>; on screen there’s only a placeholder. I agree starts recording, Not now leaves.'],
+      reading:['Reading aloud','Recording the sample. The user reads the text; Pause stops, Restart re-records the paragraph, Finish wraps up.'],
+      ready:['Voice ready','After Finish. A sample phrase in the other person’s language to play; the “Read my translations in my voice” switch is on.'],
+      settings:['Settings and deletion','Later, from Translate settings. Managing the voice; tapping Delete voice opens a confirmation sheet.']},
+  hDec:'Decisions',
+  dec:['<b>Age comes before consent.</b> “Are you 18 or older?” sits on the first screen next to the explanation: anyone under 18 doesn’t go further or see the consent.',
+   '<b>Consent is its own step with an explicit button.</b> I agree and Not now. The text isn’t made up: a dashed frame, the placeholder and filler lines that show the length.',
+   '<b>Karaoke‑style reading.</b> Read text in green, the current word on a tag: shape as well as color. Progress by paragraph, no minutes, no limits.',
+   '<b>The sample is in the other person’s language.</b> Voice ready plays a translated phrase (the #00875C translation card from Translate), because that’s how the voice is used.',
+   '<b>Deletion is just the button.</b> Delete voice in settings and on the confirmation sheet. The confirmation only says translations go back to the standard voice; no promises about storing or erasing data.',
+   '<b>No service names, no “clone”.</b> No provider, no “copy”, no “your exact voice” on screen.',
+   '<b>Copy from copy-ru.</b> Labels come from <code>docs/site/copy-ru/translate.md</code>, §11, translated into English.'],
+  hTok:'Tokens and contrast',
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>, text <code>#F2F5F7</code> / <code>#9AA4B2</code>: dark theme v2.3.',
+   'Your side: <code>#2BC48A</code> (read text, primary buttons, switch), icon fills <code>#1E3734</code>. Translated sample: <code>#00875C</code>, other person’s language dot <code>#BFF2DC</code>. Delete and recording: <code>#FF6B5E</code>.',
+   'Nunito 900 for titles, buttons and the sample (26 pt); Inter 400/500/600 for the UI, reading text Inter 500 27/39 pt. 4 pt grid, 16 margins. Tap targets ≥ 44 pt.'],
+  ctrH:['Pair (text / background)','Where','Contrast','Minimum'],
+  hNa:'Not approved',
+  na:['<b>Waiting on legal:</b> the whole screen is a mockup. Consent text, the “18+ → consent” order, the deletion confirmation copy, the provider in the Privacy Policy (GAP: My Voice, the <code>voice-deletion</code> gate is closed).',
+   '“A voice that sounds like yours” (intro) and “Read my translations in my voice” (switch) aren’t approved.',
+   '<code>copy-ru/translate.md</code> (§11 and FAQ 7) says “in your voice”, “a copy of your voice”, “two minutes”, “delete any time… by email”; per the brief, none of that is on screen.',
+   'Spanish and English copy is a translation of the draft, not checked by native speakers; the names “Mi voz” / “My Voice” aren’t settled.',
+   'The reading text is a demo; the real sample text hasn’t been chosen.',
+   'Colors <code>#1E3734</code>, <code>#FF6B5E</code>, <code>#C3CBD5</code> are derived; they aren’t in the v2.3 tokens.'],
+  ctr:['body text','labels on background','labels on a card','text already read','Restart, Pause, No','Finish, I agree, current word','translated sample (large)','sample card label','explanatory text','Delete voice in the list','Delete voice button']}
+}};
+const LANGS=['ru','es','en'];
+let L=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase(); if(!LANGS.includes(L))L='ru';
+
+function rnd(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
+function wave(n,live,seed,maxH){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const env=0.45+0.55*Math.sin(Math.PI*(i+1)/(live+1));const v=i<live?Math.max(6,Math.round((0.25+0.75*r())*maxH*env)):4;h+=`<i class="${i<live?'':P+'z'}" style="height:${v}px"></i>`;}return h;}
+function mini(n,seed,on){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const v=Math.round(5+r()*21*Math.sin(Math.PI*(i+.5)/n)+3);h+=`<i class="${i<on?P+'on':''}" style="height:${v}px"></i>`;}return h;}
+function read(s){const m=s.match(/^(.*?)\[(.*?)\](.*)$/);return `<span class="${P}done">${m[1]}</span><span class="${P}cur">${m[2]}</span>${m[3]}`;}
+
+function screen(st,t){
+ const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
+ const top=ttl=>`<div class="${P}top"><span class="${P}cb" role="button" aria-label="${t.back}">${I.back}</span><span class="${P}ttl">${ttl}</span><span class="${P}cb ${P}nil" aria-hidden="true"></span></div>`;
+ const btn=(cls,ic,txt)=>`<span class="${cls}" role="button">${ic||''}${txt}</span>`;
+ let main='',bot='',ovl='',ttl=t.name;
+ if(st==='intro'){
+  ttl='';
+  main=`<div class="${P}art"><img src="${M}mascot-speak-dark.svg" alt=""></div>
+   <div class="${P}h">${t.name}</div><p class="${P}para">${t.iP}</p>
+   <div class="${P}steps">${[I.mic,I.spk,I.tgl].map((ic,i)=>`<div class="${P}step"><i>${ic}</i>${t.iSteps[i]}</div>`).join('')}</div>`;
+  bot=`<div class="${P}age"><b>${t.age}</b><span>${t.ageSub}</span><div class="${P}btns">${btn(P+'sec','',t.ageNo)}${btn(P+'go',I.ok,t.ageYes)}</div></div>`;
+ } else if(st==='consent'){
+  ttl='';
+  const sk=[92,100,84,96,70,0,100,88,94,62,0,96,80,90,100,74].map(w=>w?`<i style="width:${w}%"></i>`:`<i class="${P}gap" style="width:0;height:0"></i>`).join('');
+  main=`<div class="${P}eb">${t.cEb}</div><div class="${P}h ${P}l">${t.cH}</div>
+   <div class="${P}doc"><div class="${P}doch"><i>${I.doc}</i>${t.cPh}</div><div class="${P}sk" aria-hidden="true">${sk}</div><div class="${P}fade"></div></div>`;
+  bot=`<div class="${P}btns">${btn(P+'sec','',t.cNo)}${btn(P+'go',I.ok,t.cYes)}</div>`;
+ } else if(st==='reading'){
+  ttl=t.rTtl;
+  main=`<div class="${P}prog"><div class="${P}lbl"><span>${t.name}</span><b>${t.rStep}</b></div><div class="${P}seg"><i class="${P}full"></i><i><b style="width:46%"></b></i><i></i><i></i></div></div>
+   <div class="${P}card"><div class="${P}lbl"><i class="${P}dot"></i>${t.rLbl}<span class="${P}rec"><i></i>${t.rRec} · 0:48</span></div>
+    <p class="${P}read" lang="${L}">${read(t.read)}</p>
+    <div class="${P}wave" aria-hidden="true">${wave(50,38,5,44)}</div></div>
+   <div class="${P}hint ${P}tip">${I.info}${t.rTip}</div>`;
+  bot=`<div class="${P}btns">${btn(P+'sec '+P+'sm',I.retry,t.redo)}${btn(P+'sec '+P+'sm',I.pause,t.pause)}${btn(P+'go',I.ok,t.fin)}</div>`;
+ } else if(st==='ready'){
+  ttl='';
+  main=`<div class="${P}art ${P}ok"><img src="${M}mascot-speak-dark.svg" alt=""><span class="${P}badge">${I.chk}</span></div>
+   <div class="${P}h ${P}sm">${t.okH}</div><p class="${P}para">${t.okP}</p>
+   <div class="${P}smp"><div class="${P}lbl"><i class="${P}dot ${P}p"></i>${t.smpLbl}</div><p class="${P}out" lang="${t.smpLang}">${t.smp}</p>
+    <div class="${P}pl"><span class="${P}pb" role="button" aria-label="${t.playA}">${I.play}</span><div class="${P}mw" aria-hidden="true">${mini(40,9,0)}</div><span class="${P}dur">0:03</span></div></div>
+   <div class="${P}tg"><div class="${P}row"><span class="${P}rt">${t.tg}<small>${t.tgSub}</small></span><span class="${P}swi" role="switch" aria-checked="true" aria-label="${t.tg}"><b>${I.chk}</b></span></div></div>`;
+  bot=`<div class="${P}btns">${btn(P+'sec','',t.again)}${btn(P+'go',I.ok,t.done)}</div>`;
+ } else {
+  main=`<div class="${P}st"><span class="${P}av">${I.wave}</span><div><b>${t.stH}</b><span>${t.stSub}</span></div></div>
+   <div class="${P}sh">${t.grp}</div>
+   <div class="${P}grp">
+    <div class="${P}row ${P}tall"><span class="${P}rt">${t.tg}<small>${t.tgSub}</small></span><span class="${P}swi" role="switch" aria-checked="true"><b>${I.chk}</b></span></div>
+    <div class="${P}row" role="button"><i>${I.play}</i><span class="${P}rt">${t.play}</span><span class="${P}chev">${I.chev}</span></div>
+    <div class="${P}row" role="button"><i>${I.retry}</i><span class="${P}rt">${t.again}</span><span class="${P}chev">${I.chev}</span></div>
+   </div>
+   <div class="${P}grp"><div class="${P}row ${P}del" role="button"><i>${I.trash}</i><span class="${P}rt">${t.del}</span></div></div>`;
+  ovl=`<div class="${P}ovl"><div class="${P}dim"></div><div class="${P}sheet" role="dialog" aria-label="${t.dH}"><span class="${P}grab"></span><span class="${P}ico">${I.trash}</span><b>${t.dH}</b><p>${t.dP}</p>
+   <div class="${P}sbtn"><span class="${P}red" role="button">${I.trash}${t.dYes}</span><span class="${P}cn" role="button">${t.dNo}</span></div></div></div>`;
+ }
+ const hasBot=!!bot;
+ return `<div class="scr ${P}scr" data-state="${st}">${sbar}${top(ttl)}<div class="${P}main">${main}</div>${hasBot?`<div class="${P}bot">${bot}</div>`:''}${ovl}<div class="homebar"><i></i></div></div>`;
+}
+
+/* контраст */
+function Lu(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const PAIRS=[['#F2F5F7','#0E1116',4.5],['#9AA4B2','#0E1116',4.5],['#9AA4B2','#1C2026',4.5],['#2BC48A','#1C2026',4.5],['#F2F5F7','#242B34',4.5],['#0E1116','#2BC48A',4.5],['#FFFFFF','#00875C',3],['#FFFFFF','#00875C',4.5],['#C3CBD5','#0E1116',4.5],['#FF6B5E','#1C2026',4.5],['#0E1116','#FF6B5E',4.5]];
+
+const STATES=['intro','consent','reading','ready','settings'];
+const HERO='reading';
+const ph=(id,s,html)=>`<div class="pf p67" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
+const $=id=>document.getElementById(P+id);
+function render(){
+ const t=T[L],p=t.page;
+ document.documentElement.lang=L; document.title=p.title;
+ $('lsw').innerHTML=LANGS.map(l=>`<a href="?l=${l}" data-l="${l}" aria-current="${l===L}">${l.toUpperCase()}</a>`).join('');
+ $('tag').textContent=p.tag; $('tag2').textContent=p.legal; $('h1').textContent=p.h1; $('lead').textContent=p.lead;
+ $('hero-ph').innerHTML=ph('translate-myvoice',.8,screen(HERO,t))+`<div class="pcap"><span class="dot"></span><div><b>${p.cap[0]}</b><span>${p.cap[1]}</span></div></div>`;
+ $('hero-t').innerHTML=`<h3>${p.heroH}</h3>`+p.heroP.map(x=>`<p>${x}</p>`).join('');
+ $('h-states').textContent=p.hStates; $('states-lead').textContent=p.statesLead;
+ $('grid').innerHTML=STATES.map((k,i)=>`<figure>${ph(P+'-'+k,.6,screen(k,t))}<figcaption><b>${i+1} · ${p.st[k][0]}</b><code>${k}</code> · ${p.st[k][1]}</figcaption></figure>`).join('');
+ $('h-dec').textContent=p.hDec; $('dec').innerHTML=p.dec.map(x=>`<li>${x}</li>`).join('');
+ $('h-tok').textContent=p.hTok; $('tok').innerHTML=p.tok.map(x=>`<li>${x}</li>`).join('');
+ const fmt=v=>L==='en'?v.toFixed(2):v.toFixed(2).replace('.',',');
+ $('ctr').innerHTML=`<tr>${p.ctrH.map(h=>`<th>${h}</th>`).join('')}</tr>`+PAIRS.map(([a,b,n],i)=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${p.ctr[i]}</td><td><b>${fmt(v)}:1</b></td><td>${v>=n?'≥ '+(n===3?'3':fmt(n).replace(/0$/,''))+' ✓':'✗'}</td></tr>`;}).join('');
+ $('h-na').textContent=p.hNa; $('na').innerHTML=p.na.map(x=>`<li>${x}</li>`).join('');
+ window.TM_CR=PAIRS.map(([a,b,n],i)=>[p.ctr[i],+cr(a,b).toFixed(2),n]);
+ document.body.dataset.ready=L;
+}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-l]');if(!a)return;e.preventDefault();L=a.dataset.l;history.replaceState(null,'','?l='+L);render();});
+window.TM_STATES=STATES;
+render();
+})();
+</script>
+</body>
+</html>

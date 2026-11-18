@@ -144,12 +144,20 @@ body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui
 .chat-web-day{align-self:center;font:500 12px/16px Inter;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px;margin-bottom:4px}
 .chat-web-m{position:relative;max-width:72%;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px}
 .chat-web-th.mob .chat-web-m{max-width:82%}
-.chat-web-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px}
+.chat-web-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px;padding-bottom:0}
+/* входящее: перевод — основной текст, подпись «Перевод с …» мятным, оригинал по касанию */
+.chat-web-ft{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin:0 -12px;padding:0 12px}
+.chat-web-tg{display:flex;align-items:center;gap:6px;min-height:44px;font:600 13px/18px Inter;color:var(--mint);white-space:nowrap}
+.chat-web-tg svg{width:16px;height:16px}
+.chat-web-tg svg.cv{width:14px;height:14px;opacity:.9}
+.chat-web-ft .chat-web-mt{margin:0;flex:none}
+.chat-web-og{margin:8px 0 0;border-radius:12px;background:var(--sf);border-left:3px solid var(--mint);padding:8px 12px 10px}
+.chat-web-og .k{display:block;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin-bottom:2px}
+.chat-web-og .v{display:block;font-size:16px;line-height:22px;color:var(--tx)}
 .chat-web-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
 .chat-web-m.gap{margin-top:8px}
 .chat-web-t{display:flex;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid rgba(154,164,178,.28);font-size:15px;line-height:20px}
 .chat-web-t svg{flex:none;width:16px;height:16px;margin-top:2px}
-.chat-web-m.in .chat-web-t{color:var(--mint)}
 .chat-web-m.out .chat-web-t{color:#fff;border-top-color:rgba(255,255,255,.3)}
 .chat-web-mt{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;line-height:16px;margin-top:2px}
 .chat-web-m.in .chat-web-mt{color:var(--sec)}
@@ -266,6 +274,8 @@ var I={
  copy:ic('<rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/>'),
  smile:ic('<circle cx="12" cy="12" r="9"/><path d="M8.5 14a4.5 4.5 0 0 0 7 0"/><circle cx="9" cy="9.8" r=".6" fill="currentColor"/><circle cx="15" cy="9.8" r=".6" fill="currentColor"/>'),
  globe:ic('<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.3 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.3-3.5-8.5S9.6 5.9 12 3.5z"/>'),
+ cd:ic('<path d="M6 9l6 6 6-6"/>').replace('<svg','<svg class="cv"'),
+ cu:ic('<path d="M6 15l6-6 6 6"/>').replace('<svg','<svg class="cv"'),
  help:ic('<circle cx="12" cy="12" r="8.5"/><path d="M9.8 9.6a2.3 2.3 0 1 1 3 2.2c-.5.2-.8.6-.8 1.1v.6"/><circle cx="12" cy="16.4" r=".6" fill="currentColor"/>')
 };
 var M='../../brandbook/assets/mascot/';
@@ -281,6 +291,7 @@ ru:{lang:'ru',tab:'Parrlo Chat',
  chats:'Чаты',search:'Поиск по чатам и сообщениям',all:'Все',unread:'Непрочитанные',groups:'Группы',
  reqT:'Запросы',reqS:'2 новых · люди не из твоих чатов',you:'Ты',
  peer:{nm:'Lucía',ini:'L',col:'#BFF2DC'},pair:['ES','RU'],pairL:'Языки чата: испанский и русский',
+ trFrom:'Перевод с испанского',hide:'Скрыть оригинал',ogK:'Оригинал · испанский',
  st:'в сети',stD:'в сети · пишет по‑испански',today:'Сегодня',readAt:'Прочитано 10:04',
  ph:'Сообщение по‑русски',reads:'Lucía прочитает:',live:'по мере набора',
  kh:'<kbd>Enter</kbd> — отправить · <kbd>Shift</kbd> + <kbd>Enter</kbd> — новая строка',
@@ -309,7 +320,7 @@ ru:{lang:'ru',tab:'Parrlo Chat',
  P:{title:'Parrlo Chat · веб-версия',eb:'Эталон · chat-web · C-12 · макет · скоро · закрытая проверка · только тёмная тема',
   h1:'Chat и в браузере',
   p1:'Веб-версия Parrlo Chat: те же чаты с переводом на компьютере и в браузере телефона, адрес <code>web.parrlo.com</code>. Это макет: код веб-версии готов, но людям она ещё не выложена. На сайте — пометка «скоро · закрытая проверка»: сначала ограниченная группа, потом открытый запуск.',
-  ul:['<b>Компьютер</b>: список чатов слева, переписка справа; открытый чат выделен фоном и полосой, не только цветом.','<b>Перевод как в приложении</b>: оригинал сверху, перевод под чертой; пока пишешь, видно, что прочитает Lucía.','<b>Клавиатура компьютера</b>: Enter отправляет, Shift + Enter переносит строку; у поиска — подсказка «/».','<b>Телефон</b>: тот же интерфейс в одну колонку — 390 и самый узкий 360.','<b>Вход</b> только через Apple или Google, без пароля.','<b>Рамки нейтральные</b>: окно без бренда браузера, телефон без деталей конкретной модели.'],
+  ul:['<b>Компьютер</b>: список чатов слева, переписка справа; открытый чат выделен фоном и полосой, не только цветом.','<b>Перевод как в приложении</b>: во входящем сверху перевод на русский, снизу мятная подпись «Перевод с испанского ⌄» — по касанию оригинал раскрывается в том же пузыре; пока пишешь, видно, что прочитает Lucía.','<b>Клавиатура компьютера</b>: Enter отправляет, Shift + Enter переносит строку; у поиска — подсказка «/».','<b>Телефон</b>: тот же интерфейс в одну колонку — 390 и самый узкий 360.','<b>Вход</b> только через Apple или Google, без пароля.','<b>Рамки нейтральные</b>: окно без бренда браузера, телефон без деталей конкретной модели.'],
   capb:'Parrlo Chat в браузере · компьютер 1440 × 900',caps:'Главный кадр: открыт чат с Lucía, наведение на сообщение показывает действия, внизу — набор с живым переводом. Макет, тексты — черновик.',
   h2s:'Состояния и ширины',lead:'Компьютер — PNG @2× (2880 × 1800), телефон 390 — PNG @3× (1170 × 2532): <code>site-v4/ref/png/chat-web--&lt;состояние&gt;--&lt;язык&gt;.png</code>. Ширина 360 показана здесь одним кадром.',
   h2d:'Решения, токены, открытые вопросы',hdec:'Решения сверх сборки',htok:'Токены и контраст',hna:'Не утверждено',
@@ -318,15 +329,16 @@ ru:{lang:'ru',tab:'Parrlo Chat',
    'phone-thread':['Телефон 390: переписка','Нажали на чат: переписка на весь экран, «Назад» возвращает к списку.'],
    w360:['Телефон 360: список','Самая узкая ширина: имена и превью сокращаются многоточием, фильтры не переносятся.'],
    signin:['Вход на компьютере','Первый вход или сессия закончилась: только Apple и Google; значки — нейтральные плейсхолдеры.']},
-  dec:['<b>Две колонки на компьютере</b> вместо переходов: список всегда на месте, переписка — в колонке до 760 px, чтобы строки не растягивались.','<b>Действия при наведении</b> у сообщения (на телефоне — долгое нажатие, как в C-02). Кнопки 44 × 44 и подсказка.','<b>Подсказка клавиш</b> под полем ввода и <code>/</code> для поиска — привычно для веба, не мешает новичку.','<b>Живой перевод при наборе</b> — тот же блок «Lucía прочитает», что в C-02.','<b>«Запросы» первой строкой</b> — из кода веба: люди не из твоих чатов, отдельно от переписок.','<b>Адресная строка без замка</b>, чтобы значок не читался как обещание о защите данных.','<b>Без нижних вкладок на телефоне</b>: настройки за аватаром, звонков в вебе нет.','<b>Карточки Парло нет</b>: секретарь — отдельная функция «скоро» (C-15), в веб-кадр не смешиваем.'],
-  ct:['Основной текст','Вторичный текст, время','Вторичный на поле поиска','Вторичный на выделенной строке','Перевод (Mint) на входящем','Белый на исходящем','Текст на акценте','Время непрочитанного','Текст в адресной строке','Текст кнопок входа','Подсказка клавиш (#C9D1DA)'],
-  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>; рамка окна <code>#14181D</code>.','Входящее <code>#242B34</code>, перевод в нём Mint <code>#BFF2DC</code>; исходящее Deep Green <code>#00875C</code>.','Акцент Light Green <code>#2BC48A</code>: отправка, полоса выбранного чата, счётчики. Жёлтого на экране нет.','Сетка 4 px; отступы 16 / 20 / 24; кнопки 44 и 56.'],
+  dec:['<b>Перевод — основной текст входящего</b>, как в сборке: сверху русский, снизу мятная подпись «Перевод с испанского ⌄» со значком; оригинал свёрнут и раскрывается по касанию в том же пузыре. Порядок один с <code>chat-thread</code>, <code>chat-original</code> и <code>chat-voice</code>.','<b>Две колонки на компьютере</b> вместо переходов: список всегда на месте, переписка — в колонке до 760 px, чтобы строки не растягивались.','<b>Действия при наведении</b> у сообщения (на телефоне — долгое нажатие, как в C-02). Кнопки 44 × 44 и подсказка.','<b>Подсказка клавиш</b> под полем ввода и <code>/</code> для поиска — привычно для веба, не мешает новичку.','<b>Живой перевод при наборе</b> — тот же блок «Lucía прочитает», что в C-02.','<b>«Запросы» первой строкой</b> — из кода веба: люди не из твоих чатов, отдельно от переписок.','<b>Адресная строка без замка</b>, чтобы значок не читался как обещание о защите данных.','<b>Без нижних вкладок на телефоне</b>: настройки за аватаром, звонков в вебе нет.','<b>Карточки Парло нет</b>: секретарь — отдельная функция «скоро» (C-15), в веб-кадр не смешиваем.'],
+  ct:['Основной текст','Вторичный текст, время','Вторичный на поле поиска','Вторичный на выделенной строке','Подпись «Перевод с испанского» (Mint) на входящем','Белый на исходящем','Текст на акценте','Время непрочитанного','Текст в адресной строке','Текст кнопок входа','Подсказка клавиш (#C9D1DA)'],
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>; рамка окна <code>#14181D</code>.','Входящее <code>#242B34</code>: перевод — основной текст <code>#F2F5F7</code>, подпись «Перевод с …» Mint <code>#BFF2DC</code>, раскрытый оригинал на <code>#1C2026</code> с мятной полосой; исходящее Deep Green <code>#00875C</code>.','Акцент Light Green <code>#2BC48A</code>: отправка, полоса выбранного чата, счётчики. Жёлтого на экране нет.','Сетка 4 px; отступы 16 / 20 / 24; кнопки 44 и 56.'],
   na:['Все тексты — черновик, включая es и en.','«Тот же способ входа, что и в приложении» — проверить, что аккаунты веба и iPhone общие во всех случаях.','Набор действий при наведении и подсказка клавиш.','Домен <code>web.parrlo.com</code> ещё не открыт, веб-вход выключен (GAP № 28).','Уведомления в браузере — позже (GAP № 41), в макете их нет.','Нужна ли в вебе карточка Парло, когда выйдет секретарь.','Политика § 2.8 (вход в веб-версию) — сверить перед открытым запуском.']}},
 
 es:{lang:'es',tab:'Parrlo Chat',
  chats:'Chats',search:'Buscar en chats y mensajes',all:'Todos',unread:'No leídos',groups:'Grupos',
  reqT:'Solicitudes',reqS:'2 nuevas · gente que no está en tus chats',you:'Tú',
  peer:{nm:'Olga',ini:'O',col:'#2BC48A'},pair:['RU','ES'],pairL:'Idiomas del chat: ruso y español',
+ trFrom:'Traducido del ruso',hide:'Ocultar original',ogK:'Original · ruso',
  st:'en línea',stD:'en línea · escribe en ruso',today:'Hoy',readAt:'Leído 10:04',
  ph:'Mensaje en español',reads:'Olga leerá:',live:'mientras escribes',
  kh:'<kbd>Enter</kbd> para enviar · <kbd>Shift</kbd> + <kbd>Enter</kbd> para nueva línea',
@@ -355,7 +367,7 @@ es:{lang:'es',tab:'Parrlo Chat',
  P:{title:'Parrlo Chat · versión web',eb:'Referencia · chat-web · C-12 · maqueta · próximamente · prueba cerrada · solo tema oscuro',
   h1:'Chat, también en el navegador',
   p1:'La versión web de Parrlo Chat: los mismos chats con traducción en el ordenador y en el navegador del móvil, en <code>web.parrlo.com</code>. Es una maqueta: el código está listo, pero aún no está abierta al público. En el sitio llevará la etiqueta «próximamente · prueba cerrada»: primero un grupo reducido y después el lanzamiento abierto.',
-  ul:['<b>Ordenador</b>: chats a la izquierda, conversación a la derecha; el chat abierto se marca con fondo y una barra, no solo con color.','<b>Traducción como en la app</b>: original arriba y traducción debajo de la línea; mientras escribes, ves lo que leerá Olga.','<b>Teclado</b>: Enter envía, Shift + Enter hace un salto de línea; «/» abre la búsqueda.','<b>Móvil</b>: la misma interfaz en una columna, a 390 y a 360, el ancho más estrecho.','<b>Acceso</b> solo con Apple o Google, sin contraseña.','<b>Marcos neutros</b>: ventana sin marca de navegador y móvil sin detalles de un modelo concreto.'],
+  ul:['<b>Ordenador</b>: chats a la izquierda, conversación a la derecha; el chat abierto se marca con fondo y una barra, no solo con color.','<b>Traducción como en la app</b>: en el mensaje recibido, arriba la traducción al español y abajo la etiqueta menta «Traducido del ruso ⌄»; al tocarla, el original se abre en la misma burbuja. Mientras escribes, ves lo que leerá Olga.','<b>Teclado</b>: Enter envía, Shift + Enter hace un salto de línea; «/» abre la búsqueda.','<b>Móvil</b>: la misma interfaz en una columna, a 390 y a 360, el ancho más estrecho.','<b>Acceso</b> solo con Apple o Google, sin contraseña.','<b>Marcos neutros</b>: ventana sin marca de navegador y móvil sin detalles de un modelo concreto.'],
   capb:'Parrlo Chat en el navegador · ordenador 1440 × 900',caps:'Imagen principal: chat con Olga abierto; al pasar el ratón por un mensaje aparecen las acciones y abajo se escribe con traducción en vivo. Maqueta, textos en borrador.',
   h2s:'Estados y anchos',lead:'Ordenador — PNG @2× (2880 × 1800); móvil 390 — PNG @3× (1170 × 2532): <code>site-v4/ref/png/chat-web--&lt;estado&gt;--&lt;idioma&gt;.png</code>. El ancho de 360 aparece aquí en una sola imagen.',
   h2d:'Decisiones, tokens, temas abiertos',hdec:'Decisiones nuevas',htok:'Tokens y contraste',hna:'Sin aprobar',
@@ -364,15 +376,16 @@ es:{lang:'es',tab:'Parrlo Chat',
    'phone-thread':['Móvil 390: conversación','Tocas un chat: la conversación ocupa la pantalla y «Atrás» vuelve a la lista.'],
    w360:['Móvil 360: lista','El ancho más estrecho: nombres y vistas previas se cortan con puntos suspensivos y los filtros no saltan de línea.'],
    signin:['Acceso en el ordenador','Primer acceso o sesión caducada: solo Apple y Google; los iconos son marcadores neutros.']},
-  dec:['<b>Dos columnas en el ordenador</b>: la lista siempre está a la vista y la conversación ocupa hasta 760 px para que las líneas no se estiren.','<b>Acciones al pasar el ratón</b> (en el móvil, pulsación larga, como en C-02). Botones de 44 × 44 y descripción emergente.','<b>Atajos de teclado</b> bajo el campo y «/» para buscar: lo habitual en la web, sin estorbar a quien empieza.','<b>Traducción en vivo al escribir</b>: el mismo bloque «Olga leerá» que en C-02.','<b>«Solicitudes» en primera fila</b>, como en el código web: gente fuera de tus chats, aparte.','<b>Barra de direcciones sin candado</b>, para que no se lea como una promesa sobre los datos.','<b>Sin pestañas abajo en el móvil</b>: ajustes tras el avatar; en la web no hay llamadas.','<b>Sin tarjeta de Parlo</b>: el asistente es otra función «próximamente» (C-15).'],
-  ct:['Texto principal','Texto secundario, hora','Secundario en el buscador','Secundario en la fila elegida','Traducción (Mint) en mensaje recibido','Blanco en mensaje enviado','Texto sobre acento','Hora de no leído','Texto de la barra de direcciones','Texto de botones de acceso','Atajos (#C9D1DA)'],
-  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>; marco de ventana <code>#14181D</code>.','Recibido <code>#242B34</code> con traducción Mint <code>#BFF2DC</code>; enviado Deep Green <code>#00875C</code>.','Acento Light Green <code>#2BC48A</code>: enviar, barra del chat elegido, contadores. Sin amarillo.','Retícula de 4 px; márgenes 16 / 20 / 24; botones de 44 y 56.'],
+  dec:['<b>La traducción es el texto principal del mensaje recibido</b>, como en la app: arriba el español, abajo la etiqueta menta «Traducido del ruso ⌄» con icono; el original está plegado y se abre al tocar, en la misma burbuja. El mismo orden que en <code>chat-thread</code>, <code>chat-original</code> y <code>chat-voice</code>.','<b>Dos columnas en el ordenador</b>: la lista siempre está a la vista y la conversación ocupa hasta 760 px para que las líneas no se estiren.','<b>Acciones al pasar el ratón</b> (en el móvil, pulsación larga, como en C-02). Botones de 44 × 44 y descripción emergente.','<b>Atajos de teclado</b> bajo el campo y «/» para buscar: lo habitual en la web, sin estorbar a quien empieza.','<b>Traducción en vivo al escribir</b>: el mismo bloque «Olga leerá» que en C-02.','<b>«Solicitudes» en primera fila</b>, como en el código web: gente fuera de tus chats, aparte.','<b>Barra de direcciones sin candado</b>, para que no se lea como una promesa sobre los datos.','<b>Sin pestañas abajo en el móvil</b>: ajustes tras el avatar; en la web no hay llamadas.','<b>Sin tarjeta de Parlo</b>: el asistente es otra función «próximamente» (C-15).'],
+  ct:['Texto principal','Texto secundario, hora','Secundario en el buscador','Secundario en la fila elegida','Etiqueta «Traducido del ruso» (Mint) en mensaje recibido','Blanco en mensaje enviado','Texto sobre acento','Hora de no leído','Texto de la barra de direcciones','Texto de botones de acceso','Atajos (#C9D1DA)'],
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>; marco de ventana <code>#14181D</code>.','Recibido <code>#242B34</code>: traducción como texto principal <code>#F2F5F7</code>, etiqueta «Traducido del…» Mint <code>#BFF2DC</code>, original abierto sobre <code>#1C2026</code> con barra menta; enviado Deep Green <code>#00875C</code>.','Acento Light Green <code>#2BC48A</code>: enviar, barra del chat elegido, contadores. Sin amarillo.','Retícula de 4 px; márgenes 16 / 20 / 24; botones de 44 y 56.'],
   na:['Todos los textos son borrador, también es y en.','«La misma opción que en la app»: confirmar que la cuenta web y la de iPhone son la misma en todos los casos.','Acciones al pasar el ratón y atajos de teclado.','El dominio <code>web.parrlo.com</code> aún no está abierto y el acceso web está desactivado (GAP n.º 28).','Notificaciones del navegador: más adelante (GAP n.º 41).','Si la web mostrará la tarjeta de Parlo cuando salga el asistente.','Política § 2.8 (acceso web): revisar antes del lanzamiento abierto.']}},
 
 en:{lang:'en',tab:'Parrlo Chat',
  chats:'Chats',search:'Search chats and messages',all:'All',unread:'Unread',groups:'Groups',
  reqT:'Requests',reqS:'2 new · people outside your chats',you:'You',
  peer:{nm:'Lucía',ini:'L',col:'#BFF2DC'},pair:['ES','EN'],pairL:'Chat languages: Spanish and English',
+ trFrom:'Translated from Spanish',hide:'Hide original',ogK:'Original · Spanish',
  st:'online',stD:'online · writes in Spanish',today:'Today',readAt:'Read 10:04',
  ph:'Message in English',reads:'Lucía will read:',live:'as you type',
  kh:'<kbd>Enter</kbd> to send · <kbd>Shift</kbd> + <kbd>Enter</kbd> for a new line',
@@ -387,7 +400,7 @@ en:{lang:'en',tab:'Parrlo Chat',
   {l:'D',c:'#6AA6F5',nm:'Diego',tm:'Yesterday',pv:ph('Photo · See you at the market')},
   {l:'M',c:'#BFF2DC',nm:'Marta',tm:'Mon',pv:tr('I’ll send the address tonight')}],
  msgs:[
-  ['in','¡Hola! ¿Ya tienes los documentos para el contrato?','Hi! Do you have the papers for the lease yet?','9:52'],
+  ['in','¡Hola! ¿Ya tienes los documentos para el contrato?','Hi! Got the papers for the lease?','9:52'],
   ['out','Yes — my passport and a letter from work','Sí, el pasaporte y una carta del trabajo.','9:54'],
   ['in','¿Quedamos mañana a las 10 en la oficina?','Shall we meet tomorrow at 10 at the office?','10:02'],
   ['out','Sure, I’ll bring everything','Claro, llevo todo.','10:03'],
@@ -401,7 +414,7 @@ en:{lang:'en',tab:'Parrlo Chat',
  P:{title:'Parrlo Chat · web',eb:'Reference · chat-web · C-12 · mockup · coming soon · closed beta · dark theme only',
   h1:'Chat, right in your browser',
   p1:'Parrlo Chat on the web: the same chats with translation on your computer and in your phone’s browser, at <code>web.parrlo.com</code>. This is a mockup: the web code is ready but not yet public. The site will label it “coming soon · closed beta”: a small group first, then an open launch.',
-  ul:['<b>Desktop</b>: chats on the left, conversation on the right; the open chat is marked by a background and a bar, not just color.','<b>Translation like in the app</b>: original on top, translation below the line; as you type, you see what Lucía will read.','<b>Keyboard</b>: Enter sends, Shift + Enter adds a line; “/” jumps to search.','<b>Phone</b>: the same interface in one column, at 390 and at the narrowest 360.','<b>Sign-in</b> with Apple or Google only, no password.','<b>Neutral frames</b>: a window with no browser brand, a phone with no model-specific details.'],
+  ul:['<b>Desktop</b>: chats on the left, conversation on the right; the open chat is marked by a background and a bar, not just color.','<b>Translation like in the app</b>: an incoming message shows the English translation on top and a mint “Translated from Spanish ⌄” label below; tap it to open the original in the same bubble. As you type, you see what Lucía will read.','<b>Keyboard</b>: Enter sends, Shift + Enter adds a line; “/” jumps to search.','<b>Phone</b>: the same interface in one column, at 390 and at the narrowest 360.','<b>Sign-in</b> with Apple or Google only, no password.','<b>Neutral frames</b>: a window with no browser brand, a phone with no model-specific details.'],
   capb:'Parrlo Chat in the browser · desktop 1440 × 900',caps:'Main frame: the chat with Lucía is open, hovering a message shows actions, and the composer shows the live translation. Mockup, copy is draft.',
   h2s:'States and widths',lead:'Desktop — PNG @2× (2880 × 1800); phone 390 — PNG @3× (1170 × 2532): <code>site-v4/ref/png/chat-web--&lt;state&gt;--&lt;lang&gt;.png</code>. The 360 width is shown here as one frame.',
   h2d:'Decisions, tokens, open questions',hdec:'Decisions beyond the build',htok:'Tokens and contrast',hna:'Not approved',
@@ -410,9 +423,9 @@ en:{lang:'en',tab:'Parrlo Chat',
    'phone-thread':['Phone 390: conversation','Tap a chat: the conversation fills the screen, Back returns to the list.'],
    w360:['Phone 360: list','The narrowest width: names and previews truncate with an ellipsis, filters stay on one line.'],
    signin:['Desktop sign-in','First visit or an expired session: Apple and Google only; icons are neutral placeholders.']},
-  dec:['<b>Two columns on desktop</b> instead of page hops: the list stays put; the conversation is capped at 760 px so lines don’t stretch.','<b>Hover actions</b> on a message (long press on phones, as in C-02). 44 × 44 buttons plus a tooltip.','<b>Keyboard hint</b> under the field and “/” for search — standard on the web, out of a newcomer’s way.','<b>Live translation while typing</b> — the same “Lucía will read” block as C-02.','<b>Requests as the first row</b>, from the web code: people outside your chats, kept apart.','<b>No padlock in the address bar</b>, so it can’t read as a promise about data.','<b>No bottom tabs on the phone</b>: settings behind the avatar; the web has no calls.','<b>No Parlo card</b>: the assistant is a separate coming-soon feature (C-15).'],
-  ct:['Body text','Secondary text, time','Secondary on search field','Secondary on selected row','Translation (Mint) in incoming','White on outgoing','Text on accent','Unread time','Address bar text','Sign-in button text','Keyboard hint (#C9D1DA)'],
-  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>; window frame <code>#14181D</code>.','Incoming <code>#242B34</code> with Mint translation <code>#BFF2DC</code>; outgoing Deep Green <code>#00875C</code>.','Light Green accent <code>#2BC48A</code>: send, selected-chat bar, counters. No yellow on screen.','4 px grid; spacing 16 / 20 / 24; buttons 44 and 56.'],
+  dec:['<b>The translation is the main text of an incoming message</b>, as in the build: English on top, a mint “Translated from Spanish ⌄” label with an icon below; the original is collapsed and opens on tap in the same bubble. Same order as <code>chat-thread</code>, <code>chat-original</code> and <code>chat-voice</code>.','<b>Two columns on desktop</b> instead of page hops: the list stays put; the conversation is capped at 760 px so lines don’t stretch.','<b>Hover actions</b> on a message (long press on phones, as in C-02). 44 × 44 buttons plus a tooltip.','<b>Keyboard hint</b> under the field and “/” for search — standard on the web, out of a newcomer’s way.','<b>Live translation while typing</b> — the same “Lucía will read” block as C-02.','<b>Requests as the first row</b>, from the web code: people outside your chats, kept apart.','<b>No padlock in the address bar</b>, so it can’t read as a promise about data.','<b>No bottom tabs on the phone</b>: settings behind the avatar; the web has no calls.','<b>No Parlo card</b>: the assistant is a separate coming-soon feature (C-15).'],
+  ct:['Body text','Secondary text, time','Secondary on search field','Secondary on selected row','“Translated from Spanish” label (Mint) in incoming','White on outgoing','Text on accent','Unread time','Address bar text','Sign-in button text','Keyboard hint (#C9D1DA)'],
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>; window frame <code>#14181D</code>.','Incoming <code>#242B34</code>: translation as main text <code>#F2F5F7</code>, “Translated from …” label in Mint <code>#BFF2DC</code>, an opened original on <code>#1C2026</code> with a mint bar; outgoing Deep Green <code>#00875C</code>.','Light Green accent <code>#2BC48A</code>: send, selected-chat bar, counters. No yellow on screen.','4 px grid; spacing 16 / 20 / 24; buttons 44 and 56.'],
   na:['All copy is draft, including es and en.','“Same option as in the app” — confirm web and iPhone accounts are always the same account.','Hover action set and keyboard hint.','The <code>web.parrlo.com</code> domain isn’t live yet and web sign-in is off (GAP #28).','Browser notifications come later (GAP #41); not in this mockup.','Whether the web shows the Parlo card once the assistant ships.','Privacy Policy § 2.8 (web sign-in) — check before the open launch.']}}
 };
 
@@ -457,7 +470,11 @@ function list(mob){
   '<div class="chat-web-fl"><span class="chat-web-ch on" role="button" aria-pressed="true">'+D.all+'</span><span class="chat-web-ch" role="button" aria-pressed="false">'+D.unread+'<em>2</em></span><span class="chat-web-ch" role="button" aria-pressed="false">'+D.groups+'</span></div>'+
   '<div class="chat-web-ls">'+reqRow()+rows.map(function(r,i){var nx=rows[i+1];return row(r,mob,!mob&&nx&&nx.sel)}).join('')+'</div></div>';
 }
-function mIn(m,o){o=o||{};return '<div class="chat-web-m in'+(o.gap?' gap':'')+(o.hv?' hv':'')+'"><span lang="'+peerLang+'">'+m[1]+'</span><div class="chat-web-t" lang="'+myLang+'">'+I.tr+'<span>'+m[2]+'</span></div><span class="chat-web-mt">'+m[3]+'</span>'+(o.hv?hover():'')+'</div>'}
+/* входящее: сверху перевод на мой язык, снизу «Перевод с … ⌄»; o.open — оригинал раскрыт в том же пузыре */
+function mIn(m,o){o=o||{};
+ var og=o.open?'<div class="chat-web-og" lang="'+peerLang+'"><span class="k">'+D.ogK+'</span><span class="v">'+m[1]+'</span></div>':'';
+ return '<div class="chat-web-m in'+(o.gap?' gap':'')+(o.hv?' hv':'')+'"><span lang="'+myLang+'">'+m[2]+'</span>'+og+
+ '<div class="chat-web-ft"><span class="chat-web-tg" role="button" aria-expanded="'+(o.open?'true':'false')+'" data-tap>'+I.tr+(o.open?D.hide+I.cu:D.trFrom+I.cd)+'</span><span class="chat-web-mt">'+m[3]+'</span></div>'+(o.hv?hover():'')+'</div>'}
 function mOut(m){return '<div class="chat-web-m out"><span lang="'+myLang+'">'+m[1]+'</span><div class="chat-web-t" lang="'+peerLang+'">'+I.tr+'<span>'+m[2]+'</span></div><span class="chat-web-mt">'+m[3]+I.done+'</span></div>'}
 function hover(){return '<span class="chat-web-hb"><span role="button" aria-label="'+D.a.react+'" data-tap>'+I.smile+'</span><span class="on" role="button" aria-label="'+D.a.reply+'" data-tap>'+I.reply+'</span><span role="button" aria-label="'+D.a.copy+'" data-tap>'+I.copy+'</span><span role="button" aria-label="'+D.a.menu+'" data-tap>'+I.more+'</span></span><span class="chat-web-tip" role="tooltip">'+D.tip+'</span>'}
 function thread(mob){
@@ -483,7 +500,7 @@ function thread(mob){
 }
 function signin(){
  var s=D.si;
- var demo='<div class="chat-web-demo"><div class="chat-web-m in"><span lang="'+peerLang+'">'+s.dIn[0]+'</span><div class="chat-web-t" lang="'+myLang+'">'+I.tr+'<span>'+s.dIn[1]+'</span></div><span class="chat-web-mt">'+s.dIn[2]+'</span></div>'+
+ var demo='<div class="chat-web-demo">'+mIn(['in',s.dIn[0],s.dIn[1],s.dIn[2]])+
   '<div class="chat-web-m out"><span lang="'+myLang+'">'+s.dOut[0]+'</span><div class="chat-web-t" lang="'+peerLang+'">'+I.tr+'<span>'+s.dOut[1]+'</span></div><span class="chat-web-mt">'+s.dOut[2]+I.done+'</span></div></div>';
  return '<div class="scr chat-web-scr chat-web-app"><div class="chat-web-si">'+
   '<div class="chat-web-brand"><div class="lg"><img src="'+M+'mascot-happy-dark.svg" alt="">Parrlo Chat</div><h2>'+s.brandH+'</h2><p>'+s.brandP+'</p>'+demo+'<img class="ms" src="'+M+'mascot-speak-dark.svg" alt=""></div>'+

@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Translate · режим «Текст»</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0B0E12;color:#F2F5F7}
+body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
+.translate-text-w{max-width:1200px;margin:0 auto}
+.translate-text-langs{display:flex;gap:8px;margin-bottom:28px}
+.translate-text-langs a{min-width:56px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;padding:0 16px;font:700 15px/1 Inter,sans-serif;color:#F2F5F7;background:#1C2026;box-shadow:inset 0 0 0 1px #2F3742;text-decoration:none}
+.translate-text-langs a[aria-current="true"]{background:#2BC48A;color:#0E1116;box-shadow:none}
+.translate-text-w h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:12px}
+.translate-text-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.translate-text-lead{color:#9AA4B2;max-width:820px}
+.translate-text-tag{display:inline-block;margin-bottom:12px;font:600 13px/1 Inter,sans-serif;color:#0E1116;background:#BFF2DC;border-radius:8px;padding:6px 10px}
+.translate-text-mk{display:inline-block;font:700 12px/1 Inter,sans-serif;color:#0E1116;background:#FFC247;border-radius:6px;padding:4px 7px;margin-left:6px;vertical-align:2px;letter-spacing:.02em}
+.translate-text-hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;margin-top:40px;padding:48px 40px;border-radius:32px;background:#12161C;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-text-hero figure{margin:0}
+.translate-text-hero-t{flex:1 1 300px;max-width:520px}
+.translate-text-hero-t h3{font:900 24px/1.25 Nunito,sans-serif;margin-bottom:12px}
+.translate-text-hero-t p{color:#C3CBD5;margin-bottom:12px}
+.translate-text-w ul{padding-left:20px;color:#C3CBD5;font-size:15px;max-width:860px}
+.translate-text-w li{margin:8px 0}
+.translate-text-w li b{color:#F2F5F7}
+.translate-text-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.translate-text-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(284px,1fr));gap:48px 24px;margin-top:32px}
+.translate-text-grid figure{margin:0;display:flex;flex-direction:column;align-items:center}
+.translate-text-grid figcaption{margin-top:16px;width:272px;font-size:14px;line-height:1.45;color:#9AA4B2}
+.translate-text-grid figcaption b{display:block;color:#F2F5F7;font:900 17px/1.3 Nunito,sans-serif;margin-bottom:4px}
+.translate-text-grid figcaption code{font-size:12px}
+.translate-text-tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
+.translate-text-tbl th,.translate-text-tbl td{text-align:left;vertical-align:top;border-bottom:1px solid #2F3742;padding:10px 12px 10px 0}
+.translate-text-tbl th{color:#9AA4B2;font-weight:600}
+.translate-text-tw{overflow-x:auto}
+.translate-text-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:0 0 0 1px #3A414B}
+@media (max-width:760px){.translate-text-w h1{font-size:30px}.translate-text-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-text-hero .pf{--s:.8!important}}
+@media (max-width:480px){.translate-text-hero .pf{--s:.7!important}}
+
+/* ===== экран 430×932 ===== */
+.translate-text-scr{--me:#2BC48A;--es:#BFF2DC;--mebg:#1E3734;--q:#FFC247;--qbg:#3A3426}
+.translate-text-top{flex:none;display:flex;align-items:center;gap:8px;padding:8px 16px;position:relative;z-index:2}
+.translate-text-cb{width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.translate-text-cb svg{width:24px;height:24px}
+.translate-text-pair{flex:1;min-width:0;display:flex;justify-content:center}
+.translate-text-pair>span{height:48px;border-radius:24px;background:var(--sf2);display:inline-flex;align-items:center;gap:8px;padding:0 16px;font:900 19px/1 Nunito,sans-serif;letter-spacing:.02em}
+.translate-text-swp{color:var(--sec);display:flex}
+.translate-text-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--me)}
+.translate-text-dot.translate-text-es{background:var(--es)}
+.translate-text-seg{flex:none;margin:4px 16px 0;display:flex;padding:2px;border-radius:24px;background:var(--sf)}
+.translate-text-seg>span{flex:1;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:8px;font:600 16px Inter,sans-serif;color:var(--sec)}
+.translate-text-seg>span svg{width:20px;height:20px}
+.translate-text-seg>span.translate-text-on{background:var(--sf2);color:var(--tx);box-shadow:inset 0 0 0 1px #3A414B}
+.translate-text-main{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:16px 16px 0}
+.translate-text-lbl{font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;display:flex;align-items:center;gap:8px;min-width:0}
+.translate-text-row{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:20px}
+
+/* перевод для меня */
+.translate-text-mine{background:var(--mebg);border-radius:28px;padding:20px 20px 16px}
+.translate-text-mine .translate-text-lbl{color:var(--me)}
+.translate-text-mine p{font:900 22px/30px Nunito,sans-serif;margin:10px 0 16px;color:var(--tx)}
+.translate-text-num{color:var(--me);text-decoration:underline solid var(--me);text-decoration-thickness:2px;text-underline-offset:5px;white-space:nowrap}
+.translate-text-acts{display:flex;gap:8px;flex-wrap:wrap}
+.translate-text-act{height:48px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 14px;font:600 16px Inter,sans-serif;background:#FFFFFF;color:#0E1116;white-space:nowrap}
+.translate-text-act svg{width:20px;height:20px}
+.translate-text-act.translate-text-gh{background:transparent;color:var(--tx);box-shadow:inset 0 0 0 1.5px #35584F}
+.translate-text-act.translate-text-dk{background:#005E40;color:#fff}
+/* оригинал */
+.translate-text-orig{background:var(--sf);border-radius:24px;padding:12px 20px 18px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-text-orig p{font:400 16px/24px Inter,sans-serif;color:#C9D0D9;margin-top:4px}
+.translate-text-tb{height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 0 0 8px;font:600 14px Inter,sans-serif;color:var(--tx)}
+.translate-text-tb svg{width:18px;height:18px}
+
+/* ответ */
+.translate-text-quote{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:20px;background:var(--sf);box-shadow:inset 3px 0 0 var(--es)}
+.translate-text-quote svg{width:20px;height:20px;flex:none;color:var(--es);margin-top:2px}
+.translate-text-quote b{display:block;font:600 13px/16px Inter,sans-serif;color:var(--sec)}
+.translate-text-quote span{display:block;font:400 15px/21px Inter,sans-serif;color:#C9D0D9;margin-top:2px}
+.translate-text-draft{background:var(--sf);border-radius:24px;padding:14px 20px 16px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-text-draft p{font:400 17px/24px Inter,sans-serif;margin-top:6px}
+.translate-text-card{background:var(--deep);border-radius:28px;padding:18px 20px 20px;color:#fff}
+.translate-text-card .translate-text-lbl{color:#fff}
+.translate-text-card p.translate-text-big{font:900 22px/30px Nunito,sans-serif;margin:10px 0 12px}
+.translate-text-fix{flex:none;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 8px;border-radius:14px;background:#005E40;font:600 13px Inter,sans-serif;color:#fff}
+.translate-text-fix svg{width:16px;height:16px}
+.translate-text-back{border-top:1px solid rgba(255,255,255,.28);padding-top:10px;margin-bottom:16px;font:400 14px/20px Inter,sans-serif;color:#fff}
+.translate-text-back b{font-weight:600}
+
+/* композер */
+.translate-text-bot{flex:none;padding:12px 16px 4px;display:flex;flex-direction:column;gap:8px}
+.translate-text-cmp{display:flex;gap:8px;align-items:center}
+.translate-text-field{flex:1;min-width:0;height:56px;border-radius:28px;background:var(--sf);box-shadow:inset 0 0 0 1.5px var(--line);display:flex;align-items:center;gap:8px;padding:0 6px 0 20px;font:400 16px Inter,sans-serif;color:var(--sec)}
+.translate-text-field>span:first-child{flex:1;min-width:0;white-space:nowrap;overflow:hidden}
+.translate-text-ib{flex:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--tx);background:var(--sf2)}
+.translate-text-ib svg{width:22px;height:22px}
+.translate-text-hint{display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center}
+.translate-text-hint svg{width:16px;height:16px;flex:none}
+.translate-text-mic{flex:none;width:56px;height:56px;border-radius:50%;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center}
+.translate-text-mic svg{width:24px;height:24px}
+
+/* пусто */
+.translate-text-empty{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 28px 0}
+.translate-text-empty img{width:168px;height:168px;margin-top:8px}
+.translate-text-empty h3{font:900 28px/36px Nunito,sans-serif;margin-top:8px}
+.translate-text-empty p{font:400 17px/25px Inter,sans-serif;color:var(--sec);margin-top:10px}
+.translate-text-eb{display:flex;flex-direction:column;gap:12px;align-self:stretch;margin-top:28px}
+.translate-text-pri{height:60px;border-radius:30px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;gap:10px;font:900 20px Nunito,sans-serif}
+.translate-text-pri svg,.translate-text-sec svg{width:22px;height:22px}
+.translate-text-sec{height:56px;border-radius:28px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:10px;font:600 17px Inter,sans-serif}
+.translate-text-foot{display:flex;gap:8px;align-items:flex-start;text-align:left;font:400 14px/20px Inter,sans-serif;color:var(--sec);margin-top:20px}
+.translate-text-foot svg{width:18px;height:18px;flex:none;margin-top:1px}
+
+/* камера: сцена из форм */
+.translate-text-cam{background:#0A0C10}
+.translate-text-scene{position:absolute;inset:0;overflow:hidden;background:
+ radial-gradient(120% 70% at 50% 45%,#3B3128 0%,#2A231D 55%,#17130F 100%)}
+.translate-text-scene::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(98deg,rgba(255,255,255,.025) 0 2px,transparent 2px 22px)}
+.translate-text-cup{position:absolute;right:-34px;top:120px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 45% 45%,#5A3A22 0 38%,#E9E4DA 39% 62%,#BDB6AA 63% 66%,transparent 67%)}
+.translate-text-key{position:absolute;left:-10px;bottom:250px;width:120px;height:26px;border-radius:13px;background:linear-gradient(#9AA0A6,#6C7279);transform:rotate(18deg)}
+.translate-text-paper{position:absolute;left:58px;top:196px;width:314px;height:372px;background:#F4F1EA;border-radius:6px;transform:rotate(-3deg);box-shadow:0 30px 60px rgba(0,0,0,.55),0 2px 0 rgba(0,0,0,.2);padding:22px 22px;color:#1C2026;font:400 12.5px/18px Inter,sans-serif}
+.translate-text-paper .translate-text-ph{display:flex;align-items:center;gap:8px;padding-bottom:10px;margin-bottom:12px;border-bottom:1.5px solid #C9C3B6}
+.translate-text-paper .translate-text-ph i{width:28px;height:28px;border-radius:6px;background:#2F4A6B;flex:none}
+.translate-text-paper .translate-text-ph b{font:800 13px/16px Inter,sans-serif;display:block}
+.translate-text-paper .translate-text-ph span{font:400 11px/14px Inter,sans-serif;color:#5B6472;display:block}
+.translate-text-paper p{margin-bottom:9px}
+.translate-text-paper .translate-text-fill{height:6px;border-radius:3px;background:#D9D3C6;margin:9px 0}
+.translate-text-paper.translate-text-det p>span{background:rgba(43,196,138,.22);box-shadow:0 0 0 1.5px rgba(0,135,92,.75);border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.translate-text-sig{width:96px;height:28px;margin-top:6px;border-bottom:1.5px solid #8A8476}
+.translate-text-frame{position:absolute;left:40px;top:176px;width:350px;height:412px;transform:rotate(-3deg)}
+.translate-text-frame i{position:absolute;width:44px;height:44px;border:4px solid var(--me)}
+.translate-text-frame i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0;border-radius:16px 0 0 0}
+.translate-text-frame i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0;border-radius:0 16px 0 0}
+.translate-text-frame i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0;border-radius:0 0 0 16px}
+.translate-text-frame i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0;border-radius:0 0 16px 0}
+.translate-text-ov{position:relative;z-index:2;display:flex;flex-direction:column;height:100%}
+.translate-text-ov .translate-text-cb,.translate-text-ov .translate-text-pair>span{background:rgba(14,17,22,.82)}
+.translate-text-pill{align-self:center;margin-top:4px;height:40px;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border-radius:20px;background:rgba(14,17,22,.82);font:600 15px Inter,sans-serif}
+.translate-text-pill svg{width:18px;height:18px;color:var(--me)}
+.translate-text-cbot{margin-top:auto;padding:56px 16px 4px;background:linear-gradient(rgba(10,12,16,0),rgba(10,12,16,.92) 40%,#0A0C10)}
+.translate-text-modes{display:flex;justify-content:center;gap:8px;margin-bottom:16px}
+.translate-text-modes span{height:44px;padding:0 16px;border-radius:22px;display:flex;align-items:center;font:700 14px Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#B4BCC7}
+.translate-text-modes span.translate-text-on{color:#0E1116;background:var(--me)}
+.translate-text-ctl{display:flex;align-items:center;justify-content:space-between;padding:0 20px 12px}
+.translate-text-cs{width:96px;display:flex;flex-direction:column;align-items:center;gap:6px;font:500 13px/16px Inter,sans-serif;color:#B4BCC7;text-align:center}
+.translate-text-cs i{width:56px;height:56px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.translate-text-cs i svg{width:24px;height:24px}
+.translate-text-shut{width:84px;height:84px;border-radius:50%;border:4px solid #F2F5F7;display:flex;align-items:center;justify-content:center}
+.translate-text-shut i{width:66px;height:66px;border-radius:50%;background:#F2F5F7}
+
+/* результат с фото */
+.translate-text-snap{position:absolute;left:0;right:0;top:0;height:330px;overflow:hidden}
+.translate-text-snap .translate-text-scene{inset:auto;left:0;top:0;width:430px;height:932px;transform:translateY(-110px)}
+.translate-text-snap::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(10,12,16,.82),rgba(10,12,16,.55) 45%,rgba(10,12,16,.75))}
+.translate-text-sheet{position:absolute;left:0;right:0;bottom:0;top:262px;z-index:3;background:var(--bg);border-radius:32px 32px 0 0;box-shadow:inset 0 1px 0 #2F3742,0 -20px 50px rgba(0,0,0,.45);display:flex;flex-direction:column;padding:8px 16px 0}
+.translate-text-grab{width:40px;height:5px;border-radius:3px;background:#3A414B;align-self:center;margin-bottom:8px}
+.translate-text-sh{display:flex;align-items:flex-start;gap:12px;padding:0 4px 12px}
+.translate-text-sh>div{flex:1;min-width:0}
+.translate-text-sh h3{font:900 24px/30px Nunito,sans-serif}
+.translate-text-sh span.translate-text-sub{display:flex;align-items:center;gap:6px;font:500 15px/20px Inter,sans-serif;color:var(--sec);margin-top:2px}
+.translate-text-sh span.translate-text-sub svg{width:16px;height:16px;color:var(--me)}
+.translate-text-x{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.translate-text-x svg{width:20px;height:20px}
+.translate-text-rec{background:var(--sf);border-radius:20px;padding:12px 16px 14px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-text-rec p{font:400 14px/20px Inter,sans-serif;color:#C9D0D9;margin-top:4px}
+.translate-text-sheet .translate-text-mine{margin-top:12px;padding:16px 20px 16px}
+.translate-text-sheet .translate-text-mine p{font-size:20px;line-height:28px;margin:8px 0 0}
+.translate-text-chk{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:12px 14px;border-radius:18px;background:var(--qbg);font:400 14px/20px Inter,sans-serif;color:var(--tx)}
+.translate-text-chk svg{width:20px;height:20px;flex:none;color:var(--q)}
+.translate-text-chk b{font-weight:600}
+.translate-text-sheet .translate-text-acts{margin-top:auto;padding-top:12px;flex-wrap:nowrap}
+.translate-text-sheet .translate-text-act{flex:1;justify-content:center;padding:0 10px}
+.translate-text-sheet .translate-text-act.translate-text-rt{flex:none;width:48px;padding:0}
+.translate-text-sheet .translate-text-act.translate-text-gh{box-shadow:inset 0 0 0 1.5px var(--line)}
+</style>
+</head>
+<body>
+<div class="translate-text-w">
+<nav class="translate-text-langs" id="translate-text-langs"></nav>
+<span class="translate-text-tag" id="translate-text-tag"></span>
+<h1 id="translate-text-h1"></h1>
+<p class="translate-text-lead" id="translate-text-lead"></p>
+
+<section class="translate-text-hero">
+ <figure id="translate-text-hero-ph"></figure>
+ <div class="translate-text-hero-t" id="translate-text-hero-t"></div>
+</section>
+
+<h2 id="translate-text-h-st"></h2>
+<p class="translate-text-lead" id="translate-text-st-lead"></p>
+<div class="translate-text-grid" id="translate-text-grid"></div>
+
+<h2 id="translate-text-h-dec"></h2>
+<ul id="translate-text-dec"></ul>
+
+<h2 id="translate-text-h-tok"></h2>
+<div class="translate-text-tw"><table class="translate-text-tbl" id="translate-text-ctr"></table></div>
+<ul id="translate-text-tok"></ul>
+
+<h2 id="translate-text-h-na"></h2>
+<ul id="translate-text-na"></ul>
+</div>
+
+<script src="../screens.js"></script>
+<script>
+(function(){
+const P='translate-text-';
+const $=id=>document.getElementById(P+id);
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const S=window.SITE_ICONS;
+const sv=b=>`<svg viewBox="0 0 24 24" ${SW}>${b}</svg>`;
+const I={
+ mic:S.mic.replace('class="ic"',''), more:S.more.replace('class="ic"',''), spark:S.spark,
+ back:sv('<path d="M14.5 5.5L8 12l6.5 6.5"/>'),
+ swap:`<svg viewBox="0 0 24 24" ${SW} style="width:20px;height:20px"><path d="M4 8h14M14.5 4.5L18 8l-3.5 3.5"/><path d="M20 16H6M9.5 12.5L6 16l3.5 3.5"/></svg>`,
+ txt:sv('<rect x="3.5" y="4.5" width="17" height="15" rx="3"/><path d="M7.5 9.5h9M7.5 13h9M7.5 16.5h5"/>'),
+ copy:sv('<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5"/><path d="M15.5 5.5A2 2 0 0 0 13.5 4H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 1.5 2"/>'),
+ share:sv('<path d="M12 3.5v11M8 7.5l4-4 4 4"/><path d="M8.5 11H7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-1.5"/>'),
+ spk:sv('<path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/>'),
+ cam:sv('<path d="M4 8.5a2 2 0 0 1 2-2h2l1.5-2h5L16 6.5h2a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.6"/>'),
+ paste:sv('<rect x="5" y="4.5" width="14" height="16" rx="2.5"/><path d="M9 4.5V3.8c0-.7.5-1.3 1.2-1.3h3.6c.7 0 1.2.6 1.2 1.3v.7"/><path d="M8.5 10h7M8.5 13.5h7M8.5 17h4"/>'),
+ reply:sv('<path d="M9.5 8L4.5 12.5l5 4.5"/><path d="M4.5 12.5H14a5.5 5.5 0 0 1 5.5 5.5v1"/>'),
+ hide:sv('<path d="M6 14.5l6-6 6 6"/>'),
+ x:sv('<path d="M6 6l12 12M18 6L6 18"/>'),
+ flash:sv('<path d="M13 2.8L5.5 13.5h5.5l-1 7.7 7.5-10.7H12z"/>'),
+ photo:sv('<rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="9.5" r="1.7"/><path d="M4 17l5-4.5 3.5 3 3-2.5 4.5 4"/>'),
+ redo:sv('<path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4v4.5H9"/>'),
+ okc:sv('<circle cx="12" cy="12" r="9.2"/><path d="M8 12.3l2.7 2.7L16 9.6"/>'),
+ info:sv('<circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/>'),
+ eye:sv('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>'),
+ scan:sv('<path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M8 10h8M8 14h5"/>'),
+};
+const N=x=>`<span class="${P}num">${x}</span>`;
+
+/* ===== словарь: экран + страница ===== */
+const T={
+ru:{
+ code:['RU','ES'], seg:['Голос','Текст'], close:'Закрыть', more:'Ещё', back:'Назад',
+ trLbl:'Русский · перевод', tr:`Привет, это Педро, хозяин квартиры. Во ${N('вторник в 10:00')} придёт мастер проверить котёл. Будешь дома? Если нет, оставь, пожалуйста, ключи в почтовом ящике.`,
+ copy:'Копировать', play:'Озвучить', share:'Поделиться',
+ orLbl:'Español · язык определился сам', hide:'Скрыть',
+ msg:'Hola, soy Pedro, el casero. El martes a las 10:00 viene el técnico a revisar la caldera. ¿Vas a estar en casa? Si no, déjame las llaves en el buzón, por favor.',
+ ph:'Ответ — как получится', hint:'Parrlo переведёт ответ и поправит ошибки', camL:'Сфотографировать текст', micL:'Сказать ответ',
+ qLbl:'Ответ на сообщение Pedro', quote:'«…Будешь дома? Если нет, оставь, пожалуйста, ключи в почтовом ящике.»',
+ drLbl:'Твой текст · Русский', draft:'да буду дома но токо до 11 потом на работу. если что ключи у соседки ольги кв 4',
+ resLbl:'Español · для Pedro', fixed:'Грамотно',
+ res:'Sí, estaré en casa, pero solo hasta las 11:00; luego me voy a trabajar. Si hace falta, las llaves las tiene mi vecina Olga, del piso 4.',
+ backL:'По‑русски:', backT:'Да, буду дома, но только до 11:00 — потом ухожу на работу. Если что, ключи у соседки Ольги из квартиры 4.',
+ eT:'Вставь сообщение', eS:'Язык определится сам, и ты прочтёшь его по‑русски. Ответ напиши как получится — Parrlo превратит его в грамотный испанский.',
+ ePaste:'Вставить', eCam:'Сфотографировать текст', eFoot:'Текст можно прислать и через «Поделиться» из любого приложения.',
+ cHint:'Наведи камеру на текст', modes:['Вывеска','Документ'], gal:'Из фото', flash:'Вспышка', shoot:'Снять',
+ rT:'Текст с фото', rSub:'Документ · Español', recLbl:'Распознано', rTrLbl:'Русский · перевод', retake:'Переснять',
+ rTr:`Сообщество собственников, Calle Mayor, 12. Уважаемые соседи! ${N('2 декабря')} с ${N('9:00 до 14:00')} не будет воды из‑за работ. Взнос за декабрь — ${N('65,00 €')}, спишут ${N('5 декабря')}.`,
+ chk:'<b>Проверь числа.</b> Суммы и даты подсвечены — сверь их со снимком: камера может ошибиться в цифре.',
+ st:{empty:['Пустой режим «Текст»','Первый вход в режим. Пользователь вставляет сообщение из буфера или фотографирует текст.'],
+     paste:['Сообщение и перевод','Вставили сообщение арендодателя: сверху перевод, время подчёркнуто, ниже — оригинал. Пользователь читает и отвечает.'],
+     reply:['Ответ, переписанный грамотно','Ответ написан наспех по‑русски. Parrlo дал грамотный испанский и смысл по‑русски для сверки. Пользователь копирует.'],
+     camera:['Камера: рамка на тексте','Нажали камеру в поле ответа. Рамка нашла письмо, строки подсвечены. Пользователь снимает.'],
+     result:['Текст с фото и перевод','После снимка: распознанный текст, перевод, суммы и даты подсвечены, просьба проверить числа.']},
+ page:{tag:'Эталон · пачка 2 · черновик текста', h1:'Translate · режим «Текст» и фото текста', mk:'макет',
+  lead:'T‑06 и T‑16. Пришло сообщение от арендодателя — вставь его, язык определится сам, и ты прочтёшь его по‑русски. Ответ пиши как получится: Parrlo превратит его в грамотный испанский, останется скопировать. Камера (T‑16) в приложении пока не готова — эти два кадра макет. Только тёмная тема, интерфейс на «ты». Экран 430×932 pt, PNG @3× — 1290×2796.',
+  heroH:'Главный кадр · сообщение и перевод',
+  heroP:['Сверху — перевод крупно: его читают. Время подчёркнуто, как в «Числа под контролем». Ниже — оригинал с подписью «язык определился сам»: выбирать язык не нужно.','Внизу всегда поле ответа: пиши по‑русски, как получится. Рядом — камера для письма или вывески.'],
+  cap:['Translate · режим «Текст»','Только тёмная тема. Тексты — черновик.'],
+  hSt:'Состояния', stLead:'По порядку сценария. Под каждым экраном — когда он показывается и что делает пользователь. Масштаб 0,6. Камера — макет: в приложении её ещё нет.',
+  hDec:'Решения', hTok:'Токены и контраст', hNa:'Не утверждено', thP:'Пара (текст / фон)', thW:'Где', thC:'Контраст', thN:'Норма', low:'ниже нормы',
+  dec:['<b>«Голос / Текст» — переключатель под шапкой.</b> Вместо значка клавиатуры в шапке — две подписанные вкладки: режим видно сразу, активная выделена подложкой и рамкой, не только цветом.',
+   '<b>Перевод сверху, оригинал ниже.</b> Как во входящем пузыре сборки: главное — прочитать. Оригинал можно скрыть. Подпись «язык определился сам» объясняет, почему не нужно выбирать язык.',
+   '<b>Цвет = сторона.</b> Текст для тебя — зелёная сторона (<code>#2BC48A</code> на <code>#1E3734</code>), текст для собеседника — Deep Green <code>#00875C</code>, как в translate‑talk. Цитата собеседника отмечена мятной полосой.',
+   '<b>Числа под контролем.</b> Время, даты и суммы в переводе подчёркнуты; на фото документа — просьба сверить их со снимком.',
+   '<b>«Грамотно» и смысл по‑русски.</b> Под испанским ответом — обратный перевод: видно, что ушло, до того как отправишь. Метка «Грамотно» — с попугаем Parrlo (<code>spark</code>), без «искр».',
+   '<b>Копировать и Поделиться.</b> Отправка идёт через мессенджер пользователя: копируешь в WhatsApp или делишься сразу.',
+   '<b>Камера в поле ответа.</b> Вход в фото — значок камеры рядом с полем и кнопка в пустом состоянии. Режимы «Вывеска / Документ», рамка и подсветка распознанных строк; сцена нарисована формами.',
+   '<b>Пустое состояние</b> — с маскотом «думает» (вариант «радуется» не берём: в нём искры), двумя действиями и подсказкой про «Поделиться» (текст из других приложений).'],
+  tok:['Тёмная тема v2.3: фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Цвет = сторона: ты — <code>#2BC48A</code> (подложка <code>#1E3734</code>), собеседник — <code>#BFF2DC</code>, перевод для собеседника — <code>#00875C</code>.',
+   'Жёлтый <code>#FFC247</code> — один элемент: значок в плашке «Проверь числа» (подложка <code>#3A3426</code>).',
+   'Nunito 900 — заголовки и переводы; Inter 400/500/600/700 — интерфейс. Сетка 4 pt, поля 16, карточки 20–28. Зоны нажатия ≥ 44 pt.'],
+  na:['Все тексты — черновик. Тексты es и en носителем не вычитаны.',
+   'Фото документа или вывески (T‑16, GAP №24) — в приложении нет, оба кадра камеры — макет. Распознавание и перевод фото пойдут по пути режима «Текст».',
+   'Переключатель «Голос / Текст» под шапкой вместо значка клавиатуры — сверх сборки.',
+   'Обратный перевод «По‑русски:» под ответом и метка «Грамотно» — сверх сборки; нужно решить, показывать ли всегда.',
+   'Подчёркивание времени, дат и сумм в режиме «Текст» — по разделу «Числа под контролем»; в сборке для текста не проверено.',
+   'Режимы камеры «Вывеска / Документ» и «Из фото» — не решено.',
+   'Цвета <code>#1E3734</code>, <code>#3A3426</code>, <code>#005E40</code> — производные, в токенах v2.3 их нет.'],
+  ctr:['основной текст','подписи, подсказки','подписи на карточках','перевод для тебя, вкладка «Текст»','подписи и числа в переводе для тебя','ответ для собеседника, метки','подписи на карточке ответа','«Копировать», «Вставить»','«Копировать» на карточке','«Поделиться», «Грамотно»','плашка «Проверь числа»','режим «Документ»','подсказки на камере (подложка 82 %)','подписи кнопок камеры'] }
+},
+es:{
+ code:['ES','RU'], seg:['Voz','Texto'], close:'Cerrar', more:'Más', back:'Atrás',
+ trLbl:'Español · traducción', tr:`¡Hola! Soy Olga, la dueña del piso. El ${N('martes a las 10:00')} viene un técnico a revisar la caldera. ¿Estará en casa? Si no, deje las llaves al conserje, por favor.`,
+ copy:'Copiar', play:'Escuchar', share:'Compartir',
+ orLbl:'Русский · idioma detectado', hide:'Ocultar',
+ msg:'Здравствуйте! Это Ольга, хозяйка квартиры. Во вторник в 10:00 придёт мастер проверить котёл. Вы будете дома? Если нет, оставьте, пожалуйста, ключи у консьержа.',
+ ph:'Responde como te salga', hint:'Parrlo traduce tu respuesta y corrige los errores', camL:'Hacer foto de un texto', micL:'Dictar respuesta',
+ qLbl:'Respuesta a Olga', quote:'«…¿Estará en casa? Si no, deje las llaves al conserje, por favor.»',
+ drLbl:'Tal como lo escribiste · Español', draft:'si estare en casa pero solo asta las 11 despues me voy a currar. si no las llaves las tiene mi vecino pedro del 4',
+ resLbl:'Русский · para Olga', fixed:'Corregido',
+ res:'Да, я буду дома, но только до 11:00, потом ухожу на работу. Если что, ключи у моего соседа Педро из квартиры 4.',
+ backL:'En español:', backT:'Sí, estaré en casa, pero solo hasta las 11:00; después me voy a trabajar. Si hace falta, las llaves las tiene mi vecino Pedro, del 4.',
+ eT:'Pega un mensaje', eS:'El idioma se detecta solo y lo lees en español. Escribe la respuesta como te salga: Parrlo la convierte en un ruso correcto.',
+ ePaste:'Pegar', eCam:'Hacer foto de un texto', eFoot:'También puedes mandar texto desde cualquier app con «Compartir».',
+ cHint:'Apunta la cámara al texto', modes:['Cartel','Documento'], gal:'De Fotos', flash:'Flash', shoot:'Hacer foto',
+ rT:'Texto de la foto', rSub:'Documento · Русский', recLbl:'Texto reconocido', rTrLbl:'Español · traducción', retake:'Repetir',
+ rTr:`Empresa administradora Dom‑Servis. Estimados vecinos: el ${N('2 de diciembre')}, de ${N('9:00 a 14:00')}, no habrá agua por obras. La cuota de diciembre es de ${N('3250 ₽')} y se cargará el ${N('5 de diciembre')}.`,
+ chk:'<b>Revisa los números.</b> Importes y fechas van resaltados: compáralos con la foto, la cámara puede confundir una cifra.',
+ st:{empty:['Modo Texto vacío','Primera vez en el modo. Se pega un mensaje del portapapeles o se hace foto de un texto.'],
+     paste:['Mensaje y traducción','Se ha pegado el mensaje de la casera: arriba la traducción, con la hora subrayada; debajo, el original. Se lee y se responde.'],
+     reply:['Respuesta bien escrita','La respuesta se escribe deprisa en español. Parrlo la da en ruso correcto y con el sentido en español para comprobarlo. Se copia.'],
+     camera:['Cámara: marco sobre el texto','Se toca la cámara junto al campo. El marco encuentra la carta y resalta las líneas. Se hace la foto.'],
+     result:['Texto de la foto y traducción','Tras la foto: texto reconocido, traducción con importes y fechas resaltados y aviso para revisar los números.']},
+ page:{tag:'Referencia · tanda 2 · textos en borrador', h1:'Translate · modo Texto y foto de un texto', mk:'maqueta',
+  lead:'T‑06 y T‑16. ¿Te ha escrito la casera? Pega el mensaje: el idioma se detecta solo y lo lees en español. Escribe la respuesta como te salga: Parrlo la convierte en un ruso correcto y solo queda copiarla. La cámara (T‑16) aún no está en la app: esos dos fotogramas son maqueta. Solo tema oscuro, interfaz de tú. Pantalla de 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Fotograma principal · mensaje y traducción',
+  heroP:['Arriba, la traducción en grande: es lo que se lee. La hora va subrayada, como en «Números bajo control». Debajo, el original con «idioma detectado»: no hay que elegir idioma.','Abajo siempre está el campo de respuesta: escribe en español, como te salga. Al lado, la cámara para una carta o un cartel.'],
+  cap:['Translate · modo Texto','Solo tema oscuro. Textos en borrador.'],
+  hSt:'Estados', stLead:'En el orden del uso. Debajo de cada pantalla: cuándo aparece y qué hace la persona. Escala 0,6. La cámara es maqueta: aún no está en la app.',
+  hDec:'Decisiones', hTok:'Tokens y contraste', hNa:'Pendiente de aprobar', thP:'Par (texto / fondo)', thW:'Dónde', thC:'Contraste', thN:'Mínimo', low:'por debajo',
+  dec:['<b>«Voz / Texto», bajo la cabecera.</b> En lugar del icono de teclado, dos pestañas con nombre: el modo se ve al momento y la activa lleva fondo y borde, no solo color.',
+   '<b>Traducción arriba, original debajo.</b> Como en la burbuja entrante de la app: lo principal es leer. El original se puede ocultar. «Idioma detectado» explica por qué no hay que elegirlo.',
+   '<b>Color = lado.</b> Lo que es para ti, en tu verde (<code>#2BC48A</code> sobre <code>#1E3734</code>); lo que es para la otra persona, en Deep Green <code>#00875C</code>, como en translate‑talk. La cita de la otra persona lleva una barra menta.',
+   '<b>Números bajo control.</b> Horas, fechas e importes van subrayados en la traducción; en la foto de un documento se pide compararlos con la imagen.',
+   '<b>«Corregido» y el sentido en español.</b> Bajo la respuesta en ruso va la traducción inversa: ves lo que vas a mandar antes de mandarlo. La etiqueta lleva el loro de Parrlo (<code>spark</code>), sin «chispas».',
+   '<b>Copiar y Compartir.</b> El envío va por la app de mensajería de cada uno: se copia en WhatsApp o se comparte directamente.',
+   '<b>Cámara junto al campo.</b> Se entra a la foto desde el icono de cámara y desde el botón del estado vacío. Modos «Cartel / Documento», marco y líneas resaltadas; la escena está dibujada con formas.',
+   '<b>Estado vacío</b> con la mascota «pensando» (la versión «contenta» lleva chispas, así que no), dos acciones y una pista sobre «Compartir» (texto desde otras apps).'],
+  tok:['Tema oscuro v2.3: fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>, texto <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Color = lado: tú — <code>#2BC48A</code> (fondo <code>#1E3734</code>), la otra persona — <code>#BFF2DC</code>, traducción para ella — <code>#00875C</code>.',
+   'Amarillo <code>#FFC247</code>: un solo elemento, el icono del aviso «Revisa los números» (fondo <code>#3A3426</code>).',
+   'Nunito 900 para títulos y traducciones; Inter 400/500/600/700 para la interfaz. Retícula de 4 pt, márgenes de 16, tarjetas de 20–28. Áreas táctiles ≥ 44 pt.'],
+  na:['Todos los textos son borrador. Los textos en español e inglés no los ha revisado un nativo.',
+   'Foto de un documento o cartel (T‑16, GAP n.º 24): no está en la app; los dos fotogramas de cámara son maqueta. El reconocimiento y la traducción seguirán el camino del modo Texto.',
+   'El selector «Voz / Texto» bajo la cabecera en lugar del icono de teclado va más allá de la versión actual.',
+   'La traducción inversa «En español:» y la etiqueta «Corregido» van más allá de la versión actual; falta decidir si se muestran siempre.',
+   'Subrayar horas, fechas e importes en el modo Texto sigue «Números bajo control»; en la app no está probado para texto.',
+   'Modos de cámara «Cartel / Documento» y «De Fotos»: sin decidir.',
+   'Los colores <code>#1E3734</code>, <code>#3A3426</code> y <code>#005E40</code> son derivados; no están en los tokens v2.3.'],
+  ctr:['texto principal','etiquetas, pistas','etiquetas en tarjetas','traducción para ti, pestaña «Texto»','etiquetas y números en tu traducción','respuesta para la otra persona','etiquetas en la tarjeta de respuesta','«Copiar», «Pegar»','«Copiar» en la tarjeta','«Compartir», «Corregido»','aviso «Revisa los números»','modo «Documento»','pistas sobre la cámara (fondo al 82 %)','etiquetas de botones de cámara'] }
+},
+en:{
+ code:['EN','ES'], seg:['Voice','Text'], close:'Close', more:'More', back:'Back',
+ trLbl:'English · translation', tr:`Hi, it’s Pedro, your landlord. The technician is coming on ${N('Tuesday at 10:00')} to check the boiler. Will you be home? If not, please leave the keys in the mailbox.`,
+ copy:'Copy', play:'Play', share:'Share',
+ orLbl:'Español · detected automatically', hide:'Hide',
+ msg:'Hola, soy Pedro, el casero. El martes a las 10:00 viene el técnico a revisar la caldera. ¿Vas a estar en casa? Si no, déjame las llaves en el buzón, por favor.',
+ ph:'Reply however it comes out', hint:'Parrlo translates your reply and fixes the mistakes', camL:'Take a photo of text', micL:'Dictate reply',
+ qLbl:'Replying to Pedro', quote:'“…Will you be home? If not, please leave the keys in the mailbox.”',
+ drLbl:'As you typed it · English', draft:'yeah ill be home but only til 11 then i got work. keys r with my neighbor olga in 4 if u need',
+ resLbl:'Español · for Pedro', fixed:'Polished',
+ res:'Sí, estaré en casa, pero solo hasta las 11:00; luego me voy a trabajar. Si hace falta, las llaves las tiene mi vecina Olga, del piso 4.',
+ backL:'In English:', backT:'Yes, I’ll be home, but only until 11:00, then I’m off to work. If needed, my neighbor Olga in apartment 4 has the keys.',
+ eT:'Paste a message', eS:'The language is detected automatically, and you read it in English. Write your reply however it comes out — Parrlo turns it into proper Spanish.',
+ ePaste:'Paste', eCam:'Take a photo of text', eFoot:'You can also send text here from any app with Share.',
+ cHint:'Point the camera at the text', modes:['Sign','Document'], gal:'Photos', flash:'Flash', shoot:'Take photo',
+ rT:'Text from photo', rSub:'Document · Español', recLbl:'Recognized text', rTrLbl:'English · translation', retake:'Retake',
+ rTr:`Homeowners’ association, Calle Mayor 12. Dear neighbors, there will be no water on ${N('December 2')} from ${N('9:00 to 14:00')} due to works. The December fee is ${N('€65.00')} and will be charged on ${N('December 5')}.`,
+ chk:'<b>Check the numbers.</b> Amounts and dates are highlighted — compare them with the photo, since the camera can misread a digit.',
+ st:{empty:['Empty Text mode','First time in the mode. The user pastes a message from the clipboard or takes a photo of text.'],
+     paste:['Message and translation','A message from the landlord was pasted: translation on top with the time underlined, original below. The user reads and replies.'],
+     reply:['Reply, cleaned up','A quick, messy reply in English. Parrlo gives proper Spanish plus the meaning in English to double-check. The user copies it.'],
+     camera:['Camera: frame on the text','The camera next to the field was tapped. The frame has found the letter and highlights its lines. The user takes the photo.'],
+     result:['Text from photo, translated','After the photo: recognized text and a translation with amounts and dates highlighted, plus a nudge to check the numbers.']},
+ page:{tag:'Reference · batch 2 · draft copy', h1:'Translate · Text mode and photo of text', mk:'mockup',
+  lead:'T‑06 and T‑16. Got a message from your landlord? Paste it: the language is detected automatically and you read it in English. Write your reply however it comes out — Parrlo turns it into proper Spanish, ready to copy. The camera (T‑16) isn’t in the app yet, so those two frames are a mockup. Dark theme only. Screen 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Hero frame · message and translation',
+  heroP:['The translation sits on top, large: that’s what you read. The time is underlined, as in “Numbers in check”. Below is the original, marked “detected automatically” — no need to pick a language.','The reply field is always at the bottom: type in English, however it comes out. Next to it, the camera for a letter or a sign.'],
+  cap:['Translate · Text mode','Dark theme only. Draft copy.'],
+  hSt:'States', stLead:'In the order of use. Under each screen: when it appears and what the user does. Scale 0.6. The camera is a mockup: it isn’t in the app yet.',
+  hDec:'Decisions', hTok:'Tokens and contrast', hNa:'Not yet approved', thP:'Pair (text / background)', thW:'Where', thC:'Contrast', thN:'Minimum', low:'below minimum',
+  dec:['<b>“Voice / Text” under the header.</b> Instead of a keyboard icon, two labeled tabs: the mode is obvious, and the active one has a fill and an outline, not just color.',
+   '<b>Translation on top, original below.</b> Same as the incoming bubble in the app: reading comes first. The original can be hidden. “Detected automatically” explains why there’s no language picker.',
+   '<b>Color = side.</b> Text for you is in your green (<code>#2BC48A</code> on <code>#1E3734</code>); text for the other person is Deep Green <code>#00875C</code>, as in translate‑talk. Their quoted message has a mint bar.',
+   '<b>Numbers in check.</b> Times, dates and amounts are underlined in the translation; for a document photo, you’re asked to compare them with the image.',
+   '<b>“Polished” plus the meaning in English.</b> Under the Spanish reply sits a back-translation, so you see what goes out before it goes. The tag uses the Parrlo parrot (<code>spark</code>), no sparkles.',
+   '<b>Copy and Share.</b> Sending happens in the user’s own messenger: copy it into WhatsApp or share it straight away.',
+   '<b>Camera in the reply field.</b> The photo flow starts from the camera icon next to the field and from the empty state. “Sign / Document” modes, a frame and highlighted lines; the scene is drawn with shapes.',
+   '<b>Empty state</b> with the “thinking” mascot (the “happy” one has sparkles, so it’s out), two actions and a hint about Share (text from other apps).'],
+  tok:['Dark theme v2.3: background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>, text <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Color = side: you — <code>#2BC48A</code> (fill <code>#1E3734</code>), the other person — <code>#BFF2DC</code>, translation for them — <code>#00875C</code>.',
+   'Yellow <code>#FFC247</code>: a single element, the icon in the “Check the numbers” note (fill <code>#3A3426</code>).',
+   'Nunito 900 for headings and translations; Inter 400/500/600/700 for UI. 4 pt grid, 16 margins, 20–28 card padding. Tap targets ≥ 44 pt.'],
+  na:['All copy is draft. Spanish and English copy hasn’t been reviewed by a native speaker.',
+   'Photo of a document or sign (T‑16, GAP #24) isn’t in the app; both camera frames are a mockup. Recognition and translation will follow the Text mode path.',
+   'The “Voice / Text” switch under the header instead of a keyboard icon goes beyond the current build.',
+   'The “In English:” back-translation and the “Polished” tag go beyond the current build; whether to always show them is open.',
+   'Underlining times, dates and amounts in Text mode follows “Numbers in check”; not tested for text in the app.',
+   'Camera modes “Sign / Document” and “Photos”: not decided.',
+   'Colors <code>#1E3734</code>, <code>#3A3426</code>, <code>#005E40</code> are derived; they’re not in the v2.3 tokens.'],
+  ctr:['body text','labels, hints','labels on cards','your translation, “Text” tab','labels and numbers in your translation','reply for the other person','labels on the reply card','“Copy”, “Paste”','“Copy” on the card','“Share”, “Polished”','“Check the numbers” note','“Document” mode','camera hints (82 % fill)','camera button labels'] }
+}};
+
+/* письмо на камере: язык собеседника */
+const LETTER={
+ es:{h:'Comunidad de Propietarios',a:'Calle Mayor, 12 · 28013 Madrid',p:['Estimados vecinos:','Les informamos de que el 2 de diciembre, de 9:00 a 14:00, se cortará el agua por obras.','La cuota de diciembre es de 65,00 € y se cargará el día 5.'],s:'Atentamente, la Administración',
+     rec:'Comunidad de Propietarios, Calle Mayor, 12. Estimados vecinos: les informamos de que el 2 de diciembre, de 9:00 a 14:00, se cortará el agua por obras. La cuota de diciembre es de 65,00 € y se cargará el día 5.'},
+ ru:{h:'Управляющая компания «Дом‑Сервис»',a:'ул. Лесная, 8 · Москва',p:['Уважаемые жильцы!','2 декабря с 9:00 до 14:00 не будет воды из‑за ремонтных работ.','Взнос за декабрь — 3250 ₽, спишется 5 декабря.'],s:'С уважением, администрация',
+     rec:'Управляющая компания «Дом‑Сервис», ул. Лесная, 8. Уважаемые жильцы! 2 декабря с 9:00 до 14:00 не будет воды из‑за ремонтных работ. Взнос за декабрь — 3250 ₽, спишется 5 декабря.'}
+};
+
+let L=new URLSearchParams(location.search).get('l');
+if(!T[L])L='ru';
+const D=T[L];
+const LT=LETTER[L==='es'?'ru':'es'];
+document.documentElement.lang=L;
+
+/* ===== куски экрана ===== */
+const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
+const home=`<div class="homebar"><i></i></div>`;
+const pair=`<span class="${P}pair"><span><i class="${P}dot"></i>${D.code[0]}<i class="${P}swp">${I.swap}</i>${D.code[1]}<i class="${P}dot ${P}es"></i></span></span>`;
+const top=`<div class="${P}top"><span class="${P}cb" data-t aria-label="${D.back}">${I.back}</span>${pair}<span class="${P}cb" data-t aria-label="${D.more}">${I.more}</span></div>`;
+const seg=`<div class="${P}seg"><span data-t>${I.mic}${D.seg[0]}</span><span class="${P}on" data-t>${I.txt}${D.seg[1]}</span></div>`;
+const cmp=(h='')=>`<div class="${P}bot">${h?`<div class="${P}hint">${I.reply}${h}</div>`:''}<div class="${P}cmp"><span class="${P}field"><span>${D.ph}</span><span class="${P}ib" data-t aria-label="${D.camL}">${I.cam}</span></span><span class="${P}mic" data-t aria-label="${D.micL}">${I.mic}</span></div></div>`;
+const scr=(body,x='')=>`<div class="scr ${P}scr ${x}">${body}</div>`;
+const mine=(lbl,txt,acts)=>`<div class="${P}mine"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot"></i>${lbl}</div></div><p>${txt}</p>${acts||''}</div>`;
+const letter=det=>`<div class="${P}paper ${det?P+'det':''}"><div class="${P}ph"><i></i><div><b>${LT.h}</b><span>${LT.a}</span></div></div>${LT.p.map(t=>`<p><span>${t}</span></p>`).join('')}<div class="${P}fill" style="width:92%"></div><div class="${P}fill" style="width:78%"></div><div class="${P}fill" style="width:85%"></div><p style="margin-top:14px">${LT.s}</p><div class="${P}sig"></div></div>`;
+const scene=det=>`<div class="${P}scene"><i class="${P}cup"></i><i class="${P}key"></i>${letter(det)}${det?`<div class="${P}frame"><i></i><i></i><i></i><i></i></div>`:''}</div>`;
+
+const H={
+empty:scr(`${sbar}${top}${seg}
+<div class="${P}empty">
+ <img src="../../brandbook/assets/mascot/mascot-think-dark.svg" alt="">
+ <h3>${D.eT}</h3>
+ <p>${D.eS}</p>
+ <div class="${P}eb"><span class="${P}pri" data-t>${I.paste}${D.ePaste}</span><span class="${P}sec" data-t>${I.cam}${D.eCam}</span></div>
+ <div class="${P}foot">${I.share}<span>${D.eFoot}</span></div>
+</div>${cmp()}${home}`),
+
+paste:scr(`${sbar}${top}${seg}
+<div class="${P}main">
+ ${mine(D.trLbl,D.tr,`<div class="${P}acts"><span class="${P}act" data-t>${I.copy}${D.copy}</span><span class="${P}act ${P}gh" data-t>${I.spk}${D.play}</span></div>`)}
+ <div class="${P}orig"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>${D.orLbl}</div><span class="${P}tb" data-t>${D.hide}${I.hide}</span></div><p>${D.msg}</p></div>
+</div>${cmp(D.hint)}${home}`),
+
+reply:scr(`${sbar}${top}${seg}
+<div class="${P}main">
+ <div class="${P}quote">${I.reply}<div><b>${D.qLbl}</b><span>${D.quote}</span></div></div>
+ <div class="${P}draft"><div class="${P}lbl"><i class="${P}dot"></i>${D.drLbl}</div><p>${D.draft}</p></div>
+ <div class="${P}card"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>${D.resLbl}</div><span class="${P}fix">${I.spark}${D.fixed}</span></div>
+  <p class="${P}big">${D.res}</p>
+  <div class="${P}back"><b>${D.backL}</b> ${D.backT}</div>
+  <div class="${P}acts"><span class="${P}act" data-t>${I.copy}${D.copy}</span><span class="${P}act ${P}dk" data-t>${I.share}${D.share}</span></div></div>
+</div>${cmp()}${home}`),
+
+camera:scr(`${scene(1)}<div class="${P}ov">${sbar}
+<div class="${P}top"><span class="${P}cb" data-t aria-label="${D.close}">${I.x}</span>${pair}<span class="${P}cb" data-t aria-label="${D.more}">${I.more}</span></div>
+<span class="${P}pill">${I.scan}${D.cHint}</span>
+<div class="${P}cbot">
+ <div class="${P}modes"><span data-t>${D.modes[0]}</span><span class="${P}on" data-t>${D.modes[1]}</span></div>
+ <div class="${P}ctl"><span class="${P}cs" data-t><i>${I.photo}</i>${D.gal}</span><span class="${P}shut" data-t aria-label="${D.shoot}"><i></i></span><span class="${P}cs" data-t><i>${I.flash}</i>${D.flash}</span></div>
+ ${home}
+</div></div>`,`${P}cam`),
+
+result:scr(`<div class="${P}snap">${scene(1)}</div><div class="${P}ov">${sbar}
+<div class="${P}top"><span class="${P}cb" data-t aria-label="${D.close}">${I.x}</span>${pair}<span class="${P}cb" data-t aria-label="${D.more}">${I.more}</span></div></div>
+<div class="${P}sheet">
+ <i class="${P}grab"></i>
+ <div class="${P}sh"><div><h3>${D.rT}</h3><span class="${P}sub">${I.okc}${D.rSub}</span></div><span class="${P}x" data-t aria-label="${D.close}">${I.x}</span></div>
+ <div class="${P}rec"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>${D.recLbl}</div></div><p>${LT.rec}</p></div>
+ ${mine(D.rTrLbl,D.rTr)}
+ <div class="${P}chk">${I.info}<span>${D.chk}</span></div>
+ <div class="${P}acts"><span class="${P}act" data-t>${I.copy}${D.copy}</span><span class="${P}act ${P}gh" data-t>${I.share}${D.share}</span><span class="${P}act ${P}gh ${P}rt" data-t aria-label="${D.retake}">${I.redo}</span></div>
+ ${home}
+</div>`,`${P}cam`),
+};
+const ORDER=['empty','paste','reply','camera','result'];
+const MOCK={camera:1,result:1};
+const SNAME={result:'camera-result'};
+window.TT_STATES=ORDER.map(k=>[k,SNAME[k]||k]); window.TT_LANG=L;
+
+/* ===== страница ===== */
+const G=D.page;
+$('langs').innerHTML=['ru','es','en'].map(l=>`<a href="?l=${l}" aria-current="${l===L}">${l.toUpperCase()}</a>`).join('');
+$('tag').textContent=G.tag; $('h1').textContent=G.h1; $('lead').textContent=G.lead;
+document.title='Parrlo Translate · '+G.cap[0].split(' · ')[1];
+const ph=(id,s,html)=>`<div class="pf p67" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
+$('hero-ph').innerHTML=ph('translate-text',.8,H.paste)+`<div class="pcap"><span class="dot"></span><div><b>${G.cap[0]}</b><span>${G.cap[1]}</span></div></div>`;
+$('hero-t').innerHTML=`<h3>${G.heroH}</h3>`+G.heroP.map(p=>`<p>${p}</p>`).join('');
+$('h-st').textContent=G.hSt; $('st-lead').textContent=G.stLead;
+$('grid').innerHTML=ORDER.map(k=>`<figure>${ph(P+'-'+k,.6,H[k])}<figcaption><b>${D.st[k][0]}${MOCK[k]?`<span class="${P}mk">${G.mk}</span>`:''}</b><code>${SNAME[k]||k}</code> · ${D.st[k][1]}</figcaption></figure>`).join('');
+$('h-dec').textContent=G.hDec; $('dec').innerHTML=G.dec.map(x=>`<li>${x}</li>`).join('');
+$('h-tok').textContent=G.hTok; $('tok').innerHTML=G.tok.map(x=>`<li>${x}</li>`).join('');
+$('h-na').textContent=G.hNa; $('na').innerHTML=G.na.map(x=>`<li>${x}</li>`).join('');
+
+/* контраст */
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const pairs=[['#F2F5F7','#0E1116',4.5],['#9AA4B2','#0E1116',4.5],['#9AA4B2','#1C2026',4.5],['#F2F5F7','#1E3734',4.5],['#2BC48A','#1E3734',4.5],
+ ['#FFFFFF','#00875C',4.5],['#FFFFFF','#005E40',4.5],['#0E1116','#2BC48A',4.5],['#0E1116','#FFFFFF',4.5],['#FFFFFF','#005E40',4.5],['#F2F5F7','#3A3426',4.5],['#0E1116','#2BC48A',4.5],['#F2F5F7','#1A1E24',4.5],['#B4BCC7','#0A0C10',4.5]];
+const dec=x=>L==='en'?String(x):String(x).replace('.',',');
+$('ctr').innerHTML=`<tr><th>${G.thP}</th><th>${G.thW}</th><th>${G.thC}</th><th>${G.thN}</th></tr>`+pairs.map(([a,b,n],i)=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${G.ctr[i]}</td><td><b>${dec(v.toFixed(2))}:1</b></td><td>${v>=n?'≥ '+dec(n)+' ✓':G.low}</td></tr>`;}).join('');
+window.TT_CR=pairs.map(([a,b,n],i)=>[G.ctr[i],+cr(a,b).toFixed(2),n]);
+document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>

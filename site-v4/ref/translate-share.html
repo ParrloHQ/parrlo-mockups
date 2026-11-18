@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Translate · голосовое</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0B0E12;color:#F2F5F7}
+body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
+.translate-share-w{max-width:1200px;margin:0 auto}
+.translate-share-langs{display:flex;gap:8px;margin-bottom:28px}
+.translate-share-langs a{min-width:56px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;padding:0 16px;font:700 15px/1 Inter,sans-serif;color:#F2F5F7;background:#1C2026;box-shadow:inset 0 0 0 1px #2F3742;text-decoration:none}
+.translate-share-langs a[aria-current="true"]{background:#2BC48A;color:#0E1116;box-shadow:none}
+.translate-share-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.translate-share-tag{display:inline-block;font:600 13px/1 Inter,sans-serif;color:#0E1116;background:#BFF2DC;border-radius:8px;padding:6px 10px}
+.translate-share-tag.translate-share-mk{background:#F2F5F7}
+.translate-share-w h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:12px}
+.translate-share-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.translate-share-lead{color:#9AA4B2;max-width:820px}
+.translate-share-hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;margin-top:40px;padding:48px 40px;border-radius:32px;background:#12161C;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-share-hero figure{margin:0}
+.translate-share-hero-t{flex:1 1 300px;max-width:520px}
+.translate-share-hero-t h3{font:900 24px/1.25 Nunito,sans-serif;margin-bottom:12px}
+.translate-share-hero-t p{color:#C3CBD5;margin-bottom:12px}
+.translate-share-w ul{padding-left:20px;color:#C3CBD5;font-size:15px;max-width:860px}
+.translate-share-w li{margin:8px 0}
+.translate-share-w li b{color:#F2F5F7}
+.translate-share-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.translate-share-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(284px,1fr));gap:48px 24px;margin-top:32px}
+.translate-share-grid figure{margin:0;display:flex;flex-direction:column;align-items:center}
+.translate-share-grid figcaption{margin-top:16px;width:272px;font-size:14px;line-height:1.45;color:#9AA4B2}
+.translate-share-grid figcaption b{display:block;color:#F2F5F7;font:900 17px/1.3 Nunito,sans-serif;margin-bottom:4px}
+.translate-share-grid figcaption code{font-size:12px}
+.translate-share-tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
+.translate-share-tbl th,.translate-share-tbl td{text-align:left;vertical-align:top;border-bottom:1px solid #2F3742;padding:10px 12px 10px 0}
+.translate-share-tbl th{color:#9AA4B2;font-weight:600}
+.translate-share-tw{overflow-x:auto}
+.translate-share-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:0 0 0 1px #3A414B}
+@media (max-width:760px){.translate-share-w h1{font-size:30px}.translate-share-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-share-hero .pf{--s:.8!important}}
+@media (max-width:480px){.translate-share-hero .pf{--s:.7!important}}
+
+/* ===== экран 430×932 ===== */
+.translate-share-scr{--me:#2BC48A;--es:#BFF2DC;--msg:#262A30}
+.translate-share-scr svg{flex:none}
+
+/* выдуманный нейтральный мессенджер */
+.translate-share-mnav{flex:none;display:flex;align-items:center;gap:12px;height:64px;padding:0 16px 0 8px;border-bottom:1px solid var(--line)}
+.translate-share-mback{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.translate-share-mback svg{width:26px;height:26px}
+.translate-share-av{width:40px;height:40px;border-radius:50%;background:#3A414B;color:#F2F5F7;display:flex;align-items:center;justify-content:center;font:700 17px Inter,sans-serif;flex:none}
+.translate-share-mnm b{display:block;font:600 17px/22px Inter,sans-serif}
+.translate-share-mnm span{display:block;font:400 13px/18px Inter,sans-serif;color:var(--sec)}
+.translate-share-chat{flex:1;display:flex;flex-direction:column;gap:8px;padding:16px 16px 0}
+.translate-share-day{align-self:center;font:500 13px Inter,sans-serif;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px;margin-bottom:4px}
+.translate-share-mb{align-self:flex-start;max-width:80%;background:var(--msg);border-radius:20px;border-bottom-left-radius:6px;padding:10px 14px;font:400 17px/23px Inter,sans-serif}
+.translate-share-mb small{display:block;text-align:right;font:400 12px/16px Inter,sans-serif;color:var(--sec);margin-top:2px}
+.translate-share-mv{display:flex;align-items:center;gap:10px;width:272px;padding:10px 14px 8px 10px}
+.translate-share-mv.translate-share-lift{position:relative;z-index:3;box-shadow:0 0 0 2px #3A414B,0 16px 36px -10px rgba(0,0,0,.7)}
+.translate-share-mplay{width:40px;height:40px;border-radius:50%;background:#F2F5F7;color:#0E1116;display:flex;align-items:center;justify-content:center;flex:none}
+.translate-share-mplay svg{width:18px;height:18px}
+.translate-share-mv .translate-share-wv{flex:1;height:32px;display:flex;align-items:center;gap:2px}
+.translate-share-mv .translate-share-wv i{width:3px;border-radius:2px;background:#9AA4B2;flex:none}
+.translate-share-mv>div:last-child{flex:none;display:flex;flex-direction:column;align-items:flex-end;font:500 13px/18px Inter,sans-serif;color:var(--sec)}
+.translate-share-dim{position:absolute;inset:0;background:rgba(5,7,10,.55);z-index:2}
+
+/* лист «Поделиться» iOS, обобщённый */
+.translate-share-ss{position:absolute;left:0;right:0;bottom:0;z-index:4;background:#1C2026;border-radius:32px 32px 0 0;box-shadow:inset 0 1px 0 #2F3742,0 -20px 50px rgba(0,0,0,.45);display:flex;flex-direction:column;padding:8px 16px 0}
+.translate-share-grab{width:40px;height:5px;border-radius:3px;background:#3A414B;align-self:center;margin-bottom:12px;flex:none}
+.translate-share-ssh{display:flex;align-items:center;gap:12px;padding:0 0 16px;border-bottom:1px solid var(--line)}
+.translate-share-file{width:52px;height:52px;border-radius:14px;background:#2F3742;color:#C3CBD5;display:flex;align-items:center;justify-content:center;flex:none}
+.translate-share-file svg{width:26px;height:26px}
+.translate-share-ssh>div{flex:1;min-width:0}
+.translate-share-ssh b{display:block;font:600 17px/22px Inter,sans-serif}
+.translate-share-ssh>div>span{display:block;font:400 14px/20px Inter,sans-serif;color:var(--sec)}
+.translate-share-x{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.translate-share-x svg{width:20px;height:20px}
+.translate-share-apps{display:flex;justify-content:space-between;padding:20px 4px 20px}
+.translate-share-app{width:72px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+.translate-share-app>i{display:block;width:64px;height:64px;border-radius:50%;background:#3A414B}
+.translate-share-app>em{display:block;width:44px;height:10px;border-radius:5px;background:#2F3742;margin-top:4px}
+.translate-share-app>svg{width:64px;height:64px;border-radius:15px}
+.translate-share-app.translate-share-on>svg{box-shadow:0 0 0 3px #1C2026,0 0 0 6px var(--me)}
+.translate-share-app>b{font:600 13px/18px Inter,sans-serif;color:var(--tx)}
+.translate-share-tap{display:block;text-decoration:none;position:absolute;left:50%;top:32px;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:rgba(242,245,247,.28);box-shadow:0 0 0 8px rgba(242,245,247,.1)}
+.translate-share-grp{background:var(--sf2);border-radius:20px;overflow:hidden}
+.translate-share-row{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:0 18px;font:400 17px Inter,sans-serif}
+.translate-share-row+.translate-share-row{border-top:1px solid var(--line)}
+.translate-share-row svg{width:22px;height:22px;color:var(--sec)}
+.translate-share-ss .homebar{margin-top:auto}
+
+/* лист Parrlo поверх мессенджера */
+.translate-share-peek{position:absolute;left:20px;right:20px;top:54px;height:24px;border-radius:14px 14px 0 0;background:#171A1F;box-shadow:inset 0 1px 0 #262A30}
+.translate-share-ps{position:absolute;left:0;right:0;top:66px;bottom:0;background:var(--bg);border-radius:32px 32px 0 0;box-shadow:inset 0 1px 0 #2F3742;display:flex;flex-direction:column}
+.translate-share-ph{flex:none;display:flex;align-items:center;gap:12px;padding:16px 16px 12px 20px}
+.translate-share-ph>svg{width:40px;height:40px;border-radius:10px}
+.translate-share-ph>div{flex:1;min-width:0}
+.translate-share-ph b{display:block;font:900 20px/24px Nunito,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.translate-share-ph span{display:flex;align-items:center;gap:6px;font:500 14px/20px Inter,sans-serif;color:var(--sec)}
+.translate-share-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--me)}
+.translate-share-dot.translate-share-es{background:var(--es)}
+.translate-share-main{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:4px 16px 0;overflow:hidden}
+.translate-share-bot{flex:none;display:flex;flex-direction:column;gap:12px;padding:12px 16px 4px}
+.translate-share-hint{display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center}
+.translate-share-hint svg{width:16px;height:16px}
+.translate-share-btns{display:flex;gap:12px}
+.translate-share-sec{flex:1;min-width:0;height:64px;border-radius:32px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;font:600 17px Inter,sans-serif;white-space:nowrap}
+.translate-share-sec svg{width:22px;height:22px}
+.translate-share-pri{flex:1.65;min-width:0;height:64px;border-radius:32px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;gap:10px;font:900 20px Nunito,sans-serif;white-space:nowrap}
+.translate-share-pri svg{width:24px;height:24px}
+.translate-share-pri.translate-share-lt{background:#F2F5F7}
+.translate-share-lbl{font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;display:flex;align-items:center;gap:8px;min-width:0}
+
+/* перевод для тебя — сторона собеседника, мятный */
+.translate-share-card{background:var(--es);color:#0E1116;border-radius:28px;padding:18px 22px 18px}
+.translate-share-card .translate-share-lbl{color:#2E4A3F}
+.translate-share-card .translate-share-lbl .translate-share-dot{background:#0E1116}
+.translate-share-card p{font:900 25px/31px Nunito,sans-serif;margin:10px 0 16px}
+.translate-share-acts{display:flex;gap:8px}
+.translate-share-act{height:48px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 14px;font:600 16px Inter,sans-serif;background:#0E1116;color:#F2F5F7}
+.translate-share-act svg{width:20px;height:20px}
+
+/* оригинал с плеером */
+.translate-share-orig{background:var(--sf);border-radius:24px;padding:14px 16px 18px 20px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-share-orow{display:flex;align-items:center;justify-content:space-between;gap:8px;height:24px;overflow:visible}
+.translate-share-col{width:44px;height:44px;margin:-10px -8px -10px 0;flex:none;display:flex;align-items:center;justify-content:center;color:var(--sec)}
+.translate-share-col svg{width:20px;height:20px}
+.translate-share-pl{display:flex;align-items:center;gap:12px;margin-top:8px}
+.translate-share-play{width:44px;height:44px;border-radius:50%;background:var(--es);color:#0E1116;display:flex;align-items:center;justify-content:center;flex:none}
+.translate-share-play svg{width:18px;height:18px}
+.translate-share-pl .translate-share-wv{flex:1;min-width:0;height:36px;display:flex;align-items:center;gap:2px;overflow:hidden}
+.translate-share-pl .translate-share-wv i{width:3px;border-radius:2px;background:var(--es);flex:none}
+.translate-share-pl .translate-share-wv i.translate-share-f{background:#3A414B}
+.translate-share-pl time{flex:none;font:600 14px/20px Inter,sans-serif;color:var(--sec);font-variant-numeric:tabular-nums}
+.translate-share-orig p{font:400 16px/23px Inter,sans-serif;margin-top:10px}
+.translate-share-note{font:400 13px/18px Inter,sans-serif;color:var(--sec);display:flex;gap:8px;align-items:flex-start;padding:0 4px}
+.translate-share-note svg{width:16px;height:16px;margin-top:1px}
+
+/* обработка */
+.translate-share-stepper{display:flex;align-items:center;gap:12px;background:var(--sf);border-radius:20px;padding:14px 16px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-share-stepper>span{display:flex;align-items:center;gap:8px;font:600 15px/20px Inter,sans-serif;white-space:nowrap}
+.translate-share-stepper svg{width:22px;height:22px}
+.translate-share-stepper .translate-share-wait{color:var(--sec)}
+.translate-share-stepper .translate-share-arr{flex:1;height:2px;background:var(--line);border-radius:1px;min-width:12px}
+.translate-share-spin{color:var(--es);animation:translate-share-rot 1s linear infinite}
+@keyframes translate-share-rot{to{transform:rotate(360deg)}}
+.translate-share-sk{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.translate-share-sk i{display:block;height:16px;border-radius:8px;background:linear-gradient(90deg,#242B34,#2F3742,#242B34)}
+.translate-share-skc{background:#1B2E29;border-radius:28px;padding:20px 24px 28px;display:flex;flex-direction:column;gap:14px}
+.translate-share-skc .translate-share-lbl{color:#BFF2DC}
+.translate-share-skc>i{display:block;height:22px;border-radius:11px;background:linear-gradient(90deg,rgba(191,242,220,.10),rgba(191,242,220,.22),rgba(191,242,220,.10))}
+
+/* название места */
+.translate-share-pw{text-decoration:underline solid currentColor;text-decoration-thickness:2px;text-underline-offset:6px;white-space:nowrap}
+.translate-share-orig .translate-share-pw{font-weight:700;text-decoration-color:var(--es)}
+.translate-share-ptag{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 9px 0 6px;margin-left:6px;border-radius:12px;background:#0E1116;color:#BFF2DC;font:600 13px/1 Inter,sans-serif;vertical-align:4px;text-decoration:none}
+.translate-share-ptag svg{width:14px;height:14px}
+.translate-share-ptip{display:flex;gap:12px;align-items:flex-start;background:#1B2E29;border-radius:20px;padding:14px 16px;box-shadow:inset 0 0 0 1px #2C4A40}
+.translate-share-ptip>i{flex:none;width:36px;height:36px;border-radius:50%;background:#BFF2DC;color:#0E1116;display:flex;align-items:center;justify-content:center}
+.translate-share-ptip>i svg{width:20px;height:20px}
+.translate-share-ptip b{display:block;font:600 15px/20px Inter,sans-serif}
+.translate-share-ptip span{display:block;font:400 14px/20px Inter,sans-serif;color:#C3CBD5;margin-top:2px}
+
+/* ошибка формата */
+.translate-share-err{align-items:center;text-align:center;justify-content:center;padding-bottom:16px}
+.translate-share-err img{width:128px;height:128px;margin-bottom:12px}
+.translate-share-err h3{font:900 28px/34px Nunito,sans-serif;margin-bottom:8px}
+.translate-share-err>p{font:400 16px/24px Inter,sans-serif;color:var(--sec);max-width:340px}
+.translate-share-fch{display:flex;align-items:center;gap:12px;align-self:stretch;margin-top:24px;background:var(--sf);border-radius:20px;padding:12px 16px;box-shadow:inset 0 0 0 1px var(--line);text-align:left}
+.translate-share-fch>i{flex:none;width:44px;height:44px;border-radius:12px;background:var(--sf2);color:var(--sec);display:flex;align-items:center;justify-content:center}
+.translate-share-fch>i svg{width:22px;height:22px}
+.translate-share-fch>div{flex:1;min-width:0}
+.translate-share-fch b{display:block;font:600 16px/22px Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.translate-share-fch>div>span{display:block;font:400 14px/20px Inter,sans-serif;color:var(--sec)}
+.translate-share-badge{flex:none;white-space:nowrap;height:28px;padding:0 10px;border-radius:14px;background:#3A2326;color:#FF8A80;display:inline-flex;align-items:center;gap:6px;font:600 13px Inter,sans-serif}
+.translate-share-badge svg{width:14px;height:14px}
+.translate-share-ok{display:flex;gap:8px;align-items:flex-start;align-self:stretch;text-align:left;margin-top:12px;padding:0 4px;font:400 14px/20px Inter,sans-serif;color:var(--sec)}
+.translate-share-ok svg{width:16px;height:16px;margin-top:2px;color:var(--me)}
+.translate-share-link{height:48px;display:flex;align-items:center;justify-content:center;gap:6px;font:600 16px Inter,sans-serif;color:var(--me)}
+.translate-share-link svg{width:18px;height:18px}
+</style>
+</head>
+<body>
+<div class="translate-share-w">
+<nav class="translate-share-langs" id="translate-share-langs"></nav>
+<div class="translate-share-tags"><span class="translate-share-tag translate-share-mk" id="translate-share-mk"></span><span class="translate-share-tag" id="translate-share-tag"></span></div>
+<h1 id="translate-share-h1"></h1>
+<p class="translate-share-lead" id="translate-share-lead"></p>
+
+<section class="translate-share-hero">
+ <figure id="translate-share-hero-ph"></figure>
+ <div class="translate-share-hero-t" id="translate-share-hero-t"></div>
+</section>
+
+<h2 id="translate-share-h-st"></h2>
+<p class="translate-share-lead" id="translate-share-st-lead"></p>
+<div class="translate-share-grid" id="translate-share-grid"></div>
+
+<h2 id="translate-share-h-dec"></h2>
+<ul id="translate-share-dec"></ul>
+
+<h2 id="translate-share-h-tok"></h2>
+<div class="translate-share-tw"><table class="translate-share-tbl" id="translate-share-ctr"></table></div>
+<ul id="translate-share-tok"></ul>
+
+<h2 id="translate-share-h-na"></h2>
+<ul id="translate-share-na"></ul>
+</div>
+
+<script src="../screens.js"></script>
+<script>
+(function(){
+const P='translate-share-';
+const $=id=>document.getElementById(P+id);
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const S=window.SITE_ICONS;
+const MASC='../../brandbook/assets/mascot/mascot-';
+const I={
+ mic:S.mic.replace('class="ic"',''),
+ back:`<svg viewBox="0 0 24 24" ${SW}><path d="M15 5l-7 7 7 7"/></svg>`,
+ play:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
+ spk:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+ copy:`<svg viewBox="0 0 24 24" ${SW}><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></svg>`,
+ save:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M4.5 16.5v1a2.5 2.5 0 0 0 2.5 2.5h10a2.5 2.5 0 0 0 2.5-2.5v-1"/></svg>`,
+ fwd:`<svg viewBox="0 0 24 24" ${SW}><path d="M14 5l6 6-6 6"/><path d="M20 11H10a6 6 0 0 0-6 6v1.5"/></svg>`,
+ audio:`<svg viewBox="0 0 24 24" ${SW}><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2"/></svg>`,
+ doc:`<svg viewBox="0 0 24 24" ${SW}><path d="M6.5 3.5h7l4 4v11a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2z"/><path d="M13.5 3.5v4h4"/><path d="M9 13v3M12 11.5v6M15 13.5v2"/></svg>`,
+ x:`<svg viewBox="0 0 24 24" ${SW}><path d="M6 6l12 12M18 6L6 18"/></svg>`,
+ up:`<svg viewBox="0 0 24 24" ${SW}><path d="M6.5 14.5L12 9l5.5 5.5"/></svg>`,
+ info:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/></svg>`,
+ okc:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M8 12.3l2.7 2.7L16 9.6"/></svg>`,
+ pin:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>`,
+ spin:`<svg viewBox="0 0 24 24" ${SW} class="${P}spin"><path d="M12 3a9 9 0 1 1-9 9"/></svg>`,
+ wait:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2" stroke-dasharray="2 3.2"/></svg>`,
+ warn:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5V13M12 16.3h.01"/></svg>`,
+ help:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.1-2.4 3.7"/><path d="M12 17h.01"/></svg>`,
+ down:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 5v13M6.5 13L12 18.5 17.5 13"/></svg>`,
+};
+/* значок Parrlo Translate (brandbook/assets/icons/ios/translate-dark-rounded.svg), id с суффиксом */
+let icN=0;
+function appIcon(){const n=P+'ic'+(icN++);return `<svg viewBox="0 0 1024 1024" aria-label="Parrlo"><defs><linearGradient id="${n}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2F36"/><stop offset="1" stop-color="#1C2026"/></linearGradient><linearGradient id="${n}g" gradientUnits="userSpaceOnUse" x1="250" y1="170" x2="880" y2="960"><stop offset="0" stop-color="#0B8F5E"/><stop offset="1" stop-color="#1DB37A"/></linearGradient><clipPath id="${n}c"><rect width="1024" height="1024" rx="228"/></clipPath></defs><g clip-path="url(#${n}c)"><rect width="1024" height="1024" fill="url(#${n}b)"/><g transform="translate(-10 -40)"><g fill="url(#${n}g)"><path d="M345 800 L 235 925 L 420 895 Z" stroke="url(#${n}g)" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><ellipse cx="430" cy="690" rx="165" ry="115" transform="rotate(-28 430 690)" fill="#0A7048"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#FFC247"/><circle cx="612" cy="372" r="44" fill="#0E1116"/><circle cx="627" cy="357" r="14" fill="#fff"/></g><circle cx="795" cy="870" r="92" fill="#1DB37A"/><g fill="none" stroke="#fff" stroke-width="13.8" stroke-linecap="round" stroke-linejoin="round"><path d="M750.84 847.92 H839.16 M817.08 825.84 L841.0 847.92 L817.08 870"/><path d="M839.16 895.76 H750.84 M772.92 873.68 L749.0 895.76 L772.92 917.84"/></g></g></svg>`;}
+
+/* ===== словарь: экран + страница ===== */
+const T={
+ru:{
+ from:'Lucía', fromAv:'L', online:'в сети', today:'Сегодня', mText:'¡Hola! Te cuento cómo llegar mañana.', t1:'9:38', t2:'9:40',
+ dur:'0:24', durP:'0:09',
+ ssT:'Голосовое сообщение', ssS:'Аудио · 0:24', apps:'Parrlo', ssActs:['Копировать','Сохранить файл','Переслать'], close:'Закрыть',
+ phT:'Голосовое от Lucía', phS:['Испанский','русский'],
+ s1:'Расшифровываем…', s2:'Переводим', skL:'Перевод появится здесь', cancel:'Отменить',
+ trL:'Перевод · Русский', orL:'Оригинал · Español', collapse:'Свернуть оригинал', play:'Озвучить', playV:'Слушать',
+ tr:'Привет! Это Лусия, хозяйка квартиры. Завтра жду тебя в\u00a0десять у\u00a0входа. Если приедешь на машине, оставь её у\u00a0церкви: в\u00a0центр только пешком.',
+ or:'¡Hola! Soy Lucía, la del piso. Mañana te espero a las diez en la puerta. Si vienes en coche, aparca junto a la iglesia, que el centro es peatonal.',
+ note:'Перевод может быть неточным. Важное — уточни у\u00a0собеседника.',
+ replyHint:'Ответ переведём на испанский', copy:'Копировать', reply:'Ответить голосом',
+ place:'Cadaqués', placeTr:'Cadaqués', placeTag:'место',
+ pTr:['А если хочешь, в субботу съездим в ',' Автобус отходит от вокзала в пять.'], pTrMid:'.',
+ pOr:['Y si te apetece, el sábado vamos a ','. El autobús sale de la estación a las cinco.'],
+ pTipB:'Cadaqués — название места', pTipS:'Пишем, как местные: так его узнают на указателе. Не то место? Коснись названия.',
+ eT:'Этот файл не открыть', eP:'Parrlo переводит голосовые и аудиозаписи, а этот формат пока не\u00a0понимает.', eFile:'Запись 12.amr', eFileS:'Аудио · AMR', eBadge:'не подходит',
+ eOk:'Подойдут голосовые из мессенджеров и аудио .m4a, .mp3, .wav.', eHelp:'Как поделиться голосовым',
+ st:{'share-sheet':['Лист «Поделиться»','В мессенджере пришло голосовое на испанском. Пользователь нажимает «Поделиться» и выбирает Parrlo.'],
+     processing:['Расшифровываем','Parrlo открылся листом поверх чата. Голосовое уже можно переслушать, перевод готовится на месте скелетона.'],
+     result:['Текст и перевод','Сверху перевод по‑русски, ниже оригинал с плеером. Пользователь копирует перевод или отвечает голосом.'],
+     place:['Название места','В голосовом есть Cadaqués: Parrlo пишет его как местные и ставит метку «место». Не то — коснуться названия.'],
+     error:['Формат не подходит','Поделились файлом, который Parrlo не открывает. Понятно, что подойдёт; пользователь закрывает лист.']},
+ page:{mk:'Макет', tag:'Эталон · пачка 2 · скоро · черновик текста', h1:'Translate · голосовое из «Поделиться»',
+  lead:'T‑13 и T‑04. Пришло голосовое — например, в WhatsApp? Нажми «Поделиться» и выбери Parrlo: он распознает речь и покажет перевод — читаешь, а не переслушиваешь в десятый раз. Здесь же — названия мест: Cadaqués, а не «Каденас». Обеих функций в сборке нет: всё на странице — макет. Только тёмная тема, интерфейс на «ты». Экран 430×932 pt, PNG @3× — 1290×2796.',
+  heroH:'Главный кадр · текст и перевод',
+  heroP:['Заголовок для сайта: «Пришло голосовое? Прочти его по‑русски.» Перевод — крупно и сверху, как во входящем пузыре сборки; оригинал с плеером — ниже, его можно свернуть.','Две кнопки: «Копировать» — перевод в буфер, «Ответить голосом» — сказать ответ по‑русски и получить его по‑испански, чтобы отправить Lucía.'],
+  cap:['Translate · голосовое','Макет · только тёмная тема · тексты — черновик'],
+  hSt:'Состояния', stLead:'По порядку: от мессенджера до перевода. Под каждым экраном — когда он показывается и что делает пользователь. Масштаб 0,6.',
+  hDec:'Решения', hTok:'Токены и контраст', hNa:'Не утверждено', thP:'Пара (текст / фон)', thW:'Где', thC:'Контраст', thN:'Норма', low:'ниже нормы',
+  dec:['<b>Лист поверх чата, а не переход в приложение.</b> Parrlo открывается расширением «Поделиться»: мессенджер виден сверху, закрыл лист — вернулся в чат.',
+   '<b>Цвет = сторона, как в translate‑talk.</b> Голосовое от собеседника — мятный <code>#BFF2DC</code>: плеер, волна и карточка перевода. Ответ — зелёный <code>#2BC48A</code>, как кнопка «Я говорю».',
+   '<b>Порядок как во входящем пузыре сборки.</b> Сверху перевод, оригинал ниже; его можно свернуть кнопкой.',
+   '<b>Обработка в два шага.</b> «Расшифровываем… → Переводим», скелетон перевода на своём месте. Голосовое можно переслушать сразу, пока идёт перевод.',
+   '<b>Названия мест — как у местных.</b> Cadaqués не переводится и не пересказывается по‑русски: остаётся Cadaqués с меткой «место» (значок + слово, не только цвет). Подсказка объясняет почему и как поправить. На es‑странице — Сергиев Посад: латиницей в переводе, в подсказке — как на указателе.',
+   '<b>«Ответить голосом».</b> Ответ переводится на язык голосового, остаётся отправить. «Копировать» берёт перевод.',
+   '<b>Ошибка формата — с действием.</b> Имя файла, метка «не подходит», что подойдёт, кнопка «Закрыть» и справка.',
+   '<b>Лист «Поделиться» — обобщённый.</b> Мессенджер выдуманный, без логотипа; чужие приложения — серые кружки, Parrlo — своей иконкой с кольцом выбора.'],
+  tok:['Тёмная тема v2.3: фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Цвет = сторона: собеседник — <code>#BFF2DC</code> (перевод для тебя, плеер), ты — <code>#2BC48A</code> («Ответить голосом»).',
+   'Метка места — <code>#BFF2DC</code> на <code>#0E1116</code>; подсказка — на <code>#1B2E29</code>. Ошибка — <code>#FF8A80</code> на <code>#3A2326</code>.',
+   'Nunito 900 — заголовки, перевод, главная кнопка; Inter 400/500/600/700 — интерфейс. Сетка 4 pt, поля 16, карточки 20–24. Зоны нажатия ≥ 44 pt.'],
+  na:['Все тексты — черновик; формулировки сайта взяты из <code>docs/site/copy-ru/translate.md</code> (экраны 7 и 10). Тексты es и en носителем не вычитаны.',
+   'T‑13 в сборке нет: нужен флаг <code>STT_FILE_TRANSLATE</code> и проверка <code>.opus</code> на телефоне (GAP №23). Звук уходит на сервер распознавания — нужна проверка юристом.',
+   'T‑04: распознавание названий мест не подтверждено (GAP Translate №3). Как писать топоним для другой письменности (Sérguiev Posad / Сергиев Посад) — не решено.',
+   'Список форматов в ошибке (.opus, .m4a, .mp3, .wav; .amr не подходит) — уточнить у разработки.',
+   'Что после «Ответить голосом» (запись в том же листе, отправка в чат) — не нарисовано.',
+   'Цвета <code>#1B2E29</code>, <code>#2C4A40</code>, <code>#2E4A3F</code>, <code>#3A2326</code>, <code>#FF8A80</code>, <code>#262A30</code> — производные, в токенах v2.3 их нет.'],
+  ctr:['основной текст','подписи, подсказки','подписи на карточках и в листе','перевод для тебя (крупный)','подписи на карточке перевода','«Озвучить», метка «место»','метка «место» в оригинале, плеер','«Ответить голосом»','«Копировать», строки листа','«Закрыть» в ошибке','ссылка «Как поделиться»','метка «не подходит»','подсказка о месте','пузыри мессенджера'] }
+},
+es:{
+ from:'Olga', fromAv:'O', online:'en línea', today:'Hoy', mText:'Привет! Рассказываю, как добраться.', t1:'9:38', t2:'9:40',
+ dur:'0:21', durP:'0:08',
+ ssT:'Mensaje de voz', ssS:'Audio · 0:21', apps:'Parrlo', ssActs:['Copiar','Guardar archivo','Reenviar'], close:'Cerrar',
+ phT:'Mensaje de voz de Olga', phS:['Ruso','español'],
+ s1:'Transcribiendo…', s2:'Traduciendo', skL:'Aquí aparecerá la traducción', cancel:'Cancelar',
+ trL:'Traducción · Español', orL:'Original · Русский', collapse:'Ocultar el original', play:'Escuchar', playV:'Reproducir',
+ tr:'¡Hola! Soy Olga. Mañana te espero a las diez en la puerta del museo. Las entradas ya las tengo; tú solo trae el pasaporte.',
+ or:'Привет! Это Ольга. Завтра жду тебя в десять у входа в музей. Билеты я уже купила, возьми только паспорт.',
+ note:'La traducción puede no ser exacta. Si es importante, confírmalo con la otra persona.',
+ replyHint:'Traducimos tu respuesta al ruso', copy:'Copiar', reply:'Responder por voz',
+ place:'Сергиев Посад', placeTr:'Sérguiev Posad', placeTag:'lugar',
+ pTr:['Y el sábado, si te apetece, vamos a ','. El tren sale de la estación a las nueve.'],
+ pOr:['А в субботу, если хочешь, съездим в ','. Электричка уходит с вокзала в девять.'],
+ pTipB:'Sérguiev Posad es un nombre de lugar', pTipS:'En los carteles verás «Сергиев Посад». ¿No es ese sitio? Toca el nombre.',
+ eT:'No se puede abrir este archivo', eP:'Parrlo traduce mensajes de voz y audios, pero todavía no entiende este formato.', eFile:'Grabación 12.amr', eFileS:'Audio · AMR', eBadge:'no compatible',
+ eOk:'Sirven los mensajes de voz de las apps de mensajería y los audios .m4a, .mp3 y .wav.', eHelp:'Cómo compartir un audio',
+ st:{'share-sheet':['Hoja «Compartir»','Llega un mensaje de voz en ruso. La persona pulsa «Compartir» y elige Parrlo.'],
+     processing:['Transcribiendo','Parrlo se abre en una hoja sobre el chat. El audio ya se puede escuchar; la traducción se prepara en su sitio.'],
+     result:['Texto y traducción','Arriba, la traducción al español; abajo, el original con reproductor. Se copia la traducción o se responde por voz.'],
+     place:['Nombre de lugar','El audio menciona Сергиев Посад: Parrlo lo reconoce como lugar y lo marca. Si no es ese, se toca el nombre.'],
+     error:['Formato no compatible','Se compartió un archivo que Parrlo no abre. Queda claro qué sirve; la persona cierra la hoja.']},
+ page:{mk:'Maqueta', tag:'Referencia · tanda 2 · próximamente · textos en borrador', h1:'Translate · mensajes de voz desde «Compartir»',
+  lead:'T‑13 y T‑04. ¿Te llega un mensaje de voz, por ejemplo en WhatsApp? Pulsa «Compartir» y elige Parrlo: reconoce el audio y te enseña la traducción, así lo lees en vez de escucharlo diez veces. Aquí también, los nombres de lugar: Cadaqués, no «Каденас». Ninguna de las dos funciones está en la app: todo lo de esta página es una maqueta. Solo tema oscuro, interfaz de tú. Pantalla de 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Fotograma principal · texto y traducción',
+  heroP:['Título para la web: «¿Te llega un audio? Léelo en español.» La traducción va grande y arriba, como en la burbuja entrante de la app; el original con reproductor, debajo, y se puede ocultar.','Dos botones: «Copiar» guarda la traducción y «Responder por voz» permite contestar en español y recibirlo en ruso para enviárselo a Olga.'],
+  cap:['Translate · mensaje de voz','Maqueta · solo tema oscuro · textos en borrador'],
+  hSt:'Estados', stLead:'En orden: del chat a la traducción. Debajo de cada pantalla: cuándo aparece y qué hace la persona. Escala 0,6.',
+  hDec:'Decisiones', hTok:'Tokens y contraste', hNa:'Pendiente de aprobar', thP:'Par (texto / fondo)', thW:'Dónde', thC:'Contraste', thN:'Mínimo', low:'por debajo',
+  dec:['<b>Una hoja sobre el chat, no un salto a la app.</b> Parrlo se abre como extensión de «Compartir»: el chat se ve arriba y, al cerrar, vuelves a él.',
+   '<b>Color = lado, como en translate‑talk.</b> El audio de la otra persona va en menta <code>#BFF2DC</code>: reproductor, onda y tarjeta de traducción. La respuesta, en verde <code>#2BC48A</code>, como «Hablo yo».',
+   '<b>El orden de la burbuja entrante.</b> Arriba la traducción y abajo el original, que se puede ocultar.',
+   '<b>Proceso en dos pasos.</b> «Transcribiendo… → Traduciendo», con el esqueleto de la traducción en su sitio. El audio se puede volver a escuchar mientras tanto.',
+   '<b>Lugares, como los escriben allí.</b> En ru y en, Cadaqués no se traduce: queda Cadaqués con la etiqueta «lugar» (icono y palabra, no solo color). En es, Сергиев Посад: en la traducción con letras latinas y, en la pista, tal como aparece en los carteles.',
+   '<b>«Responder por voz».</b> La respuesta se traduce al idioma del audio y solo queda enviarla. «Copiar» copia la traducción.',
+   '<b>Error de formato con salida.</b> Nombre del archivo, etiqueta «no compatible», qué formatos sirven, «Cerrar» y ayuda.',
+   '<b>Hoja «Compartir» genérica.</b> Mensajería inventada y sin logotipo; las otras apps, círculos grises; Parrlo, con su icono y un anillo de selección.'],
+  tok:['Tema oscuro v2.3: fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>, texto <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Color = lado: la otra persona — <code>#BFF2DC</code> (traducción para ti, reproductor); tú — <code>#2BC48A</code> («Responder por voz»).',
+   'Etiqueta de lugar — <code>#BFF2DC</code> sobre <code>#0E1116</code>; pista — sobre <code>#1B2E29</code>. Error — <code>#FF8A80</code> sobre <code>#3A2326</code>.',
+   'Nunito 900 para títulos, traducción y botón principal; Inter 400/500/600/700 para la interfaz. Retícula de 4 pt, márgenes de 16, tarjetas de 20–24. Áreas táctiles ≥ 44 pt.'],
+  na:['Todos los textos son borrador; los de la web salen de <code>docs/site/copy-ru/translate.md</code> (pantallas 7 y 10). Los textos en español e inglés no los ha revisado un nativo.',
+   'T‑13 no está en la app: hace falta el flag <code>STT_FILE_TRANSLATE</code> y probar <code>.opus</code> en el teléfono (GAP n.º 23). El audio va al servidor de reconocimiento: lo tiene que revisar el equipo legal.',
+   'T‑04: el reconocimiento de nombres de lugar no está confirmado (GAP Translate n.º 3). Cómo escribir un topónimo de otro alfabeto (Sérguiev Posad / Сергиев Посад): sin decidir.',
+   'La lista de formatos del error (.opus, .m4a, .mp3, .wav; .amr no) hay que confirmarla con desarrollo.',
+   'Qué pasa después de «Responder por voz» (grabar en la misma hoja, enviar al chat): sin dibujar.',
+   'Los colores <code>#1B2E29</code>, <code>#2C4A40</code>, <code>#2E4A3F</code>, <code>#3A2326</code>, <code>#FF8A80</code> y <code>#262A30</code> son derivados; no están en los tokens v2.3.'],
+  ctr:['texto principal','etiquetas, indicaciones','etiquetas en tarjetas y hoja','traducción para ti (grande)','etiquetas en la tarjeta','«Escuchar», etiqueta «lugar»','lugar en el original, reproductor','«Responder por voz»','«Copiar», filas de la hoja','«Cerrar» en el error','enlace «Cómo compartir»','etiqueta «no compatible»','pista del lugar','burbujas del chat'] }
+},
+en:{
+ from:'Lucía', fromAv:'L', online:'online', today:'Today', mText:'¡Hola! Te cuento cómo llegar mañana.', t1:'9:38', t2:'9:40',
+ dur:'0:24', durP:'0:09',
+ ssT:'Voice message', ssS:'Audio · 0:24', apps:'Parrlo', ssActs:['Copy','Save file','Forward'], close:'Close',
+ phT:'Voice message from Lucía', phS:['Spanish','English'],
+ s1:'Transcribing…', s2:'Translating', skL:'The translation will appear here', cancel:'Cancel',
+ trL:'Translation · English', orL:'Original · Español', collapse:'Hide original', play:'Play', playV:'Play voice message',
+ tr:'Hi! It’s Lucía, from the apartment. I’ll meet you at the door tomorrow at ten. If you’re driving, park by the church — the old town is pedestrian-only.',
+ or:'¡Hola! Soy Lucía, la del piso. Mañana te espero a las diez en la puerta. Si vienes en coche, aparca junto a la iglesia, que el centro es peatonal.',
+ note:'Translations may not be exact. Double-check anything important with the other person.',
+ replyHint:'We’ll translate your reply into Spanish', copy:'Copy', reply:'Reply by voice',
+ place:'Cadaqués', placeTr:'Cadaqués', placeTag:'place',
+ pTr:['And if you like, we can go to ',' on Saturday. The bus leaves the station at five.'],
+ pOr:['Y si te apetece, el sábado vamos a ','. El autobús sale de la estación a las cinco.'],
+ pTipB:'Cadaqués is a place name', pTipS:'Spelled the way locals write it, so it matches the signs. Wrong place? Tap the name.',
+ eT:'Can’t open this file', eP:'Parrlo translates voice messages and audio, but it can’t read this format yet.', eFile:'Recording 12.amr', eFileS:'Audio · AMR', eBadge:'not supported',
+ eOk:'Voice messages from messaging apps work, and so do .m4a, .mp3 and .wav files.', eHelp:'How to share a voice message',
+ st:{'share-sheet':['Share sheet','A voice message in Spanish arrives in a messaging app. The user taps Share and picks Parrlo.'],
+     processing:['Transcribing','Parrlo opens as a sheet over the chat. The voice message can already be replayed; the translation loads in place.'],
+     result:['Text and translation','The English translation on top, the original with a player below. The user copies the translation or replies by voice.'],
+     place:['Place name','The message mentions Cadaqués: Parrlo writes it the local way and tags it “place”. Wrong one? Tap the name.'],
+     error:['Unsupported format','Someone shared a file Parrlo can’t open. The screen says what works; the user closes the sheet.']},
+ page:{mk:'Mockup', tag:'Reference · batch 2 · coming soon · draft copy', h1:'Translate · voice messages from Share',
+  lead:'T‑13 and T‑04. Got a voice message, say on WhatsApp? Tap Share and pick Parrlo: it recognizes the speech and shows the translation, so you read it instead of replaying it ten times. Place names are here too: Cadaqués, not “Kadenas”. Neither feature is in the app yet, so everything on this page is a mockup. Dark theme only. Screen 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Hero frame · text and translation',
+  heroP:['Website headline: “Got a voice message? Read it in English.” The translation is large and on top, like the incoming bubble in the app; the original with a player sits below and can be hidden.','Two buttons: Copy puts the translation on the clipboard; Reply by voice lets you answer in English and get it in Spanish, ready to send to Lucía.'],
+  cap:['Translate · voice message','Mockup · dark theme only · draft copy'],
+  hSt:'States', stLead:'In order, from the chat to the translation. Under each screen: when it appears and what the user does. Scale 0.6.',
+  hDec:'Decisions', hTok:'Tokens and contrast', hNa:'Not yet approved', thP:'Pair (text / background)', thW:'Where', thC:'Contrast', thN:'Minimum', low:'below minimum',
+  dec:['<b>A sheet over the chat, not a jump to the app.</b> Parrlo opens as a Share extension: the chat stays visible at the top, and closing the sheet takes you back.',
+   '<b>Color = side, as in translate‑talk.</b> The other person’s message is mint <code>#BFF2DC</code>: player, waveform and translation card. Your reply is green <code>#2BC48A</code>, like “I’m speaking”.',
+   '<b>Same order as the incoming bubble in the app.</b> Translation on top, original below; it can be hidden.',
+   '<b>Two-step progress.</b> “Transcribing… → Translating”, with a skeleton where the translation will be. The message can be replayed in the meantime.',
+   '<b>Place names the local way.</b> Cadaqués isn’t translated or respelled: it stays Cadaqués, tagged “place” (icon plus word, not color alone). A hint says why and how to fix it. On the es page it’s Сергиев Посад: Latin letters in the translation, the sign spelling in the hint.',
+   '<b>Reply by voice.</b> The reply is translated into the message’s language, ready to send. Copy takes the translation.',
+   '<b>A format error with a way out.</b> File name, a “not supported” tag, what works, Close and a help link.',
+   '<b>A generic share sheet.</b> A made-up messaging app with no logo; other apps are grey circles; Parrlo has its own icon and a selection ring.'],
+  tok:['Dark theme v2.3: background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>, text <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Color = side: the other person — <code>#BFF2DC</code> (translation for you, player); you — <code>#2BC48A</code> (Reply by voice).',
+   'Place tag — <code>#BFF2DC</code> on <code>#0E1116</code>; hint on <code>#1B2E29</code>. Error — <code>#FF8A80</code> on <code>#3A2326</code>.',
+   'Nunito 900 for titles, translation and the main button; Inter 400/500/600/700 for UI. 4 pt grid, 16 margins, 20–24 cards. Tap targets ≥ 44 pt.'],
+  na:['All copy is draft; website wording comes from <code>docs/site/copy-ru/translate.md</code> (screens 7 and 10). Spanish and English copy hasn’t been reviewed by a native speaker.',
+   'T‑13 isn’t in the app: it needs the <code>STT_FILE_TRANSLATE</code> flag and an <code>.opus</code> check on a phone (GAP #23). Audio goes to the recognition server, so legal needs to review it.',
+   'T‑04: place-name recognition isn’t confirmed (GAP Translate #3). How to write a place name from another script (Sérguiev Posad / Сергиев Посад) is open.',
+   'The format list in the error (.opus, .m4a, .mp3, .wav; .amr not supported) needs confirming with engineering.',
+   'What happens after Reply by voice (recording in the same sheet, sending to the chat) isn’t drawn.',
+   'Colors <code>#1B2E29</code>, <code>#2C4A40</code>, <code>#2E4A3F</code>, <code>#3A2326</code>, <code>#FF8A80</code> and <code>#262A30</code> are derived and not in the v2.3 tokens.'],
+  ctr:['body text','labels, hints','labels on cards and sheet','translation for you (large)','labels on translation card','Play, “place” tag','place in the original, player','Reply by voice','Copy, sheet rows','Close in the error','“How to share” link','“not supported” tag','place hint','chat bubbles'] }
+}};
+
+let L=new URLSearchParams(location.search).get('l');
+if(!T[L])L='ru';
+const D=T[L];
+document.documentElement.lang=L;
+
+/* ===== куски экрана ===== */
+const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
+const home=`<div class="homebar"><i></i></div>`;
+function rnd(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
+function wave(n,played,seed,maxH){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const env=0.45+0.55*Math.sin(Math.PI*(i+.5)/n);const v=Math.max(4,Math.round((0.2+0.8*r())*maxH*env));h+=`<i class="${i<played?'':P+'f'}" style="height:${v}px"></i>`;}return h;}
+const scr=body=>`<div class="scr ${P}scr">${body}</div>`;
+
+/* мессенджер */
+const msgr=lift=>`${sbar}<div class="${P}mnav"><span class="${P}mback">${I.back}</span><span class="${P}av">${D.fromAv}</span><div class="${P}mnm"><b>${D.from}</b><span>${D.online}</span></div></div>
+<div class="${P}chat"><span class="${P}day">${D.today}</span>
+ <div class="${P}mb">${D.mText}<small>${D.t1}</small></div>
+ <div class="${P}mb ${P}mv ${lift?P+'lift':''}"><span class="${P}mplay">${I.play}</span><span class="${P}wv">${wave(30,0,7,28).replace(/ class="[^"]*"/g,'')}</span><div><span>${D.dur}</span><span>${D.t2}</span></div></div>
+</div>`;
+
+/* лист Parrlo */
+const phead=()=>`<div class="${P}ph">${appIcon()}<div><b>${D.phT}</b><span><i class="${P}dot ${P}es"></i>${D.phS[0]} → ${D.phS[1]}<i class="${P}dot"></i></span></div><span class="${P}x" aria-label="${D.close}">${I.x}</span></div>`;
+const psheet=(body,bot)=>scr(`${msgr(0)}<div class="${P}dim"></div><div class="${P}peek"></div>
+<div class="${P}ps" style="z-index:4">${phead()}<div class="${P}main">${body}</div><div class="${P}bot">${bot}</div>${home}</div>`);
+const player=(dur,played,seed)=>`<div class="${P}pl"><span class="${P}play" aria-label="${D.playV}">${I.play}</span><span class="${P}wv">${wave(46,played,seed,32)}</span><time>${dur}</time></div>`;
+const orig=(text,dur,seed,skel)=>`<div class="${P}orig"><div class="${P}orow"><span class="${P}lbl"><i class="${P}dot ${P}es"></i>${D.orL}</span>${skel?'':`<span class="${P}col" aria-label="${D.collapse}">${I.up}</span>`}</div>${player(dur,46,seed)}${skel?`<div class="${P}sk"><i style="width:100%"></i><i style="width:92%"></i><i style="width:58%"></i></div>`:`<p>${text}</p>`}</div>`;
+const card=text=>`<div class="${P}card"><span class="${P}lbl"><i class="${P}dot"></i>${D.trL}</span><p>${text}</p><div class="${P}acts"><span class="${P}act">${I.spk}${D.play}</span></div></div>`;
+const replyBot=`<div class="${P}hint">${I.info}${D.replyHint}</div><div class="${P}btns"><span class="${P}sec">${I.copy}${D.copy}</span><span class="${P}pri">${I.mic}${D.reply}</span></div>`;
+const ptag=`<span class="${P}ptag">${I.pin}${D.placeTag}</span>`;
+
+const H={
+'share-sheet':scr(`${msgr(1)}<div class="${P}dim"></div>
+<div class="${P}ss">
+ <i class="${P}grab"></i>
+ <div class="${P}ssh"><span class="${P}file">${I.audio}</span><div><b>${D.ssT}</b><span>${D.ssS}</span></div><span class="${P}x" aria-label="${D.close}">${I.x}</span></div>
+ <div class="${P}apps">
+  <span class="${P}app ${P}on">${appIcon()}<b>${D.apps}</b><u class="${P}tap"></u></span>
+  <span class="${P}app"><i></i><em></em></span><span class="${P}app"><i></i><em></em></span><span class="${P}app"><i></i><em></em></span><span class="${P}app"><i></i><em></em></span>
+ </div>
+ <div class="${P}grp">
+  <div class="${P}row">${D.ssActs[0]}${I.copy}</div>
+  <div class="${P}row">${D.ssActs[1]}${I.save}</div>
+  <div class="${P}row">${D.ssActs[2]}${I.fwd}</div>
+ </div>
+ ${home}
+</div>`),
+
+processing:psheet(`
+ <div class="${P}stepper"><span>${I.spin}${D.s1}</span><i class="${P}arr"></i><span class="${P}wait">${I.wait}${D.s2}</span></div>
+ <div class="${P}skc"><span class="${P}lbl"><i class="${P}dot"></i>${D.skL}</span><i style="width:100%"></i><i style="width:94%"></i><i style="width:80%"></i><i style="width:46%"></i></div>
+ ${orig('',D.dur,11,1)}`,
+ `<div class="${P}btns"><span class="${P}sec">${D.cancel}</span></div>`),
+
+result:psheet(`${card(D.tr)}${orig(D.or,D.dur,11)}<div class="${P}note">${I.info}<span>${D.note}</span></div>`,replyBot),
+
+place:psheet(`
+ <div class="${P}card"><span class="${P}lbl"><i class="${P}dot"></i>${D.trL}</span><p>${D.pTr[0]}<span style="white-space:nowrap"><span class="${P}pw">${D.placeTr}</span>${ptag}${L==='ru'?'.':''}${D.pTr[1].startsWith('.')?'.':''}</span>${D.pTr[1].replace(/^\./,'')}</p><div class="${P}acts"><span class="${P}act">${I.spk}${D.play}</span></div></div>
+ <div class="${P}ptip"><i>${I.pin}</i><div><b>${D.pTipB}</b><span>${D.pTipS}</span></div></div>
+ ${orig(D.pOr[0]+`<span class="${P}pw">${D.place}</span>`+D.pOr[1],D.durP,23)}`,replyBot),
+
+error:psheet(`<div class="${P}main ${P}err" style="padding:0">
+ <img src="${MASC}think-dark.svg" alt="">
+ <h3>${D.eT}</h3><p>${D.eP}</p>
+ <div class="${P}fch"><i>${I.doc}</i><div><b>${D.eFile}</b><span>${D.eFileS}</span></div><span class="${P}badge">${I.warn}${D.eBadge}</span></div>
+ <div class="${P}ok">${I.okc}<span>${D.eOk}</span></div>
+ </div>`,
+ `<span class="${P}link">${I.help}${D.eHelp}</span><div class="${P}btns"><span class="${P}pri ${P}lt">${D.close}</span></div>`),
+};
+const ORDER=['share-sheet','processing','result','place','error'];
+window.TW_STATES=ORDER; window.TW_LANG=L;
+
+/* ===== страница ===== */
+const G=D.page;
+$('langs').innerHTML=['ru','es','en'].map(l=>`<a href="?l=${l}" aria-current="${l===L}">${l.toUpperCase()}</a>`).join('');
+$('mk').textContent=G.mk; $('tag').textContent=G.tag; $('h1').textContent=G.h1; $('lead').textContent=G.lead;
+document.title='Parrlo '+G.h1;
+const ph=(id,s,html)=>`<div class="pf p67" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
+$('hero-ph').innerHTML=ph('translate-share',.8,H.result)+`<div class="pcap"><span class="dot"></span><div><b>${G.cap[0]}</b><span>${G.cap[1]}</span></div></div>`;
+$('hero-t').innerHTML=`<h3>${G.heroH}</h3>`+G.heroP.map(p=>`<p>${p}</p>`).join('');
+$('h-st').textContent=G.hSt; $('st-lead').textContent=G.stLead;
+$('grid').innerHTML=ORDER.map(k=>`<figure>${ph(P+'-'+k,.6,H[k])}<figcaption><b>${D.st[k][0]}</b><code>${k}</code> · ${D.st[k][1]}</figcaption></figure>`).join('');
+$('h-dec').textContent=G.hDec; $('dec').innerHTML=G.dec.map(x=>`<li>${x}</li>`).join('');
+$('h-tok').textContent=G.hTok; $('tok').innerHTML=G.tok.map(x=>`<li>${x}</li>`).join('');
+$('h-na').textContent=G.hNa; $('na').innerHTML=G.na.map(x=>`<li>${x}</li>`).join('');
+
+/* контраст */
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const pairs=[['#F2F5F7','#0E1116',4.5],['#9AA4B2','#0E1116',4.5],['#9AA4B2','#1C2026',4.5],['#0E1116','#BFF2DC',4.5],['#2E4A3F','#BFF2DC',4.5],['#BFF2DC','#0E1116',4.5],['#0E1116','#BFF2DC',4.5],
+ ['#0E1116','#2BC48A',4.5],['#F2F5F7','#242B34',4.5],['#0E1116','#F2F5F7',4.5],['#2BC48A','#0E1116',4.5],['#FF8A80','#3A2326',4.5],['#C3CBD5','#1B2E29',4.5],['#9AA4B2','#262A30',4.5]];
+const dec=x=>L==='en'?String(x):String(x).replace('.',',');
+$('ctr').innerHTML=`<tr><th>${G.thP}</th><th>${G.thW}</th><th>${G.thC}</th><th>${G.thN}</th></tr>`+pairs.map(([a,b,n],i)=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${G.ctr[i]}</td><td><b>${dec(v.toFixed(2))}:1</b></td><td>${v>=n?'≥ '+dec(n)+' ✓':G.low}</td></tr>`;}).join('');
+window.TW_CR=pairs.map(([a,b,n],i)=>[G.ctr[i],+cr(a,b).toFixed(2),n]);
+document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>
