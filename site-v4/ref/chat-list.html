@@ -8,363 +8,415 @@
 <link rel="stylesheet" href="../frame.css">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:48px 16px 96px}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
 .chat-list-w{max-width:1200px;margin:0 auto}
-.chat-list-w h1{font:900 44px/1.08 Nunito,sans-serif;margin:0 0 12px;letter-spacing:-.005em}
-.chat-list-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:0 0 8px}
-.chat-list-lead{color:#9AA4B2;font-size:17px;max-width:620px;margin:0}
-.chat-list-kick{font:600 13px/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 16px}
-.chat-list-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 6px;border-radius:6px;color:#F2F5F7}
-/* герой */
-.chat-list-hero{display:flex;flex-wrap:wrap;gap:56px;align-items:center;justify-content:center;padding:8px 0 72px}
-.chat-list-hero-tx{flex:1 1 360px;max-width:500px}
-.chat-list-pts{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:16px}
-.chat-list-pts li{display:flex;gap:12px;color:#C9D1DA;font-size:15px}
-.chat-list-pts li b{color:#F2F5F7;font-weight:600}
-.chat-list-pts i{flex:none;width:8px;height:8px;border-radius:50%;background:#2BC48A;margin-top:8px}
-/* сетка состояний */
-.chat-list-sec{border-top:1px solid #2F3742;padding-top:48px;margin-top:8px}
-.chat-list-sec>p{color:#9AA4B2;margin:0 0 32px;max-width:720px}
-.chat-list-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:48px 24px;justify-items:center}
-.chat-list-card{margin:0;width:256px}
-.chat-list-card h3{font:900 19px/1.25 Nunito,sans-serif;margin:20px 0 4px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.chat-list-card h3 code{font-size:12px;color:#9AA4B2;font-weight:400}
+.chat-list-lng{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-list-lng a{min-width:52px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#C9D1DA;text-decoration:none;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-list-lng a.on{background:#2BC48A;color:#0E1116;box-shadow:none}
+.chat-list-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-list-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-list-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-list-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-list-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-list-info ul,.chat-list-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-list-info li,.chat-list-sec li{margin:6px 0}
+.chat-list-w b{color:#F2F5F7;font-weight:600}
+.chat-list-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7;overflow-wrap:anywhere}
+.chat-list-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-list-lead{color:#9AA4B2;margin:0 0 32px;max-width:760px}
+.chat-list-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:40px 24px;justify-items:center}
+.chat-list-card{width:273px}
+.chat-list-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.chat-list-card h3 code{font-size:12px;color:#9AA4B2}
 .chat-list-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
-/* решения, токены */
-.chat-list-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px 48px;margin-top:72px;border-top:1px solid #2F3742;padding-top:48px}
-.chat-list-cols h2{font-size:24px;margin-bottom:16px}
-.chat-list-cols ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
-.chat-list-cols li{margin:8px 0}
-.chat-list-cols li b{color:#F2F5F7;font-weight:600}
-.chat-list-tbl{width:100%;border-collapse:collapse;font-size:14px}
-.chat-list-tbl td{padding:8px 8px 8px 0;border-bottom:1px solid #2F3742;vertical-align:middle;color:#C9D1DA}
-.chat-list-tbl td:last-child{text-align:right;white-space:nowrap;font-weight:600;color:#2BC48A;padding-right:0}
-.chat-list-sw{display:inline-block;width:28px;height:20px;border-radius:6px;vertical-align:middle;margin-right:8px;box-shadow:inset 0 0 0 1px #3A414B;font:700 11px/20px Inter;text-align:center}
-@media (max-width:520px){
- body{padding:32px 16px 72px}
- .chat-list-w h1{font-size:34px}
- .chat-list-hero{gap:32px;padding-bottom:48px}
- .chat-list-hero .pf{--s:.84!important}
-}
+.chat-list-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 40px}
+.chat-list-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-list-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-list-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-list-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-list-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-list-hero .pf{--s:.78!important}.chat-list-info h1{font-size:30px}.chat-list-hero{gap:24px}}
 
-/* ===================== ЭКРАН 390×844 ===================== */
+/* ======= экран 430×932 ======= */
 .chat-list-scr{position:relative;overflow:hidden}
-.chat-list-scr svg{flex:none}
-.chat-list-hd{flex:none;height:52px;display:flex;align-items:center;gap:8px;padding:0 16px 0 20px}
-.chat-list-hd h3{margin:0;font:900 34px/1 Nunito,sans-serif;letter-spacing:.005em}
-.chat-list-hd .chat-list-sp{flex:1}
-.chat-list-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--acc);background:var(--sf2)}
+.chat-list-scr svg{display:block;flex:none}
+.chat-list-hd{flex:none;height:56px;display:flex;align-items:center;gap:8px;padding:0 16px 0 20px}
+.chat-list-hd h3{margin:0;flex:1;font:900 34px/1 Nunito,sans-serif}
+.chat-list-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--acc);background:var(--sf2);flex:none}
 .chat-list-ib svg{width:24px;height:24px}
-.chat-list-hst{display:flex;align-items:center;gap:8px;font:500 13px/1 Inter,sans-serif;color:var(--sec);margin-top:8px}
-.chat-list-spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--acc)}
 /* поиск */
-.chat-list-sr{flex:none;margin:4px 16px 4px;height:44px;border-radius:12px;background:var(--sf);display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--sec);font-size:17px}
+.chat-list-sr{flex:none;margin:4px 16px;height:44px;border-radius:12px;background:var(--sf);display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--sec);font-size:17px;white-space:nowrap;overflow:hidden}
 .chat-list-sr svg{width:20px;height:20px}
 .chat-list-srw{flex:none;display:flex;align-items:center;gap:12px;padding:8px 16px 4px}
-.chat-list-srw .chat-list-sr{flex:1;margin:0;color:var(--tx);box-shadow:inset 0 0 0 1.5px var(--acc)}
-.chat-list-srw .chat-list-sr>svg:first-child{color:var(--sec)}
+.chat-list-srw .chat-list-sr{flex:1;min-width:0;margin:0;color:var(--tx);box-shadow:inset 0 0 0 1.5px var(--acc)}
 .chat-list-car{display:inline-block;width:2px;height:22px;background:var(--acc);margin-left:1px;vertical-align:middle}
-.chat-list-clr{margin-left:auto;width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--sec)}
-.chat-list-cancel{font:500 17px/44px Inter,sans-serif;color:var(--acc);height:44px}
+.chat-list-clr{margin-left:auto;width:44px;height:44px;margin-right:-10px;display:flex;align-items:center;justify-content:center;color:var(--sec)}
+.chat-list-cancel{font:500 17px/44px Inter,sans-serif;color:var(--acc);height:44px;flex:none}
 /* фильтры */
-.chat-list-fl{flex:none;display:flex;gap:8px;padding:4px 16px;height:52px;align-items:center}
-.chat-list-ch{height:36px;border-radius:18px;padding:0 14px;display:flex;align-items:center;gap:6px;font:600 15px/1 Inter,sans-serif;color:var(--tx);background:var(--sf);box-shadow:inset 0 0 0 1px var(--line)}
-.chat-list-ch.on{background:var(--tx);color:var(--bg);box-shadow:none}
+.chat-list-fl{flex:none;display:flex;gap:8px;padding:0 16px;height:52px;align-items:center}
+.chat-list-ch{height:44px;display:flex;align-items:center}
+.chat-list-ch span{height:36px;border-radius:18px;padding:0 14px;display:flex;align-items:center;gap:6px;font:600 15px/1 Inter,sans-serif;color:var(--tx);background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);white-space:nowrap}
+.chat-list-ch.on span{background:var(--tx);color:var(--bg);box-shadow:none}
 .chat-list-ch em{font-style:normal;min-width:20px;height:20px;border-radius:10px;background:var(--acc);color:var(--onacc);font:700 12px/20px Inter;text-align:center;padding:0 6px}
 /* карточка Парло */
-.chat-list-pc{flex:none;margin:4px 16px 8px;height:68px;border-radius:20px;background:linear-gradient(100deg,#1E3734 0%,#1C2026 62%);box-shadow:inset 0 0 0 1px #2F4A44;display:flex;align-items:center;gap:12px;padding:0 12px 0 8px}
+.chat-list-pc{flex:none;margin:4px 16px 8px;min-height:72px;border-radius:20px;background:linear-gradient(100deg,#1E3734 0%,#1C2026 62%);box-shadow:inset 0 0 0 1px #2F4A44;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 8px}
 .chat-list-pc img{width:52px;height:52px;flex:none;display:block}
-.chat-list-pc .chat-list-pct{flex:1;min-width:0}
-.chat-list-pc b{display:flex;align-items:center;gap:8px;font:900 18px/1.2 Nunito,sans-serif}
-.chat-list-pc b small{font:600 11px/1 Inter,sans-serif;letter-spacing:.04em;color:var(--mint);background:rgba(191,242,220,.12);padding:4px 6px;border-radius:6px}
-.chat-list-pc span{display:block;font-size:14px;line-height:1.3;color:#C9D1DA;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chat-list-pc>svg{width:20px;height:20px;color:var(--sec)}
+.chat-list-pct{flex:1;min-width:0}
+.chat-list-pct b{display:flex;align-items:center;gap:8px;font:900 18px/1.2 Nunito,sans-serif}
+.chat-list-pct b small{font:700 11px/1 Inter,sans-serif;letter-spacing:.04em;color:var(--mint);background:rgba(191,242,220,.12);padding:4px 6px;border-radius:6px}
+.chat-list-pct span{display:block;font-size:14px;line-height:1.3;color:#C9D1DA;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-list-pc .go{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-list-pc .go svg{width:20px;height:20px}
 /* список */
 .chat-list-ls{flex:1;min-height:0;overflow:hidden;position:relative}
-.chat-list-sh{font:600 13px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);padding:16px 20px 8px;display:flex;align-items:center;gap:6px}
-.chat-list-sh svg{width:14px;height:14px}
-.chat-list-r{position:relative;height:76px;display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--bg)}
+.chat-list-sh{font:600 13px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);padding:16px 20px 8px}
+.chat-list-r{position:relative;height:78px;display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--bg)}
 .chat-list-av{width:52px;height:52px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font:900 21px Nunito,sans-serif;color:#0E1116;position:relative}
-.chat-list-av.w{color:#fff}
-.chat-list-av .chat-list-grp{position:absolute;right:-3px;bottom:-3px;width:22px;height:22px;border-radius:50%;background:var(--sf2);box-shadow:0 0 0 3px var(--bg);color:var(--tx);display:flex;align-items:center;justify-content:center}
-.chat-list-av .chat-list-grp svg{width:13px;height:13px}
-.chat-list-av .chat-list-on{position:absolute;right:0;bottom:0;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--bg)}
-.chat-list-bd{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:4px;box-shadow:inset 0 -1px 0 var(--line)}
+.chat-list-av.g{border-radius:16px;background:#1E3734;color:var(--mint)}
+.chat-list-av.g svg{width:26px;height:26px}
+.chat-list-av .on{position:absolute;right:0;bottom:0;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--bg)}
+.chat-list-bd{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:5px;box-shadow:inset 0 -1px 0 var(--line)}
 .chat-list-r.last .chat-list-bd{box-shadow:none}
 .chat-list-l1,.chat-list-l2{display:flex;align-items:center;gap:6px;min-width:0}
-.chat-list-nm{min-width:0;font:600 17px/1.25 Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chat-list-l1 .chat-list-mu{width:16px;height:16px;color:var(--sec)}
-.chat-list-tm{margin-left:auto;flex:none;font:400 14px/1 Inter,sans-serif;color:var(--sec);display:flex;align-items:center;gap:4px}
+.chat-list-nm{min-width:0;flex:0 1 auto;font:600 17px/1.25 Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* плашки языка собеседника: мятная — переводится, серая — твой язык */
+.chat-list-lg{flex:none;display:flex;gap:4px}
+.chat-list-lg i{font:700 11px/1 Inter;letter-spacing:.06em;font-style:normal;height:20px;padding:0 6px;border-radius:6px;display:flex;align-items:center;background:rgba(191,242,220,.14);color:var(--mint)}
+.chat-list-lg i.s{background:rgba(154,164,178,.18);color:var(--tx)}
+.chat-list-mu{width:16px;height:16px;color:var(--sec);flex:none}
+.chat-list-tm{margin-left:auto;padding-left:8px;flex:none;font:400 14px/1 Inter,sans-serif;color:var(--sec);display:flex;align-items:center;gap:4px;white-space:nowrap}
 .chat-list-tm.u{color:var(--acc);font-weight:600}
 .chat-list-tm svg{width:18px;height:18px;color:var(--acc)}
 .chat-list-pv{flex:1;min-width:0;font-size:15px;line-height:1.3;color:var(--sec);display:flex;align-items:center;gap:6px}
 .chat-list-pv.u{color:var(--tx)}
 .chat-list-pv>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chat-list-pv>svg{width:16px;height:16px;color:var(--sec)}
-.chat-list-pv .chat-list-who{color:var(--tx);font-weight:500}
+.chat-list-pv>svg{width:16px;height:16px;color:var(--mint)}
+.chat-list-pv>svg.n{color:var(--sec)}
+.chat-list-who{color:var(--tx);font-weight:500}
 .chat-list-pv.typ{color:var(--acc);font-weight:500}
 .chat-list-dots{display:flex;gap:3px;align-items:center}
 .chat-list-dots i{width:5px;height:5px;border-radius:50%;background:var(--acc)}
 .chat-list-dots i:nth-child(2){opacity:.65}.chat-list-dots i:nth-child(3){opacity:.35}
 .chat-list-bg{flex:none;min-width:24px;height:24px;border-radius:12px;background:var(--acc);color:var(--onacc);font:700 13px/24px Inter,sans-serif;text-align:center;padding:0 7px}
-.chat-list-bg.m{background:var(--sf2);color:var(--tx)}
-.chat-list-pin{width:16px;height:16px;color:var(--sec)}
+.chat-list-bg.m{background:#3A414B;color:var(--tx)}
 .chat-list-pend{color:var(--sec)}
 /* смахивание */
-.chat-list-swp{position:relative;height:76px;overflow:hidden}
+.chat-list-swp{position:relative;height:78px;overflow:hidden}
 .chat-list-acts{position:absolute;top:0;right:0;bottom:0;display:flex}
-.chat-list-act{width:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:600 12px/1.15 Inter,sans-serif;text-align:center;color:var(--tx)}
+.chat-list-act{width:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:600 12px/1.15 Inter,sans-serif;text-align:center;color:#fff;padding:0 4px}
 .chat-list-act svg{width:24px;height:24px}
-.chat-list-act.a1{background:var(--deep);color:#fff}
-.chat-list-act.a2{background:#2F3742}
-.chat-list-act.a3{background:#3A414B}
-.chat-list-swp .chat-list-r{transform:translateX(-228px);box-shadow:8px 0 24px -8px rgba(0,0,0,.6)}
-.chat-list-hint{position:absolute;left:0;right:0;bottom:104px;display:flex;justify-content:center;pointer-events:none}
-.chat-list-hint span{display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:18px;background:var(--sf2);box-shadow:0 8px 24px rgba(0,0,0,.45);font:500 13px/1 Inter,sans-serif;color:var(--tx)}
+.chat-list-act.a1{background:#3A414B;color:var(--tx)}
+.chat-list-act.a2{background:#2F3742;color:var(--tx)}
+.chat-list-act.a3{background:#B8342B}
+.chat-list-swp .chat-list-r{transform:translateX(-240px);box-shadow:8px 0 24px -8px rgba(0,0,0,.6)}
+.chat-list-hint{position:absolute;left:0;right:0;bottom:112px;display:flex;justify-content:center;pointer-events:none;z-index:3}
+.chat-list-hint span{display:flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:18px;background:var(--sf2);box-shadow:0 8px 24px rgba(0,0,0,.45);font:500 13px/1 Inter,sans-serif;color:var(--tx);white-space:nowrap}
 .chat-list-hint svg{width:16px;height:16px;color:var(--acc)}
 /* поиск: результаты */
-.chat-list-res .chat-list-r{height:72px}
+.chat-list-res .chat-list-r{height:74px}
 .chat-list-res .chat-list-av{width:44px;height:44px;font-size:18px}
-.chat-list-pv mark,.chat-list-nm mark{background:#1E3734;color:var(--tx);font-weight:700;border-radius:4px;padding:0 2px;box-shadow:inset 0 -2px 0 var(--acc)}
-.chat-list-tag{flex:none;font:600 11px/1 Inter,sans-serif;color:var(--sec);border:1px solid var(--line);border-radius:6px;padding:3px 5px}
-.chat-list-more{height:44px;display:flex;align-items:center;padding:0 20px;font:500 15px/1 Inter,sans-serif;color:var(--acc)}
+.chat-list-res .chat-list-av.g{border-radius:14px}.chat-list-res .chat-list-av.g svg{width:22px;height:22px}
+.chat-list-pv mark{background:#1E3734;color:var(--tx);font-weight:700;border-radius:4px;padding:0 2px;box-shadow:inset 0 -2px 0 var(--acc)}
+.chat-list-tag{flex:none;font:600 11px/1 Inter,sans-serif;color:var(--sec);border:1px solid var(--line);border-radius:6px;padding:3px 5px;white-space:nowrap}
+.chat-list-tag.t{color:var(--mint);border-color:rgba(191,242,220,.3)}
+.chat-list-nt{display:flex;gap:10px;margin:12px 16px 0;padding:10px 14px;border-radius:14px;background:#16241F;box-shadow:inset 0 0 0 1px rgba(191,242,220,.18);font-size:14px;line-height:20px;color:#DCEFE6}
+.chat-list-nt svg{width:18px;height:18px;color:var(--mint);margin-top:1px}
 /* пусто */
 .chat-list-em{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px 24px;text-align:center}
 .chat-list-em img{width:176px;height:176px;display:block;margin-bottom:12px}
 .chat-list-em h4{margin:0 0 12px;font:900 28px/1.15 Nunito,sans-serif}
 .chat-list-em p{margin:0 0 32px;color:var(--sec);font-size:16px;line-height:1.5}
-.chat-list-btn{width:100%;height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 18px/1 Nunito,sans-serif}
+.chat-list-btn{width:100%;min-height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 18px/1.2 Nunito,sans-serif;padding:0 20px}
 .chat-list-btn svg{width:22px;height:22px}
 .chat-list-btn.p{background:var(--acc);color:var(--onacc)}
 .chat-list-btn.s{background:var(--sf2);color:var(--tx);margin-top:12px}
 .chat-list-em small{display:block;margin-top:16px;font-size:13px;line-height:1.45;color:var(--sec)}
-/* скелетон */
-.chat-list-sk{background:linear-gradient(100deg,#1C2026 30%,#262C35 50%,#1C2026 70%);background-size:300% 100%;background-position:30% 0;border-radius:8px}
-.chat-list-skr{height:76px;display:flex;align-items:center;gap:12px;padding:0 16px}
-.chat-list-skr .chat-list-sk.c{width:52px;height:52px;border-radius:50%;flex:none}
-.chat-list-skb{flex:1;display:flex;flex-direction:column;gap:10px}
-.chat-list-skb i{display:block;height:14px}
-.chat-list-skb i+i{height:12px}
-/* оффлайн */
-.chat-list-off{flex:none;margin:4px 16px 4px;min-height:44px;border-radius:12px;background:#3C372B;display:flex;align-items:center;gap:10px;padding:0 12px;font-size:14px;line-height:1.3}
-.chat-list-off svg{width:20px;height:20px;color:#FFC247}
-.chat-list-off b{font-weight:600}
+/* нет сети */
+.chat-list-off{flex:none;margin:4px 16px;min-height:52px;border-radius:14px;background:#3C372B;display:flex;align-items:center;gap:12px;padding:8px 14px;font-size:14px;line-height:20px}
+.chat-list-off svg{width:22px;height:22px;color:#FFC247}
+.chat-list-off b{display:block;font-weight:600}
 .chat-list-off span{color:#D9D3C4}
 /* вкладки */
-.chat-list-tb{position:absolute;left:0;right:0;bottom:0;padding-top:4px;background:rgba(14,17,22,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 1px 0 var(--line);z-index:2}
+.chat-list-tb{position:absolute;left:0;right:0;bottom:0;padding-top:4px;background:rgba(14,17,22,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 1px 0 var(--line);z-index:2}
 .chat-list-tbi{display:flex;height:52px}
 .chat-list-t{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--sec);font:600 11px/1.2 Inter,sans-serif}
 .chat-list-t svg{width:26px;height:26px}
 .chat-list-t.on{color:var(--acc)}
-.chat-list-t .chat-list-tic{position:relative}
-.chat-list-t .chat-list-tic em{position:absolute;left:18px;top:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--acc);color:var(--onacc);font:700 11px/18px Inter;text-align:center;padding:0 5px;font-style:normal;box-shadow:0 0 0 2px var(--bg)}
-.chat-list-gap{flex:none;height:88px}
+.chat-list-tic{position:relative}
+.chat-list-tic em{position:absolute;left:18px;top:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--acc);color:var(--onacc);font:700 11px/18px Inter;text-align:center;padding:0 5px;font-style:normal;box-shadow:0 0 0 2px var(--bg)}
+.chat-list-gap{flex:none;height:92px}
 </style>
 </head>
 <body>
 <div class="chat-list-w">
-
+<nav class="chat-list-lng" id="chat-list-lng" aria-label="Language"></nav>
 <section class="chat-list-hero">
- <figure style="margin:0"><div data-state="main" data-hero="1" data-s=".9"></div>
-  <figcaption class="pcap"><span class="dot"></span><div><b>Parrlo Chat · Чаты</b><span>Главный кадр. Только тёмная тема. Текст экрана — черновик.</span></div></figcaption></figure>
- <div class="chat-list-hero-tx">
-  <p class="chat-list-kick">Эталон v2 · chat-list</p>
-  <h1>Все разговоры — на твоём языке</h1>
-  <p class="chat-list-lead">Главный экран Parrlo Chat: каждый чат читается по‑русски, даже если собеседник пишет по‑испански. Сверху — Парло: подсказывает, кто ждёт ответа.</p>
-  <ul class="chat-list-pts">
-   <li><i></i><span><b>Перевод виден в строке.</b> Значок перевода у превью — сообщение пришло на другом языке и показано по‑русски.</span></li>
-   <li><i></i><span><b>Непрочитанное — не только цветом.</b> Число в счётчике, светлое превью и время полужирным.</span></li>
-   <li><i></i><span><b>Живые статусы.</b> «печатает», «голосовое», прочитано, без звука, закреплено — значками одного стиля.</span></li>
-   <li><i></i><span><b>Быстрые фильтры.</b> Все · Непрочитанные · Группы — в один тап, без отдельного экрана.</span></li>
-  </ul>
+ <div><div class="pf p67" style="--s:1" data-state="main" id="chat-list-hero"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b id="chat-list-capb"></b><span id="chat-list-caps"></span></div></div></div>
+ <div class="chat-list-info">
+  <p class="chat-list-eb" id="chat-list-eb"></p>
+  <h1 id="chat-list-h1"></h1>
+  <p id="chat-list-intro"></p>
+  <ul id="chat-list-what"></ul>
  </div>
 </section>
-
-<section class="chat-list-sec">
- <h2>Состояния</h2>
- <p>Шесть состояний одного экрана. Масштаб 0,6; PNG каждого — @3×, 1170×2532, в <code>site-v4/ref/png/chat-list--&lt;state&gt;.png</code>.</p>
- <div class="chat-list-grid">
-  <figure class="chat-list-card"><div data-state="main"></div><h3>Обычный список <code>main</code></h3><p>Каждый день: открыл приложение — видно, кто написал и кто ждёт ответа.</p></figure>
-  <figure class="chat-list-card"><div data-state="empty"></div><h3>Первый запуск <code>empty</code></h3><p>Чатов ещё нет: начать новый чат или позвать собеседника ссылкой.</p></figure>
-  <figure class="chat-list-card"><div data-state="loading"></div><h3>Загрузка <code>loading</code></h3><p>Первое открытие на новом телефоне: скелетон повторяет форму строк.</p></figure>
-  <figure class="chat-list-card"><div data-state="search"></div><h3>Поиск <code>search</code></h3><p>Ввод «док»: находятся чаты и сообщения — и в оригинале, и в переводе.</p></figure>
-  <figure class="chat-list-card"><div data-state="swipe"></div><h3>Смахивание <code>swipe</code></h3><p>Свайп строки влево: закрепить, выключить звук или убрать в архив.</p></figure>
-  <figure class="chat-list-card"><div data-state="offline"></div><h3>Нет сети <code>offline</code></h3><p>Список доступен; неотправленное ждёт сети, плашка не мешает читать.</p></figure>
- </div>
-</section>
-
-<section class="chat-list-cols">
- <div>
-  <h2>Решения</h2>
-  <ul>
-   <li><b>Карточка Парло с подсказкой.</b> Не просто вход в чат с помощником, а одна строка пользы: кто ждёт ответа. Лёгкий зелёный градиент отделяет её от чатов людей.</li>
-   <li><b>Фильтры-чипы</b> «Все · Непрочитанные · Группы» вместо отдельных папок: самый частый вопрос — «что нового».</li>
-   <li><b>Статусы в превью:</b> «печатает…» с точками, «Голосовое · 0:14», фото, «Ты:» с двумя галочками, пометка группы — одним набором иконок (штрих 1,9).</li>
-   <li><b>Без звука — нейтральный счётчик</b> и значок у имени: чат не кричит, но и не теряется.</li>
-   <li><b>Поиск по оригиналу и переводу.</b> Метка «перевод» / «оригинал» объясняет, почему нашлось сообщение без видимого совпадения в языке.</li>
-   <li><b>Смахивание:</b> три действия с подписями (не только иконки), подсказка снизу объясняет жест при первом использовании.</li>
-   <li><b>Нет сети:</b> плашка в одну строку на жёлтом фоне предупреждения; сообщение, написанное без сети, помечено часами «ждёт сети».</li>
-   <li><b>Пустой экран</b> с маскотом и двумя путями: начать чат или пригласить по ссылке.</li>
-   <li><b>Вкладки на размытом фоне</b> — список уходит под них, видно, что его можно прокрутить. Счётчик на вкладке «Чаты» считает чаты со звуком.</li>
-  </ul>
- </div>
- <div>
-  <h2>Токены и контраст</h2>
-  <ul style="margin-bottom:16px">
-   <li>Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>.</li>
-   <li>Текст <code>#F2F5F7</code>, вторичный <code>#9AA4B2</code>; акцент <code>#2BC48A</code> (текст на нём <code>#0E1116</code>), <code>#00875C</code> с белым.</li>
-   <li>Подсветка совпадения — <code>#1E3734</code> (successBg) + полужирный + подчёркивание акцентом.</li>
-   <li>Нет сети — <code>#3C372B</code> (warnBg) + значок <code>#FFC247</code>: единственный жёлтый элемент на экране (не считая клюва маскота).</li>
-   <li>Сетка 4 pt: поля 16/20, строка 76, аватар 52, кнопки и вкладки ≥ 44.</li>
-  </ul>
-  <table class="chat-list-tbl" id="chat-list-ctr"></table>
- </div>
- <div>
-  <h2>Не утверждено</h2>
-  <ul>
-   <li>Все тексты экрана и демо-имена (Pedro, Piso, Lucía, Olga, Carmen, Diego, Marta) — черновик.</li>
-   <li>Подсказка Парло «ждёт ответа» и что открывается по нажатию на карточку.</li>
-   <li>Фильтры-чипы и их состав; вкладка «Звонки» — есть ли звонки в первой версии.</li>
-   <li>Поиск по переводу: хранится ли перевод так, чтобы по нему искать.</li>
-   <li>Набор действий смахивания и их порядок; архив — отдельный экран, здесь не нарисован.</li>
-   <li>Пригласить по ссылке: что видит получатель, у кого ещё нет приложения.</li>
-   <li>Цвета аватаров (<code>#6AA6F5</code> — info из палитры, <code>#BFF2DC</code>, <code>#F2F5F7</code>).</li>
-  </ul>
- </div>
-</section>
+<h2 class="chat-list-h2" id="chat-list-sth"></h2>
+<p class="chat-list-lead" id="chat-list-stl"></p>
+<div class="chat-list-grid" id="chat-list-grid"></div>
+<h2 class="chat-list-h2" id="chat-list-moreh"></h2>
+<div class="chat-list-cols">
+ <div class="chat-list-sec"><h2 id="chat-list-dech"></h2><ul id="chat-list-dec"></ul></div>
+ <div class="chat-list-sec"><h2 id="chat-list-tokh"></h2><table class="chat-list-ct" id="chat-list-ct"></table><ul style="margin-top:12px" id="chat-list-tok"></ul></div>
+ <div class="chat-list-sec"><h2 id="chat-list-nah"></h2><ul id="chat-list-na"></ul></div>
 </div>
-
+</div>
 <script>
 (function(){
-const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
-const sv=(d,x='')=>`<svg viewBox="0 0 24 24" ${SW} ${x}>${d}</svg>`;
-const I={
+var N=' ',H='‑';
+/* строки списка: k — кто (L/P/O — люди, G — группа); lg — языки собеседника [код, переводится?];
+   pv: t — текст превью уже на моём языке, who — автор в группе, tr — пришло на другом языке, kind — typ / me / voice */
+var D={
+ru:{
+ htmlLang:'ru',docTitle:'Parrlo Chat · Чаты',title:'Чаты',
+ aNew:'Новый чат',aClr:'Очистить',aOpen:'Открыть',
+ search:'Поиск по'+N+'чатам и'+N+'сообщениям',filters:['Все','Непрочитанные','Группы'],
+ tabs:['Чаты','Звонки','Настройки'],
+ pName:'Парло',pTag:'ИИ',pTxt:'Pedro ждёт ответа · помочь?',
+ me:'Ты',typing:'печатает',voice:'Голосовое · 0:14',muted:'Без звука',
+ rows:[
+  {k:'P',nm:'Pedro',lg:[['ES',1]],tm:'10:04',n:2,on:1,pv:{t:'Завтра в'+N+'десять пришлю сантехника',tr:1}},
+  {k:'G',nm:'Соседи · Colón 12',lg:[['ES',1],['EN',1]],tm:'10:02',n:4,mu:1,pv:{who:'Lucía',t:'Во дворе в'+N+'10, всё в'+N+'силе?',tr:1}},
+  {k:'L',nm:'Lucía',lg:[['ES',1]],tm:'9:58',n:1,on:1,pv:{kind:'typ'}},
+  {k:'O',nm:'Olga',lg:[['RU',0]],tm:'9:41',tk:1,pv:{kind:'me',t:'Спасибо, до'+N+'завтра!'}},
+  {k:'G',nm:'Родители · 3'+H+'Б',lg:[['ES',1],['EN',1]],tm:'Вчера',pv:{who:'Pedro',t:'Нужна подпись к'+N+'пятнице',tr:1}},
+  {k:'G',nm:'Футбол по субботам',lg:[['ES',1],['EN',1]],tm:'Пн',pv:{who:'Lucía',kind:'voice'}}
+ ],
+ q:'кран',cancel:'Отмена',sf:['Всё','Чаты','Сообщения'],shM:'Сообщения · 3',tagT:'перевод',tagO:'оригинал',
+ res:[
+  {k:'P',nm:'Pedro',tm:'10:04',pv:'<span class="chat-list-who">Ты: </span>На кухне опять течёт <mark>кран</mark>',tag:0},
+  {k:'P',nm:'Pedro',tm:'10:04',pv:'<mark>Кран</mark> посмотрит сантехник',tag:1},
+  {k:'G',nm:'Соседи · Colón 12',tm:'Вчера',pv:'<span class="chat-list-who">Olga: </span>Закройте <mark>кран</mark> в'+N+'подвале',tag:0}
+ ],
+ resN:'Ищем и в'+N+'оригинале, и в'+N+'переводе: второе сообщение Pedro написал по'+H+'испански («grifo»).',
+ emH:'Начни первый разговор',emP:'Пиши по'+H+'русски'+N+'— собеседник прочитает на своём языке, а ответ придёт к'+N+'тебе по'+H+'русски.',
+ emB1:'Новый чат',emB2:'Пригласить по'+N+'QR или ссылке',emS:'Собеседнику ничего не нужно ставить: ответить можно из браузера.',
+ offB:'Нет сети',offS:'Сообщения подождут и'+N+'уйдут сами, как только появится сеть.',wait:'ждёт сети',offMsg:'Кран уже не течёт, спасибо!',offL:'Документы у'+N+'меня, до'+N+'завтра!',
+ swA:['Без звука','Скрыть','Удалить'],swH:'Смахни влево'+N+'— ещё действия',
+ /* страница */
+ eb:'Эталон · пачка 2 · chat-list · C-01 · только тёмная тема',
+ h1:'Мессенджер, в котором нет иностранцев.',
+ intro:'Ты пишешь по'+H+'русски, хозяин квартиры читает по'+H+'испански. Его ответ приходит к'+N+'тебе уже на русском. Никто не подстраивается'+N+'— все говорят как привыкли.',
+ capB:'Список чатов',capS:'Главный кадр. У каждого чата'+N+'— плашка языка собеседника, превью уже по'+H+'русски. Тексты'+N+'— черновик.',
+ what:['<b>Плашки языка</b> у имени: мятная (ES, EN)'+N+'— собеседник пишет на другом языке, Parrlo переводит; серая (RU)'+N+'— твой язык, без перевода.','<b>Превью на твоём языке</b>, значок перевода'+N+'— это сообщение пришло по'+H+'испански.','<b>Группы</b>'+N+'— квадратный аватар и все языки участников.','<b>Непрочитанное не только цветом</b>: счётчик, светлое превью, время полужирным.'],
+ stH:'Состояния',stL:'Пять кадров одного экрана. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-list--&lt;состояние&gt;--ru.png</code>, главный кадр'+N+'— <code>chat-list--ru.png</code>.',
+ st:{main:['Чаты','Главный кадр: кто написал, на каком языке, и всё уже по'+H+'русски.'],
+  search:['Поиск','Ввод «кран»: находятся сообщения и в'+N+'оригинале, и в'+N+'переводе'+N+'— с меткой.'],
+  empty:['Первый запуск','Чатов ещё нет: начать новый или позвать собеседника по'+N+'QR или ссылке.'],
+  offline:['Нет сети','Список читается; неотправленное помечено «ждёт сети» и'+N+'уйдёт само.'],
+  swipe:['Смахивание','Свайп строки влево: без звука, скрыть, удалить'+N+'— как в сборке.']},
+ moreH:'Решения, токены, открытые вопросы',decH:'Решения сверх сборки',
+ dec:['<b>Плашка языка двух видов</b>: мятная'+N+'— переводится, серая'+N+'— твой язык. Разный цвет и разный код, не только цвет.','<b>Значок перевода в превью</b>'+N+'— тот же, что в пузыре <code>chat-thread</code>.','<b>Аватары</b>: у людей'+N+'— круг с инициалом и цветом из <code>chat-group</code>, у групп'+N+'— скруглённый квадрат со значком.','<b>Карточка Парло</b>: одна строка пользы («Pedro ждёт ответа»), плашка «ИИ» по §15 текстов.','<b>Поиск по оригиналу и переводу</b> с меткой и пояснением.','<b>Нет сети</b>: плашка с текстом из FAQ сайта; единственный жёлтый элемент.','<b>Смахивание</b>: действия сборки с подписями; «Удалить»'+N+'— тёмно-красный.'],
+ tokH:'Токены и контраст',
+ tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>.','Перевод'+N+'— Mint <code>#BFF2DC</code> (плашки, значок); акцент <code>#2BC48A</code> + <code>#0E1116</code>; группа'+N+'— <code>#1E3734</code>.','Нет сети'+N+'— <code>#3C372B</code> + <code>#FFC247</code>. «Удалить»'+N+'— <code>#B8342B</code> + белый.','Строка 78, аватар 52, кнопки и вкладки ≥'+N+'44'+N+'pt, чипы фильтров 36 в зоне 44.'],
+ naH:'Не утверждено',
+ na:['Все тексты'+N+'— черновик, включая испанский и английский интерфейс.','Карточка Парло: секретарь'+N+'— «Готовим» (макет); что открывается по нажатию.','Фильтры-чипы и их состав; вкладка «Звонки».','Поиск по переводу: хранится ли перевод так, чтобы по нему искать.','Свайп: «Скрыть» и «Удалить»'+N+'— как в сборке; архив не нарисован.','Названия групп (Colón 12, 3'+H+'Б)'+N+'— демо.'],
+ ct:['Имя, превью непрочитанного','Время, превью на фоне','Плашка перевода (Mint на ~#26332F)','Серая плашка (текст на ~#2A2F37)','Акцент: время, «печатает»','Счётчик на акценте','Значок группы','Текст в поиске на #1C2026','Нет сети: текст','Нет сети: значок','«Удалить»: белый на красном','Карточка Парло']
+},
+es:{
+ htmlLang:'es',docTitle:'Parrlo Chat · Chats',title:'Chats',
+ aNew:'Chat nuevo',aClr:'Borrar',aOpen:'Abrir',
+ search:'Buscar en chats y mensajes',filters:['Todos','No leídos','Grupos'],
+ tabs:['Chats','Llamadas','Ajustes'],
+ pName:'Parrlo',pTag:'IA',pTxt:'Olga espera respuesta · ¿te ayudo?',
+ me:'Tú',typing:'escribiendo',voice:'Audio · 0:14',muted:'Silenciado',
+ rows:[
+  {k:'O',nm:'Olga',lg:[['RU',1]],tm:'10:04',n:2,on:1,pv:{t:'Mañana a las diez viene el fontanero',tr:1}},
+  {k:'G',nm:'Vecinos · Colón 12',lg:[['RU',1],['EN',1]],tm:'10:02',n:4,mu:1,pv:{who:'Olga',t:'¿En el patio a las 10, sigue en pie?',tr:1}},
+  {k:'L',nm:'Lucía',lg:[['ES',0]],tm:'9:58',n:1,on:1,pv:{kind:'typ'}},
+  {k:'P',nm:'Pedro',lg:[['ES',0]],tm:'9:41',tk:1,pv:{kind:'me',t:'¡Gracias, hasta mañana!'}},
+  {k:'G',nm:'Familias · 3.º B',lg:[['RU',1],['EN',1]],tm:'Ayer',pv:{who:'Olga',t:'Hay que firmar la excursión',tr:1}},
+  {k:'G',nm:'Fútbol de los sábados',lg:[['RU',1],['EN',1]],tm:'lun',pv:{who:'Olga',kind:'voice'}}
+ ],
+ q:'grifo',cancel:'Cancelar',sf:['Todo','Chats','Mensajes'],shM:'Mensajes · 3',tagT:'traducción',tagO:'original',
+ res:[
+  {k:'O',nm:'Olga',tm:'10:04',pv:'<span class="chat-list-who">Tú: </span>El <mark>grifo</mark> de la cocina vuelve a gotear',tag:0},
+  {k:'O',nm:'Olga',tm:'10:04',pv:'Del <mark>grifo</mark> se encarga el fontanero',tag:1},
+  {k:'G',nm:'Vecinos · Colón 12',tm:'Ayer',pv:'<span class="chat-list-who">Pedro: </span>Cerrad el <mark>grifo</mark> del sótano',tag:0}
+ ],
+ resN:'Buscamos en el original y en la traducción: el segundo mensaje Olga lo escribió en ruso («кран»).',
+ emH:'Empieza tu primera conversación',emP:'Escribe en español: la otra persona lo leerá en su idioma y su respuesta te llegará en español.',
+ emB1:'Chat nuevo',emB2:'Invitar con QR o enlace',emS:'La otra persona no tiene que instalar nada: puede responder desde el navegador.',
+ offB:'Sin conexión',offS:'Los mensajes esperan y se envían solos en cuanto vuelva la conexión.',wait:'en espera',offMsg:'Ya no gotea, ¡gracias!',offL:'Tengo los papeles, ¡hasta mañana!',
+ swA:['Silenciar','Ocultar','Eliminar'],swH:'Desliza a la izquierda: más acciones',
+ eb:'Referencia · lote 2 · chat-list · C-01 · solo tema oscuro',
+ h1:'El chat donde nadie es extranjero.',
+ intro:'Tú escribes en español y tu casera lo lee en ruso. Su respuesta te llega ya en español. Nadie tiene que adaptarse: cada uno habla como siempre.',
+ capB:'Lista de chats',capS:'Imagen principal. Cada chat lleva la etiqueta del idioma de la otra persona; las vistas previas ya están en español. Textos provisionales.',
+ what:['<b>Etiquetas de idioma</b> junto al nombre: en verde menta (RU, EN), escribe en otro idioma y Parrlo traduce; en gris (ES), tu idioma, sin traducción.','<b>Vista previa en tu idioma</b>; el icono de traducción indica que llegó en ruso.','<b>Grupos</b>: avatar cuadrado y todos los idiomas del grupo.','<b>No leídos, no solo con color</b>: contador, vista previa clara y hora en negrita.'],
+ stH:'Estados',stL:'Cinco momentos de una misma pantalla. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-list--&lt;estado&gt;--es.png</code>; la imagen principal es <code>chat-list--es.png</code>.',
+ st:{main:['Chats','Imagen principal: quién escribió, en qué idioma, y todo ya en español.'],
+  search:['Búsqueda','Al escribir «grifo» aparecen mensajes en el original y en la traducción, con etiqueta.'],
+  empty:['Primer uso','Aún no hay chats: empezar uno o invitar con QR o enlace.'],
+  offline:['Sin conexión','La lista se puede leer; lo no enviado queda «en espera» y sale solo.'],
+  swipe:['Deslizar','Deslizar una fila a la izquierda: silenciar, ocultar, eliminar, como en la app.']},
+ moreH:'Decisiones, tokens y temas abiertos',decH:'Decisiones nuevas respecto a la app',
+ dec:['<b>Dos tipos de etiqueta de idioma</b>: menta, se traduce; gris, tu idioma. Cambian el color y el código, no solo el color.','<b>Icono de traducción en la vista previa</b>, el mismo que en la burbuja de <code>chat-thread</code>.','<b>Avatares</b>: personas, círculo con inicial y color de <code>chat-group</code>; grupos, cuadrado redondeado con icono.','<b>Tarjeta de Parrlo</b>: una línea útil («Olga espera respuesta») y la etiqueta «IA» (§15 de los textos).','<b>Búsqueda en original y traducción</b>, con etiqueta y una nota.','<b>Sin conexión</b>: aviso con el texto de las preguntas frecuentes; el único elemento amarillo.','<b>Deslizar</b>: las acciones de la app con texto; «Eliminar» en rojo oscuro.'],
+ tokH:'Tokens y contraste',
+ tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code>/<code>#242B34</code>, líneas <code>#2F3742</code>.','Traducción: Mint <code>#BFF2DC</code> (etiquetas, icono); acento <code>#2BC48A</code> + <code>#0E1116</code>; grupos: <code>#1E3734</code>.','Sin conexión: <code>#3C372B</code> + <code>#FFC247</code>. «Eliminar»: <code>#B8342B</code> + blanco.','Fila de 78, avatar de 52, botones y pestañas ≥'+N+'44'+N+'pt, filtros de 36 dentro de 44.'],
+ naH:'Sin aprobar',
+ na:['Todos los textos son provisionales, incluidos los de la interfaz en español y en inglés.','Tarjeta de Parrlo: la secretaria está «en preparación» (maqueta); qué abre al tocarla.','Filtros y su composición; pestaña «Llamadas».','Búsqueda en la traducción: si se guarda de forma que se pueda buscar.','Deslizar: «Ocultar» y «Eliminar» como en la app; el archivo no se dibuja.','Los nombres de los grupos (Colón 12, 3.º B) son de demo.'],
+ ct:['Nombre, vista previa no leída','Hora, vista previa sobre el fondo','Etiqueta de traducción (Mint sobre ~#26332F)','Etiqueta gris (texto sobre ~#2A2F37)','Acento: hora, «escribiendo»','Contador sobre el acento','Icono de grupo','Texto de búsqueda sobre #1C2026','Sin conexión: texto','Sin conexión: icono','«Eliminar»: blanco sobre rojo','Tarjeta de Parrlo']
+},
+en:{
+ htmlLang:'en',docTitle:'Parrlo Chat · Chats',title:'Chats',
+ aNew:'New chat',aClr:'Clear',aOpen:'Open',
+ search:'Search chats and messages',filters:['All','Unread','Groups'],
+ tabs:['Chats','Calls','Settings'],
+ pName:'Parrlo',pTag:'AI',pTxt:'Pedro’s waiting on you · help?',
+ me:'You',typing:'typing',voice:'Voice message · 0:14',muted:'Muted',
+ rows:[
+  {k:'P',nm:'Pedro',lg:[['ES',1]],tm:'10:04',n:2,on:1,pv:{t:'Plumber’s coming tomorrow at ten',tr:1}},
+  {k:'G',nm:'Neighbors · Colón 12',lg:[['ES',1],['RU',1]],tm:'10:02',n:4,mu:1,pv:{who:'Lucía',t:'Courtyard at 10, still on?',tr:1}},
+  {k:'L',nm:'Lucía',lg:[['ES',1]],tm:'9:58',n:1,on:1,pv:{kind:'typ'}},
+  {k:'O',nm:'Olga',lg:[['RU',1]],tm:'9:41',tk:1,pv:{kind:'me',t:'Thanks, see you tomorrow!'}},
+  {k:'G',nm:'Class 3B parents',lg:[['ES',1],['RU',1]],tm:'Yesterday',pv:{who:'Pedro',t:'Please sign the trip form',tr:1}},
+  {k:'G',nm:'Saturday soccer',lg:[['ES',1],['RU',1]],tm:'Mon',pv:{who:'Lucía',kind:'voice'}}
+ ],
+ q:'faucet',cancel:'Cancel',sf:['All','Chats','Messages'],shM:'Messages · 3',tagT:'translation',tagO:'original',
+ res:[
+  {k:'P',nm:'Pedro',tm:'10:04',pv:'<span class="chat-list-who">You: </span>Kitchen <mark>faucet</mark>’s leaking again',tag:0},
+  {k:'P',nm:'Pedro',tm:'10:04',pv:'Plumber will check the <mark>faucet</mark>',tag:1},
+  {k:'G',nm:'Neighbors · Colón 12',tm:'Yesterday',pv:'<span class="chat-list-who">Olga: </span>Shut the basement <mark>faucet</mark>',tag:1}
+ ],
+ resN:'We search the original and the translation: Pedro wrote the second message in Spanish (“grifo”).',
+ emH:'Start your first conversation',emP:'Write in English. They’ll read it in their language, and their reply comes back to you in English.',
+ emB1:'New chat',emB2:'Invite with a QR code or link',emS:'They don’t need to install anything: they can reply from their browser.',
+ offB:'You’re offline',offS:'Messages will wait and send on their own once you’re back online.',wait:'waiting',offMsg:'No more leak, thanks!',offL:'Got the papers, see you tomorrow!',
+ swA:['Mute','Hide','Delete'],swH:'Swipe left for more actions',
+ eb:'Reference · batch 2 · chat-list · C-01 · dark theme only',
+ h1:'The messenger where no one’s a foreigner.',
+ intro:'You write in English, your landlord reads it in Spanish. His reply reaches you already in English. Nobody has to adapt: everyone talks the way they always do.',
+ capB:'Chat list',capS:'Main frame. Every chat shows the other person’s language; previews are already in English. Draft copy.',
+ what:['<b>Language tags</b> next to the name: mint (ES, RU) means they write in another language and Parrlo translates; gray would mean your own language.','<b>Previews in your language</b>; the translation icon means it arrived in Spanish or Russian.','<b>Groups</b>: a square avatar and every language in the group.','<b>Unread isn’t just color</b>: a badge, a brighter preview, and a bold time.'],
+ stH:'States',stL:'Five frames of one screen. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-list--&lt;state&gt;--en.png</code>; the main frame is <code>chat-list--en.png</code>.',
+ st:{main:['Chats','Main frame: who wrote, in which language, and everything already in English.'],
+  search:['Search','Typing “faucet” finds messages in the original and in the translation, each tagged.'],
+  empty:['First launch','No chats yet: start one or invite someone with a QR code or link.'],
+  offline:['Offline','The list stays readable; unsent messages show “waiting” and go out on their own.'],
+  swipe:['Swipe','Swipe a row left: mute, hide, delete, as in the build.']},
+ moreH:'Decisions, tokens, open questions',decH:'Decisions beyond the current build',
+ dec:['<b>Two kinds of language tag</b>: mint means translated, gray means your language. Different color and different code, not color alone.','<b>Translation icon in the preview</b>, the same one used in the <code>chat-thread</code> bubble.','<b>Avatars</b>: people get a circle with an initial and a color from <code>chat-group</code>; groups get a rounded square with an icon.','<b>Parrlo card</b>: one useful line (“Pedro’s waiting for a reply”) and an “AI” tag (§15 of the copy).','<b>Search across original and translation</b>, tagged, with a note.','<b>Offline</b>: a banner using the site FAQ wording; the only yellow element.','<b>Swipe</b>: the build’s actions, labeled; Delete in dark red.'],
+ tokH:'Tokens and contrast',
+ tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code>/<code>#242B34</code>, lines <code>#2F3742</code>.','Translation: Mint <code>#BFF2DC</code> (tags, icon); accent <code>#2BC48A</code> + <code>#0E1116</code>; groups: <code>#1E3734</code>.','Offline: <code>#3C372B</code> + <code>#FFC247</code>. Delete: <code>#B8342B</code> + white.','Row 78, avatar 52, buttons and tabs ≥'+N+'44'+N+'pt, 36'+N+'pt filter chips inside a 44'+N+'pt target.'],
+ naH:'Not approved',
+ na:['All copy is draft, including the Spanish and English UI.','Parrlo card: the secretary is “coming soon” (mockup); what it opens.','Filter chips and their set; the Calls tab.','Search by translation: whether translations are stored in a searchable way.','Swipe: Hide and Delete as in the build; archive not drawn.','Group names (Colón 12, 3B) are demo.'],
+ ct:['Name, unread preview','Time, preview on background','Translation tag (Mint on ~#26332F)','Gray tag (text on ~#2A2F37)','Accent: time, “typing”','Badge on accent','Group icon','Search text on #1C2026','Offline: text','Offline: icon','Delete: white on red','Parrlo card']
+}
+};
+var l=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase();if(!D[l])l='ru';
+var T=D[l];
+
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function sv(d,x,c){return '<svg viewBox="0 0 24 24" '+(x||SW)+(c?' class="'+c+'"':'')+' aria-hidden="true">'+d+'</svg>'}
+var I={
  search:sv('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>'),
  compose:sv('<path d="M12 20.5H5.5a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2V12"/><path d="M17.5 15.5v6M14.5 18.5h6"/>'),
  chev:sv('<path d="M9 5l7 7-7 7"/>'),
  tr:sv('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
- pin:sv('<path d="M9 3.5h6l-.8 5.2 3.3 3.3v1.8h-11V12l3.3-3.3z"/><path d="M12 13.8v6.7"/>'),
  mute:sv('<path d="M6.5 16.5V11a5.5 5.5 0 0 1 8.6-4.5M17.5 10.5v6l1.5 1.5H8.5"/><path d="M10 21h4M3.5 3.5l17 17"/>'),
- ticks:sv('<path d="M2.5 12.5l4.2 4.2L15 8"/><path d="M11 16.2l.5.5L20 8"/>'),
- clock:sv('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'),
- mic:sv('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
- photo:sv('<rect x="3.5" y="5" width="17" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M20.5 15.5l-4.5-4.5L6.5 19"/>'),
- users:sv('<circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M15.5 5.3a3.5 3.5 0 0 1 0 6.4M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/>','stroke-width="2.4"'),
- link:sv('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'),
- plus:sv('<path d="M12 5v14M5 12h14"/>','stroke-width="2.2"'),
- wifioff:sv('<path d="M2.5 9a14 14 0 0 1 4.6-2.8M11 5.5a14 14 0 0 1 10.5 3.5M5.5 12.5a9 9 0 0 1 3.8-2.1M15 10.7a9 9 0 0 1 3.5 1.8M8.8 16a4.5 4.5 0 0 1 6.4 0M12 19.5h.01M3.5 3.5l17 17"/>'),
- archive:sv('<rect x="3" y="4" width="18" height="4.5" rx="1.5"/><path d="M4.5 8.5V18a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8.5M10 12.5h4"/>'),
+ ticks:sv('<path d="M2.5 12.5l4 4 8-9"/><path d="M11 15.5l1.5 1.5 9-10"/>'),
+ clock:sv('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>','','n'),
+ mic:sv('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>','','n'),
+ users:sv('<circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M15.5 5.3a3.5 3.5 0 0 1 0 6.4M18 14.2a6.5 6.5 0 0 1 3.5 5.8"/>'),
+ qr:sv('<rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.5"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.5"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1.5"/><path d="M14 14h2.5v2.5M20.5 14v.01M14 20.5h.01M17.5 20.5h3v-3"/>'),
+ plus:sv('<path d="M12 5v14M5 12h14"/>','fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"'),
+ wifioff:sv('<path d="M3 3l18 18"/><path d="M8.5 16.3a5 5 0 0 1 5.2-1"/><path d="M5.2 12.9a9.6 9.6 0 0 1 3.6-2.3M12.4 9.6a9.6 9.6 0 0 1 6.4 3.3"/><path d="M2 9.3a14.5 14.5 0 0 1 3.7-2.4M10 5.6A14.5 14.5 0 0 1 22 9.3"/><circle cx="12" cy="19.5" r=".6" fill="currentColor"/>'),
+ hide:sv('<path d="M3 3l18 18"/><path d="M10.6 5.6A10 10 0 0 1 12 5.5c5 0 8.5 4.5 9.5 6.5a14 14 0 0 1-2.7 3.5M6.6 6.6A14 14 0 0 0 2.5 12c1 2 4.5 6.5 9.5 6.5a9.6 9.6 0 0 0 4.4-1.1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>'),
+ trash:sv('<path d="M4 7h16M9.5 7V4.5h5V7M6 7l1 13h10l1-13M10 11v5M14 11v5"/>'),
  xc:sv('<circle cx="12" cy="12" r="8.5"/><path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6"/>'),
  swipe:sv('<path d="M19 12H6M10 8l-4 4 4 4"/>'),
- chats:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5c-5 0-9 3.4-9 7.7 0 2.4 1.3 4.5 3.3 5.9L5.5 21l4.2-2.3c.7.1 1.5.2 2.3.2 5 0 9-3.4 9-7.7S17 3.5 12 3.5z"/></svg>',
+ info:sv('<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/>'),
+ chats:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5c-5 0-9 3.4-9 7.7 0 2.4 1.3 4.5 3.3 5.9L5.5 21l4.2-2.3c.7.1 1.5.2 2.3.2 5 0 9-3.4 9-7.7S17 3.5 12 3.5z"/></svg>',
  phone:sv('<path d="M6.6 3.5h2.7l1.5 4-2 1.3a11 11 0 0 0 5.4 5.4l1.3-2 4 1.5v2.7a2 2 0 0 1-2.1 2A15.5 15.5 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1z"/>'),
- gear:sv('<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>'),
+ gear:sv('<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>')
 };
-const M='../../brandbook/assets/mascot/';
-const sbar=(off)=>`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"${off?' style="opacity:.28"':''}></i><i></i></span></div>`;
-const tabs=(n)=>`<div class="chat-list-tb"><div class="chat-list-tbi">
- <div class="chat-list-t on"><span class="chat-list-tic">${I.chats}${n?`<em>${n}</em>`:''}</span>Чаты</div>
- <div class="chat-list-t">${I.phone}Звонки</div>
- <div class="chat-list-t">${I.gear}Настройки</div></div><div class="homebar"><i></i></div></div>`;
-const hd=(extra='')=>`<div class="chat-list-hd"><h3>Чаты</h3>${extra}<span class="chat-list-sp"></span><span class="chat-list-ib" aria-label="Новый чат">${I.compose}</span></div>`;
-const srch=`<div class="chat-list-sr">${I.search}Поиск по чатам и сообщениям</div>`;
-const filt=(u)=>`<div class="chat-list-fl"><span class="chat-list-ch on">Все</span><span class="chat-list-ch">Непрочитанные<em>${u}</em></span><span class="chat-list-ch">Группы</span></div>`;
-const parrlo=(t)=>`<div class="chat-list-pc"><img src="${M}mascot-happy-dark.svg" alt=""><div class="chat-list-pct"><b>Парло<small>ПОМОЩНИК</small></b><span>${t}</span></div>${I.chev}</div>`;
-
-/* строка чата */
-function row(o){
- const av=`<div class="chat-list-av${o.w?' w':''}" style="background:${o.c}">${o.l}${o.g?`<span class="chat-list-grp">${I.users}</span>`:''}${o.on?'<span class="chat-list-on"></span>':''}</div>`;
- const right=o.n?`<span class="chat-list-bg${o.mu?' m':''}">${o.n}</span>`:(o.pin?`<span class="chat-list-pin" aria-label="Закреплён">${I.pin}</span>`:'');
- return `<div class="chat-list-r${o.last?' last':''}">${av}<div class="chat-list-bd">
-  <div class="chat-list-l1"><span class="chat-list-nm">${o.nm}</span>${o.mu?`<span class="chat-list-mu" aria-label="Без звука">${I.mute}</span>`:''}<span class="chat-list-tm${o.n&&!o.mu?' u':''}">${o.tk?I.ticks:''}${o.tm}</span></div>
-  <div class="chat-list-l2"><span class="chat-list-pv${o.cls?' '+o.cls:''}">${o.pv}</span>${right}</div></div></div>`;
+var COL={L:'#6AA6F5',P:'#C3A6F7',O:'#E8A0BF'};
+var M='../../brandbook/assets/mascot/';
+function sbar(off){return '<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"'+(off?' style="opacity:.28"':'')+'></i><i></i></span></div>'}
+function tabs(n){return '<div class="chat-list-tb"><div class="chat-list-tbi">'+
+ '<div class="chat-list-t on" role="tab" aria-selected="true"><span class="chat-list-tic">'+I.chats+(n?'<em>'+n+'</em>':'')+'</span>'+T.tabs[0]+'</div>'+
+ '<div class="chat-list-t" role="tab">'+I.phone+T.tabs[1]+'</div><div class="chat-list-t" role="tab">'+I.gear+T.tabs[2]+'</div></div><div class="homebar"><i></i></div></div>'}
+function hd(){return '<div class="chat-list-hd"><h3>'+T.title+'</h3><span class="chat-list-ib" role="button" aria-label="'+T.aNew+'" data-tap>'+I.compose+'</span></div>'}
+var srch='<div class="chat-list-sr">'+I.search+T.search+'</div>';
+function filt(u){return '<div class="chat-list-fl"><span class="chat-list-ch on" role="button" data-tap><span>'+T.filters[0]+'</span></span><span class="chat-list-ch" role="button" data-tap><span>'+T.filters[1]+'<em>'+u+'</em></span></span><span class="chat-list-ch" role="button" data-tap><span>'+T.filters[2]+'</span></span></div>'}
+var parrlo='<div class="chat-list-pc"><img src="'+M+'mascot-happy-dark.svg" alt=""><div class="chat-list-pct"><b>'+T.pName+'<small>'+T.pTag+'</small></b><span>'+T.pTxt+'</span></div><span class="go" role="button" aria-label="'+T.aOpen+'" data-tap>'+I.chev+'</span></div>';
+function av(k,on){return k==='G'?'<div class="chat-list-av g">'+I.users+'</div>':'<div class="chat-list-av" style="background:'+COL[k]+'">'+k+(on?'<span class="on"></span>':'')+'</div>'}
+function lg(a){return '<span class="chat-list-lg">'+a.map(function(x){return '<i class="'+(x[1]?'':'s')+'">'+x[0]+'</i>'}).join('')+'</span>'}
+function pvHtml(p){
+ var who=p.who?'<span class="chat-list-who">'+p.who+': </span>':'';
+ if(p.kind==='typ')return '<span>'+T.typing+'</span><span class="chat-list-dots"><i></i><i></i><i></i></span>';
+ if(p.kind==='me')return (p.wait?I.clock:'')+'<span><span class="chat-list-who">'+T.me+': </span>'+p.t+'</span>';
+ if(p.kind==='voice')return I.mic+'<span>'+who+T.voice+'</span>';
+ return (p.tr?I.tr:'')+'<span>'+who+p.t+'</span>';
 }
-const pv={
- tr:(t,who)=>`${I.tr}<span>${who?`<span class="chat-list-who">${who}: </span>`:''}${t}</span>`,
- me:(t)=>`<span><span class="chat-list-who">Ты: </span>${t}</span>`,
- typ:`<span>печатает</span><span class="chat-list-dots"><i></i><i></i><i></i></span>`,
-};
-const R={
- pedro:{l:'P',c:'#6AA6F5',nm:'Pedro',tm:'10:05',n:2,cls:'u',pv:pv.tr('Завтра в 10 у входа?'),on:1},
- piso:{l:'P',c:'#00875C',w:1,g:1,nm:'Piso · квартира',tm:'10:02',n:4,mu:1,pv:pv.tr('Нужно молоко','Olga')},
- lucia:{l:'L',c:'#BFF2DC',nm:'Lucía',tm:'9:58',n:1,cls:'typ',pv:pv.typ,on:1},
- olga:{l:'O',c:'#2BC48A',nm:'Olga',tm:'9:41',tk:1,pv:pv.me('Ты уже на месте?')},
- carmen:{l:'C',c:'#F2F5F7',nm:'Carmen',tm:'Вчера',pv:`${I.mic}<span>Голосовое · 0:14</span>`},
- diego:{l:'D',c:'#6AA6F5',nm:'Diego',tm:'Вчера',pv:`${I.photo}<span>Фото · Встретимся на рынке</span>`},
- marta:{l:'M',c:'#BFF2DC',nm:'Marta',tm:'Пн',pv:pv.tr('Адрес пришлю вечером'),last:1},
-};
-const list=(rows)=>`<div class="chat-list-ls">${rows.map(row).join('')}<div class="chat-list-gap"></div></div>`;
+function row(o,last){
+ var u=o.n&&!o.mu;
+ var right=o.n?'<span class="chat-list-bg'+(o.mu?' m':'')+'">'+o.n+'</span>':'';
+ var cls=o.pv.kind==='typ'?'typ':(u?'u':'');
+ return '<div class="chat-list-r'+(last?' last':'')+'">'+av(o.k,o.on)+'<div class="chat-list-bd">'+
+  '<div class="chat-list-l1"><span class="chat-list-nm">'+o.nm+'</span>'+lg(o.lg)+(o.mu?'<span class="chat-list-mu" role="img" aria-label="'+T.muted+'">'+I.mute+'</span>':'')+'<span class="chat-list-tm'+(u?' u':'')+'">'+(o.tk?I.ticks:'')+o.tm+'</span></div>'+
+  '<div class="chat-list-l2"><span class="chat-list-pv '+cls+'">'+pvHtml(o.pv)+'</span>'+right+'</div></div></div>'}
+function list(rows){return '<div class="chat-list-ls">'+rows.map(function(r,i){return row(r,i===rows.length-1)}).join('')+'<div class="chat-list-gap"></div></div>'}
+var R=T.rows;
+function clone(o,ch){var x=JSON.parse(JSON.stringify(o));for(var k in ch)x[k]=ch[k];return x}
 
-const S={};
-S.main=()=>`<div class="scr chat-list-scr">${sbar()}${hd()}${srch}${filt(2)}
- ${parrlo('Pedro ждёт ответа · помочь?')}
- ${list([{...R.pedro,pin:1},R.piso,R.lucia,R.olga,R.carmen,R.diego,R.marta])}${tabs(2)}</div>`;
+var S={};
+S.main=function(){return '<div class="scr chat-list-scr">'+sbar()+hd()+srch+filt(3)+parrlo+list(R)+tabs(3)+'</div>'};
+S.search=function(){
+ var res=T.res.map(function(o,i){return '<div class="chat-list-r'+(i===T.res.length-1?' last':'')+'">'+av(o.k)+'<div class="chat-list-bd"><div class="chat-list-l1"><span class="chat-list-nm">'+o.nm+'</span><span class="chat-list-tm">'+o.tm+'</span></div><div class="chat-list-l2"><span class="chat-list-pv">'+(o.tag?I.tr:'')+'<span>'+o.pv+'</span></span><span class="chat-list-tag'+(o.tag?' t':'')+'">'+(o.tag?T.tagT:T.tagO)+'</span></div></div></div>'}).join('');
+ return '<div class="scr chat-list-scr">'+sbar()+
+ '<div class="chat-list-srw"><div class="chat-list-sr">'+I.search+'<span>'+T.q+'<i class="chat-list-car"></i></span><span class="chat-list-clr" role="button" aria-label="'+T.aClr+'" data-tap>'+I.xc+'</span></div><span class="chat-list-cancel" role="button" data-tap>'+T.cancel+'</span></div>'+
+ '<div class="chat-list-fl"><span class="chat-list-ch on" role="button" data-tap><span>'+T.sf[0]+'</span></span><span class="chat-list-ch" role="button" data-tap><span>'+T.sf[1]+'</span></span><span class="chat-list-ch" role="button" data-tap><span>'+T.sf[2]+'</span></span></div>'+
+ '<div class="chat-list-ls chat-list-res"><div class="chat-list-sh">'+T.shM+'</div>'+res+'<div class="chat-list-nt">'+I.info+'<span>'+T.resN+'</span></div><div class="chat-list-gap"></div></div>'+tabs(3)+'</div>'};
+S.empty=function(){return '<div class="scr chat-list-scr">'+sbar()+hd()+
+ '<div class="chat-list-em"><img src="'+M+'mascot-happy-dark.svg" alt=""><h4>'+T.emH+'</h4><p>'+T.emP+'</p>'+
+ '<span class="chat-list-btn p" role="button" data-tap>'+I.plus+T.emB1+'</span><span class="chat-list-btn s" role="button" data-tap>'+I.qr+T.emB2+'</span><small>'+T.emS+'</small></div><div class="chat-list-gap"></div>'+tabs(0)+'</div>'};
+S.offline=function(){
+ var mine=clone(R[0],{n:0,on:0,tk:0,tm:'<span class="chat-list-pend">'+T.wait+'</span>',pv:{kind:'me',wait:1,t:T.offMsg}});
+ var rows=[mine,R[1],clone(R[2],{on:0,pv:{t:T.offL,tr:R[2].lg[0][1]}}),R[3],R[4],R[5]];
+ return '<div class="scr chat-list-scr">'+sbar(1)+hd()+
+ '<div class="chat-list-off" role="status">'+I.wifioff+'<div><b>'+T.offB+'</b><span>'+T.offS+'</span></div></div>'+srch+filt(3)+list(rows)+tabs(3)+'</div>'};
+S.swipe=function(){
+ var a=T.swA;
+ return '<div class="scr chat-list-scr">'+sbar()+hd()+srch+filt(3)+parrlo+
+ '<div class="chat-list-ls">'+row(R[0])+row(R[1])+
+ '<div class="chat-list-swp"><div class="chat-list-acts"><span class="chat-list-act a1" role="button" data-tap>'+I.mute+a[0]+'</span><span class="chat-list-act a2" role="button" data-tap>'+I.hide+a[1]+'</span><span class="chat-list-act a3" role="button" data-tap>'+I.trash+a[2]+'</span></div>'+row(R[2])+'</div>'+
+ row(R[3])+row(R[4])+row(R[5],1)+'<div class="chat-list-gap"></div></div>'+
+ '<div class="chat-list-hint"><span>'+I.swipe+T.swH+'</span></div>'+tabs(3)+'</div>'};
 
-S.empty=()=>`<div class="scr chat-list-scr">${sbar()}${hd()}
- <div class="chat-list-em"><img src="${M}mascot-happy-dark.svg" alt="">
-  <h4>Начни первый разговор</h4>
-  <p>Пиши по‑русски — собеседник прочитает на своём языке, а его ответы ты увидишь по‑русски.</p>
-  <span class="chat-list-btn p">${I.plus}Новый чат</span>
-  <span class="chat-list-btn s">${I.link}Пригласить по ссылке</span>
-  <small>Ссылку можно отправить в любом мессенджере или по почте.</small>
- </div><div class="chat-list-gap"></div>${tabs(0)}</div>`;
+/* ===== страница ===== */
+document.documentElement.lang=T.htmlLang;document.title=T.docTitle;
+function $(id){return document.getElementById('chat-list-'+id)}
+$('lng').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" hreflang="'+k+'" class="'+(k===l?'on':'')+'"'+(k===l?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+$('eb').textContent=T.eb;$('h1').textContent=T.h1;$('intro').textContent=T.intro;
+$('capb').textContent=T.capB;$('caps').textContent=T.capS;
+$('what').innerHTML=T.what.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('sth').textContent=T.stH;$('stl').innerHTML=T.stL;
+var order=['main','search','empty','offline','swipe'];
+$('grid').innerHTML=order.map(function(k){return '<div class="chat-list-card"><div class="pf p67 flat" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+T.st[k][0]+' <code>'+k+'</code></h3><p>'+T.st[k][1]+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=S[p.dataset.state]()});
+$('moreh').textContent=T.moreH;$('dech').textContent=T.decH;$('tokh').textContent=T.tokH;$('nah').textContent=T.naH;
+$('dec').innerHTML=T.dec.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('tok').innerHTML=T.tok.map(function(x){return '<li>'+x+'</li>'}).join('');
+$('na').innerHTML=T.na.map(function(x){return '<li>'+x+'</li>'}).join('');
 
-const skr=(a,b)=>`<div class="chat-list-skr"><span class="chat-list-sk c"></span><span class="chat-list-skb"><i class="chat-list-sk" style="width:${a}%"></i><i class="chat-list-sk" style="width:${b}%"></i></span></div>`;
-S.loading=()=>`<div class="scr chat-list-scr">${sbar()}${hd('<span class="chat-list-hst"><i class="chat-list-spin"></i>Загружаем</span>')}${srch}
- <div class="chat-list-fl"><span class="chat-list-sk" style="width:64px;height:36px;border-radius:18px"></span><span class="chat-list-sk" style="width:150px;height:36px;border-radius:18px"></span><span class="chat-list-sk" style="width:88px;height:36px;border-radius:18px"></span></div>
- <div class="chat-list-sk" style="flex:none;margin:4px 16px 8px;height:68px;border-radius:20px"></div>
- <div class="chat-list-ls">${skr(38,78)}${skr(52,64)}${skr(30,82)}${skr(44,58)}${skr(34,72)}${skr(48,66)}${skr(40,60)}</div>${tabs(0)}</div>`;
-
-const res=(o)=>`<div class="chat-list-r${o.last?' last':''}"><div class="chat-list-av${o.w?' w':''}" style="background:${o.c}">${o.l}${o.g?`<span class="chat-list-grp">${I.users}</span>`:''}</div><div class="chat-list-bd">
- <div class="chat-list-l1"><span class="chat-list-nm">${o.nm}</span><span class="chat-list-tm">${o.tm}</span></div>
- <div class="chat-list-l2"><span class="chat-list-pv">${o.pv}</span>${o.tag?`<span class="chat-list-tag">${o.tag}</span>`:''}</div></div></div>`;
-S.search=()=>`<div class="scr chat-list-scr">${sbar()}
- <div class="chat-list-srw"><div class="chat-list-sr">${I.search}<span>док<i class="chat-list-car"></i></span><span class="chat-list-clr" aria-label="Очистить">${I.xc}</span></div><span class="chat-list-cancel">Отмена</span></div>
- <div class="chat-list-fl"><span class="chat-list-ch on">Всё</span><span class="chat-list-ch">Чаты</span><span class="chat-list-ch">Сообщения</span></div>
- <div class="chat-list-ls chat-list-res">
-  <div class="chat-list-sh">Чаты</div>
-  ${res({l:'Д',c:'#00875C',w:1,g:1,nm:'<mark>Док</mark>ументы на визу',tm:'',pv:'<span>Lucía, Pedro и ты</span>',last:1})}
-  <div class="chat-list-sh">Сообщения · 4</div>
-  ${res({l:'L',c:'#BFF2DC',nm:'Lucía',tm:'9:58',pv:`${I.tr}<span><mark>Док</mark>ументы у меня!</span>`,tag:'перевод'})}
-  ${res({l:'P',c:'#6AA6F5',nm:'Pedro',tm:'Вчера',pv:`<span><span class="chat-list-who">Ты: </span>Возьму все <mark>док</mark>ументы</span>`,tag:'оригинал'})}
-  ${res({l:'C',c:'#F2F5F7',nm:'Carmen',tm:'Пн',pv:`${I.tr}<span>…копию <mark>док</mark>умента</span>`,tag:'перевод'})}
-  ${res({l:'M',c:'#BFF2DC',nm:'Marta',tm:'12 нояб.',pv:`${I.tr}<span><mark>Док</mark>тор принимает с 9 утра</span>`,tag:'перевод',last:1})}
-  <div class="chat-list-gap"></div>
- </div>${tabs(2)}</div>`;
-
-S.swipe=()=>`<div class="scr chat-list-scr">${sbar()}${hd()}${srch}${filt(2)}
- ${parrlo('Pedro ждёт ответа · помочь?')}
- <div class="chat-list-ls">${row({...R.pedro,pin:1})}${row(R.piso)}
-  <div class="chat-list-swp"><div class="chat-list-acts">
-   <span class="chat-list-act a1">${I.pin}Закрепить</span><span class="chat-list-act a2">${I.mute}Без звука</span><span class="chat-list-act a3">${I.archive}Архив</span>
-  </div>${row(R.lucia)}</div>
-  ${row(R.olga)}${row(R.carmen)}${row(R.diego)}${row(R.marta)}<div class="chat-list-gap"></div></div>
- <div class="chat-list-hint"><span>${I.swipe}Смахни влево — ещё действия</span></div>${tabs(2)}</div>`;
-
-S.offline=()=>`<div class="scr chat-list-scr">${sbar(1)}${hd()}
- <div class="chat-list-off" role="status">${I.wifioff}<span><b style="color:#F2F5F7">Нет сети.</b> Обновится, когда появится сеть</span></div>
- ${srch}${filt(2)}
- <div class="chat-list-ls">${row({...R.olga,tk:0,tm:`<span class="chat-list-pend">ждёт сети</span>`,pv:`${I.clock}<span><span class="chat-list-who">Ты: </span>Уже выхожу</span>`})}
-  ${row({...R.pedro,pin:1,on:0})}${row(R.piso)}${row({...R.lucia,on:0,cls:'u',pv:pv.tr('Документы у меня, до завтра!')})}${row(R.carmen)}${row(R.diego)}${row(R.marta)}<div class="chat-list-gap"></div></div>${tabs(2)}</div>`;
-
-window.CHAT_LIST_S=S;
-document.querySelectorAll('[data-state]').forEach(el=>{
- const st=el.dataset.state;const s=el.dataset.s||'.6';
- el.outerHTML=`<div class="pf${el.dataset.hero?'':' flat'}" style="--s:${s}" data-state="${st}"${el.dataset.hero?' data-hero="1"':''}><div class="shell"></div><div class="glass">${S[st]()}</div></div>`;
-});
-
-/* контраст */
-function L(h){const c=[0,2,4].map(i=>parseInt(h.slice(1+i,3+i),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2]}
-function Rt(a,b){const x=L(a),y=L(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
-const rows=[
- ['Текст на фоне','#F2F5F7','#0E1116',4.5],['Вторичный на фоне','#9AA4B2','#0E1116',4.5],['Вторичный на #1C2026 (поиск)','#9AA4B2','#1C2026',4.5],
- ['Вторичный на #242B34','#9AA4B2','#242B34',4.5],['Акцент на фоне (время, «печатает»)','#2BC48A','#0E1116',4.5],['Счётчик на акценте','#0E1116','#2BC48A',4.5],
- ['Белый на #00875C (действие, аватар)','#FFFFFF','#00875C',4.5],['Текст на #2F3742 (действие)','#F2F5F7','#2F3742',4.5],['Текст на #3A414B (архив)','#F2F5F7','#3A414B',4.5],
- ['Совпадение на #1E3734','#F2F5F7','#1E3734',4.5],['Плашка: #D9D3C4 на #3C372B','#D9D3C4','#3C372B',4.5],['Значок #FFC247 на #3C372B','#FFC247','#3C372B',3],
- ['Карточка: #C9D1DA на #1E3734','#C9D1DA','#1E3734',4.5],['Mint на ~#253B38 (метка)','#BFF2DC','#253B38',4.5],['Буква на #6AA6F5','#0E1116','#6AA6F5',4.5],
- ['Активный чип: фон на тексте','#0E1116','#F2F5F7',4.5],['Кнопка «Новый чат»','#0E1116','#2BC48A',3]];
-document.getElementById('chat-list-ctr').innerHTML=rows.map(r=>{const v=Rt(r[1],r[2]);return `<tr><td><span class="chat-list-sw" style="background:${r[2]};color:${r[1]}">Aa</span>${r[0]}</td><td>${v.toFixed(1).replace('.',',')}:1 ${v>=r[3]?'✓':'✗'}</td></tr>`}).join('');
-document.body.dataset.ready='1';
+function Lu(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+/* плашки: фон — подложка с прозрачностью на #0E1116, посчитан вручную: mint .14 → #26332F, серая .18 → #2A2F37 */
+var pairs=[['#F2F5F7','#0E1116'],['#9AA4B2','#0E1116'],['#BFF2DC','#26332F'],['#F2F5F7','#2A2F37'],['#2BC48A','#0E1116'],['#0E1116','#2BC48A'],['#BFF2DC','#1E3734'],['#9AA4B2','#1C2026'],['#D9D3C4','#3C372B'],['#FFC247','#3C372B'],['#FFFFFF','#B8342B'],['#C9D1DA','#1E3734']];
+$('ct').innerHTML=pairs.map(function(r,i){return '<tr><td><span class="chat-list-sw" style="background:'+r[0]+'"></span><span class="chat-list-sw" style="background:'+r[1]+'"></span>'+T.ct[i]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_LIST={lang:l,S:S,order:order,min:Math.min.apply(null,pairs.map(function(r){return cr(r[0],r[1])})),
+ hero:function(k){var h=$('hero');h.dataset.state=k;h.querySelector('.glass').innerHTML=S[k]()}};
 })();
 </script>
 </body>
