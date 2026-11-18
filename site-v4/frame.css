@@ -31,7 +31,7 @@
 .scr svg{display:block}
 .sbar{flex:none;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 34px 0;font:600 17px Inter,sans-serif}
 .sbar .sig{display:flex;gap:6px;align-items:center}.sbar .sig i{display:block;width:18px;height:11px;border-radius:3px;border:1.6px solid currentColor;opacity:.85}
-.sbar .sig i.w{width:16px;height:11px;border:0;background:linear-gradient(currentColor,currentColor) 0 100%/3px 4px no-repeat,linear-gradient(currentColor,currentColor) 5px 100%/3px 7px no-repeat,linear-gradient(currentColor,currentColor) 10px 100%/3px 11px no-repeat}
+.sbar .sig i.wf{width:16px;height:11px;border:0;background:linear-gradient(currentColor,currentColor) 0 100%/3px 4px no-repeat,linear-gradient(currentColor,currentColor) 5px 100%/3px 7px no-repeat,linear-gradient(currentColor,currentColor) 10px 100%/3px 11px no-repeat}
 .ic{width:24px;height:24px}
 /* Translate */
 .tr .top{display:flex;align-items:center;gap:10px;padding:8px 14px}
@@ -69,7 +69,7 @@
 .m .tm{display:block;text-align:right;font-size:12px;opacity:.6;margin-top:2px}
 .inp{flex:none;display:flex;gap:8px;align-items:center;padding:8px 12px 10px;border-top:1px solid var(--line)}
 .inp .f{flex:1;min-height:40px;border-radius:20px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:0 14px;font-size:17px}
-.inp .f .ph{color:var(--sec)}
+.inp .f .pl{color:var(--sec)}
 .inp .f .car{width:2px;height:22px;background:var(--acc);margin-left:1px}
 .inp .sd{width:38px;height:38px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center}
 /* клавиатура Parrlo v2 */
