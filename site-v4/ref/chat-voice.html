@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · голосовое</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.chat-voice-w{max-width:1200px;margin:0 auto}
+.chat-voice-lsw{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-voice-lsw a{min-width:48px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#9AA4B2;text-decoration:none;padding:0 12px}
+.chat-voice-lsw a[aria-current="true"]{background:#1C2026;color:#F2F5F7;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-voice-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-voice-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-voice-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-voice-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-voice-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-voice-info ul,.chat-voice-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-voice-info li,.chat-voice-sec li{margin:6px 0}
+.chat-voice-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.chat-voice-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-voice-lead{color:#9AA4B2;margin:0 0 32px;max-width:720px}
+.chat-voice-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:40px 24px;justify-items:center}
+.chat-voice-card{width:280px}
+.chat-voice-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.chat-voice-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-voice-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+.chat-voice-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px 40px}
+.chat-voice-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-voice-sec b{color:#F2F5F7;font-weight:600}
+.chat-voice-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-voice-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-voice-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-voice-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-voice-hero .pf{--s:.78!important}.chat-voice-info h1{font-size:32px}.chat-voice-cols{grid-template-columns:1fr}}
+
+/* ======= экран 430×932 ======= */
+.chat-voice-scr{overflow:hidden;--rec:#FF6B5E}
+.chat-voice-scr svg{display:block}
+.chat-voice-nav{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 4px;border-bottom:1px solid var(--line)}
+.chat-voice-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-voice-ib svg{width:24px;height:24px}
+.chat-voice-ib.bk{color:var(--acc)}.chat-voice-ib.bk svg{width:28px;height:28px}
+.chat-voice-av{position:relative;width:40px;height:40px;border-radius:50%;color:#0E1116;font:800 17px/40px Nunito,Inter;text-align:center;flex:none}
+.chat-voice-av i{position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 2.5px var(--bg)}
+.chat-voice-nm{flex:1;min-width:0;padding-left:4px}
+.chat-voice-nm b{display:block;font:600 17px/22px Inter}
+.chat-voice-nm span{display:flex;align-items:center;gap:5px;font-size:13px;line-height:18px;color:var(--sec);white-space:nowrap}
+.chat-voice-nm span i{width:6px;height:6px;border-radius:50%;background:var(--acc)}
+.chat-voice-lc{flex:none;height:44px;display:flex;align-items:center}
+.chat-voice-lc span{height:32px;border-radius:16px;background:var(--sf2);display:flex;align-items:center;gap:6px;padding:0 12px;font:700 13px/1 Inter;letter-spacing:.04em;color:var(--tx)}
+.chat-voice-lc svg{width:14px;height:14px;color:var(--sec)}
+
+.chat-voice-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px}
+.chat-voice-day{align-self:center;font:500 12px/16px Inter;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px;margin-bottom:4px}
+.chat-voice-m{position:relative;max-width:80%;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px}
+.chat-voice-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px}
+.chat-voice-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.chat-voice-t{display:flex;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid rgba(154,164,178,.28);font-size:15px;line-height:20px}
+.chat-voice-t svg{flex:none;width:16px;height:16px;margin-top:2px}
+.chat-voice-m.in .chat-voice-t{color:var(--mint)}
+.chat-voice-m.out .chat-voice-t{color:#fff;border-top-color:rgba(255,255,255,.3)}
+.chat-voice-tm{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;line-height:16px;margin-top:2px;font-variant-numeric:tabular-nums}
+.chat-voice-m.in .chat-voice-tm{color:var(--sec)}
+.chat-voice-tm svg{width:16px;height:16px}
+.chat-voice-rd{align-self:flex-end;display:flex;align-items:center;gap:4px;font:500 12px/16px Inter;color:var(--sec);margin:-2px 4px 0 0}
+.chat-voice-rd svg{width:16px;height:16px;color:var(--acc)}
+
+/* голосовое в ленте */
+.chat-voice-m.vc{width:84%;max-width:84%;padding:10px 12px 8px}
+.chat-voice-vr{display:flex;align-items:center;gap:10px}
+.chat-voice-pl{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-voice-pl svg{width:20px;height:20px}
+.chat-voice-pl.p svg{margin-left:2px}
+.chat-voice-m.out .chat-voice-pl{background:#fff;color:var(--deep)}
+.chat-voice-wv{flex:1;min-width:0;display:flex;align-items:center;gap:2px;height:32px}
+.chat-voice-wv i{flex:1;min-width:2px;border-radius:2px;background:#5E6876}
+.chat-voice-wv i.p{background:var(--acc)}
+.chat-voice-m.out .chat-voice-wv i{background:rgba(255,255,255,.45)}
+.chat-voice-m.out .chat-voice-wv i.p{background:#fff}
+.chat-voice-vd{display:flex;justify-content:space-between;align-items:center;font-size:12px;line-height:16px;color:var(--sec);margin:2px 0 0 54px;font-variant-numeric:tabular-nums}
+.chat-voice-m.out .chat-voice-vd{color:#fff}
+.chat-voice-vd b{font-weight:700;color:var(--tx);background:rgba(154,164,178,.18);border-radius:6px;padding:1px 6px}
+.chat-voice-tr{margin-top:10px;font-size:17px;line-height:24px;color:var(--tx)}
+.chat-voice-m.out .chat-voice-tr{color:#fff}
+.chat-voice-lb{display:flex;align-items:center;gap:6px;font:600 11px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin-bottom:2px}
+.chat-voice-lb svg{width:14px;height:14px}
+.chat-voice-m.in .chat-voice-lb.mi{color:var(--mint)}
+.chat-voice-m.out .chat-voice-lb{color:rgba(255,255,255,.86)}
+.chat-voice-og{display:flex;align-items:center;gap:6px;height:44px;margin:0 0 -8px;font:600 14px/1 Inter;color:var(--mint);width:max-content}
+.chat-voice-og svg{width:18px;height:18px}
+.chat-voice-ogb{margin-top:8px;border-radius:12px;background:rgba(14,17,22,.34);box-shadow:inset 3px 0 0 var(--mint);padding:0 12px 10px 15px}
+.chat-voice-ogb .h{display:flex;align-items:center;justify-content:space-between;height:44px;margin-bottom:-6px}
+.chat-voice-ogb .h .k{display:flex;align-items:center;gap:8px;font:600 13px/18px Inter;color:var(--mint)}
+.chat-voice-ogb .h .k em{font-style:normal;font:700 11px/16px Inter;letter-spacing:.06em;color:var(--mint);border-radius:5px;padding:0 5px;box-shadow:inset 0 0 0 1px rgba(191,242,220,.45)}
+.chat-voice-ogb .h .x{width:44px;height:44px;margin-right:-12px;display:flex;align-items:center;justify-content:center;color:var(--sec)}
+.chat-voice-ogb .h .x svg{width:20px;height:20px}
+.chat-voice-ogb p{margin:0;font-size:15px;line-height:21px;color:#AEB7C3}
+.chat-voice-ogb p span{color:var(--tx)}
+.chat-voice-ogb p mark{background:rgba(43,196,138,.22);color:var(--tx);border-radius:4px;padding:0 2px}
+.chat-voice-ft{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:2px}
+.chat-voice-lis{height:44px;display:flex;align-items:center}
+.chat-voice-lis span{display:flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 10px;border-radius:16px;background:rgba(191,242,220,.12);color:var(--mint);font:600 13px/1 Inter;white-space:nowrap}
+.chat-voice-lis svg{width:16px;height:16px}
+.chat-voice-ft .chat-voice-tm{margin:0}
+
+/* поле ввода */
+.chat-voice-cmp{flex:none;position:relative;border-top:1px solid var(--line);padding:8px 12px 0;background:var(--bg)}
+.chat-voice-row{display:flex;align-items:flex-end;gap:8px}
+.chat-voice-pls{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-voice-pls svg{width:26px;height:26px}
+.chat-voice-f{flex:1;min-width:0;min-height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:10px 16px;font-size:17px;line-height:22px;color:var(--sec)}
+.chat-voice-go{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-voice-go svg{width:22px;height:22px}
+
+/* запись */
+.chat-voice-live{margin:0 0 10px;border-radius:16px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:10px 14px 12px;margin-right:92px}
+.chat-voice-live .h{display:flex;align-items:center;gap:6px;font:600 12px/16px Inter;color:var(--sec)}
+.chat-voice-live .h svg{width:14px;height:14px;color:var(--acc)}
+.chat-voice-live p{margin:4px 0 0;font-size:17px;line-height:24px;color:var(--tx)}
+.chat-voice-live p em{font-style:normal;color:var(--sec)}
+.chat-voice-live .dots{display:inline-flex;gap:3px;vertical-align:middle;margin-left:4px}
+.chat-voice-live .dots i{width:5px;height:5px;border-radius:50%;background:var(--sec)}
+.chat-voice-live .dots i:nth-child(2){opacity:.7}.chat-voice-live .dots i:nth-child(3){opacity:.45}
+.chat-voice-rb{display:flex;align-items:center;height:44px;padding-right:96px}
+.chat-voice-rb .tmr{display:flex;align-items:center;gap:8px;padding-left:10px;font:600 17px/22px Inter;font-variant-numeric:tabular-nums;color:var(--tx);flex:none;width:86px}
+.chat-voice-rb .tmr i{width:10px;height:10px;border-radius:50%;background:var(--rec);box-shadow:0 0 0 4px rgba(255,107,94,.18)}
+.chat-voice-rb .cn{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:15px;line-height:20px;color:var(--sec);white-space:nowrap}
+.chat-voice-rb .cn svg{width:18px;height:18px;flex:none}
+.chat-voice-big{position:absolute;right:4px;bottom:-24px;width:96px;height:96px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(43,196,138,.16),0 0 0 22px rgba(43,196,138,.07)}
+.chat-voice-big svg{width:34px;height:34px}
+.chat-voice-lk{position:absolute;right:30px;bottom:100px;width:44px;height:104px;border-radius:22px;background:var(--sf2);box-shadow:inset 0 0 0 1px var(--line),0 8px 24px rgba(0,0,0,.35);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px 0 10px;color:var(--tx)}
+.chat-voice-lk svg{width:22px;height:22px}
+.chat-voice-lk svg.up{width:18px;height:18px;color:var(--sec)}
+.chat-voice-tip{position:absolute;right:86px;bottom:calc(100% + 6px);height:32px;border-radius:16px;background:var(--sf2);display:flex;align-items:center;padding:0 12px;font:500 13px/1 Inter;color:#C9D1DA;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+
+/* предпросмотр */
+.chat-voice-pv{border-radius:20px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:4px 14px 12px;margin-bottom:10px}
+.chat-voice-pv .s{padding-top:10px}
+.chat-voice-pv .s+.s{margin-top:10px;border-top:1px solid var(--line)}
+.chat-voice-pv .hd{display:flex;align-items:center;justify-content:space-between;height:32px}
+.chat-voice-pv .hd .lb{margin:0}
+.chat-voice-pv .ed{height:44px;margin:-6px -8px -6px 0;display:flex;align-items:center;gap:6px;padding:0 8px;font:600 14px/1 Inter;color:var(--acc)}
+.chat-voice-pv .ed svg{width:16px;height:16px}
+.chat-voice-pv p{margin:4px 0 0;font-size:17px;line-height:24px;color:var(--tx)}
+.chat-voice-pv p.th{color:var(--mint)}
+.chat-voice-pv .lb.mi{color:var(--mint)}
+.chat-voice-pr{display:flex;align-items:center;gap:8px}
+.chat-voice-del{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--rec);flex:none}
+.chat-voice-del svg{width:24px;height:24px}
+.chat-voice-pp{flex:1;min-width:0;height:48px;border-radius:24px;background:var(--sf2);display:flex;align-items:center;gap:8px;padding:0 14px 0 2px}
+.chat-voice-pp .pl2{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-voice-pp .pl2 svg{width:18px;height:18px;margin-left:2px}
+.chat-voice-pp .chat-voice-wv{height:26px}
+.chat-voice-pp .d{font:600 14px/1 Inter;font-variant-numeric:tabular-nums;color:var(--tx);flex:none}
+.chat-voice-snd{width:48px;height:48px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-voice-snd svg{width:22px;height:22px}
+.chat-voice-nt{margin:8px 0 2px;text-align:center;font-size:13px;line-height:18px;color:var(--sec)}
+
+/* нет доступа */
+.chat-voice-dim{position:absolute;inset:0;background:rgba(9,11,14,.72);z-index:5}
+.chat-voice-sh{position:absolute;left:0;right:0;bottom:0;z-index:6;background:var(--sf);border-radius:28px 28px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.45),inset 0 1px 0 var(--line);padding:8px 24px 0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.chat-voice-gr{width:40px;height:5px;border-radius:3px;background:#3A414B;margin:0 auto 4px}
+.chat-voice-sh img{width:112px;height:112px;display:block;margin:4px 0 4px}
+.chat-voice-sh h4{margin:0 0 8px;font:900 26px/32px Nunito,sans-serif}
+.chat-voice-sh>p{margin:0;color:#C9D1DA;font-size:16px;line-height:23px;max-width:350px}
+.chat-voice-stp{margin:20px 0 0;width:100%;border-radius:16px;background:var(--sf2);display:flex;align-items:center;gap:8px;padding:12px 14px;font-size:15px;line-height:20px;text-align:left}
+.chat-voice-stp .p{flex:1;min-width:0;display:flex;align-items:center;flex-wrap:wrap;gap:2px 4px;color:var(--tx)}
+.chat-voice-stp .p svg{width:14px;height:14px;color:var(--sec)}
+.chat-voice-stp .ap{width:28px;height:28px;border-radius:7px;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-voice-stp .ap svg{width:18px;height:18px}
+.chat-voice-tg{width:44px;height:26px;border-radius:13px;background:var(--acc);position:relative;flex:none}
+.chat-voice-tg::after{content:"";position:absolute;right:2px;top:2px;width:22px;height:22px;border-radius:50%;background:#fff}
+.chat-voice-btn{width:100%;height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 19px/1 Nunito,sans-serif;padding:0 20px;margin-top:20px}
+.chat-voice-btn svg{width:22px;height:22px;flex:none}
+.chat-voice-btn.p{background:var(--acc);color:var(--onacc)}
+.chat-voice-btn.t{height:48px;margin-top:8px;font:600 16px/1 Inter;color:var(--tx);background:var(--sf2)}
+.chat-voice-btn.t svg{color:var(--mint);width:20px;height:20px}
+</style>
+</head>
+<body>
+<div class="chat-voice-w">
+<nav class="chat-voice-lsw" id="chat-voice-lsw" aria-label="Language"></nav>
+
+<section class="chat-voice-hero">
+ <div><div class="pf p67" style="--s:1" data-state="received" data-hero="1"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b id="chat-voice-capb"></b><span id="chat-voice-caps"></span></div></div></div>
+ <div class="chat-voice-info">
+  <p class="chat-voice-eb" id="chat-voice-eb"></p>
+  <h1 id="chat-voice-h1"></h1>
+  <p id="chat-voice-p1"></p>
+  <ul id="chat-voice-ul"></ul>
+ </div>
+</section>
+
+<h2 class="chat-voice-h2" id="chat-voice-h2s"></h2>
+<p class="chat-voice-lead" id="chat-voice-lead"></p>
+<div class="chat-voice-grid" id="chat-voice-grid"></div>
+
+<h2 class="chat-voice-h2" id="chat-voice-h2d"></h2>
+<div class="chat-voice-cols">
+ <div class="chat-voice-sec"><h2 id="chat-voice-hdec"></h2><ul id="chat-voice-dec"></ul></div>
+ <div class="chat-voice-sec"><h2 id="chat-voice-htok"></h2>
+  <table class="chat-voice-ct" id="chat-voice-ct"></table>
+  <ul style="margin-top:12px" id="chat-voice-tok"></ul></div>
+ <div class="chat-voice-sec"><h2 id="chat-voice-hna"></h2><ul id="chat-voice-na"></ul></div>
+</div>
+</div>
+
+<script>
+(function(){
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra){return '<svg viewBox="0 0 24 24" '+(extra||SW)+' aria-hidden="true">'+p+'</svg>'}
+var I={
+ back:ic('<path d="M15 5l-7 7 7 7"/>'),
+ more:ic('<circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/>','fill="currentColor"'),
+ tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+ arr:ic('<path d="M5 12h14M14 7l5 5-5 5"/>'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ micoff:ic('<path d="M15.5 10V6a3.5 3.5 0 0 0-6.8-1.2"/><path d="M8.5 8.5V11a3.5 3.5 0 0 0 5.6 2.8"/><path d="M5 11.5a7 7 0 0 0 11.3 5.5M19 11.5a7 7 0 0 1-.5 2.6"/><path d="M12 18.5v3"/><path d="M3.5 3.5l17 17"/>'),
+ plus:ic('<path d="M12 5v14M5 12h14"/>'),
+ send:ic('<path d="M12 19V5M6 11l6-6 6 6"/>','fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"'),
+ play:ic('<path d="M7 4.5v15l12.5-7.5z"/>','fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"'),
+ pause:ic('<rect x="6" y="4.5" width="4" height="15" rx="1.3"/><rect x="14" y="4.5" width="4" height="15" rx="1.3"/>','fill="currentColor"'),
+ spk:ic('<path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/>'),
+ chk2:ic('<path d="M2.5 12.5l4 4 8.5-9.5"/><path d="M11.5 15.5l1 1 8.5-9.5"/>'),
+ trash:ic('<path d="M4 6.5h16M9.5 6.5V4.5h5v2M6.5 6.5l1 13h9l1-13"/><path d="M10 10.5v6M14 10.5v6"/>'),
+ lock:ic('<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>'),
+ up:ic('<path d="M6 15l6-6 6 6"/>'),
+ down:ic('<path d="M6 9l6 6 6-6"/>'),
+ left:ic('<path d="M15 5l-7 7 7 7"/>'),
+ chev:ic('<path d="M9 5l7 7-7 7"/>'),
+ pen:ic('<path d="M4 20h4l10.5-10.5a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>'),
+ kb:ic('<rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M8 14h8"/>')
+};
+
+/* ===== словарь: экран и страница ===== */
+var T={
+ru:{lang:'ru',me:'RU',th:'ES',name:'Lucía',ini:'L',col:'#6AA6F5',
+ online:'в сети',today:'Сегодня',ph:'Сообщение по‑русски',
+ a:{back:'Назад',menu:'Меню чата',pair:'Языки чата: испанский и русский',att:'Прикрепить',mic:'Записать голосовое',play:'Прослушать голосовое',pause:'Пауза',speed:'Скорость',del:'Удалить запись',send:'Отправить голосовое',lock:'Закрепить запись',hide:'Скрыть оригинал'},
+ m1:{t:'¡Perfecto! Te espero en recepción.',r:'Отлично! Жду тебя на ресепшене.',tm:'10:02'},
+ m2:{t:'Я уже у входа. Где тебя найти?',r:'Ya estoy en la entrada. ¿Dónde te encuentro?',tm:'10:03'},
+ read:'Прочитано 10:03',
+ vin:{tr:'Я на ресепшене, рядом с большим растением. Поднимайся на второй этаж, лифт слева.',
+  o1:'Estoy en recepción, al lado de la planta grande. ',o2:'Sube',o3:' al segundo piso, el ascensor está a la izquierda.',dur:'0:11',pos:'0:04',tm:'10:04'},
+ trLb:'Перевод · по‑русски',ogShow:'Показать оригинал',ogLb:'Оригинал',ogLang:'испанский',listen:'Слушать по‑русски',
+ vme:{t:'Иду к лифту, буду через минуту. Взять тебе кофе?',a:'Иду к лифту, буду через минуту.',b:' Взять тебе…',r:'Voy al ascensor, llego en un minuto. ¿Te llevo un café?',dur:'0:06',rec:'0:05',tm:'10:05'},
+ liveLb:'Текст голосового',liveSt:'запись',cancel:'Влево — отмена',lockTip:'Вверх — без рук',
+pvMine2:'Текст голосового',fix:'Исправить',pvTh:'Lucía прочитает по‑испански',pvNote:'Lucía услышит запись и прочитает текст по‑испански.',
+ meTr:'Lucía читает',
+ deniedT:'Нет доступа к микрофону',deniedS:'Чтобы записать голосовое, разреши Parrlo микрофон в Настройках iPhone.',
+ path:['Настройки','Parrlo','Микрофон'],openSet:'Открыть Настройки',typeIt:'Написать текстом',
+ P:{title:'Parrlo Chat · голосовое',eb:'Эталон · chat-voice · C-07 · есть · только тёмная тема',
+  h1:'Голосовое: слышно и понятно',
+  p1:'Lucía присылает голосовое по‑испански. Ты слышишь её голос и тут же читаешь перевод по‑русски, а оригинал раскрывается в один тап. Твоё голосовое уходит так же: звук плюс текст на её языке.',
+  ul:['<b>Волна и текст в одном пузыре</b>: сначала звук, под ним перевод крупно — читать можно, не включая звук.','<b>Оригинал по запросу</b>: «Показать оригинал» раскрывает испанский текст; слово, которое звучит сейчас, подсвечено.','<b>«Слушать по‑русски»</b> — перевод озвучивает синтезированный голос — не голос Lucía и не твой. Какой голос и где он синтезируется — не утверждено.','<b>Цвет = сторона</b>: всё, что от Lucía и на её языке, — мятное; твоё — зелёное.'],
+  capb:'Parrlo Chat · голосовое от Lucía',caps:'Главный кадр: голосовое играет, под волной перевод по‑русски и раскрытый оригинал. Тексты — черновик.',
+  h2s:'Состояния',lead:'Пять кадров одной переписки. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-voice--&lt;состояние&gt;--&lt;язык&gt;.png</code>.',
+  h2d:'Решения, токены, открытые вопросы',hdec:'Решения сверх сборки',htok:'Токены и контраст',hna:'Не утверждено',
+  st:{recording:['Запись','Держишь кнопку микрофона и говоришь. Влево — отмена, вверх — запись без рук; текст появляется по ходу.'],
+   preview:['Перед отправкой','Запись остановлена: можно прослушать, исправить текст, удалить или отправить. Видно, что прочитает Lucía.'],
+   sent:['Голосовое отправлено','Твой пузырь: волна, твой текст и перевод, который читает Lucía.'],
+   received:['Голосовое от Lucía','Главный кадр. Волна, под ней перевод по‑русски, оригинал раскрыт, звучащее слово подсвечено.'],
+   denied:['Нет доступа к микрофону','Нажали микрофон, а доступа нет: путь в Настройках и кнопка «Открыть Настройки».']},
+  dec:['<b>Перевод — главный текст входящего голосового</b>: под волной крупно, оригинал свёрнут в «Показать оригинал». В текстовых пузырях наоборот, но голос не прочитаешь глазами — поэтому перевод наверх.','<b>Подсветка звучащего слова</b> в оригинале: видно, в каком месте записи ты сейчас.','<b>Текст по ходу записи</b>: пока держишь кнопку, над полем растёт текст; хвост, который ещё распознаётся, — серым с точками.','<b>Предпросмотр с переводом</b>: перед отправкой видно и свой текст, и что прочитает Lucía; «Исправить» правит текст, звук не меняется.','<b>Отмена и «без рук» подписаны словами</b>, а не только стрелками; замок на отдельной «дорожке» над кнопкой.','<b>«Нет доступа» с выходом</b>: точный путь «Настройки › Parrlo › Микрофон», кнопка в Настройки и «Написать текстом», чтобы не застрять.','<b>«Слушать по‑русски»</b> — озвучка перевода стандартным голосом системы; в описании прямо сказано, что голос не собеседника.'],
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>.','Входящее: перевод <code>#F2F5F7</code>, всё «от Lucía» — Mint <code>#BFF2DC</code>; исходящее — Deep Green <code>#00875C</code> с белым текстом.','Проигранная часть волны — Light Green <code>#2BC48A</code>; точка записи и «Удалить» — <code>#FF6B5E</code> (не единственный признак: есть таймер и подписи). Жёлтый не используется.','Кнопка записи при удержании 96, «Отправить» 48, остальные зоны нажатия ≥ 44.'],
+  na:['Все тексты — черновик, включая es и en (es на «tú»).','В сборке есть звук и текст (экраны 24, 26). Текст по ходу записи, подсветка слова, «Исправить» в предпросмотре и «Написать текстом» — предложение.','«Ты сказал(а)» не используем: подпись «Текст голосового» без рода.','Озвучка «Слушать по‑русски»: какой голос системы и как это подписать в Политике.','«Мой голос» (голосовые голосом пользователя) — отдельная функция, на сайте не показываем до решения юриста.','Длительность записи и поведение на длинных голосовых не описаны.'],
+  ct:['Перевод в голосовом, текст ленты','Оригинал в раскрытом блоке','Вторичный текст: время, длительность','Мятное: «Перевод», «Показать оригинал»','Текст и перевод в моём пузыре','Текст и значки на акценте','Подсказки под пузырём, «отмена»','Текст в листе «Нет доступа»']}},
+es:{lang:'es',me:'ES',th:'RU',name:'Olga',ini:'O',col:'#F2A65A',
+ online:'en línea',today:'Hoy',ph:'Mensaje en español',
+ a:{back:'Atrás',menu:'Menú del chat',pair:'Idiomas del chat: ruso y español',att:'Adjuntar',mic:'Grabar audio',play:'Escuchar audio',pause:'Pausa',speed:'Velocidad',del:'Borrar grabación',send:'Enviar audio',lock:'Bloquear grabación',hide:'Ocultar original'},
+ m1:{t:'Отлично! Жду тебя на ресепшене.',r:'¡Genial! Te espero en recepción.',tm:'10:02'},
+ m2:{t:'Ya estoy en la entrada. ¿Dónde te encuentro?',r:'Я уже у входа. Где тебя найти?',tm:'10:03'},
+ read:'Leído 10:03',
+ vin:{tr:'Estoy en recepción, junto a la planta grande. Sube al segundo piso; el ascensor está a la izquierda.',
+  o1:'Я на ресепшене, рядом с большим растением. ',o2:'Поднимайся',o3:' на второй этаж, лифт слева.',dur:'0:11',pos:'0:04',tm:'10:04'},
+ trLb:'Traducción · español',ogShow:'Ver original',ogLb:'Original',ogLang:'ruso',listen:'Escuchar en español',
+ vme:{t:'Voy al ascensor, llego en un minuto. ¿Te llevo un café?',a:'Voy al ascensor, llego en un minuto.',b:' ¿Te llevo…',r:'Иду к лифту, буду через минуту. Взять тебе кофе?',dur:'0:06',rec:'0:05',tm:'10:05'},
+ liveLb:'Texto del audio',liveSt:'grabando',cancel:'Desliza para cancelar',lockTip:'Arriba: sin mantener',
+ pvMine2:'Texto del audio',fix:'Corregir',pvTh:'Olga lo leerá en ruso',pvNote:'Olga oirá la grabación y leerá el texto en ruso.',
+ meTr:'Olga lee',
+ deniedT:'Sin acceso al micrófono',deniedS:'Para grabar audios, permite que Parrlo use el micrófono en Ajustes del iPhone.',
+ path:['Ajustes','Parrlo','Micrófono'],openSet:'Abrir Ajustes',typeIt:'Escribir texto',
+ P:{title:'Parrlo Chat · audio',eb:'Referencia · chat-voice · C-07 · disponible · solo tema oscuro',
+  h1:'Audios que se oyen y se entienden',
+  p1:'Olga te manda un audio en ruso. Oyes su voz y al momento lees la traducción al español; el original se abre con un toque. Tu audio sale igual: sonido y texto en su idioma.',
+  ul:['<b>Onda y texto en la misma burbuja</b>: primero el sonido y debajo la traducción en grande; puedes leerlo sin ponerlo.','<b>Original cuando lo quieras</b>: «Ver original» muestra el texto en ruso y resalta la palabra que suena.','<b>«Escuchar en español»</b>: la traducción la lee una voz sintética, no la de Olga ni la tuya. Qué voz y dónde se genera aún no está decidido.','<b>Color = lado</b>: lo que viene de Olga, en su idioma, va en menta; lo tuyo, en verde.'],
+  capb:'Parrlo Chat · audio de Olga',caps:'Fotograma principal: el audio suena y debajo están la traducción al español y el original abierto. Textos en borrador.',
+  h2s:'Estados',lead:'Cinco fotogramas de la misma conversación. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-voice--&lt;estado&gt;--&lt;idioma&gt;.png</code>.',
+  h2d:'Decisiones, tokens y temas abiertos',hdec:'Más allá de la versión actual',htok:'Tokens y contraste',hna:'Sin aprobar',
+  st:{recording:['Grabando','Mantienes pulsado el micrófono y hablas. A la izquierda cancelas, arriba bloqueas; el texto aparece mientras hablas.'],
+   preview:['Antes de enviar','Grabación detenida: escúchala, corrige el texto, bórrala o envíala. Ves lo que leerá Olga.'],
+   sent:['Audio enviado','Tu burbuja: la onda, tu texto y la traducción que lee Olga.'],
+   received:['Audio de Olga','Fotograma principal. Onda, traducción al español debajo, original abierto y la palabra que suena resaltada.'],
+   denied:['Sin acceso al micrófono','Tocaste el micrófono sin permiso: la ruta en Ajustes y el botón «Abrir Ajustes».']},
+  dec:['<b>En un audio recibido, la traducción va primero</b>: en grande bajo la onda; el original queda plegado en «Ver original». Un audio no se lee de un vistazo, por eso la traducción sube.','<b>Palabra resaltada</b> en el original: sabes en qué punto del audio estás.','<b>Texto mientras grabas</b>: sobre el campo crece el texto; lo que aún se reconoce va en gris con puntos.','<b>Vista previa con traducción</b>: antes de enviar ves tu texto y lo que leerá Olga; «Corregir» cambia el texto, no el sonido.','<b>Cancelar y bloquear con palabras</b>, no solo flechas; el candado tiene su propio carril sobre el botón.','<b>«Sin acceso» con salida</b>: la ruta exacta «Ajustes › Parrlo › Micrófono», botón a Ajustes y «Escribir texto» para no quedarte atascado.','<b>«Escuchar en español»</b>: voz estándar del sistema; se dice claramente que no es la voz de la otra persona.'],
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code>/<code>#242B34</code>, líneas <code>#2F3742</code>.','Recibido: traducción <code>#F2F5F7</code>, todo lo «de Olga» en Mint <code>#BFF2DC</code>; enviado: Deep Green <code>#00875C</code> con texto blanco.','Parte reproducida de la onda: Light Green <code>#2BC48A</code>; punto de grabación y «Borrar»: <code>#FF6B5E</code> (con temporizador y texto, no solo color). Sin amarillo.','Botón de grabar al mantener: 96; «Enviar»: 48; el resto de zonas táctiles ≥ 44.'],
+  na:['Todos los textos son borrador, también es y en.','La app ya tiene sonido y texto (pantallas 24 y 26). Texto en directo al grabar, palabra resaltada, «Corregir» en la vista previa y «Escribir texto» son propuesta.','«Escuchar en español»: qué voz del sistema y cómo explicarlo en la Política.','«Mi voz» (audios con la voz del usuario) es otra función; no se muestra en el sitio hasta que lo apruebe el equipo legal.','Duración máxima y comportamiento con audios largos sin definir.'],
+  ct:['Traducción del audio, texto del chat','Original en el bloque abierto','Secundario: hora, duración','Menta: «Traducción», «Ver original»','Texto y traducción en mi burbuja','Texto e iconos sobre acento','Avisos bajo la burbuja, «cancelar»','Texto en la hoja «Sin acceso»']}},
+en:{lang:'en',me:'EN',th:'ES',name:'Lucía',ini:'L',col:'#6AA6F5',
+ online:'online',today:'Today',ph:'Message in English',
+ a:{back:'Back',menu:'Chat menu',pair:'Chat languages: Spanish and English',att:'Attach',mic:'Record voice message',play:'Play voice message',pause:'Pause',speed:'Playback speed',del:'Delete recording',send:'Send voice message',lock:'Lock recording',hide:'Hide original'},
+ m1:{t:'¡Perfecto! Te espero en recepción.',r:'Perfect! I’ll wait for you at reception.',tm:'10:02'},
+ m2:{t:'I’m at the entrance. Where do I find you?',r:'Ya estoy en la entrada. ¿Dónde te encuentro?',tm:'10:03'},
+ read:'Read 10:03',
+ vin:{tr:'I’m at reception, next to the big plant. Come up to the second floor — the elevator’s on the left.',
+  o1:'Estoy en recepción, al lado de la planta grande. ',o2:'Sube',o3:' al segundo piso, el ascensor está a la izquierda.',dur:'0:11',pos:'0:04',tm:'10:04'},
+ trLb:'Translation · English',ogShow:'Show original',ogLb:'Original',ogLang:'Spanish',listen:'Listen in English',
+ vme:{t:'Heading to the elevator, be there in a minute. Want a coffee?',a:'Heading to the elevator, be there in a minute.',b:' Want a…',r:'Voy al ascensor, llego en un minuto. ¿Te llevo un café?',dur:'0:06',rec:'0:05',tm:'10:05'},
+ liveLb:'Voice message text',liveSt:'recording',cancel:'Slide to cancel',lockTip:'Slide up for hands‑free',
+ pvMine2:'Voice message text',fix:'Edit',pvTh:'Lucía will read in Spanish',pvNote:'Lucía will hear the recording and read the text in Spanish.',
+ meTr:'Lucía reads',
+ deniedT:'No access to the microphone',deniedS:'To record voice messages, allow Parrlo to use the microphone in iPhone Settings.',
+ path:['Settings','Parrlo','Microphone'],openSet:'Open Settings',typeIt:'Type instead',
+ P:{title:'Parrlo Chat · voice message',eb:'Reference · chat-voice · C-07 · live · dark theme only',
+  h1:'Voice messages you hear and understand',
+  p1:'Lucía sends a voice message in Spanish. You hear her voice and read the English translation right away; the original is one tap away. Your voice messages work the same way: sound plus text in her language.',
+  ul:['<b>Waveform and text in one bubble</b>: sound first, then the translation in large type, so you can read it without playing it.','<b>Original on demand</b>: Show original reveals the Spanish text and highlights the word being played.','<b>Listen in English</b>: the translation is read by a synthetic voice — not Lucía’s and not yours. Which voice, and where it runs, is not decided yet.','<b>Color = side</b>: anything from Lucía, in her language, is mint; yours is green.'],
+  capb:'Parrlo Chat · voice message from Lucía',caps:'Hero frame: the voice message is playing; below the waveform are the English translation and the expanded original. Draft copy.',
+  h2s:'States',lead:'Five frames from the same chat. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-voice--&lt;state&gt;--&lt;lang&gt;.png</code>.',
+  h2d:'Decisions, tokens, open questions',hdec:'Beyond the current build',htok:'Tokens and contrast',hna:'Not approved',
+  st:{recording:['Recording','You hold the mic and talk. Slide left to cancel, up to go hands‑free; the text appears as you speak.'],
+   preview:['Before sending','Recording stopped: play it back, edit the text, delete or send. You see what Lucía will read.'],
+   sent:['Voice message sent','Your bubble: the waveform, your text and the translation Lucía reads.'],
+   received:['Voice message from Lucía','Hero frame. Waveform, English translation below, the original expanded and the current word highlighted.'],
+   denied:['No microphone access','You tapped the mic without permission: the path in Settings and an Open Settings button.']},
+  dec:['<b>In an incoming voice message, the translation leads</b>: large under the waveform, with the original folded into Show original. Text bubbles work the other way round, but you can’t skim audio, so the translation moves up.','<b>Current word highlighted</b> in the original, so you know where you are in the recording.','<b>Text while recording</b>: the transcript grows above the field; the part still being recognized is gray with dots.','<b>Preview with translation</b>: before sending you see your text and what Lucía will read; Edit changes the text, not the audio.','<b>Cancel and hands‑free are spelled out</b>, not just arrows; the lock has its own track above the button.','<b>No access, with a way out</b>: the exact path Settings › Parrlo › Microphone, a button to Settings and Type instead, so you’re never stuck.','<b>Listen in English</b> uses the standard system voice, and we say clearly it isn’t the other person’s voice.'],
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code>/<code>#242B34</code>, lines <code>#2F3742</code>.','Incoming: translation <code>#F2F5F7</code>, anything “from Lucía” in Mint <code>#BFF2DC</code>; outgoing: Deep Green <code>#00875C</code> with white text.','Played part of the waveform: Light Green <code>#2BC48A</code>; recording dot and Delete: <code>#FF6B5E</code> (backed by a timer and labels, not color alone). No yellow.','Hold-to-record button 96, Send 48, every other tap target ≥ 44.'],
+  na:['All copy is draft, including es and en.','Sound plus text is in the build (screens 24, 26). Live text while recording, word highlight, Edit in preview and Type instead are proposals.','Listen in English: which system voice, and how to describe it in the Privacy Policy.','“My Voice” (messages in the user’s own voice) is a separate feature and stays off the site until legal signs off.','Maximum length and behavior for long voice messages are not specified.'],
+  ct:['Voice message translation, chat text','Original in the expanded block','Secondary: time, duration','Mint: Translation, Show original','Text and translation in my bubble','Text and icons on accent','Hints under bubbles, cancel','Text in the No access sheet']}}
+};
+
+var qs=new URLSearchParams(location.search).get('l');var LG=T[qs]?qs:'ru';var D=T[LG];var A=D.a;
+function nb(s){return String(s).replace(/(^|[\s>(«])([вкусоияаВКУСОИЯА]|во|ко|со|из|на|от|по|до|за|не|но|же|то|об|Да)\s(?=[^\s<])/g,'$1$2 ').replace(/(^|[^А-Яа-яЁё])по-(?=[а-яё])/g,'$1по‑').replace(/(\d) (мин|min|с|s)\b/g,'$1 $2')}
+
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function scr(inner){return '<div class="scr chat-voice-scr">'+sbar+inner+home+'</div>'}
+function nav(){return '<div class="chat-voice-nav"><span class="chat-voice-ib bk" role="button" aria-label="'+A.back+'" data-tap>'+I.back+'</span><span class="chat-voice-av" style="background:'+D.col+'" aria-hidden="true">'+D.ini+'<i></i></span><div class="chat-voice-nm"><b>'+D.name+'</b><span><i></i>'+D.online+'</span></div><span class="chat-voice-lc" role="button" aria-label="'+A.pair+'" data-tap><span>'+D.th+I.arr+D.me+'</span></span><span class="chat-voice-ib" role="button" aria-label="'+A.menu+'" data-tap>'+I.more+'</span></div>'}
+var WV=[.30,.55,.42,.78,.62,.95,.50,.70,.36,.84,.58,.40,.66,.92,.48,.30,.60,.74,.45,.88,.52,.36,.68,.80,.42,.56,.34,.62,.46,.28,.40,.24];
+function wave(n,played,seed){var s='',h=32;for(var i=0;i<n;i++){var v=WV[(i+(seed||0))%WV.length];s+='<i'+(i<played?' class="p"':'')+' style="height:'+Math.max(4,Math.round(v*h))+'px"></i>'}return '<span class="chat-voice-wv" aria-hidden="true">'+s+'</span>'}
+function txtIn(m){return '<div class="chat-voice-m in" lang="'+D.th.toLowerCase()+'">'+m.t+'<div class="chat-voice-t" lang="'+D.me.toLowerCase()+'">'+I.tr+'<span>'+m.r+'</span></div><div class="chat-voice-tm">'+m.tm+'</div></div>'}
+function txtOut(m){return '<div class="chat-voice-m out" lang="'+D.me.toLowerCase()+'">'+m.t+'<div class="chat-voice-t" lang="'+D.th.toLowerCase()+'">'+I.tr+'<span>'+m.r+'</span></div><div class="chat-voice-tm">'+m.tm+I.chk2+'</div></div>'}
+/* входящее голосовое: o.open — раскрыт оригинал, o.playing — играет */
+function vIn(o){
+ o=o||{};var v=D.vin;
+ var head='<div class="chat-voice-vr"><span class="chat-voice-pl'+(o.playing?'':' p')+'" role="button" aria-label="'+(o.playing?A.pause:A.play)+'" data-tap>'+(o.playing?I.pause:I.play)+'</span>'+wave(32,o.playing?13:0,0)+'</div>'+
+  '<div class="chat-voice-vd"><span>'+(o.playing?v.pos+' / '+v.dur:v.dur)+'</span><b role="button" aria-label="'+A.speed+'">1×</b></div>';
+ var tr='<div class="chat-voice-tr" lang="'+D.me.toLowerCase()+'"><span class="chat-voice-lb mi">'+I.tr+D.trLb+'</span>'+v.tr+'</div>';
+ var og=o.open?
+  '<div class="chat-voice-ogb" lang="'+D.th.toLowerCase()+'"><div class="h"><span class="k"><em>'+D.th+'</em>'+D.ogLb+' · '+D.ogLang+'</span><span class="x" role="button" aria-label="'+A.hide+'" data-tap>'+I.up+'</span></div><p><span>'+v.o1+'</span><mark>'+v.o2+'</mark>'+v.o3+'</p></div>'
+  :'<span class="chat-voice-og" role="button" aria-expanded="false" data-tap>'+D.ogShow+I.down+'</span>';
+ return '<div class="chat-voice-m in vc">'+head+tr+og+'<div class="chat-voice-ft"><span class="chat-voice-lis" role="button" data-tap><span>'+I.spk+D.listen+'</span></span><span class="chat-voice-tm">'+v.tm+'</span></div></div>';
+}
+function vOut(){
+ var v=D.vme;
+ return '<div class="chat-voice-m out vc"><div class="chat-voice-vr"><span class="chat-voice-pl p" role="button" aria-label="'+A.play+'" data-tap>'+I.play+'</span>'+wave(32,0,9)+'</div>'+
+  '<div class="chat-voice-vd"><span>'+v.dur+'</span><span></span></div>'+
+  '<div class="chat-voice-tr" lang="'+D.me.toLowerCase()+'">'+v.t+'</div>'+
+  '<div class="chat-voice-t" lang="'+D.th.toLowerCase()+'">'+I.tr+'<span>'+v.r+'</span></div>'+
+  '<div class="chat-voice-tm">'+v.tm+I.chk2+'</div></div>';
+}
+function cmpIdle(){return '<div class="chat-voice-cmp"><div class="chat-voice-row"><span class="chat-voice-pls" role="button" aria-label="'+A.att+'" data-tap>'+I.plus+'</span><span class="chat-voice-f">'+D.ph+'</span><span class="chat-voice-go" role="button" aria-label="'+A.mic+'" data-tap>'+I.mic+'</span></div></div>'}
+function thread(withVin,extra,short){return '<div class="chat-voice-msgs">'+(short?'':'<span class="chat-voice-day">'+D.today+'</span>'+txtIn(D.m1))+txtOut(D.m2)+(withVin?'':'<span class="chat-voice-rd">'+I.chk2+D.read+'</span>')+(withVin||'')+(extra||'')+'</div>'}
+
+var S={};
+S.received=function(){return scr(nav()+thread(null,vIn({open:1,playing:1}))+cmpIdle())};
+S.recording=function(){var v=D.vme;
+ return scr(nav()+thread(vIn()).replace('class="chat-voice-msgs"','class="chat-voice-msgs" style="padding-bottom:52px"')+
+ '<div class="chat-voice-cmp" style="padding-bottom:6px"><div class="chat-voice-live" aria-live="polite"><div class="h">'+I.mic+D.liveLb+'</div><p lang="'+D.me.toLowerCase()+'">'+v.a+'<em>'+v.b+'</em><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></p></div>'+
+ '<div class="chat-voice-rb"><span class="tmr"><i aria-hidden="true"></i>'+v.rec+'</span><span class="cn">'+I.left+D.cancel+'</span></div>'+
+ '<span class="chat-voice-tip">'+D.lockTip+'</span>'+
+ '<span class="chat-voice-lk" role="button" aria-label="'+A.lock+'" data-tap>'+I.lock+'<svg class="up" viewBox="0 0 24 24" '+SW+' aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></span>'+
+ '<span class="chat-voice-big" role="button" aria-label="'+A.mic+'" aria-pressed="true" data-tap>'+I.mic+'</span></div>')};
+S.preview=function(){var v=D.vme;
+ return scr(nav()+thread(vIn(),'',1)+
+ '<div class="chat-voice-cmp" style="padding-bottom:4px"><div class="chat-voice-pv">'+
+ '<div class="s"><div class="hd"><span class="chat-voice-lb">'+I.mic+D.pvMine2+'</span><span class="ed" role="button" data-tap>'+I.pen+D.fix+'</span></div><p lang="'+D.me.toLowerCase()+'">'+v.t+'</p></div>'+
+ '<div class="s"><div class="hd"><span class="chat-voice-lb mi">'+I.tr+D.pvTh+'</span></div><p class="th" lang="'+D.th.toLowerCase()+'">'+v.r+'</p></div></div>'+
+ '<div class="chat-voice-pr"><span class="chat-voice-del" role="button" aria-label="'+A.del+'" data-tap>'+I.trash+'</span><span class="chat-voice-pp"><span class="pl2" role="button" aria-label="'+A.play+'" data-tap>'+I.play+'</span>'+wave(28,0,9)+'<span class="d">'+v.dur+'</span></span><span class="chat-voice-snd" role="button" aria-label="'+A.send+'" data-tap>'+I.send+'</span></div>'+
+ '<p class="chat-voice-nt">'+D.pvNote+'</p></div>')};
+S.sent=function(){return scr(nav()+thread(vIn(),vOut(),1)+cmpIdle())};
+S.denied=function(){var p=D.path;
+ return scr(nav()+thread(vIn())+cmpIdle()+'<div class="chat-voice-dim"></div>'+
+ '<div class="chat-voice-sh" role="dialog" aria-labelledby="chat-voice-dt"><div class="chat-voice-gr"></div><img src="../../brandbook/assets/mascot/mascot-listen-dark.svg" alt=""><h4>'+D.deniedT+'</h4><p>'+D.deniedS+'</p>'+
+ '<div class="chat-voice-stp"><span class="ap">'+I.mic+'</span><span class="p">'+p[0]+I.chev+p[1]+I.chev+p[2]+'</span><span class="chat-voice-tg" aria-hidden="true"></span></div>'+
+ '<span class="chat-voice-btn p" role="button" data-tap>'+D.openSet+'</span>'+
+ '<span class="chat-voice-btn t" role="button" data-tap>'+I.kb+D.typeIt+'</span>'+
+ '<div style="height:34px"></div></div>')};
+
+var order=['recording','preview','sent','received','denied'];
+var P=D.P;
+document.documentElement.lang=D.lang;document.title=P.title;
+function $(id){return document.getElementById(id)}
+$('chat-voice-lsw').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" lang="'+k+'"'+(k===LG?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+$('chat-voice-eb').innerHTML=P.eb;$('chat-voice-h1').innerHTML=nb(P.h1);$('chat-voice-p1').innerHTML=nb(P.p1);
+$('chat-voice-ul').innerHTML=P.ul.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-voice-capb').innerHTML=P.capb;$('chat-voice-caps').innerHTML=nb(P.caps);
+$('chat-voice-h2s').innerHTML=P.h2s;$('chat-voice-lead').innerHTML=P.lead;$('chat-voice-h2d').innerHTML=P.h2d;
+$('chat-voice-hdec').innerHTML=P.hdec;$('chat-voice-htok').innerHTML=P.htok;$('chat-voice-hna').innerHTML=P.hna;
+$('chat-voice-dec').innerHTML=P.dec.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-voice-tok').innerHTML=P.tok.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-voice-na').innerHTML=P.na.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-voice-grid').innerHTML=order.map(function(k){return '<div class="chat-voice-card"><div class="pf p67" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+P.st[k][0]+' <code>'+k+'</code></h3><p>'+nb(P.st[k][1])+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=nb(S[p.dataset.state]())});
+window.CHAT_VOICE={S:S,order:order,lang:LG};
+
+function Lm(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lm(a),y=Lm(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+var pairs=[['#F2F5F7','#242B34'],['#AEB7C3','#1B2027'],['#9AA4B2','#242B34'],['#BFF2DC','#242B34'],['#FFFFFF','#00875C'],['#0E1116','#2BC48A'],['#9AA4B2','#0E1116'],['#C9D1DA','#1C2026']];
+var rows=pairs.map(function(p,i){return [p[0],p[1],P.ct[i]]});
+$('chat-voice-ct').innerHTML=rows.map(function(r){return '<tr><td><span class="chat-voice-sw" style="background:'+r[0]+'"></span><span class="chat-voice-sw" style="background:'+r[1]+'"></span>'+r[2]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_VOICE.min=Math.min.apply(null,rows.map(function(r){return cr(r[0],r[1])}));
+})();
+</script>
+</body>
+</html>
