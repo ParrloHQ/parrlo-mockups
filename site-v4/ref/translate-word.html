@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Translate · правка слова</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0B0E12;color:#F2F5F7}
+body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
+.translate-word-w{max-width:1200px;margin:0 auto}
+.translate-word-langs{display:flex;gap:8px;margin-bottom:28px}
+.translate-word-langs a{min-width:56px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;padding:0 16px;font:700 15px/1 Inter,sans-serif;color:#F2F5F7;background:#1C2026;box-shadow:inset 0 0 0 1px #2F3742;text-decoration:none}
+.translate-word-langs a[aria-current="true"]{background:#2BC48A;color:#0E1116;box-shadow:none}
+.translate-word-w h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:12px}
+.translate-word-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.translate-word-lead{color:#9AA4B2;max-width:820px}
+.translate-word-tag{display:inline-block;margin-bottom:12px;font:600 13px/1 Inter,sans-serif;color:#0E1116;background:#BFF2DC;border-radius:8px;padding:6px 10px}
+.translate-word-hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;margin-top:40px;padding:48px 40px;border-radius:32px;background:#12161C;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-word-hero figure{margin:0}
+.translate-word-hero-t{flex:1 1 300px;max-width:520px}
+.translate-word-hero-t h3{font:900 24px/1.25 Nunito,sans-serif;margin-bottom:12px}
+.translate-word-hero-t p{color:#C3CBD5;margin-bottom:12px}
+.translate-word-w ul{padding-left:20px;color:#C3CBD5;font-size:15px;max-width:860px}
+.translate-word-w li{margin:8px 0}
+.translate-word-w li b{color:#F2F5F7}
+.translate-word-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.translate-word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(284px,1fr));gap:48px 24px;margin-top:32px}
+.translate-word-grid figure{margin:0;display:flex;flex-direction:column;align-items:center}
+.translate-word-grid figcaption{margin-top:16px;width:272px;font-size:14px;line-height:1.45;color:#9AA4B2}
+.translate-word-grid figcaption b{display:block;color:#F2F5F7;font:900 17px/1.3 Nunito,sans-serif;margin-bottom:4px}
+.translate-word-grid figcaption code{font-size:12px}
+.translate-word-tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
+.translate-word-tbl th,.translate-word-tbl td{text-align:left;vertical-align:top;border-bottom:1px solid #2F3742;padding:10px 12px 10px 0}
+.translate-word-tbl th{color:#9AA4B2;font-weight:600}
+.translate-word-tw{overflow-x:auto}
+.translate-word-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:0 0 0 1px #3A414B}
+@media (max-width:760px){.translate-word-w h1{font-size:30px}.translate-word-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-word-hero .pf{--s:.8!important}}
+@media (max-width:480px){.translate-word-hero .pf{--s:.7!important}}
+
+/* ===== экран 430×932 ===== */
+.translate-word-scr{--me:#2BC48A;--es:#BFF2DC;--q:#FFC247;--qbg:#3A3426}
+.translate-word-top{flex:none;display:flex;align-items:center;gap:8px;padding:8px 16px}
+.translate-word-cb{width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.translate-word-pair{flex:1;min-width:0;display:flex;justify-content:center}
+.translate-word-pair>span{height:48px;border-radius:24px;background:var(--sf2);display:inline-flex;align-items:center;gap:8px;padding:0 16px;font:900 19px/1 Nunito,sans-serif;letter-spacing:.02em}
+.translate-word-swp{color:var(--sec);display:flex}
+.translate-word-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--me)}
+.translate-word-dot.translate-word-es{background:var(--es)}
+.translate-word-main{flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:12px 16px 0;position:relative}
+.translate-word-bot{flex:none;display:flex;flex-direction:column;gap:12px;padding:12px 16px 4px}
+.translate-word-btns{display:flex;gap:12px}
+.translate-word-pb{flex:1;min-width:0;height:80px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:10px;color:#0E1116}
+.translate-word-pb svg{flex:none;width:26px;height:26px}
+.translate-word-pb b{display:block;font:900 21px/24px Nunito,sans-serif;white-space:nowrap}
+.translate-word-pb small{display:block;font:600 13px/1.3 Inter,sans-serif;margin-top:2px}
+.translate-word-pb.translate-word-me{background:var(--me)}
+.translate-word-pb.translate-word-es{background:var(--es)}
+.translate-word-pb.translate-word-next{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--es),0 0 36px rgba(191,242,220,.28)}
+.translate-word-hint{display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center}
+.translate-word-hint svg{width:16px;height:16px;flex:none}
+.translate-word-lbl{font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;display:flex;align-items:center;gap:8px;min-width:0}
+.translate-word-row{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:20px}
+
+/* «Что понял Parrlo» */
+.translate-word-said{position:relative;background:var(--sf);border-radius:24px;padding:16px 20px 18px;box-shadow:inset 0 0 0 1px var(--line)}
+.translate-word-said p{font:500 21px/32px Inter,sans-serif;margin-top:10px;padding-right:8px}
+.translate-word-said.translate-word-up{z-index:3;box-shadow:inset 0 0 0 1px #3A414B,0 20px 40px -12px rgba(0,0,0,.6)}
+.translate-word-ed{position:absolute;right:6px;top:4px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec)}
+.translate-word-ed svg{width:20px;height:20px}
+/* слово: неуверенно / выбрано / заменено — всегда форма + цвет */
+.translate-word-wd{position:relative;display:inline;padding:2px 4px;margin:0 -1px;border-radius:8px;font-weight:700;white-space:nowrap;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.translate-word-wd::after{content:"";position:absolute;left:-6px;right:-6px;top:50%;height:44px;transform:translateY(-50%)}
+.translate-word-wd.translate-word-q{color:var(--q);background:var(--qbg);text-decoration:underline dashed var(--q);text-decoration-thickness:2px;text-underline-offset:6px}
+.translate-word-wd.translate-word-sel{margin:0 4px;color:#0E1116;background:var(--q);box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--q)}
+.translate-word-wd.translate-word-ok{color:var(--me);background:#1E3734;text-decoration:underline solid var(--me);text-decoration-thickness:2px;text-underline-offset:6px}
+.translate-word-qb{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.8px solid currentColor;font:800 12px/1 Inter,sans-serif;margin-left:4px;vertical-align:3px;font-style:normal;text-decoration:none}
+.translate-word-wd svg{display:inline-block;width:16px;height:16px;margin-left:4px;vertical-align:-1px}
+.translate-word-note{font:400 14px/20px Inter,sans-serif;color:var(--sec);display:flex;gap:8px;align-items:flex-start;padding:0 4px;margin-top:-4px}
+.translate-word-note svg{width:16px;height:16px;flex:none;margin-top:2px}
+.translate-word-note b{color:var(--tx);font-weight:600}
+
+/* перевод для собеседника */
+.translate-word-card{background:var(--deep);border-radius:28px;padding:20px 24px;color:#fff;transition:opacity .2s}
+.translate-word-card .translate-word-lbl{color:#FFFFFF}
+.translate-word-card p{font:900 30px/38px Nunito,sans-serif;margin:12px 0 20px}
+.translate-word-tw{text-decoration-thickness:2px;text-underline-offset:7px}
+.translate-word-tw.translate-word-q{text-decoration-line:underline;text-decoration-style:dashed;text-decoration-color:rgba(255,255,255,.75)}
+.translate-word-tw.translate-word-ok{text-decoration-line:underline;text-decoration-style:solid;text-decoration-color:#FFFFFF}
+.translate-word-upd{flex:none;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 8px;border-radius:14px;background:#005E40;font:600 13px Inter,sans-serif;color:#fff}
+.translate-word-upd svg{width:14px;height:14px}
+.translate-word-acts{display:flex;gap:8px}
+.translate-word-act{height:48px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 14px;font:600 16px Inter,sans-serif;background:#FFFFFF;color:#0E1116}
+.translate-word-act.translate-word-ghost{background:#005E40;color:#fff}
+.translate-word-act svg{width:20px;height:20px}
+
+/* затемнение и лист */
+.translate-word-dim{position:absolute;inset:0;background:rgba(5,7,10,.66);z-index:2}
+.translate-word-sheet{position:absolute;left:0;right:0;bottom:0;z-index:4;background:#1C2026;border-radius:32px 32px 0 0;box-shadow:inset 0 1px 0 #2F3742,0 -20px 50px rgba(0,0,0,.45);display:flex;flex-direction:column;padding:8px 16px 0}
+.translate-word-grab{width:40px;height:5px;border-radius:3px;background:#3A414B;align-self:center;margin-bottom:8px}
+.translate-word-sh{display:flex;align-items:flex-start;gap:12px;padding:4px 4px 12px}
+.translate-word-sh>div{flex:1;min-width:0}
+.translate-word-sh h3{font:900 24px/30px Nunito,sans-serif}
+.translate-word-sh span.translate-word-sub{display:block;font:500 15px/20px Inter,sans-serif;color:var(--sec);margin-top:2px}
+.translate-word-x{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.translate-word-x svg{width:20px;height:20px}
+.translate-word-sl{font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em;padding:8px 4px 8px}
+.translate-word-list{background:var(--sf2);border-radius:20px;overflow:hidden}
+.translate-word-opt{display:flex;align-items:center;gap:12px;min-height:68px;padding:10px 16px}
+.translate-word-opt+.translate-word-opt{border-top:1px solid var(--line)}
+.translate-word-opt>div{flex:1;min-width:0}
+.translate-word-opt b{display:flex;align-items:center;gap:10px;font:900 21px/26px Nunito,sans-serif}
+.translate-word-opt span.translate-word-ctx{display:block;font:400 14px/19px Inter,sans-serif;color:var(--sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.translate-word-opt span.translate-word-ctx em{font-style:normal;color:var(--tx);font-weight:600}
+.translate-word-heard{flex:none;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:14px;background:var(--qbg);color:var(--q);font:600 13px Inter,sans-serif}
+.translate-word-heard svg{width:14px;height:14px}
+.translate-word-chev{flex:none;width:20px;color:var(--sec);display:flex}
+.translate-word-chev svg{width:20px;height:20px}
+.translate-word-own{display:flex;gap:8px;align-items:center}
+.translate-word-field{flex:1;min-width:0;height:56px;border-radius:28px;background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--line);display:flex;align-items:center;gap:10px;padding:0 18px;font:400 17px Inter,sans-serif;color:var(--sec)}
+.translate-word-field svg{width:20px;height:20px;flex:none}
+.translate-word-mic{flex:none;width:56px;height:56px;border-radius:50%;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center}
+.translate-word-mic svg{width:24px;height:24px}
+.translate-word-foot{display:flex;gap:8px;align-items:flex-start;font:400 13px/18px Inter,sans-serif;color:var(--sec);padding:12px 4px 0}
+.translate-word-foot svg{width:16px;height:16px;flex:none;margin-top:1px}
+
+/* голосом */
+.translate-word-turn{align-self:center;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;border-radius:18px;background:#1E3734;color:var(--me);font:600 15px Inter,sans-serif;margin-top:4px}
+.translate-word-turn svg{width:18px;height:18px}
+.translate-word-live{align-self:center;display:flex;align-items:center;gap:2px;margin-top:24px;font:900 40px/48px Nunito,sans-serif}
+.translate-word-live i{width:3px;height:40px;border-radius:2px;background:var(--me);animation:translate-word-bl 1s steps(2) infinite}
+@keyframes translate-word-bl{50%{opacity:0}}
+.translate-word-livesub{align-self:center;font:500 14px/20px Inter,sans-serif;color:var(--sec);margin-top:4px}
+.translate-word-wave{height:96px;display:flex;align-items:center;justify-content:center;gap:4px;margin:16px 0 8px}
+.translate-word-wave i{width:4px;border-radius:2px;background:var(--me);flex:none}
+.translate-word-wave i.translate-word-f{background:#3A414B}
+.translate-word-vb{display:flex;gap:12px;padding:8px 0 0}
+.translate-word-sec{flex:1;height:64px;border-radius:32px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;font:600 17px Inter,sans-serif}
+.translate-word-pri{flex:1.4;height:64px;border-radius:32px;background:#F2F5F7;color:#0E1116;display:flex;align-items:center;justify-content:center;gap:10px;font:900 21px Nunito,sans-serif}
+.translate-word-pri i{width:16px;height:16px;border-radius:4px;background:#E0483B}
+
+/* тост «вернуть» */
+.translate-word-toast{flex:none;margin:0 16px;display:flex;align-items:center;gap:12px;min-height:64px;padding:8px 8px 8px 16px;border-radius:24px;background:var(--sf2);box-shadow:inset 0 0 0 1px #3A414B}
+.translate-word-toast>svg{width:22px;height:22px;color:var(--me);flex:none}
+.translate-word-toast>div{flex:1;min-width:0}
+.translate-word-toast b{display:block;font:600 15px/20px Inter,sans-serif}
+.translate-word-toast>div>span{display:block;font:400 14px/19px Inter,sans-serif;color:var(--sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.translate-word-undo{flex:none;white-space:nowrap;height:48px;border-radius:24px;padding:0 16px 0 12px;display:inline-flex;align-items:center;gap:6px;background:#F2F5F7;color:#0E1116;font:600 15px Inter,sans-serif}
+.translate-word-undo svg{width:18px;height:18px}
+</style>
+</head>
+<body>
+<div class="translate-word-w">
+<nav class="translate-word-langs" id="translate-word-langs"></nav>
+<span class="translate-word-tag" id="translate-word-tag"></span>
+<h1 id="translate-word-h1"></h1>
+<p class="translate-word-lead" id="translate-word-lead"></p>
+
+<section class="translate-word-hero">
+ <figure id="translate-word-hero-ph"></figure>
+ <div class="translate-word-hero-t" id="translate-word-hero-t"></div>
+</section>
+
+<h2 id="translate-word-h-st"></h2>
+<p class="translate-word-lead" id="translate-word-st-lead"></p>
+<div class="translate-word-grid" id="translate-word-grid"></div>
+
+<h2 id="translate-word-h-dec"></h2>
+<ul id="translate-word-dec"></ul>
+
+<h2 id="translate-word-h-tok"></h2>
+<div class="translate-word-tw"><table class="translate-word-tbl" id="translate-word-ctr"></table></div>
+<ul id="translate-word-tok"></ul>
+
+<h2 id="translate-word-h-na"></h2>
+<ul id="translate-word-na"></ul>
+</div>
+
+<script src="../screens.js"></script>
+<script>
+(function(){
+const P='translate-word-';
+const $=id=>document.getElementById(P+id);
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const S=window.SITE_ICONS;
+const I={
+ mic:S.mic.replace('class="ic"','class="ic" style="width:26px;height:26px"'),
+ mic18:S.mic.replace('class="ic"','class="ic" style="width:18px;height:18px"'),
+ micp:S.mic.replace('class="ic"',''),
+ kbd:S.kbd, more:S.more,
+ back:`<svg class="ic" viewBox="0 0 24 24" ${SW}><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>`,
+ swap:`<svg viewBox="0 0 24 24" ${SW} style="width:20px;height:20px"><path d="M4 8h14M14.5 4.5L18 8l-3.5 3.5"/><path d="M20 16H6M9.5 12.5L6 16l3.5 3.5"/></svg>`,
+ spk:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+ rot:`<svg viewBox="0 0 24 24" ${SW}><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 6h3"/><path d="M3 10.5a8 8 0 0 0 1.7 6.3M2.6 14.6l2 2.4 2.6-1.6"/></svg>`,
+ pencil:`<svg viewBox="0 0 24 24" ${SW}><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>`,
+ ok:`<svg viewBox="0 0 24 24" ${SW}><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+ okc:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M8 12.3l2.7 2.7L16 9.6"/></svg>`,
+ info:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/></svg>`,
+ q:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.1-2.4 3.7"/><path d="M12 17h.01"/></svg>`,
+ ear:`<svg viewBox="0 0 24 24" ${SW}><path d="M6.5 9a5.5 5.5 0 0 1 11 0c0 3-2.5 3.8-3 6.3-.4 2-1.6 3.7-3.7 3.7A3 3 0 0 1 8 16.5"/><path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 1.2-1 1.6-1.4 2.5"/></svg>`,
+ x:`<svg viewBox="0 0 24 24" ${SW}><path d="M6 6l12 12M18 6L6 18"/></svg>`,
+ chev:`<svg viewBox="0 0 24 24" ${SW}><path d="M9.5 5.5L16 12l-6.5 6.5"/></svg>`,
+ undo:`<svg viewBox="0 0 24 24" ${SW}><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>`,
+ down:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 5v13M6.5 13L12 18.5 17.5 13"/></svg>`,
+};
+
+/* ===== словарь: экран + страница ===== */
+const T={
+ru:{
+ code:['RU','ES'], meN:'Русский', ptN:'Español',
+ said:'Что понял Parrlo', edit:'Изменить фразу', forPt:'для собеседника',
+ ph:['Подскажите, во сколько сегодня ',' аптека?'], heard:'открывается', fixed:'закрывается',
+ tr:['Disculpe, ¿a qué hora ',' hoy la farmacia?'], trHeard:'abre', trFixed:'cierra',
+ opts:['закрывается','открывается','откроется'], ctx:['…сегодня ',' аптека?'],
+ hintQ:'<b>Одно слово под вопросом.</b> Коснись его, чтобы поправить.',
+ note:'Перевод может быть неточным. Важное — проверь с собеседником.',
+ play:'Озвучить', show:'Показать',
+ me:['Я говорю','по‑русски'], pt:['Yo hablo','en español'],
+ next:'Теперь очередь собеседника', firstHint:'Сначала проверь слово, потом показывай перевод',
+ shT:'Заменить слово', shSub:w=>`Расслышали: «${w}»`, heardTag:'так расслышали', sOpts:'Варианты', sOwn:'Своё слово', own:'Впиши слово', ownMic:'Сказать слово',
+ shFoot:'Перевод обновится после выбора. Остальная фраза не меняется.', close:'Закрыть',
+ vT:'Скажи одно слово', vSub:w=>`Заменим «${w}»`, vTurn:'Говоришь ты · по‑русски', vLive:'Слушаем…', cancel:'Отменить', stop:'Стоп',
+ upd:'Перевод обновлён', toastT:'Слово заменено', toastS:(a,b)=>`${a} → ${b}`, undo:'Вернуть',
+ st:{unsure:['Слово под вопросом','Перевод готов, но одно слово Parrlo расслышал неуверенно: оно жёлтое, с пунктиром и знаком «?». Пользователь касается слова.'],
+     options:['Варианты слова','Коснулись слова — снизу лист с вариантами в контексте фразы, поле «Своё слово» и микрофон. Пользователь выбирает вариант одним касанием.'],
+     voice:['Слово голосом','Нажали микрофон в листе. Пользователь говорит только одно слово, остальная фраза не перезаписывается.'],
+     updated:['Перевод обновлён','Выбрали «закрывается»: слово зелёное с галочкой, в переводе abre → cierra. Тост «Вернуть» возвращает как было.']},
+ page:{tag:'Эталон · пачка 2 · черновик текста', h1:'Translate · правка слова касанием',
+  lead:'T‑10. Parrlo показывает, что понял из твоей речи, и отмечает слово, в котором не уверен. Касание слова открывает варианты; выбор сразу обновляет перевод. Только тёмная тема, интерфейс на «ты». Экран 430×932 pt, PNG @3× — 1290×2796.',
+  heroH:'Главный кадр · варианты слова',
+  heroP:['Фраза «Что понял Parrlo» остаётся над затемнением, выбранное слово подсвечено — видно и слово, и варианты. У каждого варианта — кусок фразы, поэтому разница «открывается / закрывается» читается сразу.','Вариант «так расслышали» помечен словами, а не только цветом. Ниже — своё слово: впиши или скажи.'],
+  cap:['Translate · правка слова','Только тёмная тема. Тексты — черновик.'],
+  hSt:'Состояния', stLead:'По порядку правки. Под каждым экраном — когда он показывается и что делает пользователь. Масштаб 0,6.',
+  hDec:'Решения', hTok:'Токены и контраст', hNa:'Не утверждено', thP:'Пара (текст / фон)', thW:'Где', thC:'Контраст', thN:'Норма', low:'ниже нормы',
+  dec:['<b>Неуверенное слово — не только цветом.</b> Жёлтый текст на тёмной подложке, пунктирное подчёркивание и знак «?». Жёлтый #FFC247 — единственный жёлтый элемент на экране. В переводе это же место подчёркнуто пунктиром: видно, что изменится.',
+   '<b>Подсказка словами.</b> Под фразой — «Одно слово под вопросом. Коснись его, чтобы поправить», над кнопками — «Сначала проверь слово». Зона касания слова расширена до 44 pt.',
+   '<b>Фраза над листом.</b> Карточка «Что понял Parrlo» поднимается над затемнением, выбранное слово — жёлтая плашка с кольцом. Поэтому в сценарии правки карточка стоит над переводом (в translate‑talk — под ним).',
+   '<b>Варианты в контексте.</b> Каждый вариант — с куском фразы; выбор одним касанием, без «Готово». Вариант «так расслышали» отмечен меткой.',
+   '<b>Своё слово и голос.</b> Поле ввода и микрофон в том же листе. Голосом заменяется только одно слово, фраза целиком не перезаписывается.',
+   '<b>Результат и откат.</b> Заменённое слово — зелёное, сплошное подчёркивание и галочка; на карточке перевода — метка «Перевод обновлён», внизу тост «Вернуть».',
+   '<b>Сценарии по языкам.</b> ru: «открывается → закрывается» (смысл противоположный), es: «voz → tos», en: «pill → bill». Ошибки правдоподобные для распознавания и меняют смысл перевода.'],
+  tok:['Тёмная тема v2.3: фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Цвет = сторона, как в translate‑talk: вы — <code>#2BC48A</code>, собеседник — <code>#BFF2DC</code>, перевод для собеседника — <code>#00875C</code>.',
+   'Неуверенное слово — <code>#FFC247</code> на <code>#3A3426</code>; заменённое — <code>#2BC48A</code> на <code>#1E3734</code>.',
+   'Nunito 900 — заголовки, варианты, перевод; Inter 400/500/600/700 — интерфейс. Сетка 4 pt, поля 16, карточки 20–24. Зоны нажатия ≥ 44 pt.'],
+  na:['Все тексты — черновик. Тексты es и en носителем не вычитаны.',
+   'Название блока «Что понял Parrlo» / «Lo que entendió Parrlo» / «What Parrlo understood» взято с сайта; в приложении не решено (GAP Translate, п. 2).',
+   'Порог «под вопросом» и сколько слов отмечать сразу — не решено; на макете одно слово.',
+   'Контекст у вариантов, правка голосом, метка «Перевод обновлён» и «Вернуть» — сверх сборки (в сборке: касание → варианты).',
+   'Карточка «Что понял Parrlo» над переводом расходится с translate‑talk — нужно выбрать один порядок.',
+   'Цвет <code>#3A3426</code> — производный, в токенах v2.3 его нет.'],
+  ctr:['основной текст','подписи, подсказки','подписи в карточке и листе','слово под вопросом, метка «так расслышали»','выбранное слово','заменённое слово','перевод для собеседника (крупный)','подписи на карточке перевода','метка «Перевод обновлён», «Показать»','«Озвучить», «Вернуть»','«Я говорю», микрофон','«Yo hablo»','кнопка «Стоп»','варианты, кнопки «Отменить»'] }
+},
+es:{
+ code:['ES','RU'], meN:'Español', ptN:'Русский',
+ said:'Lo que entendió Parrlo', edit:'Editar la frase', forPt:'para la otra persona',
+ ph:['¿Hay alguna farmacia abierta por aquí? Necesito algo para la ','.'], heard:'voz', fixed:'tos',
+ tr:['Здесь поблизости есть открытая аптека? Мне нужно что‑то ','.'], trHeard:'для голоса', trFixed:'от кашля',
+ opts:['tos','voz','dos'], ctx:['…necesito algo para la ','.'],
+ hintQ:'<b>Hay una palabra dudosa.</b> Tócala para corregirla.',
+ note:'La traducción puede no ser exacta. Si es importante, compruébalo con la otra persona.',
+ play:'Escuchar', show:'Mostrar',
+ me:['Hablo yo','en español'], pt:['Я говорю','по‑русски'],
+ next:'Ahora le toca a la otra persona', firstHint:'Revisa la palabra antes de mostrar la traducción',
+ shT:'Cambiar palabra', shSub:w=>`Se entendió «${w}»`, heardTag:'lo que se oyó', sOpts:'Opciones', sOwn:'Otra palabra', own:'Escribe la palabra', ownMic:'Decir la palabra',
+ shFoot:'La traducción se actualiza al elegir. El resto de la frase no cambia.', close:'Cerrar',
+ vT:'Di solo la palabra', vSub:w=>`Vamos a cambiar «${w}»`, vTurn:'Hablas tú · en español', vLive:'Te escuchamos…', cancel:'Cancelar', stop:'Parar',
+ upd:'Traducción actualizada', toastT:'Palabra cambiada', toastS:(a,b)=>`${a} → ${b}`, undo:'Deshacer',
+ st:{unsure:['Palabra dudosa','La traducción está lista, pero Parrlo no está seguro de una palabra: aparece en amarillo, subrayada con puntos y con «?». Se toca la palabra.'],
+     options:['Opciones de palabra','Al tocar la palabra se abre una hoja con opciones en contexto, el campo «Otra palabra» y el micrófono. Se elige con un toque.'],
+     voice:['Palabra por voz','Se pulsa el micrófono de la hoja. Se dice solo una palabra; el resto de la frase no se vuelve a grabar.'],
+     updated:['Traducción actualizada','Se eligió «tos»: la palabra pasa a verde con una marca y la traducción cambia a «от кашля». «Deshacer» lo deja como estaba.']},
+ page:{tag:'Referencia · tanda 2 · textos en borrador', h1:'Translate · corregir una palabra con un toque',
+  lead:'T‑10. Parrlo muestra lo que entendió y marca la palabra de la que no está seguro. Al tocarla aparecen opciones, y al elegir una la traducción se actualiza. Solo tema oscuro, interfaz de tú. Pantalla de 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Fotograma principal · opciones de palabra',
+  heroP:['La frase «Lo que entendió Parrlo» queda por encima del oscurecido y la palabra elegida se resalta: se ven a la vez la palabra y las opciones. Cada opción lleva un trozo de la frase, así que «voz» frente a «tos» se entiende al momento.','La opción «lo que se oyó» se indica con texto, no solo con color. Debajo, otra palabra: escrita o dicha.'],
+  cap:['Translate · corregir palabra','Solo tema oscuro. Textos en borrador.'],
+  hSt:'Estados', stLead:'En el orden de la corrección. Debajo de cada pantalla: cuándo aparece y qué hace la persona. Escala 0,6.',
+  hDec:'Decisiones', hTok:'Tokens y contraste', hNa:'Pendiente de aprobar', thP:'Par (texto / fondo)', thW:'Dónde', thC:'Contraste', thN:'Mínimo', low:'por debajo',
+  dec:['<b>La palabra dudosa no se marca solo con color.</b> Texto amarillo sobre fondo oscuro, subrayado de puntos y «?». El amarillo #FFC247 es el único elemento amarillo de la pantalla. En la traducción, el mismo tramo va subrayado con puntos: se ve qué cambiará.',
+   '<b>Indicaciones con palabras.</b> Bajo la frase: «Hay una palabra dudosa. Tócala para corregirla»; sobre los botones: «Revisa la palabra antes de mostrar la traducción». El área táctil de la palabra llega a 44 pt.',
+   '<b>La frase, por encima de la hoja.</b> La tarjeta «Lo que entendió Parrlo» sube sobre el oscurecido y la palabra elegida va en amarillo con anillo. Por eso aquí la tarjeta va encima de la traducción (en translate‑talk, debajo).',
+   '<b>Opciones en contexto.</b> Cada opción lleva un trozo de la frase; se elige con un toque, sin «Listo». La opción «lo que se oyó» lleva etiqueta.',
+   '<b>Otra palabra y voz.</b> Campo de texto y micrófono en la misma hoja. Por voz solo se cambia una palabra; la frase entera no se vuelve a grabar.',
+   '<b>Resultado y vuelta atrás.</b> La palabra cambiada va en verde, con subrayado continuo y marca; la tarjeta de traducción muestra «Traducción actualizada» y abajo aparece «Deshacer».',
+   '<b>Escenas por idioma.</b> ru: «открывается → закрывается» (sentido opuesto), es: «voz → tos», en: «pill → bill». Errores verosímiles en el reconocimiento que cambian el sentido.'],
+  tok:['Tema oscuro v2.3: fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>, texto <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Color = lado, como en translate‑talk: tú — <code>#2BC48A</code>, la otra persona — <code>#BFF2DC</code>, traducción para ella — <code>#00875C</code>.',
+   'Palabra dudosa — <code>#FFC247</code> sobre <code>#3A3426</code>; palabra cambiada — <code>#2BC48A</code> sobre <code>#1E3734</code>.',
+   'Nunito 900 para títulos, opciones y traducción; Inter 400/500/600/700 para la interfaz. Retícula de 4 pt, márgenes de 16, tarjetas de 20–24. Áreas táctiles ≥ 44 pt.'],
+  na:['Todos los textos son borrador. Los textos en español e inglés no los ha revisado un nativo.',
+   'El nombre «Lo que entendió Parrlo» viene de la web; en la app aún no está decidido (GAP Translate, punto 2).',
+   'Cuándo una palabra es «dudosa» y cuántas se marcan a la vez: sin decidir; en el diseño, una.',
+   'Contexto en las opciones, corrección por voz, «Traducción actualizada» y «Deshacer» van más allá de la versión actual (hoy: tocar → opciones).',
+   'La tarjeta «Lo que entendió Parrlo» encima de la traducción no coincide con translate‑talk: hay que elegir un orden.',
+   'El color <code>#3A3426</code> es derivado; no está en los tokens v2.3.'],
+  ctr:['texto principal','etiquetas, indicaciones','etiquetas en tarjeta y hoja','palabra dudosa, etiqueta «lo que se oyó»','palabra elegida','palabra cambiada','traducción (grande)','etiquetas en la tarjeta de traducción','«Traducción actualizada», «Mostrar»','«Escuchar», «Deshacer»','«Hablo yo», micrófono','«Я говорю»','botón «Parar»','opciones, «Cancelar»'] }
+},
+en:{
+ code:['EN','ES'], meN:'English', ptN:'Español',
+ said:'What Parrlo understood', edit:'Edit phrase', forPt:'for the other person',
+ ph:['Excuse me, could we get the ',', please?'], heard:'pill', fixed:'bill',
+ tr:['Perdone, ¿nos trae la ',', por favor?'], trHeard:'pastilla', trFixed:'cuenta',
+ opts:['bill','pill','bell'], ctx:['…could we get the ',', please?'],
+ hintQ:'<b>One word might be wrong.</b> Tap it to fix it.',
+ note:'Translations may not be exact. Double-check anything important with the other person.',
+ play:'Play', show:'Show',
+ me:['I’m speaking','in English'], pt:['Yo hablo','en español'],
+ next:'Now it’s the other person’s turn', firstHint:'Check the word before you show the translation',
+ shT:'Replace word', shSub:w=>`Heard as “${w}”`, heardTag:'as heard', sOpts:'Suggestions', sOwn:'Your own word', own:'Type a word', ownMic:'Say the word',
+ shFoot:'The translation updates when you pick one. The rest of the phrase stays the same.', close:'Close',
+ vT:'Say just the word', vSub:w=>`Replacing “${w}”`, vTurn:'You’re speaking · English', vLive:'Listening…', cancel:'Cancel', stop:'Stop',
+ upd:'Translation updated', toastT:'Word replaced', toastS:(a,b)=>`${a} → ${b}`, undo:'Undo',
+ st:{unsure:['Unsure word','The translation is ready, but Parrlo isn’t sure about one word: it’s yellow, dash-underlined and marked “?”. The user taps it.'],
+     options:['Word suggestions','Tapping the word opens a sheet with suggestions shown in context, a “Your own word” field and a mic. One tap picks a suggestion.'],
+     voice:['Word by voice','The mic in the sheet is on. The user says just one word; the rest of the phrase isn’t re-recorded.'],
+     updated:['Translation updated','“bill” was picked: the word turns green with a check, and the translation changes to “cuenta”. Undo puts it back.']},
+ page:{tag:'Reference · batch 2 · draft copy', h1:'Translate · tap to fix a word',
+  lead:'T‑10. Parrlo shows what it understood and flags the word it isn’t sure about. Tapping the word opens suggestions; picking one updates the translation. Dark theme only. Screen 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Hero frame · word suggestions',
+  heroP:['The “What Parrlo understood” card stays above the dimmed background with the chosen word highlighted, so the word and the suggestions are visible together. Each suggestion comes with a bit of the phrase, so “pill” vs “bill” is obvious at a glance.','The “as heard” option is labeled in words, not just by color. Below: your own word, typed or spoken.'],
+  cap:['Translate · fix a word','Dark theme only. Draft copy.'],
+  hSt:'States', stLead:'In the order of a fix. Under each screen: when it appears and what the user does. Scale 0.6.',
+  hDec:'Decisions', hTok:'Tokens and contrast', hNa:'Not yet approved', thP:'Pair (text / background)', thW:'Where', thC:'Contrast', thN:'Minimum', low:'below minimum',
+  dec:['<b>The unsure word isn’t marked by color alone.</b> Yellow text on a dark chip, a dashed underline and a “?”. Yellow #FFC247 is the only yellow element on screen. The matching part of the translation is dash-underlined too, so you can see what will change.',
+   '<b>Hints in words.</b> Under the phrase: “One word might be wrong. Tap it to fix it.” Above the buttons: “Check the word before you show the translation.” The word’s tap area is extended to 44 pt.',
+   '<b>Phrase above the sheet.</b> The “What Parrlo understood” card rises above the dimmed background; the chosen word becomes a yellow chip with a ring. That’s why, in this flow, the card sits above the translation (in translate‑talk it’s below).',
+   '<b>Suggestions in context.</b> Each one shows a snippet of the phrase; one tap picks it, no Done button. The “as heard” option has a label.',
+   '<b>Own word and voice.</b> A text field and a mic in the same sheet. By voice, only the one word is replaced; the whole phrase isn’t re-recorded.',
+   '<b>Result and undo.</b> The replaced word is green with a solid underline and a check; the translation card shows “Translation updated”, and an Undo toast appears at the bottom.',
+   '<b>One scene per language.</b> ru: “открывается → закрывается” (opposite meaning), es: “voz → tos”, en: “pill → bill”. Plausible recognition errors that change the meaning.'],
+  tok:['Dark theme v2.3: background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>, text <code>#F2F5F7</code> / <code>#9AA4B2</code>.',
+   'Color = side, as in translate‑talk: you — <code>#2BC48A</code>, the other person — <code>#BFF2DC</code>, translation for them — <code>#00875C</code>.',
+   'Unsure word — <code>#FFC247</code> on <code>#3A3426</code>; replaced word — <code>#2BC48A</code> on <code>#1E3734</code>.',
+   'Nunito 900 for titles, suggestions and translation; Inter 400/500/600/700 for UI. 4 pt grid, 16 margins, 20–24 cards. Tap targets ≥ 44 pt.'],
+  na:['All copy is draft. Spanish and English copy hasn’t been reviewed by a native speaker.',
+   'The block name “What Parrlo understood” comes from the website; the app hasn’t settled on it (GAP Translate, item 2).',
+   'The “unsure” threshold and how many words to flag at once are open; the mockup shows one.',
+   'Context in suggestions, fixing by voice, “Translation updated” and Undo go beyond the current build (today: tap → suggestions).',
+   'Placing the “What Parrlo understood” card above the translation differs from translate‑talk; one order needs to be picked.',
+   'Color <code>#3A3426</code> is derived and not in the v2.3 tokens.'],
+  ctr:['body text','labels, hints','labels in card and sheet','unsure word, “as heard” tag','chosen word','replaced word','translation (large)','labels on translation card','“Translation updated”, “Show”','“Play”, “Undo”','“I’m speaking”, mic','“Yo hablo”','Stop button','suggestions, Cancel'] }
+}};
+
+let L=new URLSearchParams(location.search).get('l');
+if(!T[L])L='ru';
+const D=T[L];
+document.documentElement.lang=L;
+
+/* ===== куски экрана ===== */
+const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
+const home=`<div class="homebar"><i></i></div>`;
+const top=`<div class="${P}top"><span class="${P}cb" aria-label="back">${I.back}</span><span class="${P}pair"><span><i class="${P}dot"></i>${D.code[0]}<i class="${P}swp">${I.swap}</i>${D.code[1]}<i class="${P}dot ${P}es"></i></span></span><span class="${P}cb" aria-label="keyboard">${I.kbd}</span><span class="${P}cb" aria-label="more">${I.more}</span></div>`;
+const pbMe=()=>`<span class="${P}pb ${P}me">${I.mic}<span><b>${D.me[0]}</b><small>${D.me[1]}</small></span></span>`;
+const pbPt=(x='')=>`<span class="${P}pb ${P}es ${x}">${I.mic}<span><b>${D.pt[0]}</b><small>${D.pt[1]}</small></span></span>`;
+function word(mode){
+ if(mode==='q')return `<span class="${P}wd ${P}q" data-tap>${D.heard}<i class="${P}qb" aria-hidden="true">?</i></span>`;
+ if(mode==='sel')return `<span class="${P}wd ${P}sel" data-tap>${D.heard}</span>`;
+ return `<span class="${P}wd ${P}ok" data-tap>${D.fixed}${I.ok}</span>`;
+}
+const said=(mode,up)=>`<div class="${P}said ${up?P+'up':''}"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot"></i>${D.said} · ${D.meN}</div></div><span class="${P}ed" aria-label="${D.edit}">${I.pencil}</span><p>${D.ph[0]}${word(mode)}${D.ph[1]}</p></div>`;
+const card=(mode)=>`<div class="${P}card"><div class="${P}row"><div class="${P}lbl"><i class="${P}dot ${P}es"></i>${mode==='ok'?D.ptN:D.ptN+' · '+D.forPt}</div>${mode==='ok'?`<span class="${P}upd">${I.ok}${D.upd}</span>`:''}</div>
+ <p>${D.tr[0]}<span class="${P}tw ${P}${mode}">${mode==='ok'?D.trFixed:D.trHeard}</span>${D.tr[1]}</p>
+ <div class="${P}acts"><span class="${P}act">${I.spk}${D.play}</span><span class="${P}act ${P}ghost">${I.rot}${D.show}</span></div></div>`;
+function rnd(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
+function wave(n,live,seed,maxH){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const env=Math.sin(Math.PI*(i+1)/(live+1));const v=i<live?Math.max(6,Math.round((0.25+0.75*r())*maxH*(0.35+0.65*env))):4;h+=`<i class="${i<live?'':P+'f'}" style="height:${v}px"></i>`;}return h;}
+const scr=body=>`<div class="scr ${P}scr">${sbar}${body}${home}</div>`;
+const sheetHead=(t,sub)=>`<i class="${P}grab"></i><div class="${P}sh"><div><h3>${t}</h3><span class="${P}sub">${sub}</span></div><span class="${P}x" aria-label="${D.close}">${I.x}</span></div>`;
+
+const H={
+unsure:scr(`${top}
+<div class="${P}main">
+ ${said('q')}
+ <div class="${P}note">${I.q}<span>${D.hintQ}</span></div>
+ ${card('q')}
+</div>
+<div class="${P}bot"><div class="${P}hint">${I.info}${D.firstHint}</div><div class="${P}btns">${pbMe()}${pbPt()}</div></div>`),
+
+options:`<div class="scr ${P}scr">${sbar}${top}
+<div class="${P}main">
+ ${said('sel',1)}
+ ${card('q')}
+</div>
+<div class="${P}bot"><div class="${P}btns">${pbMe()}${pbPt()}</div></div>${home}
+<div class="${P}dim"></div>
+<div class="${P}sheet">
+ ${sheetHead(D.shT,D.shSub(D.heard))}
+ <div class="${P}sl">${D.sOpts}</div>
+ <div class="${P}list">${D.opts.map(o=>`<div class="${P}opt"><div><b>${o}${o===D.heard?`<span class="${P}heard">${I.ear}${D.heardTag}</span>`:''}</b><span class="${P}ctx">${D.ctx[0]}<em>${o}</em>${D.ctx[1]}</span></div><span class="${P}chev">${o===D.heard?'':I.chev}</span></div>`).join('')}</div>
+ <div class="${P}sl" style="padding-top:16px">${D.sOwn}</div>
+ <div class="${P}own"><span class="${P}field">${I.pencil}${D.own}</span><span class="${P}mic" aria-label="${D.ownMic}">${I.micp}</span></div>
+ <div class="${P}foot">${I.info}<span>${D.shFoot}</span></div>
+ ${home}
+</div></div>`,
+
+voice:`<div class="scr ${P}scr">${sbar}${top}
+<div class="${P}main">
+ ${said('sel',1)}
+ ${card('q')}
+</div>
+<div class="${P}bot"><div class="${P}btns">${pbMe()}${pbPt()}</div></div>${home}
+<div class="${P}dim"></div>
+<div class="${P}sheet">
+ ${sheetHead(D.vT,D.vSub(D.heard))}
+ <span class="${P}turn">${I.mic18}${D.vTurn}</span>
+ <div class="${P}live">${D.fixed}<i></i></div>
+ <div class="${P}livesub">${D.vLive}</div>
+ <div class="${P}wave">${wave(44,30,17,80)}</div>
+ <div class="${P}vb"><span class="${P}sec">${D.cancel}</span><span class="${P}pri"><i></i>${D.stop}</span></div>
+ ${home}
+</div></div>`,
+
+updated:scr(`${top}
+<div class="${P}main">
+ ${said('ok')}
+ ${card('ok')}
+</div>
+<div class="${P}toast">${I.okc}<div><b>${D.toastT}</b><span>${D.toastS(D.heard,D.fixed)}</span></div><span class="${P}undo">${I.undo}${D.undo}</span></div>
+<div class="${P}bot"><div class="${P}hint">${I.down}${D.next}</div><div class="${P}btns">${pbMe()}${pbPt(P+'next')}</div></div>`),
+};
+const ORDER=['unsure','options','voice','updated'];
+window.TW_STATES=ORDER; window.TW_LANG=L;
+
+/* ===== страница ===== */
+const G=D.page;
+$('langs').innerHTML=['ru','es','en'].map(l=>`<a href="?l=${l}" aria-current="${l===L}">${l.toUpperCase()}</a>`).join('');
+$('tag').textContent=G.tag; $('h1').textContent=G.h1; $('lead').textContent=G.lead;
+document.title='Parrlo Translate · '+G.cap[0].split(' · ')[1];
+const ph=(id,s,html)=>`<div class="pf p67" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
+$('hero-ph').innerHTML=ph('translate-word',.8,H.options)+`<div class="pcap"><span class="dot"></span><div><b>${G.cap[0]}</b><span>${G.cap[1]}</span></div></div>`;
+$('hero-t').innerHTML=`<h3>${G.heroH}</h3>`+G.heroP.map(p=>`<p>${p}</p>`).join('');
+$('h-st').textContent=G.hSt; $('st-lead').textContent=G.stLead;
+$('grid').innerHTML=ORDER.map(k=>`<figure>${ph(P+'-'+k,.6,H[k])}<figcaption><b>${D.st[k][0]}</b><code>${k}</code> · ${D.st[k][1]}</figcaption></figure>`).join('');
+$('h-dec').textContent=G.hDec; $('dec').innerHTML=G.dec.map(x=>`<li>${x}</li>`).join('');
+$('h-tok').textContent=G.hTok; $('tok').innerHTML=G.tok.map(x=>`<li>${x}</li>`).join('');
+$('h-na').textContent=G.hNa; $('na').innerHTML=G.na.map(x=>`<li>${x}</li>`).join('');
+
+/* контраст */
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const pairs=[['#F2F5F7','#0E1116',4.5],['#9AA4B2','#0E1116',4.5],['#9AA4B2','#1C2026',4.5],['#FFC247','#3A3426',4.5],['#0E1116','#FFC247',4.5],['#2BC48A','#1E3734',4.5],
+ ['#FFFFFF','#00875C',3],['#FFFFFF','#00875C',4.5],['#FFFFFF','#005E40',4.5],['#0E1116','#FFFFFF',4.5],['#0E1116','#2BC48A',4.5],['#0E1116','#BFF2DC',4.5],['#0E1116','#F2F5F7',4.5],['#F2F5F7','#242B34',4.5]];
+const dec=x=>L==='en'?String(x):String(x).replace('.',',');
+$('ctr').innerHTML=`<tr><th>${G.thP}</th><th>${G.thW}</th><th>${G.thC}</th><th>${G.thN}</th></tr>`+pairs.map(([a,b,n],i)=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${G.ctr[i]}</td><td><b>${dec(v.toFixed(2))}:1</b></td><td>${v>=n?'≥ '+dec(n)+' ✓':G.low}</td></tr>`;}).join('');
+window.TW_CR=pairs.map(([a,b,n],i)=>[G.ctr[i],+cr(a,b).toFixed(2),n]);
+document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>
