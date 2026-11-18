@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · звонок</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.chat-call-w{max-width:1200px;margin:0 auto}
+.chat-call-lsw{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-call-lsw a{min-width:48px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#9AA4B2;text-decoration:none;padding:0 12px}
+.chat-call-lsw a[aria-current="true"]{background:#1C2026;color:#F2F5F7;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-call-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-call-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-call-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-call-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-call-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-call-info ul,.chat-call-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-call-info li,.chat-call-sec li{margin:6px 0}
+.chat-call-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.chat-call-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-call-lead{color:#9AA4B2;margin:0 0 32px;max-width:720px}
+.chat-call-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:40px 24px;justify-items:center}
+.chat-call-card{width:280px}
+.chat-call-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.chat-call-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-call-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+.chat-call-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px 40px}
+.chat-call-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-call-sec b{color:#F2F5F7;font-weight:600}
+.chat-call-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-call-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-call-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-call-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-call-hero .pf{--s:.78!important}.chat-call-info h1{font-size:32px}.chat-call-cols{grid-template-columns:1fr}}
+
+/* ======= экран 430×932 ======= */
+.chat-call-scr{overflow:hidden;--me:#2BC48A;--th:#BFF2DC;--err:#FF6B5E;--yel:#FFC247}
+.chat-call-scr svg{display:block}
+.chat-call-top{flex:none;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 8px}
+.chat-call-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-call-ib svg{width:28px;height:28px}
+.chat-call-tm{font:600 16px/20px Inter;font-variant-numeric:tabular-nums;color:var(--sec);display:flex;align-items:center;gap:6px}
+.chat-call-tm i{width:8px;height:8px;border-radius:50%;background:var(--me)}
+.chat-call-lc{flex:none;height:44px;display:flex;align-items:center}
+.chat-call-lc span{height:32px;border-radius:16px;background:var(--sf2);display:flex;align-items:center;gap:6px;padding:0 12px;font:700 13px/1 Inter;letter-spacing:.04em;color:var(--tx)}
+.chat-call-lc svg{width:14px;height:14px;color:var(--sec)}
+
+/* собеседник */
+.chat-call-who{flex:none;display:flex;flex-direction:column;align-items:center;padding:4px 20px 16px}
+.chat-call-av{position:relative;width:96px;height:96px;border-radius:50%;color:#0E1116;font:900 40px/96px Nunito,Inter;text-align:center;flex:none}
+.chat-call-av.sp{box-shadow:0 0 0 4px var(--bg),0 0 0 7px var(--th),0 0 0 16px rgba(191,242,220,.10)}
+.chat-call-av.ring1{box-shadow:0 0 0 14px rgba(191,242,220,.09),0 0 0 32px rgba(191,242,220,.05),0 0 0 52px rgba(191,242,220,.025)}
+.chat-call-av.dim{box-shadow:inset 0 0 0 48px rgba(14,17,22,.45);color:#3A414B}
+.chat-call-av .bd{position:absolute;right:-4px;bottom:-4px;width:36px;height:36px;border-radius:50%;background:var(--err);color:#0E1116;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--bg)}
+.chat-call-av .bd svg{width:22px;height:22px}
+.chat-call-nm{margin:12px 0 0;font:900 28px/34px Nunito,sans-serif;text-align:center}
+.chat-call-ind{margin-top:8px;height:32px;border-radius:16px;display:flex;align-items:center;gap:8px;padding:0 14px 0 12px;font:600 14px/1 Inter;background:var(--sf)}
+.chat-call-ind.th{color:var(--th)}.chat-call-ind.me{color:var(--me)}
+.chat-call-ind.mut{color:var(--sec)}
+.chat-call-ind .wv{display:flex;align-items:center;gap:2px;height:16px}
+.chat-call-ind .wv b{width:3px;border-radius:2px;background:currentColor}
+.chat-call-ind svg{width:16px;height:16px}
+.chat-call-st{margin-top:6px;font-size:16px;line-height:22px;color:var(--sec);text-align:center}
+
+/* субтитры */
+.chat-call-feed{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:8px 20px 16px;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 56px);mask-image:linear-gradient(to bottom,transparent 0,#000 56px)}
+.chat-call-ln{position:relative;padding:10px 14px 10px 18px;border-radius:18px}
+.chat-call-ln::before{content:"";position:absolute;left:4px;top:12px;bottom:12px;width:3px;border-radius:2px;background:var(--th)}
+.chat-call-ln.me::before{background:var(--me)}
+.chat-call-ln .who{display:flex;align-items:center;gap:6px;font:600 13px/18px Inter;color:var(--th);margin-bottom:2px}
+.chat-call-ln.me .who{color:var(--me)}
+.chat-call-ln .who .lv{margin-left:auto;display:flex;align-items:center;gap:5px;font-weight:500;color:var(--sec)}
+.chat-call-ln .who .lv i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.chat-call-ln .tx{font-size:17px;line-height:24px;color:#C9D1DA}
+.chat-call-ln .og{display:flex;align-items:baseline;gap:6px;margin-top:4px;font-size:13px;line-height:18px;color:var(--sec);min-width:0}
+.chat-call-ln .og .k{flex:none;font:700 11px/16px Inter;letter-spacing:.06em;color:var(--sec);border-radius:5px;padding:0 5px;box-shadow:inset 0 0 0 1px #3A414B}
+.chat-call-ln .og .v{min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* живая строка: перевод крупно, исходник сворачивается под ним */
+.chat-call-ln.live{background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:14px 16px 14px 20px}
+.chat-call-ln.live::before{left:6px;top:16px;bottom:16px}
+.chat-call-ln.live .tx{font-size:23px;line-height:31px;font-weight:500;color:var(--tx);letter-spacing:-.005em}
+.chat-call-ln.live .tx em{font-style:normal;color:var(--sec)}
+.chat-call-ln.live .tx .dots{display:inline-flex;gap:3px;vertical-align:middle;margin-left:6px}
+.chat-call-ln.live .tx .dots i{width:6px;height:6px;border-radius:50%;background:var(--sec)}
+.chat-call-ln.live .tx .dots i:nth-child(2){opacity:.7}.chat-call-ln.live .tx .dots i:nth-child(3){opacity:.45}
+.chat-call-ln.live .og{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-size:15px;line-height:21px}
+.chat-call-ln.live .og .v{white-space:normal;max-height:42px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 55%,rgba(0,0,0,.35));mask-image:linear-gradient(to bottom,#000 55%,rgba(0,0,0,.35))}
+.chat-call-ln.live .og svg{flex:none;width:16px;height:16px;align-self:center;color:var(--sec)}
+/* я говорю: мой текст крупно, ниже — что прочитает собеседник */
+.chat-call-ln.live.me .og{color:#C9D1DA}
+
+/* подсказка и баннер */
+.chat-call-hint{margin:0 4px;display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);font-size:15px;line-height:22px;color:#C9D1DA}
+.chat-call-hint svg{flex:none;width:22px;height:22px;color:var(--th);margin-top:1px}
+.chat-call-sk{display:flex;flex-direction:column;gap:10px;padding:4px 4px 0}
+.chat-call-sk i{display:block;height:12px;border-radius:6px;background:#1A1F25}
+.chat-call-bn{flex:none;display:flex;align-items:center;gap:12px;margin:0 20px 4px;padding:12px 14px;border-radius:16px;background:var(--sf2);font-size:14px;line-height:20px}
+.chat-call-bn svg{flex:none;width:22px;height:22px;color:var(--yel)}
+.chat-call-bn b{display:block;font-weight:600;font-size:15px}
+.chat-call-bn span{color:#C9D1DA}
+
+/* управление */
+.chat-call-ctl{flex:none;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px 16px 12px}
+.chat-call-c{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
+.chat-call-c .b{width:68px;height:68px;border-radius:50%;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center}
+.chat-call-c .b svg{width:28px;height:28px}
+.chat-call-c.on .b{background:#F2F5F7;color:#0E1116}
+.chat-call-c.end .b{background:var(--err);color:#0E1116}
+.chat-call-c .l{font:500 13px/16px Inter;color:var(--sec);text-align:center;white-space:nowrap}
+.chat-call-c.on .l{color:var(--tx)}
+
+/* итоговые экраны: не удалось, завершён */
+.chat-call-mid{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px;text-align:center}
+.chat-call-mid h4{margin:20px 0 8px;font:900 30px/36px Nunito,sans-serif}
+.chat-call-mid p{margin:0;color:var(--sec);font-size:16px;line-height:23px;max-width:340px}
+.chat-call-mid .meta{display:flex;align-items:center;gap:8px;justify-content:center;font-size:16px;line-height:22px;color:var(--sec)}
+.chat-call-mid .meta svg{width:18px;height:18px}
+.chat-call-rt{margin:28px 0 0;width:100%;border-radius:20px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:16px}
+.chat-call-rt .q{font:600 16px/22px Inter;color:var(--tx);margin:0 0 12px}
+.chat-call-rt .r{display:flex;gap:10px}
+.chat-call-rt .r span{flex:1;min-height:48px;border-radius:24px;background:var(--sf2);display:flex;align-items:center;justify-content:center;gap:8px;font:600 15px/20px Inter;padding:0 12px;color:var(--tx)}
+.chat-call-rt .r svg{width:20px;height:20px;color:var(--sec);flex:none}
+.chat-call-act{flex:none;display:flex;flex-direction:column;gap:12px;padding:0 24px 8px}
+.chat-call-btn{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 19px/1 Nunito,sans-serif;padding:0 20px}
+.chat-call-btn svg{width:22px;height:22px;flex:none}
+.chat-call-btn.p{background:var(--acc);color:var(--onacc)}
+.chat-call-btn.s{background:var(--sf2);color:var(--tx)}
+.chat-call-btn.s svg{color:var(--mint)}
+.chat-call-btn.t{height:44px;font:600 16px/1 Inter;color:var(--sec)}
+.chat-call-nt{margin:-4px 0 0;font-size:13px;line-height:18px;color:var(--sec);text-align:center}
+</style>
+</head>
+<body>
+<div class="chat-call-w">
+<nav class="chat-call-lsw" id="chat-call-lsw" aria-label="Language"></nav>
+
+<section class="chat-call-hero">
+ <div><div class="pf p67" style="--s:1" data-state="talk" data-hero="1"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b id="chat-call-capb"></b><span id="chat-call-caps"></span></div></div></div>
+ <div class="chat-call-info">
+  <p class="chat-call-eb" id="chat-call-eb"></p>
+  <h1 id="chat-call-h1"></h1>
+  <p id="chat-call-p1"></p>
+  <ul id="chat-call-ul"></ul>
+ </div>
+</section>
+
+<h2 class="chat-call-h2" id="chat-call-h2s"></h2>
+<p class="chat-call-lead" id="chat-call-lead"></p>
+<div class="chat-call-grid" id="chat-call-grid"></div>
+
+<h2 class="chat-call-h2" id="chat-call-h2d"></h2>
+<div class="chat-call-cols">
+ <div class="chat-call-sec"><h2 id="chat-call-hdec"></h2><ul id="chat-call-dec"></ul></div>
+ <div class="chat-call-sec"><h2 id="chat-call-htok"></h2>
+  <table class="chat-call-ct" id="chat-call-ct"></table>
+  <ul style="margin-top:12px" id="chat-call-tok"></ul></div>
+ <div class="chat-call-sec"><h2 id="chat-call-hna"></h2><ul id="chat-call-na"></ul></div>
+</div>
+</div>
+
+<script>
+(function(){
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra){return '<svg viewBox="0 0 24 24" '+(extra||SW)+' aria-hidden="true">'+p+'</svg>'}
+var HS='M5.2 3.5h3.3l1.8 4.6-2.3 1.5a11.5 11.5 0 0 0 6.4 6.4l1.5-2.3 4.6 1.8v3.3a1.7 1.7 0 0 1-1.8 1.7A16.8 16.8 0 0 1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z';
+var I={
+ down:ic('<path d="M6 9.5l6 6 6-6"/>'),
+ arr:ic('<path d="M5 12h14M14 7l5 5-5 5"/>'),
+ swap:ic('<path d="M4 8.5h15M15 4.5l4 4-4 4"/><path d="M20 15.5H5M9 11.5l-4 4 4 4"/>'),
+ tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ micoff:ic('<path d="M15.5 10V6a3.5 3.5 0 0 0-6.8-1.2"/><path d="M8.5 8.5V11a3.5 3.5 0 0 0 5.6 2.8"/><path d="M5 11.5a7 7 0 0 0 11.3 5.5M19 11.5a7 7 0 0 1-.5 2.6"/><path d="M12 18.5v3"/><path d="M3.5 3.5l17 17"/>'),
+ spk:ic('<path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/>'),
+ cc:ic('<rect x="2.5" y="5" width="19" height="14" rx="3.5"/><path d="M10.4 10.2a2.3 2.3 0 1 0 0 3.6M17 10.2a2.3 2.3 0 1 0 0 3.6"/>'),
+ end:ic('<g transform="rotate(135 12 12)"><path d="'+HS+'"/></g>','fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"'),
+ phone:ic('<path d="'+HS+'"/>'),
+ chat:ic('<path d="M4.5 18.5V7a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6.5a3 3 0 0 1-3 3H8z"/><path d="M8.5 9h7M8.5 12.5h4.5"/>'),
+ alert:ic('<path d="M12 7.5v5.5"/><circle cx="12" cy="16.8" r=".9" fill="currentColor"/>','fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"'),
+ up:ic('<path d="M7.5 10.5v9h-3v-9z"/><path d="M7.5 10.5l3.6-6.3c1.6 0 2.4 1 2.1 2.6l-.6 3h5.2a2 2 0 0 1 2 2.4l-1.3 5.8a2 2 0 0 1-2 1.5H7.5"/>'),
+ dn:ic('<g transform="rotate(180 12 12)"><path d="M7.5 10.5v9h-3v-9z"/><path d="M7.5 10.5l3.6-6.3c1.6 0 2.4 1 2.1 2.6l-.6 3h5.2a2 2 0 0 1 2 2.4l-1.3 5.8a2 2 0 0 1-2 1.5H7.5"/></g>'),
+ fold:ic('<path d="M8 9l4-4 4 4M8 15l4 4 4-4"/>'),
+ clock:ic('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>')
+};
+
+/* ===== словарь: экран и страница ===== */
+var T={
+ru:{lang:'ru',me:'RU',th:'ES',name:'Lucía',ini:'L',col:'#6AA6F5',
+ you:'Ты',reads:'Lucía читает',orig:'оригинал',live:'сейчас',timer:'04:12',dur:'12:04',
+ thSp:'Говорит Lucía',meSp:'Говоришь ты',mutedInd:'Тебя не слышно',
+ min:'Свернуть звонок',pair:'Язык звонка: испанский и русский',
+ ctl:['Микрофон','Динамик','Субтитры','Завершить'],ctlMuted:'Микрофон',
+ conn:'Соединяем…',hint:'Lucía говорит по-испански. Её слова появятся здесь по-русски, а твои она прочитает по-испански.',
+ mutedT:'Микрофон выключен',mutedS:'Lucía тебя не слышит. Субтитры идут дальше.',
+ failT:'Не удалось позвонить',failS:'Соединение прервалось до ответа. Проверь интернет и попробуй ещё раз.',
+ again:'Позвонить ещё раз',write:'Написать',writeN:'Напишешь по-русски — Lucía прочитает по-испански.',close:'Закрыть',
+ endT:'Звонок завершён',rateQ:'Как тебе перевод в звонке?',good:'Всё понятно',bad:'Были неточности',
+ L0:{t:'Привет! Я уже вышла из метро.',o:'¡Hola! Ya salí del metro.'},
+ L1:{t:'Ты меня хорошо слышишь? Я подхожу к офису.',o:'¿Me oyes bien? Estoy llegando a la oficina.'},
+ M1:{t:'Да, слышу. Жду тебя на ресепшене.',o:'Sí, te oigo. Te espero en recepción.'},
+ L2:{t:'Отлично, поднимусь через пять минут.',a:' Документы у тебя с собой?',o:'Perfecto, subo en cinco minutos. ¿Traes los documentos?'},
+ M2:{t:'Да, документы у меня. И паспорт',a:' тоже',o:'Sí, tengo los documentos. Y el pasaporte'},
+ L3:{t:'Алло? Ты здесь? Я тебя не слышу.',o:'¿Hola? ¿Sigues ahí? No te oigo.'},
+ P:{title:'Parrlo Chat · звонок',eb:'Эталон · chat-call · C-13 · макет · только тёмная тема',
+  h1:'Звонок, где понимаешь каждое слово',
+  p1:'Голосовой звонок 1:1 с живыми субтитрами. Lucía говорит по-испански — ты читаешь по-русски, пока она ещё договаривает. Это макет: звонков в сборке пока нет, кадры нарисованы по задуманному поведению.',
+  ul:['<b>Живая строка</b>: перевод крупно, исходник под ним мельче и сворачивается, когда перевод готов.','<b>Цвет = сторона</b>: мятный — Lucía, зелёный — ты. У каждой строки ещё и подпись, не только цвет.','<b>Твои слова</b> — в строке с подписью «Ты»; под ними «Lucía читает» по-испански.','<b>Управление</b>: микрофон, динамик, субтитры, завершить; включённое — светлым и подписью.'],
+  capb:'Parrlo Chat · звонок с Lucía',caps:'Главный кадр: Lucía говорит, перевод на русский появляется поверх звонка. Макет, тексты — черновик.',
+  h2s:'Состояния',lead:'Шесть кадров одного звонка. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-call--&lt;состояние&gt;--&lt;язык&gt;.png</code>.',
+  h2d:'Решения, токены, открытые вопросы',hdec:'Решения сверх сборки',htok:'Токены и контраст',hna:'Не утверждено',
+  st:{connecting:['Соединяем','Нажали «Позвонить» в чате; Lucía ещё не ответила. Подсказка объясняет, что будет в субтитрах.'],
+   talk:['Разговор с субтитрами','Lucía говорит: перевод набирается крупно, исходник сворачивается под ним; прошлые реплики выше.'],
+   speaking:['Ты говоришь','Твоя речь распознаётся, ниже — что Lucía прочитает по-испански.'],
+   muted:['Микрофон выключен','Нажали «Микрофон»: кнопка светлая и перечёркнута, баннер говорит, что тебя не слышно.'],
+   failed:['Не удалось','Соединение не установилось: «Позвонить ещё раз» или «Написать» в чат.'],
+   ended:['Звонок завершён','После «Завершить»: длительность, оценка перевода и следующий шаг.']},
+  dec:['<b>Субтитры поверх звонка, а не отдельный экран</b>: аватар и управление остаются на месте, лента субтитров — между ними, старые строки уходят вверх и тают.','<b>Исходник сворачивается под переводом</b>: сначала распознаётся оригинал, потом над ним крупно встаёт перевод, оригинал уменьшается до одной строки с меткой языка — его всегда можно сверить.','<b>Недоговорённое — серым</b>: хвост фразы, которая ещё переводится, показан вторичным цветом с точками; текст не «прыгает».','<b>«Lucía читает»</b> под твоей репликой — видно, как тебя поняли на той стороне.','<b>Баннер «Микрофон выключен»</b> и строка «Ты здесь?» — ясно, почему собеседник переспрашивает.','<b>«Не удалось» не тупик</b>: повторить звонок или сразу написать в чат, с подсказкой, что сообщение тоже переведётся.','<b>Оценка перевода после звонка</b>: два ответа, без звёзд.'],
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>.','Стороны: Lucía — Mint <code>#BFF2DC</code>, ты — Light Green <code>#2BC48A</code> (как в Translate «Разговор»).','«Завершить» — <code>#FF6B5E</code> со значком <code>#0E1116</code>; жёлтый <code>#FFC247</code> — только значок выключенного микрофона.','Кнопки управления 68×68, кнопки действий 56 и 48 в высоту, «Закрыть» 44.'],
+  na:['Все тексты — черновик, включая es и en (es на «tú»).','Звонки, субтитры и перевод в реальном времени — новой функцией, в сборке нет (GAP №36).','Свёртывание исходника и серый «хвост» перевода — предложение, анимация не описана.','Оценка перевода после звонка: нужна ли, куда идёт ответ.','Озвучка перевода собеседнику (GAP №49) и видео (№52) — вне этого экрана.','Протокол и расшифровка звонка — C-14, нужны согласие участников и строка в Политике.','Цвет кнопки «Завершить» (ошибочный красный бренда на кнопке действия).'],
+  ct:['Текст: перевод в живой строке','Подпись «Lucía», мятная сторона','Подпись «Ты», зелёная сторона','Прошлые реплики','Исходник, время, подписи','Исходник в живой строке','Подписи кнопок управления','Значок на «Завершить»','Текст в баннере','Текст на акцентной кнопке']}},
+es:{lang:'es',me:'ES',th:'RU',name:'Olga',ini:'O',col:'#F2A65A',
+ you:'Tú',reads:'Olga lee',orig:'original',live:'ahora',timer:'04:12',dur:'12:04',
+ thSp:'Habla Olga',meSp:'Estás hablando',mutedInd:'No se te oye',
+ min:'Minimizar llamada',pair:'Idioma de la llamada: ruso y español',
+ ctl:['Micrófono','Altavoz','Subtítulos','Colgar'],ctlMuted:'Micrófono',
+ conn:'Conectando…',hint:'Olga habla ruso. Aquí verás sus palabras en español, y ella leerá las tuyas en ruso.',
+ mutedT:'Micrófono silenciado',mutedS:'Olga no te oye. Los subtítulos siguen activos.',
+ failT:'No se pudo llamar',failS:'La conexión se cortó antes de que Olga contestara. Revisa tu internet y vuelve a intentarlo.',
+ again:'Volver a llamar',write:'Escribir',writeN:'Escribe en español y Olga lo leerá en ruso.',close:'Cerrar',
+ endT:'Llamada finalizada',rateQ:'¿Qué tal la traducción?',good:'Todo claro',bad:'Hubo errores',
+ L0:{t:'¡Hola! Ya salí del metro.',o:'Привет! Я уже вышла из метро.'},
+ L1:{t:'¿Me oyes bien? Ya casi llego a la oficina.',o:'Ты меня хорошо слышишь? Я подхожу к офису.'},
+ M1:{t:'Sí, te oigo. Te espero en recepción.',o:'Да, слышу. Жду тебя на ресепшене.'},
+ L2:{t:'Genial, subo en cinco minutos.',a:' ¿Tienes los documentos?',o:'Отлично, поднимусь через пять минут. Документы у тебя с собой?'},
+ M2:{t:'Sí, los tengo aquí. Y el pasaporte',a:' también',o:'Да, они у меня. И паспорт'},
+ L3:{t:'¿Hola? ¿Sigues ahí? No te oigo.',o:'Алло? Ты здесь? Я тебя не слышу.'},
+ P:{title:'Parrlo Chat · llamada',eb:'Referencia · chat-call · C-13 · maqueta · solo tema oscuro',
+  h1:'Una llamada en la que entiendes cada palabra',
+  p1:'Llamada de voz 1:1 con subtítulos en directo. Olga habla ruso y tú lo lees en español mientras aún termina la frase. Es una maqueta: la app todavía no tiene llamadas; los fotogramas muestran el comportamiento previsto.',
+  ul:['<b>Línea en directo</b>: la traducción en grande; el original debajo, más pequeño, se pliega cuando la traducción está lista.','<b>Color = lado</b>: menta para Olga, verde para ti. Cada línea lleva además su etiqueta, no solo color.','<b>Tus palabras</b>: lo que dices aparece con «Tú»; debajo, «Olga lee» en ruso.','<b>Controles</b>: micrófono, altavoz, subtítulos y colgar; lo activo se ve claro y con texto.'],
+  capb:'Parrlo Chat · llamada con Olga',caps:'Fotograma principal: Olga habla y la traducción al español aparece sobre la llamada. Maqueta, textos en borrador.',
+  h2s:'Estados',lead:'Seis fotogramas de la misma llamada. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-call--&lt;estado&gt;--&lt;idioma&gt;.png</code>.',
+  h2d:'Decisiones, tokens y temas abiertos',hdec:'Más allá de la versión actual',htok:'Tokens y contraste',hna:'Sin aprobar',
+  st:{connecting:['Conectando','Tocaste «Llamar» en el chat y Olga aún no contesta. Un aviso explica qué verás en los subtítulos.'],
+   talk:['Conversación con subtítulos','Habla Olga: la traducción crece en grande y el original se pliega debajo; lo anterior sube.'],
+   speaking:['Estás hablando','Se reconoce tu voz; debajo, lo que Olga leerá en ruso.'],
+   muted:['Micrófono silenciado','Tocaste «Micrófono»: el botón se ve claro y tachado, y un aviso dice que no se te oye.'],
+   failed:['No se pudo llamar','No se estableció la conexión: «Volver a llamar» o «Escribir» en el chat.'],
+   ended:['Llamada finalizada','Después de «Colgar»: duración, valoración de la traducción y siguiente paso.']},
+  dec:['<b>Subtítulos sobre la llamada</b>, no en otra pantalla: el avatar y los controles se quedan; las líneas antiguas suben y se desvanecen.','<b>El original se pliega bajo la traducción</b>: primero se reconoce el original; encima aparece la traducción en grande y el original se reduce a una línea con su idioma.','<b>Lo que falta, en gris</b>: el final de la frase aún sin traducir va en color secundario con puntos; el texto no salta.','<b>«Olga lee»</b> bajo tu frase: ves cómo te entendieron.','<b>Aviso de micrófono silenciado</b> junto al «¿Sigues ahí?» de Olga.','<b>«No se pudo llamar» con salida</b>: volver a llamar o escribir en el chat.','<b>Valoración tras la llamada</b>: dos respuestas, sin estrellas.'],
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code>/<code>#242B34</code>, líneas <code>#2F3742</code>.','Lados: Olga — Mint <code>#BFF2DC</code>, tú — Light Green <code>#2BC48A</code>.','«Colgar» — <code>#FF6B5E</code> con icono <code>#0E1116</code>; amarillo <code>#FFC247</code> solo en el icono de micrófono silenciado.','Controles de 68×68, botones de acción de 56 y 48 de alto, «Cerrar» de 44.'],
+  na:['Todos los textos son borrador, también es y en.','Llamadas y subtítulos en directo: función nueva, no está en la app (GAP n.º 36).','Plegado del original y final de frase en gris: propuesta; animación sin definir.','Valoración tras la llamada: si hace falta y adónde va la respuesta.','Voz traducida para la otra persona (n.º 49) y vídeo (n.º 52): fuera de esta pantalla.','Acta y transcripción de llamadas: C-14, requiere consentimiento y una línea en la Política.','Color del botón «Colgar».'],
+  ct:['Texto: traducción en directo','Etiqueta «Olga», lado menta','Etiqueta «Tú», lado verde','Líneas anteriores','Original, hora, etiquetas','Original en la línea en directo','Etiquetas de los controles','Icono en «Colgar»','Texto del aviso','Texto en botón de acento']}},
+en:{lang:'en',me:'EN',th:'ES',name:'Lucía',ini:'L',col:'#6AA6F5',
+ you:'You',reads:'Lucía reads',orig:'original',live:'live',timer:'04:12',dur:'12:04',
+ thSp:'Lucía is speaking',meSp:'You’re speaking',mutedInd:'You’re muted',
+ min:'Minimize call',pair:'Call language: Spanish and English',
+ ctl:['Mute','Speaker','Captions','End'],ctlMuted:'Unmute',
+ conn:'Connecting…',hint:'Lucía speaks Spanish. Her words will show up here in English, and she’ll read yours in Spanish.',
+ mutedT:'You’re muted',mutedS:'Lucía can’t hear you. Captions keep running.',
+ failT:'Couldn’t connect',failS:'The connection dropped before Lucía picked up. Check your internet and try again.',
+ again:'Call again',write:'Send a message',writeN:'Write in English — Lucía will read it in Spanish.',close:'Close',
+ endT:'Call ended',rateQ:'How was the translation?',good:'All clear',bad:'Some mistakes',
+ L0:{t:'Hi! I just got out of the metro.',o:'¡Hola! Ya salí del metro.'},
+ L1:{t:'Can you hear me okay? I’m almost at the office.',o:'¿Me oyes bien? Estoy llegando a la oficina.'},
+ M1:{t:'Yes, I can hear you. I’m waiting at reception.',o:'Sí, te oigo. Te espero en recepción.'},
+ L2:{t:'Great, I’ll be up in five minutes.',a:' Do you have the documents?',o:'Perfecto, subo en cinco minutos. ¿Traes los documentos?'},
+ M2:{t:'Yes, I’ve got them. And my passport',a:' too',o:'Sí, los tengo. Y el pasaporte'},
+ L3:{t:'Hello? Are you still there? I can’t hear you.',o:'¿Hola? ¿Sigues ahí? No te oigo.'},
+ P:{title:'Parrlo Chat · call',eb:'Reference · chat-call · C-13 · mockup · dark theme only',
+  h1:'A call where every word lands',
+  p1:'A 1:1 voice call with live captions. Lucía speaks Spanish and you read it in English while she’s still finishing the sentence. This is a mockup: calls aren’t in the app yet, so these frames show the intended behavior.',
+  ul:['<b>Live line</b>: the translation is large; the original sits smaller underneath and folds away once the translation is ready.','<b>Color = side</b>: mint for Lucía, green for you. Every line is labeled too, so color isn’t the only cue.','<b>Your words</b> appear under “You”; below them, “Lucía reads” in Spanish.','<b>Controls</b>: mute, speaker, captions, end. Anything switched on turns light and changes its label.'],
+  capb:'Parrlo Chat · call with Lucía',caps:'Hero frame: Lucía is speaking and the English translation appears over the call. Mockup, draft copy.',
+  h2s:'States',lead:'Six frames of the same call. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-call--&lt;state&gt;--&lt;lang&gt;.png</code>.',
+  h2d:'Decisions, tokens, open questions',hdec:'Beyond the current build',htok:'Tokens and contrast',hna:'Not approved',
+  st:{connecting:['Connecting','You tapped Call in the chat and Lucía hasn’t picked up yet. A hint explains what the captions will show.'],
+   talk:['Call with captions','Lucía is speaking: the translation builds up large, the original folds beneath it, earlier lines move up.'],
+   speaking:['You’re speaking','Your speech is transcribed; below it, what Lucía will read in Spanish.'],
+   muted:['Muted','You tapped Mute: the button turns light with a slash, and a banner says Lucía can’t hear you.'],
+   failed:['Couldn’t connect','The call didn’t go through: call again or send a message in the chat.'],
+   ended:['Call ended','After End: call length, a quick translation rating and what to do next.']},
+  dec:['<b>Captions over the call</b>, not on a separate screen: avatar and controls stay put; older lines drift up and fade.','<b>The original folds under the translation</b>: the original is transcribed first, then the translation rises above it and the original shrinks to one line tagged with its language.','<b>Unfinished text in gray</b>: the tail still being translated is secondary color with dots, so text doesn’t jump.','<b>“Lucía reads”</b> under your line shows how you came across.','<b>Muted banner</b> next to Lucía’s “Are you still there?” makes the cause obvious.','<b>“Couldn’t connect” has a way out</b>: call again or write in the chat.','<b>Post-call rating</b>: two answers, no stars.'],
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code>/<code>#242B34</code>, lines <code>#2F3742</code>.','Sides: Lucía — Mint <code>#BFF2DC</code>, you — Light Green <code>#2BC48A</code>.','End — <code>#FF6B5E</code> with a <code>#0E1116</code> icon; yellow <code>#FFC247</code> only on the muted-mic icon.','Controls 68×68, action buttons 56 and 48 tall, Close 44.'],
+  na:['All copy is draft, including es and en.','Calls with live captions are a new feature, not in the build (GAP #36).','Folding original and gray unfinished tail: proposal, animation not specified.','Post-call rating: whether we need it and where answers go.','Translated voice for the other person (#49) and video (#52) are out of scope here.','Call notes and transcripts are C-14 and need consent plus a line in the Privacy Policy.','End button color.'],
+  ct:['Text: live translation','“Lucía” label, mint side','“You” label, green side','Earlier lines','Original, time, labels','Original in the live line','Control labels','Icon on End','Banner text','Text on accent button']}}
+};
+
+var qs=new URLSearchParams(location.search).get('l');var LG=T[qs]?qs:'ru';var D=T[LG];
+function nb(s){return String(s).replace(/(^|[\s>(«])([вкусоияаВКУСОИЯА]|во|ко|со|из|на|от|по|до|за|не|но|же|то|об|Да)\s(?=[^\s<])/g,'$1$2\u00A0').replace(/(^|[^А-Яа-яЁё])по-(?=[а-яё])/g,'$1по‑').replace(/(\d) (мин|min)/g,'$1 $2')}
+
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function scr(inner){return '<div class="scr chat-call-scr">'+sbar+inner+home+'</div>'}
+function top(timer){return '<div class="chat-call-top"><span class="chat-call-ib" role="button" aria-label="'+D.min+'" data-tap>'+I.down+'</span>'+(timer?'<span class="chat-call-tm"><i></i>'+timer+'</span>':'<span></span>')+'<span class="chat-call-lc" role="button" aria-label="'+D.pair+'" data-tap><span>'+D.th+I.arr+D.me+'</span></span></div>'}
+function wv(n){var h=[6,12,16,9,14,7,11],s='';for(var i=0;i<n;i++)s+='<b style="height:'+h[i%h.length]+'px"></b>';return '<span class="wv" aria-hidden="true">'+s+'</span>'}
+function who(o){
+ o=o||{};
+ var av='<div class="chat-call-av '+(o.av||'')+'" style="background:'+D.col+'" aria-hidden="true">'+D.ini+(o.badge?'<span class="bd">'+I.alert+'</span>':'')+'</div>';
+ var ind='';
+ if(o.ind==='th')ind='<div class="chat-call-ind th">'+wv(5)+D.thSp+'</div>';
+ if(o.ind==='me')ind='<div class="chat-call-ind me">'+wv(5)+D.meSp+'</div>';
+ if(o.ind==='mut')ind='<div class="chat-call-ind mut">'+I.micoff+D.mutedInd+'</div>';
+ return '<div class="chat-call-who">'+av+'<div class="chat-call-nm">'+D.name+'</div>'+ind+(o.st?'<div class="chat-call-st">'+o.st+'</div>':'')+'</div>';
+}
+function ln(side,l,o){
+ o=o||{};var me=side==='me';
+ var lab=me?D.you:D.name, k=me?D.th:D.th;
+ var ogLab=me?('<span class="k">'+D.th+'</span>'):('<span class="k">'+D.th+'</span>');
+ var tx=l.t+(o.live&&l.a?'<em>'+l.a+'</em>':'')+(o.live&&l.a?'<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>':'');
+ var head='<div class="who">'+lab+(o.live?'<span class="lv"><i></i>'+D.live+'</span>':'')+'</div>';
+ var og='<div class="og" lang="'+(me?D.th:D.th).toLowerCase()+'">'+(o.live?I.fold:'')+ogLab+'<span class="v'+(o.live?'':' chat-call-clip')+'">'+(me?'<span style="color:var(--sec)">'+D.reads+': </span>':'')+l.o+'</span></div>';
+ return '<div class="chat-call-ln '+(me?'me ':'')+(o.live?'live':'')+'"><div>'+head+'<div class="tx" lang="'+(me?D.me:D.me).toLowerCase()+'">'+tx+'</div>'+og+'</div></div>';
+}
+function ctl(o){
+ o=o||{};
+ return '<div class="chat-call-ctl">'+
+  '<span class="chat-call-c'+(o.muted?' on':'')+'" role="button" aria-pressed="'+(o.muted?'true':'false')+'"><span class="b" data-tap>'+(o.muted?I.micoff:I.mic)+'</span><span class="l">'+(o.muted?D.ctlMuted:D.ctl[0])+'</span></span>'+
+  '<span class="chat-call-c" role="button" aria-pressed="false"><span class="b" data-tap>'+I.spk+'</span><span class="l">'+D.ctl[1]+'</span></span>'+
+  '<span class="chat-call-c on" role="button" aria-pressed="true"><span class="b" data-tap>'+I.cc+'</span><span class="l">'+D.ctl[2]+'</span></span>'+
+  '<span class="chat-call-c end" role="button"><span class="b" data-tap>'+I.end+'</span><span class="l">'+D.ctl[3]+'</span></span></div>';
+}
+function feed(x){return '<div class="chat-call-feed" aria-live="polite">'+x+'</div>'}
+
+var S={};
+S.connecting=function(){return scr(top('')+who({av:'ring1',st:D.conn})+feed('<div class="chat-call-hint">'+I.tr+'<span>'+D.hint+'</span></div>')+ctl())};
+S.talk=function(){return scr(top(D.timer)+who({av:'sp',ind:'th'})+feed(ln('th',D.L0)+ln('th',D.L1)+ln('me',D.M1)+ln('th',D.L2,{live:1}))+ctl())};
+S.speaking=function(){var L2={t:D.L2.t+D.L2.a,o:D.L2.o};return scr(top(D.timer)+who({ind:'me'})+feed(ln('th',D.L1)+ln('me',D.M1)+ln('th',L2)+ln('me',D.M2,{live:1}))+ctl())};
+S.muted=function(){var L2={t:D.L2.t+D.L2.a,o:D.L2.o};return scr(top(D.timer)+who({av:'sp',ind:'th'})+'<div class="chat-call-bn" role="status">'+I.micoff+'<div><b>'+D.mutedT+'</b><span>'+D.mutedS+'</span></div></div>'+feed(ln('th',D.L1)+ln('me',D.M1)+ln('th',L2)+ln('th',D.L3,{live:1}))+ctl({muted:1}))};
+S.failed=function(){return scr(top('')+'<div class="chat-call-mid"><div class="chat-call-av dim" style="background:'+D.col+'" aria-hidden="true">'+D.ini+'<span class="bd" style="opacity:1">'+I.alert+'</span></div><h4>'+D.failT+'</h4><p>'+D.failS+'</p></div>'+
+ '<div class="chat-call-act"><span class="chat-call-btn p" role="button" data-tap>'+I.phone+D.again+'</span><span class="chat-call-btn s" role="button" data-tap>'+I.chat+D.write+'</span><p class="chat-call-nt">'+D.writeN+'</p><span class="chat-call-btn t" role="button" data-tap>'+D.close+'</span></div>')};
+S.ended=function(){return scr(top('')+'<div class="chat-call-mid"><div class="chat-call-av" style="background:'+D.col+'" aria-hidden="true">'+D.ini+'</div><h4>'+D.endT+'</h4><div class="meta">'+I.clock+D.name+' · '+D.dur+'</div>'+
+ '<div class="chat-call-rt"><p class="q">'+D.rateQ+'</p><div class="r"><span role="button" data-tap>'+I.up+D.good+'</span><span role="button" data-tap>'+I.dn+D.bad+'</span></div></div></div>'+
+ '<div class="chat-call-act"><span class="chat-call-btn p" role="button" data-tap>'+I.chat+D.write+'</span><span class="chat-call-btn s" role="button" data-tap>'+I.phone+D.again+'</span><span class="chat-call-btn t" role="button" data-tap>'+D.close+'</span></div>')};
+
+var order=['connecting','talk','speaking','muted','failed','ended'];
+var P=D.P;
+document.documentElement.lang=D.lang;document.title=P.title;
+function $(id){return document.getElementById(id)}
+$('chat-call-lsw').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" lang="'+k+'"'+(k===LG?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+$('chat-call-eb').innerHTML=P.eb;$('chat-call-h1').innerHTML=nb(P.h1);$('chat-call-p1').innerHTML=nb(P.p1);
+$('chat-call-ul').innerHTML=P.ul.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-call-capb').innerHTML=P.capb;$('chat-call-caps').innerHTML=nb(P.caps);
+$('chat-call-h2s').innerHTML=P.h2s;$('chat-call-lead').innerHTML=P.lead;$('chat-call-h2d').innerHTML=P.h2d;
+$('chat-call-hdec').innerHTML=P.hdec;$('chat-call-htok').innerHTML=P.htok;$('chat-call-hna').innerHTML=P.hna;
+$('chat-call-dec').innerHTML=P.dec.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-call-tok').innerHTML=P.tok.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-call-na').innerHTML=P.na.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-call-grid').innerHTML=order.map(function(k){return '<div class="chat-call-card"><div class="pf p67" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+P.st[k][0]+' <code>'+k+'</code></h3><p>'+nb(P.st[k][1])+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=nb(S[p.dataset.state]())});
+window.CHAT_CALL={S:S,order:order,lang:LG};
+
+function Lm(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lm(a),y=Lm(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+var pairs=[['#F2F5F7','#1C2026'],['#BFF2DC','#0E1116'],['#2BC48A','#0E1116'],['#C9D1DA','#0E1116'],['#9AA4B2','#0E1116'],['#9AA4B2','#1C2026'],['#9AA4B2','#0E1116'],['#0E1116','#FF6B5E'],['#C9D1DA','#242B34'],['#0E1116','#2BC48A']];
+var rows=pairs.map(function(p,i){return [p[0],p[1],P.ct[i]]});
+$('chat-call-ct').innerHTML=rows.map(function(r){return '<tr><td><span class="chat-call-sw" style="background:'+r[0]+'"></span><span class="chat-call-sw" style="background:'+r[1]+'"></span>'+r[2]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_CALL.min=Math.min.apply(null,rows.map(function(r){return cr(r[0],r[1])}));
+})();
+</script>
+</body>
+</html>
