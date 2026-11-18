@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo · клавиатура, «до»</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.kb-before-w{max-width:1200px;margin:0 auto}
+.kb-before-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.kb-before-tags{display:flex;gap:8px;flex-wrap:wrap}
+.kb-before-tag{display:inline-block;font:600 13px/20px Inter,sans-serif;color:#0E1116;background:#FFC247;border-radius:8px;padding:2px 10px}
+.kb-before-tag.m{background:#2F3742;color:#F2F5F7}
+.kb-before-lng{display:flex;gap:4px;background:#171C23;border-radius:14px;padding:4px}
+.kb-before-lng a{min-width:56px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font:700 15px Inter,sans-serif;color:#C5CCD5;text-decoration:none}
+.kb-before-lng a[aria-current="true"]{background:#2BC48A;color:#0E1116}
+.kb-before-w h1{font:900 36px/1.15 Nunito,sans-serif;margin:0 0 8px}
+.kb-before-w h2{font:900 24px/1.2 Nunito,sans-serif;margin:0 0 8px}
+.kb-before-lead{color:#9AA4B2;max-width:760px;margin:0 0 32px}
+.kb-before-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;padding:48px 24px 40px;border-radius:32px;background:#171C23}
+.kb-before-hero figure,.kb-before-st figure{margin:0}
+.kb-before-sec{margin-top:64px}
+.kb-before-sec>p{color:#9AA4B2;margin:0 0 24px;max-width:760px}
+.kb-before-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(600px,1fr));gap:24px}
+.kb-before-st{background:#171C23;border-radius:24px;padding:24px}
+.kb-before-st h3{font:900 20px/1.25 Nunito,sans-serif;margin:0 0 4px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.kb-before-st h3 code{font:500 13px ui-monospace,Menlo,monospace;color:#9AA4B2;background:#0E1116;border-radius:6px;padding:1px 6px}
+.kb-before-st>p{margin:0 0 20px;color:#9AA4B2;font-size:15px}
+.kb-before-pair{display:flex;gap:20px;justify-content:center}
+.kb-before-pair .pcap{margin-top:10px;font-size:13px}
+.kb-before-pair .pcap b{font-size:14px}
+.kb-before-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px}
+.kb-before-notes h2{font-size:20px;margin:0 0 10px}
+.kb-before-notes ul{margin:0;padding-left:20px;color:#9AA4B2}
+.kb-before-notes li{margin:6px 0}
+.kb-before-notes b{color:#F2F5F7;font-weight:600}
+.kb-before-st .pf{--s:.6!important}
+@media (max-width:660px){
+ .kb-before-grid{grid-template-columns:1fr}
+ .kb-before-st{padding:16px}
+ .kb-before-pair{gap:12px}
+ .kb-before-st .pf{--s:.345!important}
+ .kb-before-hero{padding:24px 8px;gap:24px}
+ .kb-before-hero .pf{--s:.76!important}
+ .kb-before-w h1{font-size:28px}
+}
+
+/* ===== экран 430×932: нейтральный мессенджер + клавиатура Parrlo ===== */
+.scr.light{--kb-bg:#D3D7DC;--kb-key:#FFFFFF;--kb-key2:#ABB2BB;--kb-tx:#0E1116;--kb-sec:#5B6472;--kb-sh:0 1px 0 rgba(0,0,0,.3);--kb-acc:#00875C;--kb-onacc:#FFFFFF;--kb-line:#D5DBE1}
+.scr:not(.light){--kb-bg:#1B1F25;--kb-key:#3A414B;--kb-key2:#2A3038;--kb-tx:#F2F5F7;--kb-sec:#C5CCD5;--kb-sh:0 1px 0 rgba(0,0,0,.6);--kb-acc:#2BC48A;--kb-onacc:#0E1116;--kb-line:#4A525D}
+.kb-before-scr .nav{padding:6px 16px 10px}
+.kb-before-scr .nav .av{color:#0E1116}
+.kb-before-scr .msgs{padding:12px 16px}
+.kb-before-scr .m{max-width:78%}
+.kb-before-scr .m .tm{opacity:1;color:var(--sec)}
+.kb-before-scr .m.out .tm{color:inherit;opacity:.85}
+.kb-before-scr.light .m.out .tm{color:#3E5A4D;opacity:1}
+.kb-before-scr .inp{padding:8px 12px 10px;align-items:flex-end}
+.kb-before-scr .inp .f{color:var(--tx);flex:1;min-width:0;padding:8px 14px;line-height:24px;font-size:17px;border-radius:20px;min-height:42px}
+.kb-before-scr .inp .f .pl{color:var(--sec)}
+.kb-before-scr .inp .sd{flex:none;width:38px;height:38px;margin-bottom:2px}
+.kb-before-scr .inp .sd.off{background:var(--sf2);color:var(--sec)}
+.kb-before-car{display:inline-block;width:2px;height:22px;background:var(--acc);vertical-align:-5px;margin-left:1px}
+.kb-before-kb{flex:none;background:var(--kb-bg);padding:0 3px;color:var(--kb-tx)}
+/* полоса над панелью — 60 pt, как в kb-translate */
+.kb-before-strip{position:relative;margin:8px 5px 0;height:60px;border-radius:14px;background:var(--kb-key);box-shadow:var(--kb-sh);padding:0 4px 0 12px;display:flex;align-items:center;gap:10px;font-size:14px;line-height:19px;overflow:hidden}
+.kb-before-strip>svg{flex:none;width:22px;height:22px;color:var(--kb-acc)}
+.kb-before-strip .tx{flex:1;min-width:0}
+.kb-before-strip .tx b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-before-strip .tx span{display:block;color:var(--kb-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-before-pill{flex:none;height:44px;display:flex;align-items:center;padding:0 4px}
+.kb-before-pill span{height:32px;border-radius:16px;background:var(--kb-key2);display:flex;align-items:center;gap:5px;padding:0 8px 0 12px;font:700 13px Inter,sans-serif;letter-spacing:.02em}
+.kb-before-pill svg{width:16px;height:16px}
+/* подсказки слов при наборе */
+.kb-before-strip.sg{padding:0 4px;gap:0}
+.kb-before-sg{flex:1 1 0;min-width:0;height:52px;display:flex;align-items:center;justify-content:center;font:500 16px Inter,sans-serif;border-radius:10px;white-space:nowrap}
+.kb-before-sg.on{background:var(--kb-bg)}
+.kb-before-sgd{flex:none;width:1px;height:28px;background:var(--kb-line)}
+/* черновик готов: два действия */
+.kb-before-strip.go{padding:0 8px;gap:8px}
+.kb-before-a{height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 16px;font:700 15px Inter,sans-serif;white-space:nowrap}
+.kb-before-a svg{flex:none;width:22px;height:22px}
+.kb-before-a .pm{width:21px;height:21px}
+.kb-before-a.p{flex:1 1 auto;min-width:0;background:var(--kb-acc);color:var(--kb-onacc)}
+.kb-before-a.s{flex:none;background:var(--kb-key2);color:var(--kb-tx)}
+.kb-before-a.p small{font:700 12px Inter,sans-serif;letter-spacing:.03em;border-radius:6px;padding:0 4px;box-shadow:inset 0 0 0 1.5px currentColor}
+.scr:not(.light) .kb-before-pop{background:#4A525D}
+/* панель иконок */
+.kb-before-bar{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;margin-top:4px}
+.kb-before-ib{width:64px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--kb-tx)}
+.kb-before-ib svg{width:26px;height:26px}
+.kb-before-ib .pm{width:25px;height:25px}
+/* клавиши */
+.kb-before-rows{position:relative;display:flex;flex-direction:column;gap:11px;padding-top:6px}
+.kb-before-r{display:flex;gap:5px}
+.kb-before-k{position:relative;flex:1 1 0;min-width:0;height:45px;border-radius:8px;background:var(--kb-key);box-shadow:var(--kb-sh);color:var(--kb-tx);display:flex;align-items:center;justify-content:center;font:400 24px/1 Inter,sans-serif}
+.kb-before-k.f{background:var(--kb-key2)}
+.kb-before-k.f svg{width:23px;height:23px}
+.kb-before-k.w{flex:1.38 1 0}
+.kb-before-g{flex:.18 1 0}
+.kb-before-hp{flex:.5 1 0}
+.kb-before-k.n{flex:1.25 1 0;font-size:17px;font-weight:500}
+.kb-before-k.p{flex:.85 1 0}
+.kb-before-k.sp{flex:4.4 1 0;font-size:16px;gap:10px}
+.kb-before-k.sp i{font-style:normal;color:var(--kb-sec);font-size:18px}
+.kb-before-k.rt{flex:1.55 1 0;background:var(--kb-acc);color:var(--kb-onacc);box-shadow:none}
+.kb-before-k.rt svg{width:25px;height:25px}
+/* нажатая клавиша: увеличенная буква над ней */
+.kb-before-k.pr{background:transparent;box-shadow:none;color:transparent}
+.kb-before-pop{position:absolute;left:-7px;right:-7px;bottom:0;height:108px;border-radius:12px 12px 9px 9px;background:var(--kb-key);box-shadow:0 1px 0 rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.22);color:var(--kb-tx);display:flex;justify-content:center;padding-top:10px;font:400 36px/1 Inter,sans-serif;z-index:2;clip-path:polygon(0 0,100% 0,100% 52%,calc(100% - 7px) 60%,calc(100% - 7px) 100%,7px 100%,7px 60%,0 52%)}
+.kb-before-home{height:34px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.kb-before-home i{width:140px;height:5px;border-radius:3px;background:var(--kb-tx)}
+</style>
+</head>
+<body>
+<div class="kb-before-w">
+<div class="kb-before-top"><div class="kb-before-tags"><span class="kb-before-tag" id="kb-before-t-draft"></span><span class="kb-before-tag m" id="kb-before-t-mock"></span></div>
+<nav class="kb-before-lng" id="kb-before-lng" aria-label="Language"></nav></div>
+<h1 id="kb-before-h1"></h1>
+<p class="kb-before-lead" id="kb-before-lead"></p>
+<div class="kb-before-hero" id="kb-before-hero"></div>
+<section class="kb-before-sec">
+<h2 id="kb-before-h-st"></h2>
+<p id="kb-before-p-st"></p>
+<div class="kb-before-grid" id="kb-before-grid"></div>
+</section>
+<section class="kb-before-sec kb-before-notes" id="kb-before-notes"></section>
+</div>
+<script>
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+let pmN=0;
+/* «Улучшить» — монохромный попугай Parrlo (ключ spark из screens.js), маска с уникальным id */
+const parrot=()=>{const id='kb-before-pm'+(++pmN);return `<svg class="pm" viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#${id})"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>`;};
+const I={
+tr:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg>`,
+mic:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/></svg>`,
+voice:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+gear:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>`,
+chev:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>`,
+shift:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l8 8.5h-4.5v7.5h-7V12H4z"/></svg>`,
+shiftOn:`<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l8 8.5h-4.5v7.5h-7V12H4z"/></svg>`,
+del:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 5H20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H8.5L3 12z"/><path d="M11.5 9.5l5 5M16.5 9.5l-5 5" stroke-linecap="round"/></svg>`,
+ret:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5v6a3 3 0 0 1-3 3H5"/><path d="M9 10l-4 4 4 4"/></svg>`,
+back:`<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>`,
+send:`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>`};
+const NB=' ';
+
+/* ===== один словарь: экран и страница ===== */
+const D={
+ru:{html:'ru',
+ /* экран */
+ kb:'ru',space:'Русский',ph:'Сообщение',online:'в сети',today:'Сегодня',who:'Pedro',av:'P',pair:'RU → ES',pairA:'Языки: с русского на испанский',
+ msgs:[['in','¡Hola! ¿Qué tal el piso? ¿Va bien la calefacción?','9:52'],['out','¡Hola, Pedro! Sí, todo bien, gracias.','9:55'],['in','Genial. Mañana viene el técnico a revisar la caldera. ¿A qué hora te viene bien?','10:01']],
+ typed:'Завтра после 10 удо',press:'о',sg:['удобно','удобнее','удобное'],
+ draft:'Завтра после 10 удобно. Я буду дома.',
+ hintB:'Пиши по‑русски',hintS:'Переведём на испанский',
+ trA:'Перевести',trTo:'ES',trAria:'Перевести на испанский',imp:'Улучшить',tr:'Перевести',dict:'Диктовка',voice:'Голосовое',set:'Настройки',
+ shift:'Заглавные',del:'Удалить',num:'Цифры',ret:'Ввод',
+ /* страница */
+ title:'Parrlo · клавиатура, «до»',t_draft:'Черновик текста',t_mock:'Макет · скоро',
+ h1:'Клавиатура Parrlo · «до»: черновик на своём языке',
+ lead:'Первый кадр пары «до → после» для главной. Чат с арендодателем в обычном мессенджере: он пишет по‑испански, ты отвечаешь по‑русски на русской раскладке. Когда черновик готов, полоса над панелью предлагает «Перевести» и «Улучшить». Следующий кадр — kb-translate: тот же черновик уже по‑испански в том же поле. Клавиатура идёт за темой телефона.',
+ capL:['Черновик готов · светлая тема','Русский текст в поле, полоса предлагает «Перевести» и «Улучшить».'],
+ capD:['Черновик готов · тёмная тема','Те же размеры, токены тёмной клавиатуры.'],
+ hSt:'Состояния',pSt:'Слева светлая тема, справа тёмная. Каркас — как у kb-translate: статус-бар, шапка чата, переписка, поле, полоса 60 pt, панель из пяти иконок, раскладка, полоска «домой».',
+ light:'Светлая',dark:'Тёмная',
+ st:{empty:['Пустое поле','Открыли чат и коснулись поля: подсказка, на каком языке писать, и пара языков; Shift включён.'],
+  typing:['Набор на своём языке','Пишешь по‑русски на русской раскладке: над нажатой клавишей увеличенная буква, в полосе — подсказки слов.'],
+  ready:['Черновик готов','Текст написан: полоса предлагает «Перевести на испанский» и «Улучшить» — дальше кадр kb-translate.']},
+ hDec:'Решения',dec:[
+  '<b>Каркас совпадает с kb-translate</b>: одна и та же переписка, поле и полоса 60 pt, поэтому «до» и «после» совмещаются при наложении и анимации.',
+  '<b>Полоса меняет смысл по ходу набора</b>: в пустом поле — на каком языке писать и куда переведём, при наборе — подсказки слов на языке раскладки, когда черновик готов — два действия словами.',
+  '<b>«Перевести» — главное действие</b> (заливка акцентом, метка языка «ES»), «Улучшить» — второе. Иконки панели не меняются, полоса лишь называет их.',
+  '<b>Раскладка — родная</b>: ru-интерфейс — русская, es — испанская с Ñ, en — английская; на пробеле название раскладки.',
+  '<b>Своей кнопки отправки у клавиатуры нет</b>: отправляет кнопка мессенджера; в пустом поле она приглушена.',
+  'Собеседник пишет на другом языке (по‑испански) — видно, зачем нужен перевод. Наш прошлый ответ в ленте уже на его языке.'],
+ hTok:'Токены и контраст',
+ hNo:'Не утверждено',no:[
+  'Все тексты — черновик: «Пиши по‑русски / Переведём на испанский», подписи кнопок, реплики переписки. Тексты es и en не вычитаны носителем.',
+  'Подсказки слов в полосе: в сборке их нет, нужна проверка, что это не ломает одну полосу статуса kb-translate.',
+  'Две кнопки словами в полосе при готовом черновике — когда показывать (после паузы набора или сразу после точки).',
+  'Метка «ES» в кнопке «Перевести»: дублирует пару языков; оставить или убрать.',
+  'Мессенджер выдуманный и нейтральный; на главной сценарий подписывается словом «WhatsApp» без логотипа.']},
+es:{html:'es',
+ kb:'es',space:'Español',ph:'Mensaje',online:'en línea',today:'Hoy',who:'Olga',av:'O',pair:'ES → RU',pairA:'Idiomas: del español al ruso',
+ msgs:[['in','Добрый день! Как вам квартира? С отоплением всё в порядке?','9:52'],['out','Здравствуйте, Ольга! Да, всё хорошо, спасибо.','9:55'],['in','Отлично. Завтра придёт мастер проверить котёл. Во сколько вам удобно?','10:01']],
+ typed:'Mañana después de las 10 me v',press:'v',sg:['va','viene','vendría'],
+ draft:'Mañana después de las 10 me va bien. Estaré en casa.',
+ hintB:'Escribe en español',hintS:'Lo traducimos al ruso',
+ trA:'Traducir',trTo:'RU',trAria:'Traducir al ruso',imp:'Mejorar',tr:'Traducir',dict:'Dictado',voice:'Nota de voz',set:'Ajustes',
+ shift:'Mayúsculas',del:'Borrar',num:'Números',ret:'Intro',
+ title:'Parrlo · teclado, «antes»',t_draft:'Texto provisional',t_mock:'Maqueta · próximamente',
+ h1:'Teclado Parrlo · «antes»: el borrador en tu idioma',
+ lead:'Primer fotograma del par «antes → después» de la portada. Un chat con la casera en un mensajero cualquiera: ella escribe en ruso y tú contestas en español con el teclado español. Cuando el borrador está listo, la franja sobre el panel te ofrece «Traducir» y «Mejorar». El siguiente fotograma es kb-translate: el mismo borrador, ya en ruso, en el mismo campo. El teclado sigue el tema del móvil.',
+ capL:['Borrador listo · tema claro','Texto en español en el campo; la franja ofrece «Traducir» y «Mejorar».'],
+ capD:['Borrador listo · tema oscuro','Mismas medidas, colores del teclado oscuro.'],
+ hSt:'Estados',pSt:'A la izquierda, el tema claro; a la derecha, el oscuro. La estructura es la de kb-translate: barra de estado, cabecera del chat, conversación, campo, franja de 60 pt, panel de cinco iconos, teclado y barra de inicio.',
+ light:'Claro',dark:'Oscuro',
+ st:{empty:['Campo vacío','Abres el chat y tocas el campo: la franja indica en qué idioma escribir y el par de idiomas; mayúsculas activadas.'],
+  typing:['Escribes en tu idioma','Escribes en español con el teclado español: la tecla pulsada se amplía y la franja sugiere palabras.'],
+  ready:['Borrador listo','Ya está escrito: la franja ofrece «Traducir al ruso» y «Mejorar». Después viene kb-translate.']},
+ hDec:'Decisiones',dec:[
+  '<b>Misma estructura que kb-translate</b>: misma conversación, campo y franja de 60 pt, para que «antes» y «después» encajen al superponerlos o animarlos.',
+  '<b>La franja cambia mientras escribes</b>: con el campo vacío dice en qué idioma escribir y a cuál se traduce; al escribir, sugiere palabras; con el borrador listo, muestra dos acciones con texto.',
+  '<b>«Traducir» es la acción principal</b> (relleno de acento y etiqueta «RU»); «Mejorar», la secundaria. Los iconos del panel no cambian.',
+  '<b>Teclado nativo</b>: interfaz es — teclado español con Ñ; ru — ruso; en — inglés. La barra espaciadora muestra el idioma.',
+  '<b>El teclado no tiene botón de enviar</b>: envía el botón del mensajero, atenuado con el campo vacío.',
+  'La otra persona escribe en otro idioma (ruso): se entiende para qué sirve traducir. Nuestra respuesta anterior ya está en su idioma.'],
+ hTok:'Colores y contraste',
+ hNo:'Pendiente de aprobar',no:[
+  'Todos los textos son provisionales; el español y el inglés están sin revisar por un nativo.',
+  'Sugerencias de palabras en la franja: no están en la versión actual; hay que comprobar que no rompen la franja única de kb-translate.',
+  'Cuándo mostrar las dos acciones con texto: tras una pausa al escribir o justo después del punto.',
+  'Etiqueta «RU» en «Traducir»: repite el par de idiomas; mantenerla o quitarla.',
+  'El mensajero es ficticio y neutro; en la portada el caso se menciona como «WhatsApp», sin logotipo.']},
+en:{html:'en',
+ kb:'en',space:'English',ph:'Message',online:'online',today:'Today',who:'Pedro',av:'P',pair:'EN → ES',pairA:'Languages: English to Spanish',
+ msgs:[['in','¡Hola! ¿Qué tal el piso? ¿Va bien la calefacción?','9:52'],['out','¡Hola, Pedro! Sí, todo bien, gracias.','9:55'],['in','Genial. Mañana viene el técnico a revisar la caldera. ¿A qué hora te viene bien?','10:01']],
+ typed:'Tomorrow after 10 wo',press:'o',sg:['works','would','won’t'],
+ draft:'Tomorrow after 10 works for me. I’ll be home.',
+ hintB:'Write in English',hintS:'We’ll translate it into Spanish',
+ trA:'Translate',trTo:'ES',trAria:'Translate into Spanish',imp:'Improve',tr:'Translate',dict:'Dictate',voice:'Voice note',set:'Settings',
+ shift:'Shift',del:'Delete',num:'Numbers',ret:'Return',
+ title:'Parrlo · keyboard, “before”',t_draft:'Draft copy',t_mock:'Mockup · coming soon',
+ h1:'Parrlo Keyboard · “before”: a draft in your own language',
+ lead:'The first frame of the home page’s “before → after” pair. A chat with a landlord in an ordinary messenger: he writes in Spanish, you reply in English on the English layout. Once the draft is ready, the strip above the toolbar offers “Translate” and “Improve”. Next comes kb-translate: the same draft, now in Spanish, in the same field. The keyboard follows the phone’s theme.',
+ capL:['Draft ready · light theme','English text in the field; the strip offers “Translate” and “Improve”.'],
+ capD:['Draft ready · dark theme','Same sizes, dark keyboard tokens.'],
+ hSt:'States',pSt:'Light theme on the left, dark on the right. Same skeleton as kb-translate: status bar, chat header, thread, field, 60 pt strip, five-icon toolbar, layout, home indicator.',
+ light:'Light',dark:'Dark',
+ st:{empty:['Empty field','You open the chat and tap the field: the strip says which language to write in and shows the language pair; Shift is on.'],
+  typing:['Typing in your language','You type in English on the English layout: the pressed key pops up and the strip suggests words.'],
+  ready:['Draft ready','The text is written: the strip offers “Translate into Spanish” and “Improve”. kb-translate comes next.']},
+ hDec:'Decisions',dec:[
+  '<b>Same skeleton as kb-translate</b>: same thread, field and 60 pt strip, so “before” and “after” line up when overlaid or animated.',
+  '<b>The strip changes as you type</b>: on an empty field it says which language to write in and where it goes; while typing it suggests words; with a finished draft it shows two labelled actions.',
+  '<b>“Translate” is the primary action</b> (accent fill, “ES” tag); “Improve” is secondary. The toolbar icons stay put.',
+  '<b>Native layout</b>: en UI — English layout; ru — Russian; es — Spanish with Ñ. The space bar names the layout.',
+  '<b>The keyboard has no send button of its own</b>: the messenger sends, and its button is dimmed while the field is empty.',
+  'The other person writes in another language (Spanish), so it’s clear why translation matters. Our earlier reply in the thread is already in their language.'],
+ hTok:'Tokens and contrast',
+ hNo:'Not approved',no:[
+  'All copy is draft; Spanish and English have not been proofread by native speakers.',
+  'Word suggestions in the strip: not in the current build; check they don’t break kb-translate’s single status strip.',
+  'When to show the two labelled actions: after a typing pause or right after a full stop.',
+  'The “ES” tag on “Translate” repeats the language pair; keep it or drop it.',
+  'The messenger is made up and neutral; on the home page the scenario is named “WhatsApp” in text, without a logo.']}
+};
+/* токены и контраст — одинаковы для всех языков (цифры WCAG) */
+const TOK={
+ru:[
+ '<b>Светлая:</b> фон #D3D7DC, клавиши и полоса #FFFFFF, служебные #ABB2BB, текст #0E1116, вторичный #5B6472, акцент #00875C / #FFFFFF; чат — фон #FFFFFF, входящие #E9EDF0, исходящие #D6F5E5.',
+ '<b>Тёмная:</b> фон #1B1F25, клавиши и полоса #3A414B, служебные #2A3038, текст #F2F5F7, вторичный #C5CCD5, акцент #2BC48A / #0E1116; чат — фон #0E1116, входящие #242B34, исходящие #00875C.',
+ '<b>Контраст, светлая:</b> CONTRAST_L.','<b>Контраст, тёмная:</b> CONTRAST_D.',
+ '<b>Не только цветом:</b> главное действие отличается заливкой и меткой языка, Shift — заливкой стрелки, нажатая клавиша — увеличенной буквой.',
+ '<b>Зоны нажатия:</b> иконки панели 64×44, кнопки полосы 44 pt, подсказки слов 52 pt, пара языков 44, переключатель языка страницы 56×44.'],
+es:[
+ '<b>Claro:</b> fondo #D3D7DC, teclas y franja #FFFFFF, teclas de función #ABB2BB, texto #0E1116, secundario #5B6472, acento #00875C / #FFFFFF; chat: fondo #FFFFFF, recibidos #E9EDF0, enviados #D6F5E5.',
+ '<b>Oscuro:</b> fondo #1B1F25, teclas y franja #3A414B, teclas de función #2A3038, texto #F2F5F7, secundario #C5CCD5, acento #2BC48A / #0E1116; chat: fondo #0E1116, recibidos #242B34, enviados #00875C.',
+ '<b>Contraste, claro:</b> CONTRAST_L.','<b>Contraste, oscuro:</b> CONTRAST_D.',
+ '<b>No solo con color:</b> la acción principal lleva relleno y etiqueta de idioma; Mayúsculas, flecha rellena; la tecla pulsada se amplía.',
+ '<b>Zonas táctiles:</b> iconos del panel 64×44, botones de la franja 44 pt, sugerencias 52 pt, par de idiomas 44, selector de idioma 56×44.'],
+en:[
+ '<b>Light:</b> background #D3D7DC, keys and strip #FFFFFF, function keys #ABB2BB, text #0E1116, secondary #5B6472, accent #00875C / #FFFFFF; chat: background #FFFFFF, incoming #E9EDF0, outgoing #D6F5E5.',
+ '<b>Dark:</b> background #1B1F25, keys and strip #3A414B, function keys #2A3038, text #F2F5F7, secondary #C5CCD5, accent #2BC48A / #0E1116; chat: background #0E1116, incoming #242B34, outgoing #00875C.',
+ '<b>Contrast, light:</b> CONTRAST_L.','<b>Contrast, dark:</b> CONTRAST_D.',
+ '<b>Not by colour alone:</b> the primary action has a fill and a language tag; Shift has a filled arrow; the pressed key pops up.',
+ '<b>Touch targets:</b> toolbar icons 64×44, strip buttons 44 pt, suggestions 52 pt, language pair 44, page language switch 56×44.']};
+
+/* контраст считается из цветов на лету */
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const PAIRS={
+ L:[['T1','#0E1116','#FFFFFF'],['T2','#5B6472','#FFFFFF'],['T3','#FFFFFF','#00875C'],['T4','#0E1116','#ABB2BB'],['T5','#0E1116','#D3D7DC'],['T6','#0E1116','#E9EDF0'],['T7','#3E5A4D','#D6F5E5'],['T8','#5B6472','#E9EDF0']],
+ D:[['T1','#F2F5F7','#3A414B'],['T2','#C5CCD5','#3A414B'],['T3','#0E1116','#2BC48A'],['T4','#F2F5F7','#2A3038'],['T5','#F2F5F7','#1B1F25'],['T6','#F2F5F7','#242B34'],['T7','#FFFFFF','#00875C'],['T8','#9AA4B2','#242B34']]};
+const PL={ru:{T1:'текст на клавише и полосе',T2:'вторичный на полосе',T3:'«Перевести» на акценте',T4:'текст на служебной клавише',T5:'подсказка слова на фоне клавиатуры',T6:'входящее сообщение',T7:'исходящее и время в нём',T8:'время во входящем'},
+ es:{T1:'texto en tecla y franja',T2:'secundario en la franja',T3:'«Traducir» sobre acento',T4:'texto en tecla de función',T5:'sugerencia sobre fondo del teclado',T6:'mensaje recibido',T7:'mensaje enviado y su hora',T8:'hora en recibido'},
+ en:{T1:'text on keys and strip',T2:'secondary on strip',T3:'“Translate” on accent',T4:'text on function key',T5:'suggestion on keyboard background',T6:'incoming message',T7:'outgoing message and its time',T8:'time in incoming'}};
+const fmt=(v,l)=>l==='en'?v.toFixed(1):v.toFixed(1).replace('.',',');
+
+/* раскладки */
+const ROWS={ru:['йцукенгшщзх','фывапролджэ','ячсмитьбю'],es:['qwertyuiop','asdfghjklñ','zxcvbnm'],en:['qwertyuiop','asdfghjkl','zxcvbnm']};
+const BAR=[['imp',parrot],['tr',()=>I.tr],['dict',()=>I.mic],['voice',()=>I.voice],['set',()=>I.gear]];
+function keys(c,up,press){
+ const R=ROWS[c.kb],lg=c.kb==='ru'?'ru':c.kb;
+ const k=ch=>{const t=up?ch.toLocaleUpperCase(lg):ch;return ch===press?`<span class="kb-before-k pr" role="button">${t}<span class="kb-before-pop" aria-hidden="true">${t}</span></span>`:`<span class="kb-before-k" role="button">${t}</span>`;};
+ const row=s=>[...s].map(k).join('');
+ const half=R[1].length<R[0].length?'<span class="kb-before-hp"></span>':'';
+ return `<div class="kb-before-r">${row(R[0])}</div><div class="kb-before-r">${half}${row(R[1])}${half}</div>
+<div class="kb-before-r"><span class="kb-before-k f w" role="button" aria-label="${c.shift}"${up?' aria-pressed="true"':''}>${up?I.shiftOn:I.shift}</span><span class="kb-before-g"></span>${row(R[2])}<span class="kb-before-g"></span><span class="kb-before-k f w" role="button" aria-label="${c.del}">${I.del}</span></div>
+<div class="kb-before-r"><span class="kb-before-k f n" role="button" aria-label="${c.num}">123</span><span class="kb-before-k p" role="button">,</span><span class="kb-before-k sp" role="button"><i>‹</i>${c.space}<i>›</i></span><span class="kb-before-k p" role="button">.</span><span class="kb-before-k rt" role="button" aria-label="${c.ret}">${I.ret}</span></div>`;}
+
+const car='<i class="kb-before-car"></i>';
+const S={
+ empty:c=>({field:`<span class="pl">${c.ph}</span>`,car:'pre',up:1,send:0,
+  strip:`<div class="kb-before-strip">${I.tr}<span class="tx"><b>${c.hintB}</b><span>${c.hintS}</span></span><span class="kb-before-pill" role="button" aria-label="${c.pairA}"><span>${c.pair}${I.chev}</span></span></div>`}),
+ typing:c=>({field:c.typed,car:'post',up:0,send:1,press:c.press,
+  strip:`<div class="kb-before-strip sg">${c.sg.map((w,i)=>`${i?'<i class="kb-before-sgd"></i>':''}<span class="kb-before-sg${i===0?' on':''}" role="button">${w}</span>`).join('')}</div>`}),
+ ready:c=>({field:c.draft,car:'post',up:0,send:1,
+  strip:`<div class="kb-before-strip go"><span class="kb-before-a p" role="button" aria-label="${c.trAria}">${I.tr}${c.trA}<small>${c.trTo}</small></span><span class="kb-before-a s" role="button">${parrot()}${c.imp}</span></div>`})
+};
+function screen(id,light,c){
+ const s=S[id](c);
+ const f=s.car==='pre'?car+s.field:s.field+car;
+ const bar=BAR.map(([n,ic])=>`<span class="kb-before-ib" role="button" aria-label="${c[n]}">${ic()}</span>`).join('');
+ const msgs=c.msgs.map(([d,t,tm])=>`<div class="m ${d}">${t}<span class="tm">${tm}</span></div>`).join('');
+ return `<div class="scr kb-before-scr ${light?'light':''}" lang="${c.html}">
+<div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>
+<div class="nav"><span class="bk">${I.back}</span><span class="av">${c.av}</span><span class="nm"><b>${c.who}</b><span>${c.online}</span></span></div>
+<div class="msgs"><div class="day">${c.today}</div>${msgs}</div>
+<div class="inp"><span class="f"><span>${f}</span></span><span class="sd${s.send?'':' off'}">${I.send}</span></div>
+<div class="kb-before-kb">
+${s.strip}
+<div class="kb-before-bar">${bar}</div>
+<div class="kb-before-rows">${keys(c,s.up,s.press)}</div>
+<div class="kb-before-home"><i></i></div></div></div>`;}
+const ph=(id,l,sc,c)=>`<div class="pf p67 ${l?'light':''}" style="--s:${sc}"><div class="shell"></div><div class="glass">${screen(id,l,c)}</div></div>`;
+
+function render(L){
+ const c=D[L];
+ document.documentElement.lang=c.html;document.title=c.title;
+ const $=id=>document.getElementById(id);
+ $('kb-before-lng').innerHTML=['ru','es','en'].map(x=>`<a href="?l=${x}" data-l="${x}" aria-current="${x===L}" lang="${x}">${x.toUpperCase()}</a>`).join('');
+ $('kb-before-t-draft').textContent=c.t_draft;$('kb-before-t-mock').textContent=c.t_mock;
+ $('kb-before-h1').textContent=c.h1;$('kb-before-lead').textContent=c.lead;
+ $('kb-before-h-st').textContent=c.hSt;$('kb-before-p-st').textContent=c.pSt;
+ $('kb-before-hero').innerHTML=
+ `<figure data-shot="kb-before--light--${L}">${ph('ready',1,1,c)}<div class="pcap"><span class="dot"></span><div><b>${c.capL[0]}</b><span>${c.capL[1]}</span></div></div></figure>
+<figure data-shot="kb-before--dark--${L}">${ph('ready',0,1,c)}<div class="pcap"><span class="dot"></span><div><b>${c.capD[0]}</b><span>${c.capD[1]}</span></div></div></figure>`;
+ $('kb-before-grid').innerHTML=Object.keys(S).map(id=>
+ `<article class="kb-before-st"><h3>${c.st[id][0]}<code>${id}</code></h3><p>${c.st[id][1]}</p><div class="kb-before-pair">
+<figure data-shot="kb-before--${id}--light--${L}">${ph(id,1,.6,c)}<div class="pcap"><div><b>${c.light}</b></div></div></figure>
+<figure data-shot="kb-before--${id}--dark--${L}">${ph(id,0,.6,c)}<div class="pcap"><div><b>${c.dark}</b></div></div></figure></div></article>`).join('');
+ const cs=t=>PAIRS[t].map(([k,a,b])=>`${PL[L][k]} ${fmt(cr(a,b),L)}`).join('; ');
+ const tok=TOK[L].map(x=>x.replace('CONTRAST_L',cs('L')).replace('CONTRAST_D',cs('D')));
+ $('kb-before-notes').innerHTML=`<div><h2>${c.hDec}</h2><ul>${c.dec.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h2>${c.hTok}</h2><ul>${tok.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div><h2>${c.hNo}</h2><ul>${c.no.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+ document.body.dataset.lang=L;
+}
+let L0=new URLSearchParams(location.search).get('l');if(!D[L0])L0='ru';
+render(L0);
+document.getElementById('kb-before-lng').addEventListener('click',e=>{const a=e.target.closest('a[data-l]');if(!a)return;e.preventDefault();const l=a.dataset.l;try{history.replaceState(null,'','?l='+l)}catch(_){}render(l);});
+window.KB_BEFORE_RENDER=render;
+document.body.dataset.ready='1';
+</script>
+</body>
+</html>

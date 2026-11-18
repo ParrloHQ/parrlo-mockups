@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Translate · до и после</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#0B0E12;color:#F2F5F7}
+body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
+.translate-clear-w{max-width:1200px;margin:0 auto}
+.translate-clear-lsw{display:flex;gap:4px;justify-content:flex-end;margin-bottom:24px}
+.translate-clear-lsw a{min-width:48px;height:44px;border-radius:22px;display:inline-flex;align-items:center;justify-content:center;font:700 14px/1 Inter,sans-serif;color:#C3CBD5;text-decoration:none;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-clear-lsw a[aria-current="true"]{background:#2BC48A;color:#0E1116;box-shadow:none}
+.translate-clear-w h1{font:900 40px/1.1 Nunito,sans-serif;margin-bottom:12px}
+.translate-clear-w h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.translate-clear-lead{color:#9AA4B2;max-width:820px}
+.translate-clear-tag{display:inline-block;margin-bottom:12px;font:600 13px/1 Inter,sans-serif;color:#0E1116;background:#BFF2DC;border-radius:8px;padding:6px 10px}
+.translate-clear-hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center;margin-top:40px;padding:48px 40px;border-radius:32px;background:#12161C;box-shadow:inset 0 0 0 1px #2F3742}
+.translate-clear-hero figure{margin:0}
+.translate-clear-hero-t{flex:1 1 320px;max-width:520px}
+.translate-clear-hero-t h3{font:900 24px/1.25 Nunito,sans-serif;margin-bottom:12px}
+.translate-clear-hero-t p{color:#C3CBD5;margin-bottom:12px}
+.translate-clear-w ul{padding-left:20px;color:#C3CBD5;font-size:15px;max-width:860px}
+.translate-clear-w li{margin:8px 0}
+.translate-clear-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7}
+.translate-clear-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:48px 24px;margin-top:32px}
+.translate-clear-grid figure{margin:0;display:flex;flex-direction:column;align-items:center}
+.translate-clear-grid figcaption{margin-top:16px;width:272px;font-size:14px;line-height:1.45;color:#9AA4B2}
+.translate-clear-grid figcaption b{display:block;color:#F2F5F7;font:900 17px/1.3 Nunito,sans-serif;margin-bottom:4px}
+.translate-clear-grid figcaption code{font-size:12px}
+.translate-clear-tbl{width:100%;border-collapse:collapse;font-size:14px;margin-top:16px}
+.translate-clear-tbl th,.translate-clear-tbl td{text-align:left;vertical-align:top;border-bottom:1px solid #2F3742;padding:10px 12px 10px 0}
+.translate-clear-tbl th{color:#9AA4B2;font-weight:600}
+.translate-clear-tw{overflow-x:auto}
+.translate-clear-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:0 0 0 1px #3A414B}
+@media (max-width:760px){.translate-clear-w h1{font-size:30px}.translate-clear-hero{padding:24px 12px;gap:24px;justify-content:center}.translate-clear-hero .pf{--s:.74!important}}
+@media (max-width:420px){.translate-clear-hero .pf{--s:.7!important}}
+
+/* ===== экран 430×932: один каркас на три кадра ===== */
+.translate-clear-scr{--me:#2BC48A;--es:#BFF2DC;--err:#FF6B5E}
+.translate-clear-top{flex:none;height:64px;display:flex;align-items:center;gap:8px;padding:0 16px}
+.translate-clear-cb{width:48px;height:48px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.translate-clear-pair{flex:1;min-width:0;display:flex;justify-content:center}
+.translate-clear-pair>span{height:48px;border-radius:24px;background:var(--sf2);display:inline-flex;align-items:center;gap:8px;padding:0 16px;font:900 19px/1 Nunito,sans-serif;letter-spacing:.02em}
+.translate-clear-swp{color:var(--sec);display:flex}
+.translate-clear-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--me)}
+.translate-clear-dot.translate-clear-p{background:var(--es)}
+.translate-clear-main{flex:none;height:648px;display:flex;flex-direction:column;gap:12px;padding:0 16px}
+.translate-clear-slot{flex:none;position:relative;border-radius:28px;padding:20px 20px 0;display:flex;flex-direction:column;overflow:hidden}
+.translate-clear-a{height:192px;background:var(--sf)}
+.translate-clear-b{height:208px;background:var(--sf)}
+.translate-clear-c{height:224px;padding:20px 24px 0}
+.translate-clear-on{box-shadow:inset 0 0 0 2px var(--me)}
+.translate-clear-quiet{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line)}
+.translate-clear-dash{background:transparent;border:1.5px dashed #3A414B}
+.translate-clear-lbl{flex:none;height:20px;display:flex;align-items:center;gap:8px;font:600 13px/16px Inter,sans-serif;color:var(--sec);letter-spacing:.02em}
+.translate-clear-lbl .translate-clear-sp{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--tx);font:600 15px/20px Inter,sans-serif;font-variant-numeric:tabular-nums}
+.translate-clear-lbl .translate-clear-sp i{width:10px;height:10px;border-radius:50%;background:var(--err);box-shadow:0 0 0 4px rgba(255,107,94,.22)}
+.translate-clear-lbl .translate-clear-par{width:18px;height:18px;flex:none;color:var(--me);display:flex}
+.translate-clear-lbl .translate-clear-par svg{width:18px;height:18px}
+.translate-clear-lbl.translate-clear-hdr{height:36px}
+/* A — живой текст / как прозвучало */
+.translate-clear-raw{margin-top:12px;font:500 23px/31px Inter,sans-serif;color:var(--tx)}
+.translate-clear-raw .translate-clear-f{color:var(--sec)}
+.translate-clear-car{display:inline-block;width:2px;height:26px;background:var(--me);vertical-align:-5px;margin-left:3px;border-radius:1px}
+.translate-clear-raw.translate-clear-done{font:400 17px/25px Inter,sans-serif;color:#C3CBD5}
+.translate-clear-raw.translate-clear-done .translate-clear-f{color:var(--sec);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:rgba(154,164,178,.8)}
+.translate-clear-wave{position:absolute;left:20px;right:20px;bottom:16px;height:44px;display:flex;align-items:center;gap:3px}
+.translate-clear-wave i{width:4px;border-radius:2px;background:var(--me);flex:none}
+.translate-clear-wave i.translate-clear-z{background:#3A414B;height:4px!important}
+.translate-clear-clip{position:absolute;left:12px;right:20px;bottom:10px;height:48px;display:flex;align-items:center;gap:8px}
+.translate-clear-play{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.translate-clear-play svg{width:18px;height:18px}
+.translate-clear-mw{flex:1;min-width:0;display:flex;align-items:center;gap:3px;height:28px;overflow:hidden}
+.translate-clear-mw i{width:3px;border-radius:2px;background:#5B6472;flex:none}
+.translate-clear-dur{font:600 14px Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--sec)}
+/* B — что понял Parrlo */
+.translate-clear-edit{margin-left:auto;height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 14px 0 12px;border-radius:22px;background:#1E3734;color:var(--me);font:600 15px/1 Inter,sans-serif;letter-spacing:0}
+.translate-clear-edit svg{width:18px;height:18px}
+.translate-clear-ph{margin-top:12px;font:600 23px/31px Inter,sans-serif;color:var(--tx)}
+.translate-clear-ph span{text-decoration:underline dotted rgba(154,164,178,.55);text-decoration-thickness:2px;text-underline-offset:6px}
+.translate-clear-tip{position:absolute;left:20px;right:20px;bottom:18px;display:flex;align-items:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec)}
+.translate-clear-tip svg{width:18px;height:18px;flex:none}
+.translate-clear-empty{margin-top:12px;font:400 17px/25px Inter,sans-serif;color:var(--sec);max-width:330px}
+.translate-clear-sk{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.translate-clear-sk i{display:block;height:16px;border-radius:8px;background:#1C2026}
+/* C — перевод */
+.translate-clear-tr{background:var(--deep);color:#fff}
+.translate-clear-tr .translate-clear-lbl{color:#fff}
+.translate-clear-out{margin-top:12px;font:900 27px/33px Nunito,sans-serif;letter-spacing:.005em}
+.translate-clear-acts{position:absolute;left:24px;right:24px;bottom:20px;display:flex;gap:8px}
+.translate-clear-act{height:48px;border-radius:24px;display:inline-flex;align-items:center;gap:8px;padding:0 18px 0 14px;font:600 16px Inter,sans-serif;background:#FFFFFF;color:#0E1116}
+.translate-clear-act.translate-clear-ghost{background:#005E40;color:#fff}
+.translate-clear-act svg{width:20px;height:20px}
+/* низ */
+.translate-clear-bot{flex:none;height:132px;display:flex;flex-direction:column;gap:12px;padding:12px 16px 8px}
+.translate-clear-hint{height:20px;display:flex;align-items:center;justify-content:center;gap:8px;font:500 14px/20px Inter,sans-serif;color:var(--sec);text-align:center;white-space:nowrap}
+.translate-clear-hint svg{width:16px;height:16px;flex:none}
+.translate-clear-btns{display:flex;gap:12px;height:80px}
+.translate-clear-pb{flex:1;min-width:0;height:80px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:10px;color:#0E1116}
+.translate-clear-pb svg{flex:none;width:26px;height:26px}
+.translate-clear-pb b{display:block;font:900 21px/24px Nunito,sans-serif;white-space:nowrap}
+.translate-clear-pb small{display:block;font:600 13px/1.3 Inter,sans-serif;margin-top:2px}
+.translate-clear-pb.translate-clear-me{background:var(--me)}
+.translate-clear-pb.translate-clear-pt{background:var(--es)}
+.translate-clear-pb.translate-clear-next{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--es),0 0 36px rgba(191,242,220,.28)}
+.translate-clear-sec{flex:none;width:136px;height:80px;border-radius:40px;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center;gap:8px;font:600 16px Inter,sans-serif}
+.translate-clear-sec svg{width:20px;height:20px;flex:none}
+.translate-clear-stop{flex:1;min-width:0;height:80px;border-radius:40px;background:#F2F5F7;color:#0E1116;display:flex;align-items:center;justify-content:center;gap:12px;font:900 24px Nunito,sans-serif}
+.translate-clear-stop i{width:20px;height:20px;border-radius:5px;background:#E0483B}
+.translate-clear-go{flex:1;min-width:0;height:80px;border-radius:40px;background:var(--me);color:#0E1116;display:flex;align-items:center;justify-content:center;gap:10px;font:900 24px Nunito,sans-serif;box-shadow:0 0 32px rgba(43,196,138,.3)}
+.translate-clear-go svg{width:26px;height:26px}
+</style>
+</head>
+<body>
+<div class="translate-clear-w">
+<nav class="translate-clear-lsw" id="translate-clear-lsw" aria-label="Language"></nav>
+<span class="translate-clear-tag" id="translate-clear-tag"></span>
+<h1 id="translate-clear-h1"></h1>
+<p class="translate-clear-lead" id="translate-clear-lead"></p>
+
+<section class="translate-clear-hero">
+ <figure id="translate-clear-hero-ph"></figure>
+ <div class="translate-clear-hero-t" id="translate-clear-hero-t"></div>
+</section>
+
+<h2 id="translate-clear-h-states"></h2>
+<p class="translate-clear-lead" id="translate-clear-states-lead"></p>
+<div class="translate-clear-grid" id="translate-clear-grid"></div>
+
+<h2 id="translate-clear-h-dec"></h2>
+<ul id="translate-clear-dec"></ul>
+
+<h2 id="translate-clear-h-tok"></h2>
+<div class="translate-clear-tw"><table class="translate-clear-tbl" id="translate-clear-ctr"></table></div>
+<ul id="translate-clear-tok"></ul>
+
+<h2 id="translate-clear-h-na"></h2>
+<ul id="translate-clear-na"></ul>
+</div>
+
+<script src="../screens.js"></script>
+<script>
+(function(){
+const P='translate-clear-';
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+const S=window.SITE_ICONS;
+const I={
+ mic:S.mic.replace('class="ic"','class="ic" style="width:26px;height:26px"'),
+ kbd:S.kbd, more:S.more, tr:S.tr, spark:S.spark,
+ back:`<svg class="ic" viewBox="0 0 24 24" ${SW}><path d="M14.5 5.5L8 12l6.5 6.5"/></svg>`,
+ swap:`<svg viewBox="0 0 24 24" ${SW} style="width:20px;height:20px"><path d="M4 8h14M14.5 4.5L18 8l-3.5 3.5"/><path d="M20 16H6M9.5 12.5L6 16l3.5 3.5"/></svg>`,
+ spk:`<svg viewBox="0 0 24 24" ${SW}><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+ rot:`<svg viewBox="0 0 24 24" ${SW}><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 6h3"/><path d="M3 10.5a8 8 0 0 0 1.7 6.3M2.6 14.6l2 2.4 2.6-1.6"/></svg>`,
+ pencil:`<svg viewBox="0 0 24 24" ${SW}><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>`,
+ tap:`<svg viewBox="0 0 24 24" ${SW}><path d="M9 11V5.5a2 2 0 0 1 4 0V11"/><path d="M13 10.5a2 2 0 0 1 4 0V12a2 2 0 0 1 3.5 1.3V15a6.5 6.5 0 0 1-6.5 6.5h-1.2a6 6 0 0 1-4.6-2.2L4.6 15.2a1.8 1.8 0 0 1 2.8-2.3L9 14.5"/></svg>`,
+ play:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>`,
+ retry:`<svg viewBox="0 0 24 24" ${SW}><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/></svg>`,
+ down:`<svg viewBox="0 0 24 24" ${SW}><path d="M12 5v13M6.5 13L12 18.5 17.5 13"/></svg>`,
+ info:`<svg viewBox="0 0 24 24" ${SW}><circle cx="12" cy="12" r="9.2"/><path d="M12 11v5.5M12 7.8h.01"/></svg>`,
+ ok:`<svg viewBox="0 0 24 24" ${SW}><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+};
+
+/* ===== словарь: экран + страница ===== */
+/* raw: {…} — лишнее (паузы, слова‑паразиты); «|» — где обрывается живой текст в кадре записи */
+const T={
+ru:{
+ pair:['RU','ES'],
+ raw:'{эээ…} {слушай,} а можно {ну…} счёт, и {это,} воду без газа…| с собой, {да?}',
+ clear:'Можно счёт и бутылку воды без газа с собой?',
+ out:'¿Me trae la cuenta y una botella de agua sin gas para llevar?', outLang:'es',
+ aRec:'Говоришь ты · по‑русски', aDone:'Как прозвучало', bLbl:'Что понял Parrlo', cLbl:'Español · для собеседника',
+ bWait:'Соберу ясную фразу, как только нажмёшь «Стоп»', cWait:'Здесь будет перевод для собеседника', cCheck:'Проверь фразу выше и нажми «Перевести»',
+ edit:'Поправить', tip:'Не то слово? Коснись его и поправь',
+ hRec:'Паузы не мешают — говори до «Стоп»', hClear:'Parrlo убрал паузы и лишние слова', hTr:'Теперь очередь собеседника',
+ cancel:'Отменить', stop:'Стоп', redo:'Заново', go:'Перевести', play:'Озвучить', show:'Показать',
+ me:['Я говорю','по‑русски'], pt:['Yo hablo','en español'],
+ aBack:'Назад', aKbd:'Ввести текстом', aMore:'Ещё', aListen:'Прослушать запись',
+ page:{title:'Parrlo Translate · до и после',tag:'Эталон · пачка 2 · черновик текста',h1:'Translate · фраза «до / после»',
+  lead:'T‑02 карты сайта. Три кадра одной реплики для анимации на главной: запись со сбивчивой речью → ясная фраза «что понял Parrlo», которую можно поправить → перевод для собеседника. Один каркас, меняется только содержимое: кадры совмещаются пиксель в пиксель. Только тёмная тема, интерфейс на «ты». Экран 430×932 pt, PNG @3× — 1290×2796.',
+  heroH:'Главный кадр · перевод готов',
+  heroP:['Сверху вниз — путь фразы: как прозвучало (лишнее зачёркнуто), что понял Parrlo, перевод для собеседника. Видно всё сразу, поэтому этот кадр работает и без анимации.','Цвет = сторона: зелёный #2BC48A — ты и твоя речь, мятный #BFF2DC — язык собеседника и его кнопка. Активный блок обведён зелёным; в анимации обводка «спускается» по шагам.'],
+  cap:['Translate · до и после','Только тёмная тема. Тексты — черновик.'],
+  hStates:'Кадры анимации',statesLead:'Три кадра в порядке анимации. Блоки, кнопки и подсказка стоят на одних и тех же местах во всех кадрах. Масштаб 0,6.',
+  st:{recording:['Идёт запись','Нажали «Я говорю». Живой текст появляется по мере речи, паузы и «эээ» — серым. «Стоп» — закончить, «Отменить» — сбросить.'],
+      clear:['Что понял Parrlo','После «Стоп». Ясная фраза в зелёной рамке, лишнее в исходном тексте зачёркнуто. Пользователь касается слова или «Поправить», затем «Перевести».'],
+      translated:['Перевод готов','Крупный перевод для собеседника: «Озвучить» или «Показать». Ясная фраза остаётся и её можно поправить; следующая очередь — собеседника.']},
+  hDec:'Решения',
+  dec:['<b>Один каркас на три кадра.</b> Три блока фиксированной высоты (192 / 208 / 224 pt) и нижняя панель 132 pt стоят на одних координатах; меняется только наполнение. Для сайта это значит: кадры можно сводить простым наплывом без сдвигов.',
+   '<b>Путь фразы виден целиком.</b> Блоки идут в порядке обработки: «Как прозвучало» → «Что понял Parrlo» → перевод. Пустые блоки не прячутся, а честно говорят, что в них появится.',
+   '<b>Лишнее — зачёркнуто, а не стёрто.</b> Во втором и третьем кадре исходная речь остаётся с зачёркнутыми паузами и словами‑паразитами — так «до / после» читается внутри одного экрана, а не только цветом.',
+   '<b>Шаг проверки перед переводом.</b> Сверх сборки (там перевод идёт сразу): ясная фраза ждёт «Перевести», чтобы её можно было поправить до того, как собеседник услышит. Быстрый режим без проверки — настройка, не на этом экране.',
+   '<b>Правка — двумя путями.</b> Слова подчёркнуты пунктиром: касание слова открывает варианты (экран T‑10). Кнопка «Поправить» с карандашом — правка всей фразы текстом.',
+   '<b>Значок блока — попугай Parrlo</b> (монохромный знак из <code>screens.js</code>, ключ <code>spark</code>), никаких «искр».',
+   '<b>Запись можно прослушать.</b> В блоке «Как прозвучало» — кнопка воспроизведения и длительность: проверить, что именно сказали.'],
+  hTok:'Токены и контраст',
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code> / <code>#242B34</code>, линии <code>#2F3742</code>, текст <code>#F2F5F7</code> / <code>#9AA4B2</code> — тёмная тема v2.3.',
+   'Сторона «ты»: <code>#2BC48A</code>, подложка кнопки «Поправить» <code>#1E3734</code>. Собеседник: <code>#BFF2DC</code>. Перевод — <code>#00875C</code>, кнопка «Показать» — <code>#005E40</code>.',
+   'Nunito 900 — перевод (27 pt), кнопки; Inter 400/500/600 — интерфейс, ясная фраза Inter 600 23 pt. Сетка 4 pt, поля 16, блоки 20–24. Зоны нажатия ≥ 44 pt (круги 48, «Поправить» 44, кнопки 80).'],
+  ctrH:['Пара (текст / фон)','Где','Контраст','Норма'],
+  hNa:'Не утверждено',
+  na:['Все тексты — черновик, включая испанский и английский варианты интерфейса.','Название блока «Что понял Parrlo» — единое для сайта и приложения ещё не решено (GAP Translate, п. 2).','Шаг «Перевести» перед переводом и прослушивание записи — функции сверх текущей сборки.','Пунктир под словами как знак «можно коснуться» — предложение.','Цвета <code>#005E40</code>, <code>#1E3734</code>, <code>#E0483B</code>, <code>#C3CBD5</code> — производные, в токенах v2.3 их нет.'],
+  ctr:['основной текст','подписи, подсказки на фоне','подписи и зачёркнутое в блоке','исходная речь после записи','кнопки «Отменить», «Заново», пилюля','«Я говорю», «Перевести»','«Yo hablo»','«Поправить»','перевод (крупный)','подпись на карточке перевода','«Показать»','«Озвучить»','кнопка «Стоп»']}
+},
+es:{
+ pair:['ES','RU'],
+ raw:'{Eh…} {oye,} ¿me traes… {pues…} la cuenta y, {esto,} agua sin gas…| para llevar, {¿vale?}',
+ clear:'¿Me trae la cuenta y una botella de agua sin gas para llevar?',
+ out:'Можно счёт и бутылку воды без газа с собой?', outLang:'ru',
+ aRec:'Hablas tú · en español', aDone:'Lo que dijiste', bLbl:'Lo que entendió Parrlo', cLbl:'Русский · para la otra persona',
+ bWait:'La frase clara aparece en cuanto pulses «Parar»', cWait:'Aquí saldrá la traducción para la otra persona', cCheck:'Revisa la frase y pulsa «Traducir»',
+ edit:'Corregir', tip:'¿Alguna palabra mal? Tócala y corrígela',
+ hRec:'Las pausas no importan: habla hasta «Parar»', hClear:'Parrlo quitó las pausas y las muletillas', hTr:'Ahora le toca a la otra persona',
+ cancel:'Cancelar', stop:'Parar', redo:'Repetir', go:'Traducir', play:'Escuchar', show:'Mostrar',
+ me:['Hablo yo','en español'], pt:['Я говорю','по‑русски'],
+ aBack:'Atrás', aKbd:'Escribir', aMore:'Más', aListen:'Escuchar la grabación',
+ page:{title:'Parrlo Translate · antes y después',tag:'Referencia · lote 2 · textos en borrador',h1:'Translate · la frase «antes / después»',
+  lead:'T‑02 del mapa del sitio. Tres fotogramas de una misma frase para la animación de la portada: grabación con habla entrecortada → frase clara («lo que entendió Parrlo»), que se puede corregir → traducción para la otra persona. Una sola estructura; solo cambia el contenido, así que los fotogramas encajan al píxel. Solo tema oscuro, interfaz de «tú». Pantalla de 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Fotograma principal · traducción lista',
+  heroP:['De arriba abajo, el recorrido de la frase: lo que dijiste (lo que sobra, tachado), lo que entendió Parrlo y la traducción. Todo está a la vista, así que el fotograma funciona también sin animación.','Color = lado: verde #2BC48A para ti y tu voz, menta #BFF2DC para el idioma de la otra persona y su botón. El bloque activo lleva borde verde, que en la animación va bajando paso a paso.'],
+  cap:['Translate · antes y después','Solo tema oscuro. Textos en borrador.'],
+  hStates:'Fotogramas de la animación',statesLead:'Los tres fotogramas en orden. Bloques, botones y aviso ocupan el mismo sitio en todos. Escala 0,6.',
+  st:{recording:['Grabando','Has pulsado «Hablo yo». El texto aparece mientras hablas; pausas y muletillas, en gris. «Parar» termina, «Cancelar» descarta.'],
+      clear:['Lo que entendió Parrlo','Tras «Parar». La frase clara, con borde verde; en el original, lo que sobra aparece tachado. Tocas una palabra o «Corregir» y luego «Traducir».'],
+      translated:['Traducción lista','Traducción grande para la otra persona: «Escuchar» o «Mostrar». La frase clara sigue ahí y se puede corregir; ahora le toca a la otra persona.']},
+  hDec:'Decisiones',
+  dec:['<b>Una estructura para tres fotogramas.</b> Tres bloques de altura fija (192 / 208 / 224 pt) y un panel inferior de 132 pt en las mismas coordenadas; solo cambia el contenido. En la web basta un fundido, sin saltos.',
+   '<b>El recorrido completo, a la vista.</b> Los bloques siguen el orden del proceso: lo que dijiste → lo que entendió Parrlo → traducción. Los bloques vacíos no se esconden: dicen qué aparecerá en ellos.',
+   '<b>Lo que sobra, tachado, no borrado.</b> En el segundo y el tercer fotograma el original se queda con pausas y muletillas tachadas: el «antes / después» se lee en la misma pantalla, no solo por color.',
+   '<b>Revisar antes de traducir.</b> Más allá de la versión actual (que traduce directamente): la frase clara espera a «Traducir» para poder corregirla antes de que la oiga la otra persona. El modo rápido sería un ajuste, fuera de esta pantalla.',
+   '<b>Dos formas de corregir.</b> Las palabras llevan subrayado punteado: al tocar una salen alternativas (pantalla T‑10). «Corregir», con el lápiz, edita la frase entera como texto.',
+   '<b>El icono del bloque es el loro de Parrlo</b> (marca monocroma de <code>screens.js</code>, clave <code>spark</code>), sin «chispas».',
+   '<b>La grabación se puede escuchar.</b> En «Lo que dijiste» hay botón de reproducción y duración, para comprobar qué se dijo.'],
+  hTok:'Tokens y contraste',
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code> / <code>#242B34</code>, líneas <code>#2F3742</code>, texto <code>#F2F5F7</code> / <code>#9AA4B2</code>: tema oscuro v2.3.',
+   'Tu lado: <code>#2BC48A</code>, fondo del botón «Corregir» <code>#1E3734</code>. La otra persona: <code>#BFF2DC</code>. Traducción: <code>#00875C</code>; botón «Mostrar»: <code>#005E40</code>.',
+   'Nunito 900 para la traducción (27 pt) y los botones; Inter 400/500/600 para la interfaz, frase clara en Inter 600 a 23 pt. Retícula de 4 pt, márgenes de 16, bloques de 20–24. Zonas táctiles ≥ 44 pt.'],
+  ctrH:['Par (texto / fondo)','Dónde','Contraste','Mínimo'],
+  hNa:'Pendiente de aprobar',
+  na:['Todos los textos son borrador, también las versiones en español e inglés.','El nombre del bloque «Lo que entendió Parrlo» aún no está fijado para web y app (GAP Translate, punto 2).','El paso «Traducir» y la escucha de la grabación van más allá de la versión actual.','El subrayado punteado como señal de «se puede tocar» es una propuesta.','Los colores <code>#005E40</code>, <code>#1E3734</code>, <code>#E0483B</code> y <code>#C3CBD5</code> son derivados; no están en los tokens v2.3.'],
+  ctr:['texto principal','etiquetas y avisos sobre el fondo','etiquetas y tachado en el bloque','original tras la grabación','«Cancelar», «Repetir», selector','«Hablo yo», «Traducir»','«Я говорю»','«Corregir»','traducción (grande)','etiqueta de la tarjeta','«Mostrar»','«Escuchar»','botón «Parar»']}
+},
+en:{
+ pair:['EN','ES'],
+ raw:'{Uh…} {so,} could I get, {like…} the check, and, {um,} some water…| no bubbles, to go, {yeah?}',
+ clear:'Could I get the check and a bottle of still water to go?',
+ out:'¿Me trae la cuenta y una botella de agua sin gas para llevar?', outLang:'es',
+ aRec:'You’re speaking · English', aDone:'What you said', bLbl:'What Parrlo understood', cLbl:'Español · for the other person',
+ bWait:'Your clear phrase appears as soon as you tap Stop', cWait:'The translation for the other person goes here', cCheck:'Check the phrase, then tap Translate',
+ edit:'Edit', tip:'Wrong word? Tap it to fix it',
+ hRec:'Pauses are fine — keep talking until Stop', hClear:'Parrlo cut the pauses and filler words', hTr:'Now it’s the other person’s turn',
+ cancel:'Cancel', stop:'Stop', redo:'Redo', go:'Translate', play:'Play', show:'Show',
+ me:['I speak','in English'], pt:['Yo hablo','en español'],
+ aBack:'Back', aKbd:'Type instead', aMore:'More', aListen:'Play recording',
+ page:{title:'Parrlo Translate · before and after',tag:'Reference · batch 2 · draft copy',h1:'Translate · the “before / after” phrase',
+  lead:'T‑02 on the site map. Three frames of one phrase for the home page animation: a messy live recording → the clear phrase (“what Parrlo understood”), which you can edit → the translation for the other person. One layout, only the content changes, so the frames line up pixel for pixel. Dark theme only. Screen 430×932 pt, PNG @3×: 1290×2796.',
+  heroH:'Hero frame · translation ready',
+  heroP:['Top to bottom, the phrase’s journey: what you said (the extras struck through), what Parrlo understood, the translation for the other person. It’s all on screen at once, so the frame works without animation too.','Color = side: green #2BC48A is you and your speech, mint #BFF2DC is the other person’s language and button. The active block gets a green outline that steps down through the frames.'],
+  cap:['Translate · before and after','Dark theme only. Draft copy.'],
+  hStates:'Animation frames',statesLead:'The three frames in animation order. Blocks, buttons and the hint sit in the same place in every frame. Scale 0.6.',
+  st:{recording:['Recording','After tapping “I speak”. Live text appears as you talk; pauses and fillers are gray. Stop finishes, Cancel throws it away.'],
+      clear:['What Parrlo understood','After Stop. The clear phrase in a green outline; extras in the original are struck through. Tap a word or Edit, then Translate.'],
+      translated:['Translation ready','Large translation for the other person: Play or Show. The clear phrase stays and can still be edited; the other person goes next.']},
+  hDec:'Decisions',
+  dec:['<b>One layout, three frames.</b> Three fixed‑height blocks (192 / 208 / 224 pt) and a 132 pt bottom panel keep the same coordinates; only the content changes. On the site, a plain crossfade works with no jumps.',
+   '<b>The whole journey is visible.</b> Blocks follow the processing order: what you said → what Parrlo understood → translation. Empty blocks don’t hide; they say what will appear.',
+   '<b>Extras are struck through, not erased.</b> In frames two and three the original stays with pauses and fillers struck out, so “before / after” reads on one screen, not by color alone.',
+   '<b>A check step before translating.</b> Beyond the current build (which translates straight away): the clear phrase waits for Translate, so it can be fixed before the other person hears it. A fast mode would be a setting, not on this screen.',
+   '<b>Two ways to edit.</b> Words carry a dotted underline: tapping one opens alternatives (screen T‑10). Edit, with the pencil, rewrites the whole phrase as text.',
+   '<b>The block icon is the Parrlo parrot</b> (the monochrome mark from <code>screens.js</code>, key <code>spark</code>), no “sparkles”.',
+   '<b>You can replay the recording.</b> “What you said” has a play button and duration, to check what was actually said.'],
+  hTok:'Tokens and contrast',
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code> / <code>#242B34</code>, lines <code>#2F3742</code>, text <code>#F2F5F7</code> / <code>#9AA4B2</code>: dark theme v2.3.',
+   'Your side: <code>#2BC48A</code>, Edit button fill <code>#1E3734</code>. Other person: <code>#BFF2DC</code>. Translation: <code>#00875C</code>; Show button: <code>#005E40</code>.',
+   'Nunito 900 for the translation (27 pt) and buttons; Inter 400/500/600 for the UI, clear phrase in Inter 600 at 23 pt. 4 pt grid, 16 margins, 20–24 block padding. Tap targets ≥ 44 pt.'],
+  ctrH:['Pair (text / background)','Where','Contrast','Minimum'],
+  hNa:'Not approved',
+  na:['All copy is draft, including the Spanish and English interface.','The block name “What Parrlo understood” isn’t settled for site and app yet (Translate GAP, item 2).','The Translate check step and recording playback go beyond the current build.','The dotted underline as a “tap me” cue is a proposal.','Colors <code>#005E40</code>, <code>#1E3734</code>, <code>#E0483B</code>, <code>#C3CBD5</code> are derived; they aren’t in the v2.3 tokens.'],
+  ctr:['body text','labels and hints on background','labels and struck text in a block','original after recording','Cancel, Redo, language pill','I speak, Translate','Yo hablo','Edit','translation (large)','translation card label','Show','Play','Stop button']}
+}};
+const LANGS=['ru','es','en'];
+let L=(new URLSearchParams(location.search).get('l')||'ru').toLowerCase(); if(!LANGS.includes(L))L='ru';
+const UL={ru:'ru',es:'es',en:'en'};
+
+function rnd(seed){let s=seed;return()=>{s=(s*9301+49297)%233280;return s/233280;};}
+function wave(n,live,seed,maxH){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const env=0.45+0.55*Math.sin(Math.PI*(i+1)/(live+1));const v=i<live?Math.max(6,Math.round((0.25+0.75*r())*maxH*env)):4;h+=`<i class="${i<live?'':P+'z'}" style="height:${v}px"></i>`;}return h;}
+function mini(n,seed){const r=rnd(seed);let h='';for(let i=0;i<n;i++){const v=Math.round(5+r()*19*Math.sin(Math.PI*(i+.5)/n)+3);h+=`<i style="height:${v}px"></i>`;}return h;}
+function raw(s,live){let t=live?s.split('|')[0]:s.replace('|','');return t.replace(/\{([^}]*)\}/g,`<span class="${P}f">$1</span>`);}
+function words(s){return s.split(' ').map(w=>`<span>${w}</span>`).join(' ');}
+
+function screen(st,t){
+ const sbar=`<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>`;
+ const top=`<div class="${P}top"><span class="${P}cb" role="button" aria-label="${t.aBack}">${I.back}</span><span class="${P}pair"><span><i class="${P}dot"></i>${t.pair[0]}<i class="${P}swp">${I.swap}</i>${t.pair[1]}<i class="${P}dot ${P}p"></i></span></span><span class="${P}cb" role="button" aria-label="${t.aKbd}">${I.kbd}</span><span class="${P}cb" role="button" aria-label="${t.aMore}">${I.more}</span></div>`;
+ const rec=st==='recording', cl=st==='clear', tr=st==='translated';
+ const par=`<span class="${P}par">${I.spark}</span>`;
+ /* A */
+ const A=rec
+  ? `<div class="${P}slot ${P}a ${P}on"><div class="${P}lbl"><i class="${P}dot"></i>${t.aRec}<span class="${P}sp"><i></i>0:05</span></div>
+     <p class="${P}raw" lang="${UL[L]}">${raw(t.raw,true)}<i class="${P}car"></i></p>
+     <div class="${P}wave" aria-hidden="true">${wave(51,40,7,40)}</div></div>`
+  : `<div class="${P}slot ${P}a"><div class="${P}lbl"><i class="${P}dot"></i>${t.aDone}</div>
+     <p class="${P}raw ${P}done" lang="${UL[L]}">${raw(t.raw,false)}</p>
+     <div class="${P}clip"><span class="${P}play" role="button" aria-label="${t.aListen}">${I.play}</span><div class="${P}mw" aria-hidden="true">${mini(44,11)}</div><span class="${P}dur">0:06</span></div></div>`;
+ /* B */
+ const B=rec
+  ? `<div class="${P}slot ${P}b ${P}quiet"><div class="${P}lbl ${P}hdr">${par}${t.bLbl}</div>
+     <p class="${P}empty">${t.bWait}</p>
+     <div class="${P}sk" aria-hidden="true"><i style="width:88%"></i><i style="width:56%"></i></div></div>`
+  : `<div class="${P}slot ${P}b ${cl?P+'on':''}"><div class="${P}lbl ${P}hdr">${par}${t.bLbl}<span class="${P}edit" role="button">${I.pencil}${t.edit}</span></div>
+     <p class="${P}ph" lang="${UL[L]}">${words(t.clear)}</p>
+     <div class="${P}tip">${I.tap}${t.tip}</div></div>`;
+ /* C */
+ const C=tr
+  ? `<div class="${P}slot ${P}c ${P}tr"><div class="${P}lbl"><i class="${P}dot ${P}p"></i>${t.cLbl}</div>
+     <p class="${P}out" lang="${t.outLang}">${t.out}</p>
+     <div class="${P}acts"><span class="${P}act" role="button">${I.spk}${t.play}</span><span class="${P}act ${P}ghost" role="button">${I.rot}${t.show}</span></div></div>`
+  : `<div class="${P}slot ${P}c ${P}dash"><div class="${P}lbl"><i class="${P}dot ${P}p"></i>${t.cLbl}</div>
+     <p class="${P}empty">${rec?t.cWait:t.cCheck}</p></div>`;
+ /* низ */
+ const mic=I.mic;
+ const bot=rec
+  ? `<div class="${P}hint">${I.info}${t.hRec}</div><div class="${P}btns"><span class="${P}sec" role="button">${t.cancel}</span><span class="${P}stop" role="button"><i></i>${t.stop}</span></div>`
+  : cl
+  ? `<div class="${P}hint">${I.ok}${t.hClear}</div><div class="${P}btns"><span class="${P}sec" role="button">${I.retry}${t.redo}</span><span class="${P}go" role="button">${I.tr}${t.go}</span></div>`
+  : `<div class="${P}hint">${I.down}${t.hTr}</div><div class="${P}btns"><span class="${P}pb ${P}me" role="button">${mic}<span><b>${t.me[0]}</b><small>${t.me[1]}</small></span></span><span class="${P}pb ${P}pt ${P}next" role="button">${mic}<span><b>${t.pt[0]}</b><small>${t.pt[1]}</small></span></span></div>`;
+ return `<div class="scr ${P}scr" data-state="${st}">${sbar}${top}<div class="${P}main">${A}${B}${C}</div><div class="${P}bot">${bot}</div><div class="homebar"><i></i></div></div>`;
+}
+
+/* контраст */
+function Lu(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function cr(a,b){const x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+const PAIRS=[['#F2F5F7','#0E1116',4.5],['#9AA4B2','#0E1116',4.5],['#9AA4B2','#1C2026',4.5],['#C3CBD5','#1C2026',4.5],['#F2F5F7','#242B34',4.5],['#0E1116','#2BC48A',4.5],['#0E1116','#BFF2DC',4.5],['#2BC48A','#1E3734',4.5],['#FFFFFF','#00875C',3],['#FFFFFF','#00875C',4.5],['#FFFFFF','#005E40',4.5],['#0E1116','#FFFFFF',4.5],['#0E1116','#F2F5F7',4.5]];
+
+const STATES=['recording','clear','translated'];
+const ph=(id,s,html)=>`<div class="pf p67" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
+const $=id=>document.getElementById(P+id);
+function render(){
+ const t=T[L],p=t.page;
+ document.documentElement.lang=L; document.title=p.title;
+ $('lsw').innerHTML=LANGS.map(l=>`<a href="?l=${l}" data-l="${l}" aria-current="${l===L}">${l.toUpperCase()}</a>`).join('');
+ $('tag').textContent=p.tag; $('h1').textContent=p.h1; $('lead').textContent=p.lead;
+ $('hero-ph').innerHTML=ph('translate-clear',.8,screen('translated',t))+`<div class="pcap"><span class="dot"></span><div><b>${p.cap[0]}</b><span>${p.cap[1]}</span></div></div>`;
+ $('hero-t').innerHTML=`<h3>${p.heroH}</h3>`+p.heroP.map(x=>`<p>${x}</p>`).join('');
+ $('h-states').textContent=p.hStates; $('states-lead').textContent=p.statesLead;
+ $('grid').innerHTML=STATES.map((k,i)=>`<figure>${ph(P+'-'+k,.6,screen(k,t))}<figcaption><b>${i+1} · ${p.st[k][0]}</b><code>${k}</code> · ${p.st[k][1]}</figcaption></figure>`).join('');
+ $('h-dec').textContent=p.hDec; $('dec').innerHTML=p.dec.map(x=>`<li>${x}</li>`).join('');
+ $('h-tok').textContent=p.hTok; $('tok').innerHTML=p.tok.map(x=>`<li>${x}</li>`).join('');
+ const fmt=v=>L==='en'?v.toFixed(2):v.toFixed(2).replace('.',',');
+ $('ctr').innerHTML=`<tr>${p.ctrH.map(h=>`<th>${h}</th>`).join('')}</tr>`+PAIRS.map(([a,b,n],i)=>{const v=cr(a,b);return `<tr><td><i class="${P}sw" style="background:${a}"></i><code>${a}</code> / <i class="${P}sw" style="background:${b}"></i><code>${b}</code></td><td>${p.ctr[i]}</td><td><b>${fmt(v)}:1</b></td><td>${v>=n?'≥ '+fmt(n).replace(/[.,]00$/,'').replace(/0$/,'')+' ✓':'✗'}</td></tr>`;}).join('');
+ $('h-na').textContent=p.hNa; $('na').innerHTML=p.na.map(x=>`<li>${x}</li>`).join('');
+ window.TC_CR=PAIRS.map(([a,b,n],i)=>[p.ctr[i],+cr(a,b).toFixed(2),n]);
+ document.body.dataset.ready=L;
+}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-l]');if(!a)return;e.preventDefault();L=a.dataset.l;history.replaceState(null,'','?l='+L);render();});
+window.TC_STATES=STATES;
+render();
+})();
+</script>
+</body>
+</html>

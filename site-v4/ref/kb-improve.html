@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo · клавиатура, «Улучшить»</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
+.kb-improve-w{max-width:1200px;margin:0 auto}
+.kb-improve-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px}
+.kb-improve-tags{display:flex;gap:8px;flex-wrap:wrap}
+.kb-improve-tag{display:inline-block;font:600 13px/20px Inter,sans-serif;color:#0E1116;background:#FFC247;border-radius:8px;padding:2px 10px}
+.kb-improve-tag.g{background:#242B34;color:#F2F5F7}
+.kb-improve-lang{display:flex;gap:4px;background:#171C23;border-radius:24px;padding:4px}
+.kb-improve-lang a{min-width:56px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 15px Inter,sans-serif;color:#C5CCD5;text-decoration:none}
+.kb-improve-lang a[aria-current="true"]{background:#2BC48A;color:#0E1116}
+.kb-improve-w h1{font:900 36px/1.15 Nunito,sans-serif;margin:0 0 8px}
+.kb-improve-w h2{font:900 24px/1.2 Nunito,sans-serif;margin:0 0 8px}
+.kb-improve-lead{color:#9AA4B2;max-width:780px;margin:0 0 32px}
+.kb-improve-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;padding:48px 24px 40px;border-radius:32px;background:#171C23}
+.kb-improve-hero figure,.kb-improve-st figure{margin:0}
+.kb-improve-sec{margin-top:64px}
+.kb-improve-sec>p{color:#9AA4B2;margin:0 0 24px;max-width:780px}
+.kb-improve-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(600px,1fr));gap:24px}
+.kb-improve-st{background:#171C23;border-radius:24px;padding:24px}
+.kb-improve-st h3{font:900 20px/1.25 Nunito,sans-serif;margin:0 0 4px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.kb-improve-st h3 code{font:500 13px ui-monospace,Menlo,monospace;color:#9AA4B2;background:#0E1116;border-radius:6px;padding:1px 6px}
+.kb-improve-st>p{margin:0 0 20px;color:#9AA4B2;font-size:15px}
+.kb-improve-pair{display:flex;gap:20px;justify-content:center}
+.kb-improve-pair .pcap{margin-top:10px;font-size:13px}
+.kb-improve-pair .pcap b{font-size:14px}
+.kb-improve-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px}
+.kb-improve-notes h2{font-size:20px;margin:0 0 10px}
+.kb-improve-notes ul{margin:0;padding-left:20px;color:#9AA4B2}
+.kb-improve-notes li{margin:6px 0}
+.kb-improve-notes b{color:#F2F5F7;font-weight:600}
+.kb-improve-st .pf{--s:.6!important}
+body.kb-improve-cap .pf{--s:1!important}
+@media (max-width:660px){
+ .kb-improve-grid{grid-template-columns:1fr}
+ .kb-improve-st{padding:16px}
+ .kb-improve-pair{gap:12px}
+ .kb-improve-st .pf{--s:.34!important}
+ .kb-improve-hero{padding:24px 8px;gap:24px}
+ .kb-improve-hero .pf{--s:.72!important}
+ .kb-improve-w h1{font-size:28px}
+}
+
+/* ===== экран 430×932: клавиатура Parrlo, «Улучшить» ===== */
+.scr.light{--kb-bg:#D3D7DC;--kb-key:#FFFFFF;--kb-key2:#ABB2BB;--kb-tx:#0E1116;--kb-sec:#5B6472;--kb-sh:0 1px 0 rgba(0,0,0,.3);--kb-acc:#00875C;--kb-onacc:#FFFFFF;--kb-track:#E3E7EB;--kb-sel:#E6F5EE}
+.scr:not(.light){--kb-bg:#1B1F25;--kb-key:#3A414B;--kb-key2:#2A3038;--kb-tx:#F2F5F7;--kb-sec:#C5CCD5;--kb-sh:0 1px 0 rgba(0,0,0,.6);--kb-acc:#2BC48A;--kb-onacc:#0E1116;--kb-track:#4A525D;--kb-sel:#24443A}
+.kb-improve-scr .nav .av{color:#0E1116}
+.kb-improve-scr .m .tm{opacity:.75}
+.kb-improve-scr .inp .f{color:var(--tx);flex:1;min-width:0;padding-top:8px;padding-bottom:8px;line-height:24px;align-items:flex-start}
+.kb-improve-car{display:inline-block;width:2px;height:22px;background:var(--acc);vertical-align:-5px;margin-left:1px}
+.kb-improve-busy{color:var(--sec)}
+.kb-improve-kb{flex:none;background:var(--kb-bg);padding:0 3px;color:var(--kb-tx)}
+/* полоса статуса над панелью */
+.kb-improve-strip{position:relative;margin:8px 5px 0;height:60px;border-radius:14px;background:var(--kb-key);box-shadow:var(--kb-sh);padding:0 4px 0 12px;display:flex;align-items:center;gap:10px;font-size:14px;line-height:19px;overflow:hidden}
+.kb-improve-strip>svg{flex:none;width:22px;height:22px;color:var(--kb-acc)}
+.kb-improve-strip>svg.pm{width:22px;height:22px}
+.kb-improve-strip .tx{flex:1;min-width:0}
+.kb-improve-strip .tx b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-improve-strip .tx span{display:block;color:var(--kb-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-improve-act{flex:none;min-width:64px;height:44px;display:flex;align-items:center;justify-content:center;padding:0 10px;font:600 15px Inter,sans-serif;color:var(--kb-tx);border-radius:10px}
+.kb-improve-pill{flex:none;height:44px;display:flex;align-items:center;padding:0 4px}
+.kb-improve-pill span{height:32px;border-radius:16px;background:var(--kb-key2);display:flex;align-items:center;gap:4px;padding:0 8px 0 12px;font:600 14px Inter,sans-serif;white-space:nowrap;color:var(--kb-tx)}
+.kb-improve-pill svg{width:16px;height:16px}
+.kb-improve-pill.open span{background:var(--kb-acc);color:var(--kb-onacc)}
+.kb-improve-prog{position:absolute;left:12px;right:12px;bottom:4px;height:3px;border-radius:2px;background:var(--kb-track);overflow:hidden}
+.kb-improve-prog i{position:absolute;top:0;bottom:0;left:18%;width:38%;border-radius:2px;background:var(--kb-acc);animation:kb-improve-run 1.4s ease-in-out infinite}
+@keyframes kb-improve-run{0%{left:20%}45%{left:100%}45.01%{left:-40%}100%{left:20%}}
+/* чипы результата */
+.kb-improve-chips{display:flex;gap:6px;height:52px;align-items:center;margin:0 5px}
+.kb-improve-chip{flex:1 1 auto;height:44px;border-radius:22px;background:var(--kb-key);box-shadow:var(--kb-sh);display:flex;align-items:center;justify-content:center;gap:4px;padding:0 9px;font:600 15px Inter,sans-serif;white-space:nowrap;color:var(--kb-tx)}
+.kb-improve-chip svg{flex:none;width:17px;height:17px}
+.kb-improve-chip.on{background:var(--kb-acc);color:var(--kb-onacc);box-shadow:none}
+.kb-improve-chip.u{flex:0 1 auto;background:var(--kb-key2);box-shadow:none}
+/* панель иконок */
+.kb-improve-bar{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;margin-top:2px}
+.kb-improve-ib{position:relative;width:64px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--kb-tx)}
+.kb-improve-ib svg{width:26px;height:26px}
+.kb-improve-ib svg.pm{width:25px;height:25px}
+.kb-improve-ib.on{background:var(--kb-acc);color:var(--kb-onacc)}
+/* клавиши */
+.kb-improve-rows{position:relative;display:flex;flex-direction:column;gap:11px;padding-top:6px}
+.kb-improve-r{display:flex;gap:6px}
+.kb-improve-r.ru{gap:5px}
+.kb-improve-k{flex:1 1 0;min-width:0;height:45px;border-radius:8px;background:var(--kb-key);box-shadow:var(--kb-sh);color:var(--kb-tx);display:flex;align-items:center;justify-content:center;font:400 23px/1 Inter,sans-serif}
+.kb-improve-k.f{background:var(--kb-key2)}
+.kb-improve-k.f svg{width:23px;height:23px}
+.kb-improve-k.w{flex:1.38 1 0}
+.kb-improve-hp{flex:.5 1 0}
+.kb-improve-g{flex:.18 1 0}
+.kb-improve-k.n{flex:1.25 1 0;font-size:16px;font-weight:500}
+.kb-improve-k.p{flex:.85 1 0}
+.kb-improve-k.sp{flex:4.4 1 0;font-size:15px;gap:9px}
+.kb-improve-k.sp i{font-style:normal;color:var(--kb-sec);font-size:17px}
+.kb-improve-k.rt{flex:1.55 1 0;background:var(--kb-acc);color:var(--kb-onacc);box-shadow:none}
+.kb-improve-k.rt svg{width:24px;height:24px}
+/* выбор тона поверх раскладки */
+.kb-improve-ov{position:absolute;inset:0 -3px -3px;background:var(--kb-bg);padding:6px 5px 3px}
+.kb-improve-ovc{height:100%;border-radius:16px;background:var(--kb-key);box-shadow:var(--kb-sh);padding:4px 8px 10px 16px;display:flex;flex-direction:column}
+.kb-improve-oh{display:flex;align-items:center;gap:8px;height:48px}
+.kb-improve-oh h4{flex:1;margin:0;font:700 17px/22px Inter,sans-serif}
+.kb-improve-oh h4 span{font-weight:400;color:var(--kb-sec);font-size:14px;margin-left:6px}
+.kb-improve-x{flex:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.kb-improve-x svg{width:22px;height:22px}
+.kb-improve-opts{display:flex;flex-direction:column;gap:8px;margin-right:8px;margin-top:2px}
+.kb-improve-opt{height:64px;border-radius:14px;border:1.5px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 14px}
+.kb-improve-opt .tx{flex:1;min-width:0}
+.kb-improve-opt b{display:block;font:700 16px/21px Inter,sans-serif}
+.kb-improve-opt .tx>span{display:block;font-size:14px;line-height:19px;color:var(--kb-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-improve-rad{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--kb-sec);display:flex;align-items:center;justify-content:center}
+.kb-improve-opt.on{border-color:var(--kb-acc);background:var(--kb-sel)}
+.kb-improve-opt.on .kb-improve-rad{border:0;background:var(--kb-acc);color:var(--kb-onacc)}
+.kb-improve-rad svg{width:16px;height:16px}
+.kb-improve-home{height:34px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.kb-improve-home i{width:140px;height:5px;border-radius:3px;background:var(--kb-tx)}
+@media (prefers-reduced-motion:reduce){.kb-improve-prog i{animation:none}}
+</style>
+</head>
+<body>
+<div class="kb-improve-w">
+<div class="kb-improve-top">
+ <div class="kb-improve-tags"><span class="kb-improve-tag" id="kb-improve-t-draft"></span><span class="kb-improve-tag g" id="kb-improve-t-soon"></span></div>
+ <nav class="kb-improve-lang" id="kb-improve-lang" aria-label="Language"></nav>
+</div>
+<h1 id="kb-improve-h1"></h1>
+<p class="kb-improve-lead" id="kb-improve-lead"></p>
+<div class="kb-improve-hero" id="kb-improve-hero"></div>
+<section class="kb-improve-sec">
+<h2 id="kb-improve-h-st"></h2>
+<p id="kb-improve-p-st"></p>
+<div class="kb-improve-grid" id="kb-improve-grid"></div>
+</section>
+<section class="kb-improve-sec kb-improve-notes" id="kb-improve-notes"></section>
+</div>
+<script>
+(function(){
+const NB=' ';
+const SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+/* знак «Улучшить» — ключ spark из site-v4/screens.js, с уникальным id маски */
+let pmN=0;
+const spark=()=>{const id='kb-improve-pm'+(++pmN);return `<svg class="pm" viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#${id})"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>`;};
+const I={
+tr:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/></svg>`,
+mic:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/></svg>`,
+voice:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/></svg>`,
+gear:`<svg viewBox="0 0 24 24" ${SW} aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>`,
+check:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+undo:`<svg viewBox="0 0 24 24" ${SW} stroke-width="2.1" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>`,
+x:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>`,
+chev:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>`,
+chevU:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 14l5-5 5 5"/></svg>`,
+shift:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l8 8.5h-4.5v7.5h-7V12H4z"/></svg>`,
+del:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 5H20a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H8.5L3 12z"/><path d="M11.5 9.5l5 5M16.5 9.5l-5 5" stroke-linecap="round"/></svg>`,
+ret:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5v6a3 3 0 0 1-3 3H5"/><path d="M9 10l-4 4 4 4"/></svg>`,
+back:`<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>`,
+send:`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>`};
+
+/* ===== переписка в демо: что пишет пользователь (изучаемый язык) ===== */
+const ES={who:'Lucía',ini:'L',kb:'es',space:'Español',
+ inc:['¡Hola! Soy Lucía, la del anuncio del piso.','¿Te viene bien venir a verlo mañana?'],
+ draft:'hola lucia, yo puedo venir mañana a las 10 si es bueno para tu, tengo muchas ganas para ver el piso',
+ good:'¡Hola, Lucía! Puedo ir mañana a las 10, si te viene bien. Tengo muchas ganas de ver el piso.',
+ soft:'¡Hola, Lucía! Si te viene bien, ¿podría pasarme mañana a las 10? Me encantaría ver el piso.',
+ polite:'Buenos días, Lucía. Si le viene bien, podría ir mañana a las 10. Tengo mucho interés en ver el piso.'};
+const RU={who:'Ольга',ini:'О',kb:'ru',space:'Русский',
+ inc:['Привет! Это Ольга, по объявлению о квартире.','Сможешь прийти посмотреть завтра?'],
+ draft:'привет ольга, я могу приходить завтра в 10 если это хорошо для тебе, я очень хочу смотреть квартира',
+ good:'Привет, Ольга! Могу прийти завтра в'+NB+'10, если тебе удобно. Очень хочу посмотреть квартиру.',
+ soft:'Привет, Ольга! Если тебе удобно, можно я приду завтра в'+NB+'10? Очень хочется посмотреть квартиру.',
+ polite:'Здравствуйте, Ольга! Если вам удобно, могу прийти завтра в'+NB+'10. Очень хочу посмотреть квартиру.'};
+
+/* ===== словарь: экран + страница ===== */
+const L={
+ru:{demo:ES,online:'в сети',
+ bar:['Улучшить','Перевести','Диктовка','Голосовое','Настройки'],
+ hintB:'Пиши по‑испански как получится',hintS:'«Улучшить» поправит ошибки и тон',
+ busyB:'Улучшаем…',cancel:'Отмена',
+ doneB:'Улучшили',softB:'Сделали мягче',politeB:'Улучшили · вежливо',was:'Было: ',
+ chips:['Короче','Мягче','Ещё вариант','Отменить'],
+ tone:'Тон',toneSub:'для этой фразы и следующих',friend:'Друг',polite:'Вежливо',
+ friendH:'На «tú», просто и тепло',politeH:'На «usted», для хозяина, врача, банка',
+ toneAria:'Тон: ',close:'Закрыть',
+ page:{title:'Parrlo · клавиатура, «Улучшить»',draft:'Черновик текста',soon:'Скоро · макет',
+  h1:'Клавиатура Parrlo · «Улучшить»',
+  lead:'Эталон функции, которой в сборке пока нет. Пишешь на изучаемом языке как получается, прямо в мессенджере, — Parrlo превращает черновик в грамотную фразу на месте. Дальше чипы: короче, мягче, ещё вариант или отменить. Тон — «Друг» или «Вежливо». Клавиатура идёт за темой телефона, поэтому всё в светлой и тёмной теме.',
+  heroL:'Результат с чипами · светлая',heroD:'Результат с чипами · тёмная',
+  heroS:'Черновик стал грамотной фразой в том же поле; ниже — Короче, Мягче, Ещё вариант, Отменить.',
+  heroSd:'Те же размеры, токены тёмной клавиатуры.',
+  hSt:'Состояния',pSt:'Слева светлая тема, справа тёмная. Раскладка и панель не меняются; меняются поле, полоса над панелью и чипы.',
+  light:'Светлая',dark:'Тёмная',
+  st:{draft:['Черновик с ошибками','Пишешь Лусии по‑испански как умеешь: без заглавных, с ошибками. Полоса подсказывает, что сделает «Улучшить», справа — тон.'],
+   improving:['Улучшаем','Нажали попугая: кнопка подсвечена, полоса «Улучшаем…» с ходом и «Отмена». Текст в поле не тронут до ответа.'],
+   result:['Результат с чипами','Грамотная фраза уже в поле. В полосе — что было, ниже чипы: Короче, Мягче, Ещё вариант, Отменить.'],
+   softer:['Применили «Мягче»','Нажали «Мягче»: фраза стала вежливой просьбой, чип отмечен галочкой. «Отменить» вернёт черновик.'],
+   tone:['Выбор тона','Нажали на тон в полосе: «Друг» на «tú» или «Вежливо» на «usted». Выбрали «Вежливо» — фраза в поле уже на «usted».']},
+  hDec:'Решения',dec:[
+   ['Замена на месте, без предпросмотра.','Черновик в поле сразу становится грамотной фразой — как в карте сайта («на месте черновика»). Страховка — «Отменить» и строка «Было: …» в полосе.'],
+   ['Четыре чипа одной строкой','под полосой: Короче, Мягче, Ещё вариант и отдельно — «Отменить» со стрелкой и на служебном фоне, чтобы не перепутать с правкой.'],
+   ['Тон живёт в полосе','рядом с результатом («Друг ▾»), а выбор открывается поверх раскладки: две большие строки с подсказкой, как будет звучать.'],
+   ['Тон назван по ситуации, а не по грамматике:','«Друг» и «Вежливо», а «tú» / «usted» (ты / вы) — в подсказке.'],
+   ['Значок «Улучшить» — монохромный попугай Parrlo','(ключ spark). Индикатор работы — полоса хода, без «искр» и вращения знака.'],
+   ['Язык черновика — изучаемый:','ru‑интерфейс пишет по‑испански, es — по‑русски, en — по‑испански; раскладка — языка черновика.']],
+  hTok:'Токены и контраст',tok:[
+   ['Светлая:','фон #D3D7DC, клавиши и полоса #FFFFFF, служебные #ABB2BB, текст #0E1116, вторичный #5B6472, акцент #00875C / #FFFFFF, выбранный тон #E6F5EE.'],
+   ['Тёмная:','фон #1B1F25, клавиши и полоса #3A414B, служебные #2A3038, текст #F2F5F7, вторичный #C5CCD5, акцент #2BC48A / #0E1116, выбранный тон #24443A.'],
+   ['Контраст (WCAG, расчёт):','','calc'],
+   ['Не только цветом:','выбранный чип — галочка и aria-pressed; выбранный тон — круг с галочкой и рамка; активная функция — заливка.'],
+   ['Зоны нажатия:','иконки панели 64×44, чипы 40 в строке 48, тон 44, «Отмена» и «Закрыть» 44, строки тона 64.']],
+  hNo:'Не утверждено',no:[
+   'Все тексты — черновик, особенно es и en: «Cercano / Formal», «Friendly / Polite», названия чипов.',
+   'Тон «для этой фразы и следующих» — как долго держится выбор и привязан ли к собеседнику (в kb‑mvp были папки контактов).',
+   '«Отменить» после «Мягче» возвращает исходный черновик, а не прошлый вариант — нужно решение.',
+   'Функции нет в сборке v2 (GAP: №4 частично, №16 и №17 нет); экран — макет.',
+   'Жёлтый на экране не используется.'],
+  ok:'нарушений нет'}},
+es:{demo:RU,online:'en línea',
+ bar:['Mejorar','Traducir','Dictado','Nota de voz','Ajustes'],
+ hintB:'Escribe en ruso como te salga',hintS:'«Mejorar» corrige errores y tono',
+ busyB:'Mejorando…',cancel:'Cancelar',
+ doneB:'Mejorado',softB:'Suavizado',politeB:'Mejorado · formal',was:'Antes: ',
+ chips:['Acortar','Suavizar','Otra versión','Deshacer'],
+ tone:'Tono',toneSub:'para esta frase y las siguientes',friend:'Cercano',polite:'Formal',
+ friendH:'Con «ты», natural y cercano',politeH:'Con «вы», para caseros, médicos, bancos',
+ toneAria:'Tono: ',close:'Cerrar',
+ page:{title:'Parrlo · teclado, «Mejorar»',draft:'Texto provisional',soon:'Próximamente · maqueta',
+  h1:'Teclado Parrlo · «Mejorar»',
+  lead:'Referencia de una función que aún no está en la app. Escribes en el idioma que aprendes como te salga, en tu app de mensajes, y Parrlo convierte el borrador en una frase correcta ahí mismo. Después, chips: más corto, más suave, otra versión o deshacer. El tono: «Cercano» o «Formal». El teclado sigue el tema del móvil, así que todo está en claro y oscuro.',
+  heroL:'Resultado con chips · claro',heroD:'Resultado con chips · oscuro',
+  heroS:'El borrador ya es una frase correcta en el mismo campo; debajo: Acortar, Suavizar, Otra versión, Deshacer.',
+  heroSd:'Mismas medidas, tokens del teclado oscuro.',
+  hSt:'Estados',pSt:'A la izquierda, tema claro; a la derecha, oscuro. El teclado y la barra no cambian; cambian el campo, la franja de arriba y los chips.',
+  light:'Claro',dark:'Oscuro',
+  st:{draft:['Borrador con errores','Le escribes a Olga en ruso como sabes: sin mayúsculas y con errores. La franja explica qué hace «Mejorar»; a la derecha, el tono.'],
+   improving:['Mejorando','Tocaste el loro: el botón se ilumina y la franja dice «Mejorando…» con progreso y «Cancelar». El texto no cambia hasta tener respuesta.'],
+   result:['Resultado con chips','La frase correcta ya está en el campo. La franja muestra lo que había; debajo, los chips: Acortar, Suavizar, Otra versión, Deshacer.'],
+   softer:['«Suavizar» aplicado','Tocaste «Suavizar»: la frase pasa a ser una petición amable y el chip lleva una marca. «Deshacer» recupera el borrador.'],
+   tone:['Elegir el tono','Tocaste el tono en la franja: «Cercano» con «ты» o «Formal» con «вы». Elegiste «Formal» y la frase ya va de «вы».']},
+  hDec:'Decisiones',dec:[
+   ['Se sustituye en el sitio, sin vista previa.','El borrador se convierte en la frase correcta en el mismo campo, como pide el mapa del sitio. La red de seguridad: «Deshacer» y la línea «Antes: …».'],
+   ['Cuatro chips en una fila','bajo la franja: Acortar, Suavizar, Otra versión y, aparte, «Deshacer» con flecha y fondo de sistema para no confundirlo con un cambio.'],
+   ['El tono vive en la franja','junto al resultado («Cercano ▾»); la elección se abre sobre el teclado: dos filas grandes con una pista de cómo sonará.'],
+   ['El tono se nombra por la situación, no por la gramática:','«Cercano» y «Formal»; «ты» / «вы» van en la pista.'],
+   ['El icono de «Mejorar» es el loro de Parrlo en monocromo','(clave spark). El progreso es una barra, sin destellos ni el icono girando.'],
+   ['El borrador va en el idioma que aprendes:','interfaz ru → español, es → ruso, en → español; el teclado es el del borrador.']],
+  hTok:'Tokens y contraste',tok:[
+   ['Claro:','fondo #D3D7DC, teclas y franja #FFFFFF, teclas de sistema #ABB2BB, texto #0E1116, secundario #5B6472, acento #00875C / #FFFFFF, tono elegido #E6F5EE.'],
+   ['Oscuro:','fondo #1B1F25, teclas y franja #3A414B, teclas de sistema #2A3038, texto #F2F5F7, secundario #C5CCD5, acento #2BC48A / #0E1116, tono elegido #24443A.'],
+   ['Contraste (WCAG, calculado):','','calc'],
+   ['No solo con color:','chip elegido con marca y aria-pressed; tono elegido con círculo marcado y borde; función activa con relleno.'],
+   ['Zonas táctiles:','iconos de la barra 64×44, chips de 40 en una fila de 48, tono 44, «Cancelar» y «Cerrar» 44, filas de tono 64.']],
+  hNo:'Sin aprobar',no:[
+   'Todos los textos son provisionales, sobre todo es y en: «Cercano / Formal», «Friendly / Polite», nombres de los chips.',
+   'Tono «para esta frase y las siguientes»: cuánto dura la elección y si va ligada al contacto (kb‑mvp tenía carpetas de contactos).',
+   '«Deshacer» tras «Suavizar» devuelve el borrador original, no la versión anterior: falta decidirlo.',
+   'La función no está en la v2 (GAP: n.º 4 parcial, n.º 16 y 17 no); la pantalla es una maqueta.',
+   'El amarillo no se usa en la pantalla.'],
+  ok:'sin incidencias'}},
+en:{demo:ES,online:'online',
+ bar:['Improve','Translate','Dictate','Voice note','Settings'],
+ hintB:'Write your Spanish, mistakes and all',hintS:'Improve fixes errors and tone',
+ busyB:'Improving…',cancel:'Cancel',
+ doneB:'Improved',softB:'Made it softer',politeB:'Improved · polite',was:'Before: ',
+ chips:['Shorter','Softer','Another','Undo'],
+ tone:'Tone',toneSub:'for this message and the next',friend:'Friendly',polite:'Polite',
+ friendH:'Uses “tú”, relaxed and warm',politeH:'Uses “usted”, for landlords, doctors, banks',
+ toneAria:'Tone: ',close:'Close',
+ page:{title:'Parrlo · keyboard, Improve',draft:'Draft copy',soon:'Coming soon · mockup',
+  h1:'Parrlo keyboard · Improve',
+  lead:'Reference for a feature that isn’t in the app yet. You write in the language you’re learning, however it comes out, right in your messaging app — Parrlo turns the draft into a correct sentence in place. Then chips: shorter, softer, another version or undo. Tone: Friendly or Polite. The keyboard follows the phone’s theme, so everything is shown light and dark.',
+  heroL:'Result with chips · light',heroD:'Result with chips · dark',
+  heroS:'The draft is now a correct sentence in the same field; below it: Shorter, Softer, Another, Undo.',
+  heroSd:'Same sizes, dark keyboard tokens.',
+  hSt:'States',pSt:'Light theme on the left, dark on the right. The layout and toolbar stay put; the field, the strip above the toolbar and the chips change.',
+  light:'Light',dark:'Dark',
+  st:{draft:['Draft with mistakes','You write to Lucía in Spanish as best you can: no capitals, a few mistakes. The strip says what Improve will do; tone sits on the right.'],
+   improving:['Improving','You tapped the parrot: the button lights up, the strip shows “Improving…” with progress and Cancel. The field stays as is until the result arrives.'],
+   result:['Result with chips','The correct sentence is already in the field. The strip shows what was there; below, the chips: Shorter, Softer, Another, Undo.'],
+   softer:['Softer applied','You tapped Softer: the sentence becomes a gentle request and the chip gets a check mark. Undo brings back the draft.'],
+   tone:['Choosing the tone','You tapped the tone in the strip: Friendly with “tú” or Polite with “usted”. Polite is picked, and the field already uses “usted”.']},
+  hDec:'Decisions',dec:[
+   ['Replaced in place, no preview.','The draft turns into the correct sentence right in the field, as the site map says. The safety net: Undo and the “Before: …” line in the strip.'],
+   ['Four chips in one row','under the strip: Shorter, Softer, Another and, set apart, Undo with an arrow on a system-key fill so it doesn’t read as an edit.'],
+   ['Tone lives in the strip','next to the result (“Friendly ▾”); the picker opens over the keys: two large rows with a hint of how it will sound.'],
+   ['Tone is named by situation, not grammar:','Friendly and Polite; “tú” / “usted” go in the hint.'],
+   ['The Improve icon is the monochrome Parrlo parrot','(key spark). Progress is a bar — no sparkles, no spinning icon.'],
+   ['The draft is in the language you’re learning:','ru UI → Spanish, es → Russian, en → Spanish; the layout matches the draft.']],
+  hTok:'Tokens and contrast',tok:[
+   ['Light:','background #D3D7DC, keys and strip #FFFFFF, system keys #ABB2BB, text #0E1116, secondary #5B6472, accent #00875C / #FFFFFF, selected tone #E6F5EE.'],
+   ['Dark:','background #1B1F25, keys and strip #3A414B, system keys #2A3038, text #F2F5F7, secondary #C5CCD5, accent #2BC48A / #0E1116, selected tone #24443A.'],
+   ['Contrast (WCAG, computed):','','calc'],
+   ['Not by color alone:','selected chip has a check and aria-pressed; selected tone has a checked circle and border; active feature is filled.'],
+   ['Tap targets:','toolbar icons 64×44, chips 44 in a 52 row, tone 44, Cancel and Close 44, tone rows 64.']],
+  hNo:'Not approved',no:[
+   'All copy is draft, especially es and en: “Cercano / Formal”, “Friendly / Polite”, chip names.',
+   'Tone “for this message and the next”: how long the choice lasts and whether it’s tied to the contact (kb‑mvp had contact folders).',
+   'Undo after Softer brings back the original draft, not the previous version — needs a decision.',
+   'Not in build v2 (GAP: #4 partial, #16 and #17 missing); this screen is a mockup.',
+   'Yellow isn’t used on the screen.'],
+  ok:'no issues'}}};
+
+const qs=new URLSearchParams(location.search);
+const LG=['ru','es','en'].includes(qs.get('l'))?qs.get('l'):'ru';
+const C=L[LG],D=C.demo,P=C.page;
+document.documentElement.lang=LG;document.title=P.title;
+const ROWS={ru:['йцукенгшщзх','фывапролджэ','ячсмитьбю'],es:['qwertyuiop','asdfghjklñ','zxcvbnm']};
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const car='<i class="kb-improve-car"></i>';
+const pill=(t,open)=>`<span class="kb-improve-pill${open?' open':''}" role="button" aria-label="${C.toneAria}${t}"${open?' aria-expanded="true"':''}><span>${t}${open?I.chevU:I.chev}</span></span>`;
+const chips=on=>`<div class="kb-improve-chips">${C.chips.map((c,i)=>{const u=i===3;const o=on===i;
+ return `<span class="kb-improve-chip${o?' on':''}${u?' u':''}" role="button"${o?' aria-pressed="true"':''}>${o?I.check:''}${u?I.undo:''}${c}</span>`}).join('')}</div>`;
+const doneStrip=(b,tone,open)=>`<div class="kb-improve-strip" role="status">${I.check}<span class="tx"><b>${b}</b><span>${C.was}${esc(D.draft)}</span></span>${pill(tone,open)}</div>`;
+const S={
+ draft:{field:esc(D.draft)+car,
+  strip:()=>`<div class="kb-improve-strip">${spark()}<span class="tx"><b>${C.hintB}</b><span>${C.hintS}</span></span>${pill(C.friend)}</div>`},
+ improving:{on:0,field:`<span class="kb-improve-busy">${esc(D.draft)}</span>`,
+  strip:()=>`<div class="kb-improve-strip" role="status"><span class="tx"><b>${C.busyB}</b><span>${esc(D.draft)}</span></span><span class="kb-improve-act" role="button">${C.cancel}</span><span class="kb-improve-prog"><i></i></span></div>`},
+ result:{field:esc(D.good)+car,strip:()=>doneStrip(C.doneB,C.friend)+chips(-1)},
+ softer:{field:esc(D.soft)+car,strip:()=>doneStrip(C.softB,C.friend)+chips(1)},
+ tone:{field:esc(D.polite)+car,strip:()=>doneStrip(C.politeB,C.polite,1)+chips(-1),
+  ov:()=>`<div class="kb-improve-ov"><div class="kb-improve-ovc" role="dialog" aria-label="${C.tone}"><div class="kb-improve-oh"><h4>${C.tone}<span>${C.toneSub}</span></h4><span class="kb-improve-x" role="button" aria-label="${C.close}">${I.x}</span></div>
+  <div class="kb-improve-opts" role="radiogroup">
+  <div class="kb-improve-opt" role="radio" aria-checked="false"><span class="kb-improve-rad"></span><span class="tx"><b>${C.friend}</b><span>${C.friendH}</span></span></div>
+  <div class="kb-improve-opt on" role="radio" aria-checked="true"><span class="kb-improve-rad">${I.check}</span><span class="tx"><b>${C.polite}</b><span>${C.politeH}</span></span></div></div></div></div>`}};
+const ICONS=[()=>spark(),()=>I.tr,()=>I.mic,()=>I.voice,()=>I.gear];
+function keys(){const R=ROWS[D.kb],ru=D.kb==='ru',cls='kb-improve-r'+(ru?' ru':'');
+ const k=c=>`<span class="kb-improve-k">${c.toLocaleUpperCase(D.kb)}</span>`,row=s=>[...s].map(k).join('');
+ const g=ru?'':'<span class="kb-improve-g"></span>';
+ return `<div class="${cls}">${row(R[0])}</div><div class="${cls}">${row(R[1])}</div>
+<div class="${cls}"><span class="kb-improve-k f w" role="button" aria-label="Shift">${I.shift}</span>${g}${row(R[2])}${g}<span class="kb-improve-k f w" role="button" aria-label="Delete">${I.del}</span></div>
+<div class="kb-improve-r"><span class="kb-improve-k f n">123</span><span class="kb-improve-k p">,</span><span class="kb-improve-k sp"><i>‹</i>${D.space}<i>›</i></span><span class="kb-improve-k p">.</span><span class="kb-improve-k rt" role="button" aria-label="Return">${I.ret}</span></div>`;}
+function screen(id,light){const s=S[id];
+ const bar=C.bar.map((n,i)=>{const on=s.on===i;return `<span class="kb-improve-ib${on?' on':''}" role="button" aria-label="${n}"${on?' aria-pressed="true"':''}>${ICONS[i]()}</span>`}).join('');
+ return `<div class="scr kb-improve-scr ${light?'light':''}" lang="${LG}">
+<div class="sbar"><span>9:41</span><span class="sig"><i class="wf"></i><i></i></span></div>
+<div class="nav"><span class="bk">${I.back}</span><span class="av">${D.ini}</span><span class="nm"><b>${D.who}</b><span>${C.online}</span></span></div>
+<div class="msgs" lang="${D.kb}"><div class="m in">${D.inc[0]}<span class="tm">9:58</span></div><div class="m in">${D.inc[1]}<span class="tm">10:02</span></div></div>
+<div class="inp"><span class="f" lang="${D.kb}"><span>${s.field}</span></span><span class="sd">${I.send}</span></div>
+<div class="kb-improve-kb">${s.strip()}
+<div class="kb-improve-bar">${bar}</div>
+<div class="kb-improve-rows" lang="${D.kb}">${keys()}${s.ov?s.ov():''}</div>
+<div class="kb-improve-home"><i></i></div></div></div>`;}
+const ph=(id,l,sc)=>`<div class="pf p67 ${l?'light':''}" style="--s:${sc}"><div class="shell"></div><div class="glass">${screen(id,l)}</div></div>`;
+
+/* страница */
+const $=id=>document.getElementById(id);
+$('kb-improve-t-draft').textContent=P.draft;$('kb-improve-t-soon').textContent=P.soon;
+$('kb-improve-lang').innerHTML=['ru','es','en'].map(l=>`<a href="?l=${l}" hreflang="${l}"${l===LG?' aria-current="true"':''}>${l.toUpperCase()}</a>`).join('');
+$('kb-improve-h1').textContent=P.h1;$('kb-improve-lead').textContent=P.lead;
+$('kb-improve-h-st').textContent=P.hSt;$('kb-improve-p-st').textContent=P.pSt;
+$('kb-improve-hero').innerHTML=
+`<figure data-shot="kb-improve--light--${LG}">${ph('result',1,1)}<div class="pcap"><span class="dot"></span><div><b>${P.heroL}</b><span>${P.heroS}</span></div></div></figure>
+<figure data-shot="kb-improve--dark--${LG}">${ph('result',0,1)}<div class="pcap"><span class="dot"></span><div><b>${P.heroD}</b><span>${P.heroSd}</span></div></div></figure>`;
+$('kb-improve-grid').innerHTML=Object.keys(S).map(id=>{const [t,w]=P.st[id];return `<article class="kb-improve-st"><h3>${t}<code>${id}</code></h3><p>${w}</p><div class="kb-improve-pair">
+<figure data-shot="kb-improve--${id}--light--${LG}">${ph(id,1,.6)}<div class="pcap"><div><b>${P.light}</b></div></div></figure>
+<figure data-shot="kb-improve--${id}--dark--${LG}">${ph(id,0,.6)}<div class="pcap"><div><b>${P.dark}</b></div></div></figure></div></article>`}).join('');
+const li=a=>`<li><b>${a[0]}</b> ${a[1]}</li>`;
+$('kb-improve-notes').innerHTML=`<div><h2>${P.hDec}</h2><ul>${P.dec.map(li).join('')}</ul></div>
+<div><h2>${P.hTok}</h2><ul>${P.tok.map(a=>a[2]?`<li><b>${a[0]}</b> <span id="kb-improve-calc"></span></li>`:li(a)).join('')}</ul></div>
+<div><h2>${P.hNo}</h2><ul>${P.no.map(t=>`<li>${t}</li>`).join('')}</ul></div>`;
+
+/* контраст: считаем по пикселям цветов из CSS, а не на глаз */
+function rgb(s){const m=s.match(/[\d.]+/g);return m?m.map(Number):[0,0,0,0];}
+function lum([r,g,b]){const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)};return .2126*f(r)+.7152*f(g)+.0722*f(b);}
+function bgOf(el){while(el){const c=rgb(getComputedStyle(el).backgroundColor);if(c.length<4||c[3]>0.5)return c;el=el.parentElement;}return [14,17,22];}
+function blend(fg,bg,a){return fg.slice(0,3).map((v,i)=>v*a+bg[i]*(1-a));}
+const pairs={};let minC=99,bad=[];
+document.querySelectorAll('.scr *').forEach(el=>{if(![...el.childNodes].some(n=>n.nodeType===3&&n.data.trim()))return;
+ const cs=getComputedStyle(el);let a=1,e=el;while(e&&!e.classList.contains('scr')){a*=+getComputedStyle(e).opacity;e=e.parentElement;}
+ const c=rgb(cs.color);const bg=bgOf(el);const fg=blend(c,bg,(c[3]??1)*a);
+ const L1=lum(fg),L2=lum(bg);const r=(Math.max(L1,L2)+.05)/(Math.min(L1,L2)+.05);
+ const big=parseFloat(cs.fontSize)>=24||(parseFloat(cs.fontSize)>=18.66&&+cs.fontWeight>=700);
+ if(r<(big?3:4.5))bad.push(el.textContent.trim().slice(0,20)+' '+r.toFixed(2));minC=Math.min(minC,r);});
+$('kb-improve-calc').textContent=(LG==='ru'?'минимум по тексту экрана ':LG==='es'?'mínimo en el texto de la pantalla ':'minimum across screen text ')+minC.toFixed(1).replace('.',LG==='en'?'.':',')+' : 1 — '+(bad.length?bad.join('; '):P.ok)+'.';
+window.KB_IMPROVE_BAD=bad;window.KB_IMPROVE_MIN=minC;
+document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>
