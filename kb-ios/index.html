@@ -11,12 +11,12 @@
 <div class="wrap">
 <h1>Клавиатура Parrlo · iOS · v2</h1>
 <p class="s">Задача Мурата 15.11: текущая клавиатура выглядит как заглушка. Планка качества и раскладки — лучшие системные клавиатуры, но всё своё: стиль брендбука v2.3, наши иконки и цвета. Клавиатура идёт за темой телефона (светлая и тёмная). Распознавание речи — на сервере, не на устройстве. Демо-данные.</p>
-<p class="s"><b>Что изменилось:</b> сверху панель из пяти иконок вместо текста «Открой Parrlo…» и синей ссылки; крупные заглавные клавиши и Shift; нижний ряд «123 · глобус · , · пробел с языком · . · ввод»; ввод — зелёный акцент; «нет доступа» — неактивные иконки и одна подсказка по нажатию; отдельной клавиши «EN» нет — язык на пробеле.</p>
+<p class="s"><b>Что изменилось:</b> сверху панель из пяти иконок вместо текста «Открой Parrlo…» и синей ссылки; крупные заглавные клавиши и Shift; нижний ряд «123 · глобус · , · пробел с языком · . · ввод»; ввод — зелёный акцент; «нет доступа» — неактивные иконки, по нажатию полоса иконок на время становится строкой подсказки (клавиши она не закрывает); отдельной клавиши «EN» нет — язык на пробеле.</p>
 
 <div class="ctl" role="toolbar" aria-label="Переключатели">
  <span class="lb">Тема</span><span class="seg" data-k="theme"><button data-v="light">Светлая</button><button data-v="dark">Тёмная</button></span>
  <span class="lb">Язык</span><span class="seg" data-k="lang"><button data-v="ru">RU</button><button data-v="es">ES</button><button data-v="en">EN</button></span>
- <span class="toc"><a href="#s-ready">Готово</a><a href="#s-nofull">Нет полного доступа</a><a href="#s-nokey">Нет ключа</a><a href="#reasons">Причины</a><a href="#s-rec">Запись (после выпуска)</a><a href="#spec">Размеры и цвета</a><a href="#texts">Тексты</a></span>
+ <span class="toc"><a href="#s-ready">Готово</a><a href="#s-nofull">Нет полного доступа</a><a href="#s-nokey">Нет ключа</a><a href="#s-nokey-long">Длинная подсказка</a><a href="#reasons">Причины</a><a href="#s-rec">Запись (после выпуска)</a><a href="#spec">Размеры и цвета</a><a href="#texts">Тексты</a></span>
 </div>
 
 <div id="frames"></div>
@@ -25,6 +25,7 @@
 <div class="tw"><table class="tx">
 <tr><th>Элемент</th><th>375×667</th><th>440×956</th><th>Примечание</th></tr>
 <tr><td>Панель иконок</td><td>высота 46 pt</td><td>50 pt</td><td>иконки 26 pt, зона нажатия 52×44 / 60×44; «Настройки» прижата вправо</td></tr>
+<tr><td>Строка подсказки</td><td>от 46 pt, растёт вверх</td><td>от 50 pt, растёт вверх</td><td>карточка 44 pt и выше, радиус 12, текст Inter 15/1.3; «Открыть» и ✕ — зоны 44×44; скрывается по ✕ или через 8 с (с VoiceOver — только по ✕)</td></tr>
 <tr><td>Клавиша</td><td>высота 42 pt, промежуток 6 pt (ru 5)</td><td>46 pt, 6 pt</td><td>между рядами 11 / 12 pt; радиус 6 / 8 pt; буквы Inter 22 / 25 pt, заглавные</td></tr>
 <tr><td>Нижний ряд</td><td>123 · 🌐 · , · пробел · . · ввод</td><td>123 · , · пробел · . · ввод</td><td>на iPhone с Face ID глобус рисует сама iOS под клавиатурой — свой не дублируем (<code>needsInputModeSwitchKey</code>)</td></tr>
 <tr><td>Пробел</td><td colspan="2">«‹ Русский ›»</td><td>смахивание по пробелу — следующий язык Parrlo (ru → es → en); долгое нажатие — курсор</td></tr>
@@ -39,7 +40,7 @@
 <tr><td>Точка записи</td><td>#C42B1F</td><td>#FF6B5E</td><td>не единственный признак: есть текст «Идёт запись»</td></tr>
 </table></div>
 <ul class="s">
-<li>Подсказка рисуется внутри окна клавиатуры: расширение iOS не может рисовать над приложением.</li>
+<li>Подсказка — строка в полосе иконок, не карточка поверх клавиш (изменено 18.11 по замечанию заказчика: старая карточка закрывала верхний ряд). Текст, при необходимости «Открыть», справа ✕ (44×44). Если текст не помещается в одну строку, полоса растёт вверх — клавиатура становится выше, поле ввода приложения поднимается; вниз, на клавиши, строка не растёт никогда. Рисовать над приложением расширение iOS не может, поэтому рост — через высоту клавиатуры.</li>
 <li>Без «Полного доступа» клавиатура не открывает приложение и не ходит в сеть, поэтому в подсказке только путь в Настройках, без кнопки.</li>
 <li>«Нет ключа» — клавиатура не может работать с облаком: шесть причин, у каждой своя подсказка (таблица ниже). Входа в Parrlo нет. Когда ключ появится, иконки включаются сами.</li>
 <li>Запись на iOS идёт в приложении Parrlo Translate, клавиатура показывает её статус: Translate 4 раза в секунду пишет статус в App Group и шлёт Darwin-уведомление; полоса видна, пока такт не старше 2 с; ✕ и «Готово» уходят командой обратно, команда старше 5 с не выполняется. Полоса в чате возможна только в варианте Б (сессия микрофона) — это после выпуска (решение Мурата 15.11). В выпуске вариант А: «Диктовка» открывает Translate, при уходе из него запись прерывается.</li>
@@ -61,7 +62,7 @@
   function sync(){document.querySelectorAll('.seg').forEach(s=>s.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(st[s.dataset.k]===b.dataset.v))));
     const u=new URL(location);u.searchParams.set('theme',st.theme);u.searchParams.set('lang',st.lang);history.replaceState(null,'',u);window.KB_RENDER();}
   document.querySelectorAll('.seg').forEach(s=>s.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[s.dataset.k]=b.dataset.v;sync();}));
-  const T=window.KB_T,keys=[['improve','Иконка'],['translate','Иконка'],['dict','Иконка'],['voice','Иконка'],['settings','Иконка'],['shift','VoiceOver'],['del','VoiceOver'],['num','VoiceOver'],['next','VoiceOver'],['space','VoiceOver'],['ret','VoiceOver'],['tipFull','Подсказка'],['tipKey','Подсказка'],['open','Кнопка'],['rec','Запись'],['done','Запись'],['cancelRec','VoiceOver']];
+  const T=window.KB_T,keys=[['improve','Иконка'],['translate','Иконка'],['dict','Иконка'],['voice','Иконка'],['settings','Иконка'],['shift','VoiceOver'],['del','VoiceOver'],['num','VoiceOver'],['next','VoiceOver'],['space','VoiceOver'],['ret','VoiceOver'],['tipFull','Подсказка'],['tipKey','Подсказка'],['open','Кнопка'],['close','VoiceOver (✕ подсказки, новая строка)'],['rec','Запись'],['done','Запись'],['cancelRec','VoiceOver']];
   document.getElementById('ttab').innerHTML='<tr><th>Ключ</th><th>Где</th><th>ru</th><th>es</th><th>en</th></tr>'+keys.map(([k,w])=>`<tr><td><code>${k}</code></td><td>${w}</td><td>${T.ru[k]}</td><td>${T.es[k]}</td><td>${T.en[k]}</td></tr>`).join('');
   const R=[['key1','Нет согласия на облако','да'],['key2','Нет токена, первое подключение','да'],['key3','Нет токена, переподключение','да'],['key4','Внутри Translate, токен выдаётся','нет'],['key5','Внутри Translate, выдача не удалась','нет'],['key6','Нет подтверждения 16+','да'],['openFail','Переход в Parrlo не открылся','—']];
   document.getElementById('rtab').innerHTML='<tr><th>Причина</th><th>«Открыть»</th><th>ru</th><th>es</th><th>en</th></tr>'+R.map(([k,w,o])=>`<tr><td>${w}</td><td>${o}</td><td>${T.ru[k]}</td><td>${T.es[k]}</td><td>${T.en[k]}</td></tr>`).join('');

@@ -22,17 +22,17 @@ const T={
    improve:'Улучшить', translate:'Перевести', dict:'Диктовка', voice:'Голосовое', settings:'Настройки',
    shift:'Заглавные', del:'Удалить', num:'Цифры', next:'Следующая клавиатура', ret:'Ввод', space:'Пробел',
    tipFull:'Включи «Полный доступ»: Настройки'+NB+'→ Parrlo Translate'+NB+'→ Клавиатуры', tipKey:'Открой Parrlo один раз', key1:'Включи клавиатуру в настройках Parrlo', key2:'Открой Parrlo один раз', key3:'Открой приложение Parrlo', key4:'Подключаем клавиатуру…', key5:'Перевод временно недоступен. Попробуй позже — печатать можно.', key6:'Открой Parrlo, чтобы включить', openFail:'Не открылось. Открой Parrlo с экрана «Домой».', open:'Открыть',
-   rec:'Идёт запись', done:'Готово', cancelRec:'Отменить запись'},
+   rec:'Идёт запись', done:'Готово', cancelRec:'Отменить запись', close:'Закрыть подсказку'},
  es:{lang:'Español', chat:'Olga', back:'Chats', msg:'Увидимся завтра в 10 в офисе?', ph:'Mensaje',
    improve:'Mejorar', translate:'Traducir', dict:'Dictado', voice:'Nota de voz', settings:'Ajustes',
    shift:'Mayúsculas', del:'Borrar', num:'Números', next:'Siguiente teclado', ret:'Intro', space:'Espacio',
    tipFull:'Activa «Acceso completo»: Ajustes'+NB+'→ Parrlo Translate'+NB+'→ Teclados', tipKey:'Abre Parrlo una vez', key1:'Activa el teclado en los ajustes de Parrlo', key2:'Abre Parrlo una vez', key3:'Abre la app Parrlo', key4:'Conectando el teclado…', key5:'La traducción no está disponible ahora mismo. Inténtalo más tarde; puedes seguir escribiendo.', key6:'Abre Parrlo para activarlo', openFail:'No se ha abierto. Abre Parrlo desde la pantalla de inicio.', open:'Abrir',
-   rec:'Grabando', done:'Listo', cancelRec:'Cancelar grabación'},
+   rec:'Grabando', done:'Listo', cancelRec:'Cancelar grabación', close:'Cerrar aviso'},
  en:{lang:'English', chat:'Lucía', back:'Chats', msg:'¿Nos vemos mañana a las 10 en la oficina?', ph:'Message',
    improve:'Improve', translate:'Translate', dict:'Dictate', voice:'Voice note', settings:'Settings',
    shift:'Shift', del:'Delete', num:'Numbers', next:'Next keyboard', ret:'Return', space:'Space',
    tipFull:'Turn on “Full Access”: Settings'+NB+'→ Parrlo Translate'+NB+'→ Keyboards', tipKey:'Open Parrlo once', key1:'Turn on the keyboard in Parrlo settings', key2:'Open Parrlo once', key3:'Open the Parrlo app', key4:'Connecting the keyboard…', key5:'Translation is temporarily unavailable. Try again later — you can still type.', key6:'Open Parrlo to turn this on', openFail:'Couldn’t open it. Open Parrlo from the Home Screen.', open:'Open',
-   rec:'Recording', done:'Done', cancelRec:'Cancel recording'},
+   rec:'Recording', done:'Done', cancelRec:'Cancel recording', close:'Close tip'},
 };
 window.KB_T=T;
 const ROWS={ru:['йцукенгшщзх','фывапролджэ','ячсмитьбю'], es:['qwertyuiop','asdfghjklñ','zxcvbnm'], en:['qwertyuiop','asdfghjkl','zxcvbnm']};
@@ -43,9 +43,10 @@ const DEV={
 const STATES=[
   {id:'ready', t:'Готово', cap:'Всё включено. Панель: Улучшить, Перевести, Диктовка, Голосовое и справа Настройки — иконки без подписей, у каждой зона нажатия 44×44 и VoiceOver-метка. Начало предложения: Shift включён, клавиши заглавные.'},
   {id:'nofull', t:'Нет полного доступа', cap:'Печатать можно. Иконки панели неактивны (приглушены), текста поверх клавиатуры нет. Без «Полного доступа» клавиатура не может открыть приложение, поэтому кнопки «Открыть» нет.', off:true},
-  {id:'nofull-tip', t:'Нет полного доступа · нажатие', cap:'Нажатие на любую неактивную иконку — одна короткая подсказка под ней. Скрывается через 4 с или по нажатию в любом месте.', off:true, tip:'full', at:1},
+  {id:'nofull-tip', t:'Нет полного доступа · нажатие', cap:'Нажатие на любую неактивную иконку — полоса иконок на время становится строкой подсказки: текст и ✕. Кнопки нет: без «Полного доступа» клавиатура не может открыть Настройки, путь — в тексте. Скрывается по ✕ или через 8 с; с VoiceOver сама не скрывается и зачитывается сразу.', chg:'Изменено 18.11: раньше подсказка всплывала карточкой поверх верхнего ряда и закрывала клавиши (замечание заказчика). Теперь она живёт в полосе над клавишами; если текст длиннее одной строки, полоса растёт вверх, к полю ввода, а клавиши остаются на месте и нажимаются.', off:true, tip:'full', at:1},
   {id:'nokey', t:'Нет ключа', cap:'Полный доступ есть, но клавиатура ещё не может работать с облаком. Причин шесть — у каждой своя подсказка (таблица «Подсказки „нет ключа“» ниже). Входа в Parrlo нет. Иконки неактивны, печатать можно.', off:true},
-  {id:'nokey-tip', t:'Нет ключа · нажатие', cap:'Пример — первое подключение: «Открой Parrlo один раз» и «Открыть». Кнопка есть только вне Translate. Если переход не открылся — «Не открылось. Открой Parrlo с экрана „Домой“». Как только ключ появится, иконки станут активными без перезапуска клавиатуры.', off:true, tip:'key', at:2},
+  {id:'nokey-tip', t:'Нет ключа · нажатие', cap:'Пример — первое подключение: «Открой Parrlo один раз» и «Открыть» в той же строке, справа ✕. Кнопка есть только вне Translate. Если переход не открылся — в строке «Не открылось. Открой Parrlo с экрана „Домой“». Как только ключ появится, строка закрывается и иконки становятся активными без перезапуска клавиатуры.', chg:'Изменено 18.11: подсказка больше не перекрывает клавиши — она заменяет полосу иконок, «Открыть» и ✕ — в ней же, зоны нажатия 44 pt.', off:true, tip:'key', msg:'key2', btn:true, at:2},
+  {id:'nokey-long', t:'Нет ключа · самая длинная строка', cap:'Проверка на длинном тексте: внутри Translate, выдача ключа не удалась (key5), кнопки «Открыть» нет. Полоса выросла вверх на одну-две строки, клавиатура стала выше на столько же, поле ввода приложения поднялось; ряды клавиш не сдвинулись.', chg:'Новый кадр 18.11: показывает, как строка подсказки растёт вверх, а не вниз на клавиши.', off:true, tip:'key', msg:'key5', btn:false, at:3},
   {id:'rec', t:'Идёт запись · после выпуска (вариант Б)', cap:'Решение Мурата 15.11: выпуск — на варианте А, вариант Б — после выпуска. В выпуске «Диктовка» открывает Parrlo Translate, запись идёт там; при уходе из Translate запись прерывается, этой полосы в чате нет. Кадр — для варианта Б (сессия микрофона у Translate). Как работает полоса: Translate 4 раза в секунду пишет статус в App Group (начало, громкость, такт) и шлёт Darwin-уведомление; полоса видна, пока такт не старше 2 с. ✕ и «Готово» отправляют команду обратно тем же путём; команда старше 5 с не выполняется.', rec:true},
 ];
 window.KB_STATES=STATES;
@@ -75,15 +76,14 @@ function tbar(c,x,s){
     let bars=''; for(let i=0;i<22;i++){const h=6+Math.round(16*Math.abs(Math.sin(i*1.7+1)*Math.cos(i*.6)));bars+=`<i style="height:${h}px"></i>`}
     return `<div class="tb rec" role="status"><span class="rx" role="button" aria-label="${c.cancelRec}">${I.x}</span><span class="rdot"></span><span class="rl">${c.rec}</span><span class="rt2">0:12</span><span class="wv" aria-hidden="true">${bars}</span><span class="dn" role="button">${c.done}</span></div>`;
   }
+  if(s.tip){
+    const txt=s.tip==='full'?c.tipFull:c[s.msg||'tipKey'];
+    const btn=s.btn?`<span class="tl" role="button">${c.open}</span>`:'';
+    return `<div class="tb tipbar"><div class="tip" role="status" aria-live="polite"><span class="tt">${txt}</span>${btn}<span class="tc" role="button" aria-label="${c.close}">${I.x}</span></div></div>`;
+  }
   const items=[['improve',I.spark],['translate',I.tr],['dict',I.mic],['voice',I.voice]];
   const b=(k,ic,i)=>`<span class="ib${s.off?' off':''}${s.tip&&s.at===i?' tap':''}" role="button" aria-label="${c[k]}"${s.off?' aria-disabled="true"':''}>${ic}</span>`;
   return `<div class="tb">${items.map(([k,ic],i)=>b(k,ic,i)).join('')}<span class="fill"></span><span class="ib set" role="button" aria-label="${c.settings}">${I.gear}</span></div>`;
-}
-function tip(c,x,s){
-  if(!s.tip) return '';
-  const txt=s.tip==='full'?c.tipFull:c.tipKey;
-  const btn=s.tip==='key'?`<span class="tl" role="button">${c.open}</span>`:'';
-  return `<div class="tip" role="status" data-at="${s.at}"><span class="ar"></span><span class="tt">${txt}</span>${btn}</div>`;
 }
 function phone(x,s){
   const c=T[x.lang], d=DEV[x.dev];
@@ -93,21 +93,17 @@ function phone(x,s){
    <div class="inp"><span class="fld"><i class="caret"></i><span>${c.ph}</span></span><span class="snd">${I.send}</span></div>`;
   const sys=d.island?`<div class="sys"><span class="sg">${I.globe}</span><span class="hm"></span></div>`:'';
   return `<div class="ph ${x.theme} ${x.dev}" style="--W:${d.W}px;--H:${d.H}px" data-state="${s.id}">${sb}<div class="host">${host}</div>
-   <div class="kb">${tbar(c,x,s)}${keys(c,x)}${tip(c,x,s)}</div>${sys}</div>`;
+   <div class="kb">${tbar(c,x,s)}${keys(c,x)}</div>${sys}</div>`;
 }
 window.KB_PHONE=phone;
 function render(){
   const st=window.KB_ST; const root=document.getElementById('frames'); let h='';
   for(const s of STATES){
-    h+=`<section class="st" id="s-${s.id}"><h3>${s.t}</h3><p class="cap">${s.cap}</p><div class="pair">`;
+    h+=`<section class="st" id="s-${s.id}"><h3>${s.t}</h3><p class="cap">${s.cap}</p>${s.chg?`<p class="chg">${s.chg}</p>`:''}<div class="pair">`;
     for(const dev of ['se','max']) h+=`<figure data-id="${s.id}__${dev}__${st.lang}__${st.theme}"><div class="zoom">${phone({lang:st.lang,theme:st.theme,dev},s)}</div><figcaption>${DEV[dev].name}</figcaption></figure>`;
     h+=`</div></section>`;
   }
   root.innerHTML=h;
-  // подсказка: стрелка над нажатой иконкой
-  document.querySelectorAll('.ph').forEach(ph=>{const t=ph.querySelector('.tip');if(!t)return;const kb=ph.querySelector('.kb');const ib=ph.querySelectorAll('.tb .ib')[+t.dataset.at];
-    const k=kb.getBoundingClientRect(),b=ib.getBoundingClientRect(),z=k.width/kb.offsetWidth;const cx=(b.left+b.width/2-k.left)/z;
-    const tw=t.offsetWidth;let left=Math.max(8,Math.min(cx-tw/2,kb.offsetWidth-tw-8));t.style.left=left+'px';t.querySelector('.ar').style.left=(cx-left-7)+'px';});
   document.body.dataset.ready='1';
 }
 window.KB_RENDER=render;
