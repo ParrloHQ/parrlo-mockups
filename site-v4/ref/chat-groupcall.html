@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · групповой звонок</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.chat-groupcall-w{max-width:1200px;margin:0 auto}
+.chat-groupcall-lsw{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-groupcall-lsw a{min-width:48px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#9AA4B2;text-decoration:none;padding:0 12px}
+.chat-groupcall-lsw a[aria-current="true"]{background:#1C2026;color:#F2F5F7;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-groupcall-hero{display:flex;flex-wrap:wrap;gap:48px;justify-content:center;align-items:flex-start}
+.chat-groupcall-info{flex:1 1 340px;max-width:520px;padding-top:24px}
+.chat-groupcall-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-groupcall-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-groupcall-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-groupcall-info ul,.chat-groupcall-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-groupcall-info li,.chat-groupcall-sec li{margin:6px 0}
+.chat-groupcall-w b{color:#F2F5F7;font-weight:600}
+.chat-groupcall-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7;overflow-wrap:anywhere}
+.chat-groupcall-legal{display:inline-block;font:700 12px/1.3 Inter;color:#0E1116;background:#FFC247;border-radius:6px;padding:3px 7px;margin-right:4px}
+.chat-groupcall-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-groupcall-lead{color:#9AA4B2;margin:0 0 32px;max-width:760px}
+.chat-groupcall-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:40px 24px;justify-items:center}
+.chat-groupcall-card{width:280px}
+.chat-groupcall-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;gap:4px 8px;align-items:baseline;flex-wrap:wrap}
+.chat-groupcall-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-groupcall-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45}
+.chat-groupcall-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 40px}
+.chat-groupcall-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-groupcall-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-groupcall-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-groupcall-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-groupcall-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:480px){.chat-groupcall-hero .pf{--s:.78!important}.chat-groupcall-info h1{font-size:30px}.chat-groupcall-hero{gap:24px}.chat-groupcall-cols{grid-template-columns:1fr}}
+
+/* ======= экран 430×932 ======= */
+.chat-groupcall-scr{overflow:hidden;--me:#2BC48A;--err:#FF6B5E;--cL:#6AA6F5;--cP:#C3A6F7;--cO:#E8A0BF}
+.chat-groupcall-scr svg{display:block}
+.chat-groupcall-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-groupcall-ib svg{width:26px;height:26px}
+.chat-groupcall-ib.ac{color:var(--acc)}
+
+/* шапка звонка */
+.chat-groupcall-top{flex:none;height:60px;display:flex;align-items:center;gap:4px;padding:0 8px}
+.chat-groupcall-tt{flex:1;min-width:0;text-align:center}
+.chat-groupcall-tt b{display:block;font:600 17px/22px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-groupcall-tt span{display:flex;align-items:center;justify-content:center;gap:6px;font:500 13px/18px Inter;color:var(--sec);font-variant-numeric:tabular-nums}
+.chat-groupcall-tt span i{width:7px;height:7px;border-radius:50%;background:var(--me)}
+.chat-groupcall-nt{flex:none;align-self:center;display:flex;align-items:center;gap:8px;height:32px;margin:0 16px 10px;padding:0 14px;border-radius:16px;background:var(--sf);font:500 13px/18px Inter;color:#C9D1DA;white-space:nowrap}
+.chat-groupcall-nt svg{width:16px;height:16px;color:var(--mint);flex:none}
+
+/* плитки участников */
+.chat-groupcall-tiles{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px}
+.chat-groupcall-tiles.t3{grid-template-columns:1fr 1fr 1fr}
+.chat-groupcall-tile{position:relative;height:128px;border-radius:24px;background:var(--sf);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-width:0}
+.chat-groupcall-tile.sp{background:#1A222B;box-shadow:inset 0 0 0 2px var(--c),0 0 0 4px rgba(255,255,255,.04)}
+.chat-groupcall-av{width:56px;height:56px;border-radius:50%;background:var(--c);color:#0E1116;font:900 25px/56px Nunito,Inter;text-align:center;flex:none;display:flex;align-items:center;justify-content:center}
+.chat-groupcall-av svg{width:30px;height:30px}
+.chat-groupcall-tile.sp .chat-groupcall-av{box-shadow:0 0 0 4px #1A222B,0 0 0 7px var(--c)}
+.chat-groupcall-tn{display:flex;align-items:center;gap:6px;margin-top:10px;font:600 15px/20px Inter;max-width:100%;padding:0 8px}
+.chat-groupcall-tn em{font:700 11px/1 Inter;font-style:normal;letter-spacing:.06em;color:var(--tx);background:var(--sf2);border-radius:6px;padding:4px 5px}
+.chat-groupcall-ts{height:18px;margin-top:2px;font:500 13px/18px Inter;color:var(--sec);display:flex;align-items:center;gap:5px;white-space:nowrap}
+.chat-groupcall-ts.sp{color:var(--c)}
+.chat-groupcall-ts svg{width:14px;height:14px}
+.chat-groupcall-wv{display:flex;align-items:center;gap:2px;height:14px}
+.chat-groupcall-wv b{width:3px;border-radius:2px;background:currentColor}
+.chat-groupcall-mk{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:var(--sf2);color:var(--sec);display:flex;align-items:center;justify-content:center}
+.chat-groupcall-mk svg{width:16px;height:16px}
+
+/* субтитры */
+.chat-groupcall-feed{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:8px 16px 12px;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 48px);mask-image:linear-gradient(to bottom,transparent 0,#000 48px)}
+.chat-groupcall-ln{position:relative;padding:8px 12px 8px 18px;border-radius:18px}
+.chat-groupcall-ln::before{content:"";position:absolute;left:4px;top:10px;bottom:10px;width:3px;border-radius:2px;background:var(--c)}
+.chat-groupcall-wh{display:flex;align-items:center;gap:6px;font:600 13px/18px Inter;color:var(--c);margin-bottom:2px;white-space:nowrap}
+.chat-groupcall-wh em{font:700 11px/16px Inter;font-style:normal;letter-spacing:.06em;color:var(--sec);border-radius:5px;padding:0 5px;box-shadow:inset 0 0 0 1px #3A414B}
+.chat-groupcall-wh .fr{font-weight:500;color:var(--sec)}
+.chat-groupcall-wh .lv{margin-left:auto;display:flex;align-items:center;gap:5px;font-weight:500;color:var(--sec)}
+.chat-groupcall-wh .lv i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.chat-groupcall-tx{font-size:17px;line-height:24px;color:#C9D1DA}
+.chat-groupcall-ln.live{background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:14px 16px 14px 20px}
+.chat-groupcall-ln.live::before{left:6px;top:16px;bottom:16px}
+.chat-groupcall-ln.live .chat-groupcall-tx{font-size:23px;line-height:31px;font-weight:500;color:var(--tx);letter-spacing:-.005em}
+.chat-groupcall-tx em{font-style:normal;color:var(--sec)}
+.chat-groupcall-dots{display:inline-flex;gap:3px;vertical-align:middle;margin-left:6px}
+.chat-groupcall-dots i{width:6px;height:6px;border-radius:50%;background:var(--sec)}
+.chat-groupcall-dots i:nth-child(2){opacity:.7}.chat-groupcall-dots i:nth-child(3){opacity:.45}
+.chat-groupcall-og{display:flex;align-items:flex-start;gap:6px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-size:15px;line-height:21px;color:var(--sec)}
+.chat-groupcall-og svg{flex:none;width:16px;height:16px;margin-top:2px}
+.chat-groupcall-og span{min-width:0;max-height:42px;overflow:hidden}
+.chat-groupcall-sys{align-self:center;display:flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:16px;background:var(--sf);font:500 14px/18px Inter;color:#C9D1DA;margin:4px 0}
+.chat-groupcall-sys svg{width:16px;height:16px;color:var(--sec)}
+
+/* управление */
+.chat-groupcall-ctl{flex:none;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px 16px 12px}
+.chat-groupcall-c{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0}
+.chat-groupcall-c .b{width:68px;height:68px;border-radius:50%;background:var(--sf2);color:var(--tx);display:flex;align-items:center;justify-content:center}
+.chat-groupcall-c .b svg{width:28px;height:28px}
+.chat-groupcall-c.on .b{background:#F2F5F7;color:#0E1116}
+.chat-groupcall-c.end .b{background:var(--err);color:#0E1116}
+.chat-groupcall-c .l{font:500 13px/16px Inter;color:var(--sec);text-align:center;white-space:nowrap}
+.chat-groupcall-c.on .l{color:var(--tx)}
+
+/* звонок заполнен */
+.chat-groupcall-mid{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px;text-align:center}
+.chat-groupcall-stk{display:flex;align-items:center;justify-content:center}
+.chat-groupcall-stk span{width:72px;height:72px;border-radius:50%;background:var(--c);color:#0E1116;font:900 30px/72px Nunito,Inter;text-align:center;box-shadow:0 0 0 5px var(--bg);margin-left:-14px}
+.chat-groupcall-stk span:first-child{margin-left:0}
+.chat-groupcall-stk span.more{background:var(--sf2);color:var(--sec);display:flex;align-items:center;justify-content:center}
+.chat-groupcall-stk span.more svg{width:28px;height:28px}
+.chat-groupcall-pl{margin-top:20px;display:flex;align-items:center;gap:8px;height:32px;padding:0 14px;border-radius:16px;background:var(--sf);font:500 14px/1 Inter;color:#C9D1DA;font-variant-numeric:tabular-nums}
+.chat-groupcall-pl i{width:8px;height:8px;border-radius:50%;background:var(--me)}
+.chat-groupcall-mid h4{margin:16px 0 8px;font:900 30px/36px Nunito,sans-serif}
+.chat-groupcall-mid p{margin:0;color:var(--sec);font-size:16px;line-height:23px;max-width:350px}
+.chat-groupcall-act{flex:none;display:flex;flex-direction:column;gap:12px;padding:0 24px 8px}
+.chat-groupcall-btn{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 19px/1 Nunito,sans-serif;padding:0 20px;white-space:nowrap}
+.chat-groupcall-btn svg{width:22px;height:22px;flex:none}
+.chat-groupcall-btn.p{background:var(--acc);color:var(--onacc)}
+.chat-groupcall-btn.s{background:var(--sf2);color:var(--tx)}
+.chat-groupcall-btn.s svg{color:var(--mint)}
+.chat-groupcall-btn.t{height:44px;font:600 16px/1 Inter;color:var(--sec)}
+.chat-groupcall-btnn{margin:-4px 0 0;font-size:13px;line-height:18px;color:var(--sec);text-align:center}
+
+/* чат с итогами */
+.chat-groupcall-nav{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 4px;border-bottom:1px solid var(--line)}
+.chat-groupcall-nav .chat-groupcall-ib svg{width:28px;height:28px}
+.chat-groupcall-gav{width:40px;height:40px;border-radius:12px;background:#1E3734;color:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-groupcall-gav svg{width:22px;height:22px}
+.chat-groupcall-nm{flex:1;min-width:0;min-height:44px;display:flex;flex-direction:column;justify-content:center;padding-left:4px}
+.chat-groupcall-nm b{display:block;font:600 17px/22px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-groupcall-nm span{display:block;font-size:13px;line-height:18px;color:var(--sec);white-space:nowrap}
+.chat-groupcall-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:12px 16px}
+.chat-groupcall-day{align-self:center;font:500 12px/16px Inter;color:var(--sec);background:var(--sf);padding:4px 12px;border-radius:12px}
+.chat-groupcall-cl{align-self:center;display:flex;align-items:center;gap:8px;font:500 13px/18px Inter;color:var(--sec)}
+.chat-groupcall-cl svg{width:16px;height:16px;color:var(--acc)}
+.chat-groupcall-min{border-radius:24px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);padding:16px 16px 6px}
+.chat-groupcall-mh{display:flex;align-items:center;gap:12px}
+.chat-groupcall-mi{width:44px;height:44px;border-radius:14px;background:#16302A;color:var(--mint);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-groupcall-mi svg{width:24px;height:24px}
+.chat-groupcall-mh div b{display:block;font:900 20px/26px Nunito,sans-serif}
+.chat-groupcall-mh div span{display:block;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-groupcall-pp{display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:13px;line-height:18px;color:var(--sec)}
+.chat-groupcall-pp .s{display:flex}
+.chat-groupcall-pp .s i{width:24px;height:24px;border-radius:50%;background:var(--c);color:#0E1116;font:800 11px/24px Nunito,Inter;text-align:center;font-style:normal;box-shadow:0 0 0 2px var(--sf);margin-left:-4px}
+.chat-groupcall-pp .s i:first-child{margin-left:0}
+.chat-groupcall-pp .s i svg{width:14px;height:14px;margin:5px}
+.chat-groupcall-ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.chat-groupcall-ul li{position:relative;padding-left:22px;font-size:16px;line-height:22px;color:var(--tx)}
+.chat-groupcall-ul li::before{content:"";position:absolute;left:4px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--mint)}
+.chat-groupcall-ul li b{font-weight:600;color:var(--c)}
+.chat-groupcall-mn{display:flex;align-items:center;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;line-height:18px;color:var(--sec)}
+.chat-groupcall-mn svg{width:16px;height:16px;flex:none;color:var(--mint)}
+.chat-groupcall-ma{display:flex;align-items:center;justify-content:space-between;margin:2px -6px 0}
+.chat-groupcall-ma .sh{height:44px;display:flex;align-items:center;gap:6px;padding:0 6px;font:600 15px/1 Inter;color:var(--acc)}
+.chat-groupcall-ma .sh svg{width:18px;height:18px}
+.chat-groupcall-ma .chat-groupcall-ib{color:var(--sec)}
+.chat-groupcall-ma .chat-groupcall-ib svg{width:22px;height:22px}
+.chat-groupcall-r{display:flex;align-items:flex-end;gap:8px;max-width:86%}
+.chat-groupcall-ra{width:32px;height:32px;border-radius:50%;background:var(--c);color:#0E1116;font:800 14px/32px Nunito,Inter;text-align:center;flex:none}
+.chat-groupcall-m{border-radius:20px;border-bottom-left-radius:6px;background:var(--sf2);padding:8px 12px 6px;font-size:16px;line-height:22px;min-width:0}
+.chat-groupcall-m .w{display:block;font:600 13px/18px Inter;color:var(--c);margin-bottom:2px}
+.chat-groupcall-m .chat-groupcall-mf{display:flex;align-items:center;gap:6px;margin-top:6px;font:500 12px/16px Inter;color:var(--mint);white-space:nowrap}
+.chat-groupcall-m .chat-groupcall-mf em{font:700 11px/1 Inter;font-style:normal;letter-spacing:.06em;height:20px;padding:0 6px;border-radius:6px;display:flex;align-items:center;background:rgba(191,242,220,.14)}
+.chat-groupcall-m .chat-groupcall-mf.or{color:var(--sec)}
+.chat-groupcall-m .chat-groupcall-mf.or em{background:rgba(154,164,178,.18);color:var(--tx)}
+.chat-groupcall-m .chat-groupcall-mf .tm{margin-left:auto;padding-left:10px;color:var(--sec)}
+.chat-groupcall-cmp{flex:none;border-top:1px solid var(--line);padding:8px 12px 0}
+.chat-groupcall-crow{display:flex;align-items:flex-end;gap:8px}
+.chat-groupcall-pls{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-groupcall-pls svg{width:26px;height:26px}
+.chat-groupcall-f{flex:1;min-width:0;min-height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:10px 16px;font-size:17px;line-height:22px;color:var(--sec);white-space:nowrap;overflow:hidden}
+.chat-groupcall-go{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-groupcall-go svg{width:22px;height:22px}
+
+/* история звонков */
+.chat-groupcall-hd{flex:none;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 8px 0 20px}
+.chat-groupcall-hd h3{margin:0;font:900 34px/40px Nunito,sans-serif}
+.chat-groupcall-seg{flex:none;margin:4px 16px 8px;height:44px;border-radius:14px;background:var(--sf);display:flex;padding:4px}
+.chat-groupcall-seg span{flex:1;border-radius:10px;display:flex;align-items:center;justify-content:center;font:600 15px/1 Inter;color:var(--sec)}
+.chat-groupcall-seg span.on{background:var(--sf2);color:var(--tx);box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.chat-groupcall-hl{flex:1;min-height:0;overflow:hidden;padding:0 16px 96px}
+.chat-groupcall-sh{font:600 12px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin:14px 4px 6px}
+.chat-groupcall-lst{border-radius:18px;background:var(--sf);overflow:hidden}
+.chat-groupcall-row{display:flex;align-items:center;gap:12px;min-height:64px;padding:8px 2px 8px 14px;border-top:1px solid var(--line)}
+.chat-groupcall-row:first-child{border-top:0}
+.chat-groupcall-row .a{width:44px;height:44px;border-radius:50%;background:var(--c);color:#0E1116;font:900 19px/44px Nunito,Inter;text-align:center;flex:none}
+.chat-groupcall-row .a.g{border-radius:14px;background:#1E3734;color:var(--mint);display:flex;align-items:center;justify-content:center}
+.chat-groupcall-row .a.g svg{width:22px;height:22px}
+.chat-groupcall-row .t{flex:1;min-width:0}
+.chat-groupcall-row .t b{display:block;font:600 16px/22px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-groupcall-row.ms .t b{color:var(--err)}
+.chat-groupcall-row .t span{display:flex;align-items:center;gap:6px;font-size:14px;line-height:20px;color:var(--sec);white-space:nowrap}
+.chat-groupcall-row .t span svg{width:16px;height:16px;flex:none}
+.chat-groupcall-row.ms .t span svg{color:var(--err)}
+.chat-groupcall-row .t span em{font:600 12px/1 Inter;font-style:normal;color:var(--mint);background:rgba(191,242,220,.12);border-radius:6px;padding:4px 6px;display:flex;align-items:center;gap:4px}
+.chat-groupcall-row .t span em svg{width:12px;height:12px;color:var(--mint)}
+.chat-groupcall-row .tm{font-size:14px;line-height:20px;color:var(--sec);font-variant-numeric:tabular-nums;flex:none}
+.chat-groupcall-row .chat-groupcall-ib{color:var(--acc)}
+.chat-groupcall-row .chat-groupcall-ib svg{width:22px;height:22px}
+.chat-groupcall-tb{position:absolute;left:0;right:0;bottom:0;padding-top:4px;background:rgba(14,17,22,.92);box-shadow:inset 0 1px 0 var(--line);z-index:2}
+.chat-groupcall-tbi{display:flex;height:52px}
+.chat-groupcall-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--sec);font:600 11px/1.2 Inter,sans-serif}
+.chat-groupcall-tab svg{width:26px;height:26px}
+.chat-groupcall-tab.on{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="chat-groupcall-w">
+<nav class="chat-groupcall-lsw" id="chat-groupcall-lsw" aria-label="Language"></nav>
+
+<section class="chat-groupcall-hero">
+ <div><div class="pf p67" style="--s:1" data-state="group-call" data-hero="1"><div class="shell"></div><div class="glass"></div></div>
+ <div class="pcap"><span class="dot"></span><div><b id="chat-groupcall-capb"></b><span id="chat-groupcall-caps"></span></div></div></div>
+ <div class="chat-groupcall-info">
+  <p class="chat-groupcall-eb" id="chat-groupcall-eb"></p>
+  <h1 id="chat-groupcall-h1"></h1>
+  <p id="chat-groupcall-p1"></p>
+  <ul id="chat-groupcall-ul"></ul>
+ </div>
+</section>
+
+<h2 class="chat-groupcall-h2" id="chat-groupcall-h2s"></h2>
+<p class="chat-groupcall-lead" id="chat-groupcall-lead"></p>
+<div class="chat-groupcall-grid" id="chat-groupcall-grid"></div>
+
+<h2 class="chat-groupcall-h2" id="chat-groupcall-h2d"></h2>
+<div class="chat-groupcall-cols">
+ <div class="chat-groupcall-sec"><h2 id="chat-groupcall-hdec"></h2><ul id="chat-groupcall-dec"></ul></div>
+ <div class="chat-groupcall-sec"><h2 id="chat-groupcall-htok"></h2>
+  <table class="chat-groupcall-ct" id="chat-groupcall-ct"></table>
+  <ul style="margin-top:12px" id="chat-groupcall-tok"></ul></div>
+ <div class="chat-groupcall-sec"><h2 id="chat-groupcall-hna"></h2><ul id="chat-groupcall-na"></ul></div>
+</div>
+</div>
+
+<script>
+(function(){
+var N=' ';
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra){return '<svg viewBox="0 0 24 24" '+(extra||SW)+' aria-hidden="true">'+p+'</svg>'}
+var HS='M5.2 3.5h3.3l1.8 4.6-2.3 1.5a11.5 11.5 0 0 0 6.4 6.4l1.5-2.3 4.6 1.8v3.3a1.7 1.7 0 0 1-1.8 1.7A16.8 16.8 0 0 1 3.5 5.3a1.7 1.7 0 0 1 1.7-1.8z';
+var I={
+ down:ic('<path d="M6 9.5l6 6 6-6"/>'),
+ back:ic('<path d="M15 5l-7 7 7 7"/>'),
+ addp:ic('<circle cx="10" cy="8" r="3.5"/><path d="M3.5 19.5a6.5 6.5 0 0 1 13 0"/><path d="M19 8v6M16 11h6"/>'),
+ me:ic('<circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>'),
+ users:ic('<circle cx="9" cy="8.5" r="3.3"/><path d="M3 19.5a6 6 0 0 1 12 0"/><path d="M15.5 5.5a3.2 3.2 0 0 1 0 6.2M17.5 14a6 6 0 0 1 3.5 5.5"/>'),
+ house:ic('<path d="M3.5 11L12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ micoff:ic('<path d="M15.5 10V6a3.5 3.5 0 0 0-6.8-1.2"/><path d="M8.5 8.5V11a3.5 3.5 0 0 0 5.6 2.8"/><path d="M5 11.5a7 7 0 0 0 11.3 5.5M19 11.5a7 7 0 0 1-.5 2.6"/><path d="M12 18.5v3"/><path d="M3.5 3.5l17 17"/>'),
+ spk:ic('<path d="M3.5 9.5v5h3.5l4.5 4V5.5L7 9.5z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.3 6.3a8.2 8.2 0 0 1 0 11.4"/>'),
+ cc:ic('<rect x="2.5" y="5" width="19" height="14" rx="3.5"/><path d="M10.4 10.2a2.3 2.3 0 1 0 0 3.6M17 10.2a2.3 2.3 0 1 0 0 3.6"/>'),
+ end:ic('<g transform="rotate(135 12 12)"><path d="'+HS+'"/></g>','fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true"'),
+ phone:ic('<path d="'+HS+'"/>'),
+ chat:ic('<path d="M4.5 18.5V7a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v6.5a3 3 0 0 1-3 3H8z"/><path d="M8.5 9h7M8.5 12.5h4.5"/>'),
+ doc:ic('<path d="M7 3.5h7l4.5 4.5v10.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2z"/><path d="M14 3.5V8h4.5"/><path d="M8.5 12.5h7M8.5 16h5"/>'),
+ cc2:ic('<rect x="2.5" y="5" width="19" height="14" rx="3.5"/><path d="M6.5 11h5M14 11h3.5M6.5 14.5h3M12 14.5h5.5"/>'),
+ fold:ic('<path d="M8 9l4-4 4 4M8 15l4 4 4-4"/>'),
+ leave:ic('<path d="M14 4.5h3.5a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H14"/><path d="M10 8l-4 4 4 4M6 12h9"/>'),
+ bell:ic('<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>'),
+ more:ic('<circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/>','fill="currentColor" aria-hidden="true"'),
+ plus:ic('<path d="M12 5v14M5 12h14"/>'),
+ expand:ic('<path d="M6 9l6 6 6-6"/>'),
+ inn:ic('<path d="M17.5 6.5l-11 11M6.5 9v8.5H15"/>'),
+ out:ic('<path d="M6.5 17.5l11-11M9 6.5h8.5V15"/>'),
+ miss:ic('<path d="M3.5 7l6 6 4-4 7 7"/><path d="M20.5 11.5V16H16"/>'),
+ info:ic('<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor"/>'),
+ newcall:ic('<path d="'+HS+'"/><path d="M17 3v6M14 6h6"/>'),
+ chats:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.5c-5 0-9 3.4-9 7.7 0 2.4 1.3 4.5 3.3 5.9L5.5 21l4.2-2.3c.7.1 1.5.2 2.3.2 5 0 9-3.4 9-7.7S17 3.5 12 3.5z"/></svg>',
+ gear:ic('<circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/>')
+};
+
+/* Состав группы один на всех языках (как в chat-group): Lucía говорит по‑испански, Pedro — по‑английски, Olga — по‑русски, «я» — на языке интерфейса.
+   Реплики звонка: orig — что сказал человек, tr — субтитр на языке интерфейса; a — хвост, который ещё переводится. */
+var PPL={L:{lang:'es',c:'#6AA6F5'},P:{lang:'en',c:'#C3A6F7'},O:{lang:'ru',c:'#E8A0BF'}};
+var LN={
+ L1:{who:'L',orig:'¿Me oís todos? Rápido: el fontanero viene el sábado a las diez.',
+  tr:{ru:{t:'Всем слышно? Коротко: сантехник придёт в субботу в'+N+'десять.'},en:{t:'Can everyone hear me? Quick one: the plumber’s coming Saturday at ten.'}}},
+ P1:{who:'P',orig:'Great, I’ll open the gate for him.',
+  tr:{ru:{t:'Отлично, я открою ему ворота.'},es:{t:'Genial, yo le abro el portón.'}}},
+ L2:{who:'L',orig:'Perfecto. Olga, ¿me dejas la llave del sótano antes del viernes?',
+  tr:{ru:{t:'Отлично. Olga, оставишь мне ключ от'+N+'подвала',a:' до'+N+'пятницы?'},en:{t:'Perfect. Olga, could you leave me the basement key',a:' before Friday?'}}},
+ P2:{who:'P',orig:'Olga, could you leave the basement key with Lucía before Friday?',
+  tr:{es:{t:'Olga, ¿le puedes dejar a Lucía la llave del sótano',a:' antes del viernes?'}}},
+ O1:{who:'O',orig:'Да, занесу ключ в четверг вечером.',
+  tr:{ru:{t:'Да, занесу ключ',a:' в'+N+'четверг вечером.'},es:{t:'Sí, le llevo la llave',a:' el jueves por la tarde.'},en:{t:'Sure, I’ll drop off the key',a:' on Thursday evening.'}}}
+};
+
+/* ===== словарь: экран и страница ===== */
+var T={
+ru:{lang:'ru',me:'RU',hero:['L1','P1','L2'],left:['L2','O1'],
+ nm:{L:'Lucía',P:'Pedro',O:'Olga'},you:'Ты',
+ from:{es:'с испанского',en:'с английского',ru:'с русского'},orig:'оригинал',live:'сейчас',
+ gname:'Соседи · Colón 12',gsub:'4 участника · ES · EN · RU',timer:'08:37',
+ nt:'Итоги звонка придут в'+N+'чат всем участникам',
+ spk:'говорит',muted:'микрофон выкл.',
+ aMin:'Свернуть звонок',aAdd:'Добавить в звонок',aBack:'Назад',aMore:'Ещё',aPlus:'Прикрепить',aMic:'Записать голосовое',aInfo:'Подробнее о звонке',aNew:'Новый звонок',
+ ctl:['Микрофон','Динамик','Субтитры','Выйти'],
+ leftSys:'Pedro вышел из звонка',
+ g2:'Родители · 3 Б',fullPill:'Звонок идёт · 41:12',fullT:'Звонок заполнен',
+ fullS:'В звонке группы «Родители · 3 Б» сейчас нет свободных мест. Можно дождаться, пока место освободится, или написать в'+N+'группу.',
+ notify:'Сообщить, когда будет место',writeG:'Написать в группу',writeN:'Напишешь по‑русски'+N+'— каждый прочитает на своём языке.',close:'Закрыть',
+ today:'Сегодня',callRow:'Групповой звонок · 18 мин · 9:20',
+ minT:'Итоги звонка',minS:'Сегодня, 9:20–9:38 · 18 мин',minP:'Lucía, Pedro, Olga и ты',
+ minL:['Сантехник придёт в субботу в'+N+'10:00. Ворота ему откроет <b style="--c:#C3A6F7">Pedro</b>.','<b style="--c:#E8A0BF">Olga</b> занесёт Lucía ключ от'+N+'подвала в'+N+'четверг вечером.','<b style="--c:#6AA6F5">Lucía</b> встретит сантехника и покажет кран во дворе.','<b style="--c:#2BC48A">Ты</b> покупаешь новый шланг для полива.'],
+ minN:'Из субтитров звонка · у каждого на своём языке',minMore:'Показать полностью',
+ reply:{who:'P',orig:'Thanks for the summary! Saturday works for me.',t:'Спасибо за итоги! В субботу мне удобно.',tm:'9:40'},
+ ph:'Сообщение по‑русски',
+ hT:'Звонки',seg:['Все','Пропущенные'],days:['Сегодня','Вчера','Понедельник'],
+ hr:[
+  {d:0,g:1,n:'Соседи · Colón 12',k:'out',s:'Групповой · 18 мин',m:1,tm:'9:20'},
+  {d:0,p:'L',k:'inn',s:'Входящий · 6 мин',tm:'8:47'},
+  {d:1,p:'P',k:'miss',s:'Пропущенный',tm:'19:12'},
+  {d:1,p:'O',k:'out',s:'Исходящий · 12 мин',tm:'17:30'},
+  {d:1,g:2,n:'Родители · 3 Б',k:'miss',s:'Групповой · пропущенный',tm:'16:05'},
+  {d:2,p:'L',k:'out',s:'Исходящий · без ответа',tm:'10:02'},
+  {d:2,g:1,n:'Соседи · Colón 12',k:'inn',s:'Групповой · 42 мин',m:1,tm:'9:15'}],
+ minChip:'Итоги',tabs:['Чаты','Звонки','Настройки'],
+ P:{title:'Parrlo Chat · групповой звонок',eb:'Эталон · chat-groupcall · C-14 · макет · только тёмная тема',
+  h1:'Звонок на четверых, где каждый говорит на своём языке',
+  p1:'Групповой звонок соседей: Lucía говорит по‑испански, Pedro'+N+'— по‑английски, Olga и ты'+N+'— по‑русски. Субтитры идут на твоём языке, у каждой строки видно, кто говорит и с какого языка перевод. После звонка в чат приходят короткие итоги. Это макет: звонков в сборке пока нет.',
+  ul:['<b>Плитки участников</b>: инициалы, имя и код языка. Говорящий'+N+'— в рамке своего цвета и с подписью «говорит», выключенный микрофон'+N+'— значком и словами.','<b>Цвет = человек</b>: у Lucía, Pedro и Olga свой цвет, как в групповом чате; ты'+N+'— зелёный. Цвет повторяется в плитке, в субтитре и в итогах, но рядом всегда есть имя.','<b>Субтитры на твоём языке</b>: в каждой строке'+N+'— имя, код языка и «с испанского» или «оригинал», если человек говорит по‑русски.','<b>«Выйти», а не «Завершить»</b>: в группе ты уходишь сам, звонок у остальных продолжается.'],
+  capb:'Parrlo Chat · звонок группы «Соседи · Colón 12»',caps:'Главный кадр: говорит Lucía, перевод на русский набирается крупно, испанский оригинал'+N+'— под ним. Макет, тексты'+N+'— черновик.',
+  h2s:'Состояния',lead:'Пять кадров: звонок, кто-то вышел, звонок заполнен, итоги в чате, история звонков. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-groupcall--&lt;состояние&gt;--ru.png</code>, главный кадр'+N+'— <code>chat-groupcall--ru.png</code>.',
+  h2d:'Решения, токены, открытые вопросы',hdec:'Решения сверх сборки',htok:'Токены и контраст',hna:'Не утверждено',
+  st:{'group-call':['Групповой звонок','Главный кадр. Четыре плитки, говорит Lucía: субтитр по‑русски крупно, ниже'+N+'— её испанский оригинал.'],
+   left:['Кто-то вышел','Pedro ушёл из звонка: плиток стало три, в ленте'+N+'— строка «Pedro вышел». Olga говорит по‑русски, ей перевод не нужен.'],
+   full:['Звонок заполнен','Нажали «Присоединиться» в большой группе, а мест нет: подождать с уведомлением или написать в группу.'],
+   minutes:['Итоги в чате','После звонка в группу пришла карточка «Итоги звонка»: четыре пункта по‑русски и «Показать полностью».'],
+   history:['История звонков','Вкладка «Звонки»: входящие, исходящие, пропущенные и групповые; у групповых с итогами'+N+'— метка «Итоги».']},
+  dec:['<b>Плитки + субтитры на одном экране</b>: сверху видно, кто в звонке и кто говорит, снизу'+N+'— что сказано. Старые строки уходят вверх и тают, как в chat-call.','<b>Метка языка в каждой строке</b>: код + «с испанского» или «оригинал». Если язык совпал с твоим, строка не переводится и это видно словами.','<b>Строка «Итоги звонка придут в чат всем участникам»</b> под шапкой видна всем весь звонок: заранее понятно, что из субтитров соберутся итоги. Звук не сохраняется и не упоминается.','<b>«Выйти»</b> вместо «Завершить» и строка «Pedro вышел из звонка» в ленте субтитров.','<b>«Звонок заполнен» без числа</b>: «нет свободных мест», а выход'+N+'— «Сообщить, когда будет место» или написать в группу.','<b>Итоги в чате</b>: 3–4 пункта на языке каждого участника, имена своими цветами, участники звонка аватарами; «Показать полностью» открывает итоги целиком. В меню «⋯»'+N+'— «Удалить у себя» (по макету call-protocol-delete).','<b>История</b>: направление и тип показаны значком и словами («Входящий», «Пропущенный»), пропущенные'+N+'— ещё и красным; у групповых звонков с итогами'+N+'— мятная метка «Итоги».'],
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>; плитка говорящего'+N+'— <code>#1A222B</code>.','Цвета людей'+N+'— как в chat-group: Lucía <code>#6AA6F5</code>, Pedro <code>#C3A6F7</code>, Olga <code>#E8A0BF</code>, ты'+N+'— Light Green <code>#2BC48A</code>.','Итоги и метка «Итоги»'+N+'— Mint <code>#BFF2DC</code>; «Выйти» и пропущенные'+N+'— <code>#FF6B5E</code>. Жёлтый на экране не используется.','Кнопки управления 68×68, действия 56 и 44 в высоту, строки истории 64, сегменты и значки'+N+'— 44.'],
+  na:['<span class="chat-groupcall-legal">нужна сверка юриста</span> Уведомление участников: как и когда все в звонке узнают, что из субтитров соберутся итоги (строка под шапкой'+N+'— предложение; экран согласия call-notice'+N+'— отдельно), срок хранения итогов, «Удалить у себя».','Итоги строятся из субтитров звонка; звук не сохраняется. Нужно подтвердить это технически до публикации.','Все тексты'+N+'— черновик, включая es и en (es на «tú»).','Групповые звонки, субтитры и итоги'+N+'— новые функции, в сборке нет (GAP №37–39).','Предел участников на сайте не пишем до решения (GAP №37); «Сообщить, когда будет место»'+N+'— предложение.','«Звонок заполнен» показан на другой группе («Родители · 3 Б»): в группе соседей всего четыре человека.','Цвета людей в звонке и красная кнопка «Выйти».'],
+  ct:['Текст на плитке, в живой строке','Lucía на поверхности','Pedro на фоне','Olga на фоне','Ты на фоне','Прошлые реплики','Вторичный на поверхности','Вторичный на фоне','Значок на «Выйти»','Пропущенный звонок','Итоги, метка Mint','Текст на акцентной кнопке','Инициал на аватаре Lucía']}},
+es:{lang:'es',me:'ES',hero:['L1','P1','P2'],left:['P2','O1'],
+ nm:{L:'Lucía',P:'Pedro',O:'Olga'},you:'Tú',
+ from:{es:'del español',en:'del inglés',ru:'del ruso'},orig:'original',live:'ahora',
+ gname:'Vecinos · Colón 12',gsub:'4 miembros · ES · EN · RU',timer:'08:37',
+ nt:'El resumen llegará al chat de todos',
+ spk:'habla',muted:'silenciado',
+ aMin:'Minimizar llamada',aAdd:'Añadir a la llamada',aBack:'Atrás',aMore:'Más',aPlus:'Adjuntar',aMic:'Grabar audio',aInfo:'Detalles de la llamada',aNew:'Nueva llamada',
+ ctl:['Micrófono','Altavoz','Subtítulos','Salir'],
+ leftSys:'Pedro salió de la llamada',
+ g2:'Familias · 3.º B',fullPill:'Llamada en curso · 41:12',fullT:'Llamada completa',
+ fullS:'Ahora mismo no queda sitio en la llamada de «Familias · 3.º B». Puedes esperar a que se libere uno o escribir en el grupo.',
+ notify:'Avísame cuando haya sitio',writeG:'Escribir al grupo',writeN:'Escribe en español y cada uno lo leerá en su idioma.',close:'Cerrar',
+ today:'Hoy',callRow:'Llamada de grupo · 18 min · 9:20',
+ minT:'Resumen de la llamada',minS:'Hoy, 9:20–9:38 · 18 min',minP:'Lucía, Pedro, Olga y tú',
+ minL:['El fontanero viene el sábado a las'+N+'10:00. <b style="--c:#C3A6F7">Pedro</b> le abre el portón.','<b style="--c:#E8A0BF">Olga</b> le lleva a Lucía la llave del sótano el jueves por la tarde.','<b style="--c:#6AA6F5">Lucía</b> recibe al fontanero y le enseña el grifo del patio.','<b style="--c:#2BC48A">Tú</b> compras una manguera nueva para regar.'],
+ minN:'Sale de los subtítulos · cada uno lo ve en su idioma',minMore:'Ver completo',
+ reply:{who:'P',orig:'Thanks for the summary! Saturday works for me.',t:'¡Gracias por el resumen! El sábado me va bien.',tm:'9:40'},
+ ph:'Mensaje en español',
+ hT:'Llamadas',seg:['Todas','Perdidas'],days:['Hoy','Ayer','Lunes'],
+ hr:[
+  {d:0,g:1,n:'Vecinos · Colón 12',k:'out',s:'De grupo · 18 min',m:1,tm:'9:20'},
+  {d:0,p:'L',k:'inn',s:'Entrante · 6 min',tm:'8:47'},
+  {d:1,p:'P',k:'miss',s:'Perdida',tm:'19:12'},
+  {d:1,p:'O',k:'out',s:'Saliente · 12 min',tm:'17:30'},
+  {d:1,g:2,n:'Familias · 3.º B',k:'miss',s:'De grupo · perdida',tm:'16:05'},
+  {d:2,p:'L',k:'out',s:'Saliente · sin respuesta',tm:'10:02'},
+  {d:2,g:1,n:'Vecinos · Colón 12',k:'inn',s:'De grupo · 42 min',m:1,tm:'9:15'}],
+ minChip:'Resumen',tabs:['Chats','Llamadas','Ajustes'],
+ P:{title:'Parrlo Chat · llamada de grupo',eb:'Referencia · chat-groupcall · C-14 · maqueta · solo tema oscuro',
+  h1:'Una llamada a cuatro, cada uno en su idioma',
+  p1:'Una llamada entre vecinos: Lucía y tú habláis español, Pedro inglés y Olga ruso. Los subtítulos salen en tu idioma y en cada línea ves quién habla y desde qué idioma se traduce. Al colgar llega al chat un resumen breve. Es una maqueta: la app aún no tiene llamadas.',
+  ul:['<b>Recuadros de participantes</b>: inicial, nombre y código de idioma. Quien habla lleva un marco de su color y «habla»; el micrófono silenciado se ve con icono y texto.','<b>Color = persona</b>: Lucía, Pedro y Olga tienen su color, como en el chat de grupo; tú, verde. El color se repite en el recuadro, el subtítulo y el resumen, siempre junto al nombre.','<b>Subtítulos en tu idioma</b>: cada línea lleva nombre, código y «del inglés», o «original» si la persona habla español.','<b>«Salir», no «Colgar»</b>: en un grupo te vas tú y la llamada sigue para los demás.'],
+  capb:'Parrlo Chat · llamada de «Vecinos · Colón 12»',caps:'Imagen principal: habla Pedro, la traducción al español crece en grande y el original en inglés queda debajo. Maqueta, textos provisionales.',
+  h2s:'Estados',lead:'Cinco fotogramas: la llamada, alguien sale, llamada completa, resumen en el chat e historial. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-groupcall--&lt;estado&gt;--es.png</code>; la imagen principal es <code>chat-groupcall--es.png</code>.',
+  h2d:'Decisiones, tokens y temas abiertos',hdec:'Más allá de la versión actual',htok:'Tokens y contraste',hna:'Sin aprobar',
+  st:{'group-call':['Llamada de grupo','Imagen principal. Cuatro recuadros; habla Pedro: subtítulo en español en grande y su original en inglés debajo.'],
+   left:['Alguien sale','Pedro se fue: quedan tres recuadros y en los subtítulos aparece «Pedro salió de la llamada».'],
+   full:['Llamada completa','Tocaste «Unirme» en un grupo grande y no hay sitio: esperar con aviso o escribir al grupo.'],
+   minutes:['Resumen en el chat','Tras colgar llega al grupo la tarjeta «Resumen de la llamada»: cuatro puntos en español y «Ver completo».'],
+   history:['Historial de llamadas','Pestaña «Llamadas»: entrantes, salientes, perdidas y de grupo; las de grupo con resumen llevan la etiqueta «Resumen».']},
+  dec:['<b>Recuadros y subtítulos en la misma pantalla</b>: arriba, quién está y quién habla; abajo, qué se dijo. Las líneas antiguas suben y se desvanecen, como en chat-call.','<b>Etiqueta de idioma en cada línea</b>: código + «del inglés» u «original». Si el idioma coincide con el tuyo, no se traduce y lo dice el texto.','<b>«El resumen llegará al chat de todos»</b> bajo la cabecera, visible para todos durante la llamada: se sabe de antemano que se hará un resumen con los subtítulos. El audio no se guarda ni se menciona.','<b>«Salir»</b> en lugar de «Colgar» y la línea «Pedro salió de la llamada» en los subtítulos.','<b>«Llamada completa» sin cifras</b>: «no queda sitio», con salida: «Avísame cuando haya sitio» o escribir al grupo.','<b>Resumen en el chat</b>: 3–4 puntos en el idioma de cada participante, nombres en su color y avatares de quien estuvo; «Ver completo» abre el resumen entero. En «⋯», «Eliminar para mí» (según call-protocol-delete).','<b>Historial</b>: dirección y tipo con icono y texto («Entrante», «Perdida»); las perdidas, además, en rojo; las de grupo con resumen, etiqueta menta «Resumen».'],
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code>/<code>#242B34</code>, líneas <code>#2F3742</code>; recuadro de quien habla <code>#1A222B</code>.','Colores de persona, como en chat-group: Lucía <code>#6AA6F5</code>, Pedro <code>#C3A6F7</code>, Olga <code>#E8A0BF</code>, tú Light Green <code>#2BC48A</code>.','Resumen y su etiqueta: Mint <code>#BFF2DC</code>; «Salir» y perdidas: <code>#FF6B5E</code>. Sin amarillo en pantalla.','Controles de 68×68, acciones de 56 y 44 de alto, filas del historial de 64, segmentos e iconos de 44.'],
+  na:['<span class="chat-groupcall-legal">revisión legal</span> Aviso a los participantes: cómo y cuándo saben todos que se hará un resumen con los subtítulos (la línea bajo la cabecera es una propuesta; la pantalla de consentimiento call-notice va aparte), cuánto se guarda el resumen y «Eliminar para mí».','El resumen sale de los subtítulos; el audio no se guarda. Hay que confirmarlo técnicamente antes de publicar.','Todos los textos son provisionales, también es y en (es con «tú»).','Llamadas de grupo, subtítulos y resúmenes: funciones nuevas, no están en la app (GAP n.º 37–39).','El máximo de participantes no se publica hasta que se decida (n.º 37); «Avísame cuando haya sitio» es una propuesta.','«Llamada completa» se muestra con otro grupo («Familias · 3.º B»): el de vecinos solo tiene cuatro personas.','Colores de persona en la llamada y botón rojo «Salir».'],
+  ct:['Texto en recuadro y línea en directo','Lucía sobre superficie','Pedro sobre fondo','Olga sobre fondo','Tú sobre fondo','Líneas anteriores','Secundario sobre superficie','Secundario sobre fondo','Icono en «Salir»','Llamada perdida','Resumen, etiqueta Mint','Texto en botón de acento','Inicial en avatar de Lucía']}},
+en:{lang:'en',me:'EN',hero:['L1','P1','L2'],left:['L2','O1'],
+ nm:{L:'Lucía',P:'Pedro',O:'Olga'},you:'You',
+ from:{es:'from Spanish',en:'from English',ru:'from Russian'},orig:'original',live:'live',
+ gname:'Neighbors · Colón 12',gsub:'4 members · ES · EN · RU',timer:'08:37',
+ nt:'Everyone gets a call summary in the chat',
+ spk:'speaking',muted:'muted',
+ aMin:'Minimize call',aAdd:'Add to call',aBack:'Back',aMore:'More',aPlus:'Attach',aMic:'Record voice message',aInfo:'Call details',aNew:'New call',
+ ctl:['Mute','Speaker','Captions','Leave'],
+ leftSys:'Pedro left the call',
+ g2:'Class 3B parents',fullPill:'Call in progress · 41:12',fullT:'This call is full',
+ fullS:'There’s no room in the “Class 3B parents” call right now. You can wait for a spot to open up or message the group.',
+ notify:'Notify me when there’s room',writeG:'Message the group',writeN:'Write in English and everyone reads it in their own language.',close:'Close',
+ today:'Today',callRow:'Group call · 18 min · 9:20',
+ minT:'Call summary',minS:'Today, 9:20–9:38 · 18 min',minP:'Lucía, Pedro, Olga and you',
+ minL:['The plumber’s coming Saturday at'+N+'10:00. <b style="--c:#C3A6F7">Pedro</b> will open the gate.','<b style="--c:#E8A0BF">Olga</b> will drop the basement key off with Lucía on Thursday evening.','<b style="--c:#6AA6F5">Lucía</b> will meet the plumber and show him the courtyard tap.','<b style="--c:#2BC48A">You</b> will pick up a new garden hose.'],
+ minN:'Built from the captions · everyone sees it in their language',minMore:'Show all',
+ reply:{who:'O',orig:'Спасибо за итоги! Ключ занесу в четверг.',t:'Thanks for the summary! I’ll drop off the key on Thursday.',tm:'9:40'},
+ ph:'Message in English',
+ hT:'Calls',seg:['All','Missed'],days:['Today','Yesterday','Monday'],
+ hr:[
+  {d:0,g:1,n:'Neighbors · Colón 12',k:'out',s:'Group · 18 min',m:1,tm:'9:20'},
+  {d:0,p:'L',k:'inn',s:'Incoming · 6 min',tm:'8:47'},
+  {d:1,p:'P',k:'miss',s:'Missed',tm:'19:12'},
+  {d:1,p:'O',k:'out',s:'Outgoing · 12 min',tm:'17:30'},
+  {d:1,g:2,n:'Class 3B parents',k:'miss',s:'Group · missed',tm:'16:05'},
+  {d:2,p:'L',k:'out',s:'Outgoing · no answer',tm:'10:02'},
+  {d:2,g:1,n:'Neighbors · Colón 12',k:'inn',s:'Group · 42 min',m:1,tm:'9:15'}],
+ minChip:'Summary',tabs:['Chats','Calls','Settings'],
+ P:{title:'Parrlo Chat · group call',eb:'Reference · chat-groupcall · C-14 · mockup · dark theme only',
+  h1:'A four-way call where everyone speaks their own language',
+  p1:'A call between neighbors: Lucía speaks Spanish, Pedro and you English, Olga Russian. Captions come in your language, and every line shows who’s talking and which language it was translated from. After the call, a short summary lands in the chat. This is a mockup: calls aren’t in the app yet.',
+  ul:['<b>Participant tiles</b>: initial, name and language code. Whoever is talking gets a frame in their color and the word “speaking”; a muted mic shows as an icon plus text.','<b>Color = person</b>: Lucía, Pedro and Olga each have a color, as in the group chat; you’re green. The color carries through tile, caption and summary, always next to the name.','<b>Captions in your language</b>: each line has a name, a code and “from Spanish”, or “original” when someone speaks English.','<b>Leave, not End</b>: in a group you’re the one leaving; the call goes on for everyone else.'],
+  capb:'Parrlo Chat · “Neighbors · Colón 12” call',caps:'Hero frame: Lucía is speaking, the English translation builds up large and the Spanish original sits below it. Mockup, draft copy.',
+  h2s:'States',lead:'Five frames: the call, someone leaves, call full, summary in the chat, call history. PNG @3× (1290×2796): <code>site-v4/ref/png/chat-groupcall--&lt;state&gt;--en.png</code>; hero frame is <code>chat-groupcall--en.png</code>.',
+  h2d:'Decisions, tokens, open questions',hdec:'Beyond the current build',htok:'Tokens and contrast',hna:'Not approved',
+  st:{'group-call':['Group call','Hero frame. Four tiles; Lucía is speaking: the English caption is large, her Spanish original below.'],
+   left:['Someone leaves','Pedro left: three tiles remain and the captions show “Pedro left the call”. Olga speaks Russian, translated to English.'],
+   full:['Call is full','You tapped Join in a big group and there’s no room: wait with a notification or message the group.'],
+   minutes:['Summary in the chat','After the call, a “Call summary” card lands in the group: four points in English and Show all.'],
+   history:['Call history','Calls tab: incoming, outgoing, missed and group calls; group calls with a summary carry a Summary tag.']},
+  dec:['<b>Tiles and captions on one screen</b>: who’s in and who’s talking up top, what was said below. Older lines drift up and fade, as in chat-call.','<b>A language tag on every line</b>: code + “from Spanish” or “original”. If the language matches yours, nothing is translated, and the text says so.','<b>“Everyone gets a call summary in the chat”</b> under the header, visible to everyone for the whole call, so it’s clear up front that a summary will be built from the captions. Audio isn’t kept or mentioned.','<b>Leave</b> instead of End, plus a “Pedro left the call” line in the captions.','<b>“This call is full” with no number</b>: “no room right now”, with a way out: Notify me when there’s room, or message the group.','<b>Summary in the chat</b>: 3–4 points in each participant’s language, names in their colors, avatars of who was on the call; Show all opens the full summary. The ⋯ menu has Delete for me (per the call-protocol-delete mockup).','<b>History</b>: direction and type as icon plus words (Incoming, Missed); missed calls are also red; group calls with a summary get a mint Summary tag.'],
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code>/<code>#242B34</code>, lines <code>#2F3742</code>; speaking tile <code>#1A222B</code>.','Person colors, as in chat-group: Lucía <code>#6AA6F5</code>, Pedro <code>#C3A6F7</code>, Olga <code>#E8A0BF</code>, you Light Green <code>#2BC48A</code>.','Summary and its tag: Mint <code>#BFF2DC</code>; Leave and missed calls: <code>#FF6B5E</code>. No yellow on screen.','Controls 68×68, actions 56 and 44 tall, history rows 64, segments and icons 44.'],
+  na:['<span class="chat-groupcall-legal">legal review needed</span> Notifying participants: how and when everyone on the call learns a summary will be built from the captions (the line under the header is a proposal; the call-notice consent screen is separate), how long the summary is kept, and Delete for me.','The summary is built from the captions; audio isn’t kept. This must be confirmed technically before publishing.','All copy is a draft, including es and en.','Group calls, captions and summaries are new features, not in the build (GAP #37–39).','No participant cap on the site until it’s decided (#37); Notify me when there’s room is a proposal.','“Call is full” uses a different group (“Class 3B parents”): the neighbors’ group only has four people.','Person colors in the call and the red Leave button.'],
+  ct:['Text on tile and live line','Lucía on surface','Pedro on background','Olga on background','You on background','Earlier lines','Secondary on surface','Secondary on background','Icon on Leave','Missed call','Summary, Mint tag','Text on accent button','Initial on Lucía’s avatar']}}
+};
+
+var qs=(new URLSearchParams(location.search).get('l')||'').toLowerCase();var LG=T[qs]?qs:'ru';var D=T[LG];
+function nb(s){return String(s).replace(/(^|[\s>(«])([вкусоияаВКУСОИЯА]|во|ко|со|из|на|от|по|до|за|не|но|же|то|об|Да|и)\s(?=[^\s<])/g,'$1$2 ').replace(/(^|[^А-Яа-яЁё])по-(?=[а-яё])/g,'$1по‑').replace(/(\d) (мин|min)/g,'$1 $2')}
+
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function scr(inner,extra){return '<div class="scr chat-groupcall-scr">'+sbar+inner+home+(extra||'')+'</div>'}
+function btn(cls,label,inner){return '<span class="'+cls+'" role="button" aria-label="'+label+'">'+inner+'</span>'}
+function wv(n){var h=[6,12,14,9,13],s='';for(var i=0;i<n;i++)s+='<b style="height:'+h[i%h.length]+'px"></b>';return '<span class="chat-groupcall-wv" aria-hidden="true">'+s+'</span>'}
+function code(l){return l.toUpperCase()}
+
+function top(){return '<div class="chat-groupcall-top">'+btn('chat-groupcall-ib',D.aMin,I.down)+'<div class="chat-groupcall-tt"><b>'+D.gname+'</b><span><i></i>'+D.timer+' · ES · EN · RU</span></div>'+btn('chat-groupcall-ib',D.aAdd,I.addp)+'</div>'+
+ '<div class="chat-groupcall-nt" role="status">'+I.doc+D.nt+'</div>'}
+function tile(k,o){
+ o=o||{};var me=k==='Y';var c=me?'#2BC48A':PPL[k].c;var nm=me?D.you:D.nm[k];var lg=me?D.me:code(PPL[k].lang);
+ var st=o.sp?'<span class="chat-groupcall-ts sp">'+wv(4)+D.spk+'</span>':(o.mu?'<span class="chat-groupcall-ts">'+D.muted+'</span>':'<span class="chat-groupcall-ts"></span>');
+ return '<div class="chat-groupcall-tile'+(o.sp?' sp':'')+'" style="--c:'+c+'">'+(o.mu?'<span class="chat-groupcall-mk">'+I.micoff+'</span>':'')+
+  '<span class="chat-groupcall-av" aria-hidden="true">'+(me?I.me:nm.charAt(0))+'</span><span class="chat-groupcall-tn">'+nm+'<em>'+lg+'</em></span>'+st+'</div>';
+}
+function line(key,o){
+ o=o||{};var L=LN[key],p=PPL[L.who],same=p.lang===D.lang;var tr=same?{t:L.orig}:L.tr[D.lang];
+ if(o.live&&same&&key==='O1')tr={t:'Да, занесу ключ',a:' в'+N+'четверг вечером.'};
+ var txt=tr.t+(tr.a?(o.live?'<em>'+tr.a+'</em><span class="chat-groupcall-dots" aria-hidden="true"><i></i><i></i><i></i></span>':tr.a):'');
+ var head='<div class="chat-groupcall-wh">'+D.nm[L.who]+'<em>'+code(p.lang)+'</em><span class="fr">'+(same?D.orig:D.from[p.lang])+'</span>'+(o.live?'<span class="lv"><i></i>'+D.live+'</span>':'')+'</div>';
+ var og=(o.live&&!same)?'<div class="chat-groupcall-og" lang="'+p.lang+'">'+I.fold+'<span>'+L.orig+'</span></div>':'';
+ return '<div class="chat-groupcall-ln'+(o.live?' live':'')+'" style="--c:'+p.c+'">'+head+'<div class="chat-groupcall-tx" lang="'+D.lang+'">'+txt+'</div>'+og+'</div>';
+}
+function ctl(){
+ return '<div class="chat-groupcall-ctl">'+
+  '<span class="chat-groupcall-c" role="button" aria-pressed="false"><span class="b">'+I.mic+'</span><span class="l">'+D.ctl[0]+'</span></span>'+
+  '<span class="chat-groupcall-c" role="button" aria-pressed="false"><span class="b">'+I.spk+'</span><span class="l">'+D.ctl[1]+'</span></span>'+
+  '<span class="chat-groupcall-c on" role="button" aria-pressed="true"><span class="b">'+I.cc+'</span><span class="l">'+D.ctl[2]+'</span></span>'+
+  '<span class="chat-groupcall-c end" role="button"><span class="b">'+I.end+'</span><span class="l">'+D.ctl[3]+'</span></span></div>';
+}
+function feed(x){return '<div class="chat-groupcall-feed" aria-live="polite">'+x+'</div>'}
+
+var S={};
+S['group-call']=function(){
+ var h=D.hero,sp=LN[h[2]].who;
+ var tiles=['L','P','O','Y'].map(function(k){return tile(k,{sp:k===sp,mu:k==='O'})}).join('');
+ return scr(top()+'<div class="chat-groupcall-tiles">'+tiles+'</div>'+feed(line(h[0])+line(h[1])+line(h[2],{live:1}))+ctl());
+};
+S.left=function(){
+ var h=D.left;
+ var tiles=['L','O','Y'].map(function(k){return tile(k,{sp:k==='O'})}).join('');
+ return scr(top()+'<div class="chat-groupcall-tiles t3">'+tiles+'</div>'+feed(line('L1')+line('P1')+line(h[0])+'<div class="chat-groupcall-sys" role="status">'+I.leave+D.leftSys+'</div>'+line(h[1],{live:1}))+ctl());
+};
+S.full=function(){
+ return scr('<div class="chat-groupcall-top">'+btn('chat-groupcall-ib',D.aBack,I.back)+'<span style="flex:1"></span></div>'+
+  '<div class="chat-groupcall-mid"><div class="chat-groupcall-stk" aria-hidden="true"><span style="--c:#6AA6F5">L</span><span style="--c:#C3A6F7">P</span><span style="--c:#E8A0BF">O</span><span class="more">'+I.users+'</span></div>'+
+  '<div class="chat-groupcall-pl"><i></i>'+D.fullPill+'</div><h4>'+D.fullT+'</h4><p>'+D.fullS+'</p></div>'+
+  '<div class="chat-groupcall-act"><span class="chat-groupcall-btn p" role="button">'+I.bell+D.notify+'</span><span class="chat-groupcall-btn s" role="button">'+I.chat+D.writeG+'</span><p class="chat-groupcall-btnn">'+D.writeN+'</p><span class="chat-groupcall-btn t" role="button">'+D.close+'</span></div>');
+};
+S.minutes=function(){
+ var r=D.reply,p=PPL[r.who],same=p.lang===D.lang;
+ var nav='<div class="chat-groupcall-nav">'+btn('chat-groupcall-ib ac',D.aBack,I.back)+'<span class="chat-groupcall-gav" aria-hidden="true">'+I.house+'</span><div class="chat-groupcall-nm" role="button"><b>'+D.gname+'</b><span>'+D.gsub+'</span></div>'+btn('chat-groupcall-ib ac',D.aNew,I.phone)+'</div>';
+ var card='<div class="chat-groupcall-min"><div class="chat-groupcall-mh"><span class="chat-groupcall-mi">'+I.doc+'</span><div><b>'+D.minT+'</b><span>'+D.minS+'</span></div></div>'+
+  '<div class="chat-groupcall-pp"><span class="s" aria-hidden="true"><i style="--c:#6AA6F5">L</i><i style="--c:#C3A6F7">P</i><i style="--c:#E8A0BF">O</i><i style="--c:#2BC48A">'+I.me+'</i></span>'+D.minP+'</div>'+
+  '<ul class="chat-groupcall-ul">'+D.minL.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+
+  '<div class="chat-groupcall-mn">'+I.cc2+D.minN+'</div>'+
+  '<div class="chat-groupcall-ma"><span class="sh" role="button">'+D.minMore+I.expand+'</span>'+btn('chat-groupcall-ib',D.aMore,I.more)+'</div></div>';
+ var msg='<div class="chat-groupcall-r" style="--c:'+p.c+'"><span class="chat-groupcall-ra" aria-hidden="true">'+D.nm[r.who].charAt(0)+'</span><div class="chat-groupcall-m"><span class="w">'+D.nm[r.who]+'</span>'+(same?r.orig:r.t)+
+  '<div class="chat-groupcall-mf'+(same?' or':'')+'"><em>'+code(p.lang)+'</em>'+(same?D.orig:D.from[p.lang])+'<span class="tm">'+r.tm+'</span></div></div></div>';
+ var cmp='<div class="chat-groupcall-cmp"><div class="chat-groupcall-crow">'+btn('chat-groupcall-pls',D.aPlus,I.plus)+'<span class="chat-groupcall-f">'+D.ph+'</span>'+btn('chat-groupcall-go',D.aMic,I.mic)+'</div></div>';
+ return scr(nav+'<div class="chat-groupcall-msgs"><span class="chat-groupcall-day">'+D.today+'</span><span class="chat-groupcall-cl">'+I.phone+D.callRow+'</span>'+card+msg+'</div>'+cmp);
+};
+S.history=function(){
+ var hd='<div class="chat-groupcall-hd"><h3>'+D.hT+'</h3>'+btn('chat-groupcall-ib ac',D.aNew,I.newcall)+'</div>';
+ var seg='<div class="chat-groupcall-seg" role="tablist"><span class="on" role="tab" aria-selected="true">'+D.seg[0]+'</span><span role="tab" aria-selected="false">'+D.seg[1]+'</span></div>';
+ var out='';[0,1,2].forEach(function(d){
+  out+='<div class="chat-groupcall-sh">'+D.days[d]+'</div><div class="chat-groupcall-lst">';
+  D.hr.filter(function(r){return r.d===d}).forEach(function(r){
+   var av=r.g?'<span class="a g" aria-hidden="true">'+(r.g===1?I.house:I.users)+'</span>':'<span class="a" style="--c:'+PPL[r.p].c+'" aria-hidden="true">'+D.nm[r.p].charAt(0)+'</span>';
+   var nm=r.g?r.n:D.nm[r.p];
+   out+='<div class="chat-groupcall-row'+(r.k==='miss'?' ms':'')+'" role="button">'+av+'<div class="t"><b>'+nm+'</b><span>'+I[r.k]+r.s+(r.m?'<em>'+I.doc+D.minChip+'</em>':'')+'</span></div><span class="tm">'+r.tm+'</span>'+btn('chat-groupcall-ib',D.aInfo,I.info)+'</div>';
+  });out+='</div>';});
+ var tb='<div class="chat-groupcall-tb"><div class="chat-groupcall-tbi"><div class="chat-groupcall-tab">'+I.chats+D.tabs[0]+'</div><div class="chat-groupcall-tab on">'+I.phone+D.tabs[1]+'</div><div class="chat-groupcall-tab">'+I.gear+D.tabs[2]+'</div></div>'+home+'</div>';
+ return '<div class="scr chat-groupcall-scr">'+sbar+hd+seg+'<div class="chat-groupcall-hl">'+out+'</div>'+tb+'</div>';
+};
+
+var order=['group-call','left','full','minutes','history'];
+var P=D.P;
+document.documentElement.lang=D.lang;document.title=P.title;
+function $(id){return document.getElementById(id)}
+$('chat-groupcall-lsw').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" lang="'+k+'"'+(k===LG?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+$('chat-groupcall-eb').innerHTML=P.eb;$('chat-groupcall-h1').innerHTML=nb(P.h1);$('chat-groupcall-p1').innerHTML=nb(P.p1);
+$('chat-groupcall-ul').innerHTML=P.ul.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-groupcall-capb').innerHTML=P.capb;$('chat-groupcall-caps').innerHTML=nb(P.caps);
+$('chat-groupcall-h2s').innerHTML=P.h2s;$('chat-groupcall-lead').innerHTML=P.lead;$('chat-groupcall-h2d').innerHTML=P.h2d;
+$('chat-groupcall-hdec').innerHTML=P.hdec;$('chat-groupcall-htok').innerHTML=P.htok;$('chat-groupcall-hna').innerHTML=P.hna;
+$('chat-groupcall-dec').innerHTML=P.dec.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-groupcall-tok').innerHTML=P.tok.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-groupcall-na').innerHTML=P.na.map(function(x){return '<li>'+nb(x)+'</li>'}).join('');
+$('chat-groupcall-grid').innerHTML=order.map(function(k){return '<div class="chat-groupcall-card"><div class="pf p67" style="--s:.6" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><h3>'+P.st[k][0]+' <code>'+k+'</code></h3><p>'+nb(P.st[k][1])+'</p></div>'}).join('');
+document.querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=nb(S[p.dataset.state]())});
+window.CHAT_GROUPCALL={S:S,order:order,lang:LG};
+
+function Lm(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lm(a),y=Lm(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+var pairs=[['#F2F5F7','#1A222B'],['#6AA6F5','#1C2026'],['#C3A6F7','#0E1116'],['#E8A0BF','#0E1116'],['#2BC48A','#0E1116'],['#C9D1DA','#0E1116'],['#9AA4B2','#1C2026'],['#9AA4B2','#0E1116'],['#0E1116','#FF6B5E'],['#FF6B5E','#1C2026'],['#BFF2DC','#1C2026'],['#0E1116','#2BC48A'],['#0E1116','#6AA6F5']];
+var rows=pairs.map(function(p,i){return [p[0],p[1],P.ct[i]]});
+$('chat-groupcall-ct').innerHTML=rows.map(function(r){return '<tr><td><span class="chat-groupcall-sw" style="background:'+r[0]+'"></span><span class="chat-groupcall-sw" style="background:'+r[1]+'"></span>'+r[2]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_GROUPCALL.min=Math.min.apply(null,rows.map(function(r){return cr(r[0],r[1])}));
+document.body.dataset.ready='1';
+})();
+</script>
+</body>
+</html>
