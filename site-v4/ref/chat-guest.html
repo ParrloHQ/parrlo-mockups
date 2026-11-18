@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrlo Chat · гость по QR</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../frame.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0B0E12;color:#F2F5F7;font:400 16px/1.5 Inter,system-ui,sans-serif;padding:24px 16px 80px}
+.chat-guest-w{max-width:1200px;margin:0 auto}
+.chat-guest-lsw{display:flex;justify-content:flex-end;gap:4px;margin:0 0 24px}
+.chat-guest-lsw a{min-width:48px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font:700 14px/1 Inter;letter-spacing:.06em;color:#9AA4B2;text-decoration:none;padding:0 12px}
+.chat-guest-lsw a[aria-current="true"]{background:#1C2026;color:#F2F5F7;box-shadow:inset 0 0 0 1px #2F3742}
+.chat-guest-hero{display:flex;flex-direction:column;align-items:center;gap:40px}
+.chat-guest-pairw{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:24px 28px}
+.chat-guest-ph{display:flex;flex-direction:column;align-items:center}
+.chat-guest-tag{margin-top:14px;display:flex;align-items:center;gap:8px;font:600 14px/20px Inter;color:#C9D1DA}
+.chat-guest-tag i{width:8px;height:8px;border-radius:50%;background:#2BC48A}
+.chat-guest-tag.g i{background:#BFF2DC}
+.chat-guest-info{max-width:760px;width:100%}
+.chat-guest-eb{font:600 13px/1.4 Inter;letter-spacing:.08em;text-transform:uppercase;color:#2BC48A;margin:0 0 8px}
+.chat-guest-info h1{font:900 40px/1.1 Nunito,sans-serif;margin:0 0 12px}
+.chat-guest-info p{color:#9AA4B2;margin:0 0 16px;font-size:16px}
+.chat-guest-info ul,.chat-guest-sec ul{margin:0;padding-left:20px;color:#C9D1DA;font-size:15px}
+.chat-guest-info li,.chat-guest-sec li{margin:6px 0}
+.chat-guest-w code{font:13px ui-monospace,Menlo,monospace;background:#1C2026;padding:1px 5px;border-radius:5px;color:#F2F5F7;overflow-wrap:anywhere}
+.chat-guest-h2{font:900 28px/1.2 Nunito,sans-serif;margin:72px 0 8px}
+.chat-guest-lead{color:#9AA4B2;margin:0 0 32px;max-width:720px}
+.chat-guest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:40px 24px;justify-items:center;align-items:end}
+.chat-guest-card{width:280px;display:flex;flex-direction:column;align-items:flex-start}
+.chat-guest-card .pf{align-self:center}
+.chat-guest-card h3{font:900 19px/1.3 Nunito,sans-serif;margin:16px 0 4px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.chat-guest-card h3 code{font-size:12px;color:#9AA4B2}
+.chat-guest-card p{margin:0;color:#9AA4B2;font-size:14px;line-height:1.45;min-height:61px}
+.chat-guest-who{font:600 12px/16px Inter;letter-spacing:.06em;text-transform:uppercase;color:#9AA4B2;margin-top:12px;display:flex;align-items:center;gap:6px}
+.chat-guest-who i{width:7px;height:7px;border-radius:50%;background:#2BC48A}.chat-guest-who.g i{background:#BFF2DC}
+.chat-guest-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px 40px}
+.chat-guest-sec h2{font:900 22px/1.3 Nunito,sans-serif;margin:0 0 8px}
+.chat-guest-sec b{color:#F2F5F7;font-weight:600}
+.chat-guest-ct{width:100%;border-collapse:collapse;font-size:14px;color:#C9D1DA}
+.chat-guest-ct td{padding:6px 8px 6px 0;border-bottom:1px solid #2F3742;vertical-align:top}
+.chat-guest-ct td:last-child{text-align:right;white-space:nowrap;color:#2BC48A;font-weight:600}
+.chat-guest-sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.chat-guest-t05{margin-top:40px;border-radius:20px;background:#14181D;box-shadow:inset 0 0 0 1px #2F3742;padding:20px 24px;color:#C9D1DA;font-size:15px}
+.chat-guest-t05 b{color:#F2F5F7}
+.chat-guest-t05 .mk{display:inline-block;font:700 11px/18px Inter;letter-spacing:.06em;text-transform:uppercase;color:#0E1116;background:#BFF2DC;border-radius:6px;padding:0 6px;margin-right:8px;vertical-align:1px}
+@media (max-width:900px){.chat-guest-hero .pf{--s:.62!important}}
+@media (max-width:480px){.chat-guest-hero .pf{--s:.76!important}.chat-guest-info h1{font-size:32px}.chat-guest-cols{grid-template-columns:1fr}}
+/* съёмка пары 860×932 */
+.chat-guest-shot{width:860px;height:932px;display:flex;align-items:flex-end;justify-content:space-between}
+
+/* ======= экраны ======= */
+.chat-guest-scr{overflow:hidden;--err:#FF6B5E}
+.chat-guest-scr svg{display:block}
+.chat-guest-ib{width:44px;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;color:var(--tx);flex:none}
+.chat-guest-ib svg{width:24px;height:24px}
+.chat-guest-ib.bk{color:var(--acc)}.chat-guest-ib.bk svg{width:28px;height:28px}
+/* верхняя строка экрана QR */
+.chat-guest-top{flex:none;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
+.chat-guest-top h4{margin:0;font:600 17px/22px Inter}
+/* QR */
+.chat-guest-qrw{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;padding:12px 28px 0;text-align:center}
+.chat-guest-qrc{width:300px;height:300px;border-radius:32px;background:#FFFFFF;padding:22px;box-shadow:0 0 0 8px rgba(43,196,138,.10),0 24px 60px -20px rgba(43,196,138,.35);flex:none}
+.chat-guest-qrc svg{width:256px;height:256px}
+.chat-guest-qrw h5{margin:28px 0 8px;font:900 28px/34px Nunito,sans-serif}
+.chat-guest-qrw p{margin:0;font-size:16px;line-height:23px;color:var(--sec);max-width:350px}
+.chat-guest-stt{margin-top:20px;height:36px;border-radius:18px;display:flex;align-items:center;gap:8px;padding:0 16px 0 14px;font:600 14px/1 Inter;background:var(--sf);color:var(--sec);box-shadow:inset 0 0 0 1px var(--line)}
+.chat-guest-stt i{width:8px;height:8px;border-radius:50%;background:var(--sec);box-shadow:0 0 0 4px rgba(154,164,178,.16)}
+.chat-guest-stt.on{color:var(--mint);background:rgba(191,242,220,.10);box-shadow:inset 0 0 0 1px rgba(191,242,220,.28)}
+.chat-guest-stt.on i{background:var(--mint);box-shadow:0 0 0 4px rgba(191,242,220,.18)}
+.chat-guest-stt svg{width:16px;height:16px}
+.chat-guest-lnk{flex:none;margin:0 24px 16px;height:56px;border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;gap:10px;padding:0 6px 0 16px}
+.chat-guest-lnk svg{width:20px;height:20px;color:var(--sec);flex:none}
+.chat-guest-lnk span{flex:1;min-width:0;font:500 15px/20px Inter;color:#C9D1DA;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-guest-lnk b{height:44px;border-radius:14px;display:flex;align-items:center;padding:0 14px;font:600 15px/1 Inter;color:var(--acc);flex:none}
+.chat-guest-act{flex:none;display:flex;flex-direction:column;gap:8px;padding:0 24px 8px}
+.chat-guest-btn{height:56px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:10px;font:900 19px/1 Nunito,sans-serif;padding:0 20px;text-align:center}
+.chat-guest-btn svg{width:22px;height:22px;flex:none}
+.chat-guest-btn.p{background:var(--acc);color:var(--onacc)}
+.chat-guest-btn.s{background:var(--sf2);color:var(--tx)}
+.chat-guest-btn.t{height:44px;font:600 16px/1 Inter;color:var(--sec)}
+
+/* браузер гостя */
+.chat-guest-url{flex:none;height:52px;display:flex;align-items:center;gap:4px;padding:0 6px 8px 16px;border-bottom:1px solid var(--line);background:#14181D}
+.chat-guest-url>span:first-child{flex:1;height:40px;border-radius:12px;background:var(--sf);display:flex;align-items:center;justify-content:center;font:500 15px/1 Inter;color:var(--tx);letter-spacing:.005em}
+.chat-guest-url>span:first-child em{font-style:normal;color:var(--sec)}
+.chat-guest-url .chat-guest-ib{color:var(--sec)}
+.chat-guest-url .chat-guest-ib svg{width:20px;height:20px}
+.chat-guest-brand{display:flex;align-items:center;gap:8px;font:900 20px/1 Nunito,sans-serif;color:var(--tx)}
+.chat-guest-brand svg{width:26px;height:26px;color:var(--acc)}
+/* вход гостя */
+.chat-guest-join{flex:1;min-height:0;display:flex;flex-direction:column;padding:20px 20px 0}
+.chat-guest-hi{display:flex;align-items:center;gap:12px;margin:20px 0 0}
+.chat-guest-hi .av{position:relative;width:52px;height:52px;border-radius:50%;color:#0E1116;font:900 22px/52px Nunito,Inter;text-align:center;flex:none}
+.chat-guest-hi .av i{position:absolute;right:-2px;bottom:-2px;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px var(--bg)}
+.chat-guest-join h5{margin:0;font:900 26px/31px Nunito,sans-serif}
+.chat-guest-join>p{margin:10px 0 0;font-size:16px;line-height:22px;color:var(--sec)}
+.chat-guest-lb{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 8px;font:600 14px/18px Inter;color:var(--tx)}
+.chat-guest-lb em{font-style:normal;font-weight:500;color:var(--sec)}
+.chat-guest-lst{border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.chat-guest-opt{height:50px;display:flex;align-items:center;gap:12px;padding:0 16px;border-top:1px solid var(--line);font-size:16px}
+.chat-guest-opt:first-child{border-top:0}
+.chat-guest-opt .nm{flex:1;min-width:0}
+.chat-guest-opt .nm small{font-size:13px;color:var(--sec);margin-left:6px}
+.chat-guest-opt .rd{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px #3A414B;flex:none;display:flex;align-items:center;justify-content:center}
+.chat-guest-opt.on{background:rgba(43,196,138,.10)}
+.chat-guest-opt.on .rd{background:var(--acc);box-shadow:none;color:var(--onacc)}
+.chat-guest-opt.on .rd svg{width:14px;height:14px}
+.chat-guest-opt .chv{width:18px;height:18px;color:var(--sec)}
+.chat-guest-fld{height:50px;border-radius:16px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;padding:0 16px;font-size:16px}
+.chat-guest-fld .car{display:inline-block;width:2px;height:20px;background:var(--acc);vertical-align:-4px;margin-left:1px;border-radius:1px}
+.chat-guest-join .chat-guest-btn{margin-top:auto}
+.chat-guest-fine{margin:10px 8px 6px;text-align:center;font-size:12px;line-height:17px;color:var(--sec)}
+.chat-guest-fine u{text-decoration:underline;text-underline-offset:2px;color:#C9D1DA}
+
+/* переписка (общая для меня и гостя) */
+.chat-guest-nav{flex:none;display:flex;align-items:center;gap:8px;height:60px;padding:0 8px 0 4px;border-bottom:1px solid var(--line)}
+.chat-guest-nav.web{padding-left:16px}
+.chat-guest-av{position:relative;width:40px;height:40px;border-radius:50%;color:#0E1116;font:800 17px/40px Nunito,Inter;text-align:center;flex:none}
+.chat-guest-av i{position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 2.5px var(--bg)}
+.chat-guest-nm{flex:1;min-width:0;padding-left:4px}
+.chat-guest-nm b{display:block;font:600 17px/22px Inter}
+.chat-guest-nm span{display:flex;align-items:center;gap:4px;font-size:13px;line-height:18px;color:var(--sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-guest-nm span svg{width:14px;height:14px;flex:none}
+.chat-guest-lc{flex:none;height:44px;display:flex;align-items:center}
+.chat-guest-lc span{height:32px;border-radius:16px;background:var(--sf2);display:flex;align-items:center;gap:6px;padding:0 12px;font:700 13px/1 Inter;letter-spacing:.04em;color:var(--tx)}
+.chat-guest-lc svg{width:14px;height:14px;color:var(--sec)}
+.chat-guest-msgs{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:12px 16px}
+.chat-guest-sys{align-self:center;display:flex;align-items:center;gap:6px;font:500 12px/16px Inter;color:var(--sec);background:var(--sf);padding:6px 12px;border-radius:14px;margin-bottom:4px;text-align:center}
+.chat-guest-sys svg{width:14px;height:14px;flex:none;color:var(--mint)}
+.chat-guest-m{position:relative;max-width:82%;border-radius:20px;padding:8px 12px 6px;font-size:16px;line-height:22px}
+.chat-guest-m.in{align-self:flex-start;background:var(--sf2);border-bottom-left-radius:6px}
+.chat-guest-m.out{align-self:flex-end;background:var(--deep);color:#fff;border-bottom-right-radius:6px}
+.chat-guest-m.gap{margin-top:4px}
+.chat-guest-t{display:flex;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid rgba(154,164,178,.28);font-size:15px;line-height:20px}
+.chat-guest-t svg{flex:none;width:16px;height:16px;margin-top:2px}
+.chat-guest-m.in .chat-guest-t{color:var(--mint)}
+.chat-guest-m.out .chat-guest-t{color:#fff;border-top-color:rgba(255,255,255,.3)}
+.chat-guest-tm{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:12px;line-height:16px;margin-top:2px}
+.chat-guest-m.in .chat-guest-tm{color:var(--sec)}
+.chat-guest-tm svg{width:16px;height:16px}
+.chat-guest-cmp{flex:none;border-top:1px solid var(--line);padding:8px 12px 0;background:var(--bg)}
+.chat-guest-row{display:flex;align-items:flex-end;gap:8px}
+.chat-guest-pls{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--sec);flex:none}
+.chat-guest-pls svg{width:26px;height:26px}
+.chat-guest-f{flex:1;min-width:0;min-height:44px;border-radius:22px;background:var(--sf);border:1px solid var(--line);display:flex;align-items:center;padding:10px 16px;font-size:17px;line-height:22px;color:var(--sec);white-space:nowrap;overflow:hidden}
+.chat-guest-cmp.web .chat-guest-f{margin-left:4px}
+.chat-guest-go{width:44px;height:44px;border-radius:50%;background:var(--acc);color:var(--onacc);display:flex;align-items:center;justify-content:center;flex:none}
+.chat-guest-go svg{width:22px;height:22px}
+.chat-guest-cmp.web{padding-bottom:4px}
+/* «остаться на связи» у гостя */
+.chat-guest-stay{flex:none;display:flex;align-items:center;gap:10px;margin:10px 16px 0;padding:6px 6px 6px 14px;border-radius:16px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);font-size:14px;line-height:19px;color:#C9D1DA}
+.chat-guest-stay>svg{width:22px;height:22px;color:var(--acc);flex:none}
+.chat-guest-stay span{flex:1;min-width:0}
+.chat-guest-stay b{height:44px;border-radius:12px;background:var(--sf2);display:flex;align-items:center;padding:0 12px;font:800 14px/1 Nunito,Inter;color:var(--tx);flex:none;white-space:nowrap}
+
+/* ссылка недействительна */
+.chat-guest-mid{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28px;text-align:center}
+.chat-guest-mid img{width:148px;height:148px}
+.chat-guest-mid h5{margin:16px 0 8px;font:900 28px/34px Nunito,sans-serif}
+.chat-guest-mid p{margin:0;color:var(--sec);font-size:16px;line-height:23px;max-width:330px}
+.chat-guest-tip{margin-top:24px;width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;padding:14px 16px;border-radius:18px;background:var(--sf);box-shadow:inset 0 0 0 1px var(--line);font-size:15px;line-height:21px;color:#C9D1DA}
+.chat-guest-tip svg{flex:none;width:22px;height:22px;color:var(--mint);margin-top:0}
+.chat-guest-tip b{color:var(--tx);font-weight:600}
+.chat-guest-code{margin-top:14px;font:500 13px/18px Inter;color:var(--sec)}
+</style>
+</head>
+<body>
+<div class="chat-guest-w">
+<nav class="chat-guest-lsw" id="chat-guest-lsw" aria-label="Language"></nav>
+
+<section class="chat-guest-hero">
+ <div class="chat-guest-pairw">
+  <div class="chat-guest-ph"><div class="pf p67" style="--s:.82" data-state="host"><div class="shell"></div><div class="glass"></div></div><div class="chat-guest-tag"><i></i><span id="chat-guest-tagm"></span></div></div>
+  <div class="chat-guest-ph"><div class="pf" style="--s:.82" data-state="talk"><div class="shell"></div><div class="glass"></div></div><div class="chat-guest-tag g"><i></i><span id="chat-guest-tagg"></span></div></div>
+ </div>
+ <div class="chat-guest-info">
+  <div class="pcap" style="max-width:none;margin:0 0 28px"><span class="dot"></span><div><b id="chat-guest-capb"></b><span id="chat-guest-caps"></span></div></div>
+  <p class="chat-guest-eb" id="chat-guest-eb"></p>
+  <h1 id="chat-guest-h1"></h1>
+  <p id="chat-guest-p1"></p>
+  <ul id="chat-guest-ul"></ul>
+ </div>
+</section>
+
+<h2 class="chat-guest-h2" id="chat-guest-h2s"></h2>
+<p class="chat-guest-lead" id="chat-guest-lead"></p>
+<div class="chat-guest-grid" id="chat-guest-grid"></div>
+<div class="chat-guest-t05" id="chat-guest-t05"></div>
+
+<h2 class="chat-guest-h2" id="chat-guest-h2d"></h2>
+<div class="chat-guest-cols">
+ <div class="chat-guest-sec"><h2 id="chat-guest-hdec"></h2><ul id="chat-guest-dec"></ul></div>
+ <div class="chat-guest-sec"><h2 id="chat-guest-htok"></h2>
+  <table class="chat-guest-ct" id="chat-guest-ct"></table>
+  <ul style="margin-top:12px" id="chat-guest-tok"></ul></div>
+ <div class="chat-guest-sec"><h2 id="chat-guest-hna"></h2><ul id="chat-guest-na"></ul></div>
+</div>
+</div>
+
+<script>
+(function(){
+var SW='fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+function ic(p,extra){return '<svg viewBox="0 0 24 24" '+(extra||SW)+' aria-hidden="true">'+p+'</svg>'}
+var I={
+ back:ic('<path d="M15 5l-7 7 7 7"/>'),
+ x:ic('<path d="M6 6l12 12M18 6L6 18"/>'),
+ more:ic('<circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/>','fill="currentColor" aria-hidden="true"'),
+ tr:ic('<path d="M3 5h9M7.5 3v2M5 5c.5 3 2.5 6 6 7.5M10 5c-.8 3.5-3 6.5-6.5 8"/><path d="M12.5 21l4-10 4 10M14 17.5h5"/>'),
+ arr:ic('<path d="M5 12h14M14 7l5 5-5 5"/>'),
+ done:ic('<path d="M2.5 12.5l4 4 8-9"/><path d="M11 15.5l1.5 1.5 9-10"/>'),
+ chk:ic('<path d="M5 12.5l4.5 4.5L19 7.5"/>','fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"'),
+ mic:ic('<rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5v3"/>'),
+ plus:ic('<path d="M12 5v14M5 12h14"/>'),
+ link:ic('<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4L11.8 5.8"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4l1.4-1.4"/>'),
+ share:ic('<path d="M12 15V3.5M7.5 8l4.5-4.5L16.5 8"/><path d="M8 11.5H6.5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H16"/>'),
+ reload:ic('<path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4.5h-4.5"/>'),
+ globe:ic('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>'),
+ chev:ic('<path d="M9 5l7 7-7 7"/>'),
+ qr:ic('<rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.5"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.5"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1.5"/><path d="M14 14h2.5v2.5H14zM18 18h2.5v2.5H18zM14 20.5h.01M20.5 14h.01"/>'),
+ dl:ic('<path d="M12 3.5V15M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 16.5v2a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-2"/>')
+};
+/* знак Parrlo (screens.js, ключ spark) */
+var PN=0;function parrot(){var id='chat-guest-pmk'+(PN++);return '<svg viewBox="180 140 735 840" fill="currentColor" aria-hidden="true"><defs><mask id="'+id+'" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024"><rect width="1024" height="1024" fill="#fff"/><circle cx="612" cy="372" r="44" fill="#000"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#000" stroke="#000" stroke-width="28" stroke-linejoin="round"/></mask></defs><g mask="url(#'+id+')"><path d="M345 800 L 235 925 L 420 895 Z" stroke="currentColor" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z"/></svg>'}
+var M='../../brandbook/assets/mascot/';
+
+/* QR — узор-плейсхолдер, не настоящий код */
+function qrSvg(){
+ var N=29,seed=7,c=[],s='';
+ function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff}
+ function inF(x,y,ox,oy){return x>=ox&&x<ox+8&&y>=oy&&y<oy+8}
+ for(var y=0;y<N;y++)for(var x=0;x<N;x++){
+  var f=inF(x,y,0,0)||inF(x,y,N-8,0)||inF(x,y,0,N-8);
+  var mid=x>=10&&x<=18&&y>=10&&y<=18;
+  if(f||mid)continue;
+  var on=(y===6)?(x%2===0):(x===6)?(y%2===0):rnd()<.5;
+  if(on)s+='M'+x+' '+y+'h1v1h-1z';
+ }
+ function finder(ox,oy){return '<rect x="'+(ox+.5)+'" y="'+(oy+.5)+'" width="6" height="6" rx="1.6" fill="none" stroke="#0E1116" stroke-width="1"/><rect x="'+(ox+2)+'" y="'+(oy+2)+'" width="3" height="3" rx=".8" fill="#0E1116"/>'}
+ return '<svg viewBox="0 0 29 29" shape-rendering="crispEdges" role="img" aria-label="QR"><path d="'+s+'" fill="#0E1116"/>'+finder(0,0)+finder(N-7,0)+finder(0,N-7)+
+  '<g shape-rendering="geometricPrecision"><rect x="10.6" y="10.6" width="7.8" height="7.8" rx="2" fill="#00875C"/><svg x="11.7" y="11.6" width="5.6" height="5.8" viewBox="180 140 735 840" fill="#FFFFFF"><g><path d="M345 800 L 235 925 L 420 895 Z" stroke="#fff" stroke-width="70" stroke-linejoin="round"/><circle cx="500" cy="640" r="245"/><circle cx="560" cy="395" r="235"/></g><circle cx="612" cy="372" r="44" fill="#00875C"/><path d="M735 322 L 895 322 A160 160 0 0 1 735 482 Z" fill="#FFC247"/></svg></g></svg>';
+}
+
+/* ===== словарь: экран и страница =====
+   h — я (хозяин чата, приложение Parrlo), g — гость (браузер), c — разговор (g: язык гостя, h: мой язык) */
+var GES={lang:'es',url:'talk.parrlo.com',reload:'Recargar',
+ invite:function(n){return n+' te invita a hablar'},
+ joinP:function(n,l){return 'Escribe en tu idioma y '+n+' lo leerá en '+l+'. Sin registrarte y sin instalar nada.'},
+ q:'¿En qué idioma escribes?',langs:[['Español','de tu navegador'],['English'],['Português'],['Otro idioma']],
+ nameL:'Tu nombre',opt:'opcional',start:'Empezar a hablar',
+ fine:'Al continuar, aceptas los <u>Términos</u> y la <u>Política de privacidad</u> de Parrlo.',
+ reads:function(l){return 'lee en '+l},
+ stay:function(n){return '¿Quieres seguir en contacto con '+n+'?'},stayB:'Instalar Parrlo',
+ sys:'Hoy',how:function(n,l){return 'Escribes en español · '+n+' lee en '+l},ph:'Mensaje en español',menu:'Menú',mic:'Grabar mensaje de voz',tr:'Traducción',
+ expT:'Este enlace ya no funciona',expP:'Puede que la conversación haya terminado o que el enlace se haya restablecido.',
+ tip:'<b>Pide que te muestren el código QR otra vez</b> y escanéalo con la cámara.',retry:'Recargar la página',what:'¿Qué es Parrlo?',code:'talk.parrlo.com · enlace no válido'};
+var GRU={lang:'ru',url:'talk.parrlo.com',reload:'Обновить',
+ invite:function(n){return n+' приглашает тебя поговорить'},
+ joinP:function(n,l){return 'Пиши на своём языке — '+n+' прочитает '+l+'. Без регистрации и установки.'},
+ q:'На каком языке пишешь?',langs:[['Русский','из браузера'],['English'],['Українська'],['Другой язык']],
+ nameL:'Твоё имя',opt:'необязательно',start:'Начать разговор',
+ fine:'Продолжая, ты принимаешь <u>Условия</u> и <u>Политику конфиденциальности</u> Parrlo.',
+ reads:function(l){return 'читает '+l},
+ stay:function(n){return 'Хочешь остаться на связи с '+n+'?'},stayB:'Установить Parrlo',
+ sys:'Сегодня',how:function(n,l){return 'Ты пишешь по-русски · '+n+' читает '+l},ph:'Сообщение по-русски',menu:'Меню',mic:'Записать голосовое',tr:'Перевод',
+ expT:'Ссылка больше не работает',expP:'Возможно, разговор уже завершён или ссылку сбросили.',
+ tip:'<b>Попроси показать QR-код ещё раз</b> и наведи на него камеру.',retry:'Обновить страницу',what:'Что такое Parrlo?',code:'talk.parrlo.com · ссылка недействительна'};
+
+var T={
+ru:{lang:'ru',hn:'Olga',hi:'O',hc:'#F2A65A',gn:'Pedro',gi:'P',gc:'#6AA6F5',G:GES,gL:'ES',hL:'RU',hLg:'ruso',hLh:'по-испански',
+ h:{close:'Закрыть',title:'Разговор по QR',qrH:'Покажи код собеседнику',qrP:'Наведёт камеру — и сразу напишет тебе из браузера. Ставить приложение не нужно.',
+  wait:'Ждём, когда откроют ссылку',opened:'Ссылку открыли — выбирают язык',copy:'Копировать',share:'Поделиться ссылкой',reset:'Сбросить ссылку',
+  back:'Назад',sub:'по QR · в браузере',pair:'Язык чата: испанский и русский',menu:'Меню чата',
+  sys:function(n){return n+' присоединился по QR-коду · 10:01'},ph:'Сообщение по-русски',mic:'Записать голосовое',tr:'Перевод'},
+ c:[{g:'Hola, soy Pedro, el fontanero. ¿Dónde está la fuga?',h:'Здравствуйте, я Pedro, сантехник. Где протечка?',tm:'10:02'},
+  {me:1,h:'Под раковиной на кухне. Проходите!',g:'Debajo del fregadero de la cocina. ¡Pase!',tm:'10:02'},
+  {g:'Vale. Primero tengo que cerrar el agua. ¿Dónde está la llave de paso?',h:'Хорошо. Сначала нужно перекрыть воду. Где вентиль?',tm:'10:03'},
+  {me:1,h:'В ванной, за дверцей справа.',g:'En el baño, detrás de la puertita de la derecha.',tm:'10:04'},
+  {g:'Perfecto. En unos veinte minutos queda arreglado.',h:'Отлично. Минут через двадцать всё будет готово.',tm:'10:05'}],
+ P:{title:'Parrlo Chat · гость по QR',eb:'Эталон · chat-guest · C-04 · только тёмная тема',
+  h1:'Собеседнику не нужно приложение',
+  p1:'Мастер у двери говорит по-испански. Olga показывает QR-код, Pedro наводит камеру — и пишет из браузера на talk.parrlo.com. Каждый читает на своём языке. Кадры — по коду гостевой страницы, которая уже есть.',
+  ul:['<b>Пара кадров</b>: слева мой iPhone с Parrlo, справа телефон гостя в браузере. Это один и тот же разговор.','<b>Гость выбирает язык сам</b>: язык браузера предложен первым, имя — по желанию. Без регистрации.','<b>Интерфейс гостя — на его языке</b>: Pedro видит страницу по-испански, Olga — приложение по-русски.','<b>Ссылку можно сбросить</b>: старая перестаёт работать, гость видит понятный экран и что делать дальше.'],
+  tagm:'Мой iPhone · Parrlo',tagg:'Телефон Pedro · браузер',
+  capb:'Parrlo Chat · разговор с гостем по QR',caps:'Главный кадр — пара: Olga в приложении и Pedro в браузере пишут друг другу, каждый на своём языке. Тексты — черновик.',
+  h2s:'Состояния',lead:'Путь гостя от QR до разговора и экран «ссылка не работает». PNG @3×: мой телефон — 1290×2796, телефон гостя — 1170×2532, пары — 2580×2796: <code>site-v4/ref/png/chat-guest--&lt;состояние&gt;--&lt;язык&gt;.png</code>.',
+  who:{h:'Мой iPhone',g:'Браузер гостя'},
+  h2d:'Решения, токены, открытые вопросы',hdec:'Решения сверх сборки',htok:'Токены и контраст',hna:'Не утверждено',
+  st:{qr:['QR на моём телефоне','Нажали «Разговор по QR»: крупный код, ссылка под ним, статус «Ждём, когда откроют ссылку».'],
+   join:['Гость выбирает язык','Pedro навёл камеру и открыл ссылку: язык браузера уже выбран, имя по желанию, кнопка «Empezar a hablar».'],
+   talk:['Разговор в браузере','Pedro пишет по-испански и читает Olga по-испански; под каждым сообщением видно перевод.'],
+   host:['У меня в Parrlo','Тот же разговор в приложении: Pedro — гость из браузера, его сообщения переведены на русский.'],
+   expired:['Ссылка не работает','Гость открыл старую или сброшенную ссылку: понятная причина и что сделать дальше.']},
+  open:'Пара «открыли ссылку»: <code>chat-guest--open--&lt;язык&gt;.png</code> — у меня статус сменился на «Ссылку открыли — выбирают язык», у гостя экран выбора языка.',
+  t05:'<span class="mk">макет</span><b>Translate · T-05 (скоро).</b> Тот же путь для разговора лицом к лицу: QR на телефоне → гость выбирает язык на talk.parrlo.com → разговор в виде Translate «Разговор» (цвет = сторона). Отдельных кадров в этой пачке нет: экран выбора языка и «ссылка не работает» переиспользуются как есть, отличается только вид разговора.',
+  dec:['<b>Статус под QR</b>: «Ждём, когда откроют ссылку» сменяется на «Ссылку открыли — выбирают язык» — видно, что гость уже на странице.','<b>Язык браузера — первым и уже выбран</b>, с подсказкой «de tu navegador»; остальное — одним касанием, «Otro idioma» ведёт к полному списку.','<b>Имя гостя по желанию</b>: без имени гость подписан «Гость».','<b>Пузыри гостя такие же, как в Parrlo</b>: оригинал сверху, перевод ниже с иконкой — гость сразу видит, что прочитает собеседник.','<b>«Остаться на связи»</b> у гостя — одна строка с кнопкой «Instalar Parrlo», без всплывающих окон.','<b>У меня гость отмечен</b> подписью «по QR · в браузере» и системной строкой о входе по QR.','<b>«Ссылка не работает» не тупик</b>: причина без кода ошибки, подсказка попросить QR ещё раз, обновить страницу.','<b>Адресная строка нейтральная</b>: только адрес и «Обновить», без замка и деталей конкретного браузера.'],
+  tok:['Фон <code>#0E1116</code>, поверхности <code>#1C2026</code>/<code>#242B34</code>, линии <code>#2F3742</code>; полоса браузера <code>#14181D</code>.','Мои сообщения — Deep Green <code>#00875C</code>, перевод входящих — Mint <code>#BFF2DC</code>. У гостя так же: его сообщения зелёные.','QR — <code>#0E1116</code> на белой карточке, в центре знак Parrlo на <code>#00875C</code>; жёлтый <code>#FFC247</code> — только клюв в знаке.','Кнопки 56 и 44 в высоту, иконки 44×44, строки языков 50.'],
+  na:['Все тексты — черновик, включая es и en (es на «tú», ru на «ты»).','Гостевая страница на проде выключена (<code>TALK_ENABLED=0</code>, GAP №8); кадры — по коду, нужна проверка пары «телефон + браузер гостя».','Вид ссылки <code>talk.parrlo.com/c/…</code> — условный.','Список языков у гостя и подсказка «из браузера» — предложение.','Строка «Остаться на связи» (GAP Chat №15): куда ведёт кнопка у гостя без App Store / Google Play.','Срок жизни ссылки и кто может её сбросить — не описаны; на экране без сроков и чисел.','Покрывает ли Политика данные гостя в браузере (GAP Translate, раздел про QR-гостя).','Translate T-05 — скоро, отдельных кадров нет.'],
+  ct:['Текст сообщений и заголовков','Перевод во входящих (Mint)','Текст в моём сообщении','Вторичный: подписи, время','Вторичный на поверхности','Подсказки на поверхности','Текст на акцентной кнопке','Ссылка «Копировать»','Модули QR на карточке']}},
+es:{lang:'es',hn:'Lucía',hi:'L',hc:'#6AA6F5',gn:'Olga',gi:'O',gc:'#F2A65A',G:GRU,gL:'RU',hL:'ES',hLg:'по-испански',hLh:'en ruso',
+ h:{close:'Cerrar',title:'Hablar por QR',qrH:'Muestra este código',qrP:'La otra persona lo escanea con la cámara y te escribe desde el navegador. No necesita instalar nada.',
+  wait:'Esperando a que abran el enlace',opened:'Enlace abierto: están eligiendo idioma',copy:'Copiar',share:'Compartir enlace',reset:'Restablecer enlace',
+  back:'Atrás',sub:'por QR · navegador',pair:'Idioma del chat: ruso y español',menu:'Menú del chat',
+  sys:function(n){return n+' se unió con el código QR · 10:01'},ph:'Mensaje en español',mic:'Grabar mensaje de voz',tr:'Traducción'},
+ c:[{g:'Здравствуйте, я Olga, сантехник. Где протечка?',h:'Hola, soy Olga, la fontanera. ¿Dónde está la fuga?',tm:'10:02'},
+  {me:1,h:'Debajo del fregadero de la cocina. ¡Pase!',g:'Под раковиной на кухне. Проходите!',tm:'10:02'},
+  {g:'Хорошо. Сначала нужно перекрыть воду. Где вентиль?',h:'Vale. Primero tengo que cortar el agua. ¿Dónde está la llave de paso?',tm:'10:03'},
+  {me:1,h:'En el baño, detrás de la puertita de la derecha.',g:'В ванной, за дверцей справа.',tm:'10:04'},
+  {g:'Отлично. Минут через двадцать всё будет готово.',h:'Perfecto. En unos veinte minutos lo tiene arreglado.',tm:'10:05'}],
+ P:{title:'Parrlo Chat · conversación por QR',eb:'Referencia · chat-guest · C-04 · solo tema oscuro',
+  h1:'La otra persona no necesita la app',
+  p1:'La fontanera que llama a la puerta habla ruso. Lucía le muestra un código QR, Olga lo escanea con la cámara y escribe desde el navegador en talk.parrlo.com. Cada una lee en su idioma. Los fotogramas siguen el código de la página para invitados, que ya existe.',
+  ul:['<b>Dos pantallas a la vez</b>: a la izquierda, mi iPhone con Parrlo; a la derecha, el móvil de la persona invitada, en el navegador. Es la misma conversación.','<b>La persona invitada elige su idioma</b>: primero aparece el de su navegador; el nombre es opcional. Sin registro.','<b>Cada una ve su interfaz en su idioma</b>: Olga ve la página en ruso y Lucía, la app en español.','<b>El enlace se puede restablecer</b>: el anterior deja de funcionar y la persona invitada ve una pantalla clara con qué hacer.'],
+  tagm:'Mi iPhone · Parrlo',tagg:'Móvil de Olga · navegador',
+  capb:'Parrlo Chat · conversación con alguien que entra por QR',caps:'Fotograma principal: Lucía en la app y Olga en el navegador se escriben, cada una en su idioma. Textos en borrador.',
+  h2s:'Estados',lead:'El camino de quien entra por QR, del código a la conversación, y la pantalla de enlace no válido. PNG @3×: mi móvil, 1290×2796; el de la persona invitada, 1170×2532; las parejas, 2580×2796: <code>site-v4/ref/png/chat-guest--&lt;estado&gt;--&lt;idioma&gt;.png</code>.',
+  who:{h:'Mi iPhone',g:'Navegador de la persona invitada'},
+  h2d:'Decisiones, tokens y temas abiertos',hdec:'Más allá de la versión actual',htok:'Tokens y contraste',hna:'Sin aprobar',
+  st:{qr:['El QR en mi móvil','Tocaste «Hablar por QR»: código grande, el enlace debajo y el estado «Esperando a que abran el enlace».'],
+   join:['Elegir idioma en el navegador','Olga escaneó el código: el idioma del navegador ya está marcado, el nombre es opcional y luego «Начать разговор».'],
+   talk:['La conversación en el navegador','Olga escribe en ruso y lee a Lucía en ruso; bajo cada mensaje se ve la traducción.'],
+   host:['En mi Parrlo','La misma conversación en la app: Olga aparece con la etiqueta «por QR · navegador», con sus mensajes traducidos al español.'],
+   expired:['Enlace no válido','Quien entra por QR abre un enlace antiguo o restablecido: el motivo, claro, y qué hacer después.']},
+  open:'Pareja «enlace abierto»: <code>chat-guest--open--&lt;idioma&gt;.png</code>. En mi móvil el estado cambia a «Enlace abierto: están eligiendo idioma»; en el de la persona invitada, la elección de idioma.',
+  t05:'<span class="mk">maqueta</span><b>Translate · T-05 (próximamente).</b> El mismo camino para hablar cara a cara: QR en el móvil → la otra persona elige idioma en talk.parrlo.com → conversación con el aspecto de Translate «Conversación» (color = lado). En este lote no hay fotogramas aparte: la elección de idioma y el enlace no válido se reutilizan tal cual; solo cambia la vista de la conversación.',
+  dec:['<b>Estado bajo el QR</b>: «Esperando a que abran el enlace» pasa a «Enlace abierto: están eligiendo idioma», así sabes que ya está en la página.','<b>El idioma del navegador va primero y ya marcado</b>, con la pista «из браузера»; los demás, a un toque; «Другой язык» abre la lista completa.','<b>Nombre opcional</b>: sin nombre, se muestra como «Por QR».','<b>Las burbujas en el navegador son como en Parrlo</b>: original arriba y traducción debajo con icono; ve enseguida qué leerá la otra persona.','<b>«Seguir en contacto»</b>: una sola línea con botón para instalar Parrlo, sin ventanas emergentes.','<b>En mi app</b>, la persona invitada lleva la etiqueta «por QR · navegador» y una línea de sistema sobre su entrada por QR.','<b>Enlace no válido no es un callejón sin salida</b>: motivo sin códigos de error, pista para pedir el QR otra vez y recargar.','<b>Barra de dirección neutra</b>: solo la dirección y «Recargar», sin candado ni detalles de un navegador concreto.'],
+  tok:['Fondo <code>#0E1116</code>, superficies <code>#1C2026</code>/<code>#242B34</code>, líneas <code>#2F3742</code>; barra del navegador <code>#14181D</code>.','Mis mensajes en Deep Green <code>#00875C</code>; la traducción de los recibidos, en Mint <code>#BFF2DC</code>. Igual en el navegador.','QR en <code>#0E1116</code> sobre tarjeta blanca, con el símbolo de Parrlo sobre <code>#00875C</code>; amarillo <code>#FFC247</code> solo en el pico.','Botones de 56 y 44 de alto, iconos de 44×44, filas de idioma de 50.'],
+  na:['Todos los textos son borrador, también es y en (es con «tú»).','La página para invitados está desactivada en producción (<code>TALK_ENABLED=0</code>, GAP n.º 8); hay que probar la pareja «móvil + navegador».','Formato del enlace <code>talk.parrlo.com/c/…</code>: provisional.','Lista de idiomas y la pista «del navegador»: propuesta.','«Seguir en contacto» (GAP Chat n.º 15): adónde lleva el botón.','Validez del enlace y quién puede restablecerlo: sin definir; en pantalla, sin plazos ni cifras.','Si la Política cubre los datos de quien entra por QR en el navegador.','Translate T-05: próximamente, sin fotogramas propios.'],
+  ct:['Texto de mensajes y títulos','Traducción en recibidos (Mint)','Texto en mi mensaje','Secundario: etiquetas, hora','Secundario sobre superficie','Pistas sobre superficie','Texto en botón de acento','Enlace «Copiar»','Módulos del QR en la tarjeta']}},
+en:{lang:'en',hn:'Olga',hi:'O',hc:'#F2A65A',gn:'Pedro',gi:'P',gc:'#6AA6F5',G:GES,gL:'ES',hL:'EN',hLg:'inglés',hLh:'in Spanish',
+ h:{close:'Close',title:'Talk by QR',qrH:'Show this code',qrP:'They point their camera at it and write to you from their browser. No app needed.',
+  wait:'Waiting for someone to open the link',opened:'Link opened — choosing a language',copy:'Copy',share:'Share link',reset:'Reset link',
+  back:'Back',sub:'via QR · in browser',pair:'Chat languages: Spanish and English',menu:'Chat menu',
+  sys:function(n){return n+' joined via QR code · 10:01'},ph:'Message in English',mic:'Record voice message',tr:'Translation'},
+ c:[{g:'Hola, soy Pedro, el fontanero. ¿Dónde está la fuga?',h:'Hi, I’m Pedro, the plumber. Where’s the leak?',tm:'10:02'},
+  {me:1,h:'Under the kitchen sink. Come on in!',g:'Debajo del fregadero de la cocina. ¡Pase!',tm:'10:02'},
+  {g:'Vale. Primero tengo que cerrar el agua. ¿Dónde está la llave de paso?',h:'Okay. I need to turn off the water first. Where’s the shut-off valve?',tm:'10:03'},
+  {me:1,h:'In the bathroom, behind the little door on the right.',g:'En el baño, detrás de la puertita de la derecha.',tm:'10:04'},
+  {g:'Perfecto. En unos veinte minutos queda arreglado.',h:'Great. It’ll be fixed in about twenty minutes.',tm:'10:05'}],
+ P:{title:'Parrlo Chat · guest by QR',eb:'Reference · chat-guest · C-04 · dark theme only',
+  h1:'They don’t need the app',
+  p1:'The plumber at the door speaks Spanish. Olga shows a QR code, Pedro points his camera at it and writes from his browser on talk.parrlo.com. Each of them reads in their own language. These frames follow the guest page code that already exists.',
+  ul:['<b>A pair of frames</b>: my iPhone with Parrlo on the left, the guest’s phone in a browser on the right. Same conversation on both.','<b>The guest picks a language</b>: their browser language comes first, a name is optional. No sign-up.','<b>Each side sees its own language</b>: Pedro gets the page in Spanish, Olga gets the app in English.','<b>The link can be reset</b>: the old one stops working, and the guest sees a clear screen with what to do next.'],
+  tagm:'My iPhone · Parrlo',tagg:'Pedro’s phone · browser',
+  capb:'Parrlo Chat · talking with a guest by QR',caps:'Hero frame: Olga in the app and Pedro in the browser are writing to each other, each in their own language. Draft copy.',
+  h2s:'States',lead:'The guest’s path from QR to conversation, plus the dead-link screen. PNG @3×: my phone 1290×2796, the guest’s phone 1170×2532, pairs 2580×2796: <code>site-v4/ref/png/chat-guest--&lt;state&gt;--&lt;lang&gt;.png</code>.',
+  who:{h:'My iPhone',g:'Guest’s browser'},
+  h2d:'Decisions, tokens, open questions',hdec:'Beyond the current build',htok:'Tokens and contrast',hna:'Not approved',
+  st:{qr:['QR on my phone','You tapped Talk by QR: a big code, the link underneath and the status “Waiting for someone to open the link.”'],
+   join:['Guest picks a language','Pedro scanned the code: his browser language is already selected, the name is optional, then “Empezar a hablar.”'],
+   talk:['Chat in the browser','Pedro writes in Spanish and reads Olga in Spanish; every message shows the translation underneath.'],
+   host:['Same chat in my Parrlo','The same conversation in the app: Pedro shows up as a guest in the browser, his messages translated into English.'],
+   expired:['Link doesn’t work','The guest opens an old or reset link: a plain reason and what to do next.']},
+  open:'“Link opened” pair: <code>chat-guest--open--&lt;lang&gt;.png</code>. On my phone the status changes to “Link opened — choosing a language”; on the guest’s, the language picker.',
+  t05:'<span class="mk">mockup</span><b>Translate · T-05 (coming soon).</b> The same path for face-to-face talk: QR on the phone → the other person picks a language on talk.parrlo.com → the conversation looks like Translate’s Conversation (color = side). No separate frames in this batch: the language picker and the dead-link screen are reused as they are; only the conversation view changes.',
+  dec:['<b>Status under the QR</b>: “Waiting for someone to open the link” turns into “Link opened — choosing a language,” so you know the guest is on the page.','<b>The browser language comes first, already selected</b>, with a “de tu navegador” hint; others are one tap away, and “Otro idioma” opens the full list.','<b>Name is optional</b>: without one, the guest is labeled “Guest.”','<b>Guest bubbles match Parrlo</b>: original on top, translation below with an icon, so the guest sees what the other person will read.','<b>“Stay in touch”</b> for the guest is a single row with an Install button, no pop-ups.','<b>On my side</b>, the guest is labeled “via QR · in browser,” with a system line about joining via QR.','<b>A dead link isn’t a dead end</b>: a plain reason without error codes, a tip to ask for the QR again, and reload.','<b>Neutral address bar</b>: just the address and Reload, no padlock or details of a specific browser.'],
+  tok:['Background <code>#0E1116</code>, surfaces <code>#1C2026</code>/<code>#242B34</code>, lines <code>#2F3742</code>; browser bar <code>#14181D</code>.','My messages in Deep Green <code>#00875C</code>, incoming translations in Mint <code>#BFF2DC</code>. Same for the guest.','QR in <code>#0E1116</code> on a white card, Parrlo mark on <code>#00875C</code> in the center; yellow <code>#FFC247</code> only on the beak.','Buttons 56 and 44 tall, icon buttons 44×44, language rows 50.'],
+  na:['All copy is draft, including es and en.','The guest page is off in production (<code>TALK_ENABLED=0</code>, GAP #8); frames follow the code, the phone + guest browser pair still needs testing.','Link format <code>talk.parrlo.com/c/…</code> is a placeholder.','Guest language list and the “from your browser” hint: proposal.','“Stay in touch” row (GAP Chat #15): where the button leads.','How long a link lasts and who can reset it: not specified; no durations or numbers on screen.','Whether the Privacy Policy covers guest data in the browser.','Translate T-05: coming soon, no frames of its own.'],
+  ct:['Message and heading text','Incoming translation (Mint)','Text in my message','Secondary: labels, time','Secondary on surface','Hints on surface','Text on accent button','Copy link','QR modules on the card']}}
+};
+
+var qs=new URLSearchParams(location.search).get('l');var LG=T[qs]?qs:'ru';var D=T[LG];var G=D.G,H=D.h;
+function nb(s){return String(s).replace(/(^|[\s>(«])([вкусоияаВКУСОИЯА]|во|ко|со|из|на|от|по|до|за|не|но|же|то|об|Да)\s(?=[^\s<])/g,'$1$2 ').replace(/(^|[^А-Яа-яЁё])по-(?=[а-яё])/g,'$1по‑').replace(/QR-код/g,'QR‑код').replace(/(\d) (мин|min)/g,'$1 $2')}
+
+var sbar='<div class="sbar"><b>9:41</b><span class="sig"><i class="wf"></i><i></i></span></div>';
+var home='<div class="homebar"><i></i></div>';
+function scr(inner){return '<div class="scr chat-guest-scr">'+sbar+inner+home+'</div>'}
+function urlbar(path){return '<div class="chat-guest-url" lang="'+G.lang+'"><span>talk.parrlo.com'+(path?'<em>'+path+'</em>':'')+'</span><span class="chat-guest-ib" role="button" aria-label="'+G.reload+'" data-tap>'+I.reload+'</span></div>'}
+function gscr(inner,path){return '<div class="scr chat-guest-scr" lang="'+G.lang+'">'+sbar+urlbar(path)+inner+home+'</div>'}
+
+/* сообщение: side h — в моём приложении, g — у гостя */
+function msg(m,side,gap){
+ var mine=side==='h'?!!m.me:!m.me;
+ /* оригинал — на языке автора */
+ var orig=m.me?m.h:m.g, tran=m.me?m.g:m.h;
+ var oL=m.me?D.hL:D.gL, tL=m.me?D.gL:D.hL;
+ return '<div class="chat-guest-m '+(mine?'out':'in')+(gap?' gap':'')+'"><span lang="'+oL.toLowerCase()+'">'+orig+'</span><div class="chat-guest-t" lang="'+tL.toLowerCase()+'">'+I.tr+'<span>'+tran+'</span></div><span class="chat-guest-tm">'+m.tm+(mine?I.done:'')+'</span></div>';
+}
+function thread(side,from){var o='',prev=null;D.c.slice(from||0).forEach(function(m){var w=m.me?1:0;o+=msg(m,side,prev!==null&&prev!==w);prev=w});return o}
+
+var S={};
+S.qr=function(opened){
+ return scr('<div class="chat-guest-top"><span class="chat-guest-ib" role="button" aria-label="'+H.close+'" data-tap>'+I.x+'</span><h4>'+H.title+'</h4><span style="width:44px"></span></div>'+
+ '<div class="chat-guest-qrw"><div class="chat-guest-qrc">'+qrSvg()+'</div><h5>'+H.qrH+'</h5><p>'+H.qrP+'</p>'+
+ (opened?'<div class="chat-guest-stt on" role="status">'+I.chk.replace('stroke-width="3"','stroke-width="2.6"')+H.opened+'</div>':'<div class="chat-guest-stt" role="status"><i></i>'+H.wait+'</div>')+'</div>'+
+ '<div class="chat-guest-lnk">'+I.link+'<span>talk.parrlo.com/c/7Kq2wP</span><b role="button" data-tap>'+H.copy+'</b></div>'+
+ '<div class="chat-guest-act"><span class="chat-guest-btn p" role="button" data-tap>'+I.share+H.share+'</span><span class="chat-guest-btn t" role="button" data-tap>'+H.reset+'</span></div>');
+};
+S.open=function(){return S.qr(1)};
+S.join=function(){
+ var opts=G.langs.map(function(l,i){var last=i===G.langs.length-1;return '<div class="chat-guest-opt'+(i===0?' on':'')+'" role="radio" aria-checked="'+(i===0)+'" data-tap><span class="nm">'+l[0]+(l[1]?'<small>'+l[1]+'</small>':'')+'</span>'+(last?'<span class="chv">'+I.chev+'</span>':'<span class="rd">'+(i===0?I.chk:'')+'</span>')+'</div>'}).join('');
+ return gscr('<div class="chat-guest-join"><div class="chat-guest-brand">'+parrot()+'Parrlo</div>'+
+ '<div class="chat-guest-hi"><span class="av" style="background:'+D.hc+'" aria-hidden="true">'+D.hi+'<i></i></span><h5>'+G.invite(D.hn)+'</h5></div>'+
+ '<p>'+G.joinP(D.hn,D.hLg)+'</p>'+
+ '<div class="chat-guest-lb">'+G.q+'</div><div class="chat-guest-lst" role="radiogroup">'+opts+'</div>'+
+ '<div class="chat-guest-lb">'+G.nameL+'<em>'+G.opt+'</em></div><div class="chat-guest-fld">'+D.gn+'<i class="car"></i></div>'+
+ '<span class="chat-guest-btn p" role="button" data-tap style="margin-top:auto">'+G.start+'</span><p class="chat-guest-fine">'+G.fine+'</p></div>','/c/7Kq2wP');
+};
+S.talk=function(){
+ return gscr('<div class="chat-guest-nav web"><span class="chat-guest-av" style="background:'+D.hc+'" aria-hidden="true">'+D.hi+'<i></i></span><div class="chat-guest-nm"><b>'+D.hn+'</b><span>'+G.reads(D.hLg)+'</span></div><span class="chat-guest-lc"><span>'+D.hL+I.arr+D.gL+'</span></span><span class="chat-guest-ib" role="button" aria-label="'+G.menu+'" data-tap>'+I.more+'</span></div>'+
+ '<div class="chat-guest-stay">'+parrot()+'<span>'+G.stay(D.hn)+'</span><b role="button" data-tap>'+G.stayB+'</b></div>'+
+ '<div class="chat-guest-msgs"><div class="chat-guest-sys">'+I.tr+G.how(D.hn,D.hLg)+'</div>'+thread('g',2)+'</div>'+
+ '<div class="chat-guest-cmp web"><div class="chat-guest-row"><span class="chat-guest-f">'+G.ph+'</span><span class="chat-guest-go" role="button" aria-label="'+G.mic+'" data-tap>'+I.mic+'</span></div></div>','/c/7Kq2wP');
+};
+S.host=function(){
+ return scr('<div class="chat-guest-nav"><span class="chat-guest-ib bk" role="button" aria-label="'+H.back+'" data-tap>'+I.back+'</span><span class="chat-guest-av" style="background:'+D.gc+'" aria-hidden="true">'+D.gi+'<i></i></span><div class="chat-guest-nm"><b>'+D.gn+'</b><span>'+I.globe+H.sub+'</span></div><span class="chat-guest-lc" role="button" aria-label="'+H.pair+'" data-tap><span>'+D.gL+I.arr+D.hL+'</span></span><span class="chat-guest-ib" role="button" aria-label="'+H.menu+'" data-tap>'+I.more+'</span></div>'+
+ '<div class="chat-guest-msgs"><div class="chat-guest-sys">'+I.qr+H.sys(D.gn)+'</div>'+thread('h')+'</div>'+
+ '<div class="chat-guest-cmp"><div class="chat-guest-row"><span class="chat-guest-pls" role="button" aria-label="+" data-tap>'+I.plus+'</span><span class="chat-guest-f">'+H.ph+'</span><span class="chat-guest-go" role="button" aria-label="'+H.mic+'" data-tap>'+I.mic+'</span></div></div>');
+};
+S.expired=function(){
+ return gscr('<div class="chat-guest-join" style="padding-bottom:0"><div class="chat-guest-brand">'+parrot()+'Parrlo</div>'+
+ '<div class="chat-guest-mid"><img src="'+M+'mascot-sleep-dark.svg" alt=""><h5>'+G.expT+'</h5><p>'+G.expP+'</p>'+
+ '<div class="chat-guest-tip">'+I.qr+'<span>'+G.tip+'</span></div><div class="chat-guest-code">'+G.code+'</div></div>'+
+ '<div class="chat-guest-act" style="padding:0 0 8px"><span class="chat-guest-btn p" role="button" data-tap>'+I.reload+G.retry+'</span><span class="chat-guest-btn t" role="button" data-tap>'+G.what+'</span></div></div>','/c/4Wd8pR');
+};
+var GUEST={join:1,talk:1,expired:1};
+var order=['qr','join','talk','host','expired'];
+var P=D.P;
+document.documentElement.lang=D.lang;document.title=P.title;
+function $(id){return document.getElementById(id)}
+$('chat-guest-lsw').innerHTML=['ru','es','en'].map(function(k){return '<a href="?l='+k+'" lang="'+k+'"'+(k===LG?' aria-current="true"':'')+'>'+k.toUpperCase()+'</a>'}).join('');
+['eb','capb','tagm','tagg','h2s','lead','h2d','hdec','htok','hna'].forEach(function(k){$('chat-guest-'+k).innerHTML=nb(P[k])});
+$('chat-guest-h1').innerHTML=nb(P.h1);$('chat-guest-p1').innerHTML=nb(P.p1);$('chat-guest-caps').innerHTML=nb(P.caps);
+$('chat-guest-t05').innerHTML=nb(P.t05)+'<br><span style="color:#9AA4B2">'+nb(P.open)+'</span>';
+['ul','dec','tok','na'].forEach(function(k){$('chat-guest-'+k).innerHTML=P[k].map(function(x){return '<li>'+nb(x)+'</li>'}).join('')});
+$('chat-guest-grid').innerHTML=order.map(function(k){var g=GUEST[k];return '<div class="chat-guest-card"><div class="pf'+(g?'':' p67')+'" style="--s:'+(g?.6:.6)+'" data-state="'+k+'"><div class="shell"></div><div class="glass"></div></div><div class="chat-guest-who'+(g?' g':'')+'"><i></i>'+(g?P.who.g:P.who.h)+'</div><h3>'+nb(P.st[k][0])+' <code>'+k+'</code></h3><p>'+nb(P.st[k][1])+'</p></div>'}).join('');
+function fill(root){(root||document).querySelectorAll('.pf[data-state]').forEach(function(p){p.querySelector('.glass').innerHTML=nb(S[p.dataset.state]())})}
+fill();
+/* пара для PNG 860×932 (@3× = 2580×2796) */
+function pair(a,b){return '<div class="chat-guest-shot" id="chat-guest-shot"><div class="pf p67 flat" style="--s:.975" data-state="'+a+'"><div class="shell"></div><div class="glass"></div></div><div class="pf flat" style="--s:.975" data-state="'+b+'"><div class="shell"></div><div class="glass"></div></div></div>'}
+window.CHAT_GUEST={S:S,order:order,guest:GUEST,lang:LG,mount:function(html){var d=document.createElement('div');d.id='chat-guest-stage';document.body.style.background='transparent';document.querySelector('.chat-guest-w').style.visibility='hidden';d.style.cssText='position:absolute;left:0;top:0;z-index:99;background:transparent';d.innerHTML=html;document.body.appendChild(d);fill(d);return d},pair:pair};
+
+function Lm(h){var c=[1,3,5].map(function(i){var v=parseInt(h.substr(i,2),16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function cr(a,b){var x=Lm(a),y=Lm(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+var pairs=[['#F2F5F7','#0E1116'],['#BFF2DC','#242B34'],['#FFFFFF','#00875C'],['#9AA4B2','#0E1116'],['#9AA4B2','#1C2026'],['#C9D1DA','#1C2026'],['#0E1116','#2BC48A'],['#2BC48A','#1C2026'],['#0E1116','#FFFFFF']];
+var rows=pairs.map(function(p,i){return [p[0],p[1],P.ct[i]]});
+$('chat-guest-ct').innerHTML=rows.map(function(r){return '<tr><td><span class="chat-guest-sw" style="background:'+r[0]+'"></span><span class="chat-guest-sw" style="background:'+r[1]+'"></span>'+r[2]+' <code>'+r[0]+'</code> / <code>'+r[1]+'</code></td><td>'+cr(r[0],r[1]).toFixed(2)+':1</td></tr>'}).join('');
+window.CHAT_GUEST.min=Math.min.apply(null,rows.map(function(r){return cr(r[0],r[1])}));
+})();
+</script>
+</body>
+</html>
