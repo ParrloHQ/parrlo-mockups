@@ -131,6 +131,14 @@ body{font:400 16px/1.5 Inter,system-ui,sans-serif;padding:32px 16px 80px}
 .translate-talk-meta{flex:none;font:500 12px/16px Inter,sans-serif;color:var(--sec);margin:2px 8px 8px}
 .translate-talk-meta.translate-talk-l{align-self:flex-start}
 .translate-talk-meta.translate-talk-r{align-self:flex-end}
+/* реплика не переведена: оригинал остаётся, вместо перевода — бейдж ошибки и «Повторить» */
+.translate-talk-bb.translate-talk-fail{max-width:100%}
+.translate-talk-fail .translate-talk-o{font:400 18px/25px Inter,sans-serif}
+.translate-talk-fl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.translate-talk-fl .translate-talk-erb{margin-top:0}
+.translate-talk-flt{font:600 15px/20px Inter,sans-serif;color:#fff}
+.translate-talk-rt{margin-left:auto;display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:24px;background:#005E40;color:#fff;font:600 16px Inter,sans-serif}
+.translate-talk-rt svg{width:20px;height:20px}
 
 /* лицом к лицу */
 .translate-talk-fc{padding:4px 12px 0}
@@ -244,7 +252,8 @@ ru:{
   ['p','Sí. Yo misma le abro la puerta a las cinco.','Да. Я {сама открою} ему дверь в пять.'],
   ['m','Отлично, тогда я буду дома в пять.','Perfecto, entonces estaré en casa a las cinco.']],
  face:{lbl:'Traducción para ti', play:'Escuchar', mic:'Yo hablo'}, mid:'Верх экрана — для собеседника', mine:'Твоя фраза · Русский', normal:'Обычный вид',
- err:{badge:'Нет сети', h:'Не получилось перевести', p:'Перевод работает через интернет. Проверь подключение и попробуй ещё раз.', clip:'Твоя запись', retry:'Повторить', redo:'Записать заново'},
+ tf:{badge:'Нет сети', h:'Не получилось перевести', retry:'Повторить'},
+ err:{badge:'Нет сети', h:'Не получилось перевести', p:'Перевод работает через интернет. Проверь подключение и попробуй ещё раз.', clip:'Твоя запись', retry:'Повторить', redo:'Записать заново'},
  page:{title:'Parrlo Translate · разговор',tag:'Эталон · пачка 2 · черновик текста',h1:'Translate · разговор лицом к лицу',
   lead:'T‑01 и T‑03 карты сайта. Один телефон на двоих: ты говоришь по‑русски, собеседник — по‑испански. Главный экран с двумя кнопками, запись с каждой стороны, лента разговора с правильным родом, режим «лицом к лицу» и ошибка с действием. Каркас — как у T‑02 и T‑10: та же шапка, блоки и нижняя панель. Только тёмная тема, интерфейс на «ты». Экран 430×932 pt, PNG @3× — 1290×2796.',
   heroH:'Главный кадр · разговор с администратором дома',
@@ -255,6 +264,7 @@ ru:{
       listening:['Говоришь ты','Нажали «Я говорю». Живой текст и волна в зелёной рамке, ниже — место для перевода. «Стоп» — перевести, «Отменить» — сбросить.'],
       'listening-other':['Говорит собеседник','Нажали «Yo hablo». Рамка и волна мятные; подсказка — на языке собеседника, «Стоп» подписан на обоих языках.'],
       conversation:['Разговор','T‑03. Реплики по очереди, род собеседника учтён. Следующая кнопка — с кольцом, очередь названа словами.'],
+      'turn-error':['Реплика не переведена','Связь пропала на одной реплике. Фраза остаётся в ленте, вместо перевода — бейдж и «Повторить»; разговор не прерывается. Сервер недоступен — бейдж «Сервер недоступен».'],
       face:['Лицом к лицу','Нажали «Показать». Верхняя половина развёрнута к собеседнику: он читает перевод и сам отвечает. Нижняя — твоя.'],
       error:['Нет сети','Связь пропала после записи. Запись можно прослушать; «Повторить» отправит её на перевод ещё раз.']},
   hDec:'Решения',
@@ -293,6 +303,7 @@ es:{
   ['p','Да. Я сама открою ему дверь в пять.','Sí. Yo {misma} le abro la puerta a las cinco.'],
   ['m','Perfecto, entonces estaré en casa a las cinco.','Отлично, тогда я буду дома в пять.']],
  face:{lbl:'Перевод для тебя', play:'Озвучить', mic:'Я говорю'}, mid:'La parte de arriba es para la otra persona', mine:'Tu frase · Español', normal:'Vista normal',
+ tf:{badge:'Sin conexión', h:'No se pudo traducir', retry:'Reintentar'},
  err:{badge:'Sin conexión', h:'No se pudo traducir', p:'La traducción necesita internet. Revisa la conexión y vuelve a intentarlo.', clip:'Tu grabación', retry:'Reintentar', redo:'Grabar de nuevo'},
  page:{title:'Parrlo Translate · conversación',tag:'Referencia · lote 2 · textos en borrador',h1:'Translate · conversación cara a cara',
   lead:'T‑01 y T‑03 del mapa del sitio. Un móvil para dos: tú hablas en español y la otra persona, en ruso. Pantalla principal con dos botones, grabación de cada lado, conversación con el género correcto, modo cara a cara y error con acción. Misma estructura que T‑02 y T‑10: cabecera, bloques y panel inferior. Solo tema oscuro, interfaz de «tú». Pantalla de 430×932 pt, PNG @3×: 1290×2796.',
@@ -304,6 +315,7 @@ es:{
       listening:['Hablas tú','Tras pulsar «Hablo yo». Texto en vivo y onda con borde verde; debajo, el hueco para la traducción. «Parar» traduce, «Cancelar» descarta.'],
       'listening-other':['Habla la otra persona','Tras pulsar «Я говорю». Borde y onda en menta; el aviso, en el idioma de la otra persona, y «Parar» en los dos idiomas.'],
       conversation:['Conversación','T‑03. Frases por turnos con el género de la otra persona. El siguiente botón lleva anillo y el turno se dice con palabras.'],
+      'turn-error':['Frase sin traducir','Se cortó la red en una frase. La frase sigue en la conversación; en lugar de la traducción, una etiqueta y «Reintentar». La conversación sigue. Si falla el servidor: «Servidor no disponible».'],
       face:['Cara a cara','Tras pulsar «Mostrar». La mitad de arriba, girada hacia la otra persona: lee la traducción y responde sola. La de abajo es tuya.'],
       error:['Sin conexión','Se cortó la red tras grabar. Puedes escuchar la grabación; «Reintentar» la vuelve a enviar.']},
   hDec:'Decisiones',
@@ -342,6 +354,7 @@ en:{
   ['p','Sí. Yo misma le abro la puerta a las cinco.','Yes. I’ll let him in myself at five.'],
   ['m','Perfect, then I’ll be home at five.','Perfecto, entonces estaré en casa a las cinco.']],
  face:{lbl:'Traducción para ti', play:'Escuchar', mic:'Yo hablo'}, mid:'Top half faces the other person', mine:'Your phrase · English', normal:'Normal view',
+ tf:{badge:'No connection', h:'Couldn’t translate', retry:'Try again'},
  err:{badge:'No connection', h:'Couldn’t translate', p:'Translation needs the internet. Check your connection and try again.', clip:'Your recording', retry:'Try again', redo:'Record again'},
  page:{title:'Parrlo Translate · conversation',tag:'Reference · batch 2 · draft copy',h1:'Translate · face‑to‑face conversation',
   lead:'T‑01 and T‑03 on the site map. One phone for two: you speak English, the other person speaks Spanish. Home screen with two buttons, recording from each side, a conversation with the right gender, face‑to‑face mode and an error with an action. Same layout as T‑02 and T‑10: header, blocks and bottom panel. Dark theme only. Screen 430×932 pt, PNG @3×: 1290×2796.',
@@ -353,6 +366,7 @@ en:{
       listening:['You’re speaking','After “I speak”. Live text and wave in a green frame, the translation slot below. Stop translates, Cancel throws it away.'],
       'listening-other':['They’re speaking','After “Yo hablo”. Frame and wave turn mint; the prompt is in their language, and Stop is labeled in both.'],
       conversation:['Conversation','T‑03. Turns back and forth, the other person’s gender applied. The next button gets a ring, and the turn is named in words.'],
+      'turn-error':['Turn not translated','The network dropped on one turn. The phrase stays in the conversation; instead of the translation there’s a badge and Try again. The conversation carries on. Server down: “Server unavailable”.'],
       face:['Face to face','After Show. The top half turns to the other person: they read the translation and reply on their own. The bottom half is yours.'],
       error:['No connection','The network dropped after recording. You can play the recording back; Try again resends it.']},
   hDec:'Decisions',
@@ -431,6 +445,19 @@ function screen(st,t){
    `<div class="${P}hint">${I.down}${t.hTurn}</div><div class="${P}btns">${pbMe()}${pbPt(P+'next')}</div>`);
  }
 
+ if(st==='turn-error'){
+  const times=['9:41','9:41','9:42','9:43','9:43'];
+  const c=t.conv.slice(0,4), n=c.length, f=t.tf;
+  const feed=c.map(([s,o,tr],i)=>{
+   if(s==='p') return `<div class="${P}bb ${P}l" role="button" aria-label="${t.aOrig}"><span class="${P}t" lang="${t.ml}">${gw(tr)}</span><span class="${P}orig">${I.chevd}${t.orig} · ${t.pair[1]}</span></div><div class="${P}meta ${P}l">${t.who[0]} · ${times[i]}</div>`;
+   return `<div class="${P}bb ${P}r"><span class="${P}o" lang="${t.ml}">${o}</span><span class="${P}t" lang="${t.pl}">${gw(tr)}</span></div><div class="${P}meta ${P}r">${t.who[1]} · ${times[i]}</div>`;
+  }).join('')+`<div class="${P}bb ${P}r ${P}fail" role="group" aria-label="${f.h}"><span class="${P}o" lang="${t.ml}">${t.conv[4][1]}</span><span class="${P}fl"><span class="${P}erb">${I.wifioff}${f.badge}</span><span class="${P}flt">${f.h}</span><span class="${P}rt" role="button">${I.retry}${f.retry}</span></span></div><div class="${P}meta ${P}r">${t.who[1]} · ${times[4]}</div>`;
+  return wrap(`${top}<div class="${P}main ${P}conv">
+   <span class="${P}gchip" role="button"><span class="${P}av">${I.person}</span>${t.gchip[0]}<span>· ${t.gchip[1]}</span>${I.chev}</span>
+   <div class="${P}feed">${feed}</div></div>`,
+   `<div class="${P}btns">${pbMe()}${pbPt()}</div>`);
+ }
+
  if(st==='face'){
   const last=t.conv[t.conv.length-1];
   return wrap(`<div class="${P}main ${P}fc">
@@ -462,7 +489,7 @@ function Lu(h){const c=[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255).map(v=>v<=
 function cr(a,b){const x=Lu(a),y=Lu(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
 const PAIRS=[['#F2F5F7','#0E1116',4.5],['#9AA4B2','#0E1116',4.5],['#9AA4B2','#1C2026',4.5],['#F2F5F7','#242B34',4.5],['#0E1116','#2BC48A',4.5],['#0E1116','#BFF2DC',4.5],['#2E4A3F','#BFF2DC',4.5],['#BFF2DC','#243A33',4.5],['#FFFFFF','#00875C',4.5],['#FFFFFF','#00875C',3],['#FFFFFF','#005E40',4.5],['#0E1116','#FFFFFF',4.5],['#0E1116','#F2F5F7',4.5],['#FF8A7F','#3C2A2E',4.5]];
 
-const STATES=['idle','listening','listening-other','conversation','face','error'];
+const STATES=['idle','listening','listening-other','conversation','turn-error','face','error'];
 const ph=(id,s,html)=>`<div class="pf p67" id="${id}" style="--s:${s}"><div class="shell"></div><div class="glass">${html}</div></div>`;
 const $=id=>document.getElementById(P+id);
 function render(){
